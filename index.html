@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="mr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>अभ्यास मंच</title>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#f0fdfa;--ink:#1c1917;--mut:#78716c;--card:#fff;--line:#e7e5e4;--b:#0f766e}
+@media(prefers-color-scheme:dark){:root{--bg:#1c1917;--ink:#fafaf9;--mut:#a8a29e;--card:#292524;--line:#44403c}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Noto Sans Devanagari","Mukta",system-ui,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+header{background:linear-gradient(135deg,#0f766e,#0d9488 60%,#1d4ed8);color:#fff;padding:16px;padding-top:calc(16px + env(safe-area-inset-top));position:sticky;top:0;z-index:5}
+#ex{position:absolute;right:12px;top:calc(12px + env(safe-area-inset-top));background:rgba(255,255,255,.2);border:0;color:#fff;border-radius:8px;padding:6px 10px;font:inherit;font-size:13px}
+header h1{margin:0;font-size:20px}header p{margin:2px 0 0;font-size:13px;opacity:.9}
+.back{background:rgba(255,255,255,.2);border:0;color:#fff;border-radius:8px;padding:6px 12px;font:inherit;font-size:14px;margin-bottom:6px}
+main{padding:16px;max-width:760px;margin:auto}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.sub{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 10px;text-align:center;cursor:pointer;border-top:5px solid var(--c)}
+.sub .e{font-size:34px}.sub b{display:block;margin-top:4px}.sub small{color:var(--mut)}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--c)}
+input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-bottom:12px}
+.les{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;width:100%;text-align:left;color:var(--ink);font:inherit}
+.les .n{min-width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:700}
+.les span.t{flex:1}.chip{font-size:12px;padding:2px 8px;border-radius:99px;background:#dcfce7;color:#166534;white-space:nowrap}
+.chip.m{background:#ccfbf1;color:#115e59}.chip.l{background:#fee2e2;color:#991b1b}
+#view{position:fixed;inset:0;background:var(--bg);z-index:10;display:none;flex-direction:column}
+#view .tb{display:flex;align-items:center;gap:10px;background:var(--b);color:#fff;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top))}
+#view .tb button{background:rgba(255,255,255,.2);border:0;color:#fff;border-radius:8px;padding:6px 12px;font:inherit}
+#view .tb span{flex:1;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#view iframe{flex:1;border:0;width:100%}
+#inst{display:none;margin:0 0 12px;padding:10px 14px;background:#ccfbf1;color:#115e59;border-radius:12px;font-size:14px}
+#inst button{margin-left:8px;border:0;background:#115e59;color:#fff;border-radius:8px;padding:5px 12px;font:inherit}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.acts a,.acts button{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px 8px;border-radius:14px;border:0;font:inherit;font-weight:700;font-size:15px;color:#fff;text-decoration:none;cursor:pointer}.acts .wa{background:#16a34a}.acts .fe{background:#0f766e}textarea{resize:vertical}</style></head><body>
+<header><button id="ex" onclick="menu(1)" aria-label="बाहेर पडा">⏻ बाहेर पडा</button><div id="hb"></div><h1 id="ht">अभ्यास मंच</h1><p id="hp">आपला स्वयं अध्ययन साथी</p></header>
+<main><div id="inst">📲 हे अ‍ॅप फोनवर ठेवा <button id="ib">इन्स्टॉल</button></div><div id="m"></div></main>
+<div id="mn" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:20;align-items:center;justify-content:center;padding:20px"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:340px;width:100%;text-align:center">
+<b>बाहेर पडायचे?</b><p id="who" style="margin:4px 0;font-size:13px;color:var(--mut)"></p><p id="mm" style="color:var(--mut);font-size:14px"></p>
+<button class="les" style="justify-content:center" onclick="doExit()">⏻ अ‍ॅप बंद करा</button>
+<button class="les" style="justify-content:center" onclick="doReset()">🚪 लॉगआउट (दुसरा विद्यार्थी)</button>
+<button class="les" style="justify-content:center" onclick="menu(0)">रद्द करा</button></div></div>
+<div id="lg" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:40;align-items:center;justify-content:center;padding:24px"><form onsubmit="return doLogin(event)" style="background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;max-width:360px;width:100%">
+<div style="text-align:center;font-size:44px">🎓</div><h2 style="text-align:center;margin:6px 0 14px">अभ्यास मंच – लॉगिन</h2>
+<input id="lu" inputmode="numeric" autocomplete="username" placeholder="PEN (११ अंकी)"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड (जन्मवर्ष)">
+<p id="le" style="color:#b91c1c;font-size:14px;min-height:20px;margin:0 0 8px"></p>
+<button class="les" id="lb" style="justify-content:center;background:#0f766e;color:#fff;border:0" type="submit">लॉगिन</button></form></div>
+<div id="fb" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:25;align-items:center;justify-content:center;padding:20px"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:380px;width:100%">
+<b style="font-size:18px">💬 अभिप्राय</b>
+<select id="ft" style="width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin:10px 0"><option>सूचना</option><option>अडचण</option><option>पाठात चूक</option><option>इतर</option></select>
+<textarea id="fx" maxlength="800" rows="5" placeholder="येथे लिहा…" style="width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-bottom:8px"></textarea>
+<p id="fm" style="min-height:20px;font-size:14px;margin:0 0 8px"></p>
+<button class="les" id="fs" style="justify-content:center;background:#0f766e;color:#fff;border:0" onclick="sendFb()">पाठवा</button>
+<button class="les" style="justify-content:center" onclick="fb.style.display='none'">रद्द करा</button></div></div>
+<div id="bye" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:30;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px"><div style="font-size:56px">✅</div><h2>तुम्ही बाहेर पडला आहात</h2><p style="color:var(--mut)">अ‍ॅप बंद करण्यासाठी फोनचे Home / Recent बटण दाबा.</p><button class="les" style="justify-content:center;max-width:260px" onclick="again()">पुन्हा सुरू करा</button></div>
+<div id="view"><div class="tb"><button onclick="closeV()">← मागे</button><span id="vt"></span><button onclick="nextL()">पुढचा →</button></div><iframe id="fr" title="पाठ"></iframe></div>
+<script>
+
+var API='https://script.google.com/macros/s/AKfycbySme1rFcvWN-9xS_BmE2dMiHqOL8P3gvhs2-BGN6aZxi2d-4xHZJOOuH5kHroLTU4x/exec',WA='https://chat.whatsapp.com/G0r9BnDy4Dr2SRWf5K6EnD',SK='am_sess_v1',QK='am_queue_v1',K='am_prog_v1',S=null,D=[],CAT=null,BASE='';
+function clsNum(st){return Number(String((st&&st.className)||'').replace(/[०-९]/g,function(ch){return '०१२३४५६७८९'.indexOf(ch)}).replace(/\D/g,''))||0}
+function medCode(st){var m=String((st&&st.medium)||'');if(/कन्न|kannada|ಕನ್ನಡ/i.test(m))return 'kn';if(/इंग्र|english/i.test(m))return 'en';return 'mr'}
+function medName(c){return c==='kn'?'कन्नड':c==='en'?'इंग्रजी':'मराठी'}
+function catKey(st){return clsNum(st)+'-'+medCode(st)}
+try{S=JSON.parse(localStorage.getItem(SK)||'null')}catch(e){}
+try{var _m=location.hash.match(/sso=([^&]+)/);if(_m){var _o=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(_m[1])))));
+ if(_o&&_o.t&&_o.s){S={token:_o.t,st:{pen:_o.s.pen,name:_o.s.name,className:_o.s.className,medium:_o.s.medium}};localStorage.setItem(SK,JSON.stringify(S))}
+ history.replaceState(null,'',location.pathname+location.search)}}catch(e){}
+var P={};try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+function api(o){return fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(o)}).then(function(r){return r.json()})}
+function showLogin(m){lg.style.display='flex';le.textContent=m||''}
+function loadCat(st){return fetch('content/'+catKey(st)+'/catalog.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(c){CAT=c;D=c.subjects;BASE='content/'+catKey(st)+'/';return true})}
+function doLogin(ev){ev.preventDefault();var u=lu.value.trim(),p=lp.value.trim();if(!u||!p){le.textContent='PEN आणि पासवर्ड टाका.';return false}
+ lb.disabled=true;le.textContent='तपासत आहे…';
+ api({action:'login',username:u,password:p}).then(function(r){
+  if(!r||!r.success){lb.disabled=false;le.textContent=(r&&r.message)||'लॉगिन अयशस्वी.';return}
+  loadCat(r.student).then(function(){lb.disabled=false;
+   S={token:r.token,st:r.student};try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){}
+   P={};save();lg.style.display='none';lp.value='';loadMine();home();flushQ()
+  }).catch(function(){lb.disabled=false;le.textContent='इयत्ता '+(clsNum(r.student)||'?')+' ('+medName(medCode(r.student))+' माध्यम) चे पाठ अजून उपलब्ध नाहीत. लवकरच येतील.'})
+ }).catch(function(){lb.disabled=false;le.textContent='इंटरनेट/सर्व्हर समस्या. पुन्हा प्रयत्न करा.'});return false}
+function loadMine(){if(!S)return;api({action:'myResults',token:S.token}).then(function(r){
+ if(r&&r.success){r.items.forEach(function(x){var d=D.filter(function(s){return s.n===x.subject})[0];if(!d)return;
+  P[key(d,x.no)]={s:Math.round(x.best*x.total/100),t:x.total}});save();if(!cur)home()}
+ else if(r&&/SESSION_EXPIRED/.test(r.message||'')){S=null;try{localStorage.removeItem(SK)}catch(e){}showLogin('सत्र संपले. पुन्हा लॉगिन करा.')}}).catch(function(){})}
+function getQ(){try{return JSON.parse(localStorage.getItem(QK)||'[]')}catch(e){return[]}}
+function putQ(q){try{localStorage.setItem(QK,JSON.stringify(q))}catch(e){}}
+function sendRes(o){return api({action:'saveResult',token:S.token,cls:String(clsNum(S.st)),subject:o.sub,lessonNo:o.no,lesson:o.les,score:o.sc,total:o.t}).then(function(r){
+ if(r&&r.success)return true;if(r&&/SESSION_EXPIRED/.test(r.message||'')){S=null;showLogin('सत्र संपले. पुन्हा लॉगिन करा.')}return !!(r&&!/SESSION_EXPIRED/.test(r.message||'')&&r.message&&/अवैध|अपूर्ण|नाही/.test(r.message))})}
+function flushQ(){if(!S)return;var q=getQ();if(!q.length)return;putQ([]);q.reduce(function(pr,o){return pr.then(function(){return sendRes(o).then(function(ok){if(!ok){var a=getQ();a.push(o);putQ(a)}}).catch(function(){var a=getQ();a.push(o);putQ(a)})})},Promise.resolve())}
+window.addEventListener('online',flushQ);
+function save(){try{localStorage.setItem(K,JSON.stringify(P))}catch(e){}}
+var cur=null,curL=null;
+function key(s,n){return s.p+'_'+n}
+function home(){cur=null;document.getElementById('hb').innerHTML='';ht.textContent='अभ्यास मंच';
+ hp.textContent=S&&S.st?((S.st.name||S.st.pen)+' · इयत्ता '+(CAT?CAT.title:'')+' · '+medName(medCode(S.st))+' माध्यम'):'विषय निवडा';
+ var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
+ h+='<div class="sub" style="--c:'+s.c+'" onclick="openS('+i+')"><div class="e">'+s.i+'</div><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div>'});
+ m.innerHTML=h+'</div><div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a><button class="fe" onclick="openFb()">💬 अभिप्राय</button></div>'}
+function openFb(){fm.textContent='';fx.value='';fs.disabled=false;fb.style.display='flex'}
+function sendFb(){var t=fx.value.trim();if(t.length<3){fm.style.color='#b91c1c';fm.textContent='कृपया काही लिहा.';return}
+ if(!S){fm.textContent='आधी लॉगिन करा.';return}
+ fs.disabled=true;fm.style.color='';fm.textContent='पाठवत आहे…';
+ api({action:'feedback',token:S.token,type:ft.value,text:t,cls:String(clsNum(S.st)),lesson:(cur&&curL?cur.n+' – '+curL:'')}).then(function(r){
+  if(r&&r.success){fm.style.color='#15803d';fm.textContent='✅ धन्यवाद! अभिप्राय मिळाला.';setTimeout(function(){fb.style.display='none'},1200)}
+  else{fs.disabled=false;fm.style.color='#b91c1c';fm.textContent=(r&&r.message)||'पाठवता आले नाही.'}
+ }).catch(function(){fs.disabled=false;fm.style.color='#b91c1c';fm.textContent='इंटरनेट तपासा आणि पुन्हा प्रयत्न करा.'})}
+function chip(r){if(!r)return '';var p=Math.round(r.s*100/r.t);return '<span class="chip '+(p>=75?'':p>=50?'m':'l')+'">'+r.s+'/'+r.t+'</span>'}
+function openS(i,q){cur=D[i];document.getElementById('hb').innerHTML='<button class="back" onclick="home()">← विषय</button>';ht.textContent=cur.n;hp.textContent=cur.l.length+' पाठ';
+ var h='<input id="q" placeholder="पाठ शोधा…" oninput="openS('+i+',this.value)" value="'+(q||'')+'">';
+ cur.l.forEach(function(x){if(q&&x[1].toLowerCase().indexOf(q.toLowerCase())<0)return;
+  h+='<button class="les" style="--c:'+cur.c+'" onclick="openL('+x[0]+')"><div class="n">'+x[0]+'</div><span class="t">'+x[1]+'</span>'+chip(P[key(cur,x[0])])+'</button>'});
+ m.innerHTML=h;if(q!==undefined){var e=document.getElementById('q');e.focus();e.setSelectionRange(e.value.length,e.value.length)}}
+function openL(n){if(!S){showLogin('');return}curL=n;var l=cur.l.filter(function(x){return x[0]==n})[0];vt.textContent=cur.n+' – '+n+'. '+l[1];fr.src=BASE+cur.p+'_l'+n+'.html';view.style.display='flex'}
+function closeV(){view.style.display='none';fr.src='about:blank';if(cur)openS(D.indexOf(cur))}
+function nextL(){var ix=cur.l.map(function(x){return x[0]});var j=ix.indexOf(curL);if(j+1<ix.length)openL(ix[j+1]);else closeV()}
+window.addEventListener('message',function(e){var d=e.data;if(d&&d.type==='closeLesson'){closeV();return}if(!d||d.type!=='ssResult'||!cur)return;
+ var k=key(cur,curL),o=P[k];if(!o||d.score/d.total>=o.s/o.t)P[k]={s:d.score,t:d.total};save();if(S){var o={sub:cur.n,no:curL,les:cur.l.filter(function(x){return x[0]==curL})[0][1],sc:d.score,t:d.total};sendRes(o).then(function(ok){if(!ok){var a=getQ();a.push(o);putQ(a)}}).catch(function(){var a=getQ();a.push(o);putQ(a)})}});
+var dp;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;inst.style.display='block'});
+ib.onclick=function(){if(dp){dp.prompt();dp=null;inst.style.display='none'}};
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
+function menu(o){mn.style.display=o?'flex':'none';mm.textContent='';who.textContent=S&&S.st?(S.st.name||S.st.pen):''}
+function doExit(){menu(0);try{fr.src='about:blank';view.style.display='none'}catch(e){}
+ try{window.close()}catch(e){}
+ setTimeout(function(){var b=document.getElementById('bye');if(b)b.style.display='flex'},250)}
+function again(){document.getElementById('bye').style.display='none';home()}
+function doReset(){menu(0);var fin=function(){S=null;P={};try{localStorage.removeItem(SK);localStorage.removeItem(K)}catch(e){}view.style.display='none';try{fr.src='about:blank'}catch(e){}cur=null;m.innerHTML='';showLogin('')};
+ if(S&&getQ().length){flushQ();setTimeout(fin,1200)}else fin()}
+if(S){loadCat(S.st).then(function(){home();loadMine();flushQ()}).catch(function(){S=null;try{localStorage.removeItem(SK)}catch(e){}home();showLogin('तुमच्या इयत्तेचे पाठ उपलब्ध नाहीत.')})}else{home();showLogin('')}
+</script></body></html>
