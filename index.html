@@ -44,7 +44,17 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <div style="text-align:center;font-size:44px">🎓</div><h2 style="text-align:center;margin:6px 0 14px">अभ्यास मंच – लॉगिन</h2>
 <input id="lu" inputmode="numeric" autocomplete="username" placeholder="PEN (११ अंकी)"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड (जन्मवर्ष)">
 <p id="le" style="color:#b91c1c;font-size:14px;min-height:20px;margin:0 0 8px"></p>
-<button class="les" id="lb" style="justify-content:center;background:#0f766e;color:#fff;border:0" type="submit">लॉगिन</button></form></div>
+<button class="les" id="lb" style="justify-content:center;background:#0f766e;color:#fff;border:0" type="submit">लॉगिन</button><button type="button" class="les" style="justify-content:center;margin-top:8px" onclick="openFp()">🔍 PEN शोधा</button></form></div>
+<div id="fp" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:45;align-items:center;justify-content:center;padding:20px"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:380px;width:100%">
+<b style="font-size:18px">🔍 माझा PEN शोधा</b>
+<p style="font-size:13px;color:var(--mut);margin:6px 0 10px">शाळेच्या नोंदीप्रमाणे नाव (इंग्रजीत), इयत्ता आणि जन्मतारीख टाका. तिन्ही जुळले तरच PEN दिसेल.</p>
+<input id="fpn" placeholder="नाव (उदा. Sayali Patil)" autocomplete="off">
+<select id="fpc" style="width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-bottom:12px"><option value="">इयत्ता निवडा</option><option>१</option><option>२</option><option>३</option><option>४</option><option>५</option><option>६</option><option>७</option><option>८</option></select>
+<input id="fpd" type="date">
+<p id="fpm" style="min-height:22px;font-size:15px;margin:0 0 8px;font-weight:700"></p>
+<button class="les" id="fpb" style="justify-content:center;background:#0f766e;color:#fff;border:0" onclick="findPen()">शोधा</button>
+<button class="les" id="fpu" style="display:none;justify-content:center;background:#15803d;color:#fff;border:0" onclick="usePen()">✔ हा PEN वापरा</button>
+<button class="les" style="justify-content:center" onclick="fp.style.display='none'">बंद करा</button></div></div>
 <div id="fb" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:25;align-items:center;justify-content:center;padding:20px"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:380px;width:100%">
 <b style="font-size:18px">💬 अभिप्राय</b>
 <select id="ft" style="width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin:10px 0"><option>सूचना</option><option>अडचण</option><option>पाठात चूक</option><option>इतर</option></select>
@@ -96,6 +106,17 @@ function home(){cur=null;document.getElementById('hb').innerHTML='';ht.textConte
  var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
  h+='<div class="sub" style="--c:'+s.c+'" onclick="openS('+i+')"><div class="e">'+s.i+'</div><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div>'});
  m.innerHTML=h+'</div><div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a><button class="fe" onclick="openFb()">💬 अभिप्राय</button></div>'}
+
+var FPEN='';
+function openFp(){fpm.textContent='';fpu.style.display='none';fpb.disabled=false;FPEN='';fp.style.display='flex'}
+function findPen(){var n=fpn.value.trim(),c=fpc.value,d=fpd.value;
+ if(n.length<3||!c||!d){fpm.style.color='#b91c1c';fpm.textContent='नाव, इयत्ता आणि जन्मतारीख तिन्ही टाका.';return}
+ fpb.disabled=true;fpm.style.color='';fpm.textContent='शोधत आहे…';fpu.style.display='none';
+ api({action:'findPen',name:n,cls:c,dob:d}).then(function(r){fpb.disabled=false;
+  if(r&&r.success){FPEN=r.pen;fpm.style.color='#15803d';fpm.innerHTML='तुमचा PEN: <span style="font-size:20px">'+r.pen+'</span><br><small>नाव: '+r.maskedName+' · इयत्ता '+c+'</small>';fpu.style.display='flex'}
+  else{fpm.style.color='#b91c1c';fpm.textContent=(r&&r.message)||'सापडला नाही.'}
+ }).catch(function(){fpb.disabled=false;fpm.style.color='#b91c1c';fpm.textContent='इंटरनेट तपासा आणि पुन्हा प्रयत्न करा.'})}
+function usePen(){lu.value=FPEN;fp.style.display='none';lp.focus()}
 function openFb(){fm.textContent='';fx.value='';fs.disabled=false;fb.style.display='flex'}
 function sendFb(){var t=fx.value.trim();if(t.length<3){fm.style.color='#b91c1c';fm.textContent='कृपया काही लिहा.';return}
  if(!S){fm.textContent='आधी लॉगिन करा.';return}
