@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="mr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>अभ्यास मंच</title>
-<meta name="theme-color" content="#0f766e">
+<title>Abhyas Manch</title>
+<meta name="theme-color" content="#1d4ed8">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
 <style>
@@ -33,7 +33,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 #inst{display:none;margin:0 0 12px;padding:10px 14px;background:#ccfbf1;color:#115e59;border-radius:12px;font-size:14px}
 #inst button{margin-left:8px;border:0;background:#115e59;color:#fff;border-radius:8px;padding:5px 12px;font:inherit}
 .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.acts a,.acts button{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px 8px;border-radius:14px;border:0;font:inherit;font-weight:700;font-size:15px;color:#fff;text-decoration:none;cursor:pointer}.acts .wa{background:#16a34a}.acts .fe{background:#0f766e}textarea{resize:vertical}</style></head><body>
-<header><button id="ex" onclick="menu(1)" aria-label="बाहेर पडा">⏻ बाहेर पडा</button><div id="hb"></div><h1 id="ht">अभ्यास मंच</h1><p id="hp">आपला स्वयं अध्ययन साथी</p></header>
+<header><button id="ex" onclick="menu(1)" aria-label="बाहेर पडा">⏻ बाहेर पडा</button><div id="hb"></div><h1 id="ht">Abhyas Manch</h1><p id="hp">आपला स्वयं अध्ययन साथी</p></header>
 <main><div id="inst">📲 हे अ‍ॅप फोनवर ठेवा <button id="ib">इन्स्टॉल</button></div><div id="m"></div></main>
 <div id="mn" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:20;align-items:center;justify-content:center;padding:20px"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:340px;width:100%;text-align:center">
 <b>बाहेर पडायचे?</b><p id="who" style="margin:4px 0;font-size:13px;color:var(--mut)"></p><p id="mm" style="color:var(--mut);font-size:14px"></p>
@@ -41,7 +41,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <button class="les" style="justify-content:center" onclick="doReset()">🚪 लॉगआउट (दुसरा विद्यार्थी)</button>
 <button class="les" style="justify-content:center" onclick="menu(0)">रद्द करा</button></div></div>
 <div id="lg" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:40;align-items:center;justify-content:center;padding:24px"><form onsubmit="return doLogin(event)" style="background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;max-width:360px;width:100%">
-<div style="text-align:center;font-size:44px">🎓</div><h2 style="text-align:center;margin:6px 0 14px">अभ्यास मंच – लॉगिन</h2>
+<div style="text-align:center"><img src="icon-192.png" alt="Abhyas Manch" width="96" height="96"></div><h2 style="text-align:center;margin:6px 0 14px">Abhyas Manch – लॉगिन</h2>
 <input id="lu" inputmode="numeric" autocomplete="username" placeholder="PEN (११ अंकी)"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड (जन्मवर्ष)">
 <p id="le" style="color:#b91c1c;font-size:14px;min-height:20px;margin:0 0 8px"></p>
 <button class="les" id="lb" style="justify-content:center;background:#0f766e;color:#fff;border:0" type="submit">लॉगिन</button><button type="button" class="les" style="justify-content:center;margin-top:8px" onclick="openFp()">🔍 PEN शोधा</button><button type="button" class="les" style="justify-content:center;margin-top:8px" onclick="openGuest()">🙋 पाहुणा म्हणून वापरा</button></form></div>
@@ -110,7 +110,7 @@ window.addEventListener('online',flushQ);
 function save(){try{localStorage.setItem(K,JSON.stringify(P))}catch(e){}}
 var cur=null,curL=null;
 function key(s,n){return s.p+'_'+n}
-function home(){cur=null;document.getElementById('hb').innerHTML='';ht.textContent='अभ्यास मंच';
+function home(){cur=null;document.getElementById('hb').innerHTML='';ht.textContent="Abhyas Manch";
  hp.textContent=S&&S.st?((S.st.name||S.st.pen)+' · इयत्ता '+(CAT?CAT.title:'')+' · '+medName(medCode(S.st))+' माध्यम'):(GUEST&&CAT?('पाहुणा · इयत्ता '+CAT.title+' · '+medName(GUEST.med)+' माध्यम'):'विषय निवडा');
  var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
  h+='<div class="sub" style="--c:'+s.c+'" onclick="openS('+i+')"><div class="e">'+s.i+'</div><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div>'});
