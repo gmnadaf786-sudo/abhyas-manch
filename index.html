@@ -70,6 +70,16 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <button class="les" id="fs" style="justify-content:center;background:#0f766e;color:#fff;border:0" onclick="sendFb()">पाठवा</button>
 <button class="les" style="justify-content:center" onclick="fb.style.display='none'">रद्द करा</button></div></div>
 <div id="bye" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:30;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px"><div style="font-size:56px">✅</div><h2>तुम्ही बाहेर पडला आहात</h2><p style="color:var(--mut)">अ‍ॅप बंद करण्यासाठी फोनचे Home / Recent बटण दाबा.</p><button class="les" style="justify-content:center;max-width:260px" onclick="again()">पुन्हा सुरू करा</button></div>
+<div id="pay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:50;align-items:center;justify-content:center;padding:20px"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:380px;width:100%;max-height:92vh;overflow:auto">
+<b style="font-size:19px">🔓 सर्व पाठ अनलॉक करा</b>
+<p id="pyi" style="font-size:15px;margin:8px 0"></p>
+<a id="pya" class="les" style="justify-content:center;background:#15803d;color:#fff;border:0;text-decoration:none;display:none" href="#">📲 UPI ने ₹ भरा</a>
+<p id="pyu" style="font-size:14px;margin:6px 0;word-break:break-all"></p>
+<p style="font-size:13px;color:var(--mut);margin:8px 0 4px">पैसे भरल्यावर व्यवहार क्रमांक (UTR / Transaction ID) येथे टाका:</p>
+<input id="pyt" placeholder="व्यवहार क्रमांक" autocomplete="off">
+<p id="pym" style="min-height:20px;font-size:14px;margin:6px 0;font-weight:700"></p>
+<button class="les" id="pyb" style="justify-content:center;background:#0f766e;color:#fff;border:0" onclick="payNow()">✔ पैसे भरले, पाठवा</button>
+<button class="les" style="justify-content:center" onclick="pay.style.display='none'">नंतर</button></div></div>
 <div id="view"><div class="tb"><button onclick="closeV()">← मागे</button><span id="vt"></span><button onclick="nextL()">पुढचा →</button></div><iframe id="fr" title="पाठ"></iframe></div>
 <script>
 
@@ -94,7 +104,7 @@ function doLogin(ev){ev.preventDefault();var u=lu.value.trim(),p=lp.value.trim()
   if(!r||!r.success){lb.disabled=false;le.textContent=(r&&r.message)||'लॉगिन अयशस्वी.';return}
   loadCat(r.student).then(function(){lb.disabled=false;
    S={token:r.token,st:r.student};try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){}
-   P={};save();lg.style.display='none';lp.value='';loadMine();home();flushQ()
+   P={};save();lg.style.display='none';lp.value='';FEEF=0;loadMine();home();flushQ()
   }).catch(function(){lb.disabled=false;le.textContent='इयत्ता '+(clsNum(r.student)||'?')+' ('+medName(medCode(r.student))+' माध्यम) चे पाठ अजून उपलब्ध नाहीत. लवकरच येतील.'})
  }).catch(function(){lb.disabled=false;le.textContent='इंटरनेट/सर्व्हर समस्या. पुन्हा प्रयत्न करा.'});return false}
 function loadMine(){if(!S)return;api({action:'myResults',token:S.token}).then(function(r){
@@ -106,15 +116,26 @@ function putQ(q){try{localStorage.setItem(QK,JSON.stringify(q))}catch(e){}}
 function sendRes(o){return api({action:'saveResult',token:S.token,cls:String(clsNum(S.st)),subject:o.sub,lessonNo:o.no,lesson:o.les,score:o.sc,total:o.t}).then(function(r){
  if(r&&r.success)return true;if(r&&/SESSION_EXPIRED/.test(r.message||'')){S=null;showLogin('सत्र संपले. पुन्हा लॉगिन करा.')}return !!(r&&!/SESSION_EXPIRED/.test(r.message||'')&&r.message&&/अवैध|अपूर्ण|नाही/.test(r.message))})}
 function flushQ(){if(!S)return;var q=getQ();if(!q.length)return;putQ([]);q.reduce(function(pr,o){return pr.then(function(){return sendRes(o).then(function(ok){if(!ok){var a=getQ();a.push(o);putQ(a)}}).catch(function(){var a=getQ();a.push(o);putQ(a)})})},Promise.resolve())}
-window.addEventListener('online',flushQ);
+window.addEventListener('online',function(){flushQ();loadFee()});
+var FEE=null,FEEF=0;
+try{FEE=JSON.parse(localStorage.getItem('am_fee_v1')||'null')}catch(e){}
+function loadFee(){api({action:'fee',token:S?S.token:''}).then(function(r){if(r&&r.success){FEE=r;try{localStorage.setItem('am_fee_v1',JSON.stringify(r))}catch(e){}if(cur)openS(D.indexOf(cur));else home()}}).catch(function(){})}
+function isLocked(s,x){return !!(FEE&&FEE.enabled&&!FEE.paid&&s.l.indexOf(x)>=FEE.free)}
+function openPay(){var f=FEE||{};pyi.textContent='एका इयत्तेसाठी वर्षाला ₹'+(f.fee||99)+'. भरल्यावर तुमच्या इयत्तेचे सर्व पाठ उघडतील. '+(f.note||'');pym.textContent='';pyt.value='';
+ if(f.upi){var u='upi://pay?pa='+encodeURIComponent(f.upi)+'&pn='+encodeURIComponent(f.payee||'Abhyas Manch')+'&am='+(f.fee||99)+'&cu=INR&tn='+encodeURIComponent('Abhyas Manch वार्षिक फी'+(S&&S.st?' '+S.st.pen:''));pya.href=u;pya.textContent='📲 UPI ने ₹'+(f.fee||99)+' भरा';pya.style.display='flex';pyu.textContent='UPI आयडी: '+f.upi+(f.payee?' ('+f.payee+')':'')}
+ else{pya.style.display='none';pyu.textContent='फी भरण्याची सोय लवकरच सुरू होईल.'}
+ pyb.style.display=S?'flex':'none';if(!S)pym.textContent='आधी PEN ने लॉगिन करा, मग व्यवहार क्रमांक पाठवा.';pay.style.display='flex'}
+function payNow(){var t=pyt.value.trim();if(!t){pym.textContent='व्यवहार क्रमांक टाका.';return}pyb.disabled=true;pym.textContent='पाठवत आहे…';
+ api({action:'feePay',token:S.token,txn:t}).then(function(r){pyb.disabled=false;pym.style.color=r&&r.success?'#15803d':'#dc2626';pym.textContent=(r&&r.message)||'त्रुटी.'}).catch(function(){pyb.disabled=false;pym.style.color='#dc2626';pym.textContent='इंटरनेट समस्या. पुन्हा प्रयत्न करा.'})}
 function save(){try{localStorage.setItem(K,JSON.stringify(P))}catch(e){}}
 var cur=null,curL=null;
 function key(s,n){return s.p+'_'+n}
-function home(){cur=null;document.getElementById('hb').innerHTML='';ht.textContent="Abhyas Manch";
+function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb').innerHTML='';ht.textContent="Abhyas Manch";
  hp.textContent=S&&S.st?((S.st.name||S.st.pen)+' · इयत्ता '+(CAT?CAT.title:'')+' · '+medName(medCode(S.st))+' माध्यम'):(GUEST&&CAT?('पाहुणा · इयत्ता '+CAT.title+' · '+medName(GUEST.med)+' माध्यम'):'विषय निवडा');
  var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
  h+='<div class="sub" style="--c:'+s.c+'" onclick="openS('+i+')"><div class="e">'+s.i+'</div><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div>'});
- m.innerHTML=h+'</div><div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+(S?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>':'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+(S?'':'<p style="text-align:center;color:var(--mut);font-size:13px;margin-top:10px">पाहुणा म्हणून तुमची प्रगती फक्त या फोनमध्ये दिसते.</p>')}
+ var fb2=(FEE&&FEE.enabled&&!FEE.paid)?'<button class="les" style="justify-content:center;background:#b45309;color:#fff;border:0;margin-top:12px" onclick="openPay()">🔓 सर्व पाठ अनलॉक करा · ₹'+FEE.fee+'/वर्ष</button>':((FEE&&FEE.enabled&&FEE.paid&&FEE.until)?'<p style="text-align:center;color:#15803d;font-size:13px;margin-top:10px">✔ पेड · मुदत '+FEE.until+'</p>':'');
+ m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+(S?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>':'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+(S?'':'<p style="text-align:center;color:var(--mut);font-size:13px;margin-top:10px">पाहुणा म्हणून तुमची प्रगती फक्त या फोनमध्ये दिसते.</p>')}
 
 
 var GOPT=[];
@@ -125,7 +146,7 @@ function startGuest(){var x=GOPT[gs.value];if(!x){gm.textContent='इयत्�
   try{localStorage.setItem('am_guest_v1',JSON.stringify(GUEST))}catch(e){}
   K='am_prog_guest_v1';try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){P={}}
   gd.style.display='none';lg.style.display='none';home()}).catch(function(){GUEST=null;gm.textContent='हे पाठ उपलब्ध नाहीत.'})}
-function guestLogin(){GUEST=null;try{localStorage.removeItem('am_guest_v1')}catch(e){}K='am_prog_v1';P={};D=[];CAT=null;cur=null;m.innerHTML='';showLogin('')}
+function guestLogin(){FEEF=0;GUEST=null;try{localStorage.removeItem('am_guest_v1')}catch(e){}K='am_prog_v1';P={};D=[];CAT=null;cur=null;m.innerHTML='';showLogin('')}
 var FPEN='';
 function openFp(){fpm.textContent='';fpu.style.display='none';fpb.disabled=false;FPEN='';fp.style.display='flex'}
 function findPen(){var n=fpn.value.trim(),c=fpc.value,d=fpd.value;
@@ -148,9 +169,9 @@ function chip(r){if(!r)return '';var p=Math.round(r.s*100/r.t);return '<span cla
 function openS(i,q){cur=D[i];document.getElementById('hb').innerHTML='<button class="back" onclick="home()">← विषय</button>';ht.textContent=cur.n;hp.textContent=cur.l.length+' पाठ';
  var h='<input id="q" placeholder="पाठ शोधा…" oninput="openS('+i+',this.value)" value="'+(q||'')+'">';
  cur.l.forEach(function(x){if(q&&x[1].toLowerCase().indexOf(q.toLowerCase())<0)return;
-  h+='<button class="les" style="--c:'+cur.c+'" onclick="openL('+x[0]+')"><div class="n">'+x[0]+'</div><span class="t">'+x[1]+'</span>'+chip(P[key(cur,x[0])])+'</button>'});
+  var lk=isLocked(cur,x);h+='<button class="les" style="--c:'+cur.c+(lk?';opacity:.6':'')+'" onclick="openL('+x[0]+')"><div class="n">'+(lk?'🔒':x[0])+'</div><span class="t">'+x[1]+'</span>'+(lk?'':chip(P[key(cur,x[0])]))+'</button>'});
  m.innerHTML=h;if(q!==undefined){var e=document.getElementById('q');e.focus();e.setSelectionRange(e.value.length,e.value.length)}}
-function openL(n){if(!S&&!GUEST){showLogin('');return}curL=n;var l=cur.l.filter(function(x){return x[0]==n})[0];vt.textContent=cur.n+' – '+n+'. '+l[1];fr.src=BASE+cur.p+'_l'+n+'.html';view.style.display='flex'}
+function openL(n){if(!S&&!GUEST){showLogin('');return}var l=cur.l.filter(function(x){return x[0]==n})[0];if(isLocked(cur,l)){view.style.display='none';openPay();return}curL=n;vt.textContent=cur.n+' – '+n+'. '+l[1];fr.src=BASE+cur.p+'_l'+n+'.html';view.style.display='flex'}
 function closeV(){view.style.display='none';fr.src='about:blank';if(cur)openS(D.indexOf(cur))}
 function nextL(){var ix=cur.l.map(function(x){return x[0]});var j=ix.indexOf(curL);if(j+1<ix.length)openL(ix[j+1]);else closeV()}
 window.addEventListener('message',function(e){var d=e.data;if(d&&d.type==='closeLesson'){closeV();return}if(!d||d.type!=='ssResult'||!cur)return;
