@@ -42,9 +42,9 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <button class="les" style="justify-content:center" onclick="menu(0)">रद्द करा</button></div></div>
 <div id="lg" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:40;align-items:center;justify-content:center;padding:24px"><form onsubmit="return doLogin(event)" style="background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;max-width:360px;width:100%">
 <div style="text-align:center"><img src="icon-192.png" alt="Abhyas Manch" width="96" height="96"></div><h2 style="text-align:center;margin:6px 0 14px">Abhyas Manch – लॉगिन</h2>
-<input id="lu" inputmode="numeric" autocomplete="username" placeholder="PEN (११ अंकी)"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड (जन्मवर्ष)">
+<button type="button" class="les" style="justify-content:center;background:#0f766e;color:#fff;border:0;font-size:18px;padding:16px" onclick="openGuest()">🙋 पाहुणा म्हणून सुरू करा</button><p style="font-size:12px;color:var(--mut);text-align:center;margin:6px 0 14px">नोंदणी/पासवर्ड नको · सर्व पाठ मोफत</p><p style="font-size:13px;color:var(--mut);text-align:center;margin:0 0 8px">— जत भागातील विद्यार्थ्यांसाठी (PEN लॉगिन) —</p><input id="lu" inputmode="numeric" autocomplete="username" placeholder="PEN (११ अंकी)"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड (जन्मवर्ष)">
 <p id="le" style="color:#b91c1c;font-size:14px;min-height:20px;margin:0 0 8px"></p>
-<button class="les" id="lb" style="justify-content:center;background:#0f766e;color:#fff;border:0" type="submit">लॉगिन</button><button type="button" class="les" style="justify-content:center;margin-top:8px" onclick="openFp()">🔍 PEN शोधा</button><button type="button" class="les" style="justify-content:center;margin-top:8px" onclick="openGuest()">🙋 पाहुणा म्हणून वापरा</button></form></div>
+<button class="les" id="lb" style="justify-content:center;background:#fff;color:#0f766e;border:2px solid #0f766e" type="submit">लॉगिन</button><button type="button" class="les" style="justify-content:center;margin-top:8px" onclick="openFp()">🔍 PEN शोधा</button></form></div>
 <div id="gd" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:45;align-items:center;justify-content:center;padding:20px"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:380px;width:100%">
 <b style="font-size:18px">🙋 पाहुणा म्हणून वापरा</b>
 <p style="font-size:13px;color:var(--mut);margin:6px 0 10px">लॉगिनशिवाय पाठ वापरा. तुमची प्रगती फक्त या फोनमध्ये राहते; शिक्षकांना निकाल दिसत नाही.</p>
@@ -80,6 +80,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <p id="pym" style="min-height:20px;font-size:14px;margin:6px 0;font-weight:700"></p>
 <button class="les" id="pyb" style="justify-content:center;background:#0f766e;color:#fff;border:0" onclick="payNow()">✔ पैसे भरले, पाठवा</button>
 <button class="les" style="justify-content:center" onclick="pay.style.display='none'">नंतर</button></div></div>
+<div id="ks" style="display:none;position:fixed;inset:0;background:var(--bg);color:var(--ink);z-index:99;align-items:center;justify-content:center;padding:28px;text-align:center"><div><div style="font-size:48px">🛠️</div><h2>सेवा तात्पुरती बंद आहे</h2><p id="ksm" style="font-size:16px"></p></div></div>
 <div id="view"><div class="tb"><button onclick="closeV()">← मागे</button><span id="vt"></span><button onclick="nextL()">पुढचा →</button></div><iframe id="fr" title="पाठ"></iframe></div>
 <script>
 
@@ -186,5 +187,6 @@ function doExit(){menu(0);try{fr.src='about:blank';view.style.display='none'}cat
 function again(){document.getElementById('bye').style.display='none';home()}
 function doReset(){menu(0);var fin=function(){S=null;GUEST=null;P={};try{localStorage.removeItem(SK);localStorage.removeItem(K);localStorage.removeItem('am_guest_v1')}catch(e){}K='am_prog_v1';D=[];CAT=null;view.style.display='none';try{fr.src='about:blank'}catch(e){}cur=null;m.innerHTML='';showLogin('')};
  if(S&&getQ().length){flushQ();setTimeout(fin,1200)}else fin()}
+fetch('status.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.open===false){ksm.textContent=j.msg||'थोड्या वेळाने पुन्हा प्रयत्न करा.';ks.style.display='flex'}}).catch(function(){});
 if(S){loadCat(S.st).then(function(){home();loadMine();flushQ()}).catch(function(){S=null;try{localStorage.removeItem(SK)}catch(e){}home();showLogin('तुमच्या इयत्तेचे पाठ उपलब्ध नाहीत.')})}else if(GUEST){loadCat({className:String(GUEST.cls),medium:medName(GUEST.med)}).then(function(){home()}).catch(function(){GUEST=null;home();showLogin('')})}else{home();showLogin('')}
 </script></body></html>
