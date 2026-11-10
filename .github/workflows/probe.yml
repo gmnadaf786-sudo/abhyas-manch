@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          for p in "kn-books/Class-7/ಗಣಿತ.pdf" "kn-books/class-7/ಗಣಿತ.pdf" "kn-books/Class-7/ಬಾಲಭಾರತಿ.pdf" "kn-books/class-7/ಬಾಲಭಾರತಿ.pdf" "kn-lessons/Class-7/ಗಣಿತ/7.Math.3.ಮಸಾವಿ - ಲಸಾವಿ.pdf" "mr-books/class-7/गणित.pdf"; do
-            for form in NFC NFD; do
+          for p in "kn-books/Class-7/ಗಣಿತ" "kn-books/Class-7/ಗಣಿತ.PDF" "kn-books/Class-7/ಗಣಿತ.pdf.pdf" "kn-books/ಗಣಿತ.pdf" "kn-books/7/ಗಣಿತ.pdf" "kn-books/Class 7/ಗಣಿತ.pdf" "kn-books/class7/ಗಣಿತ.pdf" "kn-books/Class-7/7/ಗಣಿತ.pdf" "kn-books/Class-07/ಗಣಿತ.pdf" "kn-books/ಕನ್ನಡ/Class-7/ಗಣಿತ.pdf" "kn-books/Books/Class-7/ಗಣಿತ.pdf" "kn-books/Class-1/ಗಣಿತ.pdf" "kn-books/Class-4/ಗಣಿತ.pdf" "mr-books/Class-7/गणित.pdf"; do
+            for form in NFC; do
               enc=$(python3 -c 'import sys,urllib.parse,unicodedata;s=unicodedata.normalize(sys.argv[2],sys.argv[1]);print("/".join(urllib.parse.quote(x) for x in s.split("/")))' "$p" $form)
               code=$(curl -s -o /dev/null -w "%{http_code}" -r 0-10 "https://books-cdn.gmnadaf786.workers.dev/$enc")
               echo "RES $code $form $p"
