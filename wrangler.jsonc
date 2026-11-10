@@ -1,0 +1,13 @@
+{
+  "name": "abhyas-manch",
+  "main": "worker.js",
+  "compatibility_date": "2025-11-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "am-users", "database_id": "0edf2a92-5175-47fc-ac91-0c5bac6aef19" }
+  ]
+}
