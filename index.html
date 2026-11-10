@@ -173,7 +173,7 @@ function save(){try{localStorage.setItem(K,JSON.stringify(P))}catch(e){}}
 var cur=null,curL=null;
 function key(s,n){return s.p+'_'+n}
 function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb').innerHTML='';ht.textContent="Abhyas Manch";
- hp.textContent=S&&S.st?((S.st.name||S.st.pen)+' · इयत्ता '+(CAT?CAT.title:'')+' · '+medName(medCode(S.st))+' माध्यम'):(GUEST&&CAT?('पाहुणा · इयत्ता '+CAT.title+' · '+medName(GUEST.med)+' माध्यम'):'विषय निवडा');
+ hp.textContent=S&&S.st?((S.st.name||S.st.pen)+' · इयत्ता '+(CAT?CAT.title:'')+' · '+medName(medCode(S.st))+' माध्यम'):(GUEST&&CAT?((PROF&&PROF.p&&PROF.p.name?'👤 '+PROF.p.name:'पाहुणा')+' · इयत्ता '+CAT.title+' · '+medName(GUEST.med)+' माध्यम'):'विषय निवडा');
  var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
  h+='<div class="sub" style="--c:'+s.c+';'+subGrad(s.n,s.p,i)+'" onclick="openS('+i+')"><div class="in">'+subPic(s,i)+'<div class="lbl"><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div></div></div>'});
  var fb2=(FEE&&FEE.enabled&&!FEE.paid)?'<button class="les" style="justify-content:center;background:#b45309;color:#fff;border:0;margin-top:12px" onclick="openPay()">🔓 सर्व पाठ अनलॉक करा · ₹'+FEE.fee+'/वर्ष</button>':((FEE&&FEE.enabled&&FEE.paid&&FEE.until)?'<p style="text-align:center;color:#15803d;font-size:13px;margin-top:10px">✔ पेड · मुदत '+FEE.until+'</p>':'');
@@ -223,7 +223,7 @@ function startGuest(){var x=GOPT[gs.value];if(!x){gm.textContent='इयत्�
   try{localStorage.setItem('am_guest_v1',JSON.stringify(GUEST))}catch(e){}
   K='am_prog_guest_v1';try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){P={}}
   gd.style.display='none';lg.style.display='none';home()}).catch(function(){GUEST=null;gm.textContent='हे पाठ उपलब्ध नाहीत.'})}
-function guestLogin(){FEEF=0;GUEST=null;try{localStorage.removeItem('am_guest_v1')}catch(e){}K='am_prog_v1';P={};D=[];CAT=null;cur=null;m.innerHTML='';showLogin('')}
+function guestLogin(){FEEF=0;GUEST=null;PROF=null;try{localStorage.removeItem('am_guest_v1');localStorage.removeItem('am_prof_v1')}catch(e){}K='am_prog_v1';P={};D=[];CAT=null;cur=null;m.innerHTML='';showLogin('')}
 var FPEN='';
 function openFp(){fpm.textContent='';fpu.style.display='none';fpb.disabled=false;FPEN='';fp.style.display='flex'}
 function findPen(){var n=fpn.value.trim(),c=fpc.value,d=fpd.value;
@@ -261,7 +261,7 @@ function doExit(){menu(0);try{fr.src='about:blank';view.style.display='none'}cat
  try{window.close()}catch(e){}
  setTimeout(function(){var b=document.getElementById('bye');if(b)b.style.display='flex'},250)}
 function again(){document.getElementById('bye').style.display='none';home()}
-function doReset(){menu(0);var fin=function(){S=null;GUEST=null;P={};try{localStorage.removeItem(SK);localStorage.removeItem(K);localStorage.removeItem('am_guest_v1')}catch(e){}K='am_prog_v1';D=[];CAT=null;view.style.display='none';try{fr.src='about:blank'}catch(e){}cur=null;m.innerHTML='';showLogin('')};
+function doReset(){menu(0);var fin=function(){S=null;GUEST=null;PROF=null;P={};try{localStorage.removeItem(SK);localStorage.removeItem(K);localStorage.removeItem('am_guest_v1');localStorage.removeItem('am_prof_v1')}catch(e){}K='am_prog_v1';D=[];CAT=null;view.style.display='none';try{fr.src='about:blank'}catch(e){}cur=null;m.innerHTML='';showLogin('')};
  if(S&&getQ().length){flushQ();setTimeout(fin,1200)}else fin()}
 fetch('status.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.open===false){ksm.textContent=j.msg||'थोड्या वेळाने पुन्हा प्रयत्न करा.';ks.style.display='flex'}}).catch(function(){});
 if(S){loadCat(S.st).then(function(){home();loadMine();flushQ()}).catch(function(){S=null;try{localStorage.removeItem(SK)}catch(e){}home();showLogin('तुमच्या इयत्तेचे पाठ उपलब्ध नाहीत.')})}else if(GUEST){loadCat({className:String(GUEST.cls),medium:medName(GUEST.med)}).then(function(){home()}).catch(function(){GUEST=null;home();showLogin('')})}else{home();showLogin('')}
@@ -310,9 +310,13 @@ var COVM={"1-mr": ["english", "ganit", "marathi"], "2-mr": ["english", "ganit", 
 function subPic(s,i){var k=subKey(s.n,s.p),ck=BASE.replace(/^content\//,'').replace(/\/$/,''),kn=/-kn$/.test(ck),lang=kn?'kannada':'marathi',ill={lang:lang,read:lang,ganitsw:'ganit',ganit:'ganit',english:'english',hindi:'hindi',vidnyan:'vidnyan',history:'history',civics:'civics',geo:'geo',evs1:'evs1',evs2:'evs2'}[k],cvk={lang:lang,ganit:'ganit',ganitsw:'ganit',english:'english',hindi:'hindi',vidnyan:'vidnyan',history:'history',civics:'history',geo:'geo',evs1:'evs1',evs2:'evs2'}[k],h='<div class="pic"'+(ill?' style="background-image:url(img/subj/'+ill+'.webp)"':'')+'>';if(cvk&&(COVM[ck]||[]).indexOf(cvk)>=0)h+='<img class="cv" loading="lazy" alt="" src="covers/'+ck+'/'+cvk+'.webp" onerror="this.remove()">';else if(!ill)h+='<span class="e">'+s.i+'</span>';if(k==='ganitsw')h+='<span class="bdg">✍️</span>';else if(k==='read')h+='<span class="bdg">✏️</span>';else if(k==='civics')h+='<span class="bdg">🏛️</span>';return h+'</div>'}
 
 var INJT=null;
+
+function injUser(){var P=PROF&&PROF.p;if(!P||!P.name)return;var w;try{w=fr.contentWindow;if(!w||!w.document||!w.document.body)return}catch(e){return}
+ try{w.eval('window.GM_USER='+JSON.stringify({name:P.name,school:P.school||'',cls:'इयत्ता '+P.cls})+';try{PG.name=GM_USER.name;if(!SCH)SCH=GM_USER.school}catch(e){}');
+ w.eval('(function(){if(typeof renderPdf!=="function"||renderPdf.__u)return;var o=renderPdf;renderPdf=function(){o.apply(this,arguments);try{var n=GM_USER.name;document.querySelectorAll("#sheetHost span").forEach(function(s){var f=s.firstChild;if(f&&f.nodeType===3&&/^\\s*(नाव|ಹೆಸರು)\\s*:/.test(f.nodeValue)){var l=s.querySelector(".ln2");if(l&&!l.textContent.trim()){l.textContent=n;l.style.minWidth="0"}}})}catch(e){}};renderPdf.__u=1})()')}catch(e){}}
 function injCards(){clearInterval(INJT);var n=0,p=cur&&cur.p,l=curL;INJT=setInterval(function(){if(++n>40||!cur||cur.p!==p||curL!==l){clearInterval(INJT);return}if(VXE===null&&n<40)return;var d;try{d=fr.contentDocument}catch(e){clearInterval(INJT);return}var g=d&&d.querySelector('.hgrid');if(!g)return;clearInterval(INJT);if(!VXE||g.querySelector('.am-x'))return;var kn=KN(),h='';
 if(VXE.f)h+='<div class="hc am-x" style="background:linear-gradient(145deg,#38bdf8,#1d4ed8);color:#fff" onclick="parent.vxPdf()"><div class="hi">📄</div><div class="ht">'+(kn?'ಪಾಠ ಓದಿರಿ':'पाठ वाचा')+'</div><div class="hs">'+(kn?'ಮೂಲ ಪಠ್ಯಪುಸ್ತಕದ ಪಾಠ':'मूळ पुस्तकातील पाठ')+'</div></div>';
 if(VXE.o)h+='<div class="hc am-x" style="background:linear-gradient(145deg,#f472b6,#7c3aed);color:#fff" onclick="parent.vxLO()"><div class="hi">🎯</div><div class="ht">'+(kn?'ಕಲಿಕಾ ನಿಷ್ಪತ್ತಿ':'अध्ययन निष्पत्ती')+'</div><div class="hs">'+(kn?'ಈ ಪಾಠದ ನಿಷ್ಪತ್ತಿಗಳು ('+VXE.o.length+')':'या पाठाच्या निष्पत्ती ('+VXE.o.length+')')+'</div></div>';
 if(!h)return;g.insertAdjacentHTML('beforeend',h);vx.style.display='none'},250)}
-fr.addEventListener('load',function(){if(view.style.display==='flex')injCards()});
+fr.addEventListener('load',function(){if(view.style.display==='flex'){injUser();injCards()}});
 </script></body></html>
