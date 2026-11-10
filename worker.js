@@ -22,7 +22,32 @@ export default{
     try{
       const p=u.pathname;
       if(p==='/api/ping')return J({ok:true});
-      if(r.method!=='POST'&&!p.startsWith('/api/admin'))return J({e:'method'},405);
+      if(r.method!=='POST')return J({e:'method'},405);
+      if(p==='/api/admin/stats'||p==='/api/admin/list'){
+        const b=await body(r),ip=r.headers.get('cf-connecting-ip')||'';
+        const a=await env.DB.prepare("SELECT * FROM settings WHERE k='admin'").first().catch(()=>null);
+        if(!a)return J({e:'noadmin'},503);
+        const [salt,hh,fails,last]=a.v.split('|');
+        if(+fails>=10&&Date.now()-(+last)<900000)return J({e:'locked'},429);
+        if(await hashPin(String(b.key||''),salt)!==hh){await env.DB.prepare("UPDATE settings SET v=? WHERE k='admin'").bind([salt,hh,(+fails)+1,Date.now()].join('|')).run();return J({e:'bad'},401);}
+        if(+fails)await env.DB.prepare("UPDATE settings SET v=? WHERE k='admin'").bind([salt,hh,0,0].join('|')).run();
+        const q=async(sql,...a)=>(await env.DB.prepare(sql).bind(...a).all()).results;
+        if(p==='/api/admin/list'){
+          const w=[],a2=[];for(const f of ['district','taluka','kendra']){if(b[f]){w.push(f+'=?');a2.push(String(b[f]))}}
+          return J({rows:await q('SELECT name,mobile,cls,med,district,taluka,kendra,school,school_udise,created,last_seen FROM students'+(w.length?' WHERE '+w.join(' AND '):'')+' ORDER BY id DESC LIMIT 1000',...a2)});
+        }
+        const one=async(sql)=>(await env.DB.prepare(sql).first());
+        return J({
+          tot:await one("SELECT COUNT(*) n,SUM(date(created)=date('now')) today,SUM(last_seen>=datetime('now','-1 day')) a1,SUM(last_seen>=datetime('now','-7 day')) a7 FROM students"),
+          ev:await one("SELECT COUNT(*) n,SUM(ts>=datetime('now','-1 day')) d1 FROM usage"),
+          dist:await q("SELECT district d,COUNT(*) n,SUM(last_seen>=datetime('now','-7 day')) a7 FROM students GROUP BY district ORDER BY n DESC"),
+          tal:await q("SELECT district d,taluka t,COUNT(*) n FROM students GROUP BY district,taluka ORDER BY n DESC LIMIT 300"),
+          ken:await q("SELECT district d,taluka t,kendra k,COUNT(*) n,SUM(last_seen>=datetime('now','-7 day')) a7 FROM students GROUP BY district,taluka,kendra ORDER BY n DESC LIMIT 500"),
+          cls:await q("SELECT cls c,med m,COUNT(*) n FROM students GROUP BY cls,med ORDER BY cls,med"),
+          top:await q("SELECT cls c,med m,subj s,COUNT(*) n FROM usage GROUP BY cls,med,subj ORDER BY n DESC LIMIT 25"),
+          day:await q("SELECT date(ts) d,COUNT(*) n,COUNT(DISTINCT sid) u FROM usage WHERE ts>=datetime('now','-14 day') GROUP BY date(ts) ORDER BY d")
+        });
+      }
       if(p==='/api/register'){
         const b=await body(r);
         const mobile=cl(b.mobile,10),name=cl(b.name,60),pin=cl(b.pin,6);

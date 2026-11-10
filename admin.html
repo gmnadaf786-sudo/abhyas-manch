@@ -1,0 +1,30 @@
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>अभ्यास मंच – अॅडमिन</title>
+<style>:root{--bg:#f7f7f4;--c:#fff;--i:#1f2933;--m:#64748b;--l:#e2e8f0;--a:#0f766e}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--c:#1e293b;--i:#e2e8f0;--m:#94a3b8;--l:#334155}}
+body{margin:0;background:var(--bg);color:var(--i);font:15px/1.5 system-ui,sans-serif}main{max-width:900px;margin:0 auto;padding:16px}
+.card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:14px;margin-bottom:14px}h1{font-size:20px;margin:6px 0 12px}h2{font-size:16px;margin:0 0 8px}
+input,select,button{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--i)}button{background:var(--a);color:#fff;border:0;cursor:pointer}
+.kp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kp div{background:var(--c);border:1px solid var(--l);border-radius:12px;padding:10px}.kp b{font-size:24px;display:block}.kp span{color:var(--m);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;border-bottom:1px solid var(--l);text-align:left}th{color:var(--m);font-weight:600}.w{overflow-x:auto}
+.bar{height:8px;background:var(--a);border-radius:4px}</style></head><body><main>
+<h1>📊 अभ्यास मंच – अॅडमिन</h1>
+<div class="card" id="lg"><input id="k" type="password" placeholder="अॅडमिन पासवर्ड" style="width:100%;box-sizing:border-box;margin-bottom:10px"><button onclick="go()" style="width:100%">उघडा</button><p id="e" style="color:#b91c1c"></p></div>
+<div id="d" style="display:none"></div></main>
+<script>
+var K='',E=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+function post(u,b){b.key=K;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()})}
+function tb(h,rows){return '<div class="w"><table><tr>'+h.map(function(x){return '<th>'+x+'</th>'}).join('')+'</tr>'+rows.map(function(r){return '<tr>'+r.map(function(x){return '<td>'+E(x)+'</td>'}).join('')+'</tr>'}).join('')+'</table></div>'}
+function go(){K=k.value;e.textContent='';post('/api/admin/stats',{}).then(function(j){
+ if(j.e){e.textContent={bad:'पासवर्ड चुकीचा.',locked:'खूप प्रयत्न झाले. १५ मिनिटांनी पाहा.',noadmin:'अॅडमिन पासवर्ड अजून ठरलेला नाही.'}[j.e]||'अडचण.';return}
+ lg.style.display='none';d.style.display='block';var t=j.tot,mx=Math.max.apply(null,j.day.map(function(x){return x.n}).concat([1]));
+ d.innerHTML='<div class="kp"><div><b>'+t.n+'</b><span>एकूण नोंदणी</span></div><div><b>'+(t.today||0)+'</b><span>आज नवीन</span></div><div><b>'+(t.a1||0)+'</b><span>गेल्या २४ तासांत सक्रिय</span></div><div><b>'+(t.a7||0)+'</b><span>गेल्या ७ दिवसांत सक्रिय</span></div><div><b>'+j.ev.n+'</b><span>एकूण पाठ उघडले</span></div><div><b>'+(j.ev.d1||0)+'</b><span>आज/२४ तासांत पाठ</span></div></div><br>'+
+ '<div class="card"><h2>जिल्हानिहाय</h2>'+tb(['जिल्हा','नोंदणी','७ दिवस सक्रिय'],j.dist.map(function(x){return[x.d||'—',x.n,x.a7]}))+'</div>'+
+ '<div class="card"><h2>केंद्रनिहाय (सर्वाधिक)</h2>'+tb(['जिल्हा','तालुका','केंद्र','नोंदणी','७ दिवस'],j.ken.map(function(x){return[x.d,x.t,x.k,x.n,x.a7]}))+'</div>'+
+ '<div class="card"><h2>इयत्ता / माध्यम</h2>'+tb(['इयत्ता','माध्यम','विद्यार्थी'],j.cls.map(function(x){return[x.c,x.m,x.n]}))+'</div>'+
+ '<div class="card"><h2>सर्वाधिक वापरलेले विषय</h2>'+tb(['इयत्ता','माध्यम','विषय','पाठ उघडले'],j.top.map(function(x){return[x.c,x.m,x.s,x.n]}))+'</div>'+
+ '<div class="card"><h2>गेले १४ दिवस</h2>'+j.day.map(function(x){return '<div style="display:flex;gap:8px;align-items:center;font-size:13px"><span style="width:78px">'+x.d.slice(5)+'</span><div class="bar" style="width:'+Math.round(x.n*100/mx)+'%;min-width:3px"></div><span>'+x.n+' ('+x.u+' विद्यार्थी)</span></div>'}).join('')+'</div>'+
+ '<div class="card"><h2>विद्यार्थी यादी (CSV)</h2><select id="fd" onchange="ft()"><option value="">सर्व जिल्हे</option>'+j.dist.map(function(x){return '<option>'+E(x.d)+'</option>'}).join('')+'</select> <select id="ftl"><option value="">सर्व तालुके</option></select> <button onclick="dl()">⬇ CSV डाउनलोड</button></div>';
+ window.J=j}).catch(function(){e.textContent='इंटरनेट तपासा.'})}
+function ft(){var s=['<option value="">सर्व तालुके</option>'];J.tal.filter(function(x){return x.d===fd.value}).forEach(function(x){s.push('<option>'+E(x.t)+'</option>')});ftl.innerHTML=s.join('')}
+function dl(){post('/api/admin/list',{district:fd.value,taluka:ftl.value}).then(function(j){var c='﻿नाव,मोबाईल,इयत्ता,माध्यम,जिल्हा,तालुका,केंद्र,शाळा,UDISE,नोंदणी,शेवटचा वापर\n'+j.rows.map(function(r){return [r.name,r.mobile,r.cls,r.med,r.district,r.taluka,r.kendra,r.school,r.school_udise,r.created,r.last_seen].map(function(x){return '"'+String(x==null?'':x).replace(/"/g,'""')+'"'}).join(',')}).join('\n');
+ var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:'text/csv;charset=utf-8'}));a.download='students.csv';a.click()})}
+</script></body></html>
