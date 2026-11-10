@@ -1,0 +1,16 @@
+name: Probe R2 paths
+on:
+  push:
+    paths: ['.github/workflows/probe.yml']
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for p in "kn-books/Class-7/ಗಣಿತ.pdf" "kn-books/class-7/ಗಣಿತ.pdf" "kn-books/Class-7/ಬಾಲಭಾರತಿ.pdf" "kn-books/class-7/ಬಾಲಭಾರತಿ.pdf" "kn-lessons/Class-7/ಗಣಿತ/7.Math.3.ಮಸಾವಿ - ಲಸಾವಿ.pdf" "mr-books/class-7/गणित.pdf"; do
+            for form in NFC NFD; do
+              enc=$(python3 -c 'import sys,urllib.parse,unicodedata;s=unicodedata.normalize(sys.argv[2],sys.argv[1]);print("/".join(urllib.parse.quote(x) for x in s.split("/")))' "$p" $form)
+              code=$(curl -s -o /dev/null -w "%{http_code}" -r 0-10 "https://books-cdn.gmnadaf786.workers.dev/$enc")
+              echo "RES $code $form $p"
+            done
+          done
