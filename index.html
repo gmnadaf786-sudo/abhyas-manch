@@ -192,9 +192,9 @@ function openRg(mode){RGM=mode;rgm.textContent='';rg.style.display='flex';
  rd.innerHTML='<option>लोड होत आहे…</option>';
  fetch('geo.json').then(function(r){return r.json()}).then(function(g){GEO=g;rgD()}).catch(function(){rd.innerHTML='<option value="">इंटरनेट तपासा</option>'})}
 function rgM(){var c=+rcl.value,h='<option value="">माध्यम निवडा</option>';GOPT.filter(function(x){return x.cls===c}).forEach(function(x){h+='<option value="'+x.med+'">'+medName(x.med)+' माध्यम</option>'});rcm.innerHTML=h}
-function rgD(){rd.innerHTML=rgo(GEO.map(function(x){return x.n}),'जिल्हा निवडा');rt.innerHTML=rgo([],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र निवडा')}
-function rgT(){var d=GEO[rd.value];rt.innerHTML=rgo(d?d.t.map(function(x){return x.n}):[],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र निवडा')}
-function rgK(){var d=GEO[rd.value],t=d&&d.t[rt.value];rk.innerHTML=rgo(t?t.k.map(function(x){return x[0]}):[],'केंद्र निवडा')}
+function rgD(){rd.innerHTML=rgo(GEO.map(function(x){return x.n}),'जिल्हा निवडा');rt.innerHTML=rgo([],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र (गाव) निवडा')}
+function rgT(){var d=GEO[rd.value];rt.innerHTML=rgo(d?d.t.map(function(x){return x.n}):[],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र (गाव) निवडा')}
+function rgK(){var d=GEO[rd.value],t=d&&d.t[rt.value];rk.innerHTML=rgo(t?t.k.map(function(x){return x[0]}):[],'केंद्र (गाव) निवडा')}
 function rgErr(e){var M={mobile:'मोबाईल क्रमांक बरोबर टाका.',name:'विद्यार्थ्याचे नाव टाका.',pin:'पासवर्ड ४ ते ६ अंकी असावा.',consent:'संमती निवडा.',cls:'इयत्ता आणि माध्यम निवडा.',exists:'हा मोबाईल आधीच नोंदलेला आहे. "मोबाईल नंबरने लॉगिन" वापरा.',bad:'मोबाईल किंवा पासवर्ड चुकीचा.',locked:'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.'};rgm.textContent=M[e]||'काहीतरी अडचण आली. पुन्हा प्रयत्न करा.'}
 function rgGo(){rgm.textContent='';var o={mobile:rmb.value.trim(),pin:rpn.value.trim()},u='/api/login';
  if(!/^[6-9]\d{9}$/.test(o.mobile)){rgErr('mobile');return}
