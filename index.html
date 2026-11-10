@@ -177,7 +177,7 @@ function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb'
  var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
  h+='<div class="sub" style="--c:'+s.c+';'+subGrad(s.n,s.p,i)+'" onclick="openS('+i+')"><div class="in">'+subPic(s,i)+'<div class="lbl"><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div></div></div>'});
  var fb2=(FEE&&FEE.enabled&&!FEE.paid)?'<button class="les" style="justify-content:center;background:#b45309;color:#fff;border:0;margin-top:12px" onclick="openPay()">🔓 सर्व पाठ अनलॉक करा · ₹'+FEE.fee+'/वर्ष</button>':((FEE&&FEE.enabled&&FEE.paid&&FEE.until)?'<p style="text-align:center;color:#15803d;font-size:13px;margin-top:10px">✔ पेड · मुदत '+FEE.until+'</p>':'');
- m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+((S||PROF)?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>':'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+(S?'':'<p style="text-align:center;color:var(--mut);font-size:13px;margin-top:10px">पाहुणा म्हणून तुमची प्रगती फक्त या फोनमध्ये दिसते.</p>')}
+ m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+((S||PROF)?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>':'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+''}
 
 
 
