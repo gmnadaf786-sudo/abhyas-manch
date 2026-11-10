@@ -44,17 +44,17 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <button class="les" style="justify-content:center" onclick="doExit()">🚪 अ‍ॅप बंद करा</button>
 <button class="les" style="justify-content:center" onclick="doReset()">🚪 लॉगआउट (दुसरा विद्यार्थी)</button>
 <button class="les" style="justify-content:center" onclick="menu(0)">रद्द करा</button></div></div>
-<div id="lg" style="display:none;position:fixed;inset:0;background:linear-gradient(160deg,#0f766e 0%,#14b8a6 55%,#fbbf24 130%);z-index:40;overflow:auto;padding:20px;align-items:center;justify-content:center"><div style="width:100%;max-width:380px;margin:auto">
-<div style="text-align:center;color:#fff;margin-bottom:16px"><img src="icon-512.png" alt="अभ्यास मंच" width="190" height="190" style="width:190px;height:190px;border-radius:38px;box-shadow:0 10px 30px rgba(0,0,0,.3)"><div style="font-size:15px;opacity:.95;margin-top:12px;font-weight:600">इयत्ता १ ली ते ८ वी · मराठी व कन्नड माध्यम</div></div>
-<form onsubmit="return doLogin(event)" style="background:var(--card);color:var(--ink);border-radius:22px;padding:22px;box-shadow:0 14px 40px rgba(0,0,0,.25)">
-<h2 style="margin:0 0 14px;font-size:20px;text-align:center">🔐 लॉगिन</h2>
+<div id="lg" style="display:none;position:fixed;inset:0;background:linear-gradient(160deg,#0f766e 0%,#14b8a6 55%,#fbbf24 130%);z-index:40;overflow:auto;padding:12px 20px;align-items:center;justify-content:center;height:100vh;height:100dvh"><div style="width:100%;max-width:380px;margin:auto">
+<div style="text-align:center;color:#fff;margin-bottom:10px"><img src="icon-512.png" alt="अभ्यास मंच" style="width:min(176px,23vh);height:min(176px,23vh);border-radius:32px;box-shadow:0 10px 30px rgba(0,0,0,.3)"><div style="font-size:14px;opacity:.95;margin-top:8px;font-weight:600">इयत्ता १ ली ते ८ वी · मराठी व कन्नड माध्यम</div></div>
+<form onsubmit="return doLogin(event)" style="background:var(--card);color:var(--ink);border-radius:22px;padding:16px 18px;box-shadow:0 14px 40px rgba(0,0,0,.25)">
+<h2 style="margin:0 0 10px;font-size:19px;text-align:center">🔐 लॉगिन</h2>
 <input id="lu" inputmode="numeric" autocomplete="username" placeholder="मोबाईल क्रमांक" maxlength="11"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड">
-<p id="le" style="color:#b91c1c;font-size:14px;min-height:20px;margin:0 0 8px;text-align:center"></p>
+<p id="le" style="color:#b91c1c;font-size:13px;min-height:18px;margin:0 0 6px;text-align:center"></p>
 <button class="les" id="lb" style="justify-content:center;background:#0f766e;color:#fff;border:0;font-size:18px;padding:14px" type="submit">लॉगिन करा</button>
-<div style="display:flex;align-items:center;gap:10px;margin:16px 0;color:var(--mut);font-size:13px"><i style="flex:1;height:1px;background:var(--line)"></i>नवीन आहात?<i style="flex:1;height:1px;background:var(--line)"></i></div>
+<div style="display:flex;align-items:center;gap:10px;margin:10px 0;color:var(--mut);font-size:13px"><i style="flex:1;height:1px;background:var(--line)"></i>नवीन आहात?<i style="flex:1;height:1px;background:var(--line)"></i></div>
 <button type="button" class="les" style="justify-content:center;background:#fff7ed;color:#c2410c;border:2px solid #fb923c;font-size:18px;padding:14px;margin:0" onclick="openRg(0)">📝 नोंदणी करा (Sign up)</button>
 </form>
-<p style="text-align:center;margin:16px 0 0"><a href="#" onclick="ab.style.display='flex';return false" style="color:#fff;font-size:14px;font-weight:700;text-decoration:underline">👨‍💻 विकसकाबद्दल (About Developer)</a></p></div></div>
+<p style="text-align:center;margin:12px 0 0"><a href="#" onclick="ab.style.display='flex';return false" style="color:#fff;font-size:14px;font-weight:700;text-decoration:underline">👨‍💻 विकसकाबद्दल (About Developer)</a></p></div></div>
 <div id="ab" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:60;align-items:center;justify-content:center;padding:16px;overflow:auto" onclick="if(event.target===this)this.style.display='none'"><div style="width:100%;max-width:380px;background:#fff;color:#0f172a;border-radius:24px;overflow:hidden;border:2.5px solid #d4af37;box-shadow:0 20px 40px rgba(0,0,0,.3);position:relative;margin:auto">
 <button onclick="ab.style.display='none'" style="position:absolute;right:12px;top:12px;width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.85);font-weight:900;color:#b91c1c;cursor:pointer;z-index:2" type="button">✕</button>
 <div style="background:linear-gradient(135deg,#0f2b66 0%,#1e3a8a 70%,#172554 100%);color:#fff;text-align:center;padding:18px 12px 14px;border-bottom:3px solid #d4af37"><div style="font-size:12px;font-weight:800;letter-spacing:.6px;color:#fde047">पंचायत समिती ( शिक्षण विभाग ) जत</div><div style="font-size:11px;color:#cbd5e1;margin-top:4px">अभ्यास मंच · मोफत शैक्षणिक ॲप</div></div>
@@ -73,7 +73,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <div id="rgr"><p style="font-size:12px;color:var(--mut);margin:6px 0 10px">नोंदणी मोफत आहे. PEN नको. तुमचे नाव PDF वर येईल.</p>
 <select id="rd" onchange="rgT()" class="rgs"></select><select id="rt" onchange="rgK()" class="rgs"></select><select id="rk" class="rgs"></select>
 <input id="rsn" placeholder="शाळेचे नाव" autocomplete="off"><input id="rsu" inputmode="numeric" maxlength="11" placeholder="शाळेचा UDISE कोड (माहीत असल्यास)">
-<input id="rnm" placeholder="विद्यार्थ्याचे नाव" autocomplete="name"><select id="rcl" class="rgs"></select></div>
+<input id="rnm" placeholder="विद्यार्थ्याचे नाव" autocomplete="name"><select id="rcl" onchange="rgM()" class="rgs"></select><select id="rcm" class="rgs"></select></div>
 <input id="rmb" inputmode="numeric" maxlength="10" placeholder="मोबाईल क्रमांक (१० अंकी)" autocomplete="username"><input id="rpn" type="password" inputmode="numeric" maxlength="6" placeholder="पासवर्ड (४ ते ६ अंक)" autocomplete="current-password">
 <label id="rcw" style="display:flex;gap:8px;font-size:13px;color:var(--mut);margin-bottom:10px"><input id="rcc" type="checkbox" style="width:auto;margin:3px 0 0">माझे नाव, शाळा व मोबाईल क्रमांक अभ्यास मंचच्या वापराच्या आकडेवारीसाठी साठवण्यास माझी/पालकांची संमती आहे.</label>
 <p id="rgm" style="color:#b91c1c;min-height:20px;font-size:14px;margin:0 0 8px"></p>
@@ -186,18 +186,20 @@ function rgo(a,f){return '<option value="">'+f+'</option>'+a.map(function(x,i){r
 function openRg(mode){RGM=mode;rgm.textContent='';rg.style.display='flex';
  rgt.textContent=mode?'📱 मोबाईल लॉगिन':'📝 नोंदणी';rgb.textContent=mode?'लॉगिन':'नोंदणी करा';rgr.style.display=mode?'none':'block';rcw.style.display=mode?'none':'flex';
  if(mode)return;
- if(!GOPT.length)fetch('content/index.json').then(function(r){return r.json()}).then(function(a){GOPT=a;rcl.innerHTML=rgo(a.map(function(x){return x.label}),'इयत्ता व माध्यम')}).catch(function(){});else rcl.innerHTML=rgo(GOPT.map(function(x){return x.label}),'इयत्ता व माध्यम');
+  var fin=function(){var cs=[];GOPT.forEach(function(x){if(cs.indexOf(x.cls)<0)cs.push(x.cls)});cs.sort(function(a,b){return a-b});rcl.innerHTML='<option value="">इयत्ता निवडा</option>'+cs.map(function(c){return '<option value="'+c+'">इयत्ता '+c+'</option>'}).join('');rcm.innerHTML='<option value="">माध्यम निवडा</option>'};
+ if(!GOPT.length)fetch('content/index.json').then(function(r){return r.json()}).then(function(a){GOPT=a;fin()}).catch(function(){});else fin();
  if(GEO){rgD();return}
  rd.innerHTML='<option>लोड होत आहे…</option>';
  fetch('geo.json').then(function(r){return r.json()}).then(function(g){GEO=g;rgD()}).catch(function(){rd.innerHTML='<option value="">इंटरनेट तपासा</option>'})}
+function rgM(){var c=+rcl.value,h='<option value="">माध्यम निवडा</option>';GOPT.filter(function(x){return x.cls===c}).forEach(function(x){h+='<option value="'+x.med+'">'+medName(x.med)+' माध्यम</option>'});rcm.innerHTML=h}
 function rgD(){rd.innerHTML=rgo(GEO.map(function(x){return x.n}),'जिल्हा निवडा');rt.innerHTML=rgo([],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र निवडा')}
 function rgT(){var d=GEO[rd.value];rt.innerHTML=rgo(d?d.t.map(function(x){return x.n}):[],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र निवडा')}
 function rgK(){var d=GEO[rd.value],t=d&&d.t[rt.value];rk.innerHTML=rgo(t?t.k.map(function(x){return x[0]}):[],'केंद्र निवडा')}
-function rgErr(e){var M={mobile:'मोबाईल क्रमांक बरोबर टाका.',name:'विद्यार्थ्याचे नाव टाका.',pin:'पासवर्ड ४ ते ६ अंकी असावा.',consent:'संमती निवडा.',cls:'इयत्ता व माध्यम निवडा.',exists:'हा मोबाईल आधीच नोंदलेला आहे. "मोबाईल नंबरने लॉगिन" वापरा.',bad:'मोबाईल किंवा पासवर्ड चुकीचा.',locked:'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.'};rgm.textContent=M[e]||'काहीतरी अडचण आली. पुन्हा प्रयत्न करा.'}
+function rgErr(e){var M={mobile:'मोबाईल क्रमांक बरोबर टाका.',name:'विद्यार्थ्याचे नाव टाका.',pin:'पासवर्ड ४ ते ६ अंकी असावा.',consent:'संमती निवडा.',cls:'इयत्ता आणि माध्यम निवडा.',exists:'हा मोबाईल आधीच नोंदलेला आहे. "मोबाईल नंबरने लॉगिन" वापरा.',bad:'मोबाईल किंवा पासवर्ड चुकीचा.',locked:'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.'};rgm.textContent=M[e]||'काहीतरी अडचण आली. पुन्हा प्रयत्न करा.'}
 function rgGo(){rgm.textContent='';var o={mobile:rmb.value.trim(),pin:rpn.value.trim()},u='/api/login';
  if(!/^[6-9]\d{9}$/.test(o.mobile)){rgErr('mobile');return}
  if(!/^\d{4,6}$/.test(o.pin)){rgErr('pin');return}
- if(!RGM){u='/api/register';var x=GOPT[rcl.value],d=GEO&&GEO[rd.value],t=d&&d.t[rt.value],k=t&&t.k[rk.value];
+ if(!RGM){u='/api/register';var x=GOPT.filter(function(y){return String(y.cls)===rcl.value&&y.med===rcm.value})[0],d=GEO&&GEO[rd.value],t=d&&d.t[rt.value],k=t&&t.k[rk.value];
   if(!rnm.value.trim()){rgErr('name');return}
   if(!x){rgErr('cls');return}
   if(!rcc.checked){rgErr('consent');return}
