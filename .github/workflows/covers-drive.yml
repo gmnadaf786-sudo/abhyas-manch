@@ -1,0 +1,30 @@
+name: Book covers from Drive
+on:
+  push:
+    paths: ['covers/drive.tsv']
+permissions:
+  contents: write
+jobs:
+  covers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils webp imagemagick && pip install -q gdown
+      - name: Render covers
+        run: |
+          ok=0; bad=0
+          while IFS=$'\t' read -r id out; do
+            [ -z "$id" ] && continue
+            mkdir -p "$(dirname "$out")"
+            if curl -sfL "https://drive.google.com/thumbnail?id=$id&sz=w600" -o t.img && file t.img | grep -qiE 'image|JPEG|PNG' ; then
+              convert t.img -resize 360x page.png
+            elif gdown -q --id "$id" -O book.pdf && pdftoppm -f 1 -l 1 -singlefile -png -scale-to-x 360 -scale-to-y -1 book.pdf page; then :; else
+              bad=$((bad+1)); echo "ERR $id $out"; continue
+            fi
+            cwebp -quiet -q 70 page.png -o "$out" && ok=$((ok+1)) && echo "OK  $out"
+            rm -f t.img book.pdf page.png
+          done < covers/drive.tsv
+          echo "done ok=$ok bad=$bad"
+      - run: |
+          git config user.name "covers-bot"; git config user.email "actions@users.noreply.github.com"
+          git add covers; git diff --cached --quiet || (git commit -m "Add Kannada book covers" && git pull --rebase && git push)
