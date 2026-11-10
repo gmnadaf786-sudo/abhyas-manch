@@ -30,7 +30,7 @@ export default{
         if(name.length<2)return J({e:'name'},400);
         if(!okPin(pin))return J({e:'pin'},400);
         if(!b.consent)return J({e:'consent'},400);
-        const cls=parseInt(b.cls)||0,med=b.med==='kn'?'kn':'mr';
+        const cls=parseInt(b.cls)||0,med=['kn','en'].includes(b.med)?b.med:'mr';
         if(cls<1||cls>8)return J({e:'cls'},400);
         if(await env.DB.prepare('SELECT 1 FROM students WHERE mobile=?').bind(mobile).first())return J({e:'exists'},409);
         const salt=rnd(8),h=await hashPin(pin,salt),tok=rnd(24);

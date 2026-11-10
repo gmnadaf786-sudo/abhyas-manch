@@ -19,6 +19,7 @@ main{padding:16px;max-width:760px;margin:auto}
 @media(min-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
 .sub{position:relative;background:linear-gradient(180deg,#fde68a,#f59e0b);padding:3px;border-radius:20px;cursor:pointer;box-shadow:0 6px 14px -6px rgba(180,83,9,.55);transition:transform .12s;text-align:center}.sub:active{transform:scale(.97)}.sub .in{background:#fffbeb;border-radius:17px;overflow:hidden}.sub .pic{position:relative;height:118px;background:linear-gradient(145deg,var(--g1,var(--c)),var(--g2,var(--c)));background-size:cover;background-position:center;display:flex;align-items:flex-end;justify-content:center}.sub .pic .cv{height:108px;width:80px;object-fit:cover;object-position:right center;margin-bottom:-6px;border-radius:3px 6px 6px 3px;box-shadow:-3px 4px 10px rgba(0,0,0,.45);border-left:3px solid rgba(0,0,0,.18);background:#fff}.sub .pic .e{font-size:44px;align-self:center}.sub .bdg{position:absolute;top:6px;right:6px;background:#fff;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;font-size:17px;box-shadow:0 2px 6px rgba(0,0,0,.3)}.sub .lbl{position:relative;margin:-10px 6px 8px;background:linear-gradient(180deg,#fffdf5,#fde9b8);border:2px solid #f2b631;border-radius:14px;padding:5px 6px 7px;z-index:1}.sub b{display:block;font-size:16px;line-height:1.25;color:#1e2a78}.sub small{color:#6b5a2e;font-size:12px}.sub .bar{height:5px;margin-top:4px;background:#f3e3b5}.sub .bar i{background:#16a34a}
 .bar{height:6px;background:var(--line);border-radius:3px;margin-top:8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--c)}
+.rgs{width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-bottom:12px}
 input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-bottom:12px}
 .les{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;width:100%;text-align:left;color:var(--ink);font:inherit}
 .les .n{min-width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:700}
@@ -45,9 +46,20 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <button class="les" style="justify-content:center" onclick="menu(0)">रद्द करा</button></div></div>
 <div id="lg" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:40;align-items:center;justify-content:center;padding:24px"><form onsubmit="return doLogin(event)" style="background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;max-width:360px;width:100%">
 <div style="text-align:center"><img src="icon-192.png" alt="Abhyas Manch" width="96" height="96"></div><h2 style="text-align:center;margin:6px 0 14px">Abhyas Manch – लॉगिन</h2>
-<button type="button" class="les" style="justify-content:center;background:#0f766e;color:#fff;border:0;font-size:18px;padding:16px" onclick="openGuest()">🙋 पाहुणा म्हणून सुरू करा</button><p style="font-size:12px;color:var(--mut);text-align:center;margin:6px 0 14px">नोंदणी/पासवर्ड नको · सर्व पाठ मोफत</p><p style="font-size:13px;color:var(--mut);text-align:center;margin:0 0 8px">— जत भागातील विद्यार्थ्यांसाठी (PEN लॉगिन) —</p><input id="lu" inputmode="numeric" autocomplete="username" placeholder="PEN (११ अंकी)"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड (जन्मवर्ष)">
+<button type="button" class="les" style="justify-content:center;background:#1d4ed8;color:#fff;border:0;font-size:18px;padding:16px" onclick="openRg(0)">📝 नोंदणी करा</button><button type="button" class="les" style="justify-content:center;background:#fff;color:#1d4ed8;border:2px solid #1d4ed8;margin-top:8px" onclick="openRg(1)">📱 मोबाईल नंबरने लॉगिन</button><div style="height:10px"></div><button type="button" class="les" style="justify-content:center;background:#0f766e;color:#fff;border:0;font-size:18px;padding:16px" onclick="openGuest()">🙋 पाहुणा म्हणून सुरू करा</button><p style="font-size:12px;color:var(--mut);text-align:center;margin:6px 0 14px">नोंदणी/पासवर्ड नको · सर्व पाठ मोफत</p><p style="font-size:13px;color:var(--mut);text-align:center;margin:0 0 8px">— जत भागातील विद्यार्थ्यांसाठी (PEN लॉगिन) —</p><input id="lu" inputmode="numeric" autocomplete="username" placeholder="PEN (११ अंकी)"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड (जन्मवर्ष)">
 <p id="le" style="color:#b91c1c;font-size:14px;min-height:20px;margin:0 0 8px"></p>
 <button class="les" id="lb" style="justify-content:center;background:#fff;color:#0f766e;border:2px solid #0f766e" type="submit">लॉगिन</button><button type="button" class="les" style="justify-content:center;margin-top:8px" onclick="openFp()">🔍 PEN शोधा</button></form></div>
+<div id="rg" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:46;align-items:flex-start;justify-content:center;padding:14px;overflow:auto"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:400px;width:100%;margin:auto">
+<b id="rgt" style="font-size:18px">📝 नोंदणी</b>
+<div id="rgr"><p style="font-size:12px;color:var(--mut);margin:6px 0 10px">नोंदणी मोफत आहे. PEN नको. तुमचे नाव PDF वर येईल.</p>
+<select id="rd" onchange="rgT()" class="rgs"></select><select id="rt" onchange="rgK()" class="rgs"></select><select id="rk" class="rgs"></select>
+<input id="rsn" placeholder="शाळेचे नाव" autocomplete="off"><input id="rsu" inputmode="numeric" maxlength="11" placeholder="शाळेचा UDISE कोड (माहीत असल्यास)">
+<input id="rnm" placeholder="विद्यार्थ्याचे नाव" autocomplete="name"><select id="rcl" class="rgs"></select></div>
+<input id="rmb" inputmode="numeric" maxlength="10" placeholder="मोबाईल क्रमांक (१० अंकी)" autocomplete="username"><input id="rpn" type="password" inputmode="numeric" maxlength="6" placeholder="पासवर्ड (४ ते ६ अंक)" autocomplete="current-password">
+<label id="rcw" style="display:flex;gap:8px;font-size:13px;color:var(--mut);margin-bottom:10px"><input id="rcc" type="checkbox" style="width:auto;margin:3px 0 0">माझे नाव, शाळा व मोबाईल क्रमांक अभ्यास मंचच्या वापराच्या आकडेवारीसाठी साठवण्यास माझी/पालकांची संमती आहे.</label>
+<p id="rgm" style="color:#b91c1c;min-height:20px;font-size:14px;margin:0 0 8px"></p>
+<button class="les" id="rgb" style="justify-content:center;background:#1d4ed8;color:#fff;border:0" onclick="rgGo()">नोंदणी करा</button>
+<button class="les" style="justify-content:center" onclick="rg.style.display='none'">बंद करा</button></div></div>
 <div id="gd" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:45;align-items:center;justify-content:center;padding:20px"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:380px;width:100%">
 <b style="font-size:18px">🙋 पाहुणा म्हणून वापरा</b>
 <p style="font-size:13px;color:var(--mut);margin:6px 0 10px">लॉगिनशिवाय पाठ वापरा. तुमची प्रगती फक्त या फोनमध्ये राहते; शिक्षकांना निकाल दिसत नाही.</p>
@@ -144,6 +156,38 @@ function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb'
  m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+(S?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>':'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+(S?'':'<p style="text-align:center;color:var(--mut);font-size:13px;margin-top:10px">पाहुणा म्हणून तुमची प्रगती फक्त या फोनमध्ये दिसते.</p>')}
 
 
+
+var GEO=null,RGM=0,PROF=null;try{PROF=JSON.parse(localStorage.getItem('am_prof_v1')||'null')}catch(e){}
+function rgo(a,f){return '<option value="">'+f+'</option>'+a.map(function(x,i){return '<option value="'+i+'">'+x+'</option>'}).join('')}
+function openRg(mode){RGM=mode;rgm.textContent='';rg.style.display='flex';
+ rgt.textContent=mode?'📱 मोबाईल लॉगिन':'📝 नोंदणी';rgb.textContent=mode?'लॉगिन':'नोंदणी करा';rgr.style.display=mode?'none':'block';rcw.style.display=mode?'none':'flex';
+ if(mode)return;
+ if(!GOPT.length)fetch('content/index.json').then(function(r){return r.json()}).then(function(a){GOPT=a;rcl.innerHTML=rgo(a.map(function(x){return x.label}),'इयत्ता व माध्यम')}).catch(function(){});else rcl.innerHTML=rgo(GOPT.map(function(x){return x.label}),'इयत्ता व माध्यम');
+ if(GEO){rgD();return}
+ rd.innerHTML='<option>लोड होत आहे…</option>';
+ fetch('geo.json').then(function(r){return r.json()}).then(function(g){GEO=g;rgD()}).catch(function(){rd.innerHTML='<option value="">इंटरनेट तपासा</option>'})}
+function rgD(){rd.innerHTML=rgo(GEO.map(function(x){return x.n}),'जिल्हा निवडा');rt.innerHTML=rgo([],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र निवडा')}
+function rgT(){var d=GEO[rd.value];rt.innerHTML=rgo(d?d.t.map(function(x){return x.n}):[],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र निवडा')}
+function rgK(){var d=GEO[rd.value],t=d&&d.t[rt.value];rk.innerHTML=rgo(t?t.k.map(function(x){return x[0]}):[],'केंद्र निवडा')}
+function rgErr(e){var M={mobile:'मोबाईल क्रमांक बरोबर टाका.',name:'विद्यार्थ्याचे नाव टाका.',pin:'पासवर्ड ४ ते ६ अंकी असावा.',consent:'संमती निवडा.',cls:'इयत्ता व माध्यम निवडा.',exists:'हा मोबाईल आधीच नोंदलेला आहे. "मोबाईल नंबरने लॉगिन" वापरा.',bad:'मोबाईल किंवा पासवर्ड चुकीचा.',locked:'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.'};rgm.textContent=M[e]||'काहीतरी अडचण आली. पुन्हा प्रयत्न करा.'}
+function rgGo(){rgm.textContent='';var o={mobile:rmb.value.trim(),pin:rpn.value.trim()},u='/api/login';
+ if(!/^[6-9]\d{9}$/.test(o.mobile)){rgErr('mobile');return}
+ if(!/^\d{4,6}$/.test(o.pin)){rgErr('pin');return}
+ if(!RGM){u='/api/register';var x=GOPT[rcl.value],d=GEO&&GEO[rd.value],t=d&&d.t[rt.value],k=t&&t.k[rk.value];
+  if(!rnm.value.trim()){rgErr('name');return}
+  if(!x){rgErr('cls');return}
+  if(!rcc.checked){rgErr('consent');return}
+  o.name=rnm.value.trim();o.cls=x.cls;o.med=x.med;o.district=d?d.n:'';o.taluka=t?t.n:'';o.kendra=k?k[0]:'';o.school=rsn.value.trim();o.udise=rsu.value.trim()||(k?k[1]:'');o.consent=1}
+ rgb.disabled=true;
+ fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(o)}).then(function(r){return r.json()}).then(function(j){rgb.disabled=false;
+  if(!j.ok){rgErr(j.e);return}
+  PROF={token:j.token,p:j.profile};try{localStorage.setItem('am_prof_v1',JSON.stringify(PROF))}catch(e){}
+  var pr=j.profile;GUEST={cls:pr.cls,med:pr.med};
+  loadCat({className:String(pr.cls),medium:medName(pr.med)}).then(function(){
+   try{localStorage.setItem('am_guest_v1',JSON.stringify(GUEST))}catch(e){}
+   K='am_prog_m'+pr.mobile;try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){P={}}
+   rg.style.display='none';lg.style.display='none';home()}).catch(function(){rgm.textContent='हे पाठ उपलब्ध नाहीत.'})}).catch(function(){rgb.disabled=false;rgErr('')})}
+function trk(ev,subj,les){if(!PROF||!PROF.token||!GUEST)return;try{fetch('/api/event',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+PROF.token},body:JSON.stringify({events:[{ev:ev,cls:GUEST.cls,med:GUEST.med,subj:subj,lesson:String(les)}]}),keepalive:true}).catch(function(){})}catch(e){}}
 var GOPT=[];
 function openGuest(){gm.textContent='';gs.innerHTML='<option value="">लोड होत आहे…</option>';gd.style.display='flex';
  fetch('content/index.json').then(function(r){return r.json()}).then(function(a){GOPT=a;gs.innerHTML='<option value="">इयत्ता व माध्यम निवडा</option>'+a.map(function(x,i){return '<option value="'+i+'">'+x.label+'</option>'}).join('')}).catch(function(){gs.innerHTML='<option value="">इंटरनेट तपासा</option>'})}
@@ -177,7 +221,7 @@ function openS(i,q){cur=D[i];document.getElementById('hb').innerHTML='<button cl
  cur.l.forEach(function(x){if(q&&x[1].toLowerCase().indexOf(q.toLowerCase())<0)return;
   var lk=isLocked(cur,x);h+='<button class="les" style="--c:'+cur.c+(lk?';opacity:.6':'')+'" onclick="openL('+x[0]+')"><div class="n">'+(lk?'🔒':x[0])+'</div><span class="t">'+x[1]+'</span>'+(lk?'':chip(P[key(cur,x[0])]))+'</button>'});
  m.innerHTML=h;if(q!==undefined){var e=document.getElementById('q');e.focus();e.setSelectionRange(e.value.length,e.value.length)}}
-function openL(n){if(!S&&!GUEST){showLogin('');return}var l=cur.l.filter(function(x){return x[0]==n})[0];if(isLocked(cur,l)){view.style.display='none';openPay();return}curL=n;vt.textContent=cur.n+' – '+n+'. '+l[1];fr.src=BASE+cur.p+'_l'+n+'.html';view.style.display='flex';updVx()}
+function openL(n){if(!S&&!GUEST){showLogin('');return}var l=cur.l.filter(function(x){return x[0]==n})[0];if(isLocked(cur,l)){view.style.display='none';openPay();return}curL=n;vt.textContent=cur.n+' – '+n+'. '+l[1];fr.src=BASE+cur.p+'_l'+n+'.html';view.style.display='flex';updVx();trk('lesson',cur.n,n)}
 function closeV(){lov.style.display='none';view.style.display='none';fr.src='about:blank';if(cur)openS(D.indexOf(cur))}
 function nextL(){var ix=cur.l.map(function(x){return x[0]});var j=ix.indexOf(curL);if(j+1<ix.length)openL(ix[j+1]);else closeV()}
 window.addEventListener('message',function(e){var d=e.data;if(d&&d.type==='closeLesson'){closeV();return}if(!d||d.type!=='ssResult'||!cur)return;
