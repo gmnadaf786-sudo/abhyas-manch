@@ -177,7 +177,7 @@ function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb'
  var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
  h+='<div class="sub" style="--c:'+s.c+';'+subGrad(s.n,s.p,i)+'" onclick="openS('+i+')"><div class="in">'+subPic(s,i)+'<div class="lbl"><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div></div></div>'});
  var fb2=(FEE&&FEE.enabled&&!FEE.paid)?'<button class="les" style="justify-content:center;background:#b45309;color:#fff;border:0;margin-top:12px" onclick="openPay()">🔓 सर्व पाठ अनलॉक करा · ₹'+FEE.fee+'/वर्ष</button>':((FEE&&FEE.enabled&&FEE.paid&&FEE.until)?'<p style="text-align:center;color:#15803d;font-size:13px;margin-top:10px">✔ पेड · मुदत '+FEE.until+'</p>':'');
- m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+(S?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>':'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+(S?'':'<p style="text-align:center;color:var(--mut);font-size:13px;margin-top:10px">पाहुणा म्हणून तुमची प्रगती फक्त या फोनमध्ये दिसते.</p>')}
+ m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+((S||PROF)?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>':'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+(S?'':'<p style="text-align:center;color:var(--mut);font-size:13px;margin-top:10px">पाहुणा म्हणून तुमची प्रगती फक्त या फोनमध्ये दिसते.</p>')}
 
 
 
@@ -236,6 +236,7 @@ function findPen(){var n=fpn.value.trim(),c=fpc.value,d=fpd.value;
 function usePen(){lu.value=FPEN;fp.style.display='none';lp.focus()}
 function openFb(){fm.textContent='';fx.value='';fs.disabled=false;fb.style.display='flex'}
 function sendFb(){var t=fx.value.trim();if(t.length<3){fm.style.color='#b91c1c';fm.textContent='कृपया काही लिहा.';return}
+ if(!S&&PROF){fs.disabled=true;fm.style.color='';fm.textContent='पाठवत आहे…';fetch('/api/feedback',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+PROF.token},body:JSON.stringify({type:ft.value,text:t,lesson:(cur&&curL?cur.n+' – '+curL:'')})}).then(function(r){return r.json()}).then(function(j){if(j.ok){fm.style.color='#15803d';fm.textContent='✅ धन्यवाद! अभिप्राय मिळाला.';setTimeout(function(){fb.style.display='none'},1200)}else{fs.disabled=false;fm.style.color='#b91c1c';fm.textContent=j.e==='many'?'आज खूप अभिप्राय पाठवले. उद्या प्रयत्न करा.':'पाठवता आले नाही. पुन्हा प्रयत्न करा.'}}).catch(function(){fs.disabled=false;fm.style.color='#b91c1c';fm.textContent='इंटरनेट तपासा.'});return}
  if(!S){fm.textContent='आधी लॉगिन करा.';return}
  fs.disabled=true;fm.style.color='';fm.textContent='पाठवत आहे…';
  api({action:'feedback',token:S.token,type:ft.value,text:t,cls:String(clsNum(S.st)),lesson:(cur&&curL?cur.n+' – '+curL:'')}).then(function(r){
@@ -256,7 +257,7 @@ window.addEventListener('message',function(e){var d=e.data;if(d&&d.type==='close
 var dp;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;inst.style.display='block'});
 ib.onclick=function(){if(dp){dp.prompt();dp=null;inst.style.display='none'}};
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
-function menu(o){mn.style.display=o?'flex':'none';mm.textContent='';who.textContent=S&&S.st?(S.st.name||S.st.pen):(GUEST?'पाहुणा':'')}
+function menu(o){mn.style.display=o?'flex':'none';mm.textContent='';who.textContent=S&&S.st?(S.st.name||S.st.pen):(PROF&&PROF.p?('👤 '+PROF.p.name+' · इयत्ता '+PROF.p.cls):(GUEST?'पाहुणा':''))}
 function doExit(){menu(0);try{fr.src='about:blank';view.style.display='none'}catch(e){}
  try{window.close()}catch(e){}
  setTimeout(function(){var b=document.getElementById('bye');if(b)b.style.display='flex'},250)}
