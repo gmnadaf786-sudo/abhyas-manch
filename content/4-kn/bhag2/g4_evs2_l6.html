@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ – ಪಾಠ ೬ ಸ್ವರಾಜ್ಯಸ್ಥಾಪನೆಯ ಪ್ರತಿಜ್ಞೆ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೬ : ಸ್ವರಾಜ್ಯಸ್ಥಾಪನೆಯ ಪ್ರತಿಜ್ಞೆ</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">🚩🤚 ರಾಯರೇಶ್ವರದ ಶಪಥ, ಮಾವಳರ ಸಾಥ್, ಗುಪ್ತ ಮಾಹಿತಿ ಮತ್ತು ಶಿವರಾಯರ ರಾಜಮುದ್ರೆ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೭ ಮೆಟ್ಟಿಲುಗಳು · ಪ್ರತಿಜ್ಞೆ · ಗೂಢಚಾರ ಕಾರ್ಯಾಚರಣೆ · ರಾಜಮುದ್ರೆ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೪೧ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ · ಪಾಠ ೬ : ಸ್ವರಾಜ್ಯಸ್ಥಾಪನೆಯ ಪ್ರತಿಜ್ಞೆ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🚩','🌙','🤚'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ಶಿವಬಾನ ಪ್ರಶ್ನೆಗಳು ---------- */
+const PRQ=['ಸುಲ್ತಾನರ ವತನದಾರಿಯಲ್ಲಿ ನಾವು ತೃಪ್ತರಾಗಿರಬೇಕೇ?','ಬೇರೆಯವರ ಬೊಗಸೆಯಿಂದಲೇ ನಾವು ನೀರು ಕುಡಿಯಬೇಕೇ?','ನಮ್ಮ ಜನರು ಪರಕೀಯರ ಯುದ್ಧಗಳಲ್ಲಿ ವ್ಯರ್ಥವಾಗಿ ಸಾಯುತ್ತಾರೆ, ಕುಟುಂಬಗಳಿಗೆ ಕುಟುಂಬಗಳೇ ನಿರ್ಗತಿಕವಾಗುತ್ತವೆ – ಎಷ್ಟು ದಿನ ಸಹಿಸಬೇಕು?','ಇಷ್ಟೆಲ್ಲಾ ಸಹಿಸಿದರೂ ನಮ್ಮ ಪಾಲಿಗೆ ಏನು? ಗುಲಾಮಗಿರಿ!','ವತನಗಳ ಆಸೆಯಿಂದ ನಾವು ಇದನ್ನು ಹೀಗೆಯೇ ನಡೆಯಲು ಬಿಡಬೇಕೇ?'];
+let PQN=0;
+function drawPrq(){const b=$('prqBox');if(!b)return;
+ b.innerHTML=`<svg viewBox="0 0 320 120" style="max-width:420px;width:100%;display:block;margin:0 auto;background:linear-gradient(#1e1b4b,#312e81);border-radius:12px">
+ ${[20,60,260,300].map(x=>`<text x="${x}" y="110" font-size="26">🌲</text>`).join('')}
+ <path d="M160 18 L130 50 L190 50Z" fill="#fbbf24"/><rect x="135" y="50" width="50" height="45" fill="#78716c"/><rect x="152" y="66" width="16" height="29" fill="#1c1917"/>
+ <text x="118" y="92" font-size="16">🔥</text><text x="188" y="92" font-size="16">🔥</text>
+ ${[...Array(Math.min(PQN+1,6))].map((_,i)=>`<text x="${60+i*35}" y="114" font-size="18">${i==0?'🧒':'🧔'}</text>`).join('')}
+ <text x="160" y="12" text-anchor="middle" font-size="9" fill="#e0e7ff" font-weight="700">ರಾಯರೇಶ್ವರದ ದೇವಾಲಯ · ೧೬೪೫</text></svg>
+ ${PRQ.slice(0,PQN).map((q,i)=>`<div class="msg in" style="margin-top:4px">🧒 <b>ಶಿವಬಾ:</b> “${q}”</div>`).join('')}
+ ${PQN<PRQ.length?`<div style="text-align:center;margin-top:6px"><button class="btn or" onclick="say(PRQ[PQN]);PQN++;drawPrq()">🗣️ ಶಿವಬಾನ ಮುಂದಿನ ಪ್ರಶ್ನೆ ಕೇಳಿ (${PQN+1}/${PRQ.length})</button></div>`
+ :`<div class="msg ok">🧔 <b>ಮಾವಳರು (ಒಕ್ಕೊರಲಿನಿಂದ):</b> “ಹೇಳಿ ಬಾಲರಾಜೇ, ಹೇಳಿ. ನಿಮ್ಮ ಮನೋಭಿಲಾಷೆ ಹೇಳಿ. ನೀವು ಏನು ಹೇಳುವಿರೋ ಅದನ್ನು ಮಾಡಲು ನಾವು <b>ಒಂದು ಕಾಲಿನ ಮೇಲೆ ಸಿದ್ಧ</b> ಇದ್ದೇವೆ! ನಮ್ಮ <b>ಪ್ರಾಣವನ್ನೂ ಕೊಡುತ್ತೇವೆ!</b>”</div>`}`;
+ if(PQN>=PRQ.length)award('prq','ಮಾವಳರಿಗೆ ಹೊಸ ದೃಷ್ಟಿ ಸಿಕ್ಕಿತು!')}
+
+/* ---------- ಶಪಥ ---------- */
+let SHP=0;
+function drawShp(){const b=$('shpBox');if(!b)return;
+ b.innerHTML=`<div class="pledge" style="font-size:16px">🚩 “ಗೆಳೆಯರೇ! ನಮ್ಮ ದಾರಿ ನಿಶ್ಚಯವಾಯಿತು. ನಮ್ಮ ಗುರಿಗಾಗಿ ನಾವೆಲ್ಲರೂ <b>ಶ್ರಮಿಸಬೇಕು</b>, ಎಲ್ಲರೂ <b>ದುಡಿಯಬೇಕು</b>, ಎಲ್ಲರೂ <b>ಪ್ರಾಣ ಅರ್ಪಣೆ</b> ಮಾಡಲೂ ಸಿದ್ಧರಾಗಬೇಕು. ನಮ್ಮ ಈ ಗುರಿ ಎಂದರೆ <b style="font-size:19px">‘ಹಿಂದವೀ ಸ್ವರಾಜ್ಯ’!</b> ನಿಮ್ಮ, ನನ್ನ ಎಲ್ಲರ ಸ್ವತಂತ್ರ ರಾಜ್ಯ ಸ್ಥಾಪಿಸಬೇಕು. ಪರರ ಗುಲಾಮಗಿರಿ ಇನ್ನು ಬೇಡ. ಏಳಿ, ಈ ರಾಯರೇಶ್ವರನನ್ನು ಸಾಕ್ಷಿ ಇಟ್ಟು ನಾವು ಪ್ರತಿಜ್ಞೆ ಮಾಡೋಣ.”
+ <br><br>“ಹಿಂದವೀ ಸ್ವರಾಜ್ಯದ ರೂಪದಲ್ಲಿ ಈ ರಾಜ್ಯ ಆಗಬೇಕು ಎಂದು <b>ಶ್ರೀಗಳ ಮನಸ್ಸಿನಲ್ಲಿ</b> ಇದೆ. ಶ್ರೀಗಳ ಮನೋರಥವನ್ನು ನಾವು ಪೂರ್ಣಗೊಳಿಸೋಣ.”</div>
+ <div style="text-align:center;font-size:${SHP?50:36}px;transition:.4s">${SHP?'🙌🚩🙌🚩🙌':'🤚'}</div>
+ <div style="text-align:center">${SHP?'<div class="msg ok">ಎಲ್ಲ ಮಾವಳರು ಸ್ವರಾಜ್ಯದ <b>ಆಣೆಪ್ರಮಾಣ</b> ಮಾಡಿಯೇ ದೇವಾಲಯದಿಂದ ಹೊರಬಂದರು! 🚩</div>':'<button class="btn or" style="font-size:18px" onclick="SHP=1;say(\'ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಗಾಗಿ ಈಗ ನಾವು ನಮ್ಮ ಸರ್ವಸ್ವವನ್ನು ಅರ್ಪಿಸುತ್ತೇವೆ\');confetti();drawShp();award(\'shp\',\'ಹಿಂದವೀ ಸ್ವರಾಜ್ಯದ ಪ್ರತಿಜ್ಞೆ!\')">🤚 ಮಾವಳರೊಂದಿಗೆ ಪ್ರತಿಜ್ಞೆ ಮಾಡಿ</button>'}</div>`}
+
+/* ---------- ಕರಾರುವಾಕ್ಕು ಮಾಹಿತಿ (ಗೂಢಚಾರ) ---------- */
+const GUP=[['🚪','ಕಳ್ಳದಾರಿಗಳು'],['🕳️','ಸುರಂಗಗಳು'],['🏚️','ನೆಲಮಾಳಿಗೆಗಳು'],['💣','ಮದ್ದುಗುಂಡು'],['⚔️','ಶಸ್ತ್ರಾಸ್ತ್ರಗಳು'],['⛺','ಶತ್ರುಗಳ ಠಾಣೆಗಳು']];
+let GPC=null;const GPV=new Set();
+function gpInit(){if(GPC)return;const c=[...Array(12).keys()];for(let i=c.length-1;i>0;i--){const j=Math.floor((i*7+3)%(i+1));[c[i],c[j]]=[c[j],c[i]]}GPC=c.slice(0,6)}
+function drawGup(){const b=$('gupBox');if(!b)return;gpInit();
+ b.innerHTML=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:320px;margin:0 auto">${[...Array(12)].map((_,i)=>{const k=GPC.indexOf(i),op=GPV.has(i);return `<button onclick="gpTap(${i})" style="height:58px;border-radius:10px;border:2px solid ${op?(k>=0?'#16a34a':'#cbd5e1'):'#a16207'};background:${op?(k>=0?'#dcfce7':'#f1f5f9'):'#fde68a'};cursor:pointer;font-size:${op&&k>=0?24:22}px">${op?(k>=0?GUP[k][0]+'<div style="font-size:10px;font-weight:800">'+GUP[k][1]+'</div>':'🌿'):'⛰️'}</button>`}).join('')}</div>
+ <div class="tap" style="text-align:center">🕵️ ಬೆಟ್ಟ-ಕಣಿವೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಶತ್ರುವಿನ ಗುಪ್ತ ಮಾಹಿತಿ ಹುಡುಕಿ! (ಸಿಕ್ಕಿತು: ${GPC.filter(i=>GPV.has(i)).length} / ೬)</div>`;
+ if(GPC.every(i=>GPV.has(i)))award('gup','ಭೇಷ್! ಕರಾರುವಾಕ್ಕು ಮಾಹಿತಿ ಸಿಕ್ಕಿತು.')}
+function gpTap(i){GPV.add(i);const k=GPC.indexOf(i);if(k>=0)say(GUP[k][1]);drawGup()}
+
+/* ---------- ದೇಶಮುಖರು ಒಟ್ಟಾಗಿ ---------- */
+const DSM=['ಝುಂಜಾರರಾವ್ ಮರಳ','ಹೈಬತರಾವ ಶಿಳಮಕರ','ಬಾಜಿ ಪಾಸಲಕರ','ವಿಠೋಜಿ ಶಿತೋಳೆ','ಜೇಧೆ','ಪಾಯಗುಡೆ','ಬಾಂದಲ'];
+const DSV=new Set();
+function drawDsm(){const b=$('dsmBox');if(!b)return;
+ b.innerHTML=`<div class="g2"><div style="background:#fef2f2;border-radius:12px;padding:8px;min-height:90px"><b>🤼 ತಮ್ಮತಮ್ಮಲ್ಲೇ ಜಗಳವಾಡುವ ದೇಶಮುಖರು</b><div class="chips">${DSM.map((d,i)=>DSV.has(i)?'':`<span class="chip" onclick="DSV.add(${i});say('${d}');drawDsm()">${d}</span>`).join('')}</div></div>
+ <div style="background:#f0fdf4;border-radius:12px;padding:8px;min-height:90px"><b>🚩 ಸ್ವರಾಜ್ಯದ ಸಂಗಾತಿಗಳು</b><div class="chips">${DSM.map((d,i)=>DSV.has(i)?`<span class="chip on">🤝 ${d}</span>`:'').join('')}</div></div></div>
+ <div class="msg ${DSV.size==DSM.length?'ok':'in'}">${DSV.size==DSM.length?'🎉 ಮರಾಠರ ಪರಸ್ಪರ ಜಗಳಗಳು ನಿಂತವು! ಮಾವಳದಲ್ಲಿ ಸ್ವರಾಜ್ಯದ ಓಟ ಆರಂಭವಾಯಿತು.':'👆 ಪ್ರತಿಯೊಬ್ಬ ದೇಶಮುಖನ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ – ಶಿವರಾಯರು ಸಿಹಿ ಮಾತುಗಳಿಂದ, ಸ್ವರಾಜ್ಯದ ಗುರಿಯಿಂದ ಅವರನ್ನು ತಮ್ಮವರನ್ನಾಗಿ ಮಾಡಿಕೊಂಡರು.'}</div>`;
+ if(DSV.size==DSM.length)award('dsm','ಭೇಷ್! ದೇಶಮುಖರು ಒಟ್ಟಾದರು.')}
+
+/* ---------- ರಾಜಮುದ್ರೆ ಮತ್ತು ಚಂದ್ರಕಲೆ ---------- */
+let CK=1;
+function moonP(k){const r=40,f=k/15;if(f>=1)return `<circle cx="50" cy="50" r="${r}" fill="#fde68a"/>`;const x=r*(1-2*f);return `<path d="M50 ${50-r} A${r} ${r} 0 0 1 50 ${50+r} A${Math.abs(x)} ${r} 0 0 ${f<.5?0:1} 50 ${50-r}Z" fill="#fde68a"/>`}
+function drawMud(){const b=$('mudBox');if(!b)return;const D=x=>(''+x).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+ b.innerHTML=`<div class="g2"><div style="text-align:center"><svg viewBox="0 0 100 100" style="width:130px;background:#0f172a;border-radius:50%">${moonP(CK)}</svg>
+ <div><b>ಶುದ್ಧ ${CK==15?'ಹುಣ್ಣಿಮೆ':D(CK)+' (ತಿಥಿ)'}</b></div><input type="range" min="1" max="15" value="${CK}" style="width:90%" oninput="CK=+this.value;drawMud();if(CK==15)award('ck','ವರ್ಧಿಷ್ಣು – ಬೆಳೆಯುತ್ತಾ ಹೋಗುವುದು!')">
+ <div class="tap">ಪಾಡ್ಯದಿಂದ ಚಂದ್ರಕಲೆ ಪ್ರತಿದಿನ ಬೆಳೆಯುತ್ತಾ ಹೋಗುತ್ತದೆ…</div></div>
+ <div style="display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 200 200" style="width:190px">
+ <path d="M100 8 L150 22 L186 60 L192 110 L170 160 L120 190 L80 190 L30 160 L8 110 L14 60 L50 22Z" fill="#fef3c7" stroke="#92400e" stroke-width="5"/>
+ <path d="M100 22 L142 34 L172 66 L176 108 L158 150 L116 176 L84 176 L42 150 L24 108 L28 66 L58 34Z" fill="none" stroke="#92400e" stroke-width="1.5"/>
+ ${['ಪ್ರತಿಪಚ್ಚಂದ್ರಲೇಖೇವ','ವರ್ಧಿಷ್ಣುರ್ವಿಶ್ವವಂದಿತಾ |','ಶಾಹಸೂನೋಃ ಶಿವಸ್ಯೈಷಾ','ಮುದ್ರಾ ಭದ್ರಾಯ ರಾಜತೇ ||'].map((t,i)=>`<text x="100" y="${78+i*20}" text-anchor="middle" font-size="12.5" font-weight="800" fill="#78350f">${t}</text>`).join('')}</svg></div></div>
+ <div class="key"><b>ಅರ್ಥ:</b> ಪಾಡ್ಯದ <b>ಚಂದ್ರಕಲೆಯಂತೆ ಬೆಳೆಯುತ್ತಾ ಹೋಗುವ</b> ಮತ್ತು ಎಲ್ಲ <b>ವಿಶ್ವಕ್ಕೆ ವಂದ್ಯ</b> ಆಗುವಂತಹ ಶಹಾಜಿರಾಜೇಯವರ ಪುತ್ರ ಶಿವಾಜಿರಾಜೇ ಅವರ ಈ ರಾಜಮುದ್ರೆ <b>ಜನರ ಕಲ್ಯಾಣಕ್ಕಾಗಿ</b> ಇದೆ.</div>`}
+
+/* ---------- ಸಾರಾಂಶ ---------- */
+const SUM=['ಪುಣೆಯ ನೈಋತ್ಯಕ್ಕಿರುವ ರಾಯರೇಶ್ವರದ ದೇವಾಲಯದಲ್ಲಿ ೧೬೪೫ ರಲ್ಲಿ ಶಿವರಾಯ ಮತ್ತು ಸುತ್ತಲಿನ ಕಣಿವೆಗಳ ಮಾವಳರು ಸಮಾಲೋಚನೆಗಾಗಿ ಸೇರಿದರು.',
+ 'ವಯಸ್ಸಿನಲ್ಲಿ ಚಿಕ್ಕವರಾದರೂ ಮನಸ್ಸಿನ ಹಾರಾಟ ದೊಡ್ಡದಾಗಿದ್ದ ಶಿವಬಾ ಕೇಳಿದರು – ಸುಲ್ತಾನರ ವತನದಾರಿಯಲ್ಲಿ ತೃಪ್ತರಾಗಿರಬೇಕೇ? ಬೇರೆಯವರ ಬೊಗಸೆಯಿಂದ ನೀರು ಕುಡಿಯಬೇಕೇ? ಎಷ್ಟು ದಿನ ಗುಲಾಮಗಿರಿ ಸಹಿಸಬೇಕು?',
+ 'ಮಾವಳರು ಪುಳಕಿತರಾದರು; ಅವರಿಗೆ ಹೊಸ ದೃಷ್ಟಿ ಸಿಕ್ಕಿತು. “ನೀವು ಏನು ಹೇಳುವಿರೋ ಅದನ್ನು ಮಾಡುತ್ತೇವೆ, ಪ್ರಾಣವನ್ನೂ ಕೊಡುತ್ತೇವೆ!” ಎಂದು ಅವರು ಒಕ್ಕೊರಲಿನಿಂದ ಹೇಳಿದರು.',
+ 'ಶಿವರಾಯರು ಗುರಿ ಹೇಳಿದರು – ‘ಹಿಂದವೀ ಸ್ವರಾಜ್ಯ’ (ನಿಮ್ಮ-ನನ್ನ ಎಲ್ಲರ ಸ್ವತಂತ್ರ ರಾಜ್ಯ). ರಾಯರೇಶ್ವರನನ್ನು ಸಾಕ್ಷಿ ಇಟ್ಟು ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಯ ಪ್ರತಿಜ್ಞೆ ಮಾಡಿದರು.',
+ '“ಹಿಂದವೀ ಸ್ವರಾಜ್ಯದ ರೂಪದಲ್ಲಿ ಈ ರಾಜ್ಯ ಆಗಬೇಕು ಎಂದು ಶ್ರೀಗಳ ಮನಸ್ಸಿನಲ್ಲಿದೆ. ಶ್ರೀಗಳ ಮನೋರಥವನ್ನು ನಾವು ಪೂರ್ಣಗೊಳಿಸೋಣ.”',
+ 'ಲಾಲ್ ಮಹಲ್‌ನಲ್ಲಿ ಈ ಪ್ರಸಂಗ ಕೇಳಿ ಜಿಜಾಬಾಯಿಗೆ ಧನ್ಯೋಧನ್ಯ ಅನಿಸಿತು; ಬಾಲರಾಜೇ ತಮ್ಮ ಕನಸು ಪೂರ್ಣಗೊಳಿಸುತ್ತಾರೆ ಎಂಬ ವಿಶ್ವಾಸ ಮೂಡತೊಡಗಿತು.',
+ 'ನಿತ್ಯಕ್ರಮ: ಮಾವಳರೊಂದಿಗೆ ಕತ್ತಿವರಸೆ, ಕುದುರೆ ಸವಾರಿ, ಬೆಟ್ಟಗಳ ಗುಪ್ತದಾರಿಗಳನ್ನು ಹುಡುಕುವುದು, ಕಣಿವೆ-ಘಾಟಿ-ಕಳ್ಳದಾರಿಗಳನ್ನು ಗಮನಿಸುವುದು.',
+ 'ಪುಣೆಯ ಸುತ್ತಲಿನ ಕೋಟೆ-ಕೊತ್ತಲಗಳನ್ನು ಗಮನಿಸಿದರು; ಕಳ್ಳದಾರಿಗಳು, ಸುರಂಗಗಳು, ನೆಲಮಾಳಿಗೆಗಳು, ಮದ್ದುಗುಂಡು, ಶಸ್ತ್ರಾಸ್ತ್ರಗಳು ಮತ್ತು ಶತ್ರುಗಳ ಠಾಣೆಗಳ ಕರಾರುವಾಕ್ಕು ಮಾಹಿತಿ ಪಡೆದರು.',
+ 'ಹನ್ನೆರಡು ಮಾವಳಗಳ ದೇಶಮುಖರ ಜಗಳಗಳಿಗೆ ಕಡಿವಾಣ ಹಾಕಿದರು; ಝುಂಜಾರರಾವ್ ಮರಳ, ಹೈಬತರಾವ ಶಿಳಮಕರ, ಬಾಜಿ ಪಾಸಲಕರ, ವಿಠೋಜಿ ಶಿತೋಳೆ, ಜೇಧೆ, ಪಾಯಗುಡೆ, ಬಾಂದಲ ಇತ್ಯಾದಿ ಶಿವರಾಯರ ಮಾತನ್ನು ಒಪ್ಪತೊಡಗಿದರು.',
+ 'ಶಹಾಜಿರಾಜೇ ಶಿವರಾಯರ ಸ್ವತಂತ್ರ ರಾಜಮುದ್ರೆ ತಯಾರಿಸಿದರು – ಅದು ಸಂಸ್ಕೃತ ಭಾಷೆಯಲ್ಲಿತ್ತು (ಆ ಕಾಲದಲ್ಲಿ ರಾಜಮುದ್ರೆಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಫಾರ್ಸಿಯಲ್ಲಿ ಇರುತ್ತಿದ್ದವು).',
+ 'ಸ್ವರಾಜ್ಯ ಬೇಕು, ಹಾಗೆಯೇ ಸ್ವಭಾಷೆ ಬೇಕು, ಸ್ವಧರ್ಮ ಬೇಕು; ಆದರೆ ಬೇರೆ ಧರ್ಮದ ದ್ವೇಷವೂ ಬೇಡ. ಆಡಳಿತ ಜನಕಲ್ಯಾಣಕ್ಕಾಗಿ ಇದೆ ಎಂದು ರಾಜಮುದ್ರೆಯಿಂದ ಮಾವಳರಿಗೆ ತಕ್ಷಣ ತಿಳಿಯಿತು.'];
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+const L=[
+{h:'ರಾಯರೇಶ್ವರದ ದೇವಾಲಯ',s:'ಪುಣೆಯ ನೈಋತ್ಯಕ್ಕಿರುವ ರಾಯರೇಶ್ವರದ ದೇವಾಲಯ ಬಹಳ ರಮಣೀಯ ಸ್ಥಳವಾಗಿತ್ತು. ಅಲ್ಲಿ ಹದಿನಾರುನೂರ ನಲವತ್ತೈದನೇ ಇಸವಿಯಲ್ಲಿ ಒಂದು ವಿಶಿಷ್ಟ ಘಟನೆ ನಡೆಯಿತು. ಶಿವರಾಯ ಮತ್ತು ಸುತ್ತಲಿನ ಕಣಿವೆಗಳ ಕೆಲವು ಮಾವಳರು ಸಮಾಲೋಚನೆಗಾಗಿ ಅಲ್ಲಿ ಸೇರಿದ್ದರು. ಆ ದಟ್ಟ ಅರಣ್ಯದಲ್ಲಿ ಮರ-ಪೊದೆಗಳ ನಡುವೆ ಅಡಗಿದ್ದ ರಾಯರೇಶ್ವರದ ದೇವಾಲಯದಲ್ಲಿ ಶಿವರಾಯರೊಂದಿಗೆ ಮಾವಳರು ಯಾವ ಗುಪ್ತಾಲೋಚನೆ ಮಾಡುತ್ತಿದ್ದರು? ಶ್ರೀಶಂಕರನ ಬಳಿ ಯಾವ ವರ ಬೇಡುತ್ತಿದ್ದರು?',b:()=>`
+ <div class="key">📍 <b>ರಾಯರೇಶ್ವರದ ದೇವಾಲಯ</b> – ಪುಣೆಯ <b>ನೈಋತ್ಯಕ್ಕೆ</b>, ದಟ್ಟ ಅರಣ್ಯದಲ್ಲಿ · 📅 <b>೧೬೪೫</b> · ಶಿವರಾಯ ಮತ್ತು ಸುತ್ತಲಿನ ಕಣಿವೆಗಳ ಮಾವಳರು <b>ಸಮಾಲೋಚನೆಗಾಗಿ</b> ಸೇರಿದರು.</div>
+ <div class="tap">💡 <b>ಮಸಲತ್ತು / ಗುಪ್ತಾಲೋಚನೆ</b> = ಗುಪ್ತ ಚರ್ಚೆ, ವಿಚಾರ ವಿನಿಮಯ. <b>ದಟ್ಟ ಅರಣ್ಯ</b> = ದಟ್ಟ, ಶಾಂತ ಕಾಡು. <b>ನೈಋತ್ಯ</b> = ದಕ್ಷಿಣ-ಪಶ್ಚಿಮ ದಿಕ್ಕು.</div>
+ <h3>🗣️ ಬಾಲಶಿವಬಾನ ತೇಜಸ್ವಿ ವಾಣಿ</h3><div id="prqBox"></div>`,a:()=>drawPrq()},
+{h:'ಸ್ವರಾಜ್ಯದ ಶಪಥ',s:'ಮಾವಳರ ಈ ಮಾತುಗಳಿಂದ ಶಿವರಾಯರಿಗೆ ಉತ್ಸಾಹ ಉಕ್ಕಿತು. ಗೆಳೆಯರೇ! ನಮ್ಮ ದಾರಿ ನಿಶ್ಚಯವಾಯಿತು. ನಮ್ಮ ಗುರಿಗಾಗಿ ನಾವೆಲ್ಲರೂ ಶ್ರಮಿಸಬೇಕು, ಎಲ್ಲರೂ ದುಡಿಯಬೇಕು, ಎಲ್ಲರೂ ಪ್ರಾಣ ಅರ್ಪಿಸಲೂ ಸಿದ್ಧರಾಗಬೇಕು. ನಮ್ಮ ಈ ಗುರಿ ಎಂದರೆ ಹಿಂದವೀ ಸ್ವರಾಜ್ಯ! ನಿಮ್ಮ, ನನ್ನ ಎಲ್ಲರ ಸ್ವತಂತ್ರ ರಾಜ್ಯ ಸ್ಥಾಪಿಸಬೇಕು. ಪರರ ಗುಲಾಮಗಿರಿ ಇನ್ನು ಬೇಡ. ಏಳಿ, ಈ ರಾಯರೇಶ್ವರನನ್ನು ಸಾಕ್ಷಿ ಇಟ್ಟು ನಾವು ಪ್ರತಿಜ್ಞೆ ಮಾಡೋಣ. ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಗಾಗಿ ಈಗ ನಾವು ನಮ್ಮ ಸರ್ವಸ್ವವನ್ನು ಅರ್ಪಿಸುತ್ತೇವೆ.',b:()=>`
+ <div id="shpBox"></div>
+ <div class="tap">💡 <b>ಉತ್ಸಾಹ ಉಕ್ಕುವುದು</b> = ಉತ್ಸಾಹ ತುಂಬುವುದು. <b>ಸರ್ವಸ್ವ ಅರ್ಪಿಸುವುದು</b> = ಎಲ್ಲವನ್ನೂ ಅರ್ಪಿಸುವುದು. <b>ಆಣೆಪ್ರಮಾಣ</b> = ಶಪಥ, ವಚನ. <b>ಮನೋರಥ</b> = ಇಚ್ಛೆ.</div>
+ ${pickGame('dh',[['ಶಿವರಾಯರ ಗುರಿ ಯಾವುದಾಗಿತ್ತು?',['ಹಿಂದವೀ ಸ್ವರಾಜ್ಯ','ಸುಲ್ತಾನನ ಸೇವೆ','ದೊಡ್ಡ ಜಹಗೀರು'],0],['ಪ್ರತಿಜ್ಞೆಯನ್ನು ಯಾರನ್ನು ಸಾಕ್ಷಿ ಇಟ್ಟು ಮಾಡಲಾಯಿತು?',['ರಾಯರೇಶ್ವರನನ್ನು','ವಿಠ್ಠಲನನ್ನು','ಸುಲ್ತಾನನನ್ನು'],0],['ಹಿಂದವೀ ಸ್ವರಾಜ್ಯ ಯಾರದು?',['ನಿಮ್ಮ-ನನ್ನ ಎಲ್ಲರದು','ರಾಜನದು ಮಾತ್ರ','ಸುಲ್ತಾನನದು'],0]],'dh')}`,a:()=>{drawShp();drawGames()}},
+{h:'ಜೀಜಾವುಗಳಿಗೆ ಧನ್ಯೋಧನ್ಯ ಅನಿಸಿತು',s:'ಶಿವರಾಯರ ಮನಸ್ಸು ಉಕ್ಕಿ ಬಂದಿತು. ಅವರು ಪುಣೆಗೆ ಬರುತ್ತಲೇ ನೇರವಾಗಿ ಲಾಲ್ ಮಹಲ್‌ನಲ್ಲಿ ಮಾತೋಶ್ರೀಯವರ ಬಳಿ ಹೋದರು. ನಡೆದ ಪ್ರಸಂಗವನ್ನು ಜಿಜಾಬಾಯಿಗೆ ಹೇಳಿದರು. ಆ ತಾಯಿಗೆ ಧನ್ಯೋಧನ್ಯ ಅನಿಸಿತು. ತಾವು ಮನಸ್ಸಿನಲ್ಲಿ ಇಟ್ಟುಕೊಂಡದ್ದನ್ನು ಬಾಲರಾಜೇ ಪೂರ್ಣಗೊಳಿಸುತ್ತಾರೆ ಎಂಬ ಆಶೆ, ವಿಶ್ವಾಸ ಅವರಿಗೆ ಮೂಡತೊಡಗಿತು.',b:()=>`
+ <div style="text-align:center;font-size:50px">🏰👩‍👦✨</div>
+ <div class="key">ಶಿವರಾಯರು ನೇರವಾಗಿ <b>ಲಾಲ್ ಮಹಲ್‌ನಲ್ಲಿ</b> ಮಾತೋಶ್ರೀಯವರ ಬಳಿ ಹೋದರು ಮತ್ತು ಪ್ರಸಂಗ ಹೇಳಿದರು. ಜೀಜಾವುಗಳಿಗೆ <b>ಧನ್ಯೋಧನ್ಯ</b> ಅನಿಸಿತು – <b>“ತಾವು ಮನಸ್ಸಿನಲ್ಲಿ ಇಟ್ಟುಕೊಂಡದ್ದನ್ನು ಬಾಲರಾಜೇ ಪೂರ್ಣಗೊಳಿಸುತ್ತಾರೆ!”</b> ಎಂಬ ವಿಶ್ವಾಸ ಮೂಡತೊಡಗಿತು.</div>
+ <h3>🪜 ಘಟನಾಕ್ರಮ ಜೋಡಿಸಿ</h3>${orderGame('gk',['🌲 ರಾಯರೇಶ್ವರದ ದೇವಾಲಯದಲ್ಲಿ ಮಾವಳರು ಸೇರಿದರು','🗣️ ಶಿವಬಾ ಮನಸ್ಸಿನ ಮಾತು ಹೇಳಿದರು','🧔 ಮಾವಳರು ಪುಳಕಿತರಾದರು – “ಪ್ರಾಣವನ್ನೂ ಕೊಡುತ್ತೇವೆ!”','🤚 ಹಿಂದವೀ ಸ್ವರಾಜ್ಯದ ಪ್ರತಿಜ್ಞೆ','🏰 ಲಾಲ್ ಮಹಲ್‌ನಲ್ಲಿ ಜೀಜಾವುಗಳಿಗೆ ಪ್ರಸಂಗ ಹೇಳಿದರು'],'gk')}`,a:()=>drawGames()},
+{h:'ಮಾವಳ ಕಣಿವೆಯ ಜಮಾವಣೆ',s:'ಶಿವರಾಯರು ತಮ್ಮ ಹೊಸ ಕೆಲಸಕ್ಕೆ ತೊಡಗಿದರು. ಮಾವಳರನ್ನು ಜೊತೆ ಕರೆದುಕೊಂಡು ಅವರು ಕತ್ತಿವರಸೆ ಮಾಡತೊಡಗಿದರು. ಕುದುರೆ ಸವಾರಿ ಮಾಡುವುದು, ಬೆಟ್ಟಗಳ ಗುಪ್ತದಾರಿಗಳನ್ನು ಹುಡುಕುವುದು, ಕಣಿವೆ, ಘಾಟಿ, ಕಳ್ಳದಾರಿಗಳನ್ನು ಗಮನಿಸುವುದು – ಇದು ಅವರ ನಿತ್ಯಕ್ರಮವಾಯಿತು. ಶಿವರಾಯರು ಮಾವಳರ ಹೃದಯಗಳನ್ನು ಗೆದ್ದರು. ತರುಣ ಮಾವಳರು ಶಿವರಾಯರಿಗಾಗಿ ಹುಚ್ಚರಾದರು. ಶಿವರಾಯರು ಪುಣೆಯ ಸುತ್ತಲಿನ ಎಲ್ಲ ಕೋಟೆ-ಕೊತ್ತಲಗಳನ್ನು ಸೂಕ್ಷ್ಮವಾಗಿ ಗಮನಿಸಿದರು. ಕಳ್ಳದಾರಿಗಳು, ಸುರಂಗಗಳು, ನೆಲಮಾಳಿಗೆಗಳು, ಮದ್ದುಗುಂಡು, ಶಸ್ತ್ರಾಸ್ತ್ರಗಳು ಮತ್ತು ಶತ್ರುಗಳ ಸೈನ್ಯದ ಠಾಣೆಗಳ ಕರಾರುವಾಕ್ಕು ಮಾಹಿತಿ ಪಡೆದರು.',b:()=>`
+ <h3>📅 ಶಿವರಾಯರ ನಿತ್ಯಕ್ರಮ – ಸರಿಯೇ ತಪ್ಪೇ?</h3>${sortGame('nit',[['🗡️ ಮಾವಳರೊಂದಿಗೆ ಕತ್ತಿವರಸೆ',0],['🐎 ಕುದುರೆ ಸವಾರಿ',0],['⛰️ ಬೆಟ್ಟಗಳ ಗುಪ್ತದಾರಿಗಳನ್ನು ಹುಡುಕುವುದು',0],['👀 ಕಣಿವೆ, ಘಾಟಿ, ಕಳ್ಳದಾರಿಗಳನ್ನು ಗಮನಿಸುವುದು',0],['🍇 ದಿನವಿಡೀ ಭೋಗವಿಲಾಸ',1],['😴 ಏನೂ ಮಾಡದೆ ವಿಶ್ರಾಂತಿ',1]],[['✔ ನಿತ್ಯಕ್ರಮ','gr'],['✘ ಇಲ್ಲ','or']],'nit')}
+ <h3>🕵️ ಗೂಢಚಾರ ಕಾರ್ಯಾಚರಣೆ</h3><div id="gupBox"></div>
+ <div class="msg ok">ತರುಣ ಮಾವಳರು ಶಿವರಾಯರಿಗಾಗಿ <b>ಹುಚ್ಚು</b> ಹಿಡಿದಂತಾದರು – “ಶಿವರಾಯರಿಗಾಗಿ ಬದುಕಬೇಕು, ಶಿವರಾಯರಿಗಾಗಿ ಸಾಯಬೇಕು!” ಸಮುದ್ರಕ್ಕೆ ಭರತ ಬರುವಂತೆ ಚಟುವಟಿಕೆಗಳಿಗೆ <b>ಉಬ್ಬರ</b> ಬಂದಿತು. 🌊</div>`,a:()=>{drawGup();drawGames()}},
+{h:'ಮಾವಳದ ಸಂಗಾತಿಗಳು',s:'ಹನ್ನೆರಡು ಮಾವಳಗಳಲ್ಲಿ ಅಲ್ಲಲ್ಲಿ ಕೆಲವು ದೇಶಮುಖರು ತಮ್ಮ ವತನಗಳನ್ನು ಕಾಪಾಡಿಕೊಂಡು ಕುಳಿತಿದ್ದರು. ಅವರಿಗೆ ತಮ್ಮ ವತನದ ವಿಪರೀತ ಆಸೆ ಇತ್ತು. ವತನಕ್ಕಾಗಿ ಅವರು ತಮ್ಮತಮ್ಮಲ್ಲೇ ಜಗಳವಾಡುತ್ತಿದ್ದರು. ಈ ಜಗಳದಲ್ಲಿ ಮರಾಠರ ಶಕ್ತಿ ಸುಮ್ಮನೆ ವ್ಯರ್ಥವಾಗುತ್ತಿದೆ ಎಂದು ಶಿವರಾಯರು ಗುರುತಿಸಿದರು. ಅದಕ್ಕೆ ಕಡಿವಾಣ ಹಾಕಲು ಅವರು ನಿರ್ಧರಿಸಿದರು. ಶಿವರಾಯರು ದೇಶಮುಖರ ಗ್ರಾಮಗಳಿಗೆ ಭೇಟಿ ನೀಡುತ್ತಿದ್ದರು. ಅವರಿಗೆ ತಿಳಿಹೇಳುತ್ತಿದ್ದರು. ಸ್ವರಾಜ್ಯದ ಗುರಿಯಿಂದ ಅವರನ್ನು ಪ್ರೇರೇಪಿಸುತ್ತಿದ್ದರು. ಕೆಲವರು ದೌರ್ಜನ್ಯ ಮಾಡಿದರು. ಅವರನ್ನೂ ಶಿವರಾಯರು ದಾರಿಗೆ ತಂದರು. ಝುಂಜಾರರಾವ್ ಮರಳ, ಹೈಬತರಾವ ಶಿಳಮಕರ, ಬಾಜಿ ಪಾಸಲಕರ, ವಿಠೋಜಿ ಶಿತೋಳೆ, ಜೇಧೆ, ಪಾಯಗುಡೆ, ಬಾಂದಲ ಇತ್ಯಾದಿ ದೇಶಮುಖ ಮಂಡಳಿ ಶಿವರಾಯರ ಮಾತನ್ನು ಒಪ್ಪತೊಡಗಿತು.',b:()=>`
+ <div class="key">ಹನ್ನೆರಡು ಮಾವಳಗಳ ದೇಶಮುಖರ <b>ಜಗಳದಲ್ಲಿ ಮರಾಠರ ಶಕ್ತಿ ವ್ಯರ್ಥ</b> ಆಗುತ್ತಿತ್ತು ➜ ಶಿವರಾಯರ ಭೇಟಿ, ತಿಳಿಹೇಳುವಿಕೆ, <b>ಸಿಹಿ ಮಾತು</b>; ದೌರ್ಜನ್ಯ ಮಾಡುವವರನ್ನು <b>ದಾರಿಗೆ</b> ತಂದರು.</div>
+ <h3>🤝 ದೇಶಮುಖರನ್ನು ಸ್ವರಾಜ್ಯಕ್ಕೆ ತನ್ನಿ</h3><div id="dsmBox"></div>`,a:()=>drawDsm()},
+{h:'ಶಿವರಾಯರ ರಾಜಮುದ್ರೆ',s:'ಶಿವರಾಯರ ಹೆಸರಿನಿಂದ ಜಹಗೀರಿನ ಆಡಳಿತ ಆರಂಭವಾಗಿತ್ತು. ಶಹಾಜಿರಾಜೇ ಶಿವರಾಯರ ಸ್ವತಂತ್ರ ರಾಜಮುದ್ರೆ ತಯಾರಿಸಿದ್ದರು. ಪಾಡ್ಯದ ಚಂದ್ರಕಲೆಯಂತೆ ಬೆಳೆಯುತ್ತಾ ಹೋಗುವ ಮತ್ತು ಎಲ್ಲ ವಿಶ್ವಕ್ಕೆ ವಂದ್ಯ ಆಗುವಂತಹ ಶಹಾಜಿರಾಜೇಯವರ ಪುತ್ರ ಶಿವಾಜಿರಾಜೇ ಅವರ ರಾಜಮುದ್ರೆ ಜನರ ಕಲ್ಯಾಣಕ್ಕಾಗಿ ಇದೆ. ಆ ಕಾಲದಲ್ಲಿ ರಾಜಮುದ್ರೆಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಫಾರ್ಸಿ ಭಾಷೆಯಲ್ಲಿರುತ್ತಿದ್ದವು, ಆದರೆ ಶಿವರಾಯರ ಮುದ್ರೆ ಸಂಸ್ಕೃತ ಭಾಷೆಯಲ್ಲಿತ್ತು. ಸ್ವರಾಜ್ಯ ಬೇಕು, ಹಾಗೆಯೇ ಸ್ವಭಾಷೆ ಬೇಕು, ಸ್ವಧರ್ಮ ಬೇಕು. ಅದರ ಜೊತೆಗೆ ಬೇರೆ ಧರ್ಮದ ದ್ವೇಷವೂ ಬೇಡ.',b:()=>`
+ <div id="mudBox"></div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">📜</div><div class="tt">ಭಾಷೆ</div><div class="dd">ಆ ಕಾಲದಲ್ಲಿ ರಾಜಮುದ್ರೆಗಳು ಸಾಮಾನ್ಯವಾಗಿ <b>ಪರ್ಷಿಯನ್</b> ಭಾಷೆಯಲ್ಲಿ; ಶಿವರಾಯರ ಮುದ್ರೆ <b>ಸಂಸ್ಕೃತ</b> ಭಾಷೆಯಲ್ಲಿ.</div></div>
+  <div class="tile op"><div class="ic">🕊️</div><div class="tt">ಸಂದೇಶ</div><div class="dd">ಸ್ವರಾಜ್ಯ ಬೇಕು, ಹಾಗೆಯೇ <b>ಸ್ವಭಾಷೆ</b> ಬೇಕು, <b>ಸ್ವಧರ್ಮ</b> ಬೇಕು; ಆದರೆ <b>ಬೇರೆ ಧರ್ಮದ ದ್ವೇಷ ಬೇಡ</b>. ಆಡಳಿತ <b>ಜನಕಲ್ಯಾಣಕ್ಕಾಗಿ</b>.</div></div>
+ </div>
+ ${pickGame('mu6',[['ರಾಜಮುದ್ರೆಯನ್ನು ಯಾರು ತಯಾರಿಸಿದರು?',['ಶಹಾಜಿರಾಜೇ','ಆದಿಲ್‌ಶಾಹ','ದಾದಾಜಿ'],0],['ಶಿವರಾಯರ ರಾಜಮುದ್ರೆ ಯಾವ ಭಾಷೆಯಲ್ಲಿ?',['ಪರ್ಷಿಯನ್','ಸಂಸ್ಕೃತ','ಕನ್ನಡ'],1],['ರಾಜಮುದ್ರೆ ಯಾವುದರಂತೆ ಬೆಳೆಯುತ್ತಾ ಹೋಗುವಂತಹದು?',['ಪಾಡ್ಯದ ಚಂದ್ರಕಲೆ','ಸೂರ್ಯನ ಕಿರಣ','ನದಿಯ ಹರಿವು'],0],['ರಾಜಮುದ್ರೆ ಯಾರಿಗಾಗಿ ಇದೆ?',['ಜನರ ಕಲ್ಯಾಣಕ್ಕಾಗಿ','ರಾಜನಿಗೆ ಮಾತ್ರ','ಸುಲ್ತಾನನಿಗಾಗಿ'],0]],'mu6')}`,a:()=>{drawMud();drawGames()}},
+{h:'ನಾವು ಇದನ್ನು ಅಧ್ಯಯನ ಮಾಡಿದೆವು',s:'ಈ ಪಾಠದಲ್ಲಿ ನಾವು ರಾಯರೇಶ್ವರದ ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಯ ಪ್ರತಿಜ್ಞೆಯನ್ನು ನೋಡಿದೆವು. ಬನ್ನಿ ಮರುಪರಿಶೀಲಿಸೋಣ.',b:()=>`
+ <ul>${SUM.map(x=>`<li>${x}</li>`).join('')}</ul>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>ಶಿಕ್ಷಕರ ಸಹಾಯದಿಂದ ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಯ ಪ್ರಸಂಗದ (ರಾಯರೇಶ್ವರದ ಪ್ರತಿಜ್ಞೆ) ಚಿತ್ರ ತಯಾರಿಸಿ. – ದೇವಾಲಯ, ದೀವಟಿಗೆಗಳು, ಶಿವಬಾ ಮತ್ತು ಮಾವಳರು, ಕೈ ಮುಂದೆ ಮಾಡಿ ಶಪಥ…</div>`,a:()=>award('end','ಪಾಠ ಪೂರ್ಣ! ಅಭಿನಂದನೆಗಳು!')}
+];
+let S=0;
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ರಾಯರೇಶ್ವರದ ದೇವಾಲಯ ಪುಣೆಯ ಯಾವ ದಿಕ್ಕಿಗೆ ಇದೆ?',['ನೈಋತ್ಯಕ್ಕೆ','ಈಶಾನ್ಯಕ್ಕೆ','ಪೂರ್ವದಲ್ಲಿ','ಉತ್ತರದಲ್ಲಿ'],0,'ನೈಋತ್ಯಕ್ಕೆ (ದಕ್ಷಿಣ-ಪಶ್ಚಿಮ).'],
+['ರಾಯರೇಶ್ವರದ ದೇವಾಲಯದಲ್ಲಿ ವಿಶಿಷ್ಟ ಘಟನೆ ಯಾವ ವರ್ಷ ನಡೆಯಿತು?',['೧೬೪೫','೧೬೩೦','೧೬೭೪','೧೬೩೬'],0,'೧೬೪೫ ರಲ್ಲಿ.'],
+['ರಾಯರೇಶ್ವರದ ದೇವಾಲಯದಲ್ಲಿ ಯಾರು ಸೇರಿದ್ದರು?',['ಶಿವರಾಯ ಮತ್ತು ಮಾವಳರು','ಸುಲ್ತಾನ','ಮೊಘಲ್ ಸೈನಿಕರು','ವ್ಯಾಪಾರಿ'],0,'ಶಿವರಾಯ ಮತ್ತು ಸುತ್ತಲಿನ ಕಣಿವೆಗಳ ಮಾವಳರು.'],
+['ಮಾವಳರು ರಾಯರೇಶ್ವರದಲ್ಲಿ ಯಾವುದಕ್ಕಾಗಿ ಸೇರಿದ್ದರು?',['ಸಮಾಲೋಚನೆಗಾಗಿ','ಜಾತ್ರೆಗಾಗಿ','ಮದುವೆಗಾಗಿ','ವ್ಯಾಪಾರಕ್ಕಾಗಿ'],0,'ಮಸಲತ್ತು – ಗುಪ್ತ ಚರ್ಚೆ.'],
+['ರಾಯರೇಶ್ವರದ ದೇವಾಲಯ ಎಲ್ಲಿ ಅಡಗಿತ್ತು?',['ದಟ್ಟ ಅರಣ್ಯದಲ್ಲಿ ಮರ-ಪೊದೆಗಳ ನಡುವೆ','ನಗರದ ಮಧ್ಯಭಾಗದಲ್ಲಿ','ಸಮುದ್ರತೀರದಲ್ಲಿ','ಮರುಭೂಮಿಯಲ್ಲಿ'],0,'ದಟ್ಟ ಅರಣ್ಯದಲ್ಲಿ.'],
+['‘ಮನಸ್ಸಿನ ಹಾರಾಟ ದೊಡ್ಡದು’ ಇದರ ಅರ್ಥವೇನು?',['ದೊಡ್ಡ ಕನಸುಗಳು ಮತ್ತು ವಿಚಾರಗಳು','ಎತ್ತರ ಜಿಗಿತ','ಬಹಳ ಭಯ','ಆಲಸ್ಯ'],0,'ವಯಸ್ಸು ಚಿಕ್ಕದು ಆದರೆ ವಿಚಾರ ದೊಡ್ಡದು.'],
+['ಶಿವರಾಯರ ತಂದೆ ಶಹಾಜಿರಾಜೇ ಎಲ್ಲಿಯ ಸರದಾರರಾಗಿದ್ದರು?',['ವಿಜಾಪುರದ','ದೆಹಲಿಯ','ಗೋವಾದ','ಜಂಜಿರಾದ'],0,'ವಿಜಾಪುರದ ಸರದಾರ.'],
+['“ಬೇರೆಯವರ ಬೊಗಸೆಯಿಂದಲೇ ನಾವು ನೀರು ಕುಡಿಯಬೇಕೇ?” ಇದರ ಅರ್ಥವೇನು?',['ಯಾವಾಗಲೂ ಇನ್ನೊಬ್ಬರ ಮೇಲೆ ಅವಲಂಬಿಸಬೇಕೇ?','ನೀರು ಕಡಿಮೆ ಕುಡಿಯಬೇಕೇ?','ಬೊಗಸೆ ತೊಳೆಯಬೇಕೇ?','ನೀರು ಹಂಚಬೇಕೇ?'],0,'ಪರಾವಲಂಬನೆ – ಇನ್ನೊಬ್ಬರ ಅಧೀನದಲ್ಲಿ ಬದುಕುವುದು.'],
+['ಪರಕೀಯ ಆಡಳಿತಗಳ ಯುದ್ಧದಲ್ಲಿ ಯಾರ ಜನರು ವ್ಯರ್ಥವಾಗಿ ಸಾಯುತ್ತಿದ್ದರು?',['ನಮ್ಮ (ಮರಾಠಿ) ಜನರು','ಸುಲ್ತಾನರ','ಇಂಗ್ಲಿಷರ','ಯಾರೂ ಇಲ್ಲ'],0,'ನಮ್ಮ ಜನರು ವ್ಯರ್ಥವಾಗಿ ಸಾಯುತ್ತಿದ್ದರು.'],
+['‘ನಿರ್ಗತಿಕರಾಗುವುದು’ ಎಂದರೆ ಏನು?',['ಮನೆಮಠ ಬಿಟ್ಟು ಅಲೆಯುವುದು, ಧ್ವಂಸವಾಗುವುದು','ಶ್ರೀಮಂತರಾಗುವುದು','ಪ್ರವಾಸಕ್ಕೆ ಹೋಗುವುದು','ಕಲಿಯಲು ಹೋಗುವುದು'],0,'ಧ್ವಂಸವಾಗಿ ಅಲೆಯುವುದು.'],
+['ಇಷ್ಟೆಲ್ಲಾ ಸಹಿಸಿದರೂ ಮರಾಠರ ಪಾಲಿಗೆ ಏನು ಇತ್ತು?',['ಗುಲಾಮಗಿರಿ','ಸ್ವಾತಂತ್ರ್ಯ','ಸಂಪತ್ತು','ಸನ್ಮಾನ'],0,'ಗುಲಾಮಗಿರಿ.'],
+['ಶಿವರಾಯರ ಮಾತು ಕೇಳಿ ಮಾವಳರಿಗೆ ಏನು ಸಿಕ್ಕಿತು?',['ಹೊಸ ದೃಷ್ಟಿ','ಭಯ','ಬೇಸರ','ಕೋಪ'],0,'ಹೊಸ ದೃಷ್ಟಿ.'],
+['ಮಾವಳರು ಒಕ್ಕೊರಲಿನಿಂದ ಏನು ಹೇಳಿದರು?',['ನೀವು ಹೇಳಿದ್ದನ್ನು ಮಾಡುತ್ತೇವೆ, ಪ್ರಾಣವನ್ನೂ ಕೊಡುತ್ತೇವೆ!','ನಾವು ಮನೆಗೆ ಹೋಗುತ್ತೇವೆ','ನಮಗೆ ಜಹಗೀರು ಕೊಡಿ','ನಾವು ಸುಲ್ತಾನನ ಬಳಿ ಹೋಗುತ್ತೇವೆ'],0,'ಪ್ರಾಣವನ್ನೂ ಕೊಡುತ್ತೇವೆ!'],
+['ಶಿವರಾಯರ ಗುರಿ ಯಾವುದಾಗಿತ್ತು?',['ಹಿಂದವೀ ಸ್ವರಾಜ್ಯ','ದೊಡ್ಡ ಜಹಗೀರು','ಸುಲ್ತಾನನ ಸೇವೆ','ವ್ಯಾಪಾರ'],0,'ಹಿಂದವೀ ಸ್ವರಾಜ್ಯ.'],
+['ಹಿಂದವೀ ಸ್ವರಾಜ್ಯ ಎಂದರೇನು?',['ನಿಮ್ಮ-ನನ್ನ ಎಲ್ಲರ ಸ್ವತಂತ್ರ ರಾಜ್ಯ','ರಾಜನ ರಾಜ್ಯ ಮಾತ್ರ','ಪರರ ರಾಜ್ಯ','ಸುಲ್ತಾನನ ರಾಜ್ಯ'],0,'ಎಲ್ಲರ ಸ್ವತಂತ್ರ ರಾಜ್ಯ.'],
+['ಪ್ರತಿಜ್ಞೆಯನ್ನು ಯಾರನ್ನು ಸಾಕ್ಷಿ ಇಟ್ಟು ಮಾಡಲಾಯಿತು?',['ರಾಯರೇಶ್ವರನನ್ನು','ವಿಠ್ಠಲನನ್ನು','ಸುಲ್ತಾನನನ್ನು','ಶಹಾಜಿರಾಜೇಯವರಿಗೆ'],0,'ರಾಯರೇಶ್ವರನಿಗೆ (ಶ್ರೀಶಂಕರನಿಗೆ).'],
+['“ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಗಾಗಿ ಈಗ ನಾವು ನಮ್ಮ ...... ಅರ್ಪಿಸುತ್ತೇವೆ.”',['ಸರ್ವಸ್ವ','ಕುದುರೆಗಳು','ವತನ','ಚಿನ್ನ'],0,'ಸರ್ವಸ್ವ.'],
+['“ಹಿಂದವೀ ಸ್ವರಾಜ್ಯದ ರೂಪದಲ್ಲಿ ಈ ರಾಜ್ಯ ಆಗಬೇಕು ಎಂದು ...... ಮನಸ್ಸಿನಲ್ಲಿದೆ.”',['ಶ್ರೀಗಳ','ಸುಲ್ತಾನನ','ಮೊಘಲರ','ವತನದಾರರ'],0,'ಶ್ರೀಗಳ (ಪರಮೇಶ್ವರನ).'],
+['ಮಾವಳರು ದೇವಾಲಯದಿಂದ ಹೇಗೆ ಹೊರಬಂದರು?',['ಸ್ವರಾಜ್ಯದ ಆಣೆಪ್ರಮಾಣ ಮಾಡಿ','ಖಾಲಿ ಕೈಯಲ್ಲಿ','ಜಗಳ ಮಾಡಿ','ಹೆದರಿ'],0,'ಆಣೆಪ್ರಮಾಣ ಮಾಡಿ.'],
+['ಪುಣೆಗೆ ಬರುತ್ತಲೇ ಶಿವರಾಯರು ಎಲ್ಲಿಗೆ ಹೋದರು?',['ಲಾಲ್ ಮಹಲ್‌ನಲ್ಲಿ ಮಾತೋಶ್ರೀಯವರ ಬಳಿ','ಶಿವನೇರಿಗೆ','ವಿಜಾಪುರಕ್ಕೆ','ರಾಯಗಡದಲ್ಲಿ'],0,'ಲಾಲ್ ಮಹಲ್‌ನಲ್ಲಿ ಜೀಜಾವುಗಳ ಬಳಿ.'],
+['ಪ್ರಸಂಗ ಕೇಳಿ ಜಿಜಾಬಾಯಿಗೆ ಏನು ಅನಿಸಿತು?',['ಧನ್ಯೋಧನ್ಯ','ದುಃಖ','ಕೋಪ','ಭಯ'],0,'ಧನ್ಯೋಧನ್ಯ.'],
+['ಜಿಜಾಬಾಯಿಗೆ ಯಾವ ವಿಶ್ವಾಸ ಮೂಡತೊಡಗಿತು?',['ಬಾಲರಾಜೇ ತಮ್ಮ ಕನಸು ಪೂರ್ಣಗೊಳಿಸುತ್ತಾರೆ','ಶಿವಬಾ ಸುಲ್ತಾನನ ಸರದಾರನಾಗುತ್ತಾನೆ','ಶಿವಬಾ ವ್ಯಾಪಾರಿಯಾಗುತ್ತಾನೆ','ಶಿವಬಾ ಕರ್ನಾಟಕಕ್ಕೆ ಹೋಗುತ್ತಾನೆ'],0,'ಮನಸ್ಸಿನಲ್ಲಿ ಇಟ್ಟುಕೊಂಡದ್ದನ್ನು ಬಾಲರಾಜೇ ಪೂರ್ಣಗೊಳಿಸುತ್ತಾರೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ಶಿವರಾಯರ ನಿತ್ಯಕ್ರಮ ಆಗಿರಲಿಲ್ಲ?',['ದಿನವಿಡೀ ವಿಶ್ರಾಂತಿ','ಕುದುರೆ ಸವಾರಿ','ಕತ್ತಿವರಸೆ','ಕಳ್ಳದಾರಿಗಳನ್ನು ಗಮನಿಸುವುದು'],0,'ವಿಶ್ರಾಂತಿ ಅಲ್ಲ – ನಿರಂತರ ಸಿದ್ಧತೆ.'],
+['ಶಿವರಾಯರು ಯಾವುದರ ಕರಾರುವಾಕ್ಕು ಮಾಹಿತಿ ಪಡೆದರು?',['ಕಳ್ಳದಾರಿಗಳು, ಸುರಂಗಗಳು, ನೆಲಮಾಳಿಗೆಗಳು, ಮದ್ದುಗುಂಡು, ಶತ್ರುಗಳ ಠಾಣೆಗಳು','ಕೇವಲ ಮಾರುಕಟ್ಟೆ ಬೆಲೆ','ಮಳೆಯ','ಹಬ್ಬಗಳ'],0,'ಕೋಟೆಗಳ ಮತ್ತು ಶತ್ರುಗಳ ಮಾಹಿತಿ.'],
+['‘ಕರಾರುವಾಕ್ಕು ಮಾಹಿತಿ’ ಎಂದರೆ ಏನು?',['ಸೂಕ್ಷ್ಮ, ಪೂರ್ಣ ಮಾಹಿತಿ','ಸ್ವಲ್ಪ ಮಾಹಿತಿ','ತಪ್ಪು ಮಾಹಿತಿ','ಹಳೆಯ ಮಾಹಿತಿ'],0,'ಪ್ರತಿಯೊಂದರ ಸಂಪೂರ್ಣ ಮಾಹಿತಿ.'],
+['ಮಾವಳರ ಹೃದಯಗಳನ್ನು ಯಾರು ಗೆದ್ದರು?',['ಶಿವರಾಯರು','ಸುಲ್ತಾನ','ವತನದಾರರು','ಮೊಘಲರು'],0,'ಶಿವರಾಯರು.'],
+['ತರುಣ ಮಾವಳರು ಏನೆಂದು ಭಾವಿಸತೊಡಗಿದರು?',['ಶಿವರಾಯರಿಗಾಗಿ ಬದುಕಬೇಕು, ಶಿವರಾಯರಿಗಾಗಿ ಸಾಯಬೇಕು','ಸುಲ್ತಾನನಿಗಾಗಿ ಹೋರಾಡಬೇಕು','ವತನಕ್ಕಾಗಿ ಜಗಳವಾಡಬೇಕು','ಊರು ಬಿಡಬೇಕು'],0,'ಶಿವರಾಯರಿಗಾಗಿ ಬದುಕುವುದು-ಸಾಯುವುದು.'],
+['ಶಿವರಾಯರ ಚಟುವಟಿಕೆಗಳಿಗೆ ಹೇಗೆ ಉಬ್ಬರ ಬಂದಿತು?',['ಸಮುದ್ರಕ್ಕೆ ಭರತ ಬರುವಂತೆ','ನದಿ ಬತ್ತುವಂತೆ','ಮಳೆ ನಿಲ್ಲುವಂತೆ','ರಾತ್ರಿ ಆಗುವಂತೆ'],0,'ಸಮುದ್ರಕ್ಕೆ ಭರತ ಬರುವಂತೆ.'],
+['ಹನ್ನೆರಡು ಮಾವಳಗಳ ದೇಶಮುಖರಿಗೆ ಯಾವುದರ ಆಸೆ ಇತ್ತು?',['ವತನದ','ವಿದ್ಯೆಯ','ಸಂಗೀತದ','ಆಟದ'],0,'ವತನದ ವಿಪರೀತ ಆಸೆ.'],
+['ದೇಶಮುಖರ ಜಗಳದಿಂದ ಏನಾಗುತ್ತಿತ್ತು?',['ಮರಾಠರ ಶಕ್ತಿ ವ್ಯರ್ಥವಾಗುತ್ತಿತ್ತು','ಸ್ವರಾಜ್ಯ ಬೆಳೆಯುತ್ತಿತ್ತು','ಕೃಷಿ ಸುಧಾರಿಸುತ್ತಿತ್ತು','ಶಾಂತಿ ನೆಲೆಸಿತ್ತು'],0,'ಶಕ್ತಿ ಸುಮ್ಮನೆ ವ್ಯರ್ಥ.'],
+['ಶಿವರಾಯರು ದೇಶಮುಖರನ್ನು ತಮ್ಮವರನ್ನಾಗಿ ಹೇಗೆ ಮಾಡಿಕೊಂಡರು?',['ಭೇಟಿ, ತಿಳಿಹೇಳುವಿಕೆ, ಸಿಹಿ ಮಾತು ಮತ್ತು ಸ್ವರಾಜ್ಯದ ಗುರಿ ಹೇಳಿ','ಹಣ ಹಂಚಿ ಮಾತ್ರ','ಬೆದರಿಸಿ ಮಾತ್ರ','ಜಹಗೀರು ಕಿತ್ತುಕೊಂಡು'],0,'ಸಿಹಿ ಮಾತುಗಳಿಂದ, ಗುರಿಯಿಂದ ಪ್ರೇರೇಪಿಸಿ.'],
+['ದೌರ್ಜನ್ಯ ಮಾಡುವ ದೇಶಮುಖರನ್ನು ಶಿವರಾಯರು ಏನು ಮಾಡಿದರು?',['ದಾರಿಗೆ ತಂದರು','ಬಹುಮಾನ ನೀಡಿದರು','ರಾಜನನ್ನಾಗಿ ಮಾಡಿದರು','ನಿರ್ಲಕ್ಷಿಸಿದರು'],0,'ದಾರಿಗೆ ತಂದರು.'],
+['ಕೆಳಗಿನವರಲ್ಲಿ ಯಾರು ಶಿವರಾಯರ ಮಾತನ್ನು ಒಪ್ಪುವ ದೇಶಮುಖರಾಗಿದ್ದರು?',['ಬಾಜಿ ಪಾಸಲಕರ','ಫತ್ತೇಖಾನ್','ಮಲಿಕ್ ಅಂಬರ್','ಷಹಜಹಾನ್'],0,'ಬಾಜಿ ಪಾಸಲಕರ, ಝುಂಜಾರರಾವ್ ಮರಳ ಇತ್ಯಾದಿ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವ ಹೆಸರು ಮಾವಳದ ದೇಶಮುಖರಲ್ಲಿ ಇಲ್ಲ?',['ಆದಿಲ್‌ಶಾಹ','ಜೇಧೆ','ಬಾಂದಲ','ಪಾಯಗುಡೆ'],0,'ಆದಿಲ್‌ಶಾಹ ಸುಲ್ತಾನನಾಗಿದ್ದ.'],
+['ಶಿವರಾಯರ ಸ್ವತಂತ್ರ ರಾಜಮುದ್ರೆಯನ್ನು ಯಾರು ತಯಾರಿಸಿದ್ದರು?',['ಶಹಾಜಿರಾಜೇ','ಜಿಜಾಬಾಯಿ','ದಾದಾಜಿ ಕೊಂಡದೇವ','ಆದಿಲ್‌ಶಾಹ'],0,'ಶಹಾಜಿರಾಜೇ.'],
+['ಶಿವರಾಯರ ರಾಜಮುದ್ರೆ ಯಾವ ಭಾಷೆಯಲ್ಲಿತ್ತು?',['ಸಂಸ್ಕೃತ','ಪರ್ಷಿಯನ್','ಕನ್ನಡ','ಕನ್ನಡ'],0,'ಸಂಸ್ಕೃತ ಭಾಷೆಯಲ್ಲಿ.'],
+['ಆ ಕಾಲದಲ್ಲಿ ರಾಜಮುದ್ರೆಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಯಾವ ಭಾಷೆಯಲ್ಲಿರುತ್ತಿದ್ದವು?',['ಪರ್ಷಿಯನ್','ಸಂಸ್ಕೃತ','ಇಂಗ್ಲಿಷ್','ತಮಿಳು'],0,'ಪರ್ಷಿಯನ್.'],
+['ರಾಜಮುದ್ರೆಯನ್ನು ಯಾವುದಕ್ಕೆ ಹೋಲಿಸಲಾಗಿದೆ?',['ಪಾಡ್ಯದ ಚಂದ್ರಕಲೆಗೆ','ಸೂರ್ಯನಿಗೆ','ನಕ್ಷತ್ರಗಳಿಗೆ','ನದಿಗೆ'],0,'ಪಾಡ್ಯದ ಚಂದ್ರಕಲೆಯಂತೆ ಬೆಳೆಯುತ್ತಾ ಹೋಗುವಂತಹದು.'],
+['ರಾಜಮುದ್ರೆಯ ಪ್ರಕಾರ ಶಿವಾಜಿರಾಜೇ ಯಾರ ಪುತ್ರ?',['ಶಹಾಜಿರಾಜೇಯವರ','ಮಾಲೋಜಿರಾಜೇಯವರ','ಲಖುಜಿರಾವರ','ವಿಠೋಜಿರಾಜೇಯವರ'],0,'ಶಾಹಸೂನೋಃ – ಶಹಾಜಿರಾಜೇಯವರ ಪುತ್ರ.'],
+['ರಾಜಮುದ್ರೆ ಯಾವುದಕ್ಕಾಗಿ ಇದೆ?',['ಜನರ ಕಲ್ಯಾಣಕ್ಕಾಗಿ','ಯುದ್ಧಕ್ಕಾಗಿ ಮಾತ್ರ','ತೆರಿಗೆ ಹೆಚ್ಚಿಸಲು','ಸುಲ್ತಾನನಿಗಾಗಿ'],0,'ಭದ್ರಾಯ – ಜನಕಲ್ಯಾಣಕ್ಕಾಗಿ.'],
+['ರಾಜಮುದ್ರೆಯಿಂದ ಯಾವ ವಿಚಾರ ಕಾಣುತ್ತದೆ?',['ಸ್ವಭಾಷೆ, ಸ್ವಧರ್ಮ; ಆದರೆ ಬೇರೆ ಧರ್ಮದ ದ್ವೇಷ ಬೇಡ','ಯುದ್ಧ ಮಾತ್ರ','ಪರರ ಸೇವೆ','ಭೇದಭಾವ'],0,'ಸ್ವಭಾಷೆ-ಸ್ವಧರ್ಮ ಮತ್ತು ಪರಧರ್ಮದ ದ್ವೇಷ ಬೇಡ.']
+];
+
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ಪುಣೆಯ ನೈಋತ್ಯಕ್ಕಿರುವ ............ ದೇವಾಲಯ ಬಹಳ ರಮಣೀಯ ಸ್ಥಳವಾಗಿತ್ತು.',['ರಾಯರೇಶ್ವರದ','ಘೃಷ್ಣೇಶ್ವರದ','ಭೀಮಾಶಂಕರದ'],0],
+  ['ಮಾವಳಗಳಲ್ಲಿ ಅಲ್ಲಲ್ಲಿ ಕೆಲವು ............ ಮಂಡಳಿ ತಮ್ಮ ವತನಗಳನ್ನು ಕಾಪಾಡಿಕೊಂಡು ಕುಳಿತಿದ್ದರು.',['ಸುಲ್ತಾನ','ದೇಶಮುಖ','ಸಂತ'],1],
+  ['ಶಹಾಜಿರಾಜೇ ಶಿವರಾಯರ ಸ್ವತಂತ್ರ ............ ತಯಾರಿಸಿದ್ದರು.',['ಕತ್ತಿ','ರಾಜಮುದ್ರೆ','ಪಲ್ಲಕ್ಕಿ'],1]],
+ aa:[['ರಾಯರೇಶ್ವರದ ದೇವಾಲಯದಲ್ಲಿ ಶಿವರಾಯರು ಕೊನೆಗೆ ನಿಶ್ಚಯದಿಂದ ಏನು ಹೇಳಿದರು?','“ಹಿಂದವೀ ಸ್ವರಾಜ್ಯದ ರೂಪದಲ್ಲಿ ಈ ರಾಜ್ಯ ಆಗಬೇಕು ಎಂದು ಶ್ರೀಗಳ ಮನಸ್ಸಿನಲ್ಲಿದೆ. ಶ್ರೀಗಳ ಮನೋರಥವನ್ನು ನಾವು ಪೂರ್ಣಗೊಳಿಸೋಣ,” ಎಂದು ಶಿವರಾಯರು ಕೊನೆಗೆ ನಿಶ್ಚಯದಿಂದ ಹೇಳಿದರು.'],
+  ['ಜಿಜಾಬಾಯಿಗೆ ಯಾವ ವಿಶ್ವಾಸ ಮೂಡತೊಡಗಿತು?','ತಾವು ಮನಸ್ಸಿನಲ್ಲಿ ಇಟ್ಟುಕೊಂಡದ್ದನ್ನು ಬಾಲರಾಜೇ ಪೂರ್ಣಗೊಳಿಸುತ್ತಾರೆ ಎಂಬ ವಿಶ್ವಾಸ ಜಿಜಾಬಾಯಿಗೆ ಮೂಡತೊಡಗಿತು.'],
+  ['ಶಿವರಾಯರು ಯಾವ ವಿಷಯಗಳ ಕರಾರುವಾಕ್ಕು ಮಾಹಿತಿ ಪಡೆದರು?','ಶಿವರಾಯರು ಪುಣೆಯ ಸುತ್ತಲಿನ ಕೋಟೆ-ಕೊತ್ತಲಗಳು, ಕಳ್ಳದಾರಿಗಳು, ಸುರಂಗಗಳು, ನೆಲಮಾಳಿಗೆಗಳು, ಮದ್ದುಗುಂಡು, ಶಸ್ತ್ರಾಸ್ತ್ರಗಳು ಮತ್ತು ಶತ್ರುಗಳ ಸೈನ್ಯದ ಠಾಣೆಗಳ ಕರಾರುವಾಕ್ಕು ಮಾಹಿತಿ ಪಡೆದರು.'],
+  ['ಶಿವರಾಯರು ಯಾವುದಕ್ಕೆ ಕಡಿವಾಣ ಹಾಕಲು ನಿರ್ಧರಿಸಿದರು?','ವತನಕ್ಕಾಗಿ ತಮ್ಮತಮ್ಮಲ್ಲೇ ಜಗಳವಾಡುವ ದೇಶಮುಖರ ಜಗಳಗಳಿಗೆ (ಇದರಲ್ಲಿ ಮರಾಠರ ಶಕ್ತಿ ವ್ಯರ್ಥವಾಗುತ್ತಿತ್ತು) ಕಡಿವಾಣ ಹಾಕಲು ಶಿವರಾಯರು ನಿರ್ಧರಿಸಿದರು.']],
+ ii:[['ಶಿವರಾಯರ ಗುರಿ ಯಾವುದಾಗಿತ್ತು?','ಶಿವರಾಯರ ಗುರಿ ‘ಹಿಂದವೀ ಸ್ವರಾಜ್ಯ’ ಆಗಿತ್ತು. ಪರರ ಗುಲಾಮಗಿರಿ ಬೇಡ; ನಿಮ್ಮ, ನನ್ನ, ಎಲ್ಲರ ಸ್ವತಂತ್ರ ರಾಜ್ಯ ಸ್ಥಾಪಿಸಬೇಕು. ಅದಕ್ಕಾಗಿ ಎಲ್ಲರೂ ಶ್ರಮಿಸಬೇಕು, ದುಡಿಯಬೇಕು ಮತ್ತು ಪ್ರಾಣ ಅರ್ಪಿಸಲೂ ಸಿದ್ಧರಾಗಬೇಕು ಎಂದು ಅವರು ನಿರ್ಧರಿಸಿದರು.'],
+  ['ಶಿವರಾಯರ ಯಾವ ನಿತ್ಯಕ್ರಮ ಆರಂಭವಾಯಿತು?','ಶಿವರಾಯರು ಮಾವಳರನ್ನು ಜೊತೆ ಕರೆದುಕೊಂಡು ಕತ್ತಿವರಸೆ ಮಾಡತೊಡಗಿದರು. ಕುದುರೆ ಸವಾರಿ ಮಾಡುವುದು, ಬೆಟ್ಟಗಳ ಗುಪ್ತದಾರಿಗಳನ್ನು ಹುಡುಕುವುದು, ಕಣಿವೆ, ಘಾಟಿ, ಕಳ್ಳದಾರಿಗಳನ್ನು ಗಮನಿಸುವುದು ಅವರ ನಿತ್ಯಕ್ರಮವಾಯಿತು. ಅವರು ಪುಣೆಯ ಸುತ್ತಲಿನ ಕೋಟೆ-ಕೊತ್ತಲಗಳನ್ನು ಸೂಕ್ಷ್ಮವಾಗಿ ಗಮನಿಸಿದರು.']]
+};
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಸ್ವಾಧ್ಯಾಯ</h2>
+ <h3>೧. ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</h3>${pickGame('swa',SW.a,'swa')}
+ <h3>೨. ಪ್ರತಿಯೊಂದಕ್ಕೂ ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>೩. ಎರಡು-ಮೂರು ವಾಕ್ಯಗಳಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.ii.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>ಶಿಕ್ಷಕರ ಸಹಾಯದಿಂದ ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಯ ಪ್ರಸಂಗದ ಚಿತ್ರ ತಯಾರಿಸಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಶಿವರಾಯರು ವಯಸ್ಸಿನಲ್ಲಿ ಚಿಕ್ಕವರಾಗಿದ್ದರೂ ಮಾವಳರು ಅವರ ಮಾತು ಕೇಳಿದರು. ಇದರ ಹಿಂದೆ ಯಾವ ಕಾರಣಗಳಿರಬಹುದು?','ವಿಚಾರ, ಪ್ರಾಮಾಣಿಕತೆ…','ಶಿವರಾಯರ ವಿಚಾರಗಳು ಸ್ಪಷ್ಟ ಮತ್ತು ಕಳಕಳಿಯಿಂದ ಕೂಡಿದ್ದವು; ಅವರು ಜನರ ದುಃಖದ ಬಗ್ಗೆ ಮಾತನಾಡುತ್ತಿದ್ದರು; ಅವರು ಮಾವಳರೊಂದಿಗೆ ಬೆರೆತು ಇರುತ್ತಿದ್ದರು, ಅವರ ವಿಶ್ವಾಸ ಇತ್ತು. ಒಳ್ಳೆಯ ನಾಯಕತ್ವಕ್ಕೆ ವಯಸ್ಸಿಗಿಂತ ವಿಚಾರ ಮತ್ತು ಕೃತಿ ಮುಖ್ಯ.'],
+['“ಬೇರೆಯವರ ಬೊಗಸೆಯಿಂದಲೇ ನಾವು ನೀರು ಕುಡಿಯಬೇಕೇ?” ಈ ಪ್ರಶ್ನೆ ಇಂದಿನ ಜೀವನದಲ್ಲಿ ಎಲ್ಲಿ ಅನ್ವಯವಾಗುತ್ತದೆ?','ಸ್ವಾವಲಂಬನೆ…','ನಾವು ನಮ್ಮ ಕೆಲಸಗಳನ್ನು ನಾವೇ ಮಾಡಬೇಕು, ಸ್ವಾವಲಂಬಿಗಳಾಗಬೇಕು; ಅಧ್ಯಯನ ನಾವೇ ಮಾಡಬೇಕು, ಇನ್ನೊಬ್ಬರ ಉತ್ತರಗಳನ್ನು ನಕಲು ಮಾಡಬಾರದು. ದೇಶವೂ ಇತರ ದೇಶಗಳ ಮೇಲೆ ಅವಲಂಬಿಸದೆ ತಾನೇ ವಸ್ತುಗಳನ್ನು ತಯಾರಿಸಬೇಕು (ಆತ್ಮನಿರ್ಭರತೆ).'],
+['ರಾಯರೇಶ್ವರದಂತಹ ಕಾಡಿನ ಗುಪ್ತ ಸ್ಥಳವನ್ನು ಸಮಾಲೋಚನೆಗೆ ಏಕೆ ಆರಿಸಿರಬಹುದು?','ಶತ್ರುವಿನ ಗೂಢಚಾರರು…','ಶತ್ರುವಿನ ಗೂಢಚಾರರಿಗೆ ತಿಳಿಯಬಾರದು, ಗುಪ್ತತೆ ಉಳಿಯಬೇಕು, ಶಾಂತವಾಗಿ ಚರ್ಚಿಸಲು ಸಾಧ್ಯವಾಗಬೇಕು ಮತ್ತು ದೇವರನ್ನು ಸಾಕ್ಷಿ ಇಟ್ಟು ಶಪಥ ಮಾಡಲು ಸಾಧ್ಯವಾಗಬೇಕು ಎಂದು.'],
+['ಕಳ್ಳದಾರಿಗಳು, ಸುರಂಗಗಳು, ಶತ್ರುಗಳ ಠಾಣೆಗಳ ಮಾಹಿತಿ ಯುದ್ಧದಲ್ಲಿ ಹೇಗೆ ಉಪಯುಕ್ತವಾಗುತ್ತದೆ?','ಅಚಾನಕ್ ದಾಳಿ…','ಶತ್ರುವಿಗೆ ತಿಳಿಯದಂತೆ ಕೋಟೆಯೊಳಗೆ ನುಗ್ಗಬಹುದು, ಅಚಾನಕ್ ದಾಳಿ ಮಾಡಬಹುದು, ಸಂಕಟದಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿ ತಪ್ಪಿಸಿಕೊಳ್ಳಬಹುದು ಮತ್ತು ಕಡಿಮೆ ಸೈನಿಕರಿಂದಲೂ ವಿಜಯ ಗಳಿಸಬಹುದು.'],
+['ದೇಶಮುಖರ ಜಗಳಗಳನ್ನು ನಿಲ್ಲಿಸುವುದು ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಏಕೆ ಅಗತ್ಯವಾಗಿತ್ತು?','ಒಗ್ಗಟ್ಟು…','ಜಗಳದಲ್ಲಿ ಮರಾಠರ ಶಕ್ತಿ ವ್ಯರ್ಥವಾಗುತ್ತಿತ್ತು. ಎಲ್ಲರೂ ಒಟ್ಟಾದರೆ ಮಾತ್ರ ದೊಡ್ಡ ಸುಲ್ತಾನಿ ಶಕ್ತಿಗಳೊಂದಿಗೆ ಹೋರಾಡಲು ಸಾಧ್ಯವಿತ್ತು. ಒಗ್ಗಟ್ಟಿನಲ್ಲೇ ಬಲ ಇರುತ್ತದೆ.'],
+['ಶಿವರಾಯರ ರಾಜಮುದ್ರೆಯನ್ನು ಬೆಳೆಯುತ್ತಿರುವ ಚಂದ್ರಕಲೆಗೆ ಏಕೆ ಹೋಲಿಸಿರಬಹುದು?','ಪಾಡ್ಯದಿಂದ ಹುಣ್ಣಿಮೆ…','ಪಾಡ್ಯದ ಚಿಕ್ಕ ಚಂದ್ರಕಲೆ ಪ್ರತಿದಿನ ಬೆಳೆಯುತ್ತಾ ಹುಣ್ಣಿಮೆಯಂದು ಪೂರ್ಣವಾಗುತ್ತದೆ; ಹಾಗೆಯೇ ಚಿಕ್ಕ ಸ್ವರಾಜ್ಯ ಬೆಳೆಯುತ್ತಾ ದೊಡ್ಡ, ಎಲ್ಲರಿಗೂ ವಂದನೀಯ ರಾಜ್ಯ ಆಗಲಿ ಎಂಬ ಆಶೆ ಅದರಿಂದ ವ್ಯಕ್ತವಾಗುತ್ತದೆ.'],
+['ಆ ಕಾಲದಲ್ಲಿ ರಾಜಮುದ್ರೆ ಫಾರ್ಸಿಯಲ್ಲಿದ್ದಾಗ ಶಿವರಾಯರ ಮುದ್ರೆ ಸಂಸ್ಕೃತದಲ್ಲಿ ಏಕೆ ಇತ್ತು?','ಸ್ವಭಾಷೆ…','ಸ್ವರಾಜ್ಯ ಎಂದರೆ ನಮ್ಮ ರಾಜ್ಯ, ಆದ್ದರಿಂದ ನಮ್ಮ ಭಾಷೆ (ಸ್ವಭಾಷೆ) ಬಳಸಬೇಕು ಎಂಬ ವಿಚಾರ ಇತ್ತು; ಪರರ ಭಾಷೆಯ ಬದಲು ನಮ್ಮ ಪರಂಪರೆಯ ಭಾಷೆಯನ್ನು ಆರಿಸಿ ಸ್ವಾಭಿಮಾನ ತೋರಿಸಿದರು.'],
+['“ಸ್ವಧರ್ಮ ಬೇಕು, ಆದರೆ ಬೇರೆ ಧರ್ಮದ ದ್ವೇಷ ಬೇಡ” – ಈ ವಿಚಾರ ಇಂದಿನ ಭಾರತದಲ್ಲಿ ಎಷ್ಟು ಮಹತ್ವದ್ದು?','ವೈವಿಧ್ಯತೆಯಲ್ಲಿ ಏಕತೆ…','ಭಾರತದಲ್ಲಿ ಅನೇಕ ಧರ್ಮಗಳು, ಭಾಷೆಗಳಿವೆ. ಎಲ್ಲರೂ ತಮ್ಮತಮ್ಮ ಧರ್ಮ ಪಾಲಿಸುವಾಗ ಇತರರ ಧರ್ಮವನ್ನು ಗೌರವಿಸಿದರೆ ಮಾತ್ರ ದೇಶದಲ್ಲಿ ಶಾಂತಿ, ಏಕತೆ ಮತ್ತು ಪ್ರಗತಿ ಉಳಿಯುತ್ತದೆ.'],
+['ನೀವು ತರಗತಿಯ ಮಾನಿಟರ್ ಆದರೆ ತರಗತಿಗಾಗಿ ಯಾವ ‘ಪ್ರತಿಜ್ಞೆ’ ಮಾಡುವಿರಿ?','ಸ್ವಚ್ಛತೆ, ಅಧ್ಯಯನ, ಸಹಾಯ…','ಉದಾ. ತರಗತಿಯನ್ನು ಸ್ವಚ್ಛವಾಗಿ ಇಡುತ್ತೇವೆ, ಎಲ್ಲರನ್ನೂ ಸಮಾನವಾಗಿ ನಡೆಸಿಕೊಳ್ಳುತ್ತೇವೆ, ಅಧ್ಯಯನದಲ್ಲಿ ಒಬ್ಬರಿಗೊಬ್ಬರು ಸಹಾಯ ಮಾಡುತ್ತೇವೆ, ಜಗಳಗಳನ್ನು ಬಗೆಹರಿಸುತ್ತೇವೆ, ಶಾಲೆಯ ಆಸ್ತಿಯನ್ನು ಕಾಪಾಡುತ್ತೇವೆ.'],
+['ಶಿವರಾಯರು ಸಿಹಿ ಮಾತುಗಳಿಂದ ಜನರನ್ನು ತಮ್ಮವರನ್ನಾಗಿ ಮಾಡಿಕೊಂಡರು. ಇದರಿಂದ ನಾವು ಯಾವ ಕೌಶಲ್ಯ ಕಲಿಯುತ್ತೇವೆ?','ಸಂವಾದ…','ಒಳ್ಳೆಯ ಸಂವಹನ, ತಿಳಿಹೇಳುವುದು, ಇನ್ನೊಬ್ಬರ ಮಾತು ಕೇಳುವುದು ಮತ್ತು ಒಟ್ಟಾಗಿ ಕೆಲಸ ಮಾಡುವ (ಟೀಮ್‌ವರ್ಕ್) ಕೌಶಲ್ಯ – ಇದು ನಾಯಕತ್ವಕ್ಕೆ ಬಹಳ ಮುಖ್ಯ.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೬ : ಸ್ವರಾಜ್ಯಸ್ಥಾಪನೆಯ ಪ್ರತಿಜ್ಞೆ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${SUM.map(x=>`<li>${x}</li>`).join('')}</ol>
+ <p class="pq">ಶಿವರಾಯರ ರಾಜಮುದ್ರೆ</p><div style="text-align:center;font-weight:700">ಪ್ರತಿಪಚ್ಚಂದ್ರಲೇಖೇವ ವರ್ಧಿಷ್ಣುರ್ವಿಶ್ವವಂದಿತಾ |<br>ಶಾಹಸೂನೋಃ ಶಿವಸ್ಯೈಷಾ ಮುದ್ರಾ ಭದ್ರಾಯ ರಾಜತೇ ||</div>
+ <div>ಅರ್ಥ: ಪಾಡ್ಯದ ಚಂದ್ರಕಲೆಯಂತೆ ಬೆಳೆಯುತ್ತಾ ಹೋಗುವ ಮತ್ತು ಎಲ್ಲ ವಿಶ್ವಕ್ಕೆ ವಂದ್ಯ ಆಗುವಂತಹ ಶಹಾಜಿರಾಜೇಯವರ ಪುತ್ರ ಶಿವಾಜಿರಾಜೇ ಅವರ ರಾಜಮುದ್ರೆ ಜನರ ಕಲ್ಯಾಣಕ್ಕಾಗಿ ಇದೆ.</div>
+ <p class="pq">ಪದಾರ್ಥ</p><div>ಮಸಲತ್ತು/ಗುಪ್ತಾಲೋಚನೆ – ಗುಪ್ತ ಚರ್ಚೆ • ದಟ್ಟ – ಗಾಢ, ಶಾಂತ • ನೈಋತ್ಯ – ದಕ್ಷಿಣ-ಪಶ್ಚಿಮ • ಬೊಗಸೆ – ಎರಡೂ ಕೈಗಳ ದೊನ್ನೆ • ವ್ಯರ್ಥವಾಗಿ – ಕಾರಣವಿಲ್ಲದೆ • ನಿರ್ಗತಿಕರಾಗುವುದು – ಧ್ವಂಸವಾಗುವುದು • ಉತ್ಸಾಹ ಉಕ್ಕುವುದು – ಉತ್ಸಾಹ • ಸರ್ವಸ್ವ – ಎಲ್ಲವೂ • ಆಣೆಪ್ರಮಾಣ – ಶಪಥ • ಮನೋರಥ – ಇಚ್ಛೆ • ಕರಾರುವಾಕ್ಕು – ಪೂರ್ಣ, ಸೂಕ್ಷ್ಮ • ಉಬ್ಬರ – ಭರತ, ಜೋರು • ದೌರ್ಜನ್ಯ – ಮನಸ್ಸಿಗೆ ಬಂದಂತೆ • ರಾಜಮುದ್ರೆ – ರಾಜನ ಮೊಹರು</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">೧. ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</div>${SW.a.map((x,i)=>`<div>(${'ಅಆಇ'[i]}) ${x[0]}</div>`).join('')}
+ <div class="pq">೨. ಪ್ರತಿಯೊಂದಕ್ಕೂ ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div class="avoid"><div>(${'ಅಆಇಈ'[i]}) ${x[0]}</div>${lines(1)}</div>`).join('')}
+ <div class="pq">೩. ಎರಡು-ಮೂರು ವಾಕ್ಯಗಳಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.ii.map((x,i)=>`<div class="avoid"><div>(${'ಅಆ'[i]}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ <div class="avoid"><div class="pq">೪. (ಚಟುವಟಿಕೆ) ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಯ ಪ್ರಸಂಗದ ಚಿತ್ರ ಬಿಡಿಸಿ.</div><div style="height:60mm;border:1.2px solid #000;border-radius:3mm"></div></div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>೧.</b> (ಅ) ರಾಯರೇಶ್ವರದ (ಆ) ದೇಶಮುಖ (ಇ) ರಾಜಮುದ್ರೆ</div><div><b>೨.</b><ol>${SW.aa.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>೩.</b><ol>${SW.ii.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ · ಪಾಠ ೬</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

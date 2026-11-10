@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೧ – ಪಾಠ ೮ ಸ್ವಚ್ಛ ನನ್ನ ಪರಿಸರ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೮ : ಸ್ವಚ್ಛ ನನ್ನ ಪರಿಸರ</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">♻️🧹 ಹಸಿ-ಒಣ ಕಸ, ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ಮತ್ತು ೩R – ಬನ್ನಿ, ನಮ್ಮ ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛ ಮತ್ತು ಸುಂದರವಾಗಿಡೋಣ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೯ ಮೆಟ್ಟಿಲುಗಳು · ಕಸ ವರ್ಗೀಕರಣ · ಕಂಪೋಸ್ಟ್</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೩೦ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೮ : ಸ್ವಚ್ಛ ನನ್ನ ಪರಿಸರ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','♻️','🌿','✨'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ಕಸ ಆರಿಸಿ ---------- */
+const LIT=[[40,120,'🍌'],[90,140,'🥤'],[150,128,'📰'],[210,146,'🍎'],[260,124,'🧴'],[300,142,'🥚']];
+let LITP=new Set(),DIRTY=true;
+function parkSvg(){const n=LIT.length-LITP.size;return `<svg viewBox="0 0 330 170" style="max-width:440px;display:block;margin:0 auto;background:linear-gradient(#bae6fd 0 55%,${n?'#a3a38a':'#86efac'} 55%);border-radius:16px">
+ <text x="30" y="80" font-size="34">🌳</text><text x="270" y="78" font-size="34">🏫</text>
+ ${n?`<text x="150" y="40" font-size="13" font-weight="800" fill="#991b1b" text-anchor="middle">🤢 ದುರ್ವಾಸನೆ!</text>`:`<text x="160" y="40" font-size="14" font-weight="800" fill="#166534" text-anchor="middle">✨ ಸ್ವಚ್ಛ, ಸುಂದರ ಪರಿಸರ!</text><text x="120" y="90" font-size="26">🌼</text><text x="200" y="92" font-size="26">🦋</text>`}
+ ${LIT.map((l,i)=>LITP.has(i)?'':`<g style="cursor:pointer" onclick="litTap(${i})"><text x="${l[0]}" y="${l[1]}" font-size="24" text-anchor="middle">${l[2]}</text><circle cx="${l[0]}" cy="${l[1]-8}" r="16" fill="transparent"/></g>`).join('')}
+ ${n?[0,1,2].map(i=>`<text font-size="14">🪰<animateMotion dur="${2+i*.5}s" repeatCount="indefinite" path="M${80+i*70} 110 q20 -30 40 0 t40 0"/></text>`).join(''):''}
+ <rect x="150" y="62" width="22" height="30" rx="3" fill="#16a34a"/><rect x="176" y="62" width="22" height="30" rx="3" fill="#2563eb"/></svg>`}
+function litTap(i){LITP.add(i);$('parkBox').innerHTML=parkSvg();say('ಕಸ ಎತ್ತಿದರು');if(LITP.size==LIT.length){award('park','ಭೇಷ್! ಪರಿಸರ ಸ್ವಚ್ಛವಾಯಿತು.');$('parkMsg').innerHTML='<div class="msg ok">🎉 ಪರಿಸರ ಸ್ವಚ್ಛವಾಯಿತು – ನೊಣಗಳು ಹೋದವು, ದುರ್ವಾಸನೆ ಹೋಯಿತು, ಹೂವು-ಚಿಟ್ಟೆಗಳು ಬಂದವು!</div>'}}
+
+/* ---------- ಹಸಿ / ಒಣ ಕಸದ ತೊಟ್ಟಿ ---------- */
+const WASTE=[['🥬 ತರಕಾರಿಗಳ ತೊಟ್ಟು',0],['🛍️ ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲಗಳು',1],['🍌 ಹಣ್ಣುಗಳ ಸಿಪ್ಪೆ',0],['🥜 ಕಾಯಿಗಳ ಸಿಪ್ಪೆ',0],['🧴 ಪ್ಲಾಸ್ಟಿಕ್ ಬಾಟಲಿಗಳು',1],['📦 ರಟ್ಟು',1],['🍒 ಹಣ್ಣುಗಳ ಬೀಜಗಳು',0],['🪥 ಹಾಳಾದ ಟೂತ್‌ಬ್ರಷ್',1],['🔌 ಕೆಟ್ಟುಹೋದ ಚಾರ್ಜರ್',1],['🍂 ಉದುರಿದ ಎಲೆಗಳು',0],['🥚 ಮೊಟ್ಟೆಯ ಚಿಪ್ಪುಗಳು',0],['🔩 ಮೊಳೆಗಳು',1],['🪟 ಗಾಜಿನ ತುಂಡುಗಳು',1],['🧸 ಪ್ಲಾಸ್ಟಿಕ್ ಆಟಿಕೆಗಳು',1]];
+let WQ=[],WI=0,WOK=0,WMSG='';
+function wInit(){WQ=shuf(WASTE.map((_,i)=>i));WI=0;WOK=0;WMSG='';drawW()}
+function drawW(){const b=$('wBox');if(!b)return;
+ if(WI>=WQ.length){b.innerHTML=`<div class="msg ok" style="font-size:18px">🎉 ಆಟ ಮುಗಿಯಿತು! ಸರಿ: ${WOK} / ${WQ.length}</div><button class="btn ln sm" onclick="wInit()">🔄 ಮತ್ತೆ ಆಡಿ</button>`;if(WOK==WQ.length)award('waste','ಭೇಷ್! ಎಲ್ಲಾ ಕಸ ಸರಿಯಾದ ತೊಟ್ಟಿಯಲ್ಲಿ.');return}
+ const w=WASTE[WQ[WI]];
+ b.innerHTML=`<div class="step" style="text-align:center">ಕಸ ${WI+1} / ${WQ.length} · ಸರಿ ${WOK}</div>
+ <div style="text-align:center;font-size:24px;font-weight:800;margin:8px 0;padding:14px;border-radius:14px;background:#fef9c3">${w[0]}</div>
+ <div style="display:flex;gap:12px;justify-content:center">
+  <button class="btn gr" style="flex:1;max-width:170px;font-size:17px;padding:14px" onclick="wPick(0)">🟢🗑️<br>ಹಸಿ ಕಸ<br><small>ಹಸಿರು ತೊಟ್ಟಿ</small></button>
+  <button class="btn" style="flex:1;max-width:170px;font-size:17px;padding:14px" onclick="wPick(1)">🔵🗑️<br>ಒಣ ಕಸ<br><small>ನೀಲಿ ತೊಟ್ಟಿ</small></button></div>${WMSG}`}
+function wPick(c){const w=WASTE[WQ[WI]];if(c==w[1]){WOK++;WMSG=`<div class="msg ok">✔ ಸರಿ! ${w[0]} – ${c?'ಒಣ ಕಸ (ಕೊಳೆಯುವುದಿಲ್ಲ)':'ಹಸಿ ಕಸ (ಕೊಳೆಯುತ್ತದೆ, ಕೆಡುತ್ತದೆ)'}</div>`}else WMSG=`<div class="msg no">✘ ${w[0]} ಇದು ${w[1]?'ಒಣ ಕಸ – ನೀಲಿ ತೊಟ್ಟಿ':'ಹಸಿ ಕಸ – ಹಸಿರು ತೊಟ್ಟಿ'}</div>`;WI++;drawW()}
+
+/* ---------- ಕಂಪೋಸ್ಟ್ ---------- */
+let CW=0;
+function compSvg(w){const t=w/6,col=(a,b)=>`rgb(${Math.round(a[0]+(b[0]-a[0])*t)},${Math.round(a[1]+(b[1]-a[1])*t)},${Math.round(a[2]+(b[2]-a[2])*t)})`;
+ return `<svg viewBox="0 0 220 170" style="width:260px;max-width:100%;background:#fefce8;border-radius:14px">
+ <path d="M50 40 L170 40 L160 150 L60 150Z" fill="#78716c" stroke="#44403c" stroke-width="2"/>
+ ${[0,1,2,3].map(i=>`<rect x="${62+i*1}" y="${60+i*22}" width="${96-i*2}" height="20" fill="${i%2?col([101,163,13],[87,60,32]):col([132,204,22],[68,45,22])}"/>`).join('')}
+ ${w<5?`<text x="80" y="76" font-size="14">🍌🥬🍂</text>`:''}${w>=5?`<text x="88" y="110" font-size="13" fill="#fef3c7" font-weight="800">ಗೊಬ್ಬರ ಸಿದ್ಧ!</text>`:''}
+ ${w>=2&&w<5?[0,1].map(i=>`<text x="${90+i*30}" y="${120+i*8}" font-size="12">🪱</text>`).join(''):''}
+ <rect x="44" y="30" width="132" height="10" rx="3" fill="#57534e"/>
+ <text x="110" y="166" text-anchor="middle" font-size="12" font-weight="800">${w==0?'ಆರಂಭ':w+' ವಾರಗಳು'}</text></svg>`}
+function compUpd(){$('compBox').innerHTML=compSvg(CW);$('compMsg').innerHTML=CW>=4?'<div class="msg ok">✔ ೪ ರಿಂದ ೬ ವಾರಗಳ ನಂತರ ಕಪ್ಪಾದ, ಮೃದುವಾದ <b>ಕಾಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ</b> ತಯಾರಾಗುತ್ತದೆ. ಅದನ್ನು ಶಾಲೆಯ ಹಿತ್ತಲ ತೋಟದಲ್ಲಿ ಬಳಸಿ!</div>':'<div class="msg in">ಹಸಿ ಕಸ ನಿಧಾನವಾಗಿ ಕೊಳೆಯುತ್ತಿದೆ…</div>';if(CW==6)award('comp','ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ಸಿದ್ಧ!')}
+
+/* ---------- ಘೋಷವಾಕ್ಯ ಫಲಕ ---------- */
+const SLOG=['ಸ್ವಚ್ಛ ಶಾಲೆ ಸುಂದರ ಪರಿಸರ','ಸ್ವಚ್ಛತೆ ಪಾಲಿಸಿ, ರೋಗ ತಪ್ಪಿಸಿ','ಎಲ್ಲಿ ಸ್ವಚ್ಛತೆ ಇರುತ್ತದೋ ಅಲ್ಲಿ ಆರೋಗ್ಯ ನೆಲೆಸುತ್ತದೆ','ಕಸದ ತೊಟ್ಟಿ ಬಳಸೋಣ, ಸ್ವಚ್ಛ ಪರಿಸರ ನಿರ್ಮಿಸೋಣ'];
+let SLI=0;
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+let S=0;
+const L=[
+{h:'ಗಮನಿಸಿ – ಕಸ ಕಡಿಮೆ ಮಾಡದಿದ್ದರೆ?',s:'ನಮ್ಮ ಸುತ್ತಮುತ್ತ ಹೀಗೆ ಕಸ ಬಿದ್ದಿದ್ದರೆ ಎಲ್ಲೆಡೆ ದುರ್ವಾಸನೆ ಹರಡುತ್ತದೆ. ಕಸದ ಮೇಲೆ ಕೂರುವ ಮನೆನೊಣಗಳಿಂದ ರೋಗಗಳು ಹರಡುತ್ತವೆ. ನಮ್ಮ ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡುವುದು ನಮ್ಮ ಜವಾಬ್ದಾರಿ.',b:()=>`
+ <div class="msg in">🤔 ಯೋಚಿಸಿ: ಕಸ ಕಡಿಮೆ ಮಾಡದಿದ್ದರೆ ಏನಾಗುತ್ತದೆ?</div>
+ <div class="key">ನಮ್ಮ ಸುತ್ತಮುತ್ತ ಕಸ ಬಿದ್ದಿದ್ದರೆ <b>ಎಲ್ಲೆಡೆ ದುರ್ವಾಸನೆ</b> ಹರಡುತ್ತದೆ. ಕಸದ ಮೇಲೆ ಕೂರುವ <b>ಮನೆನೊಣಗಳಿಂದ ರೋಗಗಳು</b> ಹರಡುತ್ತವೆ. ಇಂತಹ ಜಾಗದಲ್ಲಿ ವಾಸಿಸುವುದು ಆರೋಗ್ಯಕ್ಕೆ <b>ಅಪಾಯಕಾರಿ</b> ಇರುತ್ತದೆ.</div>
+ <h3>🧹 ಆಟ: ಕಸ ಆರಿಸಿ ಮತ್ತು ಪರಿಸರ ಸ್ವಚ್ಛಗೊಳಿಸಿ</h3><div class="tap">ಪ್ರತಿ ಕಸದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ ಅದನ್ನು ಎತ್ತಿ.</div>
+ <div id="parkBox">${parkSvg()}</div><div id="parkMsg"></div>
+ <div class="key">ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡುವುದು <b>ನಮ್ಮ ಜವಾಬ್ದಾರಿ</b> ಇದೆ. <b>ಕಸ ಉತ್ಪತ್ತಿಯಾಗದಂತೆ</b> ಎಲ್ಲರೂ ಎಚ್ಚರ ವಹಿಸಬೇಕು. ಆದರೂ ಉತ್ಪತ್ತಿಯಾಗುವ ಕಸವನ್ನು <b>ಸರಿಯಾದ ವಿಧಾನದಲ್ಲಿ ವಿಲೇವಾರಿ</b> ಮಾಡಬೇಕು – ಕಸ ಸಂಗ್ರಹಿಸಿ <b>ವಿಭಿನ್ನ</b> ಮಾಡಬೇಕು.</div>`},
+{h:'ಹಸಿ ಕಸ ಮತ್ತು ಒಣ ಕಸ',s:'ಕೊಳೆಯುವ, ಕೆಡುವ ಕಸವನ್ನು ಹಸಿ ಕಸ ಎನ್ನುತ್ತಾರೆ. ಅದನ್ನು ಹಸಿರು ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುತ್ತಾರೆ. ಕೊಳೆಯದೆ, ಕೆಡದೆ ಅನೇಕ ದಿನ ಹಾಗೆಯೇ ಇರುವ ಕಸವನ್ನು ಒಣ ಕಸ ಎನ್ನುತ್ತಾರೆ. ಅದನ್ನು ನೀಲಿ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುತ್ತಾರೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#f0fdf4;border-color:#16a34a"><div class="ic">🟢🗑️</div><div class="tt">ಹಸಿ ಕಸ – ಹಸಿರು ತೊಟ್ಟಿ</div><div class="dd">ತರಕಾರಿಗಳ ತೊಟ್ಟು, ಉದುರಿದ ಎಲೆಗಳು, ಹಣ್ಣುಗಳ ಸಿಪ್ಪೆ, ಮೊಟ್ಟೆಯ ಚಿಪ್ಪು ಇತ್ಯಾದಿ ಕಸ <b>ಕೊಳೆಯುತ್ತದೆ, ಕೆಡುತ್ತದೆ</b>.</div></div>
+  <div class="tile op" style="background:#eff6ff;border-color:#2563eb"><div class="ic">🔵🗑️</div><div class="tt">ಒಣ ಕಸ – ನೀಲಿ ತೊಟ್ಟಿ</div><div class="dd">ಮೊಳೆ, ಪ್ಲಾಸ್ಟಿಕ್ ಆಟಿಕೆ, ತಗಡಿನ ತುಂಡುಗಳು, ಗಾಜಿನ ತುಂಡುಗಳು ಇತ್ಯಾದಿ ಕಸ <b>ಕೊಳೆಯದೆ, ಕೆಡದೆ ಅನೇಕ ದಿನ ಹಾಗೆಯೇ</b> ಉಳಿಯುತ್ತದೆ.</div></div>
+ </div>
+ <h3>🎯 ಆಟ: ಕಸವನ್ನು ಸರಿಯಾದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕಿ!</h3>
+ <div id="wBox"></div>`,a:()=>wInit()},
+{h:'ಕಸಕ್ಕೆ ಮುಂದೆ ಏನಾಗುತ್ತದೆ?',s:'ದೊಡ್ಡ ಪ್ರಮಾಣದಲ್ಲಿ ಸಂಗ್ರಹವಾದ ಹಸಿ ಮತ್ತು ಒಣ ಕಸವನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಇಡಲಾಗುತ್ತದೆ. ಹಸಿ ಕಸವನ್ನು ಕೊಳೆಸಿ ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ತಯಾರಿಸಲಾಗುತ್ತದೆ. ಒಣ ಕಸವನ್ನು ಕಾರ್ಖಾನೆಗೆ ಕಳುಹಿಸಿ ಅದರಿಂದ ಹೊಸ ವಸ್ತುಗಳನ್ನು ತಯಾರಿಸಲಾಗುತ್ತದೆ.',b:()=>`
+ <div class="msg in">🤔 ಕಸದ ಗಾಡಿ ಹಸಿ ಮತ್ತು ಒಣ ಕಸ ತೆಗೆದುಕೊಂಡು ಹೋಗುತ್ತದೆ, ನಂತರ ಈ ಕಸಕ್ಕೆ ಏನಾಗುತ್ತಿರಬಹುದು?</div>
+ <svg viewBox="0 0 340 190" style="max-width:440px;display:block;margin:0 auto;background:#f8fafc;border-radius:16px">
+  <text x="170" y="30" text-anchor="middle" font-size="26">🚛</text><text x="170" y="48" text-anchor="middle" font-size="12" font-weight="800">ಕಸದ ಗಾಡಿ</text>
+  <path d="M150 54 L80 90 M190 54 L260 90" stroke="#64748b" stroke-width="2.5"/>
+  <rect x="20" y="90" width="120" height="34" rx="8" fill="#dcfce7" stroke="#16a34a"/><text x="80" y="112" text-anchor="middle" font-size="13" font-weight="800">🟢 ಹಸಿ ಕಸ</text>
+  <rect x="200" y="90" width="120" height="34" rx="8" fill="#dbeafe" stroke="#2563eb"/><text x="260" y="112" text-anchor="middle" font-size="13" font-weight="800">🔵 ಒಣ ಕಸ</text>
+  <path d="M80 124 L80 146 M260 124 L260 146" stroke="#64748b" stroke-width="2.5"/>
+  <rect x="10" y="146" width="140" height="34" rx="8" fill="#fef3c7" stroke="#a16207"/><text x="80" y="168" text-anchor="middle" font-size="12" font-weight="800">🌱 ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ತಯಾರಿಕೆ</text>
+  <rect x="190" y="146" width="140" height="34" rx="8" fill="#ede9fe" stroke="#7c3aed"/><text x="260" y="168" text-anchor="middle" font-size="12" font-weight="800">🏭 ಕಾರ್ಖಾನೆ – ಹೊಸ ವಸ್ತುಗಳು</text>
+  <circle r="5" fill="#16a34a"><animateMotion dur="2.5s" repeatCount="indefinite" path="M150 54 L80 90 L80 160"/></circle>
+  <circle r="5" fill="#2563eb"><animateMotion dur="2.5s" repeatCount="indefinite" path="M190 54 L260 90 L260 160"/></circle></svg>
+ <div class="key">ಹಸಿ ಕಸವನ್ನು ಕೊಳೆಸಿ ಅದರ <b>ಕಾಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ</b> ತಯಾರಿಸಲಾಗುತ್ತದೆ. ಒಣ ಕಸವನ್ನು <b>ಕಾರ್ಖಾನೆಗೆ</b> ಕಳುಹಿಸಿ ಅದರಿಂದ <b>ಹೊಸ ವಸ್ತುಗಳನ್ನು</b> ತಯಾರಿಸಲಾಗುತ್ತದೆ (ಉದಾ. ಪ್ಲಾಸ್ಟಿಕ್ ಮರುಉತ್ಪಾದನಾ ಯೋಜನೆ).</div>`},
+{h:'ಬನ್ನಿ, ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ತಯಾರಿಸೋಣ!',s:'ಹಸಿ ಕಸ ಕೆಲವು ದಿನಗಳ ನಂತರ ಕೊಳೆತು ಅದರಿಂದ ಗೊಬ್ಬರ ತಯಾರಾಗುತ್ತದೆ, ಅದನ್ನೇ ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ಎನ್ನುತ್ತಾರೆ. ನಾಲ್ಕರಿಂದ ಆರು ವಾರಗಳ ನಂತರ ಗೊಬ್ಬರ ತಯಾರಾಗುತ್ತದೆ.',b:()=>`
+ <div class="key">ಹಸಿ ಕಸ ಕೆಲವು ದಿನಗಳ ನಂತರ ಕೊಳೆತು ಅದರಿಂದ ಗೊಬ್ಬರ ತಯಾರಾಗುತ್ತದೆ, ಅದನ್ನೇ <b>ಕಾಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ</b> ಎನ್ನುತ್ತಾರೆ. ಮನೆಯಲ್ಲಿ ಮತ್ತು ಶಾಲೆಯಲ್ಲಿ ನಾವೂ ಗೊಬ್ಬರ ಮಾಡಬಹುದು.</div>
+ <h3>🪣 ಸ್ಲೈಡರ್ ಸರಿಸಿ – ವಾರಗಳನ್ನು ಮುಂದೆ ಒಯ್ಯಿರಿ</h3>
+ <div style="text-align:center" id="compBox"></div>
+ <input type="range" min="0" max="6" value="${CW}" style="width:100%" oninput="CW=+this.value;compUpd()"><div id="compMsg"></div>
+ <h3>ಹಂತಗಳನ್ನು ಕ್ರಮವಾಗಿ ಜೋಡಿಸಿ</h3>
+ ${orderGame('comp',['ಶಾಲೆಯ ಮೂಲೆಯಲ್ಲಿ ಗುಂಡಿ ತೋಡಿ ಅಥವಾ ಖಾಲಿ ಡ್ರಮ್ ಇಡಿ','ಅದರಲ್ಲಿ ದಿನವೂ ಹಸಿ ಕಸ ಹಾಕಿ','ಮೇಲೆ ಸ್ವಲ್ಪ ಮಣ್ಣು ಮತ್ತು ಹಸಿ ಕಸ ಹಾಕಿ','ಆಗಾಗ ನೀರು ಚಿಮುಕಿಸಿ ಮತ್ತು ಮುಚ್ಚಿಡಿ','೪–೬ ವಾರಗಳ ನಂತರ ಗೊಬ್ಬರ ಸಿದ್ಧ – ಹಿತ್ತಲ ತೋಟದಲ್ಲಿ ಬಳಸಿ'],'compo')}
+ <div class="know"><b class="h">💡 ನಿಮಗೆ ಗೊತ್ತೇ?</b><br>ಬಹಳ ಹಿಂದಿನಿಂದ ಜಾನುವಾರುಗಳ ಕೊಟ್ಟಿಗೆಯ <b>ಸಗಣಿ-ಮೂತ್ರ ಮತ್ತು ಉಳಿದ ಮೇವಿನಿಂದ</b> ಒಳ್ಳೆಯ ರೀತಿಯ <b>ಕೊಟ್ಟಿಗೆ ಗೊಬ್ಬರ</b> ತಯಾರಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ರೈತರು ಆ ಗೊಬ್ಬರವನ್ನು ಬೆಳೆಗಳ ಸಮೃದ್ಧ ಬೆಳವಣಿಗೆಗಾಗಿ ಹೊಲದಲ್ಲಿ ಬಳಸುತ್ತಾರೆ.</div>`,a:()=>{compUpd();drawGames()}},
+{h:'೩R – ಕಡಿಮೆ ಮಾಡಿ, ಮರುಬಳಕೆ, ಮರುಚಕ್ರೀಕರಣ',s:'ಕಸ ಕಡಿಮೆ ಮಾಡುವುದು ಎಂದರೆ ರಿಡ್ಯೂಸ್, ಮರುಬಳಕೆ ಎಂದರೆ ರೀಯೂಸ್ ಮತ್ತು ಮರುಚಕ್ರೀಕರಣ ಎಂದರೆ ರೀಸೈಕಲ್. ಈ ಮೂರು ಆರ್ ಪಾಲಿಸುವುದರಿಂದ ಕಸ ಕಡಿಮೆಯಾಗುತ್ತದೆ, ಪರಿಸರ ಸ್ವಚ್ಛ ಮತ್ತು ಸುಂದರವಾಗಿರುತ್ತದೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#fef2f2"><div class="ic">➖</div><div class="tt">ಕಸ ಕಡಿಮೆ ಮಾಡುವುದು (Reduce)</div><div class="dd">ಕಡಿಮೆ ಪ್ರಮಾಣದಲ್ಲಿ ಕಸ ಉತ್ಪತ್ತಿಯಾಗುವ ವಸ್ತುಗಳನ್ನು ಬಳಸುವುದು. ಉದಾ. ಪ್ಲಾಸ್ಟಿಕ್/ಕಾಗದದ ಲೋಟದ ಬದಲು <b>ಸ್ಟೀಲ್ ಲೋಟ</b>; ಟಿಶ್ಯೂ ಪೇಪರ್ ಬದಲು <b>ಬಟ್ಟೆ ಕರವಸ್ತ್ರ</b>; ಪೆನ್ಸಿಲ್ ಚಿಕ್ಕದಾದರೂ <b>ಕೊನೆಯವರೆಗೆ</b> ಬಳಸಿ.</div></div>
+  <div class="tile op" style="background:#fefce8"><div class="ic">🔁</div><div class="tt">ಮರುಬಳಕೆ (Reuse)</div><div class="dd">ಹಳೆಯದಾದ ವಸ್ತುವನ್ನು ಮತ್ತೆ ಬಳಸುವುದು. ಉದಾ. ಪುಸ್ತಕದಲ್ಲಿ ಉಳಿದ <b>ಖಾಲಿ ಹಾಳೆಗಳು</b> ಕಚ್ಚಾ ಕೆಲಸಕ್ಕೆ, ಚಿತ್ರಕ್ಕೆ; <b>ಐಸ್‌ಕ್ರೀಮ್‌ನ ಖಾಲಿ ಡಬ್ಬಿಯಲ್ಲಿ</b> ಆಟಿಕೆ, ಪೆನ್ಸಿಲ್ ಇಡಿ.</div></div>
+  <div class="tile op" style="background:#f0fdf4"><div class="ic">♻️</div><div class="tt">ಮರುಚಕ್ರೀಕರಣ (Recycle)</div><div class="dd">ಒಣ ಕಸದಲ್ಲಿನ ಪ್ಲಾಸ್ಟಿಕ್, ಕಾಗದ, ಮೊಳೆ, ಪಿನ್ನುಗಳಿಂದ <b>ಹೊಸ ವಸ್ತುಗಳನ್ನು</b> ಮಾಡುವುದು. ಉದಾ. <b>ಹಳೆಯ ವೃತ್ತಪತ್ರಿಕೆಯಿಂದ</b> ಮತ್ತೆ ಕಾಗದ; ಬಳಸಿದ ಪ್ಲಾಸ್ಟಿಕ್ ಬಾಟಲಿ/ಡಬ್ಬಿಗಳಿಂದ ಹೊಸ ವಸ್ತುಗಳು.</div></div>
+ </div>
+ <h3>ಆಟ: ಯಾವುದು R?</h3>
+ ${sortGame('r3',[['ಬಟ್ಟೆ ಚೀಲ ಬಳಸುವುದು',0],['ಹಳೆಯ ಬಾಟಲಿಯಲ್ಲಿ ಗಿಡ ನೆಡುವುದು',1],['ರದ್ದಿಯಿಂದ ಹೊಸ ಕಾಗದ ತಯಾರಿಸುವುದು',2],['ಪೆನ್ಸಿಲ್ ಕೊನೆಯವರೆಗೆ ಬಳಸುವುದು',0],['ಪುಸ್ತಕದ ಖಾಲಿ ಹಾಳೆಗಳ ಮೇಲೆ ಚಿತ್ರ ಬಿಡಿಸುವುದು',1],['ಪ್ಲಾಸ್ಟಿಕ್ ಬಾಟಲಿಗಳಿಂದ ಹೊಸ ವಸ್ತುಗಳು',2],['ಟಿಶ್ಯೂ ಪೇಪರ್ ಬದಲು ಕರವಸ್ತ್ರ',0],['ಐಸ್‌ಕ್ರೀಮ್ ಡಬ್ಬಿಯಲ್ಲಿ ಪೆನ್ಸಿಲ್‌ಗಳನ್ನು ಇಡುವುದು',1]],[['➖ Reduce','or'],['🔁 Reuse','pu'],['♻️ Recycle','gr']],'r3')}
+ <div class="msg ok">೩R ಪಾಲಿಸುವುದರಿಂದ <b>ಕಸ ಕಡಿಮೆಯಾಗುತ್ತದೆ</b>, ಪರಿಸರ <b>ಸ್ವಚ್ಛ ಮತ್ತು ಸುಂದರ</b> ಆಗಿರುತ್ತದೆ, ಸಸ್ಯಗಳು ಮತ್ತು ಪ್ರಾಣಿಗಳು <b>ಸುರಕ್ಷಿತ</b> ಉಳಿಯುತ್ತವೆ.</div>`,a:()=>drawGames()},
+{h:'ಇದನ್ನು ಯಾವಾಗಲೂ ನೆನಪಿಡಿ',s:'ಕಸವನ್ನು ಹಸಿ ಮತ್ತು ಒಣ ಎಂದು ಗುಂಪುಗಳಾಗಿ ಮಾಡುವುದರಿಂದ ಅದನ್ನು ಮತ್ತೆ ಬಳಸಬಹುದಾದ ಹೊಸ ವಸ್ತುಗಳನ್ನಾಗಿ ಪರಿವರ್ತಿಸಬಹುದು. ವಸ್ತುಗಳನ್ನು ಅಗತ್ಯವಿದ್ದಷ್ಟೇ ಖರೀದಿಸಿ. ಬಳಸದ ಮತ್ತು ಉತ್ತಮ ಸ್ಥಿತಿಯಲ್ಲಿರುವ ವಸ್ತುಗಳನ್ನು ಅಗತ್ಯವಿರುವವರಿಗೆ ಕೊಡಬೇಕು.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">🗂️</div><div class="dd">ಕಸವನ್ನು <b>ಹಸಿ ಮತ್ತು ಒಣ</b> ಎಂದು ಗುಂಪುಗಳಾಗಿ ಮಾಡುವುದರಿಂದ ಅದನ್ನು ಮತ್ತೆ ಬಳಸಬಹುದಾದ <b>ಹೊಸ ವಸ್ತುಗಳನ್ನಾಗಿ ಪರಿವರ್ತನೆ</b> ಮಾಡಬಹುದು.</div></div>
+  <div class="tile op"><div class="ic">🛒</div><div class="dd">ಆಟಿಕೆ, ವಸ್ತುಗಳು, ಚಪ್ಪಲಿ, ಬಟ್ಟೆ ಇತ್ಯಾದಿ <b>ಅಗತ್ಯವಿದ್ದಷ್ಟೇ ಖರೀದಿ</b> ಮಾಡಿ, ಆಗ ಕಸ ದೊಡ್ಡ ಪ್ರಮಾಣದಲ್ಲಿ ಉತ್ಪತ್ತಿಯಾಗುವುದಿಲ್ಲ.</div></div>
+  <div class="tile op"><div class="ic">🎁</div><div class="dd">ಬಳಸದ ಮತ್ತು <b>ಉತ್ತಮ ಸ್ಥಿತಿಯಲ್ಲಿರುವ ವಸ್ತುಗಳನ್ನು ಅಗತ್ಯವಿರುವವರಿಗೆ</b> ಕೊಡಬೇಕು.</div></div>
+ </div>
+ <div class="know"><b class="h">✂️ ಮಾಡಿ ನೋಡಿ</b><br>(೧) ಪೆನ್ಸಿಲ್ ಜೂಪು ಮಾಡುವಾಗ ಬರುವ ತುಣುಕುಗಳ ಬೇರೆ ಬೇರೆ ಆಕಾರಗಳನ್ನು ಅಂಟಿಸಿ <b>ಶುಭಾಶಯ ಪತ್ರ</b> ತಯಾರಿಸಿ.<br>(೨) ಕಾಗದದ ವಿವಿಧ ಆಕಾರಗಳ <b>ಉಂಡೆಗಳನ್ನು</b> ಅಂಟಿಸಿ ಚಿತ್ರ ತಯಾರಿಸಿ.</div>
+ <svg viewBox="0 0 300 120" style="max-width:360px;display:block;margin:0 auto;background:#fff7ed;border-radius:14px;border:2px dashed #fb923c">
+  ${[0,1,2,3,4,5,6,7].map(i=>`<path d="M${150+40*Math.cos(i*.785)} ${60+40*Math.sin(i*.785)} q${10*Math.cos(i*.785+1.5)} ${10*Math.sin(i*.785+1.5)} ${18*Math.cos(i*.785)} ${18*Math.sin(i*.785)}" stroke="#ca8a04" stroke-width="7" stroke-linecap="round" fill="none"/>`).join('')}
+  <circle cx="150" cy="60" r="16" fill="#fde047" stroke="#a16207"/><text x="60" y="110" font-size="11" font-weight="800" fill="#9a3412">ಪೆನ್ಸಿಲ್ ತುಣುಕುಗಳ ಹೂವು 🌻</text></svg>`},
+{h:'ಸ್ವಚ್ಛ ಶಾಲೆ – ನನ್ನ ಜವಾಬ್ದಾರಿ',s:'ನಾವೆಲ್ಲರೂ ಸೇರಿ ನಮ್ಮ ಪರಿಸರ ಮತ್ತು ಶಾಲೆಯನ್ನು ಸ್ವಚ್ಛವಾಗಿಡುವುದು ಬಹಳ ಮುಖ್ಯ. ಶಾಲೆ ಮತ್ತು ಶಾಲೆಯ ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛಗೊಳಿಸಲು ಯಾವ ಸಾಮಗ್ರಿ ಬೇಕು ಎಂಬುದನ್ನು ಆಯ್ಕೆ ಮಾಡಿ.',b:()=>`
+ <h3>🧰 ಸ್ವಚ್ಛತೆಗೆ ಯಾವ ಸಾಮಗ್ರಿ ಬೇಕಾಗುತ್ತದೆ? (ಸರಿಯಾದದ್ದನ್ನು ಆಯ್ಕೆ ಮಾಡಿ)</h3>
+ ${sortGame('kit',[['🧹 ಪೊರಕೆ',0],['🧽 ಹಲಗೆ, ಮೇಜು, ಬೆಂಚುಗಳನ್ನು ಒರೆಸಲು ಬಟ್ಟೆ',0],['🧤 ಕೈಗವಸು',0],['🪣 ಬಕೆಟ್, ನೀರು, ಮಗ್ ಮತ್ತು ಬಟ್ಟೆ',0],['🟢🔵 ಹಸಿರು ಮತ್ತು ನೀಲಿ ಕಸದ ತೊಟ್ಟಿ',0],['📺 ಟಿವಿ',1],['⚽ ಫುಟ್‌ಬಾಲ್',1],['🍫 ಚಾಕೊಲೇಟ್',1]],[['✔ ಬೇಕಾಗುತ್ತದೆ','gr'],['✘ ಬೇಡ','or']],'kit')}
+ <h3>📢 ಘೋಷವಾಕ್ಯ ಫಲಕ</h3>
+ <div style="text-align:center;margin:8px 0;padding:18px 10px;border-radius:14px;background:linear-gradient(135deg,#16a34a,#2563eb);color:#fff;font-size:22px;font-weight:800;box-shadow:0 3px 10px #0003" id="slog">🧹 ${SLOG[SLI]} 🌿</div>
+ <div style="text-align:center"><button class="btn or sm" onclick="SLI=(SLI+1)%SLOG.length;$('slog').innerHTML='🧹 '+SLOG[SLI]+' 🌿';say(SLOG[SLI]);if(SLI==SLOG.length-1)award('slog','ಭೇಷ್!')">🔄 ಮುಂದಿನ ಘೋಷವಾಕ್ಯ</button></div>`,a:()=>drawGames()},
+{h:'ಸ್ವಚ್ಛತೆಯ ನಿಯಮಗಳು',s:'ಕಸವನ್ನು ಯಾವಾಗಲೂ ಸರಿಯಾದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲೇ ಹಾಕಿ. ತರಗತಿಯಲ್ಲಿ ಕಾಗದ, ರಬ್ಬರ್ ತುಂಡುಗಳು, ಪೆನ್ಸಿಲ್ ಕಸವನ್ನು ನೆಲದ ಮೇಲೆ ಎಸೆಯಬೇಡಿ. ಗೋಡೆ, ಮೇಜು-ಕುರ್ಚಿಗಳ ಮೇಲೆ ಗೀಚಬೇಡಿ. ನೀರನ್ನು ವ್ಯರ್ಥ ಮಾಡಬೇಡಿ. ಸ್ವಚ್ಛತೆಯ ಕೆಲಸ ಮಾಡಲು ಕಡಿಮೆತನ ಎಂದು ಭಾವಿಸಬೇಡಿ.',b:()=>`
+ <h3>ಆಟ: ಒಳ್ಳೆಯ ಅಭ್ಯಾಸ ☑ ಅಥವಾ ಕೆಟ್ಟ ಅಭ್ಯಾಸ ☒?</h3>
+ ${sortGame('hab',[['ಕಸವನ್ನು ಸರಿಯಾದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುವುದು',0],['ಪೆನ್ಸಿಲ್ ಕಸವನ್ನು ತರಗತಿಯಲ್ಲಿ ನೆಲದ ಮೇಲೆ ಹಾಕುವುದು',1],['ಡಬ್ಬಿಯಲ್ಲಿ ಉಳಿದ ತಿಂಡಿಯನ್ನು ಹಸಿರು ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುವುದು',0],['ಗೋಡೆ, ಬೆಂಚುಗಳ ಮೇಲೆ ಗೀಚುವುದು',1],['ನಲ್ಲಿ ತೆರೆದಿದ್ದರೆ ತಕ್ಷಣ ಮುಚ್ಚುವುದು',0],['ಸ್ವಚ್ಛತೆಯ ಕೆಲಸ ಮಾಡಲು ಕಡಿಮೆತನ ಅನಿಸುವುದು',1],['ಮಾರುಕಟ್ಟೆಗೆ ಹೋಗುವಾಗ ಮನೆಯಿಂದ ಬಟ್ಟೆ ಚೀಲ ತೆಗೆದುಕೊಂಡು ಹೋಗುವುದು',0],['ಪ್ರವಾಸದಲ್ಲಿ ಖಾಲಿ ಬಾಟಲಿಯನ್ನು ರಸ್ತೆಯ ಬದಿಯಲ್ಲಿ ಎಸೆಯುವುದು',1]],[['☑ ಒಳ್ಳೆಯದು','gr'],['☒ ಕೆಟ್ಟದ್ದು','or']],'hab')}
+ <div class="key">• ಕಸವನ್ನು ಯಾವಾಗಲೂ <b>ಸರಿಯಾದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲೇ</b> ಹಾಕಿ.<br>• ಗೋಡೆ, ಮೇಜು-ಕುರ್ಚಿಗಳ ಮೇಲೆ <b>ಗೀಚಬೇಡಿ</b>, ಚಿತ್ರಗಳನ್ನೂ ಬಿಡಿಸಬೇಡಿ.<br>• ನೀರನ್ನು ವ್ಯರ್ಥ ಮಾಡಬೇಡಿ; ನಲ್ಲಿ ತೆರೆದಿದ್ದರೆ <b>ತಕ್ಷಣ ಮುಚ್ಚಿ</b> ಮಾಡಿ.<br>• ಸ್ವಚ್ಛತೆಯ ನಿಯಮ ಪಾಲಿಸಿ. ಸ್ವಚ್ಛತೆಯ ಕೆಲಸ ಮಾಡಲು <b>ಕಡಿಮೆತನ ಎಂದು ಭಾವಿಸಬೇಡಿ</b>.</div>`,a:()=>drawGames()},
+{h:'ಇದನ್ನು ನಾವು ಕಲಿತೆವು',s:'ಕೊಳೆತು ಕೆಟ್ಟು ಗೊಬ್ಬರವಾಗುವ ಕಸ ಹಸಿ ಕಸ. ಕೊಳೆಯದೆ ಅನೇಕ ದಿನ ಹಾಗೆಯೇ ಉಳಿಯುವ ಕಸ ಒಣ ಕಸ. ಹಸಿ ಕಸ ಹಸಿರು, ಒಣ ಕಸ ನೀಲಿ ಕಸದ ತೊಟ್ಟಿಗೆ. ಸ್ವಚ್ಛತೆ ಕಾಪಾಡಿದರೆ ಪರಿಸರ ಸ್ವಚ್ಛ ಮತ್ತು ಸುಂದರವಾಗಿ ಕಾಣುತ್ತದೆ.',b:()=>`
+ <ul>
+  <li>ಕೊಳೆತು, ಕೆಟ್ಟು ಗೊಬ್ಬರವಾಗುವ ಕಸ <b>ಹಸಿ ಕಸ</b>; ಅದು <b>ಹಸಿರು</b> ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುತ್ತಾರೆ.</li>
+  <li>ಕೊಳೆಯದೆ, ಕೆಡದೆ ಅನೇಕ ದಿನ ಹಾಗೆಯೇ ಉಳಿಯುವ ಕಸ <b>ಒಣ ಕಸ</b>; ಅದು <b>ನೀಲಿ</b> ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುತ್ತಾರೆ.</li>
+  <li>ಹಸಿ ಕಸ ಕೊಳೆತು ತಯಾರಾಗುವ ಗೊಬ್ಬರ ಎಂದರೆ <b>ಕಾಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ</b>.</li>
+  <li>ಕಸವನ್ನು ಹಸಿ ಮತ್ತು ಒಣ ಎಂದು ಗುಂಪುಗಳಾಗಿ ಮಾಡುವುದರಿಂದ ಅದನ್ನು <b>ಹೊಸ ವಸ್ತುಗಳನ್ನಾಗಿ ಪರಿವರ್ತನೆ</b> ಮಾಡಬಹುದು.</li>
+  <li><b>೩R</b> – Reduce (ಕಡಿಮೆ ಮಾಡುವುದು), Reuse (ಮರುಬಳಕೆ), Recycle (ಮರುಚಕ್ರೀಕರಣ).</li>
+  <li>ಸ್ವಚ್ಛತೆ ಕಾಪಾಡಿದರೆ ನಮ್ಮ ಪರಿಸರ <b>ಸ್ವಚ್ಛ ಮತ್ತು ಸುಂದರ</b> ಕಾಣುತ್ತದೆ.</li>
+ </ul>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br><b>ಬೇಡದ ವಸ್ತುಗಳಿಂದ ಬಾಳಿಕೆ ಬರುವ ವಸ್ತುಗಳು</b> ತಯಾರಿಸಿ. ಗೆಳೆಯ-ಗೆಳತಿಯರು ತಯಾರಿಸಿದ ವಸ್ತುಗಳ <b>ಉಪಯುಕ್ತತೆ ಮತ್ತು ಅಂದ</b> ಇವುಗಳ ಆಧಾರದ ಮೇಲೆ ಹೋಲಿಸಿ ಮತ್ತು ಅದನ್ನು ಪುಸ್ತಕದಲ್ಲಿ ದಾಖಲಿಸಿ.</div>
+ <div class="msg ok" style="text-align:center;font-size:19px">♻️ ಈ ಪಾಠದಲ್ಲಿ ನೀವು ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು: <b>${(award('end','ಅಭಿನಂದನೆ! ನೀವು ಇಡೀ ಪಾಠ ಕಲಿತಿರಿ.'),STARS.size)}</b> ⭐</div>
+ <div class="tool">${tool('N')}</div>`}
+];
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ಕಸ ಕಡಿಮೆ ಮಾಡದಿದ್ದರೆ ಏನಾಗುತ್ತದೆ?',['ಪರಿಸರ ಸುಂದರವಾಗುತ್ತದೆ','ಎಲ್ಲೆಡೆ ದುರ್ವಾಸನೆ ಹರಡುತ್ತದೆ','ಗಿಡಗಳು ಬೆಳೆಯುತ್ತವೆ','ಗಾಳಿ ಶುದ್ಧವಾಗುತ್ತದೆ'],1,'ಕಸದಿಂದ ದುರ್ವಾಸನೆ ಹರಡುತ್ತದೆ.'],
+['ಕಸದ ಮೇಲೆ ಕೂರುವ ಯಾವ ಕೀಟಗಳಿಂದ ರೋಗಗಳು ಹರಡುತ್ತವೆ?',['ಚಿಟ್ಟೆಗಳು','ಮನೆನೊಣಗಳು','ಜೇನುನೊಣಗಳು','ಇರುವೆಗಳು'],1,'ಮನೆನೊಣಗಳಿಂದ ರೋಗಗಳು ಹರಡುತ್ತವೆ.'],
+['ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡುವುದು ಯಾರ ಜವಾಬ್ದಾರಿ?',['ಕೇವಲ ಸ್ವಚ್ಛತಾ ಕಾರ್ಮಿಕರದ್ದು','ನಮ್ಮೆಲ್ಲರದ್ದು','ಕೇವಲ ಶಿಕ್ಷಕರದ್ದು','ಯಾರದ್ದೂ ಅಲ್ಲ'],1,'ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡುವುದು ನಮ್ಮ ಜವಾಬ್ದಾರಿ.'],
+['ಕೊಳೆಯುವ, ಕೆಡುವ ಕಸವನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ಒಣ ಕಸ','ಹಸಿ ಕಸ','ಅಪಾಯಕಾರಿ ಕಸ','ಪ್ಲಾಸ್ಟಿಕ್ ಕಸ'],1,'ಕೊಳೆಯುವ, ಕೆಡುವ ಕಸ ಎಂದರೆ ಹಸಿ ಕಸ.'],
+['ಹಸಿ ಕಸವನ್ನು ಯಾವ ಬಣ್ಣದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುತ್ತಾರೆ?',['ನೀಲಿ','ಕೆಂಪು','ಹಸಿರು','ಹಳದಿ'],2,'ಹಸಿ ಕಸಕ್ಕೆ ಹಸಿರು ಕಸದ ತೊಟ್ಟಿ.'],
+['ಒಣ ಕಸವನ್ನು ಯಾವ ಬಣ್ಣದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುತ್ತಾರೆ?',['ಹಸಿರು','ನೀಲಿ','ಕಪ್ಪು','ಬಿಳಿ'],1,'ಒಣ ಕಸಕ್ಕೆ ನೀಲಿ ಕಸದ ತೊಟ್ಟಿ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಹಸಿ ಕಸ ಯಾವುದು?',['ಮೊಳೆಗಳು','ಗಾಜಿನ ತುಂಡುಗಳು','ಹಣ್ಣುಗಳ ಸಿಪ್ಪೆ','ಪ್ಲಾಸ್ಟಿಕ್ ಆಟಿಕೆಗಳು'],2,'ಹಣ್ಣುಗಳ ಸಿಪ್ಪೆ ಕೊಳೆಯುತ್ತದೆ – ಹಸಿ ಕಸ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಒಣ ಕಸ ಯಾವುದು?',['ತರಕಾರಿಗಳ ತೊಟ್ಟು','ಉದುರಿದ ಎಲೆಗಳು','ಮೊಟ್ಟೆಯ ಚಿಪ್ಪುಗಳು','ತಗಡಿನ ತುಂಡುಗಳು'],3,'ತಗಡಿನ ತುಂಡುಗಳು ಕೊಳೆಯುವುದಿಲ್ಲ – ಒಣ ಕಸ.'],
+['ಕೊಳೆಯದೆ, ಕೆಡದೆ ಅನೇಕ ದಿನ ಹಾಗೆಯೇ ಉಳಿಯುವ ಕಸವನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ಹಸಿ ಕಸ','ಒಣ ಕಸ','ಗೊಬ್ಬರ','ಮಣ್ಣು'],1,'ಅದನ್ನು ಒಣ ಕಸ ಎನ್ನುತ್ತಾರೆ.'],
+['ಹಾಳಾದ ಟೂತ್‌ಬ್ರಷ್ ಅನ್ನು ಯಾವ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕಬೇಕು?',['ಹಸಿರು','ನೀಲಿ','ಯಾವುದರಿಂದಲಾದರೂ','ರಸ್ತೆಯಲ್ಲಿ'],1,'ಪ್ಲಾಸ್ಟಿಕ್ ಟೂತ್‌ಬ್ರಷ್ ಒಣ ಕಸ – ನೀಲಿ ತೊಟ್ಟಿ.'],
+['ಹಸಿ ಕಸದಿಂದ ಏನನ್ನು ತಯಾರಿಸಲಾಗುತ್ತದೆ?',['ಪ್ಲಾಸ್ಟಿಕ್','ಕಾಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ','ಗಾಜು','ಕಬ್ಬಿಣ'],1,'ಹಸಿ ಕಸವನ್ನು ಕೊಳೆಸಿ ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ತಯಾರಿಸುತ್ತಾರೆ.'],
+['ಒಣ ಕಸವನ್ನು ಎಲ್ಲಿಗೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ?',['ಹೊಲಕ್ಕೆ','ಕಾರ್ಖಾನೆಗೆ – ಹೊಸ ವಸ್ತು ತಯಾರಿಸಲು','ನದಿಗೆ','ಕಾಡಿಗೆ'],1,'ಒಣ ಕಸದಿಂದ ಕಾರ್ಖಾನೆಯಲ್ಲಿ ಹೊಸ ವಸ್ತುಗಳು ತಯಾರಾಗುತ್ತವೆ.'],
+['ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ಎಂದರೇನು?',['ಹಸಿ ಕಸ ಕೊಳೆತು ತಯಾರಾಗುವ ಗೊಬ್ಬರ','ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ','ಪ್ಲಾಸ್ಟಿಕ್ ಗೊಬ್ಬರ','ಒಣ ಕಸ'],0,'ಹಸಿ ಕಸ ಕೊಳೆತು ತಯಾರಾಗುವ ಗೊಬ್ಬರ.'],
+['ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ತಯಾರಾಗಲು ಎಷ್ಟು ಸಮಯ ಬೇಕು?',['೧–೨ ದಿನ','೪–೬ ವಾರ','೧ ವರ್ಷ','೧ ಗಂಟೆ'],1,'೪ ರಿಂದ ೬ ವಾರಗಳ ನಂತರ ಗೊಬ್ಬರ ತಯಾರಾಗುತ್ತದೆ.'],
+['ಕಂಪೋಸ್ಟ್ ಗುಂಡಿಯಲ್ಲಿ ಆಗಾಗ ಏನನ್ನು ಚಿಮುಕಿಸುತ್ತಾರೆ?',['ನೀರು','ಎಣ್ಣೆ','ಉಪ್ಪು','ಸೀಮೆಎಣ್ಣೆ'],0,'ಆಗಾಗ ನೀರು ಚಿಮುಕಿಸಿ ಮುಚ್ಚಿಡುತ್ತಾರೆ.'],
+['ತಯಾರಾದ ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರವನ್ನು ಶಾಲೆಯಲ್ಲಿ ಎಲ್ಲಿ ಬಳಸಬಹುದು?',['ತರಗತಿಯಲ್ಲಿ','ಶಾಲೆಯ ಹಿತ್ತಲ ತೋಟದಲ್ಲಿ','ಹಲಗೆಯ ಮೇಲೆ','ಮೈದಾನದಲ್ಲಿ ಆಡಲು'],1,'ಶಾಲೆಯ ಹಿತ್ತಲ ತೋಟದಲ್ಲಿ ಬಳಸಬಹುದು.'],
+['ಜಾನುವಾರುಗಳ ಸಗಣಿ-ಮೂತ್ರ ಮತ್ತು ಉಳಿದ ಮೇವಿನಿಂದ ಯಾವ ಗೊಬ್ಬರ ತಯಾರಾಗುತ್ತದೆ?',['ಕೊಟ್ಟಿಗೆ ಗೊಬ್ಬರ','ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ','ಯೂರಿಯಾ','ಪ್ಲಾಸ್ಟಿಕ್'],0,'ಮೊದಲಿನಿಂದಲೂ ಕೊಟ್ಟಿಗೆ ಗೊಬ್ಬರ ತಯಾರಿಸುತ್ತಾರೆ.'],
+['೩R ನಲ್ಲಿನ ‘Reduce’ ಎಂದರೇನು?',['ಕಸ ಕಡಿಮೆ ಮಾಡುವುದು','ಮರುಬಳಕೆ','ಮರುಚಕ್ರೀಕರಣ','ಕಸ ಸುಡುವುದು'],0,'Reduce – ಕಸ ಕಡಿಮೆ ಮಾಡುವುದು.'],
+['೩R ನಲ್ಲಿನ ‘Reuse’ ಎಂದರೇನು?',['ಕಸ ಎಸೆಯುವುದು','ಹಳೆಯ ವಸ್ತುವನ್ನು ಮತ್ತೆ ಬಳಸುವುದು','ಹೊಸ ವಸ್ತು ಖರೀದಿಸುವುದು','ಕಸ ಸುಡುವುದು'],1,'Reuse – ಮರುಬಳಕೆ.'],
+['೩R ನಲ್ಲಿನ ‘Recycle’ ಎಂದರೇನು?',['ಒಣ ಕಸದಿಂದ ಹೊಸ ವಸ್ತು ತಯಾರಿಸುವುದು','ವಸ್ತು ಎಸೆಯುವುದು','ವಸ್ತು ಅಡಗಿಸುವುದು','ವಸ್ತು ಖರೀದಿಸುವುದು'],0,'Recycle – ಮರುಚಕ್ರೀಕರಣ.'],
+['ಪ್ಲಾಸ್ಟಿಕ್ ಲೋಟದ ಬದಲು ಸ್ಟೀಲ್ ಲೋಟ ಬಳಸುವುದು ಯಾವುದರ ಉದಾಹರಣೆ?',['Reduce','Reuse','Recycle','ಇವುಗಳಲ್ಲಿ ಯಾವುದೂ ಅಲ್ಲ'],0,'ಕಸ ಕಡಿಮೆ ಉತ್ಪತ್ತಿಯಾಗುತ್ತದೆ – Reduce.'],
+['ಐಸ್‌ಕ್ರೀಮ್‌ನ ಖಾಲಿ ಡಬ್ಬಿಯಲ್ಲಿ ಪೆನ್ಸಿಲ್‌ಗಳನ್ನು ಇಡುವುದು ಯಾವುದರ ಉದಾಹರಣೆ?',['Reduce','Reuse','Recycle','ಇವುಗಳಲ್ಲಿ ಯಾವುದೂ ಅಲ್ಲ'],1,'ಹಳೆಯ ವಸ್ತುವನ್ನು ಮತ್ತೆ ಬಳಸುವುದು – Reuse.'],
+['ಹಳೆಯ ವೃತ್ತಪತ್ರಿಕೆಯಿಂದ ಮತ್ತೆ ಕಾಗದ ತಯಾರಿಸುವುದು ಯಾವುದರ ಉದಾಹರಣೆ?',['Reduce','Reuse','Recycle','ಇವುಗಳಲ್ಲಿ ಯಾವುದೂ ಅಲ್ಲ'],2,'ಹೊಸ ವಸ್ತು ತಯಾರಿಸುವುದು – Recycle.'],
+['ಟಿಶ್ಯೂ ಪೇಪರ್ ಬದಲು ಏನನ್ನು ಬಳಸಬೇಕು?',['ಬಟ್ಟೆ ಕರವಸ್ತ್ರ','ಪ್ಲಾಸ್ಟಿಕ್','ವೃತ್ತಪತ್ರಿಕೆ','ಏನೂ ಇಲ್ಲ'],0,'ಬಟ್ಟೆ ಕರವಸ್ತ್ರ ಬಳಸುವುದರಿಂದ ಕಸ ಕಡಿಮೆಯಾಗುತ್ತದೆ.'],
+['೩R ಪಾಲಿಸುವುದರಿಂದ ಏನಾಗುತ್ತದೆ?',['ಕಸ ಹೆಚ್ಚುತ್ತದೆ','ಕಸ ಕಡಿಮೆಯಾಗುತ್ತದೆ, ಪರಿಸರ ಸ್ವಚ್ಛವಾಗಿರುತ್ತದೆ','ಮಾಲಿನ್ಯ ಹೆಚ್ಚುತ್ತದೆ','ಪ್ರಾಣಿಗಳು ಅಪಾಯಕ್ಕೆ ಸಿಲುಕುತ್ತವೆ'],1,'ಕಸ ಕಡಿಮೆಯಾಗುತ್ತದೆ, ಪರಿಸರ ಸ್ವಚ್ಛ ಮತ್ತು ಸುಂದರವಾಗಿರುತ್ತದೆ.'],
+['ಬಳಸದ ಮತ್ತು ಉತ್ತಮ ಸ್ಥಿತಿಯಲ್ಲಿರುವ ವಸ್ತುಗಳನ್ನು ಏನು ಮಾಡಬೇಕು?',['ಎಸೆದುಬಿಡಬೇಕು','ಅಗತ್ಯವಿರುವವರಿಗೆ ಕೊಡಬೇಕು','ಸುಡಬೇಕು','ಅಡಗಿಸಿಡಬೇಕು'],1,'ಇಂತಹ ವಸ್ತುಗಳನ್ನು ಅಗತ್ಯವಿರುವವರಿಗೆ ಕೊಡಬೇಕು.'],
+['ಡಬ್ಬಿಯಲ್ಲಿ ಉಳಿದ ತಿಂಡಿಯನ್ನು ಎಲ್ಲಿ ಹಾಕಬೇಕು?',['ತರಗತಿಯಲ್ಲಿ ನೆಲದ ಮೇಲೆ','ಹಸಿರು ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ','ನೀಲಿ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ','ಕಿಟಕಿಯಿಂದ ಹೊರಗೆ'],1,'ಉಳಿದ ತಿಂಡಿ ಹಸಿ ಕಸ – ಹಸಿರು ತೊಟ್ಟಿ.'],
+['ನೀರಿನ ನಲ್ಲಿ ತೆರೆದೇ ಇದ್ದರೆ ಏನು ಮಾಡಬೇಕು?',['ಹಾಗೆಯೇ ಬಿಡಬೇಕು','ತಕ್ಷಣ ಮುಚ್ಚಬೇಕು','ಗೆಳೆಯರಿಗೆ ತೋರಿಸಬೇಕು','ಬಕೆಟ್ ತುಂಬಿಸಿಡಬೇಕು'],1,'ನೀರಿನ ಅಪವ್ಯಯ ತಪ್ಪಿಸಲು ತಕ್ಷಣ ಮುಚ್ಚಬೇಕು.'],
+['ಹಾಳಾದ ತರಕಾರಿಯನ್ನು ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲದಲ್ಲಿ ಕಟ್ಟಿ ಹಸಿರು ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುವುದು ಸರಿಯೇ?',['ಹೌದು','ಇಲ್ಲ – ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲ ಒಣ ಕಸ','ಯಾವಾಗಲೂ','ಕೆಲವೊಮ್ಮೆ'],1,'ಪ್ಲಾಸ್ಟಿಕ್ ಕೊಳೆಯುವುದಿಲ್ಲ; ತರಕಾರಿಯನ್ನು ಚೀಲವಿಲ್ಲದೆ ಹಸಿರು ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕಬೇಕು.'],
+['‘ಎಲ್ಲಿ ಸ್ವಚ್ಛತೆ ಇರುತ್ತದೋ ಅಲ್ಲಿ ……… ನೆಲೆಸುತ್ತದೆ.’',['ಆರೋಗ್ಯ','ರೋಗರುಜಿನ','ಕಸ','ದುರ್ವಾಸನೆ'],0,'ಎಲ್ಲಿ ಸ್ವಚ್ಛತೆ ಇರುತ್ತದೋ ಅಲ್ಲಿ ಆರೋಗ್ಯ ನೆಲೆಸುತ್ತದೆ.']
+];
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ಒಣ ಕಸ ಎಂದರೇನು?','ಕೊಳೆಯದೆ, ಕೆಡದೆ ಅನೇಕ ದಿನ ಹಾಗೆಯೇ ಉಳಿಯುವ ಕಸವನ್ನು ಒಣ ಕಸ ಎನ್ನುತ್ತಾರೆ. ಉದಾ. ಮೊಳೆ, ಪ್ಲಾಸ್ಟಿಕ್ ಆಟಿಕೆ, ಗಾಜಿನ ತುಂಡುಗಳು.'],
+  ['ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ಎಂದರೇನು?','ಹಸಿ ಕಸ ಕೆಲವು ದಿನಗಳ ನಂತರ ಕೊಳೆತು ಗೊಬ್ಬರವಾಗುತ್ತದೆ, ಅದನ್ನು ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ಎನ್ನುತ್ತಾರೆ.'],
+  ['ನಿಮ್ಮ ಮನೆಯನ್ನು ಸ್ವಚ್ಛವಾಗಿಡಲು ನೀವು ಏನು ಮಾಡುವಿರಿ?','ಮನೆಯಲ್ಲಿ ಹಸಿ ಮತ್ತು ಒಣ ಕಸಕ್ಕಾಗಿ ಬೇರೆ ಬೇರೆ ಡಬ್ಬಿ ಇಡುತ್ತೇನೆ, ಕಸವನ್ನು ಕಸದ ಗಾಡಿಗೇ ಕೊಡುತ್ತೇನೆ, ವಸ್ತುಗಳನ್ನು ಜಾಗದಲ್ಲಿಯೇ ಇಡುತ್ತೇನೆ, ನೀರು ಮತ್ತು ವಸ್ತುಗಳನ್ನು ವ್ಯರ್ಥ ಮಾಡುವುದಿಲ್ಲ, ೩R ಬಳಸುತ್ತೇನೆ ಮತ್ತು ಮನೆಯ ಸ್ವಚ್ಛತೆಯ ಕೆಲಸದಲ್ಲಿ ಸಹಾಯ ಮಾಡುತ್ತೇನೆ.']],
+ aa:[['ಹಸಿ ಕಸ – ಯಾವ ಬಣ್ಣದ ತೊಟ್ಟಿ?','ಹಸಿರು'],['ನೀಲಿ ಕಸದ ತೊಟ್ಟಿ – ಯಾವ ಕಸ?','ಒಣ'],['ನನ್ನ ಶಾಲೆ – ಹೇಗೆ ಇಡಬೇಕು?','ಸ್ವಚ್ಛ'],['ಹಸಿ ಕಸದಿಂದ ಸಿಗುವ ಗೊಬ್ಬರ','ಕಂಪೋಸ್ಟ್']],
+ ii:[['ಬಳೆಗಳ ತುಂಡುಗಳು',1],['ಮರದ ಎಲೆಗಳು',0],['ಮೊಳೆ',1],['ಕಾಗದ',1],['ಹಾಳಾದ ಆಹಾರ',0],['ಸೀಮೆಸುಣ್ಣದ ತುಂಡುಗಳು',1],['ಪೆನ್ನಿನ ಖಾಲಿಯಾದ ರೀಫಿಲ್',1],['ಪೆನ್ನಿನ ಮುಚ್ಚಳ',1],['ಬಾಳೆಹಣ್ಣಿನ ಸಿಪ್ಪೆ',0]],
+ u:[['ತರಕಾರಿಗಳ ತೊಟ್ಟು ಮತ್ತು ಹಣ್ಣುಗಳ ಸಿಪ್ಪೆಯನ್ನು ಹಸಿರು ಬಣ್ಣದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುವುದು',0],['ಪ್ರವಾಸಕ್ಕೆ ಹೋದಾಗ ಖಾಲಿ ಪ್ಲಾಸ್ಟಿಕ್ ನೀರಿನ ಬಾಟಲಿಯನ್ನು ರಸ್ತೆಯ ಬದಿಯಲ್ಲಿ ಎಸೆಯುವುದು',1],['ಮಾರುಕಟ್ಟೆಗೆ ಹೋಗುವಾಗ ಮನೆಯಿಂದ ಬಟ್ಟೆ ಚೀಲ ತೆಗೆದುಕೊಂಡು ಹೋಗುವುದು',0],['ಮುರಿದ ಪ್ಲಾಸ್ಟಿಕ್ ಆಟಿಕೆಗಳನ್ನು ಹಸಿರು ಬಣ್ಣದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುವುದು',1],['ಹಾಳಾದ ತರಕಾರಿಯನ್ನು ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲದಲ್ಲಿ ಕಟ್ಟಿ ಹಸಿರು ಬಣ್ಣದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುವುದು',1]],
+ ee:'ಕಸ ಎತ್ತಿ ಸರಿಯಾದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುತ್ತೇನೆ; ಹಸಿ ಮತ್ತು ಒಣ ಕಸವನ್ನು ಬೇರ್ಪಡಿಸುತ್ತೇನೆ; ಕಸ ಸುಡುವುದಿಲ್ಲ; ಗಿಡ ನೆಟ್ಟು ಅವುಗಳ ಆರೈಕೆ ಮಾಡುತ್ತೇನೆ; ಪ್ಲಾಸ್ಟಿಕ್ ಬದಲು ಬಟ್ಟೆ ಚೀಲ ಬಳಸುತ್ತೇನೆ; ಗೆಳೆಯರೊಂದಿಗೆ ಸ್ವಚ್ಛತಾ ಅಭಿಯಾನ ನಡೆಸುತ್ತೇನೆ ಮತ್ತು ಘೋಷವಾಕ್ಯಗಳ ಫಲಕ ಹಾಕುತ್ತೇನೆ.',
+ rr:'<b>Reduce (ಕಸ ಕಡಿಮೆ ಮಾಡುವುದು)</b> – ಕಸ ಕಡಿಮೆ ಉತ್ಪತ್ತಿಯಾಗುವ ವಸ್ತುಗಳನ್ನು ಬಳಸುವುದು, ಉದಾ. ಬಟ್ಟೆ ಚೀಲ, ಸ್ಟೀಲ್ ಲೋಟ.<br><b>Reuse (ಮರುಬಳಕೆ)</b> – ಹಳೆಯ ವಸ್ತುವನ್ನು ಮತ್ತೆ ಬಳಸುವುದು, ಉದಾ. ಖಾಲಿ ಹಾಳೆಗಳನ್ನು ಕಚ್ಚಾ ಕೆಲಸಕ್ಕೆ.<br><b>Recycle (ಮರುಚಕ್ರೀಕರಣ)</b> – ಒಣ ಕಸದಿಂದ ಹೊಸ ವಸ್ತು ತಯಾರಿಸುವುದು, ಉದಾ. ರದ್ದಿಯಿಂದ ಹೊಸ ಕಾಗದ.'
+};
+const WG=[['ಒ','ಕ','ಹ','ಜ','ಮ','ದ'],['ಣ','ನ','ಸಿ','ಲ','ಗ','ತ'],['ಬ','ಸ್ವ','ರು','ಡ','ಕ','ಹ'],['ಮ','ಚ್ಛ','ಯ','ಕಂ','ಪೋ','ಸ್ಟ್'],['ರ','ಲ','ನ','ವ','ಡ','ಗ'],['ತ','ಜ','ಮ','ಕ','ಸ','ರ']];
+const WW=[['ಹಸಿರು',[[0,2],[1,2],[2,2]]],['ಒಣ',[[0,0],[1,0]]],['ಸ್ವಚ್ಛ',[[2,1],[3,1]]],['ಕಂಪೋಸ್ಟ್',[[3,3],[3,4],[3,5]]]];
+let WS={sel:[],fd:[]};
+function wsTap(r,c){const k=r+','+c;if(WS.fd.some(w=>WW[w][1].some(p=>p[0]==r&&p[1]==c)))return;const i=WS.sel.indexOf(k);if(i>=0)WS.sel.splice(i,1);else WS.sel.push(k);
+ WW.forEach((w,j)=>{if(WS.fd.includes(j))return;const set=w[1].map(p=>p.join(','));if(set.length==WS.sel.length&&set.every(s=>WS.sel.includes(s))){WS.fd.push(j);WS.sel=[];say(w[0]);if(WS.fd.length==WW.length)award('ws','ಭೇಷ್! ಎಲ್ಲಾ ಪದಗಳು ಸಿಕ್ಕಿದವು.')}});drawWS()}
+function drawWS(){const b=$('wsBox');if(!b)return;const fc=new Set();WS.fd.forEach(j=>WW[j][1].forEach(p=>fc.add(p.join(','))));
+ b.innerHTML=`<div class="ws" style="grid-template-columns:repeat(6,1fr);max-width:360px">${WG.map((row,r)=>row.map((ch,c)=>`<div class="${fc.has(r+','+c)?'fd':WS.sel.includes(r+','+c)?'sel':''}" onclick="wsTap(${r},${c})">${ch}</div>`).join('')).join('')}</div>
+ <table class="t">${SW.aa.map((x,i)=>{const f=WS.fd.includes(WW.findIndex(w=>w[0]==x[1]));return `<tr><td class="l">(${i+1}) ${x[0]}</td><td style="width:90px;font-weight:800;color:#166534">${f?x[1]:'______'}</td></tr>`}).join('')}</table>
+ <button class="btn ln sm" onclick="WS.sel=[];drawWS()">ಆಯ್ಕೆ ಅಳಿಸಿ</button><button class="btn or sm" onclick="WS.fd=WW.map((_,j)=>j);WS.sel=[];drawWS()">ಉತ್ತರಗಳನ್ನು ತೋರಿಸಿ</button>`}
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಅಭ್ಯಾಸ – ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ</h2>
+ <h3>(ಅ) ಕೆಳಗಿನ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.a.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಆ) ಕೆಳಗಿನ ಪದಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಪದಗಳನ್ನು ಪದಬಂಧದಲ್ಲಿ ಹುಡುಕಿ ಮತ್ತು ಕೊಟ್ಟ ಜಾಗದಲ್ಲಿ ಬರೆಯಿರಿ.</h3><div class="tap">ಪದದ ಅಕ್ಷರಗಳನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಆಯ್ಕೆ ಮಾಡಿ (ಅಡ್ಡ/ಉದ್ದ). ಸಿಕ್ಕಿದ ಪದ ಕೋಷ್ಟಕದಲ್ಲಿ ತಾನಾಗಿ ತುಂಬುತ್ತದೆ.</div><div id="wsBox"></div>
+ <h3>(ಇ) ಕೆಳಗೆ ಕೊಟ್ಟ ವಸ್ತುಗಳನ್ನು ಹಸಿ ಕಸ ಮತ್ತು ಒಣ ಕಸ ಎಂಬ ಗುಂಪುಗಳಲ್ಲಿ ವರ್ಗೀಕರಿಸಿ.</h3>
+ ${sortGame('swi',SW.ii,[['🟢 ಹಸಿ','gr'],['🔵 ಒಣ','sm']],'swi')}
+ <h3>(ಈ) ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡಲು ನೀವು ಏನು ಮಾಡುವಿರಿ?</h3>${sq('ಚಿತ್ರವನ್ನು ಗಮನಿಸಿ. ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡಲು ನೀವು ಏನು ಮಾಡುವಿರಿ?',SW.ee,1)}
+ <h3>(ಉ) ಒಳ್ಳೆಯ ಅಭ್ಯಾಸಗಳ ಮುಂದೆ ☑ ಮತ್ತು ಕೆಟ್ಟ ಅಭ್ಯಾಸಗಳ ಮುಂದೆ ☒ ಹೀಗೆ ಗುರುತು ಮಾಡಿ.</h3>
+ ${sortGame('swu',SW.u,[['☑','gr'],['☒','or']],'swu')}
+ <h3>(ಊ) ೩R ನ ಅರ್ಥವನ್ನು ನಿಮ್ಮ ಮಾತುಗಳಲ್ಲಿ ಬರೆಯಿರಿ.</h3>${sq('೩R ನ ಅರ್ಥ ಬರೆಯಿರಿ.',SW.rr,1)}
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br><b>ಬೇಡದ ವಸ್ತುಗಳಿಂದ ಬಾಳಿಕೆ ಬರುವ ವಸ್ತುಗಳು</b> ತಯಾರಿಸಿ. ಗೆಳೆಯ-ಗೆಳತಿಯರು ತಯಾರಿಸಿದ ವಸ್ತುಗಳ ಉಪಯುಕ್ತತೆ ಮತ್ತು ಅಂದದ ಆಧಾರದ ಮೇಲೆ ಹೋಲಿಸಿ. ಅದನ್ನು ಪುಸ್ತಕದಲ್ಲಿ ದಾಖಲಿಸಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames();drawWS()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಹಸಿ ಕಸವನ್ನು ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲದಲ್ಲಿ ಕಟ್ಟಿ ಹಸಿರು ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕಿದರೆ ಯಾವ ತೊಂದರೆ ಬರುತ್ತದೆ?','ಪ್ಲಾಸ್ಟಿಕ್ ಕೊಳೆಯುತ್ತದೆಯೇ?','ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲ ಕೊಳೆಯುವುದಿಲ್ಲ. ಆದ್ದರಿಂದ ಒಳಗಿನ ಹಸಿ ಕಸ ಸರಿಯಾಗಿ ಕೊಳೆಯುವುದಿಲ್ಲ, ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ತಯಾರಾಗುವುದಿಲ್ಲ ಮತ್ತು ಗೊಬ್ಬರದಲ್ಲಿ ಪ್ಲಾಸ್ಟಿಕ್ ಬೆರೆತು ಅದು ಹಾಳಾಗುತ್ತದೆ. ಆದ್ದರಿಂದ ಹಸಿ ಕಸವನ್ನು ಚೀಲವಿಲ್ಲದೆ ಹಾಕಬೇಕು.'],
+['ಕಸ ಸುಡುವುದು ಕಸ ಕಡಿಮೆ ಮಾಡುವ ಸರಿಯಾದ ದಾರಿ ಏಕೆ ಅಲ್ಲ?','ಹೊಗೆಗೆ ಏನಾಗುತ್ತದೆ?','ಕಸ, ವಿಶೇಷವಾಗಿ ಪ್ಲಾಸ್ಟಿಕ್, ಸುಟ್ಟರೆ ವಿಷಕಾರಿ ಹೊಗೆ ಉಂಟಾಗುತ್ತದೆ. ಅದರಿಂದ ಗಾಳಿ ಮಾಲಿನ್ಯವಾಗುತ್ತದೆ ಮತ್ತು ಉಸಿರಾಟದ ರೋಗಗಳು ಬರುತ್ತವೆ. ಕಸವನ್ನು ಬೇರ್ಪಡಿಸಿ ಗೊಬ್ಬರ ಅಥವಾ ಮರುಚಕ್ರೀಕರಣ ಮಾಡುವುದು ಸರಿ.'],
+['ನಿಮ್ಮ ಶಾಲೆಯಲ್ಲಿ ದಿನವೂ ಉತ್ಪತ್ತಿಯಾಗುವ ಕಸ ಕಡಿಮೆ ಮಾಡಲು ಮೂರು ಉಪಾಯಗಳನ್ನು ಸೂಚಿಸಿ.','೩R ನೆನಪಿಡಿ.','(೧) ಊಟದ ಡಬ್ಬಿ ಮತ್ತು ನೀರಿಗಾಗಿ ಸ್ಟೀಲ್ ಡಬ್ಬಿ/ಬಾಟಲಿ ಬಳಸುವುದು, ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲಗಳನ್ನು ತಪ್ಪಿಸುವುದು. (೨) ಪುಸ್ತಕದ ಖಾಲಿ ಹಾಳೆಗಳನ್ನು ಕಚ್ಚಾ ಕೆಲಸಕ್ಕೆ ಬಳಸುವುದು. (೩) ಉಳಿದ ತಿಂಡಿ ಮತ್ತು ಉದುರಿದ ಎಲೆಗಳನ್ನು ಕಂಪೋಸ್ಟ್ ಗುಂಡಿಯಲ್ಲಿ ಹಾಕಿ ಹಿತ್ತಲ ತೋಟಕ್ಕೆ ಗೊಬ್ಬರ ತಯಾರಿಸುವುದು.'],
+['ಕಸದ ಗಾಡಿ ಮೂರು ದಿನ ಬರದಿದ್ದರೆ ಮನೆಯ ಕಸವನ್ನು ಏನು ಮಾಡುವಿರಿ?','ಹಸಿ ಮತ್ತು ಒಣ ಇವುಗಳನ್ನು ಬೇರೆ ಬೇರೆ…','ಹಸಿ ಕಸವನ್ನು ಮನೆಯ ಕುಂಡದಲ್ಲಿ ಅಥವಾ ಅಂಗಳದ ಗುಂಡಿಯಲ್ಲಿ ಕಂಪೋಸ್ಟ್ ಮಾಡಲು ಹಾಕುತ್ತೇನೆ; ಒಣ ಕಸವನ್ನು ಸ್ವಚ್ಛಗೊಳಿಸಿ ಬೇರೆ ಚೀಲದಲ್ಲಿ ಸಂಗ್ರಹಿಸಿಡುತ್ತೇನೆ. ಕಸವನ್ನು ರಸ್ತೆಯಲ್ಲಿ ಎಸೆಯುವುದಿಲ್ಲ ಅಥವಾ ಸುಡುವುದಿಲ್ಲ.'],
+['ಕಂಪೋಸ್ಟ್ ಗುಂಡಿ ಅಥವಾ ಡ್ರಮ್ ಅನ್ನು ಮುಚ್ಚಿ ಏಕೆ ಇಡುತ್ತಾರೆ?','ನೊಣ, ವಾಸನೆ, ಮಳೆ ಇವುಗಳ ಬಗ್ಗೆ ಯೋಚಿಸಿ.','ಮುಚ್ಚಳ ಇಟ್ಟರೆ ದುರ್ವಾಸನೆ ಹರಡುವುದಿಲ್ಲ, ನೊಣ ಮತ್ತು ಇತರ ಪ್ರಾಣಿಗಳು ಬರುವುದಿಲ್ಲ ಮತ್ತು ಮಳೆಯ ಹೆಚ್ಚು ನೀರು ಹೋಗುವುದಿಲ್ಲ. ಆದ್ದರಿಂದ ಕಸ ಸರಿಯಾಗಿ ಕೊಳೆತು ಒಳ್ಳೆಯ ಗೊಬ್ಬರ ತಯಾರಾಗುತ್ತದೆ.'],
+['ಪ್ಲಾಸ್ಟಿಕ್‌ನ ಖಾಲಿ ಬಾಟಲಿಯಿಂದ ನೀವು ಯಾವ ಮೂರು ಉಪಯುಕ್ತ ವಸ್ತುಗಳನ್ನು ತಯಾರಿಸುವಿರಿ?','ಪೆನ್ಸಿಲ್, ಗಿಡ, ಹಣ…','ಪೆನ್ ಸ್ಟ್ಯಾಂಡ್, ಸಣ್ಣ ಕುಂಡ (ಗಿಡ ನೆಡಲು), ಹುಂಡಿ (ಹಣ ಉಳಿಸಲು), ಪಕ್ಷಿಗಳಿಗೆ ನೀರಿನ ಪಾತ್ರೆ ಇತ್ಯಾದಿ.'],
+['ಹಸಿ ಮತ್ತು ಒಣ ಕಸವನ್ನು ಒಟ್ಟಿಗೆ ಬೆರೆಸಿದರೆ ಏನು ನಷ್ಟವಾಗುತ್ತದೆ?','ಮರುಬಳಕೆ ಮಾಡಬಹುದೇ?','ಒಟ್ಟಿಗೆ ಬೆರೆತ ಕಸ ಬೇಗ ಕೊಳೆತು ದುರ್ವಾಸನೆ ಬರುತ್ತದೆ, ಒಣ ಕಸ ಕೊಳಕಾಗಿ ಅದರ ಮರುಚಕ್ರೀಕರಣ ಕಷ್ಟವಾಗುತ್ತದೆ ಮತ್ತು ಹಸಿ ಕಸದಿಂದ ಒಳ್ಳೆಯ ಗೊಬ್ಬರ ತಯಾರಾಗುವುದಿಲ್ಲ.'],
+['ಪ್ರವಾಸಕ್ಕೆ ಹೋದಾಗ ಕಸ ನಿರ್ವಹಣೆಯನ್ನು ಹೇಗೆ ಮಾಡುವಿರಿ?','ಜೊತೆಗೆ ಯಾವ ಚೀಲ ಒಯ್ಯುವಿರಿ?','ಜೊತೆಗೆ ಕಸಕ್ಕಾಗಿ ಒಂದು ಚೀಲ ಒಯ್ಯುತ್ತೇವೆ, ಖಾಲಿ ಬಾಟಲಿ, ಕಾಗದಗಳನ್ನು ಅದರಲ್ಲಿ ಇಡುತ್ತೇವೆ, ಹಸಿ ಕಸವನ್ನು ಬೇರೆಯಾಗಿ ಇಡುತ್ತೇವೆ ಮತ್ತು ಅದನ್ನು ಸರಿಯಾದ ಕಸದ ತೊಟ್ಟಿಯಲ್ಲೇ ಹಾಕುತ್ತೇವೆ. ಪ್ರವಾಸದ ಸ್ಥಳದಲ್ಲಿ ಯಾವುದೇ ಕಸವನ್ನು ಬಿಟ್ಟುಹೋಗುವುದಿಲ್ಲ.'],
+['“ಸ್ವಚ್ಛತೆಯ ಕೆಲಸ ಮಾಡಲು ಕಡಿಮೆತನ ಎಂದು ಭಾವಿಸಬೇಡಿ” ಎಂದು ಏಕೆ ಹೇಳಿದೆ?','ಸ್ವಚ್ಛತೆಯ ಲಾಭ ಯಾರಿಗೆ ಆಗುತ್ತದೆ?','ಸ್ವಚ್ಛತೆಯಿಂದ ಎಲ್ಲರ ಆರೋಗ್ಯ ಚೆನ್ನಾಗಿರುತ್ತದೆ. ನಮ್ಮ ಪರಿಸರವನ್ನು ನಾವೇ ಸ್ವಚ್ಛವಾಗಿಟ್ಟರೆ ರೋಗರುಜಿನ ತಪ್ಪುತ್ತದೆ. ಆದ್ದರಿಂದ ಸ್ವಚ್ಛತೆಯ ಕೆಲಸ ಹೆಮ್ಮೆಯ ಕೆಲಸ, ಕಡಿಮೆತನದ್ದಲ್ಲ.'],
+['ಮಾರುಕಟ್ಟೆಯಿಂದ ವಸ್ತು ಖರೀದಿಸುವಾಗ ಕಸ ಕಡಿಮೆ ಮಾಡುವುದು ಹೇಗೆ?','ಚೀಲ, ಪ್ಯಾಕಿಂಗ್, ಅಗತ್ಯ…','ಮನೆಯಿಂದ ಬಟ್ಟೆ ಚೀಲ ಮತ್ತು ಡಬ್ಬಿಗಳನ್ನು ಒಯ್ಯುತ್ತೇನೆ, ಅಗತ್ಯವಿದ್ದಷ್ಟೇ ವಸ್ತು ತೆಗೆದುಕೊಳ್ಳುತ್ತೇನೆ, ಕಡಿಮೆ ಪ್ಯಾಕಿಂಗ್ ಇರುವ ವಸ್ತುಗಳನ್ನು ಆರಿಸುತ್ತೇನೆ ಮತ್ತು ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲಗಳನ್ನು ನಿರಾಕರಿಸುತ್ತೇನೆ.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೮ : ಸ್ವಚ್ಛ ನನ್ನ ಪರಿಸರ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${[...document.querySelectorAll('#stepBox ul li')].map(l=>`<li>${l.innerHTML}</li>`).join('')}</ol>
+ <table class="w"><tr><th>🟢 ಹಸಿ ಕಸ (ಹಸಿರು ತೊಟ್ಟಿ)</th><th>🔵 ಒಣ ಕಸ (ನೀಲಿ ತೊಟ್ಟಿ)</th></tr><tr><td class="l">ತರಕಾರಿಗಳ ತೊಟ್ಟು, ಉದುರಿದ ಎಲೆಗಳು, ಹಣ್ಣುಗಳ ಸಿಪ್ಪೆ, ಮೊಟ್ಟೆಯ ಚಿಪ್ಪುಗಳು – ಕೊಳೆಯುತ್ತದೆ, ಕೆಡುತ್ತದೆ → ಕಾಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ</td><td class="l">ಮೊಳೆ, ಪ್ಲಾಸ್ಟಿಕ್ ಆಟಿಕೆ, ತಗಡು ಮತ್ತು ಗಾಜಿನ ತುಂಡುಗಳು – ಕೊಳೆಯುವುದಿಲ್ಲ → ಕಾರ್ಖಾನೆಯಲ್ಲಿ ಹೊಸ ವಸ್ತುಗಳು</td></tr></table>
+ <p class="pq">ಕಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ ತಯಾರಿಸುವುದು</p><div>ಗುಂಡಿ/ಡ್ರಮ್ → ದಿನವೂ ಹಸಿ ಕಸ → ಮೇಲೆ ಸ್ವಲ್ಪ ಮಣ್ಣು → ಆಗಾಗ ನೀರು ಚಿಮುಕಿಸಿ ಮುಚ್ಚುವುದು → ೪–೬ ವಾರಗಳಲ್ಲಿ ಗೊಬ್ಬರ.</div>
+ <p class="pq">೩R</p><table class="w"><tr><th>Reduce – ಕಡಿಮೆ ಮಾಡುವುದು</th><th>Reuse – ಮರುಬಳಕೆ</th><th>Recycle – ಮರುಚಕ್ರೀಕರಣ</th></tr><tr><td class="l">ಸ್ಟೀಲ್ ಲೋಟ, ಬಟ್ಟೆ ಕರವಸ್ತ್ರ, ಪೆನ್ಸಿಲ್ ಕೊನೆಯವರೆಗೆ</td><td class="l">ಖಾಲಿ ಹಾಳೆಗಳು ಕಚ್ಚಾ ಕೆಲಸಕ್ಕೆ, ಐಸ್‌ಕ್ರೀಮ್ ಡಬ್ಬಿಯಲ್ಲಿ ಪೆನ್ಸಿಲ್‌ಗಳು</td><td class="l">ರದ್ದಿಯಿಂದ ಕಾಗದ, ಪ್ಲಾಸ್ಟಿಕ್ ಬಾಟಲಿಗಳಿಂದ ಹೊಸ ವಸ್ತುಗಳು</td></tr></table>
+ <p class="pq">ಘೋಷವಾಕ್ಯಗಳು</p><div>${SLOG.join(' • ')}</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">(ಅ) ಕೆಳಗಿನ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.a.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(2)}</div>`).join('')}
+ <div class="avoid"><div class="pq">(ಆ) ಕೆಳಗಿನ ಪದಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಪದಗಳನ್ನು ಪದಬಂಧದಲ್ಲಿ ಹುಡುಕಿ, ಚೌಕ ಹಾಕಿ ಮತ್ತು ಜಾಗದಲ್ಲಿ ಬರೆಯಿರಿ.</div>
+ <div style="display:flex;gap:6mm;align-items:flex-start"><table class="w" style="width:70mm">${WG.map(r=>`<tr>${r.map(c=>`<td style="height:9mm;font-size:13pt;font-weight:700">${c}</td>`).join('')}</tr>`).join('')}</table>
+ <div style="flex:1">${['ಹಸಿ ಕಸ','ನೀಲಿ ಕಸದ ತೊಟ್ಟಿ','ನನ್ನ ಶಾಲೆ','ಹಸಿ ಕಸದಿಂದ ಸಿಗುವ ಗೊಬ್ಬರ'].map((x,i)=>`<div style="margin:4mm 0">(${i+1}) ${x} – ____________</div>`).join('')}</div></div></div>
+ <div class="avoid"><div class="pq">(ಇ) ಹಸಿ ಕಸ ಮತ್ತು ಒಣ ಕಸ ಎಂದು ವರ್ಗೀಕರಿಸಿ.</div><div>${SW.ii.map(x=>x[0]).join(', ')}.</div><table class="w" style="margin-top:2mm"><tr><th>ಹಸಿ ಕಸ</th><th>ಒಣ ಕಸ</th></tr><tr><td style="height:22mm"></td><td></td></tr></table></div>
+ <div class="avoid"><div class="pq">(ಈ) ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡಲು ನೀವು ಏನು ಮಾಡುವಿರಿ?</div>${lines(3)}</div>
+ <div class="avoid"><div class="pq">(ಉ) ಒಳ್ಳೆಯ ಅಭ್ಯಾಸಗಳ ಮುಂದೆ ☑ ಮತ್ತು ಕೆಟ್ಟ ಅಭ್ಯಾಸಗಳ ಮುಂದೆ ☒ ಹೀಗೆ ಗುರುತು ಮಾಡಿ.</div><table class="w"><tr><th style="width:10mm">ಕ್ರ.ಸಂ.</th><th>ಅಭ್ಯಾಸಗಳು</th><th style="width:16mm">ಗುರುತು</th></tr>${SW.u.map((x,i)=>`<tr><td>${i+1}</td><td class="l">${x[0]}</td><td></td></tr>`).join('')}</table></div>
+ <div class="avoid"><div class="pq">(ಊ) ೩R ನ ಅರ್ಥವನ್ನು ನಿಮ್ಮ ಮಾತುಗಳಲ್ಲಿ ಬರೆಯಿರಿ.</div>${lines(3)}</div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>(ಅ)</b><ol>${SW.a.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಆ)</b> ${SW.aa.map((x,i)=>`(${i+1}) ${x[1]}`).join('; ')}</div><div><b>(ಇ)</b> ಹಸಿ: ${SW.ii.filter(x=>!x[1]).map(x=>x[0]).join(', ')}. ಒಣ: ${SW.ii.filter(x=>x[1]).map(x=>x[0]).join(', ')}.</div><div><b>(ಈ)</b> ${SW.ee}</div><div><b>(ಉ)</b> ${SW.u.map((x,i)=>`${i+1}) ${x[1]?'☒':'☑'}`).join('; ')}</div><div><b>(ಊ)</b> ${SW.rr}</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>ಇ. ೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೮</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

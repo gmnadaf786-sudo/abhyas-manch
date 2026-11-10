@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ – ಪಾಠ ೧ ಪ್ರಕೃತಿಯ ಸಂಪತ್ತು</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೧ : ಪ್ರಕೃತಿಯ ಸಂಪತ್ತು</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">💧 ನೀರು ಮತ್ತು ಮಣ್ಣು ನಮ್ಮ ಅಮೂಲ್ಯ ನೈಸರ್ಗಿಕ ಸಂಪತ್ತು. ಕೆಳಗಿನ ಒಂದು ಕಾರ್ಡ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೧೩ ಮೆಟ್ಟಿಲುಗಳು · ಚಿತ್ರಗಳು · ಆಟ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೨೦ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೧ : ಪ್ರಕೃತಿಯ ಸಂಪತ್ತು';
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+let S=0;
+const L=[
+{h:'ನೆನಪಿಸಿಕೊಳ್ಳೋಣ – ನೀರು ಯಾವುದಕ್ಕಾಗಿ?',s:'ಬೆಳಗ್ಗೆ ಎದ್ದಾಗಿನಿಂದ ರಾತ್ರಿ ಮಲಗುವವರೆಗೆ ನಾವು ಮನೆಯಲ್ಲಿ ನೀರನ್ನು ಯಾವ ಯಾವ ಕೆಲಸಗಳಿಗೆ ಬಳಸುತ್ತೇವೆ ಎಂಬುದನ್ನು ನೆನಪಿಸಿಕೊಳ್ಳಿ.',b:()=>`
+ <div>ಬೆಳಗ್ಗೆ ಎದ್ದಾಗಿನಿಂದ ರಾತ್ರಿ ಮಲಗುವವರೆಗೆ ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ ನೀರನ್ನು ಯಾವ ಯಾವ ಕೆಲಸಗಳಿಗೆ ಬಳಸಲಾಗುತ್ತದೆ? ಕೆಳಗಿನ ಕೆಲಸಗಳ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.</div>
+ <div class="chips">${['ಕುಡಿಯುವುದು','ಸ್ನಾನ','ಅಡುಗೆ','ಹಲ್ಲುಜ್ಜುವುದು','ಬಟ್ಟೆ ತೊಳೆಯುವುದು','ಪಾತ್ರೆ ತೊಳೆಯುವುದು','ನೆಲ ಒರೆಸುವುದು','ಗಿಡಗಳಿಗೆ ನೀರು','ಜಾನುವಾರುಗಳಿಗೆ ನೀರು','ಶೌಚಾಲಯ ಸ್ವಚ್ಛತೆ'].map(x=>`<span class="chip" onclick="chip(this)">${x}</span>`).join('')}</div>
+ <div class="msg in" data-cnt="ನೀವು # ಕೆಲಸಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿದಿರಿ. ನಾವು ದಿನವಿಡೀ ನೀರನ್ನು ಅವಲಂಬಿಸಿದ್ದೇವೆ! 💧">ಕೆಲಸಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿ…</div>
+ <h3>ಯೋಚಿಸಿ</h3>
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🌧️</div><div class="tt">ಮಳೆ ನೀರು ಎಲ್ಲೆಲ್ಲಿ ಹೋಗುತ್ತದೆ?</div><div class="dd">ನದಿ, ಹಳ್ಳ, ತೊರೆ, ಕೆರೆ, ಅಣೆಕಟ್ಟಿಗೆ ಹೋಗುತ್ತದೆ; ಸ್ವಲ್ಪ ನೀರು ನೆಲದಲ್ಲಿ ಇಂಗುತ್ತದೆ.</div><div class="tap">ಉತ್ತರಕ್ಕಾಗಿ ಕ್ಲಿಕ್ ಮಾಡಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🌍</div><div class="tt">ಭೂಮಿಯ ಮೇಲೆ ನೀರು ಎಲ್ಲಿಂದ ಬರುತ್ತದೆ?</div><div class="dd">ಮಳೆಯಿಂದ. ಮಳೆ ನೀರು ನದಿ, ಕೆರೆ, ಸಮುದ್ರ ಮತ್ತು ನೆಲದಲ್ಲಿ ಸಂಗ್ರಹವಾಗುತ್ತದೆ.</div><div class="tap">ಉತ್ತರಕ್ಕಾಗಿ ಕ್ಲಿಕ್ ಮಾಡಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🚰</div><div class="tt">ಮನೆಯಲ್ಲಿ ಬಳಸಲು ನೀರು ಎಲ್ಲಿಂದ ಸಿಗುತ್ತದೆ?</div><div class="dd">ನಲ್ಲಿ, ಬಾವಿ, ಕೈಪಂಪ್, ಕೊಳವೆ ಬಾವಿ, ನದಿ, ಕೆರೆ ಇವುಗಳಿಂದ.</div><div class="tap">ಉತ್ತರಕ್ಕಾಗಿ ಕ್ಲಿಕ್ ಮಾಡಿ</div></div>
+ </div>`},
+{h:'ನೀರಿನ ಮೂಲಗಳು',s:'ಯಾವ ಸ್ಥಳಗಳಿಂದ ನಮಗೆ ನೀರು ಸಿಗುತ್ತದೆಯೋ ಆ ಸ್ಥಳಗಳನ್ನು ನೀರಿನ ಮೂಲಗಳು ಎನ್ನುತ್ತಾರೆ. ನೀರು ನಮಗೆ, ಸಸ್ಯಗಳಿಗೆ ಮತ್ತು ಪ್ರಾಣಿಗಳಿಗೆ ಅತ್ಯಂತ ಮುಖ್ಯ.',b:()=>`
+ <div class="key">ಯಾವ ಸ್ಥಳಗಳಿಂದ ನಮಗೆ ನೀರು ಸಿಗುತ್ತದೆಯೋ ಆ ಸ್ಥಳಗಳನ್ನು <b>ನೀರಿನ ಮೂಲಗಳು</b> ಎನ್ನುತ್ತಾರೆ.</div>
+ <div>ನೀರು ನಮಗೆ, ಸಸ್ಯಗಳಿಗೆ ಮತ್ತು ಪ್ರಾಣಿಗಳಿಗೆ ಅತ್ಯಂತ ಮುಖ್ಯ; ಆದ್ದರಿಂದ ನೀರನ್ನು <b>ಎಚ್ಚರಿಕೆಯಿಂದ ಬಳಸುವುದು</b> ಮತ್ತು <b>ಸಂಗ್ರಹಿಸುವುದು</b> ಅಗತ್ಯ. ಕುಡಿಯಲು, ಕೃಷಿಗೆ ಮತ್ತು ಜಾನುವಾರುಗಳಿಗೆ ದೊಡ್ಡ ಪ್ರಮಾಣದಲ್ಲಿ ನೀರನ್ನು ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ.</div>
+ <h3>ದೊಡ್ಡ ಪ್ರಮಾಣದ ನೀರು ಸಂಗ್ರಹ (ಕ್ಲಿಕ್ ಮಾಡಿ)</h3>
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🕳️</div><div class="tt">ಬಾವಿ</div><div class="dd">ಮಳೆಯ ಸ್ವಲ್ಪ ನೀರು ನೆಲದಲ್ಲಿ ಇಂಗುತ್ತದೆ. ನೆಲದ ಕೆಳಗಿನ ನೀರು ಬಾವಿಯಿಂದ ಸಿಗುತ್ತದೆ. ಬಾವಿಯ ರಚನೆ ಸಾಮಾನ್ಯವಾಗಿ ವೃತ್ತಾಕಾರವಾಗಿರುತ್ತದೆ. <b>ಆಡ, ಬಾರವ, ಬುಡಕಿ</b> ಇವು ಬಾವಿಯ ಪ್ರಕಾರಗಳು.</div><div class="tap">ಮಾಹಿತಿಗಾಗಿ ಕ್ಲಿಕ್ ಮಾಡಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🏞️</div><div class="tt">ಕೆರೆ</div><div class="dd">ನೆಲದ ತಗ್ಗು ಭಾಗದಲ್ಲಿ ಸಂಗ್ರಹವಾದ ನೀರಿನ ಸುತ್ತ ಗಟ್ಟಿ ಕಟ್ಟಡ ನಿರ್ಮಿಸಿ ಅದಕ್ಕೆ ನಿಶ್ಚಿತ ರೂಪ ನೀಡಿದರೆ ಅದನ್ನು ಕೆರೆ ಎನ್ನುತ್ತಾರೆ. ಕೆರೆಗೆ <b>ಪುಷ್ಕರಿಣಿ, ವಾಪಿ, ವಾಪಿಕಾ</b> ಎಂಬ ಹೆಸರುಗಳೂ ಇವೆ.</div><div class="tap">ಮಾಹಿತಿಗಾಗಿ ಕ್ಲಿಕ್ ಮಾಡಿ</div></div>
+ </div>`},
+{h:'ನೀರು ಸಂಗ್ರಹಿಸುವ ಇತರ ಸ್ಥಳಗಳು',s:'ತೊಟ್ಟಿ, ಕೋಟೆಯ ಕೆರೆ ಮತ್ತು ಟ್ಯಾಂಕ್ ಹಾಗೂ ಒಡ್ಡಿನಲ್ಲಿ ನೀರು ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ. ಸಾತಾರಾ ಜಿಲ್ಲೆಯ ಲಿಂಬ್‌ನಲ್ಲಿ ಬಾರಾಮೋಟೆಯ ಐತಿಹಾಸಿಕ ಬಾವಿ ಇದೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🧱</div><div class="tt">ತೊಟ್ಟಿ</div><div class="dd">ಹಿಂದಿನ ಕಾಲದಲ್ಲಿ ನೀರು ಸಂಗ್ರಹಿಸಲು ತೊಟ್ಟಿಗಳನ್ನು ಬಳಸುತ್ತಿದ್ದರು. ಕೆಲವು ಕಡೆ ಇಂದಿಗೂ ಬಳಸುತ್ತಾರೆ. ಅದರಲ್ಲಿನ ನೀರನ್ನು ಕುಡಿಯಲು, ಕೃಷಿಗೆ ಮತ್ತು ಕಟ್ಟಡ ಕೆಲಸಕ್ಕೆ ಬಳಸುತ್ತಾರೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🏰</div><div class="tt">ಕೋಟೆಯ ಕೆರೆ ಮತ್ತು ಟ್ಯಾಂಕ್</div><div class="dd">ಕೋಟೆಯಲ್ಲಿ ವಾಸಿಸುವ ಜನರಿಗಾಗಿ ಕಲ್ಲಿನ ಕೆರೆ ಮತ್ತು ಟ್ಯಾಂಕ್‌ಗಳನ್ನು ಅಗೆಯುತ್ತಿದ್ದರು. ಅವುಗಳಲ್ಲಿ ಸಂಗ್ರಹವಾಗುವ ನೀರನ್ನು ವರ್ಷವಿಡೀ ಬಳಸಬಹುದಿತ್ತು.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🌊</div><div class="tt">ಒಡ್ಡು</div><div class="dd">ನದಿಯ ಹರಿಯುವ ನೀರನ್ನು ತಡೆಯಲು ಕಲ್ಲಿನ ಅಥವಾ ಮಣ್ಣಿನ ಒಡ್ಡುಗಳನ್ನು ಕಟ್ಟುತ್ತಾರೆ. ಹಳ್ಳದ ಹರಿವನ್ನು ನಿಲ್ಲಿಸಲು ಅಥವಾ ಹೊಲದಲ್ಲಿ ನೀರು ಸಂಗ್ರಹಿಸಲೂ ಒಡ್ಡುಗಳನ್ನು ಕಟ್ಟುತ್ತಾರೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+ </div>
+ <div class="know"><b class="h">💡 ನಿಮಗೆ ಗೊತ್ತೇ?</b><br>ಸಾತಾರಾ ಜಿಲ್ಲೆಯ <b>ಲಿಂಬ್</b> ಇಲ್ಲಿ ಇತಿಹಾಸ ಕಾಲದ <b>ಬಾರಾಮೋಟೆಯ ಬಾವಿ</b> ಇದೆ. ಶಿವಕಾಲೀನ ವಾಸ್ತುಶಾಸ್ತ್ರದ ಅತ್ಯುತ್ತಮ ಮಾದರಿ ಇಲ್ಲಿ ನೋಡಲು ಸಿಗುತ್ತದೆ. ಕಲ್ಲಿನ ಕಟ್ಟಡ, ಬಹಳಷ್ಟು ಮೆಟ್ಟಿಲುಗಳು ಮತ್ತು ವಿಶಾಲ ಅರಮನೆಯಂತಹ ರಚನೆ ಈ ಬಾವಿಯ ವೈಶಿಷ್ಟ್ಯಗಳು.</div>
+ <h3>ಗಮನಿಸಿ – ಮನೆಯಲ್ಲಿ ನೀರನ್ನು ಯಾವುದರಲ್ಲಿ ಸಂಗ್ರಹಿಸುತ್ತೀರಿ?</h3>
+ <div class="chips">${['🪣 ಬಕೆಟ್','🛢️ ಡ್ರಮ್','🏺 ಮಡಕೆ','ಹಂಡೆ','ಕೊಡ','ಕೊಡ','ನೀರಿನ ಟ್ಯಾಂಕ್','ತಂಬಿಗೆ'].map(x=>`<span class="chip" onclick="chip(this)">${x}</span>`).join('')}</div>
+ <div class="msg in" data-cnt="ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ # ಬಗೆಯ ಪಾತ್ರೆಗಳಲ್ಲಿ ನೀರು ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ.">ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ ಬಳಸುವ ಪಾತ್ರೆಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿ.</div>`},
+{h:'ಭೂಮಿಯ ಮೇಲಿನ ನೀರು – ಎಷ್ಟು ಕುಡಿಯಲು ಯೋಗ್ಯ?',s:'ಭೂಮಿಯ ಸುಮಾರು ಎಪ್ಪತ್ತೊಂದು ಪ್ರತಿಶತ ಭಾಗ ನೀರಿನಿಂದ ಆವೃತವಾಗಿದೆ. ಭೂಮಿಯ ಮೇಲಿನ ಎಲ್ಲ ನೀರನ್ನು ಒಂದು ಡ್ರಮ್‌ನಲ್ಲಿ ಹಿಡಿಸಿದರೆ ಸಿಹಿ ನೀರು ಕೇವಲ ಒಂದು ಕಪ್ ಮತ್ತು ಕುಡಿಯಲು ಯೋಗ್ಯ ನೀರು ಕೇವಲ ಒಂದು ಹನಿ ಇರುತ್ತದೆ.',b:()=>`
+ <div>ಭೂಮಿಯ ಸುಮಾರು <b>೭೧ ಪ್ರತಿಶತ</b> ಭಾಗ ನೀರಿನಿಂದ ಆವೃತವಾಗಿದೆ. ಅದರಲ್ಲಿ ಹೆಚ್ಚಿನ ನೀರು ಸಾಗರ ಮತ್ತು ಸಮುದ್ರಗಳಲ್ಲಿದೆ (ಉಪ್ಪು). ಸ್ವಲ್ಪ ನೀರು <b>ಹೆಪ್ಪುಗಟ್ಟಿದ</b> ಸ್ಥಿತಿಯಲ್ಲಿ, ಇನ್ನು ಸ್ವಲ್ಪ <b>ನೆಲದ ಒಳಗೆ</b> ಇದೆ. ಬಹಳ ಕಡಿಮೆ ನೀರು ಕುಡಿಯಲು ಯೋಗ್ಯ.</div>
+ <div class="key">ಕಲ್ಪಿಸಿಕೊಳ್ಳಿ: ಭೂಮಿಯ ಮೇಲಿನ ಎಲ್ಲ ನೀರು ಒಂದು <b>ಡ್ರಮ್‌ನಲ್ಲಿ</b> ಹಿಡಿಯುತ್ತದೆ ಎಂದಾದರೆ <b>ಸಿಹಿ ನೀರು</b> ಕೇವಲ <b>ಒಂದು ಕಪ್</b> ಮತ್ತು ನದಿ, ಹಳ್ಳ, ಬಾವಿ, ಅಣೆಕಟ್ಟು, ಕೆರೆಗಳಲ್ಲಿನ <b>ಕುಡಿಯಲು ಯೋಗ್ಯ ನೀರು</b> ಕೇವಲ <b>ಒಂದು ಹನಿ</b> ಇರುತ್ತದೆ!</div>
+ <div class="chips"><span class="chip" id="w0" onclick="wv(0)">🛢️ ಎಲ್ಲ ನೀರು</span><span class="chip" id="w1" onclick="wv(1)">☕ ಸಿಹಿ ನೀರು</span><span class="chip" id="w2" onclick="wv(2)">💧 ಕುಡಿಯಲು ಯೋಗ್ಯ ನೀರು</span></div>
+ <svg viewBox="0 0 360 200" id="wsvg"></svg>
+ <div class="msg in" id="wmsg">ಮೇಲಿನ ಬಟನ್‌ಗಳ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.</div>
+ <div class="msg ok">ಆದ್ದರಿಂದ ಕುಡಿಯಲು ಲಭ್ಯವಿರುವ ನೀರು ಎಷ್ಟು ಕಡಿಮೆ ಎಂಬುದು ಅರಿವಾಗುತ್ತದೆ. ನಾವು ನೀರನ್ನು ವ್ಯರ್ಥ ಮಾಡದೆ ಸರಿಯಾಗಿ ಬಳಸಬೇಕು.</div>`,a:()=>wv(0)},
+{h:'ನೀರು ಅಮೂಲ್ಯ – ಉಳಿಸೋಣ',s:'ನೀರು ಅಮೂಲ್ಯ. ನಾವು ನೀರಿನ ಒಂದು ಹನಿಯನ್ನೂ ವ್ಯರ್ಥ ಮಾಡಬಾರದು. ಕೆಳಗಿನ ಕ್ರಿಯೆ ಸರಿಯೇ ತಪ್ಪೇ ನಿರ್ಧರಿಸಿ.',b:()=>`
+ <div class="key">‘ನೀರು ಅಮೂಲ್ಯ.’ ದೈನಂದಿನ ಜೀವನದಲ್ಲಿ ನೀರಿಗೆ ಪರ್ಯಾಯವಿಲ್ಲ. ಯಾವುದೇ ಜೀವಿ ನೀರಿಲ್ಲದೆ ಬದುಕಲಾರದು, ಆದ್ದರಿಂದ ನೀರನ್ನು <b>‘ಜೀವನ್’</b> ಎನ್ನುತ್ತಾರೆ.</div>
+ <h3>ಆಟ: ಸರಿಯೇ ತಪ್ಪೇ?</h3>
+ <div id="sortBox"></div><div id="sortRes"></div>
+ <div class="know"><b class="h">⭐ ಇದನ್ನು ಯಾವಾಗಲೂ ನೆನಪಿಡಿ</b><br>• ನೀರನ್ನು ಮಿತವಾಗಿ ಬಳಸಿ. • ಸಾಧ್ಯವಿರುವಲ್ಲಿ ನೀರನ್ನು ಸಂಗ್ರಹಿಸಿ. • ನೀರನ್ನು ಸಾಧ್ಯವಿರುವಲ್ಲಿ ಮರುಬಳಕೆ ಮಾಡಿ. • ಮನೆಯಲ್ಲಿ ಕುಡಿಯಲು ತುಂಬಿಟ್ಟ ನೀರು ಎಂದಿಗೂ ಹಳಸುವುದಿಲ್ಲ.</div>`,a:()=>drawSort()},
+{h:'ನೀರಿನ ಮರುಬಳಕೆ ಮತ್ತು ಸುರಕ್ಷಿತ ನೀರು',s:'ಬಳಸಿದ ನೀರನ್ನು ಚೆಲ್ಲದೆ ಮತ್ತೆ ಬಳಸುವುದು ಎಂದರೆ ನೀರಿನ ಮರುಬಳಕೆ. ಯಾವ ನೀರನ್ನು ಕುಡಿದರೆ ಆರೋಗ್ಯಕ್ಕೆ ಯಾವುದೇ ಅಪಾಯವಾಗುವುದಿಲ್ಲವೋ ಅದನ್ನು ಸುರಕ್ಷಿತ ನೀರು ಎನ್ನುತ್ತಾರೆ.',b:()=>`
+ <div class="key"><b>ನೀರಿನ ಮರುಬಳಕೆ:</b> ಬಳಸಿದ ನೀರನ್ನು ಚೆಲ್ಲದೆ ಅದನ್ನು ಮತ್ತೆ ಬಳಸುವುದು.</div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">🥬➡️🌱</div><div class="dd">ತರಕಾರಿ, ಹಣ್ಣು ತೊಳೆದ ನೀರನ್ನು ಗಿಡಗಳಿಗೆ ಹಾಕುವುದು</div></div>
+  <div class="tile op"><div class="ic">🥛➡️🪴</div><div class="dd">ಕುಡಿದು ಉಳಿದ ನೀರನ್ನು ಕುಂಡದ ಗಿಡಗಳಿಗೆ ಹಾಕುವುದು</div></div>
+  <div class="tile op"><div class="ic">👕➡️🚽</div><div class="dd">ಬಟ್ಟೆ ತೊಳೆದ ನಂತರದ ನೀರನ್ನು ಶೌಚಾಲಯ ಸ್ವಚ್ಛತೆಗೆ ಬಳಸುವುದು</div></div>
+ </div>
+ <div class="key"><b>ಸುರಕ್ಷಿತ ನೀರು:</b> ಯಾವ ನೀರನ್ನು ಕುಡಿದರೆ ನಮ್ಮ ಆರೋಗ್ಯಕ್ಕೆ ಯಾವುದೇ ರೀತಿಯಲ್ಲಿ ಅಪಾಯವಾಗುವುದಿಲ್ಲವೋ ಅಂತಹ ನೀರನ್ನು ಸುರಕ್ಷಿತ ನೀರು ಎನ್ನುತ್ತಾರೆ.</div>
+ <div>ಸುರಕ್ಷಿತ ನೀರು ಕುಡಿಯಲು ಸ್ವಚ್ಛ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿರುತ್ತದೆ. ಆದ್ದರಿಂದ <b>ಹೊಟ್ಟೆನೋವು, ಬೇಧಿ</b> ಇಂತಹ ಕಾಯಿಲೆಗಳನ್ನು ತಪ್ಪಿಸಬಹುದು ಮತ್ತು ದೇಹ ಆರೋಗ್ಯವಾಗಿರುತ್ತದೆ.</div>
+ <div class="know"><b class="h">💡 ನಿಮಗೆ ಗೊತ್ತೇ?</b><br>ಬಹಳ ವರ್ಷಗಳ ಹಿಂದೆ ಜನರು ನೀರನ್ನು ಶುದ್ಧ ಮಾಡಲು ನೈಸರ್ಗಿಕ ಮತ್ತು ಸಾಂಪ್ರದಾಯಿಕ ವಿಧಾನಗಳನ್ನು ಬಳಸುತ್ತಿದ್ದರು. <b>ಬೇವು, ತುಳಸಿ, ಕೊತ್ತಂಬರಿ</b> ಇವುಗಳ ಎಲೆಗಳು; <b>ನೆಲ್ಲಿಕಾಯಿ, ನೇರಳೆ, ತೆಟ್ಟಂಕೊಟ್ಟೆ</b> ಇವುಗಳ ಬೀಜಗಳನ್ನು ನೀರು ಶುದ್ಧ ಮಾಡಲು ಬಳಸುತ್ತಿದ್ದರು.</div>`},
+{h:'ನೀರನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸುವ ವಿಧಾನಗಳು',s:'ನೀರನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸಲು ನಾಲ್ಕು ವಿಧಾನಗಳಿವೆ: ಸೋಸುವುದು, ತಿಳಿಗೊಳಿಸುವುದು, ಕುದಿಸುವುದು ಮತ್ತು ಸೋಂಕು ನಿವಾರಣೆ.',b:()=>`
+ <div>ಪ್ರತಿ ವಿಧಾನದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ ಮಾಹಿತಿ ಓದಿ.</div>
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🧺</div><div class="tt">೧. ಸೋಸುವುದು</div><div class="dd">ನೀರನ್ನು ಬಟ್ಟೆಯಿಂದ ಅಥವಾ ಸೋಸುಕದಿಂದ ಸೋಸಿಕೊಳ್ಳಬೇಕು. ಇದರಿಂದ ಮಣ್ಣಿನ ಕಣಗಳು ಅಥವಾ ಇತರ ಕಸ ಬೇರ್ಪಡುತ್ತದೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🫙</div><div class="tt">೨. ತಿಳಿಗೊಳಿಸುವುದು</div><div class="dd">ನೀರಿನಲ್ಲಿ <b>ಹರಳೆ (ಹಿಟಕರಿ</b> ತಿರುಗಿಸಿದರೆ ನೀರಿನಲ್ಲಿನ ಮಣ್ಣಿನ ಕಣಗಳು, ಕಸ ತಳಕ್ಕೆ ಹೋಗಿ ನೀರು ತಿಳಿಯಾಗುತ್ತದೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">♨️</div><div class="tt">೩. ಕುದಿಸುವುದು</div><div class="dd">ನೀರು <b>೧೦ ರಿಂದ ೧೫ ನಿಮಿಷ</b> ಕುದಿಸುವುದರಿಂದ ಅದರಲ್ಲಿನ ಸೂಕ್ಷ್ಮಜೀವಿಗಳು ನಾಶವಾಗುತ್ತವೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🧪</div><div class="tt">೪. ಸೋಂಕು ನಿವಾರಣೆ</div><div class="dd">ನೀರಿನಲ್ಲಿನ ಸೂಕ್ಷ್ಮಜೀವಿಗಳನ್ನು ನಾಶ ಮಾಡಲು ನೀರಿನಲ್ಲಿ <b>ಬ್ಲೀಚಿಂಗ್ ಪೌಡರ್</b> ಅಥವಾ <b>ಕ್ಲೋರಿನ್ ಮಾತ್ರೆ/ಹನಿ</b> ಹಾಕುತ್ತಾರೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+ </div>
+ <svg viewBox="0 0 360 150"><rect x="0" y="0" width="360" height="150" rx="12" fill="#f8fafc"/>
+  <path d="M120 60 h120 l-10 60 h-100z" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+  <rect x="122" y="66" width="116" height="20" fill="#60a5fa" opacity=".8"/>
+  <g fill="#bfdbfe"><circle cx="150" cy="55" r="5"><animate attributeName="cy" values="66;40;66" dur="1.2s" repeatCount="indefinite"/></circle><circle cx="180" cy="50" r="4"><animate attributeName="cy" values="66;35;66" dur="1s" repeatCount="indefinite"/></circle><circle cx="210" cy="55" r="5"><animate attributeName="cy" values="66;42;66" dur="1.4s" repeatCount="indefinite"/></circle></g>
+  <path d="M140 132 q10-18 20 0 q10-18 20 0 q10-18 20 0 q10-18 20 0" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+  <rect x="110" y="132" width="140" height="10" rx="3" fill="#475569"/>
+  <text x="270" y="70" font-size="14" font-weight="700" fill="#0f172a">೧೦–೧೫ ನಿಮಿಷ</text><text x="270" y="90" font-size="13" fill="#475569">ಕುದಿಸಿ = ಸೂಕ್ಷ್ಮಜೀವಿ ನಾಶ</text></svg>
+ <div class="msg in">🤔 ಯೋಚಿಸಿ: ನದಿಯ ನೀರನ್ನು ನೀವು ಹಾಗೆಯೇ ಕುಡಿಯಲು ಬಳಸುತ್ತೀರಾ? <b>ಇಲ್ಲ</b> – ಏಕೆಂದರೆ ಅದರಲ್ಲಿ ಮಣ್ಣು, ಕಸ ಮತ್ತು ರೋಗಾಣುಗಳು ಇರಬಹುದು.</div>`},
+{h:'ಜಲಮಾಲಿನ್ಯ',s:'ಸಾಬೂನಿನ ನೀರು, ಪ್ಲಾಸ್ಟಿಕ್, ಗೊಬ್ಬರ, ಪ್ಲಾಸ್ಟರ್ ಆಫ್ ಪ್ಯಾರಿಸ್ ಮೂರ್ತಿಗಳು, ರಾಸಾಯನಿಕಗಳು ಇಂತಹ ಅನೇಕ ಅಂಶಗಳಿಂದ ನೀರು ಕಲುಷಿತವಾಗುತ್ತದೆ, ಇದನ್ನು ಜಲಮಾಲಿನ್ಯ ಎನ್ನುತ್ತಾರೆ.',b:()=>`
+ <div class="key">ಸಾಬೂನಿನ ನೀರು, ಪ್ಲಾಸ್ಟಿಕ್, ಗೊಬ್ಬರ, ಪ್ಲಾಸ್ಟರ್ ಆಫ್ ಪ್ಯಾರಿಸ್ ಮೂರ್ತಿಗಳು (POP), ರಾಸಾಯನಿಕಗಳು ಇತ್ಯಾದಿ ಅನೇಕ ಅಂಶಗಳಿಂದ ನೀರು ಕಲುಷಿತವಾಗುತ್ತದೆ, ಇದಕ್ಕೆ <b>ಜಲಮಾಲಿನ್ಯ</b> ಎನ್ನುತ್ತಾರೆ. ಇಂತಹ ಅಂಶಗಳು ಜೀವಿಗಳ ಆರೋಗ್ಯಕ್ಕೆ ಹಾನಿಕಾರಕ.</div>
+ <h3>ನೀರನ್ನು ಕಲುಷಿತಗೊಳಿಸುವ ಅಂಶಗಳನ್ನು ಗುರುತಿಸಿ (ಕ್ಲಿಕ್ ಮಾಡಿ)</h3>
+ <div class="chips" id="polBox">${[['🧼 ಸಾಬೂನಿನ ನೀರು',1],['🛍️ ಪ್ಲಾಸ್ಟಿಕ್',1],['🌿 ಗಿಡ ನೆಡುವುದು',0],['🧪 ರಾಸಾಯನಿಕಗಳು',1],['🗿 POP ಮೂರ್ತಿಗಳು',1],['🌧️ ಮಳೆ ನೀರು ಸಂಗ್ರಹಿಸುವುದು',0],['🧴 ಗೊಬ್ಬರಗಳು',1],['🚯 ಕಸ',1]].map(x=>`<span class="chip" onclick="polC(this,${x[1]})">${x[0]}</span>`).join('')}</div>
+ <div id="polMsg"></div>
+ <div class="know"><b class="h">💡 ನಿಮಗೆ ಗೊತ್ತೇ?</b><br>ಭಾರತ ಸರ್ಕಾರ ಗಂಗಾ ನದಿಯ ಮಾಲಿನ್ಯ ತಡೆಯಲು <b>‘ನಮಾಮಿ ಗಂಗೆ’</b> ಈ ಯೋಜನೆಯನ್ನು ಜೂನ್ <b>೨೦೧೪</b> ತಿಂಗಳಲ್ಲಿ ಕೈಗೆತ್ತಿಕೊಂಡಿತು. ಇದರಲ್ಲಿ ಕೊಳಚೆ ನೀರಿನ ಶುದ್ಧೀಕರಣ, ನದಿ ದಡದ ಸ್ವಚ್ಛತೆ, ಗಿಡ ನೆಡುವುದು ಹಾಗೂ ಗಂಗೆಯ ಜಲಚರಗಳ ರಕ್ಷಣೆ ಮತ್ತು ಸಂವರ್ಧನೆ ಇಂತಹ ಚಟುವಟಿಕೆಗಳಿವೆ.</div>`},
+{h:'ಮಳೆ ನೀರಿನ ಸಂರಕ್ಷಣೆ',s:'ಮಳೆ ನೀರನ್ನು ಸಂಗ್ರಹಿಸಲು ಕೃಷಿ ಹೊಂಡಗಳನ್ನು ತೋಡುತ್ತಾರೆ ಮತ್ತು ನೆಲದಲ್ಲಿನ ನೀರಿನ ಮಟ್ಟ ಹೆಚ್ಚಲು ಬೆಟ್ಟದ ಇಳಿಜಾರಿನಲ್ಲಿ ಕಂದಕಗಳನ್ನು ತೋಡುತ್ತಾರೆ.',b:()=>`
+ <div>ನೀರು ಒಂದು ಮುಖ್ಯ <b>ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲ</b> ಆಗಿದೆ. ವರ್ಷವಿಡೀ ನೀರಿನ ಅಗತ್ಯ ಪೂರೈಸಲು ಮಳೆ ನೀರನ್ನು ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ.</div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">🟦🌾</div><div class="tt">ಕೃಷಿ ಹೊಂಡ</div><div class="dd">ಹೊಲದಲ್ಲಿ ಬೆಳೆಗಳಿಗೆ ನೀರಿನ ಕೊರತೆ ಆಗದಂತೆ ಕೃಷಿ ಹೊಂಡಗಳನ್ನು ತೋಡಲಾಗುತ್ತದೆ.</div></div>
+  <div class="tile op"><div class="ic">⛰️〰️</div><div class="tt">ಬೆಟ್ಟದ ಇಳಿಜಾರಿನ ಕಂದಕ</div><div class="dd">ನೆಲದಲ್ಲಿನ ನೀರಿನ ಮಟ್ಟ ಹೆಚ್ಚಲು ಬೆಟ್ಟದ ಇಳಿಜಾರಿನಲ್ಲಿ ಕಂದಕಗಳನ್ನು ತೋಡಲಾಗುತ್ತದೆ.</div></div>
+ </div>
+ <div class="key">ಈ ವಿಧಾನಗಳಿಂದ <b>ಮಳೆ ನೀರಿನ ಸಂರಕ್ಷಣೆ</b> ಆಗುತ್ತದೆ.</div>
+ <h3>ಗಮನಿಸಿ – ನೀರು ಎಲ್ಲಿ ಹರಿದು ಹೋಗುವುದಿಲ್ಲ?</h3>
+ <div class="chips"><span class="chip" onclick="rq(this,0)">⛰️ ಕಲ್ಲಿನ ಬೆಟ್ಟ</span><span class="chip" onclick="rq(this,1)">🟫 ಮಣ್ಣಿನ ನೆಲ</span></div>
+ <div id="rqMsg"></div>`},
+{h:'ಮಣ್ಣು – ಒಂದು ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲ',s:'ಮಣ್ಣು ರೂಪುಗೊಳ್ಳಲು ಬಹಳ ವರ್ಷಗಳು ಬೇಕು. ಮಣ್ಣಿನ ಮೇಲಿನ ಪದರ ಫಲವತ್ತಾಗಿರುತ್ತದೆ. ಮರ, ಹುಲ್ಲು, ಪೊದೆ ಬೆಳೆಸಿದರೆ ಮಣ್ಣಿನ ಸವಕಳಿ ಕಡಿಮೆಯಾಗುತ್ತದೆ.',b:()=>`
+ <div>ಮಳೆ ನೀರು ಕಲ್ಲುಬಂಡೆಗಳ ಮೇಲೆ ಹರಿದು ಹೋಗುತ್ತದೆ, ಆದರೆ ಮಣ್ಣಿನಲ್ಲಿ ಇಂಗುತ್ತದೆ; ಏಕೆಂದರೆ ಮಣ್ಣಿಗೆ ನೀರು ಹಿಡಿದಿಡುವ ಸಾಮರ್ಥ್ಯ ಇದೆ. ಆದ್ದರಿಂದ <b>ಮಣ್ಣು ನೀರಿನಂತೆಯೇ ಮುಖ್ಯವಾದ ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲ</b> ಇದೆ.</div>
+ <div class="key">ಮಣ್ಣು ರೂಪುಗೊಳ್ಳಲು <b>ಬಹಳ ವರ್ಷಗಳು</b> ಬೇಕು. ಮಣ್ಣಿನ ಮೇಲಿನ ಪದರ <b>ಫಲವತ್ತಾದ</b> ಇರುತ್ತದೆ. ನೆಲದ ಮೇಲೆ ಸಸ್ಯ, ಹುಲ್ಲು, ಮರ, ಪೊದೆ ಬೆಳೆಸಿದರೆ ನೆಲದ <b>ಸವಕಳಿ</b> ಕಡಿಮೆಯಾಗುತ್ತದೆ, ಇದರಿಂದ ಮಣ್ಣಿನ ಸಂರಕ್ಷಣೆಯಾಗುತ್ತದೆ.</div>
+ <svg viewBox="0 0 360 140"><rect width="175" height="140" rx="10" fill="#fde68a"/><text x="88" y="22" text-anchor="middle" font-size="13" font-weight="700">ಬರಡು – ವಿನಾಶಕಾರಿ ಭವಿಷ್ಯ</text>
+  <path d="M10 110 L60 80 L100 100 L165 70 L165 130 L10 130Z" fill="#d6a15c"/><text x="40" y="70" font-size="22">🏜️</text><text x="110" y="62" font-size="20">🪵</text>
+  <rect x="185" width="175" height="140" rx="10" fill="#bbf7d0"/><text x="272" y="22" text-anchor="middle" font-size="13" font-weight="700">ಹಸಿರು – ಸಮೃದ್ಧ ಭವಿಷ್ಯ</text>
+  <path d="M195 110 L245 80 L285 100 L350 70 L350 130 L195 130Z" fill="#65a30d"/><text x="210" y="80" font-size="24">🌳</text><text x="260" y="70" font-size="24">🌳</text><text x="305" y="62" font-size="22">🌾</text></svg>
+ <div class="msg in">🤔 ಮಣ್ಣಿನ ಸಂರಕ್ಷಣೆ ಏಕೆ ಅಗತ್ಯ? → ಮಣ್ಣು ರೂಪುಗೊಳ್ಳಲು ಬಹಳ ವರ್ಷಗಳು ಬೇಕು; ಮಣ್ಣು ಇಲ್ಲದಿದ್ದರೆ ಬೆಳೆ, ಮರ, ಆಹಾರ ಸಿಗುವುದಿಲ್ಲ.</div>
+ <h3>ಮಹಾರಾಷ್ಟ್ರದ ಮಣ್ಣಿನ ಪ್ರಕಾರಗಳು</h3>
+ <div class="chips">${['ಮೆಕ್ಕಲು ಮಣ್ಣು','ಕಪ್ಪು ಮಣ್ಣು (ರೆಗುರ್)','ಕೆಂಪು ಮಣ್ಣು','ಲ್ಯಾಟರೈಟ್ (ಜಂಬಿಟ್ಟಿಗೆ ಕಲ್ಲಿನ) ಮಣ್ಣು','ಬೆಟ್ಟದ ಮಣ್ಣು','ಜವುಗು ಮಣ್ಣು','ಪೀಟ್ ಮಣ್ಣು','ಶಾಡೂ ಮಣ್ಣು'].map(x=>`<span class="chip on">${x}</span>`).join('')}</div>`},
+{h:'ಮಣ್ಣಿನ ಪ್ರಕಾರಗಳು – ಮರಳು ಮಣ್ಣು, ಜೇಡಿ ಮಣ್ಣು, ಗೋಡು ಮಣ್ಣು',s:'ಮರಳು ಮಣ್ಣಿನಲ್ಲಿ ಮರಳಿನ ಪ್ರಮಾಣ ಹೆಚ್ಚು ಇರುತ್ತದೆ. ಜೇಡಿ ಮಣ್ಣು ಅಂಟು ಮತ್ತು ಮೃದುವಾಗಿರುತ್ತದೆ ಹಾಗೂ ನೀರು ಹಿಡಿದಿಡುತ್ತದೆ. ಮರಳು ಮಣ್ಣು, ಜೇಡಿ ಮಣ್ಣು ಮತ್ತು ಹೂಳಿನ ಮಿಶ್ರಣದಿಂದ ಗೋಡು ಮಣ್ಣು ರೂಪುಗೊಳ್ಳುತ್ತದೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#fef3c7"><div class="ic">🏖️</div><div class="tt">(೧) ಮರಳು ಮಣ್ಣು</div><div class="dd">• ಮರಳಿನ ಪ್ರಮಾಣ ಹೆಚ್ಚು.<br>• ನೀರು ತಕ್ಷಣ ಇಂಗಿ ಹೋಗುತ್ತದೆ.<br>• ಬೇಗ ಒಣಗುತ್ತದೆ.</div></div>
+  <div class="tile op" style="background:#fde2cf"><div class="ic">🏺</div><div class="tt">(೨) ಜೇಡಿ ಮಣ್ಣು</div><div class="dd">• ತುಂಬಾ ಅಂಟು ಮತ್ತು ಮೃದು.<br>• ಕಣಗಳು ತುಂಬಾ ಚಿಕ್ಕವು ಮತ್ತು ಬಿಗಿಯಾಗಿ ಅಂಟಿಕೊಂಡಿರುತ್ತವೆ.<br>• ನೀರನ್ನು ಸುಲಭವಾಗಿ ಹಿಡಿದಿಡುತ್ತದೆ.<br>• ಬೆಳೆಗಳ ಬೆಳವಣಿಗೆಗೆ ಮತ್ತು ವಿವಿಧ ವಸ್ತುಗಳು (ಮಡಕೆ, ಮೂರ್ತಿ) ತಯಾರಿಸಲು ಉಪಯುಕ್ತ.</div></div>
+  <div class="tile op" style="background:#dcfce7"><div class="ic">🌾</div><div class="tt">(೩) ಗೋಡು ಮಣ್ಣು</div><div class="dd">• ಮರಳು ಮಣ್ಣು + ಜೇಡಿ ಮಣ್ಣು + ಹೂಳು ಇವುಗಳ ಮಿಶ್ರಣ.<br>• ನೀರು ಹಿಡಿದಿಡುತ್ತದೆ, ನೆಲದಲ್ಲಿ ತೇವ ಇರುತ್ತದೆ.<br>• ಬೆಳೆಗಳ ಬೆಳವಣಿಗೆಗೆ ಉತ್ತಮ.</div></div>
+ </div>
+ <h3>ಗುರುತಿಸಿ ನೋಡೋಣ, ನಾನು ಯಾರು?</h3><div id="whoBox"></div>
+ <div class="know"><b class="h">🔬 ಮಾಡಿ ನೋಡಿ</b><br>ಪರಿಸರದ ವಿವಿಧ ಮಣ್ಣಿನ ಮಾದರಿಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ. ಮಣ್ಣನ್ನು ನೆನೆಸಿ ಉಂಡೆ ಮಾಡಿ ನೋಡಿ. ಮಣ್ಣಿನ ಬಣ್ಣ, ವೈಶಿಷ್ಟ್ಯಗಳು ಮತ್ತು ಉಂಡೆ ಆಗುತ್ತದೆಯೇ (ಹೌದು/ಇಲ್ಲ) ಎಂಬ ಕೋಷ್ಟಕವನ್ನು ಪುಸ್ತಕದಲ್ಲಿ ತುಂಬಿ.</div>`,a:()=>drawWho()},
+{h:'ಮಣ್ಣಿನ ಮಾಲಿನ್ಯ ಮತ್ತು ಸಾವಯವ ಗೊಬ್ಬರ',s:'ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ, ಕೀಟನಾಶಕಗಳ ಅತಿಯಾದ ಬಳಕೆಯಿಂದ ಹಾಗೂ ಕಾರ್ಖಾನೆಯ ವಿಷಕಾರಿ ವಸ್ತುಗಳು ಮತ್ತು ಕಸ ಮಣ್ಣಿನಲ್ಲಿ ಬೆರೆತಿದ್ದರಿಂದ ಮಣ್ಣಿನ ಫಲವತ್ತತೆ ಕಡಿಮೆಯಾಗುತ್ತದೆ ಮತ್ತು ಅದು ಕಲುಷಿತವಾಗುತ್ತದೆ, ಇದನ್ನು ಮಣ್ಣಿನ ಮಾಲಿನ್ಯ ಎನ್ನುತ್ತಾರೆ.',b:()=>`
+ <div class="key">ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ, ಕೀಟನಾಶಕಗಳ <b>ಅತಿಯಾದ ಬಳಕೆಯಿಂದ</b> ಹಾಗೂ ಕಾರ್ಖಾನೆಗಳ <b>ವಿಷಕಾರಿ ವಸ್ತುಗಳು ಮತ್ತು ಕಸ</b> ಮಣ್ಣಿನಲ್ಲಿ ಬೆರೆತಿದ್ದರಿಂದ ಮಣ್ಣಿನ ಫಲವತ್ತತೆ ಕಡಿಮೆಯಾಗುತ್ತದೆ ಮತ್ತು ಅದು ಕಲುಷಿತವಾಗುತ್ತದೆ, ಇದಕ್ಕೆ <b>ಮಣ್ಣಿನ ಮಾಲಿನ್ಯ</b> ಎನ್ನುತ್ತಾರೆ.</div>
+ <div>ಇಂತಹ ಪದಾರ್ಥಗಳು ಮಣ್ಣಿನಲ್ಲಿ ಬೆರೆಯದಂತೆ ನಾವು ಎಚ್ಚರಿಕೆ ವಹಿಸಬೇಕು. ಹೊಲದಲ್ಲಿ ರಾಸಾಯನಿಕ ಗೊಬ್ಬರದ ಬದಲು <b>ಸಾವಯವ ಗೊಬ್ಬರದ</b> ಬಳಕೆ ಮಾಡಬೇಕು.</div>
+ <svg viewBox="0 0 360 120"><rect width="360" height="120" rx="12" fill="#f0fdf4"/>
+  <text x="40" y="50" font-size="30">🐄</text><text x="85" y="50" font-size="30">🍂</text><text x="130" y="45" font-size="22" fill="#15803d">➜</text>
+  <rect x="160" y="22" width="70" height="40" rx="6" fill="#a16207"/><text x="195" y="47" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">ಗುಂಡಿ</text>
+  <text x="240" y="45" font-size="22" fill="#15803d">➜</text><text x="270" y="50" font-size="30">🌱</text>
+  <text x="180" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">ಜಾನುವಾರುಗಳ ಮಲಮೂತ್ರ + ಕೊಳೆತ ತರಗೆಲೆ = ಸಾವಯವ ಗೊಬ್ಬರ</text></svg>`},
+{h:'ಇದನ್ನು ನಾವು ಕಲಿತೆವು',s:'ಎಲ್ಲ ಜೀವಿಗಳಿಗೆ ನೀರು ಮುಖ್ಯ, ಆದ್ದರಿಂದ ನೀರನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಬಳಸಬೇಕು. ನೀರಿನ ಪ್ರತಿ ಹನಿಯೂ ಮುಖ್ಯ.',b:()=>`
+ <ul>
+  <li>ಎಲ್ಲ ಜೀವಿಗಳಿಗೆ ನೀರು ಮುಖ್ಯ, ಆದ್ದರಿಂದ ಅದನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಬಳಸಬೇಕು.</li>
+  <li>ನದಿ, ಬಾವಿ, ಕೆರೆ, ಅಣೆಕಟ್ಟು ಇಂತಹ ಸ್ಥಳಗಳಿಗೆ <b>ನೀರಿನ ಮೂಲಗಳು</b> ಎನ್ನುತ್ತಾರೆ.</li>
+  <li>ಕೆರೆ, ಬಾವಿ, ಒಡ್ಡು, ಕೋಟೆಯ ಟ್ಯಾಂಕ್, ತೊಟ್ಟಿ ಇವುಗಳಲ್ಲಿ ದೊಡ್ಡ ಪ್ರಮಾಣದಲ್ಲಿ ನೀರು ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ.</li>
+  <li>ನೀರಿನ ಪ್ರತಿ ಹನಿಯೂ ಮುಖ್ಯ, ಆದ್ದರಿಂದ <b>ಮರುಬಳಕೆ</b> ಅಗತ್ಯ.</li>
+  <li>ಸೋಸುವುದು, ತಿಳಿಗೊಳಿಸುವುದು, ಕುದಿಸುವುದು, ಸೋಂಕು ನಿವಾರಣೆ ಇವು ನೀರನ್ನು <b>ಸುರಕ್ಷಿತ</b> ಮಾಡುವ ವಿಧಾನಗಳು.</li>
+  <li>ಮಳೆ ನೀರನ್ನು ಸಂಗ್ರಹಿಸಿ ನೆಲದಲ್ಲಿನ ನೀರಿನ ಮಟ್ಟ ಹೆಚ್ಚಿಸುವುದು ಎಂದರೆ <b>ಮಳೆ ನೀರಿನ ಸಂರಕ್ಷಣೆ</b>.</li>
+  <li>ಮಣ್ಣು ರೂಪುಗೊಳ್ಳಲು ಬಹಳ ವರ್ಷಗಳು ಬೇಕು, ಆದ್ದರಿಂದ ಅದರ ರಕ್ಷಣೆ ಅಗತ್ಯ.</li>
+  <li>ಮರಳು ಮಣ್ಣು, ಜೇಡಿ ಮಣ್ಣು, ಗೋಡು ಮಣ್ಣು ಇವು ಮಣ್ಣಿನ ಪ್ರಕಾರಗಳು.</li>
+  <li>ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ, ಕೀಟನಾಶಕ, ವಿಷಕಾರಿ ಪದಾರ್ಥಗಳಿಂದ ಫಲವತ್ತತೆ ಕಡಿಮೆಯಾಗುತ್ತದೆ – ಇದು <b>ಮಣ್ಣಿನ ಮಾಲಿನ್ಯ</b>.</li>
+ </ul>
+ <div class="pledge">🤝 <b>ಪ್ರತಿಜ್ಞೆ:</b> ನಾನು ಪ್ರತಿಜ್ಞೆ ಮಾಡುತ್ತೇನೆ, ನಾನು ನೀರನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಬಳಸುತ್ತೇನೆ. ನಾನು ನೀರಿನ ಒಂದು ಹನಿಯನ್ನೂ ವ್ಯರ್ಥ ಮಾಡುವುದಿಲ್ಲ. ನೀರು ಜೀವನ ಎಂಬ ಅರಿವು ನನಗಿದೆ. ನಾನು ನನ್ನ ಸ್ನೇಹಿತರಿಗೆ ಮತ್ತು ಕುಟುಂಬದ ಸದಸ್ಯರಿಗೆ ನೀರು ಉಳಿತಾಯಕ್ಕಾಗಿ ಪ್ರೋತ್ಸಾಹ ನೀಡುತ್ತೇನೆ. ನಾನು ನೀರು ಉಳಿತಾಯಕ್ಕಾಗಿ ಯಾವಾಗಲೂ ಪ್ರಯತ್ನಿಸುತ್ತೇನೆ.<br><button class="btn gr sm" onclick="say('ನಾನು ಪ್ರತಿಜ್ಞೆ ಮಾಡುತ್ತೇನೆ, ನಾನು ನೀರನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಬಳಸುತ್ತೇನೆ. ನಾನು ನೀರಿನ ಒಂದು ಹನಿಯನ್ನೂ ವ್ಯರ್ಥ ಮಾಡುವುದಿಲ್ಲ. ನೀರು ಜೀವನ ಎಂಬ ಅರಿವು ನನಗಿದೆ. ನಾನು ನನ್ನ ಸ್ನೇಹಿತರಿಗೆ ಮತ್ತು ಕುಟುಂಬದ ಸದಸ್ಯರಿಗೆ ನೀರು ಉಳಿತಾಯಕ್ಕಾಗಿ ಪ್ರೋತ್ಸಾಹ ನೀಡುತ್ತೇನೆ. ನಾನು ನೀರು ಉಳಿತಾಯಕ್ಕಾಗಿ ಯಾವಾಗಲೂ ಪ್ರಯತ್ನಿಸುತ್ತೇನೆ.')">🗣 ಪ್ರತಿಜ್ಞೆ ಕೇಳಿ</button></div>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>• ಮಣ್ಣಿನಿಂದ ವಿವಿಧ ವಸ್ತುಗಳ ಅಥವಾ ಪ್ರಾಣಿಗಳ ಪ್ರತಿಕೃತಿಗಳನ್ನು ತಯಾರಿಸಿ.<br>• ಛಾವಣಿಯ ಮೇಲಿನ ಮಳೆ ನೀರು ಸಂಗ್ರಹಿಸುವ ವಿಧಾನಗಳ ಮಾಹಿತಿ ಪಡೆದು ಅದರ ಪೋಸ್ಟರ್ ತಯಾರಿಸಿ.</div>
+ <div class="msg ok" style="text-align:center;font-size:19px">💧 ನೀರಿನ ಪ್ರತಿ ಹನಿಯೂ ಮುಖ್ಯ! 💧</div>
+ <div class="tool">${tool('N')}</div>`}
+];
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* water visual */
+function wv(k){[0,1,2].forEach(i=>{const e=$('w'+i);if(e)e.classList.toggle('on',i==k)});
+ const hl=i=>i==k?'#dc2626':'#475569';
+ $('wsvg').innerHTML=`<rect width="360" height="200" rx="12" fill="#f8fafc"/>
+ <g><rect x="25" y="30" width="110" height="140" rx="14" fill="#93c5fd" stroke="${hl(0)}" stroke-width="${k==0?4:2}"/><line x1="25" y1="70" x2="135" y2="70" stroke="#1e40af"/><line x1="25" y1="130" x2="135" y2="130" stroke="#1e40af"/><text x="80" y="190" text-anchor="middle" font-size="13" font-weight="700">ಡ್ರಮ್ = ಎಲ್ಲ ನೀರು</text></g>
+ <g><path d="M175 120 h50 l-6 45 h-38z" fill="#bfdbfe" stroke="${hl(1)}" stroke-width="${k==1?4:2}"/><path d="M225 130 q16 6 0 22" fill="none" stroke="${hl(1)}" stroke-width="3"/><text x="200" y="190" text-anchor="middle" font-size="13" font-weight="700">ಕಪ್ = ಸಿಹಿ ನೀರು</text></g>
+ <g><path d="M300 135 q-12 18 0 26 q12-8 0-26z" fill="#2563eb" stroke="${hl(2)}" stroke-width="${k==2?4:2}"/><text x="300" y="190" text-anchor="middle" font-size="13" font-weight="700">ಹನಿ = ಕುಡಿಯಲು ಯೋಗ್ಯ</text></g>`;
+ const m=['ಭೂಮಿಯ ಮೇಲಿನ ಎಲ್ಲ ನೀರು – ಇದರಲ್ಲಿ ಹೆಚ್ಚಿನದು ಸಮುದ್ರ ಮತ್ತು ಸಾಗರಗಳ ಉಪ್ಪು ನೀರು.','ಇದರಲ್ಲಿ ಸಿಹಿ ನೀರು ಕೇವಲ ಒಂದು ಕಪ್! ಅದರಲ್ಲಿ ಬಹಳಷ್ಟು ಹೆಪ್ಪುಗಟ್ಟಿದೆ ಅಥವಾ ನೆಲದ ಕೆಳಗಿದೆ.','ನದಿ, ಬಾವಿ, ಕೆರೆ, ಅಣೆಕಟ್ಟುಗಳಲ್ಲಿನ ಕುಡಿಯಲು ಯೋಗ್ಯ ನೀರು ಕೇವಲ ಒಂದು ಹನಿ! ಆದ್ದರಿಂದ ಅದನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಬಳಸಿ.'];
+ $('wmsg').innerHTML=m[k]}
+
+/* sort game */
+const SORT=[['ಹಲ್ಲುಜ್ಜುವಾಗ ನಲ್ಲಿ ಬಂದ್ ಮಾಡಿಡುವುದು',1],['ಸ್ನಾನಕ್ಕೆ ಶವರ್ ಬದಲು ಬಕೆಟ್ ಬಳಸುವುದು',1],['ಸೋರುವ ನಲ್ಲಿಯನ್ನು ತಕ್ಷಣ ದುರಸ್ತಿ ಮಾಡುವುದು',1],['ತರಕಾರಿ ತೊಳೆದ ನೀರನ್ನು ಗಿಡಗಳಿಗೆ ಹಾಕುವುದು',1],['ಹಿಂದಿನ ದಿನ ತುಂಬಿಟ್ಟ ಕುಡಿಯುವ ನೀರು ಹಳಸಿತು ಎಂದು ಚೆಲ್ಲಿಬಿಡುವುದು',0],['ಗಾಡಿ ತೊಳೆಯುವಾಗ ಪೈಪ್‌ನಿಂದ ತುಂಬಾ ನೀರು ಹರಿಯಲು ಬಿಡುವುದು',0],['ಕುಡಿಯಲು ಯೋಗ್ಯ ನೀರು ಪಡೆಯಲು ನೀರನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸುವುದು',1],['ಟ್ಯಾಂಕ್ ತುಂಬಿ ನೀರು ಹೊರಗೆ ಹರಿಯಲು ಬಿಡುವುದು',0]];
+let SA={};
+function drawSort(){const b=$('sortBox');if(!b)return;b.innerHTML=SORT.map((x,i)=>`<div class="sort ${SA[i]==null?'':(SA[i]==x[1]?'ok':'no')}"><span>${x[0]}</span><span class="bb"><button class="btn gr sm" onclick="sa(${i},1)">✔ ಸರಿ</button><button class="btn or sm" onclick="sa(${i},0)">✘ ತಪ್ಪು</button></span></div>`).join('');
+ const n=Object.keys(SA).length,c=Object.keys(SA).filter(i=>SA[i]==SORT[i][1]).length;
+ $('sortRes').innerHTML=n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${SORT.length} ಸರಿ ${n==SORT.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''}
+function sa(i,v){SA[i]=v;drawSort()}
+function polC(el,ok){el.classList.add('on');el.style.borderColor=ok?'#dc2626':'#16a34a';el.style.background=ok?'#fee2e2':'#dcfce7';el.style.color=ok?'#991b1b':'#166534';
+ $('polMsg').innerHTML=`<div class="msg ${ok?'no':'ok'}">${el.textContent} – ${ok?'ಇದು ನೀರನ್ನು ಕಲುಷಿತಗೊಳಿಸುತ್ತದೆ! ⚠️':'ಇದು ನೀರನ್ನು ಕಲುಷಿತಗೊಳಿಸುವುದಿಲ್ಲ, ಬದಲಿಗೆ ಉಪಯುಕ್ತ. ✔'}</div>`}
+function rq(el,v){el.parentNode.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');
+ $('rqMsg').innerHTML=v?'<div class="msg ok">✔ ಸರಿ! ಮಣ್ಣಿಗೆ ನೀರು ಹಿಡಿದಿಡುವ ಸಾಮರ್ಥ್ಯ ಇದೆ, ಆದ್ದರಿಂದ ನೀರು ಮಣ್ಣಿನಲ್ಲಿ ಇಂಗುತ್ತದೆ ಮತ್ತು ಹರಿದು ಹೋಗುವುದಿಲ್ಲ.</div>':'<div class="msg no">✘ ಕಲ್ಲಿನ ಬೆಟ್ಟದಿಂದ ನೀರು ಹರಿದು ಹೋಗುತ್ತದೆ; ಕಲ್ಲುಬಂಡೆಗಳು ನೀರನ್ನು ಹಿಡಿದಿಡುವುದಿಲ್ಲ.</div>'}
+/* who am I */
+const WHO=[['ನಾನು ಅಂಟು ಮತ್ತು ಮೃದು. ನಾನು ನೀರನ್ನು ಸುಲಭವಾಗಿ ಹಿಡಿದಿಡುತ್ತೇನೆ.','ಜೇಡಿ ಮಣ್ಣು'],['ನಾನು ಮರಳಿನಂತೆ. ನಾನು ನೀರನ್ನು ಹಿಡಿದಿಡಲಾರೆ.','ಮರಳು ಮಣ್ಣು'],['ನಾನು ಮರಳು ಮಣ್ಣು, ಜೇಡಿ ಮಣ್ಣು ಮತ್ತು ಹೂಳಿನಿಂದ ರೂಪುಗೊಂಡಿದ್ದೇನೆ.','ಗೋಡು ಮಣ್ಣು']];
+let WA={};
+function drawWho(){const b=$('whoBox');if(!b)return;const o=['ಮರಳು ಮಣ್ಣು','ಜೇಡಿ ಮಣ್ಣು','ಗೋಡು ಮಣ್ಣು'];
+ b.innerHTML=WHO.map((w,i)=>`<div class="sq"><b>${i+1}) ${w[0]}</b><div class="chips">${o.map(x=>`<span class="chip ${WA[i]==x?'on':''}" onclick="WA[${i}]='${x}';drawWho()">${x}</span>`).join('')}</div>${WA[i]?`<div class="msg ${WA[i]==w[1]?'ok':'no'}">${WA[i]==w[1]?'✔ ಸರಿ!':'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('')}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ಭೂಮಿಯ ಸುಮಾರು ಎಷ್ಟು ಪ್ರತಿಶತ ಭಾಗ ನೀರಿನಿಂದ ಆವೃತವಾಗಿದೆ?',['೫೧ %','೬೧ %','೭೧ %','೮೧ %'],2,'ಭೂಮಿಯ ಸುಮಾರು ೭೧ ಪ್ರತಿಶತ ಭಾಗ ನೀರಿನಿಂದ ಆವೃತವಾಗಿದೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ನೀರಿನ ಮೂಲ ಅಲ್ಲ?',['ನದಿ','ಅರಣ್ಯ','ಕೆರೆ','ಬಾವಿ'],1,'ಕಾಡು ನೀರಿನ ಮೂಲ ಅಲ್ಲ.'],
+['ಆಡ, ಬಾರವ, ಬುಡಕಿ ಇವು ಯಾವುದರ ಪ್ರಕಾರಗಳು?',['ಕೆರೆಯದು','ಬಾವಿಯದು','ಒಡ್ಡಿನದು','ತೊಟ್ಟಿಯದು'],1,'ಆಡ, ಬಾರವ, ಬುಡಕಿ ಇವು ಬಾವಿಯ ಪ್ರಕಾರಗಳು.'],
+['ಪುಷ್ಕರಿಣಿ, ವಾಪಿ, ವಾಪಿಕಾ ಇವು ಯಾವುದರ ಹೆಸರುಗಳು?',['ಬಾವಿಯದು','ನದಿಯದು','ಕೆರೆಯದು','ಅಣೆಕಟ್ಟಿನದು'],2,'ಕೆರೆಗೆ ಪುಷ್ಕರಿಣಿ, ವಾಪಿ, ವಾಪಿಕಾ ಎಂಬ ಹೆಸರುಗಳೂ ಇವೆ.'],
+['ಬಾರಾಮೋಟೆಯ ಐತಿಹಾಸಿಕ ಬಾವಿ ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿದೆ?',['ಸಾಂಗ್ಲಿ','ಸಾತಾರಾ','ಪುಣೆ','ಕೊಲ್ಲಾಪುರ'],1,'ಸಾತಾರಾ ಜಿಲ್ಲೆಯ ಲಿಂಬ್‌ನಲ್ಲಿ ಬಾರಾಮೋಟೆಯ ಬಾವಿ ಇದೆ.'],
+['ನದಿಯ ಹರಿಯುವ ನೀರನ್ನು ತಡೆಯಲು ಏನನ್ನು ಕಟ್ಟುತ್ತಾರೆ?',['ತೊಟ್ಟಿ','ಒಡ್ಡು','ಬಾವಿ','ಟ್ಯಾಂಕ್'],1,'ನದಿಯ ಹರಿಯುವ ನೀರನ್ನು ತಡೆಯಲು ಕಲ್ಲಿನ ಅಥವಾ ಮಣ್ಣಿನ ಒಡ್ಡುಗಳನ್ನು ಕಟ್ಟುತ್ತಾರೆ.'],
+['ಭೂಮಿಯ ಮೇಲಿನ ಎಲ್ಲ ನೀರು ಒಂದು ಡ್ರಮ್‌ನಲ್ಲಿ ಹಿಡಿದರೆ ಕುಡಿಯಲು ಯೋಗ್ಯ ನೀರು ಎಷ್ಟಿರುತ್ತದೆ?',['ಡ್ರಮ್ ತುಂಬ','ಬಕೆಟ್ ತುಂಬ','ಒಂದು ಕಪ್','ಒಂದು ಹನಿ'],3,'ಸಿಹಿ ನೀರು ಒಂದು ಕಪ್, ಆದರೆ ಕುಡಿಯಲು ಯೋಗ್ಯ ನೀರು ಕೇವಲ ಒಂದು ಹನಿ ಇರುತ್ತದೆ.'],
+['ನೀರನ್ನು ‘ಜೀವನ’ ಎಂದು ಏಕೆ ಕರೆಯುತ್ತಾರೆ?',['ನೀರಿಗೆ ಬಣ್ಣ ಇಲ್ಲ ಆದ್ದರಿಂದ','ಯಾವುದೇ ಜೀವಿ ನೀರಿಲ್ಲದೆ ಬದುಕಲಾರದು ಆದ್ದರಿಂದ','ನೀರು ಅಗ್ಗ ಆದ್ದರಿಂದ','ನೀರು ಎಲ್ಲೆಡೆ ಸಿಗುತ್ತದೆ ಆದ್ದರಿಂದ'],1,'ಯಾವುದೇ ಜೀವಿ ನೀರಿಲ್ಲದೆ ಬದುಕಲಾರದು.'],
+['ತರಕಾರಿ ತೊಳೆದ ನೀರನ್ನು ಗಿಡಗಳಿಗೆ ಹಾಕುವುದನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ಜಲಮಾಲಿನ್ಯ','ನೀರಿನ ಮರುಬಳಕೆ','ತಿಳಿಯಾಗುವುದು','ಸೋಂಕು ನಿವಾರಣೆ'],1,'ಬಳಸಿದ ನೀರನ್ನು ಮತ್ತೆ ಬಳಸುವುದು ಎಂದರೆ ನೀರಿನ ಮರುಬಳಕೆ.'],
+['ನೀರಿನಲ್ಲಿ ಹರಳೆ ತಿರುಗಿಸಿದರೆ ಏನಾಗುತ್ತದೆ?',['ನೀರು ಕುದಿಯುತ್ತದೆ','ಮಣ್ಣಿನ ಕಣಗಳು ಮತ್ತು ಕಸ ತಳಕ್ಕೆ ಹೋಗಿ ನೀರು ತಿಳಿಯಾಗುತ್ತದೆ','ರೋಗಾಣುಗಳು ಹೆಚ್ಚುತ್ತವೆ','ನೀರು ಉಪ್ಪಾಗುತ್ತದೆ'],1,'ಹರಳೆಯಿಂದ ಕಣಗಳು ತಳದಲ್ಲಿ ಕೂರುತ್ತವೆ – ಇದನ್ನು ತಿಳಿಗೊಳಿಸುವುದು ಎನ್ನುತ್ತಾರೆ.'],
+['ಸೂಕ್ಷ್ಮಜೀವಿಗಳು ನಾಶವಾಗಲು ನೀರನ್ನು ಎಷ್ಟು ಹೊತ್ತು ಕುದಿಸಬೇಕು?',['೨ ರಿಂದ ೩ ನಿಮಿಷ','೫ ನಿಮಿಷ','೧೦ ರಿಂದ ೧೫ ನಿಮಿಷ','೧ ಗಂಟೆ'],2,'ನೀರನ್ನು ೧೦ ರಿಂದ ೧೫ ನಿಮಿಷ ಕುದಿಸಿದರೆ ಸೂಕ್ಷ್ಮಜೀವಿಗಳು ನಾಶವಾಗುತ್ತವೆ.'],
+['ನೀರಿನ ಸೋಂಕು ನಿವಾರಣೆಗೆ ಏನನ್ನು ಹಾಕುತ್ತಾರೆ?',['ಸಕ್ಕರೆ','ಉಪ್ಪು','ಬ್ಲೀಚಿಂಗ್ ಪೌಡರ್ / ಕ್ಲೋರಿನ್','ಎಣ್ಣೆ'],2,'ಬ್ಲೀಚಿಂಗ್ ಪೌಡರ್ ಅಥವಾ ಕ್ಲೋರಿನ್ ಮಾತ್ರೆ/ಹನಿ ಹಾಕುತ್ತಾರೆ.'],
+['ಸುರಕ್ಷಿತ ನೀರು ಕುಡಿಯುವುದರಿಂದ ಯಾವ ಕಾಯಿಲೆಗಳನ್ನು ತಪ್ಪಿಸಬಹುದು?',['ಹೊಟ್ಟೆನೋವು, ಬೇಧಿ','ಕಣ್ಣು ಬೇನೆ','ಹಲ್ಲು ಹುಳುಕಾಗುವುದು','ನೆಗಡಿ'],0,'ಸುರಕ್ಷಿತ ನೀರಿನಿಂದ ಹೊಟ್ಟೆನೋವು, ಬೇಧಿ ಇಂತಹ ಕಾಯಿಲೆಗಳನ್ನು ತಪ್ಪಿಸಬಹುದು.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ಜಲಮಾಲಿನ್ಯಕ್ಕೆ ಕಾರಣ ಅಲ್ಲ?',['ಸಾಬೂನಿನ ನೀರು','POP ಮೂರ್ತಿಗಳು','ಪ್ಲಾಸ್ಟಿಕ್','ನೀರು ಕುದಿಸುವುದು'],3,'ನೀರು ಕುದಿಸುವುದು ನೀರನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸುವ ವಿಧಾನ.'],
+['‘ನಮಾಮಿ ಗಂಗೆ’ ಯೋಜನೆಯನ್ನು ಯಾವ ವರ್ಷ ಕೈಗೆತ್ತಿಕೊಳ್ಳಲಾಯಿತು?',['೨೦೦೪','೨೦೧೦','೨೦೧೪','೨೦೨೦'],2,'ಜೂನ್ ೨೦೧೪ ರಲ್ಲಿ ‘ನಮಾಮಿ ಗಂಗೆ’ ಯೋಜನೆಯನ್ನು ಕೈಗೆತ್ತಿಕೊಳ್ಳಲಾಯಿತು.'],
+['ನೆಲದಲ್ಲಿನ ನೀರಿನ ಮಟ್ಟ ಹೆಚ್ಚಲು ಬೆಟ್ಟದ ಇಳಿಜಾರಿನಲ್ಲಿ ಏನನ್ನು ತೋಡುತ್ತಾರೆ?',['ಬಾವಿ','ಕಂದಕ','ತೊಟ್ಟಿ','ಕೃಷಿ ಹೊಂಡ'],1,'ಬೆಟ್ಟದ ಇಳಿಜಾರಿನಲ್ಲಿ ಕಂದಕಗಳನ್ನು ತೋಡಲಾಗುತ್ತದೆ.'],
+['ಯಾವ ಮಣ್ಣಿನಿಂದ ನೀರು ತಕ್ಷಣ ಇಂಗಿ ಹೋಗುತ್ತದೆ?',['ಜೇಡಿ ಮಣ್ಣು','ಗೋಡು ಮಣ್ಣು','ಮರಳು ಮಣ್ಣು','ಕಪ್ಪು ಮಣ್ಣು'],2,'ಮರಳು ಮಣ್ಣಿನಲ್ಲಿ ಮರಳು ಹೆಚ್ಚು ಇರುವುದರಿಂದ ನೀರು ತಕ್ಷಣ ಇಂಗುತ್ತದೆ.'],
+['ಮಡಕೆ, ಮೂರ್ತಿ ತಯಾರಿಸಲು ಯಾವ ಮಣ್ಣು ಉಪಯುಕ್ತ?',['ಮರಳು ಮಣ್ಣು','ಜೇಡಿ ಮಣ್ಣು','ಮರಳು','ಜಲ್ಲಿ'],1,'ಜೇಡಿ ಮಣ್ಣು ಅಂಟು ಮತ್ತು ಮೃದುವಾಗಿರುವುದರಿಂದ ವಸ್ತುಗಳನ್ನು ತಯಾರಿಸಬಹುದು.'],
+['ಮಣ್ಣಿನ ಫಲವತ್ತತೆ ಯಾವುದರಿಂದ ಕಡಿಮೆಯಾಗುತ್ತದೆ?',['ಸಾವಯವ ಗೊಬ್ಬರ','ಗಿಡ ನೆಡುವುದು','ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ ಮತ್ತು ಕೀಟನಾಶಕಗಳ ಅತಿಯಾದ ಬಳಕೆ','ಹುಲ್ಲು ಬೆಳೆಸುವುದು'],2,'ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ, ಕೀಟನಾಶಕಗಳ ಅತಿಯಾದ ಬಳಕೆಯಿಂದ ಮಣ್ಣಿನ ಮಾಲಿನ್ಯ ಆಗುತ್ತದೆ.'],
+['ಸಾವಯವ ಗೊಬ್ಬರ ಯಾವುದರಿಂದ ತಯಾರಾಗುತ್ತದೆ?',['ರಾಸಾಯನಿಕಗಳಿಂದ','ಜಾನುವಾರುಗಳ ಮಲಮೂತ್ರ ಮತ್ತು ಕೊಳೆತ ತರಗೆಲೆಯಿಂದ','ಪ್ಲಾಸ್ಟಿಕ್‌ನಿಂದ','ಮರಳಿನಿಂದ'],1,'ಸಾವಯವ ಗೊಬ್ಬರ ಜಾನುವಾರುಗಳ ಮಲಮೂತ್ರ, ಕೊಳೆತ ತರಗೆಲೆಯಿಂದ ತಯಾರಾಗುತ್ತದೆ.']
+];
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ aa:[['ನಾನು ಅಂಟು ಮತ್ತು ಮೃದು. ನಾನು ನೀರನ್ನು ಸುಲಭವಾಗಿ ಹಿಡಿದಿಡುತ್ತೇನೆ.','ಜೇಡಿ ಮಣ್ಣು'],['ನಾನು ಮರಳಿನಂತೆ. ನಾನು ನೀರನ್ನು ಹಿಡಿದಿಡಲಾರೆ.','ಮರಳು ಮಣ್ಣು'],['ನಾನು ಮರಳು ಮಣ್ಣು, ಜೇಡಿ ಮಣ್ಣು ಮತ್ತು ಹೂಳಿನಿಂದ ರೂಪುಗೊಂಡಿದ್ದೇನೆ.','ಗೋಡು ಮಣ್ಣು']],
+ i:[['ಮಣ್ಣಿನ ಉಪಯೋಗಗಳನ್ನು ಬರೆಯಿರಿ.','ಮಣ್ಣು ಬೆಳೆಗಳ ಮತ್ತು ಮರಗಳ ಬೆಳವಣಿಗೆಗೆ ಉಪಯುಕ್ತ. ಮಣ್ಣು ನೀರನ್ನು ಹಿಡಿದಿಡುತ್ತದೆ. ಜೇಡಿ ಮಣ್ಣಿನಿಂದ ಮಡಕೆ, ಮೂರ್ತಿ, ಇಟ್ಟಿಗೆ, ಹೆಂಚು, ಆಟಿಕೆ ಇಂತಹ ವಿವಿಧ ವಸ್ತುಗಳನ್ನು ತಯಾರಿಸುತ್ತಾರೆ.'],
+  ['ಮಣ್ಣಿನ ಮಾಲಿನ್ಯದ ಕಾರಣಗಳನ್ನು ಬರೆಯಿರಿ.','ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ ಮತ್ತು ಕೀಟನಾಶಕಗಳ ಅತಿಯಾದ ಬಳಕೆ, ಕಾರ್ಖಾನೆಗಳ ವಿಷಕಾರಿ ವಸ್ತುಗಳು ಮತ್ತು ಕಸ ಮಣ್ಣಿನಲ್ಲಿ ಬೆರೆಯುವುದು, ಪ್ಲಾಸ್ಟಿಕ್ ಮಣ್ಣಿನಲ್ಲಿ ಹಾಕುವುದು.'],
+  ['ಸುರಕ್ಷಿತ ನೀರು ಎಂದರೇನು?','ಯಾವ ನೀರನ್ನು ಕುಡಿದರೆ ನಮ್ಮ ಆರೋಗ್ಯಕ್ಕೆ ಯಾವುದೇ ರೀತಿಯಲ್ಲಿ ಅಪಾಯವಾಗುವುದಿಲ್ಲವೋ ಅಂತಹ ನೀರನ್ನು ಸುರಕ್ಷಿತ ನೀರು ಎನ್ನುತ್ತಾರೆ.'],
+  ['ನೀರಿನ ಮಾಲಿನ್ಯ ಯಾವ ಯಾವ ಕಾರಣಗಳಿಂದ ಆಗುತ್ತದೆ?','ಸಾಬೂನಿನ ನೀರು, ಪ್ಲಾಸ್ಟಿಕ್, ಗೊಬ್ಬರ, ಪ್ಲಾಸ್ಟರ್ ಆಫ್ ಪ್ಯಾರಿಸ್ (POP) ಮೂರ್ತಿಗಳು, ರಾಸಾಯನಿಕಗಳು ಇತ್ಯಾದಿ ಅಂಶಗಳು ನೀರಿನಲ್ಲಿ ಬೆರೆಯುವುದರಿಂದ ನೀರಿನ ಮಾಲಿನ್ಯ ಆಗುತ್ತದೆ.']],
+ u:[['ಚಿತ್ರದಲ್ಲಿ ನೀರನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸುವ ಯಾವ ವಿಧಾನವನ್ನು ಬಳಸಲಾಗಿದೆ?','ಕುದಿಯುವುದು'],['ಸುರಕ್ಷಿತವಾಗಲು ನೀರನ್ನು ಎಷ್ಟು ಹೊತ್ತು ಕುದಿಸಬೇಕು?','೧೦ ರಿಂದ ೧೫ ನಿಮಿಷ'],['ನೀರು ಕುದಿಸಿದ ಮೇಲೆ ಅದು ಕುಡಿಯಲು ಏಕೆ ಸುರಕ್ಷಿತವಾಗುತ್ತದೆ?','ಕುದಿಸುವುದರಿಂದ ನೀರಿನಲ್ಲಿನ ಸೂಕ್ಷ್ಮಜೀವಿಗಳು ನಾಶವಾಗುತ್ತವೆ.'],['ನೀರನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸಲು ಇನ್ನೂ ಯಾವ ಉಪಾಯಗಳನ್ನು ಮಾಡಬಹುದು?','ಸೋಸುವುದು, ತಿಳಿಗೊಳಿಸುವುದು (ಹರಳೆ ತಿರುಗಿಸುವುದು), ಸೋಂಕು ನಿವಾರಣೆ (ಬ್ಲೀಚಿಂಗ್ ಪೌಡರ್ / ಕ್ಲೋರಿನ್).']],
+ uu:[['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ನೀರಿನ ಮೂಲ ಅಲ್ಲ?',['ನದಿ','ಅರಣ್ಯ','ಕೆರೆ','ಬಾವಿ'],1],['ಮಣ್ಣಿನ ಮಾಲಿನ್ಯ ಯಾವುದರಿಂದ ಆಗುತ್ತದೆ?',['ಮಣ್ಣಿನಲ್ಲಿ ಗಿಡ ನೆಡುವುದರಿಂದ','ಮಣ್ಣಿನಲ್ಲಿ ಕಸ ಮತ್ತು ಪ್ಲಾಸ್ಟಿಕ್ ಹಾಕುವುದರಿಂದ','ನೀರು ಉಳಿಸುವುದರಿಂದ','ಮಣ್ಣಿನಲ್ಲಿ ದನಗಳನ್ನು ತೊಳೆಯುವುದರಿಂದ'],1],['ನೀರಿನ ಅತ್ಯಂತ ಮುಖ್ಯ ಉಪಯೋಗ ಯಾವುದು?',['ನೆಲ ಒರೆಸಲು','ಆಡಲು','ಕುಡಿಯಲು','ವಾಹನಗಳನ್ನು ತೊಳೆಯಲು'],2]],
+ e:[['ಛಾವಣಿಯ ನೀರು ವ್ಯರ್ಥವಾಗದಂತೆ…','ಕೊಳವೆಯ ಮೂಲಕ ಛಾವಣಿಯ ನೀರನ್ನು ಟ್ಯಾಂಕ್/ಡ್ರಮ್‌ನಲ್ಲಿ ಸಂಗ್ರಹಿಸುತ್ತೇನೆ ಅಥವಾ ಗುಂಡಿಯ ಮೂಲಕ ನೆಲದಲ್ಲಿ ಇಂಗಿಸುತ್ತೇನೆ.'],['ನೀರಿನ ಮಾಲಿನ್ಯ ಆಗದಂತೆ…','ನದಿ, ಕೆರೆಯಲ್ಲಿ ಕಸ, ಪ್ಲಾಸ್ಟಿಕ್, POP ಮೂರ್ತಿ ಹಾಕುವುದಿಲ್ಲ; ಅಲ್ಲಿ ಬಟ್ಟೆ, ದನಗಳನ್ನು ತೊಳೆಯುವುದಿಲ್ಲ ಮತ್ತು ಇತರರಿಗೂ ಹೇಳುತ್ತೇನೆ.'],['ಮಣ್ಣಿನ ಮಾಲಿನ್ಯ ಆಗದಂತೆ…','ಮಣ್ಣಿನಲ್ಲಿ ಪ್ಲಾಸ್ಟಿಕ್ ಮತ್ತು ಕಸ ಹಾಕುವುದಿಲ್ಲ; ರಾಸಾಯನಿಕ ಗೊಬ್ಬರದ ಬದಲು ಸಾವಯವ ಗೊಬ್ಬರ ಬಳಸಲು ಹೇಳುತ್ತೇನೆ.'],['ರಸ್ತೆಯಲ್ಲಿ ಹೋಗುವಾಗ ನೀರಿನ ನಲ್ಲಿ ಚಾಲೂ ಇದೆ…','ತಕ್ಷಣ ನಲ್ಲಿ ಬಂದ್ ಮಾಡುತ್ತೇನೆ; ನಲ್ಲಿ ಕೆಟ್ಟಿದ್ದರೆ ದೊಡ್ಡವರಿಗೆ / ಗ್ರಾಮ ಪಂಚಾಯತಿಗೆ ತಿಳಿಸುತ್ತೇನೆ.'],['ಮಳೆಯಿಂದ ಮನೆಯ ನಲ್ಲಿಗೆ ಕೆಸರು ನೀರು ಬಂತು…','ನೀರನ್ನು ಸೋಸಿ, ಹರಳೆ ತಿರುಗಿಸಿ ತಿಳಿಗೊಳಿಸಿ ಮತ್ತು ಕುದಿಸಿ ನಂತರವೇ ಕುಡಿಯುತ್ತೇನೆ; ದೊಡ್ಡವರಿಗೆ ಹೇಳುತ್ತೇನೆ.']]
+};
+const SRC=['ಕೆರೆ','ಸಮುದ್ರ','ನದಿ','ಅಣೆಕಟ್ಟು','ಬಾವಿ','ಆಡ','ಕೈಪಂಪ್','ಬಾರವ','ಹಳ್ಳ','ಝರಿ','ಜಲಪಾತ','ಸರೋವರ'];
+const WG=[['ಬ','ಕೆ','ಟ್','ಸ','ಮ','ಬಿಂ','ನ'],['ಕೊ','ಡ','ಶ','ರ','ಪ','ದಿ','ಟ್ಯಾಂ'],['ತ','ಹಂ','ಡೆ','ಜ','ನ','ಗೆ','ಕ್'],['ಮ','ಡ','ಕೆ','ಡ್ರ','ಮ್','ಲ','ಫ'],['ಸ','ಲ','ರ','ತ','ನ','ವ','ಮ']];
+const WW=[['ಬಕೆಟ್',[[0,0],[0,1],[0,2]]],['ಕೊಡ',[[1,0],[1,1]]],['ಹಂಡೆ',[[2,1],[2,2]]],['ಮಡಕೆ',[[3,0],[3,1],[3,2]]],['ಡ್ರಮ್',[[3,3],[3,4]]],['ಬಿಂದಿಗೆ',[[0,5],[1,5],[2,5]]],['ಟ್ಯಾಂಕ್',[[1,6],[2,6]]]];
+let WS={sel:[],fd:[]};
+function wsTap(r,c){const k=r+','+c;if(WS.fd.some(w=>WW[w][1].some(p=>p[0]==r&&p[1]==c)))return;const i=WS.sel.indexOf(k);if(i>=0)WS.sel.splice(i,1);else WS.sel.push(k);
+ WW.forEach((w,j)=>{if(WS.fd.includes(j))return;const set=w[1].map(p=>p.join(','));if(set.length==WS.sel.length&&set.every(s=>WS.sel.includes(s))){WS.fd.push(j);WS.sel=[];say(w[0])}});drawWS()}
+function drawWS(){const b=$('wsBox');if(!b)return;const fc=new Set();WS.fd.forEach(j=>WW[j][1].forEach(p=>fc.add(p.join(','))));
+ b.innerHTML=`<div class="ws">${WG.map((row,r)=>row.map((ch,c)=>`<div class="${fc.has(r+','+c)?'fd':WS.sel.includes(r+','+c)?'sel':''}" onclick="wsTap(${r},${c})">${ch}</div>`).join('')).join('')}</div>
+ <div class="msg ${WS.fd.length==WW.length?'ok':'in'}">ಸಿಕ್ಕಿದವು: ${WS.fd.map(j=>WW[j][0]).join(', ')||'—'} (${WS.fd.length}/${WW.length}) ${WS.fd.length==WW.length?'🎉':''}</div>
+ <button class="btn ln sm" onclick="WS.sel=[];drawWS()">ಆಯ್ಕೆ ಅಳಿಸಿ</button><button class="btn or sm" onclick="WS.fd=WW.map((_,j)=>j);WS.sel=[];drawWS()">ಉತ್ತರಗಳನ್ನು ತೋರಿಸಿ</button>`}
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function wtot(){let t=0;document.querySelectorAll('.wq').forEach(i=>t+=(+i.value||0));$('wt').textContent=t}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಅಭ್ಯಾಸ – ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ</h2>
+ <h3>(ಅ) ನಿಮ್ಮ ಪರಿಸರದಲ್ಲಿ ಕಂಡುಬರುವ ನೀರಿನ ಮೂಲಗಳನ್ನು ಕೆಳಗಿನ ಪಟ್ಟಿಯಿಂದ ಆರಿಸಿ ಬರೆಯಿರಿ.</h3>
+ <div class="chips">${SRC.map(x=>`<span class="chip" onclick="chip(this)">${x}</span>`).join('')}</div><div class="msg in" data-cnt="ನೀವು # ಮೂಲಗಳನ್ನು ಆರಿಸಿದಿರಿ. ಈಗ ಅವುಗಳನ್ನು ಪುಸ್ತಕದಲ್ಲಿ ಬರೆಯಿರಿ.">ನಿಮ್ಮ ಪರಿಸರದ ಮೂಲಗಳನ್ನು ಆರಿಸಿ.</div>
+ <h3>(ಆ) ಗುರುತಿಸಿ ನೋಡೋಣ, ನಾನು ಯಾರು?</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಇ) ಕೆಳಗಿನ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.i.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಈ) ಮನೆಯಲ್ಲಿ ನೀರನ್ನು ಯಾವ ಯಾವುದರಲ್ಲಿ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ, ಆ ಸಾಧನಗಳನ್ನು ಕೆಳಗಿನ ಪದ ಒಗಟಿನಲ್ಲಿ ಹುಡುಕಿ.</h3><div class="tap">ಪದದ ಅಕ್ಷರಗಳನ್ನು ಒಂದರ ನಂತರ ಒಂದು ಕ್ಲಿಕ್ ಮಾಡಿ ಆರಿಸಿ. (ಅಡ್ಡ / ಉದ್ದ ಪದಗಳು – ಒಟ್ಟು ೭)</div><div id="wsBox"></div>
+ <h3>(ಉ) ಚಿತ್ರವನ್ನು ಗಮನಿಸಿ ಮತ್ತು ಉತ್ತರ ಬರೆಯಿರಿ.</h3>
+ <svg viewBox="0 0 300 110" style="max-width:300px"><path d="M100 30 h100 l-8 50 h-84z" fill="#94a3b8" stroke="#334155" stroke-width="2"/><rect x="102" y="34" width="96" height="16" fill="#60a5fa"/><text x="130" y="25" font-size="16">♨️♨️</text><path d="M115 98 q8-14 16 0 q8-14 16 0 q8-14 16 0 q8-14 16 0" fill="#f97316"/><rect x="90" y="96" width="120" height="8" fill="#475569"/></svg>
+ ${SW.u.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಊ) ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.</h3>${SW.uu.map((x,i)=>`<div class="sq"><b>${i+1}) ${x[0]}</b><div class="chips">${x[1].map((o,j)=>`<span class="chip" onclick="this.parentNode.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));this.classList.add('on');this.parentNode.nextElementSibling.innerHTML=${j==x[2]}?'<div class=\\'msg ok\\'>✔ ಸರಿ!</div>':'<div class=\\'msg no\\'>✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: ${x[1][x[2]]}</div>'">${'ಅಆಇಈ'[j]}) ${o}</span>`).join('')}</div><div></div></div>`).join('')}
+ <h3>(ಎ) ನೀವು ಏನು ಮಾಡುತ್ತೀರಿ ಎಂದು ಬರೆಯಿರಿ.</h3>${SW.e.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಐ) ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ ಒಂದು ದಿನದಲ್ಲಿ ನೀರಿನ ಬಳಕೆ ಎಷ್ಟು? ದಾಖಲಿಸಿ.</h3>
+ <table class="t"><tr><th>ಕ್ರ.ಸಂ.</th><th>ಚಟುವಟಿಕೆ</th><th>ಅಂದಾಜು ಪ್ರಮಾಣ (ಬಕೆಟ್ / ಕೊಡ)</th></tr>${['ಸ್ನಾನಕ್ಕಾಗಿ','ಬಟ್ಟೆ ತೊಳೆಯಲು','ಪಾತ್ರೆ ತೊಳೆಯಲು','ಕುಡಿಯಲು'].map((x,i)=>`<tr><td>${i+1}</td><td class="l">${x}</td><td><input type="number" min="0" class="wq" oninput="wtot()"></td></tr>`).join('')}<tr><th colspan="2">ಒಟ್ಟು</th><th id="wt">0</th></tr></table>
+ <div class="tap">ನಿಮ್ಮ ದಾಖಲೆಯನ್ನು ಸ್ನೇಹಿತರು ಮಾಡಿದ ದಾಖಲೆಯೊಂದಿಗೆ ಹೋಲಿಸಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawWS()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಭೂಮಿಯ ೭೧ ಪ್ರತಿಶತ ಭಾಗ ನೀರಿನಿಂದ ಆವೃತವಾಗಿದ್ದರೂ ಅನೇಕ ಹಳ್ಳಿಗಳಲ್ಲಿ ನೀರಿನ ಕೊರತೆ ಏಕೆ ಕಾಣುತ್ತದೆ?','ಭೂಮಿಯ ಮೇಲಿನ ಹೆಚ್ಚಿನ ನೀರು ಯಾವ ಬಗೆಯದು?','ಭೂಮಿಯ ಮೇಲಿನ ಹೆಚ್ಚಿನ ನೀರು ಸಮುದ್ರದ ಉಪ್ಪು ನೀರು; ಸ್ವಲ್ಪ ಹೆಪ್ಪುಗಟ್ಟಿದೆ, ಸ್ವಲ್ಪ ನೆಲದ ಕೆಳಗಿದೆ. ಕುಡಿಯಲು ಯೋಗ್ಯ ನೀರು ಕೇವಲ ಒಂದು ಹನಿ ಮಾತ್ರ. ಜೊತೆಗೆ ನೀರು ವ್ಯರ್ಥವಾಗುತ್ತದೆ ಮತ್ತು ಮಳೆ ನೀರು ಸಂಗ್ರಹವಾಗುವುದಿಲ್ಲ, ಆದ್ದರಿಂದ ಕೊರತೆ ಕಾಣುತ್ತದೆ.'],
+['ರಮೇಶ ಬಾವಿಯ ನೀರು ಸ್ವಚ್ಛವಾಗಿ ಕಾಣುತ್ತದೆ ಎಂದು ಅದನ್ನು ನೇರವಾಗಿ ಕುಡಿದ. ಅವನ ನಡವಳಿಕೆ ಸರಿಯೇ? ಏಕೆ?','ಕಣ್ಣಿಗೆ ಕಾಣದ ಯಾವುದು ನೀರಿನಲ್ಲಿ ಇರಬಹುದು?','ಇಲ್ಲ. ನೀರು ಸ್ವಚ್ಛವಾಗಿ ಕಂಡರೂ ಅದರಲ್ಲಿ ಕಣ್ಣಿಗೆ ಕಾಣದ ರೋಗಾಣುಗಳು ಇರಬಹುದು. ಅದರಿಂದ ಹೊಟ್ಟೆನೋವು, ಬೇಧಿ ಆಗಬಹುದು. ನೀರನ್ನು ಸೋಸಿ, ಕುದಿಸಿ ಅಥವಾ ಸೋಂಕು ನಿವಾರಣೆ ಮಾಡಿಯೇ ಕುಡಿಯಬೇಕು.'],
+['ಬೆಟ್ಟದ ಮೇಲಿನ ಎಲ್ಲ ಮರಗಳನ್ನು ಕಡಿದರೆ ಮಳೆ ನೀರು ಮತ್ತು ಮಣ್ಣಿಗೆ ಏನಾಗುತ್ತದೆ?','ಮರಗಳ ಬೇರುಗಳು ಮಣ್ಣಿಗೆ ಏನು ಮಾಡುತ್ತವೆ?','ಮರಗಳ ಬೇರುಗಳು ಮಣ್ಣನ್ನು ಹಿಡಿದಿಡುತ್ತವೆ. ಮರಗಳನ್ನು ಕಡಿದರೆ ಮಳೆ ನೀರು ವೇಗವಾಗಿ ಹರಿದು ಹೋಗುತ್ತದೆ, ನೆಲದಲ್ಲಿ ಇಂಗುವುದಿಲ್ಲ ಮತ್ತು ಫಲವತ್ತಾದ ಮಣ್ಣಿನ ಪದರವೂ ಕೊಚ್ಚಿ ಹೋಗುತ್ತದೆ (ಸವಕಳಿಯಾಗುತ್ತದೆ). ಇದರಿಂದ ನೆಲದಲ್ಲಿನ ನೀರಿನ ಮಟ್ಟ ಕಡಿಮೆಯಾಗುತ್ತದೆ.'],
+['ಒಂದು ಪಾತ್ರೆಯಲ್ಲಿ ಮರಳು ಮತ್ತು ಇನ್ನೊಂದರಲ್ಲಿ ಜೇಡಿ ಮಣ್ಣು ತೆಗೆದುಕೊಂಡು ಎರಡರಲ್ಲೂ ಸಮಾನ ನೀರು ಹಾಕಿದರು. ಯಾವ ಪಾತ್ರೆಯಿಂದ ನೀರು ಬೇಗ ಕೆಳಗೆ ಇಂಗುತ್ತದೆ? ಏಕೆ?','ಮಣ್ಣಿನ ಕಣಗಳ ಗಾತ್ರ ನೆನಪಿಸಿಕೊಳ್ಳಿ.','ಮರಳಿನ ಪಾತ್ರೆಯಿಂದ ನೀರು ಬೇಗ ಇಂಗುತ್ತದೆ, ಏಕೆಂದರೆ ಮರಳು ಮಣ್ಣಿನ ಕಣಗಳು ದೊಡ್ಡವು ಮತ್ತು ಬಿಡಿಬಿಡಿಯಾಗಿರುತ್ತವೆ, ಅದು ನೀರನ್ನು ಹಿಡಿದಿಡಲಾರದು. ಜೇಡಿ ಮಣ್ಣಿನ ಕಣಗಳು ಚಿಕ್ಕವು ಮತ್ತು ಬಿಗಿಯಾಗಿ ಅಂಟಿಕೊಂಡಿರುವುದರಿಂದ ಅದು ನೀರನ್ನು ಹಿಡಿದಿಡುತ್ತದೆ.'],
+['ಗಣೇಶ ವಿಸರ್ಜನೆಗಾಗಿ POP ಬದಲು ಶಾಡೂ ಮಣ್ಣಿನ ಮೂರ್ತಿಯನ್ನು ಏಕೆ ಬಳಸಬೇಕು?','POP ನೀರಿನಲ್ಲಿ ಕರಗುತ್ತದೆಯೇ?','POP (ಪ್ಲಾಸ್ಟರ್ ಆಫ್ ಪ್ಯಾರಿಸ್) ನೀರಿನಲ್ಲಿ ಬೇಗ ಕರಗುವುದಿಲ್ಲ ಮತ್ತು ಅದರಲ್ಲಿನ ಬಣ್ಣ-ರಾಸಾಯನಿಕಗಳಿಂದ ಜಲಮಾಲಿನ್ಯ ಆಗುತ್ತದೆ. ಶಾಡೂ ಮಣ್ಣು ನೈಸರ್ಗಿಕವಾಗಿದ್ದು ನೀರಿನಲ್ಲಿ ಸುಲಭವಾಗಿ ಕರಗುತ್ತದೆ, ಆದ್ದರಿಂದ ನೀರು ಕಲುಷಿತವಾಗುವುದಿಲ್ಲ.'],
+['ರೈತ ರಾಸಾಯನಿಕ ಗೊಬ್ಬರದ ಬದಲು ಸಾವಯವ ಗೊಬ್ಬರವನ್ನು ಏಕೆ ಬಳಸಬೇಕು?','ದೀರ್ಘಕಾಲ ಮಣ್ಣಿಗೆ ಏನಾಗುತ್ತದೆ?','ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ ಮತ್ತು ಕೀಟನಾಶಕಗಳ ಅತಿಯಾದ ಬಳಕೆಯಿಂದ ಮಣ್ಣಿನ ಫಲವತ್ತತೆ ಕಡಿಮೆಯಾಗುತ್ತದೆ ಮತ್ತು ಮಣ್ಣು ಕಲುಷಿತವಾಗುತ್ತದೆ. ಸಾವಯವ ಗೊಬ್ಬರ ಜಾನುವಾರುಗಳ ಮಲಮೂತ್ರ ಮತ್ತು ತರಗೆಲೆಯಿಂದ ತಯಾರಾಗುತ್ತದೆ, ಅದು ಮಣ್ಣಿನ ಫಲವತ್ತತೆ ಹೆಚ್ಚಿಸುತ್ತದೆ ಮತ್ತು ಮಣ್ಣಿನ ಮಾಲಿನ್ಯ ಆಗುವುದಿಲ್ಲ.'],
+['ಹಿಂದಿನ ಕಾಲದಲ್ಲಿ ಕೋಟೆಗಳಲ್ಲಿ ಕಲ್ಲಿನ ಕೆರೆ ಮತ್ತು ಟ್ಯಾಂಕ್‌ಗಳನ್ನು ಏಕೆ ಕಟ್ಟುತ್ತಿದ್ದರು? ಇದರಿಂದ ಇಂದು ನಾವು ಏನು ಕಲಿಯಬಹುದು?','ಕೋಟೆಯಲ್ಲಿ ನದಿ ಇರುತ್ತದೆಯೇ?','ಕೋಟೆಗಳು ಎತ್ತರದ ಬೆಟ್ಟದ ಮೇಲಿರುವುದರಿಂದ ಅಲ್ಲಿ ನದಿ-ಬಾವಿಯ ನೀರು ಸಿಗುತ್ತಿರಲಿಲ್ಲ. ಆದ್ದರಿಂದ ಮಳೆ ನೀರನ್ನು ಕೆರೆ ಮತ್ತು ಟ್ಯಾಂಕ್‌ಗಳಲ್ಲಿ ಸಂಗ್ರಹಿಸಿ ವರ್ಷವಿಡೀ ಬಳಸುತ್ತಿದ್ದರು. ಇದರಿಂದ ನಾವು ಮಳೆ ನೀರು ಸಂಗ್ರಹಿಸುವ (ಜಲ ಸಂರಕ್ಷಣೆಯ) ಮಹತ್ವ ಕಲಿಯುತ್ತೇವೆ.'],
+['ನಿಮ್ಮ ಶಾಲೆಯಲ್ಲಿ ನೀರು ಉಳಿಸಲು ಯಾವ ಮೂರು ಉಪಾಯಗಳನ್ನು ಮಾಡಬಹುದು?','ನಲ್ಲಿ, ಉಳಿದ ನೀರು, ಛಾವಣಿಯ ನೀರು…','(೧) ಬಳಕೆ ಆದ ಮೇಲೆ ನಲ್ಲಿ ತಕ್ಷಣ ಬಂದ್ ಮಾಡುವುದು ಮತ್ತು ಸೋರುವ ನಲ್ಲಿಗಳನ್ನು ದುರಸ್ತಿ ಮಾಡುವುದು. (೨) ಕುಡಿದು ಉಳಿದ ನೀರನ್ನು ಗಿಡಗಳಿಗೆ ಹಾಕುವುದು. (೩) ಛಾವಣಿಯ ಮಳೆ ನೀರನ್ನು ಟ್ಯಾಂಕ್‌ನಲ್ಲಿ ಸಂಗ್ರಹಿಸುವುದು ಅಥವಾ ಇಂಗು ಗುಂಡಿಯಲ್ಲಿ ಇಂಗಿಸುವುದು.'],
+['ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ ದಿನವಿಡೀ ನೀರಿನ ಮರುಬಳಕೆಯನ್ನು ಹೇಗೆ ಮಾಡಬಹುದು ಎಂಬ ಯೋಜನೆ ತಯಾರಿಸಿ.','ಬಳಸಿದ ಯಾವ ನೀರು ಮತ್ತೆ ಉಪಯೋಗಕ್ಕೆ ಬರಬಹುದು?','ತರಕಾರಿ-ಹಣ್ಣು ತೊಳೆದ ನೀರು ಗಿಡಗಳಿಗೆ; ಅಕ್ಕಿ/ಬೇಳೆ ತೊಳೆದ ನೀರು ಕುಂಡಗಳಿಗೆ; ಬಟ್ಟೆ ತೊಳೆದ ಕೊನೆಯ ನೀರು ಶೌಚಾಲಯ ಅಥವಾ ಅಂಗಳ ಸ್ವಚ್ಛತೆಗೆ; ಕುಡಿದು ಉಳಿದ ನೀರು ಗಿಡಗಳಿಗೆ. ಇದರಿಂದ ಪ್ರತಿದಿನ ಬಹಳಷ್ಟು ನೀರು ಉಳಿಯುತ್ತದೆ.'],
+['ಒಂದು ಹಳ್ಳಿಯಲ್ಲಿ ಎಲ್ಲರೂ ಕೊಳವೆ ಬಾವಿಯಿಂದ ಬಹಳಷ್ಟು ನೀರು ಎತ್ತಿದರು ಆದರೆ ಮಳೆ ನೀರು ಸಂಗ್ರಹಿಸಲಿಲ್ಲ. ಕೆಲವು ವರ್ಷಗಳ ನಂತರ ಏನಾಗುತ್ತದೆ? ಉಪಾಯ ಸೂಚಿಸಿ.','ನೆಲದ ಕೆಳಗಿನ ನೀರು ಎಲ್ಲಿಂದ ತುಂಬುತ್ತದೆ?','ನೆಲದ ಕೆಳಗಿನ ನೀರಿನ ಮಟ್ಟ ತುಂಬಾ ಕೆಳಗೆ ಹೋಗುತ್ತದೆ, ಬಾವಿಗಳು ಮತ್ತು ಕೊಳವೆ ಬಾವಿಗಳು ಬತ್ತುತ್ತವೆ. ಉಪಾಯ: ಕೃಷಿ ಹೊಂಡ, ಕಂದಕ, ಒಡ್ಡುಗಳನ್ನು ಕಟ್ಟುವುದು, ಛಾವಣಿಯ ನೀರನ್ನು ನೆಲದಲ್ಲಿ ಇಂಗಿಸುವುದು, ಗಿಡ ನೆಡುವುದು ಮತ್ತು ನೀರನ್ನು ಮಿತವಾಗಿ ಬಳಸುವುದು.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೧ : ಪ್ರಕೃತಿಯ ಸಂಪತ್ತು — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function buildSheet(k,K){let h='';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${[...document.querySelectorAll('#stepBox ul li')].map(l=>`<li>${l.innerHTML}</li>`).join('')}</ol>
+ <p class="pq">ನೀರನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸುವ ವಿಧಾನಗಳು</p><table class="w"><tr><th>ವಿಧಾನ</th><th>ಹೇಗೆ ಮಾಡುತ್ತಾರೆ?</th></tr><tr><td>ಸೋಸುವುದು</td><td class="l">ಬಟ್ಟೆಯಿಂದ/ಸೋಸುಕದಿಂದ ಸೋಸುವುದು – ಮಣ್ಣು, ಕಸ ಬೇರ್ಪಡುತ್ತದೆ.</td></tr><tr><td>ತಿಳಿಯಾಗುವುದು</td><td class="l">ಹರಳೆ ತಿರುಗಿಸುವುದು – ಕಣಗಳು ತಳದಲ್ಲಿ ಕೂರುತ್ತವೆ.</td></tr><tr><td>ಕುದಿಯುವುದು</td><td class="l">೧೦ ರಿಂದ ೧೫ ನಿಮಿಷ ಕುದಿಸುವುದು – ಸೂಕ್ಷ್ಮಜೀವಿಗಳು ನಾಶವಾಗುತ್ತವೆ.</td></tr><tr><td>ಸೋಂಕು ನಿವಾರಣೆ</td><td class="l">ಬ್ಲೀಚಿಂಗ್ ಪೌಡರ್ / ಕ್ಲೋರಿನ್ ಹಾಕುವುದು.</td></tr></table>
+ <p class="pq">ಮಣ್ಣಿನ ಪ್ರಕಾರಗಳು</p><table class="w"><tr><th>ಮರಳು ಮಣ್ಣು</th><th>ಜೇಡಿ ಮಣ್ಣು</th><th>ಗೋಡು ಮಣ್ಣು</th></tr><tr><td class="l">ಮರಳು ಹೆಚ್ಚು; ನೀರು ತಕ್ಷಣ ಇಂಗುತ್ತದೆ; ಬೇಗ ಒಣಗುತ್ತದೆ.</td><td class="l">ಅಂಟು, ಮೃದು; ನೀರು ಹಿಡಿದಿಡುತ್ತದೆ; ವಸ್ತುಗಳನ್ನು ತಯಾರಿಸಲು ಉಪಯುಕ್ತ.</td><td class="l">ಮರಳು+ಜೇಡಿ ಮಣ್ಣು+ಹೂಳು; ತೇವ ಉಳಿಯುತ್ತದೆ; ಬೆಳೆಗಳಿಗೆ ಉತ್ತಮ.</td></tr></table>
+ <p class="pq">ಪ್ರತಿಜ್ಞೆ</p><p>ನಾನು ಪ್ರತಿಜ್ಞೆ ಮಾಡುತ್ತೇನೆ, ನಾನು ನೀರನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಬಳಸುತ್ತೇನೆ. ನಾನು ನೀರಿನ ಒಂದು ಹನಿಯನ್ನೂ ವ್ಯರ್ಥ ಮಾಡುವುದಿಲ್ಲ. ನೀರು ಜೀವನ ಎಂಬ ಅರಿವು ನನಗಿದೆ. ನಾನು ನನ್ನ ಸ್ನೇಹಿತರಿಗೆ ಮತ್ತು ಕುಟುಂಬದ ಸದಸ್ಯರಿಗೆ ನೀರು ಉಳಿತಾಯಕ್ಕಾಗಿ ಪ್ರೋತ್ಸಾಹ ನೀಡುತ್ತೇನೆ.</p>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ)</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${'ಅಆಇಈ'[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><table class="w" style="margin-top:4px"><tr>${MCQ.map((q,i)=>`<td>${i+1}) ${'ಅಆಇಈ'[q[2]]}</td>`).slice(0,10).join('')}</tr><tr>${MCQ.map((q,i)=>`<td>${i+1}) ${'ಅಆಇಈ'[q[2]]}</td>`).slice(10).join('')}</tr></table></div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">(ಅ) ನಿಮ್ಮ ಪರಿಸರದಲ್ಲಿ ಕಂಡುಬರುವ ನೀರಿನ ಮೂಲಗಳನ್ನು ಕೆಳಗಿನ ಪಟ್ಟಿಯಿಂದ ಆರಿಸಿ ಬರೆಯಿರಿ.</div><div>${SRC.join(', ')}.</div>${lines(2)}
+ <div class="pq">(ಆ) ಗುರುತಿಸಿ ನೋಡೋಣ, ನಾನು ಯಾರು?</div>${SW.aa.map((x,i)=>`<div>${i+1}) ${x[0]} &nbsp; ಉತ್ತರ: ____________</div>`).join('')}
+ <div class="pq">(ಇ) ಕೆಳಗಿನ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.i.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(2)}</div>`).join('')}
+ <div class="pq">(ಈ) ಮನೆಯಲ್ಲಿ ನೀರು ಸಂಗ್ರಹಿಸುವ ಸಾಧನಗಳನ್ನು ಪದ ಒಗಟಿನಲ್ಲಿ ಹುಡುಕಿ ಮತ್ತು ಅವುಗಳ ಸುತ್ತ ಚೌಕಟ್ಟು ಹಾಕಿ.</div><table class="w" style="width:110mm;margin:2mm auto">${WG.map(r=>`<tr>${r.map(c=>`<td style="height:9mm;font-size:13pt;font-weight:700">${c}</td>`).join('')}</tr>`).join('')}</table>
+ <div class="pq">(ಉ) ನೀರು ಕುದಿಸುವ ಚಿತ್ರದ ಆಧಾರದ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.u.map((x,i)=>`<div>${i+1}) ${x[0]}</div>${lines(1)}`).join('')}
+ <div class="pq">(ಊ) ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.</div>${SW.uu.map((x,i)=>`<div>${i+1}) ${x[0]}</div><div class="po">${x[1].map((o,j)=>`<span>(${'ಅಆಇಈ'[j]}) ${o}</span>`).join('')}</div>`).join('')}
+ <div class="pq">(ಎ) ನೀವು ಏನು ಮಾಡುತ್ತೀರಿ ಎಂದು ಬರೆಯಿರಿ.</div>${SW.e.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(1)}</div>`).join('')}
+ <div class="pq">(ಐ) ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ ಒಂದು ದಿನದಲ್ಲಿ ನೀರಿನ ಬಳಕೆ ಎಷ್ಟು? ದಾಖಲಿಸಿ.</div><table class="w"><tr><th>ಕ್ರ.ಸಂ.</th><th>ಚಟುವಟಿಕೆ</th><th>ಅಂದಾಜು ಪ್ರಮಾಣ (ಬಕೆಟ್/ಕೊಡ)</th></tr>${['ಸ್ನಾನಕ್ಕಾಗಿ','ಬಟ್ಟೆ ತೊಳೆಯಲು','ಪಾತ್ರೆ ತೊಳೆಯಲು','ಕುಡಿಯಲು'].map((x,i)=>`<tr><td>${i+1}</td><td>${x}</td><td style="width:50mm"></td></tr>`).join('')}</table>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>(ಆ)</b> ${SW.aa.map((x,i)=>`${i+1}) ${x[1]}`).join('; ')}</div><div><b>(ಇ)</b><ol>${SW.i.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಈ)</b> ${WW.map(w=>w[0]).join(', ')}</div><div><b>(ಉ)</b><ol>${SW.u.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಊ)</b> ${SW.uu.map((x,i)=>`${i+1}) ${x[1][x[2]]}`).join('; ')}</div><div><b>(ಏ)</b><ol>${SW.e.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>ಇ. ೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೧</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

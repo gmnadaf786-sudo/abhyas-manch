@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೧ – ಪಾಠ ೭ ಜಾಗೃತಿಯೇ ಸುರಕ್ಷೆ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೭ : ಜಾಗೃತಿಯೇ ಸುರಕ್ಷೆ</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">🛡️ ಅಪಾಯಗಳನ್ನು ಗುರುತಿಸಿ, ನಿಮ್ಮ ಮತ್ತು ಇತರರ ಕಾಳಜಿ ವಹಿಸಿ – ಬನ್ನಿ, ಸುರಕ್ಷಾ ರಕ್ಷಕರಾಗೋಣ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೧೩ ಮೆಟ್ಟಿಲುಗಳು · ಅಪಾಯಗಳನ್ನು ಹುಡುಕಿ · ಸಹಾಯ ಸಂಖ್ಯೆಗಳು</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೪೧ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೭ : ಜಾಗೃತಿಯೇ ಸುರಕ್ಷೆ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🛡️','🌟','✨'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ಮನೆಯ ಅಪಾಯಗಳನ್ನು ಹುಡುಕಿ ---------- */
+const HZ=[
+ [52,62,'🔥','ಗ್ಯಾಸ್ ಒಲೆ ಉರಿಯುತ್ತಿರುವಾಗ ಹತ್ತಿರ ಆಡುವುದು',1,'ಗ್ಯಾಸ್ ಬಳಸುತ್ತಿರುವಾಗ ಹತ್ತಿರ ಎಂದಿಗೂ ಆಡಬೇಡಿ. ಬಳಸದಿರುವಾಗ ರೆಗ್ಯುಲೇಟರ್ ಆಫ್ ಮಾಡಿಡಿ.'],
+ [150,48,'🔌','ತುಂಡಾದ ವಿದ್ಯುತ್ ತಂತಿ',1,'ತುಂಡಾದ ತಂತಿಗಳನ್ನು ಅಥವಾ ಹಾಳಾದ ಸ್ವಿಚ್ ಅನ್ನು ಮುಟ್ಟಬೇಡಿ; ಹಿರಿಯರಿಗೆ ಹೇಳಿ.'],
+ [258,112,'🚗','ಮೆಟ್ಟಿಲ ಮೇಲೆ ಬಿದ್ದಿರುವ ಆಟಿಕೆ',1,'ಮೆಟ್ಟಿಲ ಮೇಲೆ ಆಟಿಕೆ ಬಿದ್ದಿದ್ದರೆ ಕಾಲು ಜಾರಿ ಬೀಳಬಹುದು. ಆಟಿಕೆಗಳನ್ನು ಜಾಗದಲ್ಲಿಡಿ.'],
+ [120,150,'💧','ಸೋರುವ ನಲ್ಲಿ, ನೆಲದ ಮೇಲೆ ನೀರು',1,'ಒದ್ದೆ ನೆಲದ ಮೇಲೆ ಜಾರಿ ಬೀಳಬಹುದು. ನಲ್ಲಿ ದುರಸ್ತಿ ಮಾಡಿ, ನೀರು ಒರೆಸಿ.'],
+ [200,150,'💊','ಕೆಳಗೆ ಇಟ್ಟಿರುವ ಔಷಧಿಗಳು ಮತ್ತು ರಾಸಾಯನಿಕಗಳು',1,'ಔಷಧಿ, ಕೀಟನಾಶಕ, ರಾಸಾಯನಿಕಗಳನ್ನು ಚಿಕ್ಕ ಮಕ್ಕಳಿಂದ ದೂರ ಮತ್ತು ಎತ್ತರದಲ್ಲಿಡಿ.'],
+ [36,150,'🧨','ನೆಲದ ಮೇಲೆ ಬಿದ್ದಿರುವ ಬೆಂಕಿಪೆಟ್ಟಿಗೆ',1,'ಬೆಂಕಿಪೆಟ್ಟಿಗೆ, ಲೈಟರ್, ಮೇಣದಬತ್ತಿ ಅಪಾಯಕಾರಿ – ಬೆಂಕಿಯೊಂದಿಗೆ ಆಡಬೇಡಿ.'],
+ [230,40,'🕰️','ಗೋಡೆಯ ಗಡಿಯಾರ',0,'ಇದು ಸುರಕ್ಷಿತ.'],
+ [300,60,'📚','ಪುಸ್ತಕದ ಕಪಾಟು',0,'ಇದು ಸುರಕ್ಷಿತ.']];
+let HZF=new Set();
+function hzSvg(){return `<svg viewBox="0 0 330 180" style="max-width:440px;display:block;margin:0 auto;background:linear-gradient(#fef9c3 0 72%,#e7e5e4 72%);border-radius:16px">
+ <rect x="20" y="70" width="70" height="40" fill="#cbd5e1" stroke="#475569"/><text x="55" y="95" text-anchor="middle" font-size="10" font-weight="700">ಅಡುಗೆ ಕಟ್ಟೆ</text>
+ <path d="M240 130 l20 -16 l20 -16 l20 -16 l20 -16" stroke="#a16207" stroke-width="8" fill="none"/><text x="290" y="140" font-size="10" font-weight="700">ಮೆಟ್ಟಿಲು</text>
+ <rect x="110" y="20" width="16" height="22" rx="3" fill="#94a3b8"/><path d="M118 42 q20 4 26 8" stroke="#1e293b" stroke-width="2" fill="none"/>
+ <rect x="104" y="112" width="30" height="12" fill="#94a3b8"/><text x="119" y="121" font-size="8" text-anchor="middle">ನಲ್ಲಿ</text>
+ <rect x="182" y="156" width="40" height="8" fill="#a16207"/>
+ ${HZ.map((h,i)=>`<g style="cursor:pointer" onclick="hzTap(${i})"><text x="${h[0]}" y="${h[1]}" font-size="22" text-anchor="middle">${h[2]}</text><circle cx="${h[0]}" cy="${h[1]-7}" r="16" fill="transparent"/>${HZF.has(i)?`<circle cx="${h[0]}" cy="${h[1]-7}" r="16" fill="none" stroke="${h[4]?'#dc2626':'#16a34a'}" stroke-width="3"/>`:''}</g>`).join('')}</svg>`}
+function hzTap(i){const h=HZ[i];HZF.add(i);$('hzBox').innerHTML=hzSvg();const n=HZ.filter((x,j)=>x[4]&&HZF.has(j)).length;
+ $('hzMsg').innerHTML=`<div class="msg ${h[4]?'no':'ok'}">${h[4]?'⚠️ ಅಪಾಯ ಸಿಕ್ಕಿತು: ':'✔ '}<b>${h[3]}</b> – ${h[5]}<br><small>ಸಿಕ್ಕಿದ ಅಪಾಯಗಳು: ${n} / 6</small></div>`;say(h[3]+'. '+h[5]);if(n==6)award('hz','ಭೇಷ್! ನೀವು ಸುರಕ್ಷಾ ರಕ್ಷಕರಾದಿರಿ.')}
+
+/* ---------- ಜೀವರಕ್ಷಕ ಚೀಲ ---------- */
+const BAG=[['💧 ನೀರಿನ ಬಾಟಲಿ',1],['🍪 ಒಣ ತಿಂಡಿ',1],['🔦 ಟಾರ್ಚ್',1],['💊 ನಿಯಮಿತ ಔಷಧಿಗಳು',1],['🩹 ಪ್ರಥಮ ಚಿಕಿತ್ಸಾ ಪೆಟ್ಟಿಗೆ',1],['📣 ಸೀಟಿ',1],['📺 ಟಿವಿ',0],['🎮 ವಿಡಿಯೋ ಗೇಮ್',0],['🧸 ದೊಡ್ಡ ಆಟಿಕೆಗಳು',0],['📄 ಮುಖ್ಯ ದಾಖಲೆಗಳು',1],['🪑 ಕುರ್ಚಿ',0],['🧥 ಬಟ್ಟೆಗಳು',1]];
+let BAGI=new Set(),BAGE='';
+function bagTap(i){if(BAG[i][1]){BAGI.add(i);BAGE='';say(BAG[i][0].slice(2))}else BAGE=`<div class="msg no">✘ ${BAG[i][0]} – ಸಂಕಟದಲ್ಲಿ ಇದು ಉಪಯೋಗಕ್ಕೆ ಬರುವುದಿಲ್ಲ, ಭಾರ ಹೆಚ್ಚುತ್ತದೆ.</div>`;drawBag();if(BAG.filter(b=>b[1]).every((b,j)=>BAGI.has(BAG.indexOf(b))))award('bag','ಭೇಷ್! ಜೀವರಕ್ಷಕ ಚೀಲ ಸಿದ್ಧ.')}
+function drawBag(){const b=$('bagBox');if(!b)return;const need=BAG.filter(x=>x[1]).length;
+ b.innerHTML=`<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><div style="font-size:64px">🎒</div><div style="flex:1;min-width:160px;background:#fef9c3;border-radius:12px;padding:6px 10px;min-height:60px"><b>ಚೀಲದಲ್ಲಿ:</b> ${[...BAGI].map(i=>BAG[i][0]).join(', ')||'—'} <small>(${BAGI.size}/${need})</small></div></div>
+ <div class="chips">${BAG.map((x,i)=>BAGI.has(i)?'':`<span class="chip" onclick="bagTap(${i})">${x[0]}</span>`).join('')}</div>${BAGE}`}
+
+/* ---------- ಸಹಾಯ ಸಂಖ್ಯೆಗಳು ---------- */
+const HL=[['100','👮 ಪೊಲೀಸ್ ಸಹಾಯ'],['101','🚒 ಅಗ್ನಿಶಾಮಕ ದಳ'],['108','🚑 ಆಂಬ್ಯುಲೆನ್ಸ್ (೧೦೮ / ೧೦೨)'],['181','👩 ಮಹಿಳಾ ಮತ್ತು ಮಕ್ಕಳ ರಕ್ಷಣಾ ಸಹಾಯ'],['1098','🧒 ಮಕ್ಕಳ ಸಹಾಯವಾಣಿ ಸಂಖ್ಯೆ (Child helpline)'],['1077','🌊 ವಿಪತ್ತು ನಿರ್ವಹಣಾ ಕೇಂದ್ರ']];
+let DIAL='',HLS=new Set();
+function dialKey(k){if(k=='C'){DIAL='';}else if(DIAL.length<4)DIAL+=k;const m=HL.find(h=>h[0]==DIAL);let t=`<div class="msg in" style="font-size:22px;text-align:center;letter-spacing:4px">${DIAL||'—'}</div>`;
+ if(m){HLS.add(m[0]);t+=`<div class="msg ok" style="font-size:18px">📞 ${m[0]} – <b>${m[1]}</b></div>`;say(m[1]);if(HLS.size==6)award('hl','ಭೇಷ್! ಎಲ್ಲಾ ಸಹಾಯ ಸಂಖ್ಯೆಗಳನ್ನು ಗುರುತಿಸಿದಿರಿ.')}
+ $('dialOut').innerHTML=t}
+function dialPad(){return `<div id="dialOut"><div class="msg in" style="text-align:center">ಸಂಖ್ಯೆ ಒತ್ತಿ…</div></div><div style="display:grid;grid-template-columns:repeat(3,64px);gap:8px;justify-content:center;margin:8px 0">${['1','2','3','4','5','6','7','8','9','C','0','📞'].map(k=>`<button class="btn ${k=='C'?'or':k=='📞'?'gr':'ln'}" style="margin:0;font-size:20px" onclick="${k=='📞'?'':`dialKey('${k}')`}">${k}</button>`).join('')}</div>`}
+
+/* ---------- ಸುರಕ್ಷಾ ಚಿಹ್ನೆಗಳು ---------- */
+const SIGNS=[['⚠️','ಅಪಾಯದ ಎಚ್ಚರಿಕೆ – ಜಾಗರೂಕರಾಗಿರಿ!'],['⚡','ಅಧಿಕ ವಿದ್ಯುತ್ ಒತ್ತಡ – ಹತ್ತಿರ ಹೋಗಬೇಡಿ'],['🔥','ದಹಿಸುವ ಪದಾರ್ಥ – ಬೆಂಕಿ ಹತ್ತಬಹುದು'],['🧯','ಅಗ್ನಿಶಾಮಕ ಯಂತ್ರ ಇಲ್ಲಿದೆ'],['🚪🏃','ತುರ್ತು ನಿರ್ಗಮನ ದಾರಿ (EXIT)'],['➕','ಪ್ರಥಮ ಚಿಕಿತ್ಸೆ (First Aid)'],['☠️','ವಿಷಕಾರಿ ಪದಾರ್ಥ – ಮುಟ್ಟಬೇಡಿ'],['🚭','ಧೂಮಪಾನ ನಿಷೇಧ']];
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+let S=0;
+const L=[
+{h:'ವಿಪತ್ತು ಎಂದರೇನು?',s:'ವಿಪತ್ತು ಎಂದರೆ ಅಚಾನಕ್ಕಾಗಿ ಬರುವ ಮತ್ತು ದೊಡ್ಡ ನಷ್ಟ ಉಂಟುಮಾಡುವ ಸಂಕಟ. ವಿಪತ್ತಿನಿಂದ ಮಾನವನ ಪ್ರಾಣಹಾನಿ ಮತ್ತು ಆರ್ಥಿಕ ಹಾನಿ ದೊಡ್ಡ ಪ್ರಮಾಣದಲ್ಲಿ ಆಗುತ್ತದೆ.',b:()=>`
+ <div>ರಾಜು ಮತ್ತು ಅವನ ಕುಟುಂಬದವರು ಹಳ್ಳಿಯಿಂದ ಮರಳುವಾಗ ಒಂದು ಭಯಾನಕ ದೃಶ್ಯ ನೋಡಿದರು. <b>ಬೆಟ್ಟ ಕುಸಿದು ಇಡೀ ಗ್ರಾಮ ಮಣ್ಣಿನಡಿ ಹೂತುಹೋಗಿತ್ತು.</b> ಮನೆಗಳು, ಹೊಲಗಳು, ಮರಗಳು ಎಲ್ಲವೂ ನಾಶವಾಗಿದ್ದವು. ಈ ಘಟನೆ ನೈಸರ್ಗಿಕ ಸಂಕಟದಿಂದ ನಡೆದಿತ್ತು.</div>
+ <div class="know"><b class="h">📰 ಸುದ್ದಿ ಓದಿ – ಇರ್ಶಾಲವಾಡಿ ದುರಂತ</b><br>ರಾಯಗಡ ಜಿಲ್ಲೆಯ ಖಾಲಾಪುರ ತಾಲ್ಲೂಕಿನ ಇರ್ಶಾಲವಾಡಿಯಲ್ಲಿ <b>೧೯ ಜುಲೈ ೨೦೨೩</b> ರಂದು ರಾತ್ರಿ, <b>ಅತಿವೃಷ್ಟಿಯಿಂದ ಅಚಾನಕ್ಕಾಗಿ ಭೂಕುಸಿತವಾಯಿತು</b>. ಗ್ರಾಮ ನಿದ್ರೆಯಲ್ಲಿದ್ದಾಗ ನಡೆದ ಈ ಘಟನೆಯಲ್ಲಿ ಅನೇಕ ಜನರು ಮೃತಪಟ್ಟರು; ಕೆಲವರು ಬದುಕುಳಿದರು.</div>
+ <div class="msg in">🤔 ಯೋಚಿಸಿ: ಈ ದುರಂತ ಏಕೆ ನಡೆದಿರಬಹುದು? <button class="btn ln sm" onclick="this.nextElementSibling.style.display='block'">ಉತ್ತರ</button><span style="display:none"> ತುಂಬಾ ಹೆಚ್ಚು ಮಳೆ (ಅತಿವೃಷ್ಟಿ) ಬಿದ್ದ ಕಾರಣ ಬೆಟ್ಟದ ಮಣ್ಣು ಸಡಿಲವಾಗಿ ಭೂಕುಸಿತವಾಯಿತು.</span></div>
+ <div class="key"><b>ವಿಪತ್ತು</b> ಎಂದರೆ <b>ಅಚಾನಕ್ಕಾಗಿ ಬರುವ</b> ಮತ್ತು <b>ದೊಡ್ಡ ನಷ್ಟ</b> ಉಂಟುಮಾಡುವ ಸಂಕಟ. ವಿಪತ್ತಿನಿಂದ ಮಾನವನ <b>ಪ್ರಾಣಹಾನಿ ಮತ್ತು ಆರ್ಥಿಕ ಹಾನಿ</b> ದೊಡ್ಡ ಪ್ರಮಾಣದಲ್ಲಿ ಆಗುತ್ತದೆ.</div>`},
+{h:'ನೈಸರ್ಗಿಕ ಮತ್ತು ಮಾನವನಿರ್ಮಿತ ವಿಪತ್ತು',s:'ನೈಸರ್ಗಿಕವಾಗಿ ಬರುವ ವಿಪತ್ತನ್ನು ನೈಸರ್ಗಿಕ ವಿಪತ್ತು ಎನ್ನುತ್ತಾರೆ. ಮಾನವನ ತಪ್ಪುಗಳಿಂದ ಹಾಗೂ ದುರಾಸೆಯಿಂದ ಉಂಟಾಗುವ ವಿಪತ್ತನ್ನು ಮಾನವನಿರ್ಮಿತ ವಿಪತ್ತು ಎನ್ನುತ್ತಾರೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#eff6ff"><div class="ic">🌊🌪️</div><div class="tt">ನೈಸರ್ಗಿಕ ವಿಪತ್ತು</div><div class="dd">ನೈಸರ್ಗಿಕವಾಗಿ ಬರುವ ವಿಪತ್ತುಗಳು: <b>ಪ್ರವಾಹ, ಭೂಕಂಪ, ಬರ, ಚಂಡಮಾರುತ, ಆಲಿಕಲ್ಲು ಮಳೆ, ಅತಿವೃಷ್ಟಿ, ಭೂಕುಸಿತ</b>.</div></div>
+  <div class="tile op" style="background:#fef2f2"><div class="ic">🔥🚗</div><div class="tt">ಮಾನವ ನಿರ್ಮಿತ ವಿಪತ್ತು</div><div class="dd">ಮಾನವನ <b>ತಪ್ಪುಗಳಿಂದ ಮತ್ತು ದುರಾಸೆಯಿಂದ</b> ಪ್ರಕೃತಿಗೆ ಅಪಾರ ಹಾನಿಯಾಗಿ ಉಂಟಾಗುವ: <b>ಬೆಂಕಿ ಹತ್ತುವುದು, ಅಪಘಾತ, ಯುದ್ಧ, ಮಾಲಿನ್ಯ</b>.</div></div>
+ </div>
+ <h3>ಆಟ: ಯಾವ ರೀತಿಯ ವಿಪತ್ತು?</h3>
+ ${sortGame('dis',[['🌊 ಪ್ರವಾಹ',0],['🔥 ಬೆಂಕಿ ಹತ್ತುವುದು',1],['🏚️ ಭೂಕಂಪ',0],['🚗 ಅಪಘಾತ',1],['☀️ ಬರ',0],['🌪️ ಚಂಡಮಾರುತ',0],['🏭 ಮಾಲಿನ್ಯ',1],['⚔️ ಯುದ್ಧ',1],['🧊 ಆಲಿಕಲ್ಲು ಮಳೆ',0],['⛰️ ಭೂಕುಸಿತ',0]],[['ನೈಸರ್ಗಿಕ','sm'],['ಮಾನವ ನಿರ್ಮಿತ','or']],'dis')}`,a:()=>drawGames()},
+{h:'ಬರ',s:'ಬರ ಎಂದರೆ ಮಳೆ ಕಡಿಮೆ ಬಿದ್ದ ಕಾರಣ ನೀರಿನ ಕೊರತೆಯಾಗುವುದು. ಆಗ ಜನರಿಗೆ, ಜಾನುವಾರುಗಳಿಗೆ ಮತ್ತು ಕೃಷಿಗೆ ಸಾಕಷ್ಟು ನೀರು ಸಿಗುವುದಿಲ್ಲ.',b:()=>`
+ <div class="key"><b>ಬರ</b> ಎಂದರೆ <b>ಮಳೆ ಕಡಿಮೆ ಬಿದ್ದ ಕಾರಣ ನೀರಿನ ಕೊರತೆ</b> ಆಗುವುದು. ಆಗ ಜನರಿಗೆ, ಜಾನುವಾರುಗಳಿಗೆ ಮತ್ತು ಕೃಷಿಗೆ ಸಾಕಷ್ಟು ನೀರು ಸಿಗುವುದಿಲ್ಲ.</div>
+ <h3>ಆಟ: ಕಾರಣ, ಪರಿಣಾಮ ಅಥವಾ ಪರಿಹಾರ?</h3>
+ ${sortGame('dr',[['ಮಳೆ ಕಡಿಮೆ ಬೀಳುವುದು ಅಥವಾ ಸಕಾಲಕ್ಕೆ ಬೀಳದಿರುವುದು',0],['ಬೆಳೆಗಳು ಒಣಗಿಹೋಗುವುದು',1],['ಕೆರೆ, ಒಡ್ಡು, ಅಣೆಕಟ್ಟುಗಳನ್ನು ಕಟ್ಟಿ ನೀರು ಸಂಗ್ರಹಿಸುವುದು',2],['ಮರ ಕಡಿಯುವುದು',0],['ಜಾನುವಾರುಗಳಿಗೆ ನೀರು ಮತ್ತು ಮೇವು ಸಿಗದಿರುವುದು',1],['ಹನಿ ಮತ್ತು ತುಂತುರು ನೀರಾವರಿ',2],['ಕಾಂಕ್ರೀಟ್ ಹಾಕುವುದರಿಂದ ನೀರು ಭೂಮಿಯಲ್ಲಿ ಇಂಗದಿರುವುದು',0],['ನೀರಿಗಾಗಿ ದೂರದವರೆಗೆ ನಡೆದುಹೋಗುವುದು',1],['ಗಿಡ ನೆಡುವುದು',2],['ನೀರಿನ ಅಪವ್ಯಯ',0],['ಕಡಿಮೆ ನೀರಿನಲ್ಲಿ ಬೆಳೆಯುವ ಬೆಳೆಗಳನ್ನು ಬೆಳೆಯುವುದು',2]],[['ಕಾರಣ','or'],['ಪರಿಣಾಮ','pu'],['ಪರಿಹಾರ','gr']],'dr')}
+ <div class="g2">
+  <div class="tile op" style="text-align:center"><div class="tt">💧 ಹನಿ ನೀರಾವರಿ</div><svg viewBox="0 0 160 80" width="180"><line x1="10" y1="20" x2="150" y2="20" stroke="#0369a1" stroke-width="4"/>${[30,70,110].map(x=>`<path d="M${x} 70 l0 -18 M${x} 56 q-8 -6 -12 0 M${x} 56 q8 -6 12 0" stroke="#16a34a" stroke-width="3" fill="none"/><circle cx="${x}" cy="24" r="3" fill="#38bdf8"><animate attributeName="cy" values="24;50" dur="1s" repeatCount="indefinite"/></circle>`).join('')}<rect x="0" y="70" width="160" height="10" fill="#a16207"/></svg><div class="dd">ಗಿಡದ ಬುಡಕ್ಕೆ ಹನಿ ಹನಿ ನೀರು – ಬಹಳ ಉಳಿತಾಯ</div></div>
+  <div class="tile op" style="text-align:center"><div class="tt">🚿 ತುಂತುರು ನೀರಾವರಿ</div><svg viewBox="0 0 160 80" width="180"><line x1="80" y1="70" x2="80" y2="34" stroke="#475569" stroke-width="4"/>${[-50,-30,-10,10,30,50].map((d,i)=>`<circle cx="80" cy="30" r="2.5" fill="#38bdf8"><animate attributeName="cx" values="80;${80+d}" dur="1.2s" begin="${i*.15}s" repeatCount="indefinite"/><animate attributeName="cy" values="30;${62}" dur="1.2s" begin="${i*.15}s" repeatCount="indefinite"/></circle>`).join('')}<rect x="0" y="70" width="160" height="10" fill="#65a30d"/></svg><div class="dd">ಮಳೆಯಂತೆ ಸಣ್ಣ ತುಂತುರು – ನೀರಿನ ಉಳಿತಾಯ</div></div>
+ </div>`,a:()=>drawGames()},
+{h:'ಚಂಡಮಾರುತ – ಸುದ್ದಿ ಓದಿ',s:'ಹವಾಮಾನ ಇಲಾಖೆಯಿಂದ ಚಂಡಮಾರುತದ ಅಪಾಯದ ಎಚ್ಚರಿಕೆ. ರಾಯಗಡ, ರತ್ನಾಗಿರಿ ಮತ್ತು ಸಿಂಧುದುರ್ಗ ಜಿಲ್ಲೆಗಳಿಗೆ ಎಚ್ಚರಿಕೆ ಜಾರಿ. ಮೀನುಗಾರರು ಸಮುದ್ರಕ್ಕೆ ಹೋಗಬಾರದೆಂದು ಮನವಿ. ನಾಗರಿಕರಿಗೆ ಸುರಕ್ಷಿತವಾಗಿರಲು ಸಲಹೆ.',b:()=>`
+ <div class="know" style="background:#fff"><b class="h">📰 ಹವಾಮಾನ ಇಲಾಖೆಯಿಂದ ಚಂಡಮಾರುತದ ಅಪಾಯದ ಎಚ್ಚರಿಕೆ</b><br>ರಾಯಗಡ, ರತ್ನಾಗಿರಿ ಮತ್ತು ಸಿಂಧುದುರ್ಗ ಜಿಲ್ಲೆಗಳಿಗೆ ಎಚ್ಚರಿಕೆ ಜಾರಿ. ಮೀನುಗಾರರು ಸಮುದ್ರಕ್ಕೆ ಹೋಗಬಾರದೆಂದು ಮನವಿ. ನಾಗರಿಕರಿಗೆ ಸುರಕ್ಷಿತವಾಗಿರಲು ಸಲಹೆ.</div>
+ <svg viewBox="0 0 320 130" style="max-width:420px;display:block;margin:0 auto;background:linear-gradient(#475569,#0369a1);border-radius:16px">
+  <g transform="translate(90,60)"><g><animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="2s" repeatCount="indefinite"/>${[0,90,180,270].map(a=>`<path d="M0 0 q30 -10 40 10" stroke="#e2e8f0" stroke-width="5" fill="none" transform="rotate(${a})"/>`).join('')}</g><circle r="6" fill="#0f172a"/></g>
+  ${[0,1,2].map(i=>`<path d="M180 ${100-i*12} q15 -18 30 0 t30 0 t30 0" stroke="#bae6fd" stroke-width="3" fill="none"><animateTransform attributeName="transform" type="translate" values="0 0;-20 0;0 0" dur="${1.2+i*.3}s" repeatCount="indefinite"/></path>`).join('')}
+  <text x="240" y="30" fill="#fff" font-size="12" font-weight="800" text-anchor="middle">ಎತ್ತರದ ಅಲೆಗಳು 🌊</text><text x="90" y="125" fill="#fff" font-size="12" font-weight="800" text-anchor="middle">ವೇಗದ ಗಾಳಿ</text></svg>
+ ${pickGame('cyc',[['ಹವಾಮಾನ ಇಲಾಖೆ ಯಾವ ಎಚ್ಚರಿಕೆ ನೀಡಿದೆ?',['ಪ್ರವಾಹದ','ಚಂಡಮಾರುತದ ಅಪಾಯ','ಭೂಕಂಪದ'],1],['ಯಾವ ಜಿಲ್ಲೆಗಳಿಗೆ ಅಪಾಯದ ಸೂಚನೆ (ಎಚ್ಚರಿಕೆ) ನೀಡಲಾಗಿದೆ?',['ಪುಣೆ, ಸಾತಾರಾ, ಸಾಂಗ್ಲಿ','ರಾಯಗಡ, ರತ್ನಾಗಿರಿ, ಸಿಂಧುದುರ್ಗ','ನಾಗಪುರ, ಅಮರಾವತಿ'],1],['ಮೀನುಗಾರರಿಗೆ ಯಾವ ಮನವಿ ಮಾಡಲಾಗಿದೆ?',['ಸಮುದ್ರಕ್ಕೆ ಹೋಗಬಾರದೆಂದು','ಹೆಚ್ಚು ಮೀನು ಹಿಡಿಯಬೇಕೆಂದು','ದೋಣಿಗಳಿಗೆ ಬಣ್ಣ ಹಚ್ಚಬೇಕೆಂದು'],0],['ನಾಗರಿಕರು ಯಾವ ಎಚ್ಚರಿಕೆ ವಹಿಸಬೇಕೆಂದು ಹೇಳಲಾಗಿದೆ?',['ಸಮುದ್ರ ತೀರದಲ್ಲಿ ವಿಹಾರಕ್ಕೆ ಹೋಗಬೇಕು','ಸುರಕ್ಷಿತವಾಗಿರಬೇಕು','ಪ್ರಯಾಣ ಮಾಡಬೇಕು'],1]],'cyc')}
+ <div class="key">ಸಮುದ್ರದಲ್ಲಿ <b>ಚಂಡಮಾರುತದ</b> ಸಮಯದಲ್ಲಿ <b>ಬಹಳ ವೇಗವಾಗಿ ಗಾಳಿ</b> ಬೀಸುತ್ತದೆ, <b>ಭಾರಿ ಮಳೆ</b> ಬೀಳುತ್ತದೆ ಮತ್ತು ಸಮುದ್ರದಲ್ಲಿ <b>ಎತ್ತರದ ಅಲೆಗಳು</b> ಉಂಟಾಗುತ್ತವೆ. ರಕ್ಷಣೆಗಾಗಿ <b>ಹವಾಮಾನ ಇಲಾಖೆ ನೀಡಿದ ಸಂದೇಶ ಕೇಳುವುದು, ಸುರಕ್ಷಿತ ಜಾಗದಲ್ಲಿರುವುದು ಮತ್ತು ಅನಗತ್ಯ ಪ್ರಯಾಣ ತಪ್ಪಿಸುವುದು</b> ಮುಖ್ಯ. ಜನರ ಸಹಾಯಕ್ಕಾಗಿ ಸರ್ಕಾರ <b>ತುರ್ತು ವ್ಯವಸ್ಥೆಯನ್ನು</b> ಸಿದ್ಧವಾಗಿಟ್ಟಿರುತ್ತದೆ.</div>
+ <div class="msg in">🤔 ಚಂಡಮಾರುತದಿಂದ ಹಳ್ಳಿಯಲ್ಲಿ ವಿದ್ಯುತ್ ಹೋಗಿ ನೀರಿನ ಕೊರತೆಯಾದರೆ ಯಾವ ಉಪಾಯ ಸೂಚಿಸುವಿರಿ? <button class="btn ln sm" onclick="this.nextElementSibling.style.display='block'">ಕೆಲವು ಉಪಾಯಗಳು</button><span style="display:none"> ಟಾರ್ಚ್, ಮೇಣದಬತ್ತಿ (ಜಾಗರೂಕತೆಯಿಂದ) ಬಳಸುವುದು; ಮೊಬೈಲ್ ಚಾರ್ಜ್ ಇಟ್ಟುಕೊಳ್ಳುವುದು; ಸಂಗ್ರಹಿಸಿದ ನೀರನ್ನು ಮಿತವಾಗಿ ಮತ್ತು ಕುದಿಸಿ ಬಳಸುವುದು; ಮಳೆನೀರು ಸಂಗ್ರಹಿಸುವುದು; ನೆರೆಹೊರೆಯವರಿಗೆ ಸಹಾಯ ಮಾಡುವುದು.</span></div>`,a:()=>drawGames()},
+{h:'ಅತಿವೃಷ್ಟಿ',s:'ಅತಿವೃಷ್ಟಿ ಎಂದರೆ ತುಂಬಾ ಹೆಚ್ಚು ಮಳೆ ಬೀಳುವುದು. ಅದರಿಂದ ನದಿ-ಹಳ್ಳಗಳಲ್ಲಿ ನೀರು ತುಂಬುತ್ತದೆ, ಪ್ರವಾಹ ಬರುತ್ತದೆ; ಮನೆ, ಬೆಳೆ, ಮರ, ಜಾನುವಾರುಗಳಿಗೆ ದೊಡ್ಡ ನಷ್ಟವಾಗುತ್ತದೆ. ಆದ್ದರಿಂದ ನಾವು ಜಾನುವಾರುಗಳ ಸಮೇತ ಸುರಕ್ಷಿತ ಅಥವಾ ಎತ್ತರದ ಜಾಗಕ್ಕೆ ಹೋಗಬೇಕು.',b:()=>`
+ <div class="key"><b>ಅತಿವೃಷ್ಟಿ</b> ಎಂದರೆ <b>ತುಂಬಾ ಹೆಚ್ಚು ಮಳೆ</b> ಬೀಳುವುದು. ಅದರಿಂದ ನದಿ-ಹಳ್ಳಗಳಲ್ಲಿ ನೀರು ತುಂಬುತ್ತದೆ, <b>ಪ್ರವಾಹ</b> ಬರುತ್ತದೆ; ಮನೆ, ಬೆಳೆ, ಮರ, ಜಾನುವಾರುಗಳಿಗೆ ದೊಡ್ಡ ನಷ್ಟವಾಗುತ್ತದೆ. ಆದ್ದರಿಂದ ನಾವು <b>ಜಾನುವಾರುಗಳ ಸಮೇತ ಸುರಕ್ಷಿತ ಅಥವಾ ಎತ್ತರದ ಜಾಗಕ್ಕೆ</b> ಹೋಗಬೇಕು.</div>
+ <h3>ಆಟ: ಅತಿವೃಷ್ಟಿ / ಪ್ರವಾಹದ ಸಮಯದಲ್ಲಿ – ಸರಿಯೋ ತಪ್ಪೋ?</h3>
+ ${sortGame('fl',[['ಜಾನುವಾರುಗಳೊಂದಿಗೆ ಎತ್ತರದ ಜಾಗಕ್ಕೆ ಹೋಗುವುದು',0],['ಪ್ರವಾಹದ ನೀರು ನೋಡಲು ಸೇತುವೆ ಮೇಲೆ ಹೋಗುವುದು',1],['ಹವಾಮಾನ ಇಲಾಖೆಯ ಸೂಚನೆಗಳನ್ನು ಕೇಳುವುದು',0],['ಹರಿಯುವ ನೀರಿನಲ್ಲಿ ವಾಹನ ಓಡಿಸುವುದು',1],['ಜೀವರಕ್ಷಕ ಚೀಲ ಸಿದ್ಧವಾಗಿಡುವುದು',0],['ವಿದ್ಯುತ್ ಕಂಬದ ಹತ್ತಿರ ನಿಲ್ಲುವುದು',1]],[['✔ ಸರಿ','gr'],['✘ ತಪ್ಪು','or']],'fl')}`,a:()=>drawGames()},
+{h:'ಸುರಕ್ಷಾ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಜೀವರಕ್ಷಕ ಚೀಲ',s:'ಸುರಕ್ಷಾ ಚಿಹ್ನೆಗಳ ಅರ್ಥ ತಿಳಿದುಕೊಳ್ಳಿ. ವಿಪತ್ತು ಬಂದಾಗ ಮನೆಯಿಂದ ಹೊರಡುವಾಗ ಜೊತೆಗೆ ಒಯ್ಯಬೇಕಾದ ವಸ್ತುಗಳ ಜೀವರಕ್ಷಕ ಚೀಲ ಸಿದ್ಧಪಡಿಸಿ.',b:()=>`
+ <h3>🚸 ಸುರಕ್ಷಾ ಚಿಹ್ನೆಗಳು (ಕ್ಲಿಕ್ ಮಾಡಿ)</h3>
+ <div class="g2" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">${SIGNS.map(x=>`<div class="tile" onclick="tog(this);say('${x[1]}')" style="text-align:center"><div style="font-size:40px">${x[0]}</div><div class="dd">${x[1]}</div><div class="tap">ಅರ್ಥ ನೋಡಿ</div></div>`).join('')}</div>
+ <h3>🎒 ಮಾಡಿ ನೋಡಿ: ಜೀವರಕ್ಷಕ ಚೀಲ ತುಂಬಿ</h3>
+ <div class="tap">ವಿಪತ್ತು ಬಂದಾಗ ಮನೆಯಿಂದ ಹೊರಡುವಾಗ ಯಾವ ವಸ್ತುಗಳನ್ನು ಜೊತೆಗೆ ಒಯ್ಯುವಿರಿ? ಉಪಯುಕ್ತ ವಸ್ತುಗಳ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.</div>
+ <div id="bagBox"></div>
+ <div class="know"><b class="h">💡 ನಿಮಗೆ ಗೊತ್ತೇ?</b><br>‘<b>ರಾಷ್ಟ್ರೀಯ ವಿಪತ್ತು ನಿರ್ವಹಣಾ ದಿನ</b>’ ಪ್ರತಿ ವರ್ಷ <b>೧೩ ಅಕ್ಟೋಬರ್</b> ರಂದು ಆಚರಿಸಲಾಗುತ್ತದೆ. ಇದರ ಆರಂಭ <b>೧೯೮೯ರಲ್ಲಿ</b> ಆಯಿತು. ತುರ್ತು ಪರಿಸ್ಥಿತಿಯಲ್ಲಿ ತಮ್ಮನ್ನು ಮತ್ತು ಇತರರನ್ನು ಹೇಗೆ ರಕ್ಷಿಸಿಕೊಳ್ಳಬೇಕು ಎಂಬ ಮಾರ್ಗದರ್ಶನವನ್ನು ಈ ದಿನ ನೀಡಲಾಗುತ್ತದೆ.</div>`,a:()=>drawBag()},
+{h:'ಮನೆಯೊಳಗಿನ ವಿಪತ್ತುಗಳು – ಅಪಾಯಗಳನ್ನು ಹುಡುಕಿ',s:'ಮನೆಯೊಳಗೂ ನಮ್ಮ ತಪ್ಪುಗಳಿಂದ ಬೆಂಕಿ, ಶಾರ್ಟ್ ಸರ್ಕ್ಯೂಟ್, ಗ್ಯಾಸ್ ಸೋರಿಕೆ, ಮೊಬೈಲ್ ಸ್ಫೋಟ, ಅಪಘಾತದಂತಹ ವಿಪತ್ತುಗಳು ಬರಬಹುದು. ಚಿತ್ರದಲ್ಲಿರುವ ಅಪಾಯಗಳನ್ನು ಹುಡುಕಿ.',b:()=>`
+ <div>ರಾಜುವಿನ ಮನಸ್ಸಿನಲ್ಲಿ ಪ್ರಶ್ನೆ ಬಂತು – “ಇಂತಹ ಘಟನೆಗಳು ಮನೆಯಲ್ಲೂ ನಡೆಯಬಹುದೇ?” ಹೌದು! ನಮ್ಮ ತಪ್ಪುಗಳಿಂದ ಮನೆಯಲ್ಲಿ <b>ಬೆಂಕಿ ಹತ್ತುವುದು, ಶಾರ್ಟ್ ಸರ್ಕ್ಯೂಟ್, ಗ್ಯಾಸ್ ಸೋರಿಕೆ, ಮೊಬೈಲ್ ಸ್ಫೋಟ, ಅಪಘಾತ, ಎಲೆಕ್ಟ್ರಿಕ್ ಹೀಟರ್‌ನ ತಪ್ಪು ಬಳಕೆ</b> ಇಂತಹ ವಿಪತ್ತುಗಳು ಬರಬಹುದು.</div>
+ <h3>🔍 ಸುರಕ್ಷಾ ರಕ್ಷಕರಾಗೋಣ – ಚಿತ್ರದಲ್ಲಿರುವ ೬ ಅಪಾಯಗಳನ್ನು ಹುಡುಕಿ</h3>
+ <div id="hzBox">${hzSvg()}</div><div id="hzMsg"><div class="msg in">ಅಪಾಯಕಾರಿ ಎನಿಸುವ ವಸ್ತುಗಳ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.</div></div>`},
+{h:'ಮನೆಯಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿರೋಣ',s:'ಅಡುಗೆಮನೆಯಲ್ಲಿ ಗ್ಯಾಸ್ ಬಳಸುವಾಗ ಹತ್ತಿರ ಆಡಬೇಡಿ. ಬೆಂಕಿಯೊಂದಿಗೆ ಆಡಬೇಡಿ. ಒದ್ದೆ ಕೈಗಳಿಂದ ವಿದ್ಯುತ್ ಉಪಕರಣಗಳನ್ನು ಮುಟ್ಟಬೇಡಿ. ಔಷಧಿ ಮತ್ತು ರಾಸಾಯನಿಕಗಳೊಂದಿಗೆ ಆಡಬೇಡಿ. ಮೆಟ್ಟಿಲು ಹತ್ತುವಾಗ-ಇಳಿಯುವಾಗ ಆತುರ ಮಾಡಬೇಡಿ.',b:()=>`
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🍳</div><div class="tt">ಅಡುಗೆಮನೆಯಲ್ಲಿ ಎಚ್ಚರಿಕೆ</div><div class="dd">ಗ್ಯಾಸ್ ಒಲೆ ಬಳಸುತ್ತಿರುವಾಗ ಹತ್ತಿರ ಎಂದಿಗೂ ಆಡಬೇಡಿ. ಬಳಸದಿರುವಾಗ ಗ್ಯಾಸ್ ಒಲೆ ಮತ್ತು ಸಿಲಿಂಡರ್‌ನ <b>ರೆಗ್ಯುಲೇಟರ್ ಆಫ್</b> ಆಗಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.</div><div class="tap">ಕ್ಲಿಕ್</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🕯️</div><div class="tt">ಬೆಂಕಿಯೊಂದಿಗೆ ಆಡಬೇಡಿ</div><div class="dd">ಮೇಣದಬತ್ತಿ, ಲೈಟರ್ ಅಥವಾ ಬೆಂಕಿಪೆಟ್ಟಿಗೆ ಅಪಾಯಕಾರಿ – ಅವುಗಳೊಂದಿಗೆ ಆಡಬೇಡಿ.</div><div class="tap">ಕ್ಲಿಕ್</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">⚡</div><div class="tt">ವಿದ್ಯುತ್ ಉಪಕರಣಗಳು</div><div class="dd">ತುಂಡಾದ ತಂತಿ ಅಥವಾ ಹಾಳಾದ ಸ್ವಿಚ್ ಮುಟ್ಟಬೇಡಿ. <b>ಒದ್ದೆ ಕೈಗಳಿಂದ</b> ವಿದ್ಯುತ್ ಉಪಕರಣಗಳನ್ನು ಮುಟ್ಟಬೇಡಿ. ಹಿರಿಯರು ದುರಸ್ತಿ ಮಾಡುವಾಗ <b>ರಬ್ಬರ್ ಕೈಗವಸು ಮತ್ತು ಚಪ್ಪಲಿ</b> ಬಳಸಬೇಕು.</div><div class="tap">ಕ್ಲಿಕ್</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">☠️</div><div class="tt">ಅಪಾಯಕಾರಿ ರಾಸಾಯನಿಕಗಳಿಂದ ದೂರ</div><div class="dd">ಔಷಧಿ, ಕೀಟನಾಶಕ, ಸ್ವಚ್ಛತೆಯ ರಾಸಾಯನಿಕಗಳೊಂದಿಗೆ ಆಡಬೇಡಿ. ಆಕಸ್ಮಿಕವಾಗಿ ಮುಟ್ಟಿದರೆ <b>ಸೋಪಿನಿಂದ ಕೈಗಳನ್ನು</b> ಸ್ವಚ್ಛವಾಗಿ ತೊಳೆಯಿರಿ.</div><div class="tap">ಕ್ಲಿಕ್</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🪜</div><div class="tt">ಎತ್ತರದ ಜಾಗದಲ್ಲಿ ಎಚ್ಚರಿಕೆ</div><div class="dd">ಮೆಟ್ಟಿಲು ಹತ್ತುವಾಗ-ಇಳಿಯುವಾಗ ಆತುರ ಮಾಡಬೇಡಿ, ಕಟಕಟೆಯ ಆಧಾರ ಪಡೆಯಿರಿ. ಕಿಟಕಿ/ತಾರಸಿಯಿಂದ ಹೊರಗೆ ಬಾಗಿ ನೋಡಬೇಡಿ, ಛಾವಣಿಯ ಮೇಲೆ ಒಬ್ಬರೇ ಹೋಗಬೇಡಿ. <b>ಲಿಫ್ಟ್</b> ಹಿರಿಯರೊಂದಿಗೇ ಬಳಸಿ.</div><div class="tap">ಕ್ಲಿಕ್</div></div>
+ </div>
+ <h3>ಆಟ: ವಿದ್ಯುತ್ ವಿಷಯದಲ್ಲಿ – ಸುರಕ್ಷಿತ ☑ ಅಥವಾ ಅಪಾಯಕಾರಿ ☒?</h3>
+ ${sortGame('elec',[['ಒದ್ದೆ ಕೈಗಳಿಂದ ಸ್ವಿಚ್ ಒತ್ತುವುದು',1],['ಒಂದೇ ಸಾಕೆಟ್‌ನಲ್ಲಿ ಹೆಚ್ಚು ಪ್ಲಗ್ ಹಾಕುವುದು',1],['ಒಣ ಕೈಗಳಿಂದ ಸ್ವಿಚ್ ಬಳಸುವುದು',0],['ವಿದ್ಯುತ್ ತಂತಿಯ ಮೇಲೆ ಬಟ್ಟೆ ಒಣಗಿಸುವುದು',1],['ಬಳಸಿದ ನಂತರ ಉಪಕರಣ ಆಫ್ ಮಾಡುವುದು',0],['ತುಂಡಾದ ವೈರ್ ಮುಟ್ಟುವುದು',1],['ದುರಸ್ತಿ ಮಾಡುವಾಗ ರಬ್ಬರ್ ಕೈಗವಸು ಬಳಸುವುದು',0]],[['☑ ಸುರಕ್ಷಿತ','gr'],['☒ ಅಪಾಯಕಾರಿ','or']],'elec')}`,a:()=>drawGames()},
+{h:'ಸಹಾಯ ಮಾಡೋಣ – ದೃಷ್ಟಿಮಿತ್ರ',s:'ನಮ್ಮೊಂದಿಗೆ ಚಿಕ್ಕ ಮಕ್ಕಳು, ಅಜ್ಜ-ಅಜ್ಜಿಯರಂತಹ ವಯಸ್ಸಾದವರು ಮತ್ತು ದಿವ್ಯಾಂಗರ ಕಾಳಜಿಯನ್ನೂ ನಾವು ವಹಿಸಬೇಕು.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">🧒</div><div class="tt">ಚಿಕ್ಕ ಮಕ್ಕಳು</div><div class="dd">ರಸ್ತೆ ಅಥವಾ ಮೆಟ್ಟಿಲುಗಳನ್ನು ತಪ್ಪಿಸಿ ಸುರಕ್ಷಿತ ಜಾಗದಲ್ಲಿ ಆಡಲು ಹೇಳಬೇಕು; ರಸ್ತೆ ದಾಟಲು ಸಹಾಯ ಮಾಡಬೇಕು.</div></div>
+  <div class="tile op"><div class="ic">👴👵</div><div class="tt">ಅಜ್ಜ-ಅಜ್ಜಿ</div><div class="dd">ನಡೆಯುವಾಗ ಆಧಾರ ನೀಡಬೇಕು ಅಥವಾ ಅವರೊಂದಿಗೆ ನಡೆಯಬೇಕು; ಬಸ್ಸಿನಲ್ಲಿ ಕೂರಲು ಜಾಗ ಬಿಟ್ಟುಕೊಡಬೇಕು.</div></div>
+  <div class="tile op"><div class="ic">🧑‍🦽</div><div class="tt">ದಿವ್ಯಾಂಗ ಗೆಳೆಯರು</div><div class="dd">ತರಗತಿಗೆ ತಲುಪಲು, ನೆಲದ ಮೇಲೆ ಬಿದ್ದ ಪುಸ್ತಕಗಳನ್ನು ಎತ್ತಲು, ರಸ್ತೆ ದಾಟಲು ಸಹಾಯ ಮಾಡಬೇಕು.</div></div>
+ </div>
+ <h3>🧑‍🦯 ಆಟ ಆಡೋಣ: ದೃಷ್ಟಿಮಿತ್ರ – ಹಂತಗಳನ್ನು ಕ್ರಮವಾಗಿ ಜೋಡಿಸಿ</h3>
+ ${orderGame('dm',['ಇಬ್ಬರಿಬ್ಬರ ಜೋಡಿ ಮಾಡುವುದು','ಒಬ್ಬರ ಕಣ್ಣಿಗೆ ಹಗುರವಾಗಿ ಪಟ್ಟಿ ಕಟ್ಟುವುದು','ದೃಷ್ಟಿಮಿತ್ರ ಕೈ ಹಿಡಿದು ತರಗತಿಯಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿ ತಿರುಗಾಡಿಸುವುದು','“ಬಲಕ್ಕೆ ತಿರುಗು, ಒಂದು ಹೆಜ್ಜೆ ಮುಂದಿಡು” ಎಂದು ಸೂಚನೆ ನೀಡುವುದು','ಐದು ನಿಮಿಷಗಳ ನಂತರ ಪಾತ್ರ ಬದಲಾಯಿಸುವುದು'],'dm')}
+ <div class="msg ok">ಇದರಿಂದ ದೃಷ್ಟಿಹೀನರಿಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬೇಕು ಮತ್ತು ಅವರಿಗೆ ಯಾವ ತೊಂದರೆಗಳಾಗುತ್ತವೆ ಎಂಬುದು ತಿಳಿಯುತ್ತದೆ.</div>`,a:()=>drawGames()},
+{h:'ಪರಿಸರದ ಕಾಳಜಿ',s:'ನಮ್ಮ ಕುಟುಂಬದಂತೆಯೇ ಪರಿಸರದ ಕಾಳಜಿ ವಹಿಸುವುದು ನಮ್ಮ ಜವಾಬ್ದಾರಿ. ನದಿ, ಹಳ್ಳ, ಸಾರ್ವಜನಿಕ ಜಾಗಗಳನ್ನು ಸ್ವಚ್ಛವಾಗಿಡಬೇಕು. ಗಿಡ ನೆಟ್ಟು, ನೀರು ಉಳಿಸಿ ಮತ್ತು ಕಸ ಕಡಿಮೆ ಮಾಡಿ ಪರಿಸರವನ್ನು ರಕ್ಷಿಸಬೇಕು.',b:()=>`
+ <div class="key">ನಾವು ಕುಟುಂಬದ, ಸ್ನೇಹಿತರ ಕಾಳಜಿ ವಹಿಸುವಂತೆಯೇ <b>ಪರಿಸರದ ಕಾಳಜಿ</b> ವಹಿಸುವುದು ನಮ್ಮ ಜವಾಬ್ದಾರಿ. ಪರಿಸರವನ್ನು ಬೇರೆ ಎಂದು ಭಾವಿಸದೆ <b>ನಮ್ಮ ಕುಟುಂಬದ ಒಂದು ಭಾಗ</b> ಎಂದು ಪರಿಗಣಿಸಬೇಕು. ನಮ್ಮ ಜೀವನ ಮತ್ತು ಪರಿಸರದ ಆರೋಗ್ಯ <b>ಒಂದರ ಮೇಲೊಂದು ಅವಲಂಬಿತ</b> ಇದೆ.</div>
+ <h3>ಆಟ: ಸಮಸ್ಯೆ – ಪರಿಣಾಮ – ಪರಿಹಾರ ಹೊಂದಿಸಿ</h3>
+ ${pickGame('env',[['💧 ನೀರಿನ ಅಪವ್ಯಯ – ಪರಿಣಾಮ?',['ನೀರು ಕಡಿತದ ಸಂಕಟ','ಗಿಡಗಳು ಬೆಳೆಯುವುದು','ಗಾಳಿ ಶುದ್ಧವಾಗುವುದು'],0],['💧 ನೀರಿನ ಅಪವ್ಯಯ – ಪರಿಹಾರ?',['ನಲ್ಲಿ ತೆರೆದಿಡುವುದು','ನೀರು ಉಳಿಸುವುದು','ಕಸ ಸುಡುವುದು'],1],['🪓 ಮರ ಕಡಿಯುವುದು – ಪರಿಹಾರ?',['ಗಿಡ ನೆಡುವುದು','ಇನ್ನಷ್ಟು ಮರ ಕಡಿಯುವುದು','ಪ್ಲಾಸ್ಟಿಕ್ ಬಳಸುವುದು'],0],['🛍️ ಪ್ಲಾಸ್ಟಿಕ್‌ನ ಅತಿಬಳಕೆ – ಪರಿಣಾಮ?',['ನದಿ/ಹಳ್ಳಗಳು ಕಟ್ಟಿಕೊಳ್ಳುತ್ತವೆ','ನೀರು ಸ್ವಚ್ಛವಾಗುತ್ತದೆ','ಗಿಡಗಳು ಬೆಳೆಯುತ್ತವೆ'],0],['🛍️ ಪ್ಲಾಸ್ಟಿಕ್‌ನ ಅತಿಬಳಕೆ – ಪರಿಹಾರ?',['ಬಟ್ಟೆ ಚೀಲ ಬಳಸುವುದು','ಹೆಚ್ಚು ಚೀಲಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳುವುದು','ಪ್ಲಾಸ್ಟಿಕ್ ಸುಡುವುದು'],0],['🗑️ ಪರಿಸರ ಅಸ್ವಚ್ಛತೆ – ಪರಿಹಾರ?',['ಕಸವನ್ನು ರಸ್ತೆಯಲ್ಲಿ ಎಸೆಯುವುದು','ಕಸವನ್ನು ಕಸದ ತೊಟ್ಟಿಯಲ್ಲಿ ಹಾಕುವುದು','ಕಸವನ್ನು ನದಿಯಲ್ಲಿ ಎಸೆಯುವುದು'],1]],'env')}`,a:()=>drawGames()},
+{h:'ಅಪರಿಚಿತರಿಂದ ಸುರಕ್ಷೆ',s:'ನಮ್ಮ ಸುರಕ್ಷತೆ ನಮ್ಮ ಮೊದಲ ಮತ್ತು ಮುಖ್ಯ ಜವಾಬ್ದಾರಿ. ಅಪರಿಚಿತ ವ್ಯಕ್ತಿ ತಿಂಡಿ ಅಥವಾ ವಸ್ತು ಕೊಡಲು ಪ್ರಯತ್ನಿಸಿದರೆ ತಕ್ಷಣ ಬೇಡ ಎನ್ನಿ ಮತ್ತು ಅಲ್ಲಿಂದ ಹೊರಟುಹೋಗಿ. ಏನಾದರೂ ನಡೆದರೆ ಹಿರಿಯರಿಗೆ ಅಥವಾ ಶಿಕ್ಷಕರಿಗೆ ತಕ್ಷಣ ಹೇಳಿ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#fef2f2"><div class="ic">🙅</div><div class="tt">‘ಬೇಡ’ ಎನ್ನಿ!</div><div class="dd">ಅಪರಿಚಿತ ವ್ಯಕ್ತಿ ತಿಂಡಿ ಅಥವಾ ಯಾವುದೇ ವಸ್ತು ಕೊಡಲು ಪ್ರಯತ್ನಿಸಿದರೆ ತಕ್ಷಣ <b>‘ಇಲ್ಲ’</b> ಎನ್ನಿ. ಅವರೊಂದಿಗೆ ಮಾತನಾಡುವ ಅಥವಾ ಹತ್ತಿರ ನಿಲ್ಲುವ ಅಗತ್ಯವಿಲ್ಲ. <b>ಅಲ್ಲಿಂದ ತಕ್ಷಣ ಹೊರಟುಹೋಗಿ.</b></div></div>
+  <div class="tile op" style="background:#fff7ed"><div class="ic">📢</div><div class="tt">ಜೋರಾಗಿ ಕೂಗಿ</div><div class="dd">ಯಾರಾದರೂ ಬಲವಂತವಾಗಿ ಹಿಡಿಯಲು ಪ್ರಯತ್ನಿಸಿದರೆ ಹೆದರಬೇಡಿ. ಜೋರಾಗಿ ಕೂಗಿ – <b>“ಸಹಾಯ ಮಾಡಿ! ಬಿಡಿ! ನನ್ನನ್ನು ಕಾಪಾಡಿ!”</b> ಬಿಡುಗಡೆಯಾದ ತಕ್ಷಣ ಓಡಿ <b>ಜನದಟ್ಟಣೆಯ ಜಾಗಕ್ಕೆ, ಅಂಗಡಿಗೆ ಅಥವಾ ಪೊಲೀಸ್ ಠಾಣೆಗೆ</b> ಹೋಗಿ.</div></div>
+  <div class="tile op" style="background:#f0fdf4"><div class="ic">🗣️👩‍🏫</div><div class="tt">ಹಿರಿಯರಿಗೆ ಹೇಳಿ</div><div class="dd">ಇಂತಹ ಘಟನೆಯನ್ನು ಮನೆಯ ಹಿರಿಯರಿಗೆ ಅಥವಾ ಶಿಕ್ಷಕರಿಗೆ <b>ತಕ್ಷಣ ಹೇಳಿ</b>. ಅವರು ನಿಮ್ಮ ಮೇಲೆ ಕೋಪಿಸಿಕೊಳ್ಳುವುದಿಲ್ಲ, ಬದಲಿಗೆ ಅವರಿಗೆ ನಿಮ್ಮ ಬಗ್ಗೆ ಹೆಮ್ಮೆಯಾಗುತ್ತದೆ.</div></div>
+  <div class="tile op" style="background:#eff6ff"><div class="ic">✉️</div><div class="tt">ರಹಸ್ಯ ಸಂಕೇತ</div><div class="dd">ಕೂಗಲು ಸಾಧ್ಯವಿಲ್ಲದಿದ್ದರೆ ಶಾಂತವಾಗಿ ಕೈ ಸಂಕೇತ ಬಳಸಿ ಅಥವಾ ಚೀಟಿಯಲ್ಲಿ <b>‘SOS’ (Save Our Soul)</b> ಅಥವಾ <b>‘ನನ್ನನ್ನು ಕಾಪಾಡಿ’</b> ಬರೆಯಿರಿ.</div></div>
+ </div>
+ <h3>ಆಟ: ಸುರಕ್ಷಿತವೋ ಅಸುರಕ್ಷಿತವೋ?</h3>
+ ${sortGame('str',[['ಅಪರಿಚಿತ ವ್ಯಕ್ತಿ ಚಾಕೊಲೇಟ್ ಕೊಡುತ್ತಿದ್ದಾನೆ, ಅದನ್ನು ತೆಗೆದುಕೊಳ್ಳುವುದು',1],['ಶಾಲೆಯಿಂದ ಮನೆಗೆ ಗೆಳೆಯರೊಂದಿಗೆ ಹೋಗುವುದು',0],['ಅಪರಿಚಿತ ವ್ಯಕ್ತಿಯ ವಾಹನದಲ್ಲಿ ಕೂರುವುದು',1],['ಏನಾದರೂ ಅನಾನುಕೂಲ ಅನಿಸಿದರೆ ಅಪ್ಪ-ಅಮ್ಮ/ಶಿಕ್ಷಕರಿಗೆ ಹೇಳುವುದು',0],['ರಸ್ತೆಯಲ್ಲಿ ಒಬ್ಬರೇ ತಿರುಗಾಡುವಾಗ ಅಪರಿಚಿತ ವ್ಯಕ್ತಿಯೊಂದಿಗೆ ಹರಟೆ ಹೊಡೆಯುವುದು',1],['ಪರಿಚಿತ ಹಿರಿಯ ವ್ಯಕ್ತಿಯೊಂದಿಗೆ ಮಾರುಕಟ್ಟೆಗೆ ಹೋಗುವುದು',0]],[['🟢 ಸುರಕ್ಷಿತ','gr'],['🔴 ಅಸುರಕ್ಷಿತ','or']],'str')}`,a:()=>drawGames()},
+{h:'ಸಹಾಯ ಸಂಖ್ಯೆಗಳು – ಡಯಲ್ ಮಾಡಿ ನೋಡಿ',s:'ಪೊಲೀಸ್ ಸಹಾಯ ನೂರು, ಅಗ್ನಿಶಾಮಕ ದಳ ನೂರೊಂದು, ಆಂಬ್ಯುಲೆನ್ಸ್ ನೂರೆಂಟು ಅಥವಾ ನೂರೆರಡು, ಮಹಿಳಾ ಮತ್ತು ಮಕ್ಕಳ ರಕ್ಷಣಾ ಸಹಾಯ ನೂರ ಎಂಬತ್ತೊಂದು, ಮಕ್ಕಳ ಸಹಾಯವಾಣಿ ಒಂದು ಸೊನ್ನೆ ಒಂಬತ್ತು ಎಂಟು, ವಿಪತ್ತು ನಿರ್ವಹಣಾ ಕೇಂದ್ರ ಒಂದು ಸೊನ್ನೆ ಏಳು ಏಳು.',b:()=>`
+ <div class="key">ಕೆಳಗಿನ ಸಂಖ್ಯೆಗೆ ಫೋನ್ ಮಾಡಿದರೆ <b>ತಕ್ಷಣ ಸಹಾಯ</b> ಸಿಗುತ್ತದೆ. ಈ ಸಂಖ್ಯೆಗಳನ್ನು ಕಂಠಪಾಠ ಮಾಡಿ!</div>
+ <div class="g2" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">${HL.map(h=>`<div class="tile op" style="text-align:center"><div class="tt" style="font-size:24px">${h[0]}</div><div class="dd">${h[1]}</div></div>`).join('')}</div>
+ <h3>📱 ಆಟ: ಸಂಖ್ಯೆ ಡಯಲ್ ಮಾಡಿ ಮತ್ತು ಗುರುತಿಸಿ</h3>${dialPad()}
+ <div class="msg no">⚠️ ಈ ಸಂಖ್ಯೆಗಳನ್ನು ನಿಜವಾದ ಸಂಕಟದಲ್ಲಿ ಮಾತ್ರ ಬಳಸಬೇಕು – ತಮಾಷೆಗಾಗಿ ಎಂದಿಗೂ ಫೋನ್ ಮಾಡಬಾರದು.</div>`},
+{h:'ಇದನ್ನು ನಾವು ಕಲಿತೆವು',s:'ವಿಪತ್ತು ಎಂದರೆ ಅಚಾನಕ್ಕಾಗಿ ಬರುವ ಮತ್ತು ದೊಡ್ಡ ನಷ್ಟ ಉಂಟುಮಾಡುವ ಸಂಕಟ. ಮನೆಯಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿರಲು ಎಚ್ಚರ ವಹಿಸಬೇಕು. ಚಿಕ್ಕ ಮಕ್ಕಳು, ವಯಸ್ಸಾದವರು ಮತ್ತು ದಿವ್ಯಾಂಗರ ಕಾಳಜಿ ವಹಿಸಬೇಕು. ಪರಿಸರವನ್ನು ರಕ್ಷಿಸಬೇಕು. ಅಪರಿಚಿತರಿಂದ ದೂರವಿರಬೇಕು.',b:()=>`
+ <ul>
+  <li>ವಿಪತ್ತು ಎಂದರೆ <b>ಅಚಾನಕ್ಕಾಗಿ ಬರುವ</b> ಮತ್ತು <b>ದೊಡ್ಡ ನಷ್ಟ</b> ಉಂಟುಮಾಡುವ ಸಂಕಟ.</li>
+  <li>ನೈಸರ್ಗಿಕವಾಗಿ ಬರುವ ವಿಪತ್ತನ್ನು <b>‘ನೈಸರ್ಗಿಕ ವಿಪತ್ತು’</b> ಎನ್ನುತ್ತಾರೆ.</li>
+  <li>ಮಾನವನ ತಪ್ಪುಗಳಿಂದ ಮತ್ತು ದುರಾಸೆಯಿಂದ ಉಂಟಾಗುವ ವಿಪತ್ತನ್ನು <b>‘ಮಾನವ ನಿರ್ಮಿತ ವಿಪತ್ತು’</b> ಎನ್ನುತ್ತಾರೆ.</li>
+  <li>ಮನೆಯಲ್ಲಿ ಉಂಟಾಗುವ ವಿಪತ್ತುಗಳಿಂದ ಸುರಕ್ಷಿತವಾಗಿರಲು <b>ಎಚ್ಚರಿಕೆ</b> ವಹಿಸಬೇಕು.</li>
+  <li>ನಮ್ಮೊಂದಿಗೆ <b>ಚಿಕ್ಕ ಮಕ್ಕಳು, ಅಜ್ಜ-ಅಜ್ಜಿ, ದಿವ್ಯಾಂಗ</b> ವ್ಯಕ್ತಿಗಳ ಕಾಳಜಿಯನ್ನೂ ವಹಿಸಬೇಕು.</li>
+  <li>ನಮ್ಮ <b>ಪರಿಸರದ ಕಾಳಜಿ</b> ವಹಿಸುವುದು ಮತ್ತು ಅದನ್ನು ರಕ್ಷಿಸುವುದು ನಮ್ಮ ಜವಾಬ್ದಾರಿ.</li>
+  <li><b>ಅಪರಿಚಿತರಿಂದ ದೂರ</b> ಇರಬೇಕು.</li>
+ </ul>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>ಯಾವುದಾದರೂ ಒಂದು ವಿಪತ್ತನ್ನು ಆಯ್ಕೆ ಮಾಡಿ, ಅದರ ಆಧಾರದ ಮೇಲೆ <b>ಘೋಷವಾಕ್ಯ</b> ಅಥವಾ <b>ತುರ್ತು ಚಿಹ್ನೆ</b> ತಯಾರಿಸಿ ಮತ್ತು ತರಗತಿಯಲ್ಲಿ ಪ್ರಸ್ತುತಪಡಿಸಿ.</div>
+ <div class="msg ok" style="text-align:center;font-size:19px">🛡️ ಈ ಪಾಠದಲ್ಲಿ ನೀವು ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು: <b>${(award('end','ಅಭಿನಂದನೆ! ನೀವು ಇಡೀ ಪಾಠ ಕಲಿತಿರಿ.'),STARS.size)}</b> ⭐</div>
+ <div class="tool">${tool('N')}</div>`}
+];
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ವಿಪತ್ತಿನ ಅತ್ಯಂತ ಮುಖ್ಯ ಗುರುತು ಯಾವುದು?',['ಅದು ಮೊದಲೇ ಸೂಚನೆ ನೀಡಿ ಬರುತ್ತದೆ','ಅದು ನಿರ್ದಿಷ್ಟ ಜಾಗದಲ್ಲಿ ಮಾತ್ರ ಆಗುತ್ತದೆ','ಅದು ಕೇವಲ ಆರ್ಥಿಕ ಹಾನಿ ಮಾಡುತ್ತದೆ','ಅದು ಅಚಾನಕ್ಕಾಗಿ ಬರುತ್ತದೆ ಮತ್ತು ದೊಡ್ಡ ನಷ್ಟ ಮಾಡುತ್ತದೆ'],3,'ವಿಪತ್ತು ಅಚಾನಕ್ಕಾಗಿ ಬರುವ ಮತ್ತು ದೊಡ್ಡ ನಷ್ಟ ಉಂಟುಮಾಡುವ ಸಂಕಟ.'],
+['ವಿಪತ್ತಿನಿಂದ ಯಾವ ಹಾನಿ ಆಗುತ್ತದೆ?',['ಕೇವಲ ಮರಗಳಿಗೆ','ಪ್ರಾಣಹಾನಿ ಮತ್ತು ಆರ್ಥಿಕ ಹಾನಿ','ಕೇವಲ ರಸ್ತೆಗಳಿಗೆ','ಯಾವುದೂ ಇಲ್ಲ'],1,'ವಿಪತ್ತಿನಿಂದ ಪ್ರಾಣಹಾನಿ ಮತ್ತು ಆರ್ಥಿಕ ಹಾನಿ ದೊಡ್ಡ ಪ್ರಮಾಣದಲ್ಲಿ ಆಗುತ್ತದೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ನೈಸರ್ಗಿಕ ವಿಪತ್ತು ಯಾವುದು?',['ಬೆಂಕಿ','ಅಪಘಾತ','ಭೂಕಂಪ','ಯುದ್ಧ'],2,'ಭೂಕಂಪ ನೈಸರ್ಗಿಕ ವಿಪತ್ತು.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಮಾನವನಿರ್ಮಿತ ವಿಪತ್ತು ಯಾವುದು?',['ಪ್ರವಾಹ','ಮಾಲಿನ್ಯ','ಬರ','ಆಲಿಕಲ್ಲು ಮಳೆ'],1,'ಮಾಲಿನ್ಯ ಮಾನವನ ತಪ್ಪುಗಳಿಂದ ಆಗುತ್ತದೆ.'],
+['ಮಾನವನಿರ್ಮಿತ ವಿಪತ್ತುಗಳು ಯಾವುದರಿಂದ ಉಂಟಾಗುತ್ತವೆ?',['ಮಾನವನ ತಪ್ಪುಗಳಿಂದ ಮತ್ತು ದುರಾಸೆಯಿಂದ','ಚಂದ್ರನಿಂದ','ಋತುಗಳಿಂದ','ಪ್ರಾಣಿಗಳಿಂದ'],0,'ಮಾನವನ ತಪ್ಪುಗಳು ಮತ್ತು ದುರಾಸೆಯಿಂದ ಪ್ರಕೃತಿಗೆ ಹಾನಿಯಾಗುತ್ತದೆ.'],
+['ಇರ್ಶಾಲವಾಡಿಯ ದುರಂತ ಯಾವುದರಿಂದ ನಡೆಯಿತು?',['ಬೆಂಕಿಯಿಂದ','ಅತಿವೃಷ್ಟಿಯಿಂದ ಭೂಕುಸಿತವಾಗಿ','ಭೂಕಂಪದಿಂದ','ಚಂಡಮಾರುತದಿಂದ'],1,'ಅತಿವೃಷ್ಟಿಯಿಂದ ರಾತ್ರಿ ಅಚಾನಕ್ಕಾಗಿ ಭೂಕುಸಿತವಾಯಿತು.'],
+['ಇರ್ಶಾಲವಾಡಿ ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿದೆ?',['ಸಾತಾರಾ','ರಾಯಗಡ','ಸಾಂಗ್ಲಿ','ಪುಣೆ'],1,'ರಾಯಗಡ ಜಿಲ್ಲೆಯ ಖಾಲಾಪುರ ತಾಲ್ಲೂಕಿನಲ್ಲಿ ಇರ್ಶಾಲವಾಡಿ ಇದೆ.'],
+['ಮಳೆ ಕಡಿಮೆ ಬಿದ್ದ ಕಾರಣ ನೀರಿನ ಕೊರತೆಯಾಗುವುದನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ಪ್ರವಾಹ','ಬರ','ಅತಿವೃಷ್ಟಿ','ಚಂಡಮಾರುತ'],1,'ಇದನ್ನು ಬರ ಎನ್ನುತ್ತಾರೆ.'],
+['ಬರಕ್ಕೆ ಕಾರಣವಲ್ಲದ್ದು ಯಾವುದು?',['ಮರ ಕಡಿಯುವುದು','ನೀರಿನ ಅಪವ್ಯಯ','ಗಿಡ ನೆಡುವುದು','ಕಾಂಕ್ರೀಟ್ ಹಾಕುವುದು'],2,'ಗಿಡ ನೆಡುವುದು ಬರಕ್ಕೆ ಪರಿಹಾರ.'],
+['ಕಾಂಕ್ರೀಟ್ ಹಾಕುವುದರಿಂದ ಬರ ಹೇಗೆ ಹೆಚ್ಚುತ್ತದೆ?',['ನೀರು ಭೂಮಿಯಲ್ಲಿ ಇಂಗುವುದಿಲ್ಲ','ಮಳೆ ಹೆಚ್ಚುತ್ತದೆ','ಗಿಡಗಳು ಬೆಳೆಯುತ್ತವೆ','ನದಿಗಳು ತುಂಬುತ್ತವೆ'],0,'ಕಾಂಕ್ರೀಟ್‌ನಿಂದ ಮಳೆನೀರು ಭೂಮಿಯಲ್ಲಿ ಇಂಗುವುದಿಲ್ಲ.'],
+['ಬೆಳೆಗಳಿಗೆ ನೀರು ಉಳಿಸುವ ನೀರಾವರಿ ವಿಧಾನ ಯಾವುದು?',['ಕಾಲುವೆಯಿಂದ ಹೇರಳ ನೀರು','ಹನಿ ಮತ್ತು ತುಂತುರು ನೀರಾವರಿ','ನೀರು ಹರಿಯಲು ಬಿಡುವುದು','ಪ್ರವಾಹ ತರುವುದು'],1,'ಹನಿ ಮತ್ತು ತುಂತುರು ನೀರಾವರಿಯಿಂದ ನೀರು ಉಳಿಯುತ್ತದೆ.'],
+['ಬರವನ್ನು ಎದುರಿಸುವ ಉಪಾಯ ಯಾವುದು?',['ಮಳೆ ನೀರು ಸಂಗ್ರಹಿಸುವುದು','ಮರ ಕಡಿಯುವುದು','ನೀರು ವ್ಯರ್ಥ ಮಾಡುವುದು','ಕಾಂಕ್ರೀಟ್ ಹಾಕುವುದನ್ನು ಹೆಚ್ಚಿಸುವುದು'],0,'ಮಳೆನೀರು ಸಂಗ್ರಹಿಸುವುದು, ಗಿಡ ನೆಡುವುದು ಇವು ಉಪಾಯಗಳು.'],
+['ಚಂಡಮಾರುತದ ಎಚ್ಚರಿಕೆಯನ್ನು ಯಾರು ನೀಡುತ್ತಾರೆ?',['ಹವಾಮಾನ ಇಲಾಖೆ','ಶಾಲೆ','ಬ್ಯಾಂಕ್','ಆಸ್ಪತ್ರೆ'],0,'ಹವಾಮಾನ ಇಲಾಖೆ ಚಂಡಮಾರುತದ ಎಚ್ಚರಿಕೆ ನೀಡುತ್ತದೆ.'],
+['ಚಂಡಮಾರುತದ ಎಚ್ಚರಿಕೆಯಲ್ಲಿ ಮೀನುಗಾರರಿಗೆ ಯಾವ ಮನವಿ ಮಾಡಲಾಗುತ್ತದೆ?',['ಸಮುದ್ರಕ್ಕೆ ಹೋಗಬಾರದೆಂದು','ಹೆಚ್ಚು ಮೀನು ಹಿಡಿಯಬೇಕೆಂದು','ದಡದಲ್ಲಿ ಆಡಲು','ಈಜಲು'],0,'ಮೀನುಗಾರರು ಸಮುದ್ರಕ್ಕೆ ಹೋಗಬಾರದೆಂದು ಮನವಿ ಮಾಡಲಾಗುತ್ತದೆ.'],
+['ಚಂಡಮಾರುತದ ಸಮಯದಲ್ಲಿ ಏನಾಗುತ್ತದೆ?',['ವೇಗದ ಗಾಳಿ, ಭಾರಿ ಮಳೆ, ಎತ್ತರದ ಅಲೆಗಳು','ತಣ್ಣನೆಯ ಗಾಳಿ ಮತ್ತು ಮಂಜುಗಡ್ಡೆ','ಒಣ ಹವಾಮಾನ','ಶಾಂತ ಸಮುದ್ರ'],0,'ಬಹಳ ವೇಗವಾಗಿ ಗಾಳಿ ಬೀಸುತ್ತದೆ, ಭಾರಿ ಮಳೆ ಬೀಳುತ್ತದೆ, ಎತ್ತರದ ಅಲೆಗಳು ಬರುತ್ತವೆ.'],
+['ಚಂಡಮಾರುತದಿಂದ ರಕ್ಷಣೆಗಾಗಿ ಏನು ಮಾಡಬೇಕು?',['ಅನಗತ್ಯ ಪ್ರಯಾಣ ತಪ್ಪಿಸಬೇಕು','ಸಮುದ್ರ ತೀರಕ್ಕೆ ಹೋಗಬೇಕು','ಮರದ ಕೆಳಗೆ ನಿಲ್ಲಬೇಕು','ವಿದ್ಯುತ್ ಕಂಬವನ್ನು ಹಿಡಿಯಬೇಕು'],0,'ಹವಾಮಾನ ಇಲಾಖೆಯ ಸಂದೇಶಗಳನ್ನು ಕೇಳಿ, ಸುರಕ್ಷಿತ ಜಾಗದಲ್ಲಿರಿ.'],
+['ಅತಿವೃಷ್ಟಿ ಎಂದರೇನು?',['ತುಂಬಾ ಹೆಚ್ಚು ಮಳೆ ಬೀಳುವುದು','ಮಳೆ ಬೀಳದಿರುವುದು','ಚಳಿ ಬೀಳುವುದು','ಗಾಳಿ ಬೀಸುವುದು'],0,'ಅತಿವೃಷ್ಟಿ ಎಂದರೆ ತುಂಬಾ ಹೆಚ್ಚು ಮಳೆ.'],
+['ಅತಿವೃಷ್ಟಿ ಮತ್ತು ಪ್ರವಾಹದ ಸಮಯದಲ್ಲಿ ನಾವು ಎಲ್ಲಿಗೆ ಹೋಗಬೇಕು?',['ನದಿ ದಂಡೆಗೆ','ಜಾನುವಾರುಗಳ ಸಮೇತ ಸುರಕ್ಷಿತ, ಎತ್ತರದ ಜಾಗಕ್ಕೆ','ಸೇತುವೆಯ ಮೇಲೆ','ತಗ್ಗು ಪ್ರದೇಶಕ್ಕೆ'],1,'ಜಾನುವಾರುಗಳ ಸಮೇತ ಸುರಕ್ಷಿತ ಅಥವಾ ಎತ್ತರದ ಜಾಗಕ್ಕೆ ಹೋಗಬೇಕು.'],
+['ಜೀವರಕ್ಷಕ ಚೀಲದಲ್ಲಿ ಯಾವ ವಸ್ತುವನ್ನು ಇಡಬಾರದು?',['ನೀರಿನ ಬಾಟಲಿ','ಟಾರ್ಚ್','ಟಿವಿ','ಔಷಧಿಗಳು'],2,'ಸಂಕಟದಲ್ಲಿ ಟಿವಿಯಿಂದ ಉಪಯೋಗವಿಲ್ಲ.'],
+['ರಾಷ್ಟ್ರೀಯ ವಿಪತ್ತು ನಿರ್ವಹಣಾ ದಿನವನ್ನು ಯಾವಾಗ ಆಚರಿಸಲಾಗುತ್ತದೆ?',['೧೩ ಅಕ್ಟೋಬರ್','೧೫ ಆಗಸ್ಟ್','೨೬ ಜನವರಿ','೫ ಜೂನ್'],0,'ಪ್ರತಿ ವರ್ಷ ೧೩ ಅಕ್ಟೋಬರ್‌ನಂದು.'],
+['ರಾಷ್ಟ್ರೀಯ ವಿಪತ್ತು ನಿರ್ವಹಣಾ ದಿನ ಯಾವ ವರ್ಷದಿಂದ ಆರಂಭವಾಯಿತು?',['೧೯೪೭','೧೯೮೯','೨೦೦೦','೨೦೨೩'],1,'೧೯೮೯ರಿಂದ.'],
+['ಯಾವ ಕಾರಣದಿಂದ ದೊಡ್ಡ ಬೆಂಕಿ ಹತ್ತಬಹುದು?',['ಬಾಗಿಲುಗಳನ್ನು ಮುಚ್ಚಿಡುವುದರಿಂದ','ಕೇವಲ ನೈಸರ್ಗಿಕ ಘಟನೆಯಿಂದ','ಹೆಚ್ಚು ಮಳೆ ಬಿದ್ದುದರಿಂದ','ಗ್ಯಾಸ್ ತೆರೆದಿಡುವುದು, ಶಾರ್ಟ್ ಸರ್ಕ್ಯೂಟ್, ಕಸ ಸುಡುವುದು'],3,'ಇಂತಹ ತಪ್ಪುಗಳಿಂದ ದೊಡ್ಡ ಬೆಂಕಿ ಹತ್ತಬಹುದು.'],
+['ಬಳಸದಿರುವಾಗ ಗ್ಯಾಸ್ ಸಿಲಿಂಡರ್‌ನ ಯಾವುದನ್ನು ಆಫ್ ಮಾಡಿಡಬೇಕು?',['ರೆಗ್ಯುಲೇಟರ್','ಕಿಟಕಿ','ಫ್ಯಾನ್','ನಲ್ಲಿ'],0,'ಬಳಸದಿರುವಾಗ ರೆಗ್ಯುಲೇಟರ್ ಆಫ್ ಆಗಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಬೇಕು.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವ ವಸ್ತುಗಳನ್ನು ಚಿಕ್ಕ ಮಕ್ಕಳಿಂದ ದೂರ ಇಡಬೇಕು?',['ಪೆನ್ಸಿಲ್ ಮತ್ತು ರಬ್ಬರ್','ಔಷಧಿ, ಕೀಟನಾಶಕ ಮತ್ತು ರಾಸಾಯನಿಕಗಳು','ಆಟಿಕೆ ಮತ್ತು ಪುಸ್ತಕಗಳು','ನೀರಿನ ಬಾಟಲಿ'],1,'ಔಷಧಿ, ಕೀಟನಾಶಕ, ರಾಸಾಯನಿಕಗಳು ಅಪಾಯಕಾರಿ.'],
+['ರಾಸಾಯನಿಕಗಳನ್ನು ಆಕಸ್ಮಿಕವಾಗಿ ಮುಟ್ಟಿದರೆ ಏನು ಮಾಡಬೇಕು?',['ಕೈಗಳನ್ನು ಸೋಪಿನಿಂದ ಸ್ವಚ್ಛವಾಗಿ ತೊಳೆಯಬೇಕು','ಏನೂ ಮಾಡಬಾರದು','ಕೈಯನ್ನು ಬಾಯಿಗೆ ಹಚ್ಚಬೇಕು','ಬಟ್ಟೆಗೆ ಒರೆಸಬೇಕು'],0,'ಸೋಪಿನಿಂದ ಕೈಗಳನ್ನು ಸ್ವಚ್ಛವಾಗಿ ತೊಳೆಯಬೇಕು.'],
+['ವಿದ್ಯುತ್ ಉಪಕರಣಗಳನ್ನು ಯಾವ ರೀತಿ ಎಂದಿಗೂ ಮುಟ್ಟಬಾರದು?',['ಒಣ ಕೈಗಳಿಂದ','ಒದ್ದೆ ಕೈಗಳಿಂದ','ಕೈಗವಸು ಹಾಕಿಕೊಂಡು','ಹಿರಿಯರ ಉಪಸ್ಥಿತಿಯಲ್ಲಿ'],1,'ಒದ್ದೆ ಕೈಗಳಿಂದ ವಿದ್ಯುತ್ ಶಾಕ್ ಹೊಡೆಯಬಹುದು.'],
+['ವಿದ್ಯುತ್ ಉಪಕರಣಗಳ ದುರಸ್ತಿ ಮಾಡುವಾಗ ಹಿರಿಯರು ಏನನ್ನು ಬಳಸಬೇಕು?',['ರಬ್ಬರ್ ಕೈಗವಸು ಮತ್ತು ಚಪ್ಪಲಿ','ಒದ್ದೆ ಬಟ್ಟೆ','ಕಬ್ಬಿಣದ ಕೈಗವಸು','ಏನೂ ಇಲ್ಲ'],0,'ರಬ್ಬರ್ ಕೈಗವಸು ಮತ್ತು ಚಪ್ಪಲಿ ಬಳಸಬೇಕು.'],
+['ಮೆಟ್ಟಿಲು ಇಳಿಯುವಾಗ ಏನು ಮಾಡಬೇಕು?',['ಆತುರ ಮಾಡಬೇಕು','ಓಡುತ್ತಾ ಇಳಿಯಬೇಕು','ನಿಧಾನವಾಗಿ ನಡೆಯಬೇಕು ಮತ್ತು ಕಟಕಟೆಯ ಆಧಾರ ಪಡೆಯಬೇಕು','ಜಿಗಿಯಬೇಕು'],2,'ಆತುರ ಮಾಡದೆ ಕಟಕಟೆಯ ಆಧಾರ ಪಡೆಯಬೇಕು.'],
+['ಲಿಫ್ಟ್ ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?',['ಒಬ್ಬರೇ ಆಡಲು','ಹಿರಿಯರೊಂದಿಗೇ','ಗೆಳೆಯರೊಂದಿಗೆ ಜಿಗಿಯುತ್ತಾ','ಯಾವಾಗಲೂ ಬಟನ್‌ಗಳನ್ನು ಒತ್ತುತ್ತಾ'],1,'ಲಿಫ್ಟ್ ಅನ್ನು ಹಿರಿಯರೊಂದಿಗೇ ಬಳಸಬೇಕು.'],
+['ಬಸ್ಸಿನಲ್ಲಿ ಅಜ್ಜ-ಅಜ್ಜಿಯರಿಗೆ ಕೂರಲು ಜಾಗ ಏಕೆ ಕೊಡಬೇಕು?',['ಅವರಿಗೆ ನಿಲ್ಲುವುದು ತೊಂದರೆದಾಯಕ ಮತ್ತು ಅಪಾಯಕಾರಿ','ಅವರು ಕೇಳಿದರು ಎಂದು','ಬಸ್ ಖಾಲಿ ಇರುತ್ತದೆ ಎಂದು','ಯಾವುದೇ ಕಾರಣವಿಲ್ಲ'],0,'ವಯಸ್ಸಿನ ಕಾರಣ ಅವರಿಗೆ ನಿಲ್ಲುವುದು ಕಷ್ಟ, ಸಮತೋಲನ ತಪ್ಪಬಹುದು.'],
+['ದೃಷ್ಟಿಮಿತ್ರ ಆಟದಿಂದ ನಾವು ಏನು ಕಲಿಯುತ್ತೇವೆ?',['ದೃಷ್ಟಿಹೀನರಿಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬೇಕು','ಓಡುವುದು','ಈಜುವುದು','ಚಿತ್ರ ಬಿಡಿಸುವುದು'],0,'ದೃಷ್ಟಿಹೀನರಿಗೆ ಆಧಾರ ಮತ್ತು ಮಾರ್ಗದರ್ಶನವನ್ನು ಹೇಗೆ ನೀಡಬೇಕು.'],
+['ಪ್ಲಾಸ್ಟಿಕ್ ಬಳಕೆ ತಪ್ಪಿಸುವುದು ಏಕೆ ಮುಖ್ಯ?',['ಅದು ಪರಿಸರವನ್ನು ಮಾಲಿನ್ಯಗೊಳಿಸುತ್ತದೆ ಮತ್ತು ರೋಗ ಹರಡಬಹುದು','ಅದು ಸುಲಭವಾಗಿ ಸಿಗುವುದಿಲ್ಲ','ಅದು ಭಾರವಾಗಿರುತ್ತದೆ','ಅದು ತುಂಬಾ ದುಬಾರಿ'],0,'ಪ್ಲಾಸ್ಟಿಕ್ ಪರಿಸರವನ್ನು ಮಾಲಿನ್ಯಗೊಳಿಸುತ್ತದೆ, ಹಳ್ಳಗಳು ಕಟ್ಟಿಕೊಳ್ಳುತ್ತವೆ.'],
+['ಮರ ಕಡಿಯುವುದಕ್ಕೆ ಪರಿಹಾರ ಯಾವುದು?',['ಗಿಡ ನೆಡುವುದು','ಪ್ಲಾಸ್ಟಿಕ್ ಬಳಕೆ','ನೀರು ವ್ಯರ್ಥ ಮಾಡುವುದು','ಕಸ ಸುಡುವುದು'],0,'ಗಿಡ ನೆಡುವುದು ಪರಿಹಾರ.'],
+['ಅಪರಿಚಿತ ವ್ಯಕ್ತಿ ತಿಂಡಿ ಕೊಟ್ಟರೆ ಏನು ಮಾಡಬೇಕು?',['ತೆಗೆದುಕೊಳ್ಳಬೇಕು','‘ಬೇಡ’ ಎಂದು ಹೇಳಿ ಅಲ್ಲಿಂದ ಹೊರಡಬೇಕು','ಅವರೊಂದಿಗೆ ಹೋಗಬೇಕು','ಅವರನ್ನು ಮನೆಗೆ ಕರೆಯಬೇಕು'],1,'ತಕ್ಷಣ ‘ಬೇಡ’ ಎನ್ನಿ ಮತ್ತು ಅಲ್ಲಿಂದ ಹೊರಟುಹೋಗಿ.'],
+['ಯಾರಾದರೂ ಬಲವಂತವಾಗಿ ಹಿಡಿದರೆ ಏನು ಮಾಡಬೇಕು?',['ಶಾಂತವಾಗಿರಬೇಕು','ಜೋರಾಗಿ ಕೂಗಿ ಸಹಾಯ ಕೇಳಬೇಕು','ಅಡಗಿ ಕೂರಬೇಕು','ಏನೂ ಮಾಡಬಾರದು'],1,'“ಸಹಾಯ ಮಾಡಿ, ಬಿಡಿ, ನನ್ನನ್ನು ಕಾಪಾಡಿ” ಎಂದು ಜೋರಾಗಿ ಕೂಗಬೇಕು.'],
+['ಕೂಗಲು ಸಾಧ್ಯವಿಲ್ಲದಿದ್ದರೆ ಚೀಟಿಯಲ್ಲಿ ಯಾವ ಸಂಕೇತ ಬರೆಯಬೇಕು?',['SOS','OK','ABC','HELLO'],0,'SOS (Save Our Soul) ಅಥವಾ ‘ನನ್ನನ್ನು ಕಾಪಾಡಿ’.'],
+['ಪೊಲೀಸ್ ಸಹಾಯಕ್ಕೆ ಯಾವ ಸಂಖ್ಯೆ?',['100','101','108','1098'],0,'ಪೊಲೀಸ್ ಸಹಾಯ – 100.'],
+['ಬೆಂಕಿ ಹತ್ತಿದರೆ ಅಗ್ನಿಶಾಮಕ ದಳದ ಸಂಖ್ಯೆ ಯಾವುದು?',['100','101','181','1077'],1,'ಅಗ್ನಿಶಾಮಕ ದಳ – 101.'],
+['ಆಂಬ್ಯುಲೆನ್ಸ್‌ಗೆ ಯಾವ ಸಂಖ್ಯೆ ಡಯಲ್ ಮಾಡಬೇಕು?',['108','100','1098','181'],0,'ಆಂಬ್ಯುಲೆನ್ಸ್ – 108 / 102.'],
+['ಮಕ್ಕಳ ಸಹಾಯವಾಣಿ ಸಂಖ್ಯೆ (Child helpline) ಯಾವುದು?',['1098','1077','101','100'],0,'Child helpline – 1098.'],
+['ವಿಪತ್ತು ನಿರ್ವಹಣಾ ಕೇಂದ್ರದ ಸಂಖ್ಯೆ ಯಾವುದು?',['1077','181','108','100'],0,'ವಿಪತ್ತು ನಿರ್ವಹಣಾ ಕೇಂದ್ರ – 1077.']
+];
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ವಿಪತ್ತಿನ ಅತ್ಯಂತ ಮುಖ್ಯ ಗುರುತು ಯಾವುದು?',['ಅದು ಮೊದಲೇ ಸೂಚನೆ ನೀಡಿ ಬರುತ್ತದೆ.','ಅದು ನಿರ್ದಿಷ್ಟ ಜಾಗದಲ್ಲಿ ಮಾತ್ರ ಆಗುತ್ತದೆ.','ಅದು ಕೇವಲ ಆರ್ಥಿಕ ಹಾನಿ ಮಾಡುತ್ತದೆ.','ಅದು ಅಚಾನಕ್ಕಾಗಿ ಬರುತ್ತದೆ ಮತ್ತು ದೊಡ್ಡ ನಷ್ಟ ಮಾಡುತ್ತದೆ.'],3],
+  ['ಯಾವ ಕಾರಣದಿಂದ ದೊಡ್ಡ ಬೆಂಕಿ ಹತ್ತಬಹುದು?',['ಮನೆಯ ಬಾಗಿಲುಗಳನ್ನು ಮುಚ್ಚಿಡುವುದರಿಂದ','ಕೇವಲ ನೈಸರ್ಗಿಕ ಘಟನೆಯಿಂದ','ಹೆಚ್ಚು ಮಳೆ ಬಿದ್ದುದರಿಂದ','ಗ್ಯಾಸ್ ತೆರೆದಿಡುವುದು, ಶಾರ್ಟ್ ಸರ್ಕ್ಯೂಟ್ ಅಥವಾ ಕಸ ಸುಡುವುದರಂತಹ ತಪ್ಪುಗಳಿಂದ'],3],
+  ['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವ ವಸ್ತುಗಳನ್ನು ಚಿಕ್ಕ ಮಕ್ಕಳಿಂದ ದೂರ ಇಡಬೇಕು?',['ಪೆನ್ಸಿಲ್ ಮತ್ತು ರಬ್ಬರ್','ಔಷಧಿ, ಕೀಟನಾಶಕ ಮತ್ತು ರಾಸಾಯನಿಕ','ಆಟಿಕೆ ಮತ್ತು ಪುಸ್ತಕ','ನೀರಿನ ಬಾಟಲಿ'],1],
+  ['ಪ್ಲಾಸ್ಟಿಕ್ ಬಳಕೆ ತಪ್ಪಿಸುವುದು ಏಕೆ ಮುಖ್ಯ?',['ಅದು ಪರಿಸರವನ್ನು ಮಾಲಿನ್ಯಗೊಳಿಸುತ್ತದೆ ಮತ್ತು ರೋಗ ಹರಡಬಹುದು.','ಅದು ಸುಲಭವಾಗಿ ಲಭ್ಯವಾಗುವುದಿಲ್ಲ.','ಅದು ಭಾರವಾಗಿರುತ್ತದೆ.','ಅದು ತುಂಬಾ ದುಬಾರಿ.'],0]],
+ aa:[['ಮಾನವನಿರ್ಮಿತ ವಿಪತ್ತು ಎಂದರೇನು?','ಮಾನವನ ತಪ್ಪುಗಳಿಂದ ಹಾಗೂ ದುರಾಸೆಯಿಂದ ಪ್ರಕೃತಿಗೆ ಅಪಾರ ಹಾನಿಯಾಗಿ ಉಂಟಾಗುವ ವಿಪತ್ತನ್ನು ಮಾನವನಿರ್ಮಿತ ವಿಪತ್ತು ಎನ್ನುತ್ತಾರೆ. ಉದಾ. ಬೆಂಕಿ, ಅಪಘಾತ, ಯುದ್ಧ, ಮಾಲಿನ್ಯ.'],
+  ['ಶಾರ್ಟ್ ಸರ್ಕ್ಯೂಟ್ ಆಗಲು ಎರಡು ಕಾರಣಗಳನ್ನು ಬರೆಯಿರಿ.','(೧) ಹಳೆಯ, ತುಂಡಾದ ಅಥವಾ ಬಯಲಾದ ವಿದ್ಯುತ್ ತಂತಿಗಳು. (೨) ಒಂದೇ ಸಾಕೆಟ್‌ನಲ್ಲಿ ಹೆಚ್ಚು ಉಪಕರಣಗಳನ್ನು ಹಚ್ಚುವುದು ಅಥವಾ ಉಪಕರಣ/ತಂತಿಗೆ ನೀರು ಹೋಗುವುದು.'],
+  ['ನಾವು ಬಸ್ಸಿನಲ್ಲಿ ಪ್ರಯಾಣಿಸುವಾಗ ‘ಅಜ್ಜ-ಅಜ್ಜಿಯರಿಗೆ’ ಕೂರಲು ಜಾಗ ಏಕೆ ಕೊಡಬೇಕು?','ವಯಸ್ಸಿನ ಕಾರಣ ಅಜ್ಜ-ಅಜ್ಜಿಯರಿಗೆ ಹೆಚ್ಚು ಹೊತ್ತು ನಿಲ್ಲುವುದು ತೊಂದರೆದಾಯಕ. ಬಸ್ ಅಲುಗಾಡಿದಾಗ ಅವರು ಸಮತೋಲನ ತಪ್ಪಿ ಬೀಳಬಹುದು. ಆದ್ದರಿಂದ ಅವರ ಕಾಳಜಿ ವಹಿಸಲು ಕೂರಲು ಜಾಗ ಕೊಡಬೇಕು.']],
+ i:[['ನಿಮ್ಮ ತರಗತಿಯ ಕೆಲವು ವಿದ್ಯಾರ್ಥಿಗಳು ಪ್ರತಿದಿನ ಊಟದ ಡಬ್ಬಿಯನ್ನು ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲದಲ್ಲಿ ತರುತ್ತಾರೆ. ಪ್ಲಾಸ್ಟಿಕ್ ಬಳಕೆ ತಪ್ಪಿಸಲು ಯಾವ ಹೊಸ ಯೋಚನೆಗಳನ್ನು ಸೂಚಿಸುವಿರಿ?','ಸ್ಟೀಲ್ ಡಬ್ಬಿ ಮತ್ತು ಬಟ್ಟೆ ಚೀಲ ಬಳಸುವುದು; ಮನೆಯಲ್ಲಿ ಹಳೆಯ ಬಟ್ಟೆಗಳಿಂದ ಚೀಲ ಹೊಲಿಯುವುದು; ತರಗತಿಯಲ್ಲಿ ‘ಪ್ಲಾಸ್ಟಿಕ್‌ಮುಕ್ತ ಡಬ್ಬಿ’ ಉಪಕ್ರಮ ನಡೆಸಿ ಪ್ರತಿದಿನ ಪ್ಲಾಸ್ಟಿಕ್ ಬಳಸದವರಿಗೆ ⭐ ಬಹುಮಾನ ಕೊಡುವುದು; ಪ್ಲಾಸ್ಟಿಕ್‌ನ ಅನಾನುಕೂಲಗಳನ್ನು ತಿಳಿಸುವ ಫಲಕ ಹಾಕುವುದು.'],
+  ['ಯಾರಾದರೂ ಇದ್ದಕ್ಕಿದ್ದಂತೆ ನಿಮಗೆ ಅನಾನುಕೂಲ ಅನಿಸುವ ರೀತಿಯಲ್ಲಿ ಮುಟ್ಟಿದರು. ಆಗ ನಿಮ್ಮ ಮೊದಲ ಕ್ರಿಯೆ ಏನಾಗಿರುತ್ತದೆ ಮತ್ತು ಏಕೆ?','ತಕ್ಷಣ ಜೋರಾಗಿ ‘ಬೇಡ’ ಎಂದು ಹೇಳಿ ಅಲ್ಲಿಂದ ದೂರ ಹೋಗುತ್ತೇನೆ ಮತ್ತು ಅಪ್ಪ-ಅಮ್ಮ ಅಥವಾ ಶಿಕ್ಷಕರಿಗೆ ತಕ್ಷಣ ಹೇಳುತ್ತೇನೆ. ಏಕೆಂದರೆ ಇದು ನನ್ನ ತಪ್ಪಲ್ಲ; ವಿಶ್ವಾಸಾರ್ಹ ಹಿರಿಯರು ನನ್ನನ್ನು ಸುರಕ್ಷಿತವಾಗಿಡಬಲ್ಲರು. ಅಗತ್ಯವಿದ್ದರೆ ಮಕ್ಕಳ ಸಹಾಯವಾಣಿ ಸಂಖ್ಯೆ 1098ಕ್ಕೆ ಕರೆ ಮಾಡಿದರೆ ಸಹಾಯ ಸಿಗುತ್ತದೆ.'],
+  ['ರಾಧಾಗೆ ಚಾಕೊಲೇಟ್‌ಗಳೆಂದರೆ ತುಂಬಾ ಇಷ್ಟ. ಒಬ್ಬ ಅಪರಿಚಿತ ವ್ಯಕ್ತಿ ಅವಳಿಗೆ ಶಾಲೆಯ ಹೊರಗೆ ಚಾಕೊಲೇಟ್ ಕೊಡುತ್ತಾನೆ. ರಾಧಾ ಏನು ಮಾಡಬೇಕು? ಏಕೆ?','ರಾಧಾ ಚಾಕೊಲೇಟ್ ತೆಗೆದುಕೊಳ್ಳಬಾರದು; ‘ಬೇಡ’ ಎಂದು ಹೇಳಿ ತಕ್ಷಣ ಶಾಲೆಗೆ ಅಥವಾ ಶಿಕ್ಷಕರ ಬಳಿಗೆ ಹೋಗಿ ಅವರಿಗೆ ತಿಳಿಸಬೇಕು. ಏಕೆಂದರೆ ಅಪರಿಚಿತರಿಂದ ತಿಂಡಿ ತೆಗೆದುಕೊಳ್ಳುವುದು ಅಪಾಯಕಾರಿಯಾಗಬಹುದು.'],
+  ['ಸಮೀರ ಮನೆಯಲ್ಲಿರುವಾಗ ಅವನ ಪುಟ್ಟ ತಂಗಿಗೆ ಸಣ್ಣ ಗಾಯವಾದರೆ, ಅವನು ಪ್ರಥಮ ಚಿಕಿತ್ಸೆಯನ್ನು ಹೇಗೆ ಮಾಡಬೇಕು ಎಂಬುದನ್ನು ಬರೆಯಿರಿ.','ಗಾಯವನ್ನು ಶುದ್ಧ ನೀರಿನಿಂದ ತೊಳೆಯಬೇಕು, ಶುದ್ಧ ಬಟ್ಟೆಯಿಂದ ಹಗುರವಾಗಿ ಒರೆಸಿ ಒಣಗಿಸಬೇಕು, ಸೋಂಕುನಿವಾರಕ ಔಷಧಿ ಹಚ್ಚಿ ಶುದ್ಧ ಪಟ್ಟಿ (ಬ್ಯಾಂಡೇಜ್) ಕಟ್ಟಬೇಕು ಮತ್ತು ಮನೆಯ ಹಿರಿಯರಿಗೆ ಹೇಳಬೇಕು. ರಕ್ತ ನಿಲ್ಲದಿದ್ದರೆ ತಕ್ಷಣ ಆಸ್ಪತ್ರೆಗೆ ಕರೆದುಕೊಂಡು ಹೋಗಬೇಕು.']],
+ bm:{'🚦 ರಸ್ತೆಯಲ್ಲಿ':['ಜೀಬ್ರಾ ಕ್ರಾಸಿಂಗ್‌ನಲ್ಲೇ ರಸ್ತೆ ದಾಟಿ.','ಸಿಗ್ನಲ್ ಪಾಲಿಸಿ.','ರಸ್ತೆಯ ಬದಿಯಲ್ಲಿ ನಡೆಯಿರಿ.'],'🏠 ಮನೆಯಲ್ಲಿ':['ಬೆಂಕಿಯೊಂದಿಗೆ ಆಡಬೇಡಿ.','ಒದ್ದೆ ಕೈಗಳಿಂದ ಸ್ವಿಚ್ ಮುಟ್ಟಬೇಡಿ.','ಔಷಧಿಗಳೊಂದಿಗೆ ಆಡಬೇಡಿ.'],'🏫 ಶಾಲೆಯಲ್ಲಿ':['ಮೆಟ್ಟಿಲನ್ನು ನಿಧಾನವಾಗಿ ಇಳಿಯಿರಿ.','ಅಪರಿಚಿತರಿಂದ ತಿಂಡಿ ತೆಗೆದುಕೊಳ್ಳಬೇಡಿ.','ಏನಾದರೂ ಅನಿಸಿದರೆ ಶಿಕ್ಷಕರಿಗೆ ಹೇಳಿ.'],'🌊 ನೀರಿನ ಬಳಿ':['ಹಿರಿಯರಿಲ್ಲದೆ ಈಜಲು ಹೋಗಬೇಡಿ.','ಪ್ರವಾಹದ ನೀರಿಗೆ ಇಳಿಯಬೇಡಿ.','ಈಜುವಾಗ ಫ್ಲೋಟರ್ ಬಳಸಿ.']}
+};
+const SWIM=[['🩱 ಈಜು ಉಡುಪು',1],['🥽 ಈಜು ಕನ್ನಡಕ',1],['🧢 ಈಜು ಟೋಪಿ',1],['🛟 ಗಾಳಿ ಟ್ಯೂಬ್ / ಫ್ಲೋಟರ್',1],['🧴 ಟವೆಲ್',1],['☂️ ಛತ್ರಿ',0],['🧥 ಸ್ವೆಟರ್',0],['👞 ಶಾಲೆಯ ಬೂಟು',0],['🎒 ಶಾಲೆಯ ಬ್ಯಾಗ್',0]];
+let SWI=new Set(),SWE='',BMK='🚦 ರಸ್ತೆಯಲ್ಲಿ',BMS=new Set();
+function swimTap(i){if(SWIM[i][1]){SWI.add(i);SWE=''}else SWE=`<div class="msg no">✘ ${SWIM[i][0]} ಈಜುವಾಗ ಉಪಯೋಗಕ್ಕೆ ಬರುವುದಿಲ್ಲ.</div>`;drawSwim();if(SWI.size==SWIM.filter(x=>x[1]).length)award('swim','ಭೇಷ್! ಸ್ವರಾಜನ ಸಾಮಗ್ರಿ ಸಿದ್ಧ.')}
+function drawSwim(){$('swimBox').innerHTML=`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span style="font-size:48px">🏊</span><div style="flex:1;min-width:150px;background:#e0f2fe;border-radius:12px;padding:6px 10px"><b>ಸ್ವರಾಜನ ಚೀಲ:</b> ${[...SWI].map(i=>SWIM[i][0]).join(', ')||'—'}</div></div><div class="chips">${SWIM.map((x,i)=>SWI.has(i)?'':`<span class="chip" onclick="swimTap(${i})">${x[0]}</span>`).join('')}</div>${SWE}`}
+function drawBM(){const r=SW.bm[BMK];$('bmBox').innerHTML=`<div class="chips">${Object.keys(SW.bm).map(k=>`<span class="chip ${k==BMK?'on':''}" onclick="BMK='${k}';BMS=new Set();drawBM()">${k}</span>`).join('')}</div>
+ <div class="tap">ಬುಕ್‌ಮಾರ್ಕ್‌ನಲ್ಲಿ ಬರೆಯಬೇಕಾದ ನಿಯಮಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿ:</div><div class="chips">${r.map((x,i)=>`<span class="chip ${BMS.has(i)?'on':''}" onclick="BMS.has(${i})?BMS.delete(${i}):BMS.add(${i});drawBM()">${x}</span>`).join('')}</div>
+ <div style="margin:8px auto;width:150px;min-height:300px;border-radius:14px;background:linear-gradient(#fde68a,#fca5a5);border:3px dashed #b45309;padding:10px;text-align:center;box-shadow:0 2px 8px #0003"><div style="font-size:34px">${BMK.split(' ')[0]}</div><b>ಸುರಕ್ಷಾ ನಿಯಮಗಳು</b><br><small>${BMK.slice(2)}</small><hr>${[...BMS].map(i=>`<div style="font-size:14px;margin:6px 0">✔ ${r[i]}</div>`).join('')||'<small>ನಿಯಮ ಆಯ್ಕೆ ಮಾಡಿ</small>'}<div style="font-size:11px;margin-top:8px">🛡️ ಜಾಗೃತಿಯೇ ಸುರಕ್ಷೆ</div></div>`;if(BMS.size>=3)award('bm','ಸುಂದರ ಬುಕ್‌ಮಾರ್ಕ್!')}
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಅಭ್ಯಾಸ – ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ</h2>
+ <h3>(ಅ) ಸರಿಯಾದ ಆಯ್ಕೆಯ ಸಂಖ್ಯೆಯ ಸುತ್ತ ವೃತ್ತ ಹಾಕಿ.</h3>${pickGame('swa',SW.a,'swa')}
+ <h3>(ಆ) ಕೆಳಗಿನ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಇ) ಯೋಚಿಸಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.i.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಈ) ಸುರಕ್ಷಾ ನಿಯಮಗಳ ಬುಕ್‌ಮಾರ್ಕ್ (ಓದುಗುರುತು) ತಯಾರಿಸಿ.</h3><div id="bmBox"></div>
+ <div class="tap">ಆಯತಾಕಾರದ ಕಾಗದದ ಮೇಲೆ ಇದೇ ರೀತಿ ನಿಯಮಗಳನ್ನು ಬರೆಯಿರಿ, ಚಿತ್ರ ಬಿಡಿಸಿ, ಬಣ್ಣ ಹಚ್ಚಿ ಗೆಳೆಯರಿಗೆ ಉಡುಗೊರೆ ಕೊಡಿ.</div>
+ <h3>(ಉ) ಬನ್ನಿ, ಸ್ವಲ್ಪ ಮೋಜು ಮಾಡೋಣ! ಸ್ವರಾಜ್‌ಗೆ ಈಜುಕೊಳದಲ್ಲಿ ಅಭ್ಯಾಸಕ್ಕೆ ಹೋಗಬೇಕು. ಅವನಿಗೆ ಬೇಕಾದ ಸಾಮಗ್ರಿ ಹುಡುಕಲು ಸಹಾಯ ಮಾಡಿ.</h3><div id="swimBox"></div>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>ಯಾವುದಾದರೂ ಒಂದು ವಿಪತ್ತನ್ನು ಆಯ್ಕೆ ಮಾಡಿ, ಅದರ ಆಧಾರದ ಮೇಲೆ ಘೋಷವಾಕ್ಯ ಅಥವಾ ತುರ್ತು ಚಿಹ್ನೆ ತಯಾರಿಸಿ ಮತ್ತು ತರಗತಿಯಲ್ಲಿ ಪ್ರಸ್ತುತಪಡಿಸಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames();drawBM();drawSwim()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಶಾಲೆಯಲ್ಲಿರುವಾಗ ಇದ್ದಕ್ಕಿದ್ದಂತೆ ಭೂಕಂಪದ ಕಂಪನಗಳ ಅನುಭವವಾದರೆ ನೀವು ಏನು ಮಾಡುವಿರಿ?','ತಲೆಯನ್ನು ಹೇಗೆ ರಕ್ಷಿಸುವಿರಿ? ಹೊರಗೆ ಯಾವಾಗ ಹೋಗುವಿರಿ?','ಗಾಬರಿಯಾಗಿ ಓಡಾಡದೆ ಬೆಂಚಿನ ಕೆಳಗೆ ಕುಳಿತು ಎರಡೂ ಕೈಗಳಿಂದ ತಲೆ ಮುಚ್ಚಿಕೊಳ್ಳುತ್ತೇನೆ; ಕಿಟಕಿ, ಕಪಾಟುಗಳಿಂದ ದೂರ ಇರುತ್ತೇನೆ. ಕಂಪನ ನಿಂತ ಮೇಲೆ ಶಿಕ್ಷಕರ ಸೂಚನೆಯಂತೆ ಸಾಲಿನಲ್ಲಿ ಶಾಂತವಾಗಿ ತೆರೆದ ಮೈದಾನಕ್ಕೆ ಹೋಗುತ್ತೇನೆ.'],
+['ಮನೆಯಲ್ಲಿ ಗ್ಯಾಸ್ ವಾಸನೆ ಬರುತ್ತಿದ್ದರೆ ಏನು ಮಾಡುವಿರಿ? ಏನು ಮಾಡಬಾರದು?','ಕಿಡಿ ಬಿದ್ದರೆ ಏನಾಗುತ್ತದೆ?','ವಿದ್ಯುತ್ ಸ್ವಿಚ್, ಬೆಂಕಿಪೆಟ್ಟಿಗೆ, ಲೈಟರ್ ಅನ್ನು ಬಳಸುವುದೇ ಇಲ್ಲ; ಕಿಟಕಿ-ಬಾಗಿಲು ತೆರೆಯುತ್ತೇನೆ; ಹಿರಿಯರಿಗೆ ತಕ್ಷಣ ಹೇಳಿ ರೆಗ್ಯುಲೇಟರ್ ಆಫ್ ಮಾಡಲು ಹೇಳುತ್ತೇನೆ; ಮನೆಯ ಹೊರಗೆ ಸುರಕ್ಷಿತ ಜಾಗಕ್ಕೆ ಹೋಗುತ್ತೇನೆ. ಒಂದು ಕಿಡಿಯಿಂದಲೂ ಬೆಂಕಿ ಹತ್ತಬಹುದು.'],
+['ಬೆಟ್ಟದ ಇಳಿಜಾರಿನ ಮರಗಳನ್ನು ಕಡಿದರೆ ಭೂಕುಸಿತದ ಅಪಾಯ ಏಕೆ ಹೆಚ್ಚುತ್ತದೆ?','ಮರಗಳ ಬೇರುಗಳು ಮಣ್ಣಿಗೆ ಏನು ಮಾಡುತ್ತವೆ?','ಮರಗಳ ಬೇರುಗಳು ಮಣ್ಣನ್ನು ಬಿಗಿಯಾಗಿ ಹಿಡಿದಿಟ್ಟಿರುತ್ತವೆ. ಮರ ಕಡಿದ ಮೇಲೆ ಅತಿವೃಷ್ಟಿಯಲ್ಲಿ ಮಣ್ಣು ಸಡಿಲವಾಗಿ ಕೊಚ್ಚಿಹೋಗುತ್ತದೆ ಮತ್ತು ಬೆಟ್ಟದ ಭಾಗ (ಗುಡ್ಡ) ಕುಸಿಯುವ ಅಪಾಯ ಹೆಚ್ಚುತ್ತದೆ.'],
+['ಮಳೆಗಾಲದಲ್ಲಿ ರಸ್ತೆಯ ಮೇಲೆ ವಿದ್ಯುತ್ ತಂತಿ ತುಂಡಾಗಿ ಬಿದ್ದಿರುವುದು ಕಂಡರೆ ಏನು ಮಾಡುವಿರಿ?','ಒದ್ದೆ ರಸ್ತೆಗಳು ವಿದ್ಯುತ್ ವಾಹಕಗಳು.','ತಂತಿಯಿಂದ ಮತ್ತು ಸುತ್ತಲಿನ ನೀರಿನಿಂದ ದೂರ ಇರುತ್ತೇನೆ, ಇತರರನ್ನೂ ಅತ್ತ ಹೋಗಲು ಬಿಡುವುದಿಲ್ಲ, ಹಿರಿಯರಿಗೆ ತಕ್ಷಣ ಹೇಳಿ ವಿದ್ಯುತ್ ವಿತರಣಾ ಕಚೇರಿಗೆ ತಿಳಿಸಲು ಹೇಳುತ್ತೇನೆ.'],
+['ಮೊಬೈಲ್ ಚಾರ್ಜಿಂಗ್‌ಗೆ ಹಾಕಿರುವಾಗ ಅದನ್ನು ಬಳಸುವುದು ಅಥವಾ ದಿಂಬಿನ ಕೆಳಗೆ ಇಡುವುದು ಏಕೆ ಅಪಾಯಕಾರಿ?','ಮೊಬೈಲ್ ಬಿಸಿಯಾಗುತ್ತದೆಯೇ?','ಚಾರ್ಜ್ ಮಾಡುವಾಗ ಮೊಬೈಲ್ ಬಿಸಿಯಾಗುತ್ತದೆ. ಬಳಸುವಾಗ ಅಥವಾ ದಿಂಬಿನ ಕೆಳಗೆ ಇಟ್ಟರೆ ಅದು ಹೆಚ್ಚು ಬಿಸಿಯಾಗಿ ಬ್ಯಾಟರಿ ಉಬ್ಬಬಹುದು ಅಥವಾ ಸ್ಫೋಟವಾಗಿ ಬೆಂಕಿ ಹತ್ತಬಹುದು.'],
+['ನಿಮ್ಮ ಹಳ್ಳಿಯಲ್ಲಿ ಬರ ಬಿದ್ದಿದೆ. ಹಳ್ಳಿಗಾಗಿ ನೀವು ಯಾವ ಮೂರು ಉಪಾಯಗಳನ್ನು ಸೂಚಿಸುವಿರಿ?','ನೀರು ಸಂಗ್ರಹ, ನೀರಾವರಿ, ಗಿಡಗಳು…','(೧) ಮಳೆನೀರು ಸಂಗ್ರಹಿಸಲು ಕೃಷಿಹೊಂಡ, ಒಡ್ಡು ಮತ್ತು ಛಾವಣಿ ನೀರಿನ ಸಂಗ್ರಹ. (೨) ಕೃಷಿಗೆ ಹನಿ ಮತ್ತು ತುಂತುರು ನೀರಾವರಿ ಹಾಗೂ ಕಡಿಮೆ ನೀರಿನಲ್ಲಿ ಬೆಳೆಯುವ ಬೆಳೆಗಳು. (೩) ಗಿಡ ನೆಡುವುದು ಮತ್ತು ನೀರಿನ ಅಪವ್ಯಯ ತಪ್ಪಿಸುವುದು.'],
+['ಜೋರಾಗಿ ಮಳೆ ಬಿದ್ದಾಗ ನಗರದ ರಸ್ತೆಗಳಲ್ಲಿ ನೀರು ನಿಲ್ಲುತ್ತದೆ. ಇದಕ್ಕೆ ಪ್ಲಾಸ್ಟಿಕ್ ಮತ್ತು ಕಾಂಕ್ರೀಟ್ ಹೇಗೆ ಜವಾಬ್ದಾರ?','ನೀರು ಎಲ್ಲಿಗೆ ಹೋಗುತ್ತದೆ?','ಕಾಂಕ್ರೀಟ್‌ನಿಂದ ಮಳೆನೀರು ಭೂಮಿಯಲ್ಲಿ ಇಂಗುವುದಿಲ್ಲ, ಮತ್ತು ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲಗಳಿಂದ ಚರಂಡಿ ಮತ್ತು ಹಳ್ಳಗಳು ಕಟ್ಟಿಕೊಳ್ಳುತ್ತವೆ. ಆದ್ದರಿಂದ ನೀರು ಹರಿದುಹೋಗದೆ ರಸ್ತೆಗಳಲ್ಲಿ ನಿಲ್ಲುತ್ತದೆ.'],
+['ಮನೆಯಲ್ಲಿ ಅಜ್ಜ-ಅಜ್ಜಿಯರಿಗಾಗಿ ಹೆಚ್ಚಿನ ಸುರಕ್ಷತೆಯನ್ನು ಹೇಗೆ ಮಾಡುವಿರಿ?','ಬೀಳುವುದನ್ನು ತಪ್ಪಿಸಲು…','ಮೆಟ್ಟಿಲಿಗೆ ಮತ್ತು ಸ್ನಾನದ ಮನೆಯಲ್ಲಿ ಆಧಾರಕ್ಕಾಗಿ ಕಟಕಟೆ ಹಾಕುವುದು, ನೆಲ ಒಣಗಿಸಿಡುವುದು, ರಾತ್ರಿ ಸಣ್ಣ ದೀಪ ಉರಿಸಿಡುವುದು, ಔಷಧಿ ಮತ್ತು ಅಗತ್ಯ ವಸ್ತುಗಳನ್ನು ಅವರ ಕೈಗೆ ಸಿಗುವಂತೆ ಇಡುವುದು, ನೆಲದ ಮೇಲೆ ವಸ್ತುಗಳನ್ನು ಹರಡದಿರುವುದು.'],
+['ಶಾಲೆ ಬಿಟ್ಟ ಮೇಲೆ ಒಬ್ಬ ಅಪರಿಚಿತ ವ್ಯಕ್ತಿ, “ನಿನ್ನ ಅಪ್ಪ ನಿನ್ನನ್ನು ಕರೆದುಕೊಂಡು ಬರಲು ನನ್ನನ್ನು ಕಳುಹಿಸಿದ್ದಾರೆ” ಎಂದರು. ನೀವು ಏನು ಮಾಡುವಿರಿ?','ಪರಿಚಿತರಲ್ಲದೆ ಬೇರೆ ಯಾರೊಂದಿಗಾದರೂ ಹೋಗಬೇಕೇ?','ನಾನು ಆ ವ್ಯಕ್ತಿಯೊಂದಿಗೆ ಹೋಗುವುದಿಲ್ಲ. ತಕ್ಷಣ ಶಾಲೆಗೆ ಹಿಂದಿರುಗಿ ಶಿಕ್ಷಕರಿಗೆ ಹೇಳಿ ಮನೆಗೆ ಫೋನ್ ಮಾಡಲು ಹೇಳುತ್ತೇನೆ. ಮನೆಯವರೊಂದಿಗೆ ಮೊದಲೇ ನಿರ್ಧರಿಸಿದ ಒಂದು ಗುಪ್ತ ಪದವನ್ನು (ಕೋಡ್) ಕೇಳಬಹುದು.'],
+['ಸಹಾಯ ಸಂಖ್ಯೆ 101 ಅಥವಾ 108ಕ್ಕೆ ಯಾರಾದರೂ ತಮಾಷೆಗಾಗಿ ಫೋನ್ ಮಾಡಿದರೆ ಏನು ನಷ್ಟವಾಗಬಹುದು?','ಅದೇ ಸಮಯದಲ್ಲಿ ನಿಜವಾದ ಬೆಂಕಿ ಅಥವಾ ಅಪಘಾತ ಆದರೆ…','ಸುಳ್ಳು ಫೋನ್‌ನಿಂದ ಅಗ್ನಿಶಾಮಕ ದಳ ಅಥವಾ ಆಂಬ್ಯುಲೆನ್ಸ್ ತಪ್ಪು ಜಾಗಕ್ಕೆ ಹೋಗುತ್ತದೆ. ಅದೇ ಸಮಯದಲ್ಲಿ ನಿಜವಾದ ಸಂಕಟದಲ್ಲಿರುವವರಿಗೆ ಸಹಾಯ ತಡವಾಗಿ ಸಿಕ್ಕಿ ಪ್ರಾಣಹಾನಿ ಆಗಬಹುದು. ಆದ್ದರಿಂದ ಈ ಸಂಖ್ಯೆಗಳನ್ನು ನಿಜವಾದ ಸಂಕಟದಲ್ಲಿ ಮಾತ್ರ ಬಳಸಬೇಕು.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೭ : ಜಾಗೃತಿಯೇ ಸುರಕ್ಷೆ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${[...document.querySelectorAll('#stepBox ul li')].map(l=>`<li>${l.innerHTML}</li>`).join('')}</ol>
+ <table class="w"><tr><th>ನೈಸರ್ಗಿಕ ವಿಪತ್ತು</th><th>ಮಾನವ ನಿರ್ಮಿತ ವಿಪತ್ತು</th></tr><tr><td>ಪ್ರವಾಹ, ಭೂಕಂಪ, ಬರ, ಚಂಡಮಾರುತ, ಆಲಿಕಲ್ಲು ಮಳೆ, ಅತಿವೃಷ್ಟಿ, ಭೂಕುಸಿತ</td><td>ಬೆಂಕಿ ಹತ್ತುವುದು, ಅಪಘಾತ, ಯುದ್ಧ, ಮಾಲಿನ್ಯ</td></tr></table>
+ <p class="pq">ಬರ</p><table class="w"><tr><th>ಕಾರಣಗಳು</th><th>ಪರಿಹಾರ</th></tr><tr><td class="l">ಮಳೆ ಕಡಿಮೆ/ಸಕಾಲಕ್ಕೆ ಬೀಳದಿರುವುದು, ಮರ ಕಡಿಯುವುದು, ಕಾಂಕ್ರೀಟ್ ಹಾಕುವುದರಿಂದ ನೀರು ಭೂಮಿಯಲ್ಲಿ ಇಂಗದಿರುವುದು, ನೀರಿನ ಅಪವ್ಯಯ</td><td class="l">ಕೆರೆ, ಒಡ್ಡು, ಅಣೆಕಟ್ಟು; ಹನಿ ಮತ್ತು ತುಂತುರು ನೀರಾವರಿ; ಮಳೆನೀರು ಸಂಗ್ರಹಣೆ; ಗಿಡ ನೆಡುವುದು; ಕಡಿಮೆ ನೀರಿನ ಬೆಳೆಗಳು</td></tr></table>
+ <p class="pq">ಮನೆಯಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿರಿ</p><div>ಗ್ಯಾಸ್ ಬಳಸುವಾಗ ಹತ್ತಿರ ಆಡಬೇಡಿ, ರೆಗ್ಯುಲೇಟರ್ ಆಫ್ ಮಾಡಿಡಿ • ಬೆಂಕಿಯೊಂದಿಗೆ ಆಡಬೇಡಿ • ಒದ್ದೆ ಕೈಗಳಿಂದ ವಿದ್ಯುತ್ ಉಪಕರಣ ಮುಟ್ಟಬೇಡಿ • ಔಷಧಿ ಮತ್ತು ರಾಸಾಯನಿಕ ದೂರ • ಮೆಟ್ಟಿಲು ನಿಧಾನ, ಕಟಕಟೆಯ ಆಧಾರ • ಲಿಫ್ಟ್ ಹಿರಿಯರೊಂದಿಗೆ.</div>
+ <p class="pq">ಅಪರಿಚಿತ ವ್ಯಕ್ತಿ</p><div>‘ಬೇಡ’ ಎನ್ನಿ • ಹೊರಟುಹೋಗಿ • ಜೋರಾಗಿ ಕೂಗಿ – “ಸಹಾಯ ಮಾಡಿ!” • ಹಿರಿಯರಿಗೆ/ಶಿಕ್ಷಕರಿಗೆ ಹೇಳಿ • SOS ಸುಳಿವು.</div>
+ <p class="pq">ಸಹಾಯ ಸಂಖ್ಯೆಗಳು</p><table class="w"><tr>${HL.map(x=>`<th>${x[0]}</th>`).join('')}</tr><tr>${HL.map(x=>`<td>${x[1].slice(2)}</td>`).join('')}</tr></table>
+ <div style="margin-top:2mm">ರಾಷ್ಟ್ರೀಯ ವಿಪತ್ತು ನಿರ್ವಹಣಾ ದಿನ – <b>೧೩ ಅಕ್ಟೋಬರ್</b> (೧೯೮೯ರಿಂದ)</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">(ಅ) ಸರಿಯಾದ ಆಯ್ಕೆಯ ಸಂಖ್ಯೆಯ ಸುತ್ತ ವೃತ್ತ ಹಾಕಿ.</div>${SW.a.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div><div class="po">${x[1].map((o,j)=>`<span>(${j+1}) ${o}</span>`).join('')}</div></div>`).join('')}
+ <div class="pq">(ಆ) ಕೆಳಗಿನ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(2)}</div>`).join('')}
+ <div class="pq">(ಇ) ಯೋಚಿಸಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.i.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ <div class="avoid"><div class="pq">(ಈ) ಸುರಕ್ಷಾ ನಿಯಮಗಳ ಬುಕ್‌ಮಾರ್ಕ್ ತಯಾರಿಸಿ. (ಕೆಳಗಿನ ಚೌಕಟ್ಟಿನಲ್ಲಿ ನಿಯಮ ಬರೆದು ಚಿತ್ರ ಬಿಡಿಸಿ)</div><div style="display:flex;gap:6mm">${[1,2].map(()=>`<div style="width:45mm;height:75mm;border:1.5px dashed #000;border-radius:3mm"></div>`).join('')}</div></div>
+ <div class="avoid"><div class="pq">(ಉ) ಸ್ವರಾಜ್‌ಗೆ ಈಜಲು ಬೇಕಾದ ಸಾಮಗ್ರಿಗಳ ಮೇಲೆ ✔ ಮಾಡಿ.</div><div class="po">${SWIM.map(x=>`<span>☐ ${x[0].slice(x[0].indexOf(' ')+1)}</span>`).join('')}</div></div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>(ಅ)</b> ${SW.a.map((x,i)=>`${i+1}) (${x[2]+1})`).join('; ')}</div><div><b>(ಆ)</b><ol>${SW.aa.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಇ)</b><ol>${SW.i.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಉ)</b> ${SWIM.filter(x=>x[1]).map(x=>x[0].slice(x[0].indexOf(' ')+1)).join(', ')}</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>ಇ. ೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೭</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

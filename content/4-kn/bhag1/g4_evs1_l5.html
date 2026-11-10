@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ ನೇ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೧ – ಪಾಠ ೫ ಋತುಬದಲಾವಣೆಯ ಮೋಜು</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೫ : ಋತುಬದಲಾವಣೆಯ ಮೋಜು</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">☀️🌧️❄️ ಬೇಸಿಗೆ, ಮಳೆಗಾಲ, ಚಳಿಗಾಲ – ಋತುಗಳು ಹೇಗೆ ಬದಲಾಗುತ್ತವೆ ಮತ್ತು ಅವುಗಳ ಪರಿಣಾಮ ನಮ್ಮ ಮೇಲೆ ಏನು? ಬನ್ನಿ ಹುಡುಕೋಣ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೧೨ ಮೆಟ್ಟಿಲುಗಳು · ಋತು ಯಂತ್ರ · ೮ ಆಟ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೩೦ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೫ : ಋತುಬದಲಾವಣೆಯ ಮೋಜು';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','☀️','🌧️','❄️'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ಋತು ಯಂತ್ರ ---------- */
+const MONS=['ಜನವರಿ','ಫೆಬ್ರವರಿ','ಮಾರ್ಚ್','ಏಪ್ರಿಲ್','ಮೇ','ಜೂನ್','ಜುಲೈ','ಆಗಸ್ಟ್','ಸೆಪ್ಟೆಂಬರ್','ಅಕ್ಟೋಬರ್','ನವೆಂಬರ್','ಡಿಸೆಂಬರ್'];
+const INS=m=>m>=1&&m<=4?['ಬೇಸಿಗೆ','☀️','#f97316']:m>=5&&m<=8?['ಮಳೆಗಾಲ','🌧️','#0ea5e9']:['ಚಳಿಗಾಲ','❄️','#6366f1'];
+let SM=5,SMS=new Set();
+function seasonSvg(m){const th=Math.PI+(m-5)/12*2*Math.PI,ex=180+140*Math.cos(th),ey=110+62*Math.sin(th),r=22;
+ const ux=(180-ex),uy=(110-ey),ul=Math.hypot(ux,uy)||1,u=[ux/ul,uy/ul],p=[-u[1],u[0]];
+ const m1=[-p[1],p[0]],sw=(m1[0]*u[0]+m1[1]*u[1])<0?1:0;
+ const P1=[ex+r*p[0],ey+r*p[1]],P2=[ex-r*p[0],ey-r*p[1]];
+ const t=23.5*Math.PI/180,ax=[Math.sin(t),-Math.cos(t)],eq=[Math.cos(t),Math.sin(t)];const f=v=>v.toFixed(1);
+ return `<svg viewBox="0 0 360 220" style="max-width:460px;display:block;margin:0 auto;background:#020617;border-radius:16px">
+ <ellipse cx="180" cy="110" rx="140" ry="62" fill="none" stroke="#475569" stroke-dasharray="4 4"/>
+ ${[0,3,6,9].map(k=>{const a=Math.PI+(k-5)/12*2*Math.PI;return `<text x="${f(180+158*Math.cos(a))}" y="${f(114+78*Math.sin(a))}" fill="#94a3b8" font-size="10" text-anchor="middle">${MONS[k]}</text>`}).join('')}
+ <circle cx="180" cy="110" r="24" fill="#fbbf24"/><text x="180" y="114" text-anchor="middle" font-size="11" font-weight="800">ಸೂರ್ಯ</text>
+ <circle cx="${f(ex)}" cy="${f(ey)}" r="${r}" fill="#3b82f6"/>
+ <path d="M${f(P1[0])} ${f(P1[1])} A${r} ${r} 0 0 ${sw} ${f(P2[0])} ${f(P2[1])}Z" fill="#000" opacity=".6"/>
+ <line x1="${f(ex-eq[0]*r)}" y1="${f(ey-eq[1]*r)}" x2="${f(ex+eq[0]*r)}" y2="${f(ey+eq[1]*r)}" stroke="#fde68a" stroke-width="1.2" stroke-dasharray="3 2"/>
+ <line x1="${f(ex-ax[0]*(r+10))}" y1="${f(ey-ax[1]*(r+10))}" x2="${f(ex+ax[0]*(r+10))}" y2="${f(ey+ax[1]*(r+10))}" stroke="#fff" stroke-width="2"/>
+ <text x="${f(ex+ax[0]*(r+18))}" y="${f(ey+ax[1]*(r+18)+4)}" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">ಉ</text>
+ <text x="${f(ex-ax[0]*(r+18))}" y="${f(ey-ax[1]*(r+18)+4)}" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">ದ</text>
+ <text x="180" y="212" fill="#e2e8f0" font-size="13" font-weight="800" text-anchor="middle">${MONS[m]}</text></svg>`}
+function seasonUpd(){const m=SM;$('seaBox').innerHTML=seasonSvg(m);SMS.add(m);
+ const nh=(m>=3&&m<=7)?'ಉತ್ತರ ಧ್ರುವ ಸೂರ್ಯನ ಕಡೆಗೆ ಬಾಗಿದೆ – <b>ಉತ್ತರ ಅರ್ಧಗೋಳದಲ್ಲಿ ಹಗಲು ದೊಡ್ಡದು, ತಾಪಮಾನ ಹೆಚ್ಚು</b>; ದಕ್ಷಿಣ ಅರ್ಧಗೋಳದಲ್ಲಿ ಹಗಲು ಚಿಕ್ಕದು, ಚಳಿ.':(m>=9||m<=1)?'ಉತ್ತರ ಧ್ರುವ ಸೂರ್ಯನಿಂದ ದೂರ ಬಾಗಿದೆ – <b>ಉತ್ತರ ಅರ್ಧಗೋಳದಲ್ಲಿ ಹಗಲು ಚಿಕ್ಕದು, ಚಳಿ</b>; ದಕ್ಷಿಣ ಅರ್ಧಗೋಳದಲ್ಲಿ ಬೇಸಿಗೆ.':'ಎರಡೂ ಅರ್ಧಗೋಳಗಳಲ್ಲಿ ಹಗಲು ಮತ್ತು ರಾತ್ರಿ ಸುಮಾರು ಸಮಾನ.';
+ const s=INS(m);$('seaMsg').innerHTML=`<div class="msg in">${nh}</div><div class="msg ok" style="font-size:18px;background:${s[2]}22;color:#0f172a">ಭಾರತದಲ್ಲಿ (ಉತ್ತರ ಅರ್ಧಗೋಳ) <b>${MONS[m]}</b> ನಲ್ಲಿ : ${s[1]} <b>${s[0]}</b> <span style="font-size:14px">(ಹಗಲು ಸುಮಾರು ${(12+1.3*Math.sin((m-2.7)/12*2*Math.PI)).toFixed(1)} ಗಂಟೆ)</span></div>`;
+ if(SMS.size>=12)award('sea','ಭಲೇ! ನೀವು ವರ್ಷದ ಋತುಗಳನ್ನು ನೋಡಿದಿರಿ.')}
+let SEAID=0;
+function seaPlay(){const id=++SEAID;const b=$('seaBtn');b.textContent='⏳ ತಿರುಗುತ್ತಿದೆ…';let k=0;const iv=setInterval(()=>{if(id!==SEAID||!$('seaBox')){clearInterval(iv);return}SM=(SM+1)%12;const r=$('seaRange');if(r)r.value=SM;seasonUpd();if(++k>=12){clearInterval(iv);b.textContent='▶ ವರ್ಷಪೂರ್ತಿ ತಿರುಗಿಸಿ'}},700)}
+
+/* ---------- ಮಳೆ ಹೇಗೆ ಬೀಳುತ್ತದೆ ---------- */
+const rainSvg=`<svg viewBox="0 0 360 200" style="max-width:460px;display:block;margin:0 auto;background:linear-gradient(#bae6fd,#e0f2fe);border-radius:16px">
+ <circle cx="40" cy="30" r="18" fill="#fbbf24"/>
+ <path d="M0 160 Q40 152 80 160 T160 160 V200 H0Z" fill="#0284c7"/><text x="60" y="186" fill="#fff" font-size="12" font-weight="800">ಸಾಗರ</text>
+ ${[30,60,90,120].map((x,i)=>`<path d="M${x} 150 q-6-12 0-24 q6-12 0-24" stroke="#fff" stroke-width="2" fill="none" opacity=".8"><animate attributeName="opacity" values="0;.9;0" dur="2s" begin="${i*.4}s" repeatCount="indefinite"/></path>`).join('')}
+ <text x="70" y="88" font-size="11" font-weight="700" fill="#0369a1">ಆವಿ ⬆</text>
+ <g><animateTransform attributeName="transform" type="translate" values="0 0;150 0" dur="5s" repeatCount="indefinite"/><text x="40" y="70" font-size="34">☁️</text></g>
+ <text x="150" y="50" font-size="12" font-weight="800" fill="#334155">ತೇವಾಂಶಯುಕ್ತ ಗಾಳಿ ➜</text>
+ <path d="M200 200 L260 90 L300 140 L330 100 L360 200Z" fill="#65a30d"/><text x="290" y="190" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">ಬೆಟ್ಟ</text>
+ <text x="235" y="78" font-size="30">🌧️</text>
+ ${[0,1,2,3,4].map(i=>`<line x1="${238+i*7}" y1="88" x2="${234+i*7}" y2="98" stroke="#0369a1" stroke-width="2"><animate attributeName="y1" values="88;130" dur=".8s" begin="${i*.15}s" repeatCount="indefinite"/><animate attributeName="y2" values="96;138" dur=".8s" begin="${i*.15}s" repeatCount="indefinite"/></line>`).join('')}</svg>`;
+
+/* ---------- ಸ್ಥಳಾಂತರ ---------- */
+let MIG=1;
+function migSvg(){const w=MIG;return `<svg viewBox="0 0 360 200" style="max-width:460px;display:block;margin:0 auto;background:linear-gradient(${w?'#e0e7ff,#fef9c3':'#fef9c3,#e0e7ff'});border-radius:16px">
+ <rect x="0" y="0" width="360" height="54" fill="${w?'#c7d2fe':'#bbf7d0'}"/><text x="180" y="22" text-anchor="middle" font-size="13" font-weight="800">ಉತ್ತರದ ಪ್ರದೇಶ ${w?'❄️ ಬಹಳ ಚಳಿ, ಆಹಾರ ಕಡಿಮೆ':'🌼 ಬೆಚ್ಚಗಿನ ಹವಾಮಾನ'}</text>
+ <path d="M60 200 L80 130 L150 110 L210 120 L280 140 L300 200Z" fill="#fde68a" stroke="#a16207"/><text x="180" y="176" text-anchor="middle" font-size="14" font-weight="800">ಭಾರತ ${w?'– ಬೆಚ್ಚಗಿನ ಚಳಿಗಾಲ 🦐':''}</text>
+ ${[0,1,2,3,4].map(i=>`<text font-size="18">🕊️<animateMotion dur="${3+i*.4}s" repeatCount="indefinite" path="${w?`M${100+i*40} 40 Q${130+i*30} 90 ${120+i*30} 150`:`M${120+i*30} 150 Q${130+i*30} 90 ${100+i*40} 40`}"/></text>`).join('')}</svg>`}
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+let S=0;
+const L=[
+{h:'ವೀಕ್ಷಿಸಿ – ಋತುಗಳು ಮತ್ತು ನಾವು',s:'ಚಿತ್ರವನ್ನು ವೀಕ್ಷಿಸಿ. ಶಿಕ್ಷಕರು, ಪೋಷಕರು ಮತ್ತು ಸ್ನೇಹಿತರೊಂದಿಗೆ ಚರ್ಚಿಸಿ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಪಡೆಯಿರಿ.',b:()=>`
+ <div>ಶಿಕ್ಷಕರು, ಪೋಷಕರು ಮತ್ತು ಸ್ನೇಹಿತರೊಂದಿಗೆ ಚರ್ಚಿಸಿ ಮತ್ತು ಉತ್ತರಗಳನ್ನು ಹುಡುಕಿ. (ಕ್ಲಿಕ್ ಮಾಡಿ ಉತ್ತರ ನೋಡಿ)</div>
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🥭</div><div class="tt">ಮಾವಿಗೆ ಹೂಗೊಂಚಲು ಯಾವ ಋತುವಿನಲ್ಲಿ ಬರುತ್ತದೆ?</div><div class="dd">ಚಳಿಗಾಲದ ಕೊನೆಯಲ್ಲಿ (ಜನವರಿ–ಫೆಬ್ರವರಿ ಸುಮಾರಿಗೆ). ನಂತರ ಬೇಸಿಗೆಯಲ್ಲಿ ಮಾವಿನ ಹಣ್ಣುಗಳು ಹಣ್ಣಾಗುತ್ತವೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🍐</div><div class="tt">ಚಳಿಗಾಲದಲ್ಲಿ ನಾವು ಯಾವ ಹಣ್ಣುಗಳನ್ನು ತಿನ್ನುತ್ತೇವೆ?</div><div class="dd">ಸೀಬೆ, ಬೋರೆ ಹಣ್ಣು, ಕಿತ್ತಳೆ, ನೆಲ್ಲಿಕಾಯಿ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">👨‍🌾</div><div class="tt">ರೈತರು ಮಳೆಗಾಲದಲ್ಲಿ ಯಾವ ಕೆಲಸಗಳನ್ನು ಮಾಡುತ್ತಾರೆ?</div><div class="dd">ಉಳುಮೆ, ಬಿತ್ತನೆ, ಕಳೆ ಕೀಳುವುದು, ಬದು ಹಾಕುವುದು.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🍉</div><div class="tt">ಕರಬೂಜ, ಸೌತೆಕಾಯಿ, ಶರಬತ್ತು ಇವುಗಳ ಅಗತ್ಯ ಯಾವಾಗ ಕಾಣುತ್ತದೆ?</div><div class="dd">ಬೇಸಿಗೆಯಲ್ಲಿ – ದೇಹಕ್ಕೆ ತಂಪು ಮತ್ತು ನೀರು ಸಿಗಲೆಂದು.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🥜</div><div class="tt">ಒಣ ಹಣ್ಣುಗಳನ್ನು ಯಾವ ಋತುವಿನಲ್ಲಿ ತಿನ್ನುವುದು ಪ್ರಯೋಜನಕಾರಿ?</div><div class="dd">ಚಳಿಗಾಲದಲ್ಲಿ – ಅದು ಹೆಚ್ಚು ಶಕ್ತಿ ನೀಡುತ್ತದೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🐦</div><div class="tt">ಪ್ರಾಣಿಗಳು ಮಳೆಯಲ್ಲಿ ತಮ್ಮನ್ನು ಹೇಗೆ ರಕ್ಷಿಸಿಕೊಳ್ಳುತ್ತವೆ?</div><div class="dd">ಬಿಲದಲ್ಲಿ, ಮರದ ಪೊಟರೆಯಲ್ಲಿ, ಗೂಡಿನಲ್ಲಿ, ಗುಹೆಯಲ್ಲಿ ಅಥವಾ ಕೊಟ್ಟಿಗೆಯಲ್ಲಿ ಆಶ್ರಯ ಪಡೆಯುತ್ತವೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+ </div>`},
+{h:'ಋತುಗಳು ಹೇಗೆ ಆಗುತ್ತವೆ?',s:'ಭೂಮಿ ತನ್ನ ಸುತ್ತ ಮತ್ತು ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವಾಗ ಅದರ ಅಕ್ಷ ಇಪ್ಪತ್ತಮೂರೂವರೆ ಡಿಗ್ರಿ ವಾಲಿರುತ್ತದೆ. ಆದ್ದರಿಂದ ಉತ್ತರ ಮತ್ತು ದಕ್ಷಿಣ ಧ್ರುವಗಳು ಬೇರೆ ಬೇರೆ ಕಾಲದಲ್ಲಿ ಸೂರ್ಯನ ಎದುರು ಬರುತ್ತವೆ ಮತ್ತು ಋತುಗಳು ಬದಲಾಗುತ್ತವೆ.',b:()=>`
+ <div class="key">ಭೂಮಿ ತನ್ನ ಸುತ್ತ ಮತ್ತು ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವಾಗ ಅದರ <b>ಅಕ್ಷ ೨೩°೩೦′ (೨೩½°)</b> ವಾಲಿರುತ್ತದೆ. ಆದ್ದರಿಂದ ಎರಡೂ ಧ್ರುವಗಳು ಬೇರೆ ಬೇರೆ ಕಾಲದಲ್ಲಿ ಸೂರ್ಯನ ಎದುರು ಬರುತ್ತವೆ.</div>
+ <h3>🌍 ಋತು ಯಂತ್ರ – ತಿಂಗಳು ಬದಲಿಸಿ</h3>
+ <div id="seaBox"></div>
+ <input type="range" id="seaRange" min="0" max="11" value="${SM}" style="width:100%" oninput="SM=+this.value;seasonUpd()">
+ <div style="text-align:center"><button class="btn gr sm" id="seaBtn" onclick="seaPlay()">▶ ವರ್ಷಪೂರ್ತಿ ತಿರುಗಿಸಿ</button></div>
+ <div id="seaMsg"></div>
+ <ul>
+  <li>ಉತ್ತರ ಧ್ರುವ ಸೂರ್ಯನ ಎದುರು ಬರುತ್ತಾ ಹೋದಂತೆ, ಹಾಗೆಯೇ <b>ಉತ್ತರ ಅರ್ಧಗೋಳದಲ್ಲಿ ಹಗಲಿನ ಅವಧಿ ಹೆಚ್ಚುತ್ತದೆ</b> – ತಾಪಮಾನ ಹೆಚ್ಚಿ ಬೇಸಿಗೆ ಆರಂಭವಾಗುತ್ತದೆ.</li>
+  <li>ಅದೇ ಸಮಯದಲ್ಲಿ <b>ದಕ್ಷಿಣ ಅರ್ಧಗೋಳದಲ್ಲಿ</b> ಹಗಲು ಚಿಕ್ಕದಾಗುತ್ತದೆ – ಅಲ್ಲಿ ಚಳಿಗಾಲ ಆರಂಭವಾಗುತ್ತದೆ.</li>
+  <li>ಯಾವ ಅರ್ಧಗೋಳದಲ್ಲಿ ಬೇಸಿಗೆಯೋ, ಅದರ <b>ವಿರುದ್ಧ ಅರ್ಧಗೋಳದಲ್ಲಿ ಚಳಿಗಾಲ</b> ಇರುತ್ತದೆ.</li>
+ </ul>`,a:()=>seasonUpd()},
+{h:'ಮಳೆ ಹೇಗೆ ಬೀಳುತ್ತದೆ?',s:'ಎರಡೂ ಅರ್ಧಗೋಳಗಳಲ್ಲಿ ತಾಪಮಾನದಲ್ಲಿ ಬದಲಾವಣೆಯಾಗುತ್ತದೆ, ಆದ್ದರಿಂದ ವಾಯುಭಾರದಲ್ಲೂ ವ್ಯತ್ಯಾಸವಾಗಿ ಗಾಳಿ ಉಂಟಾಗುತ್ತದೆ. ಸಾಗರದಿಂದ ತೇವಾಂಶಯುಕ್ತ ಗಾಳಿ ಬೀಸಿ ಬರುತ್ತದೆ, ಇಂತಹ ಗಾಳಿಯಿಂದ ಮಳೆ ಬೀಳುತ್ತದೆ. ನಮ್ಮ ದೇಶದಲ್ಲಿ ಮಾನ್ಸೂನ್ ಗಾಳಿಯಿಂದ ಮಳೆ ಬೀಳುತ್ತದೆ.',b:()=>`
+ ${rainSvg}
+ <h3>ಮಳೆ ಬೀಳುವ ಕ್ರಮವನ್ನು ಜೋಡಿಸಿ</h3>
+ ${orderGame('rain',['☀️ ತಾಪಮಾನದಲ್ಲಿ ಬದಲಾವಣೆ','🌀 ವಾಯುಭಾರದಲ್ಲಿ ವ್ಯತ್ಯಾಸ','💨 ಗಾಳಿಯ ಉತ್ಪತ್ತಿ','🌊 ಸಾಗರದಿಂದ ತೇವಾಂಶಯುಕ್ತ ಗಾಳಿ','🌧️ ಮಳೆ'],'rain')}
+ <div class="key">ನಮ್ಮ ದೇಶದಲ್ಲಿ <b>ಮಾನ್ಸೂನ್ ಗಾಳಿಯಿಂದ</b> ಮಳೆ ಬೀಳುತ್ತದೆ. ಮಳೆಯ ಪ್ರಮಾಣ ಭೌಗೋಳಿಕ ಪ್ರದೇಶಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಕಡಿಮೆ-ಹೆಚ್ಚು ಆಗುತ್ತದೆ. ಭೂಮಿಯ ಮೇಲ್ಮೈಯ ಬದಲಾಗುವ ತಾಪಮಾನದಿಂದ <b>ಬೇಸಿಗೆ, ಮಳೆಗಾಲ ಮತ್ತು ಚಳಿಗಾಲ</b> ಈ ಋತುಗಳ ಉತ್ಪತ್ತಿಯಾಗುತ್ತದೆ.</div>`,a:()=>drawGames()},
+{h:'ಭಾರತದ ಮೂರು ಋತುಗಳು',s:'ಭಾರತದಲ್ಲಿ ಬೇಸಿಗೆ, ಮಳೆಗಾಲ ಮತ್ತು ಚಳಿಗಾಲ ಎಂದು ಮೂರು ಪ್ರಮುಖ ಋತುಗಳಿವೆ. ಪ್ರತಿ ಮುಖ್ಯ ಋತುವಿನ ಅವಧಿ ನಾಲ್ಕು ತಿಂಗಳು.',b:()=>`
+ <div class="key">ಭಾರತದಲ್ಲಿ <b>ಮೂರು ಪ್ರಮುಖ ಋತುಗಳು</b> ಇವೆ. ಪ್ರತಿ ಮುಖ್ಯ ಋತುವಿನ ಅವಧಿ <b>ನಾಲ್ಕು ತಿಂಗಳು</b> ಇರುತ್ತದೆ.</div>
+ <div class="g2">
+  <div class="tile op" style="background:#fff7ed"><div class="ic">☀️</div><div class="tt">ಬೇಸಿಗೆ</div><div class="dd">ಫೆಬ್ರವರಿಯಿಂದ ಮೇ</div></div>
+  <div class="tile op" style="background:#f0f9ff"><div class="ic">🌧️</div><div class="tt">ಮಳೆಗಾಲ</div><div class="dd">ಜೂನ್‌ನಿಂದ ಸೆಪ್ಟೆಂಬರ್</div></div>
+  <div class="tile op" style="background:#eef2ff"><div class="ic">❄️</div><div class="tt">ಚಳಿಗಾಲ</div><div class="dd">ಅಕ್ಟೋಬರ್‌ನಿಂದ ಜನವರಿ</div></div>
+ </div>
+ <h3>ಆಟ: ತಿಂಗಳು ಯಾವ ಋತುವಿನಲ್ಲಿ?</h3>
+ ${sortGame('mon',MONS.map((m,i)=>[m,i>=1&&i<=4?0:i>=5&&i<=8?1:2]),[['☀️ ಬೇಸಿಗೆ','or'],['🌧️ ಮಳೆಗಾಲ','sm'],['❄️ ಚಳಿಗಾಲ','pu']],'mon')}`,a:()=>drawGames()},
+{h:'ಋತುಬದಲಾವಣೆಯ ಪರಿಣಾಮಗಳು',s:'ಋತುಬದಲಾವಣೆ ಭೂಮಿ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವುದರಿಂದ ಮತ್ತು ಭೂಮಿಯ ಅಕ್ಷ ವಾಲಿರುವುದರಿಂದ ಆಗುತ್ತದೆ. ಬೇರೆ ಬೇರೆ ಋತುಗಳಲ್ಲಿ ತಾಪಮಾನ ಮತ್ತು ಮಳೆಯ ಪ್ರಮಾಣ ಅಂದರೆ ಹವಾಮಾನದಲ್ಲಿ ಬದಲಾವಣೆಗಳಾಗುತ್ತವೆ. ಇದರ ಪರಿಣಾಮಗಳು ಪ್ರಕೃತಿಯ ಮೇಲೆ ಮತ್ತು ಮಾನವನ ಆರೋಗ್ಯದ ಮೇಲೆ ಕಾಣಿಸುತ್ತವೆ.',b:()=>`
+ <div class="key">ಋತು ಬದಲಾವಣೆ <b>ಭೂಮಿ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವುದರಿಂದ</b> ಮತ್ತು <b>ಭೂಮಿಯ ಅಕ್ಷ ವಾಲಿರುವುದರಿಂದ</b> ಆಗುತ್ತವೆ. ಬೇರೆ ಬೇರೆ ಋತುಗಳಲ್ಲಿ <b>ತಾಪಮಾನ ಮತ್ತು ಮಳೆಯ ಪ್ರಮಾಣ</b> ಅಂದರೆ <b>ಹವಾಮಾನ</b> ಬದಲಾಗುತ್ತದೆ.</div>
+ <h3>🌿 ಪ್ರಕೃತಿಯ ಮೇಲೆ ಪರಿಣಾಮ</h3>
+ <div class="chips"><span class="chip on">🌱 ಸಸ್ಯಗಳ ಬೆಳವಣಿಗೆ</span><span class="chip on">🐾 ಪ್ರಾಣಿಗಳ ನಡವಳಿಕೆ</span><span class="chip on">🌾 ಬೆಳೆಗಳ ಇಳುವರಿ</span></div>
+ <h3>🧍 ಮಾನವನ ಆರೋಗ್ಯದ ಮೇಲೆ ಪರಿಣಾಮ (ಕ್ಲಿಕ್ ಮಾಡಿ)</h3>
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">😓</div><div class="tt">ದೈಹಿಕ ಬದಲಾವಣೆ</div><div class="dd">ಆಯಾಸ, ಮೈಕೈ ನೋವು ಅನುಭವವಾಗುತ್ತದೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🍲</div><div class="tt">ಆಹಾರದಲ್ಲಿ ಬದಲಾವಣೆ</div><div class="dd">ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಆಹಾರ ಪದಾರ್ಥ ಮತ್ತು ಪಾನೀಯಗಳನ್ನು ಬದಲಿಸುತ್ತೇವೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">👕</div><div class="tt">ಉಡುಪಿನಲ್ಲಿ ಬದಲಾವಣೆ</div><div class="dd">ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಬಟ್ಟೆ ಬದಲಿಸುತ್ತೇವೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🦠</div><div class="tt">ಸೋಂಕಿನ ಅಪಾಯ</div><div class="dd">ಹವಾಮಾನ ಬದಲಾದರೆ ನೆಗಡಿ, ಜ್ವರದಂತಹ ಕಾಯಿಲೆಗಳು ಹರಡುವ ಅಪಾಯ ಹೆಚ್ಚುತ್ತದೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+ </div>`},
+{h:'ಬೇಸಿಗೆ ☀️',s:'ಬೇಸಿಗೆಯಲ್ಲಿ ವಾತಾವರಣದಲ್ಲಿ ಉಷ್ಣತೆ ಹೆಚ್ಚಿರುತ್ತದೆ. ನಾವು ಸಡಿಲ ಮತ್ತು ಹತ್ತಿಯ ಬಟ್ಟೆ ಧರಿಸುತ್ತೇವೆ, ಪದೇ ಪದೇ ನೀರು ಮತ್ತು ತಂಪು ಪಾನೀಯ ಕುಡಿಯುತ್ತೇವೆ. ಮಾವು, ಕಲ್ಲಂಗಡಿ, ಕಿತ್ತಳೆ, ದ್ರಾಕ್ಷಿ ಹೇರಳವಾಗಿ ಬರುತ್ತವೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#fff7ed"><div class="ic">👕💧</div><div class="tt">ನಾವು ಏನು ಮಾಡುತ್ತೇವೆ?</div><div class="dd">• <b>ಸಡಿಲ ಮತ್ತು ಹತ್ತಿಯ</b> ಬಟ್ಟೆ ಧರಿಸುತ್ತೇವೆ.<br>• ಪದೇ ಪದೇ <b>ನೀರು ಮತ್ತು ತಂಪು ಪಾನೀಯ</b> ಕುಡಿಯುತ್ತೇವೆ.<br>• ಬಿಸಿಲಿನಲ್ಲಿ ಸಾಧ್ಯವಾದಷ್ಟು ಹೊರಗೆ ಹೋಗುವುದಿಲ್ಲ.<br>• ಅಗತ್ಯ ಬಿದ್ದರೆ <b>ಕೊಡೆ, ಸನ್‌ಕೋಟ್, ಕರವಸ್ತ್ರ</b> ಬಳಸುತ್ತೇವೆ.</div></div>
+  <div class="tile op" style="background:#fff7ed"><div class="ic">🥭🍉🍊🍇</div><div class="tt">ಬೇಸಿಗೆಯ ಹಣ್ಣುಗಳು</div><div class="dd">ಮಾವು, ಕಲ್ಲಂಗಡಿ, ಕಿತ್ತಳೆ, ದ್ರಾಕ್ಷಿ. <b>ಕೊಂಕಣದಲ್ಲಿ ಗೇರುಬೀಜದ</b> ಋತು ಆರಂಭವಾಗುತ್ತದೆ.</div></div>
+  <div class="tile op" style="background:#fff7ed"><div class="ic">🐍🐸</div><div class="tt">ಪ್ರಾಣಿಗಳು ಏನು ಮಾಡುತ್ತವೆ?</div><div class="dd">ಹಾವು, ಕಪ್ಪೆ ಬೇಸಿಗೆಯಲ್ಲಿ ಸಾಮಾನ್ಯವಾಗಿ ಹೊರಗೆ ಬರುವುದಿಲ್ಲ. ಕೆಲವು ಪ್ರಾಣಿಗಳು ಮರಗಳ ಮೇಲೆ ಅಥವಾ ತಂಪಾದ ಸ್ಥಳದಲ್ಲಿ ವಾಸಿಸುತ್ತವೆ.</div></div>
+ </div>
+ <div class="know"><b class="h">🥤 ಬೇಸಿಗೆಯ ಮನೆಯ ಪಾನೀಯಗಳು</b><br>ನಿಂಬೆ ಶರಬತ್ತು, ಕೋಕಂ ಶರಬತ್ತು, ಹಸಿ ಮಾವಿನ ಪಾನಕ, ಮಜ್ಜಿಗೆ. ಮನೆಯ ದೊಡ್ಡವರ ಸಹಾಯದಿಂದ ಮಾಡಿ ನೋಡಿ!</div>`},
+{h:'ಮಳೆಗಾಲ 🌧️',s:'ಬೇಸಿಗೆಯ ನಂತರ ಮಳೆಗಾಲ ಬರುತ್ತದೆ. ಜೂನ್ ತಿಂಗಳಿಂದ ಮಳೆ ಆರಂಭವಾಗುತ್ತದೆ. ಎಲ್ಲೆಡೆ ಹಸಿರು ಕಾಣುತ್ತದೆ. ರೈತರು ಬಿತ್ತನೆ ಆರಂಭಿಸುತ್ತಾರೆ. ಮಳೆಯಿಂದ ರಕ್ಷಣೆಗಾಗಿ ಕೊಡೆ, ರೇನ್‌ಕೋಟ್, ಕೊಪ್ಪೆ, ಕಂಬಳಿ ಬಳಸುತ್ತೇವೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#f0f9ff"><div class="ic">🌱👨‍🌾</div><div class="tt">ಮಳೆಗಾಲದಲ್ಲಿ</div><div class="dd">• <b>ಜೂನ್</b> ತಿಂಗಳಿಂದ ಮಳೆ ಆರಂಭ.<br>• ಎಲ್ಲೆಡೆ <b>ಹಸಿರು</b>.<br>• ರೈತ <b>ಬಿತ್ತನೆಯ</b> ಕೆಲಸ ಆರಂಭಿಸುತ್ತಾರೆ.<br>• ಜನರು ಮನೆಯನ್ನು ಮಳೆಯಿಂದ ರಕ್ಷಿಸಿಕೊಳ್ಳುತ್ತಾರೆ.<br>• ವಿವಿಧ ಹಣ್ಣುಗಳು ಮತ್ತು <b>ಕಾಡು ತರಕಾರಿಗಳು</b> ಆಹಾರದಲ್ಲಿ.</div></div>
+  <div class="tile op" style="background:#f0f9ff"><div class="ic">☂️🧥</div><div class="tt">ರಕ್ಷಣೆಗಾಗಿ</div><div class="dd">ಕೊಡೆ, ರೇನ್‌ಕೋಟ್, <b>ಕೊಪ್ಪೆ</b>, <b>ಕಂಬಳಿ</b>.</div></div>
+ </div>
+ <h3>ಆಟ: ಮಳೆಗಾಲದಲ್ಲಿ ಸುರಕ್ಷಿತ ನಡವಳಿಕೆ – ಸರಿಯೋ ತಪ್ಪೋ?</h3>
+ ${sortGame('rainsafe',[['ನದಿ-ಹಳ್ಳಕ್ಕೆ ಪ್ರವಾಹ ಬಂದಾಗ ಪ್ರವಾಹದ ನೀರಿನಲ್ಲಿ ಹೋಗುವುದು',1],['ಪ್ರವಾಹ ಇದ್ದರೆ ಪರ್ಯಾಯ ರಸ್ತೆ ಬಳಸುವುದು',0],['ಹೊರಗೆ ಹೋಗುವಾಗ ಕೊಡೆ/ರೇನ್‌ಕೋಟ್ ತೆಗೆದುಕೊಳ್ಳುವುದು',0],['ಮಿಂಚು ಹೊಡೆಯುವಾಗ ದೊಡ್ಡ ಮರದ ಕೆಳಗೆ ನಿಲ್ಲುವುದು',1],['ಕುದಿಸಿದ ನೀರು ಕುಡಿಯುವುದು',0],['ನಿಂತ ನೀರಿನಲ್ಲಿ ಆಡುವುದು',1]],[['✔ ಸರಿ','gr'],['✘ ತಪ್ಪು','or']],'rainsafe')}`,a:()=>drawGames()},
+{h:'ಚಳಿಗಾಲ ❄️',s:'ಮಳೆಗಾಲ ಮುಗಿದ ಮೇಲೆ ಚಳಿಗಾಲದ ಸುಳಿವು ಸಿಗುತ್ತದೆ. ಗಾಳಿಯಲ್ಲಿ ತಂಪು ಅನುಭವವಾಗುತ್ತದೆ, ಚಳಿ ಆಗತೊಡಗುತ್ತದೆ. ನಾವು ಬೆಚ್ಚಗಿನ ಬಟ್ಟೆ ಬಳಸುತ್ತೇವೆ. ಚಳಿಗಾಲದಲ್ಲಿ ಸೀಬೆ, ಬೋರೆ ಹಣ್ಣಿನಂತಹ ಹಣ್ಣುಗಳು ಸಿಗುತ್ತವೆ. ದೀಪಾವಳಿಯ ರಜೆಗಳು ಚಳಿಗಾಲದಲ್ಲೇ ಇರುತ್ತವೆ. ಚಳಿಗಾಲದ ಕೊನೆಯಲ್ಲಿ ಮರಗಳ ಎಲೆ ಉದುರುವಿಕೆ ಆರಂಭವಾಗುತ್ತದೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#eef2ff"><div class="ic">🧣🧥</div><div class="tt">ಚಳಿಗಾಲದಲ್ಲಿ</div><div class="dd">• ಗಾಳಿಯಲ್ಲಿ <b>ತಂಪು</b>, ಚಳಿ ಆಗತೊಡಗುತ್ತದೆ.<br>• ಚಳಿಯಿಂದ ರಕ್ಷಣೆಗಾಗಿ <b>ಬೆಚ್ಚಗಿನ ಬಟ್ಟೆ</b>.<br>• <b>ದೀಪಾವಳಿಯ</b> ರಜೆಗಳು ಚಳಿಗಾಲದಲ್ಲೇ.<br>• ಋತುವಿನ ಕೊನೆಯಲ್ಲಿ ಮರಗಳ <b>ಎಲೆ ಉದುರುವಿಕೆ</b> ಆರಂಭವಾಗುತ್ತದೆ.</div></div>
+  <div class="tile op" style="background:#eef2ff"><div class="ic">🍐🫐</div><div class="tt">ಚಳಿಗಾಲದ ಹಣ್ಣುಗಳು</div><div class="dd">ಸೀಬೆ, ಬೋರೆ ಹಣ್ಣು. ಹೆಚ್ಚು ಶಕ್ತಿ ನೀಡುವ ಪದಾರ್ಥಗಳನ್ನು (ಒಣ ಹಣ್ಣುಗಳು, ಎಳ್ಳು-ಬೆಲ್ಲ) ಚಳಿಗಾಲದಲ್ಲಿ ತಿನ್ನಬೇಕು.</div></div>
+ </div>
+ <h3>ಆಟ: ಯಾವ ಉಡುಪು / ವಸ್ತು ಯಾವ ಋತುವಿನಲ್ಲಿ?</h3>
+ ${sortGame('dress',[['👕 ಸಡಿಲ ಹತ್ತಿ ಬಟ್ಟೆ',0],['🧥 ರೇನ್‌ಕೋಟ್',1],['🧶 ಸ್ವೆಟರ್',2],['🧢 ಸನ್‌ಕೋಟ್ / ಟೋಪಿ',0],['🪖 ಕೊಪ್ಪೆ',1],['🧣 ಶಾಲು / ಮಫ್ಲರ್',2],['☂️ ಕಂಬಳಿ (ಮಳೆಯಲ್ಲಿ)',1],['🧤 ಕೈಗವಸು',2]],[['☀️ ಬೇಸಿಗೆ','or'],['🌧️ ಮಳೆಗಾಲ','sm'],['❄️ ಚಳಿಗಾಲ','pu']],'dress')}`,a:()=>drawGames()},
+{h:'ಋತುವಿಗೆ ಅನುಗುಣವಾದ ಆಹಾರ',s:'ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ನಮ್ಮ ಆಹಾರದಲ್ಲಿ ಬದಲಾವಣೆಯಾಗುತ್ತದೆ. ಬೇಸಿಗೆಯಲ್ಲಿ ತಂಪು ಪಾನೀಯ, ಮಳೆಗಾಲದಲ್ಲಿ ಕಾಡು ತರಕಾರಿ, ಚಳಿಗಾಲದಲ್ಲಿ ಶಕ್ತಿ ನೀಡುವ ಪದಾರ್ಥಗಳು.',b:()=>`
+ <div class="key">ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ನಮ್ಮ <b>ಆಹಾರ ಮತ್ತು ಉಡುಪಿನಲ್ಲಿ</b> ಬದಲಾವಣೆಗಳಾಗುತ್ತವೆ.</div>
+ <h3>ಆಟ: ಈ ಪದಾರ್ಥ / ಹಣ್ಣು ಯಾವ ಋತುವಿನಲ್ಲಿ?</h3>
+ ${sortGame('food',[['🍉 ಕಲ್ಲಂಗಡಿ',0],['🥭 ಮಾವು',0],['🍋 ನಿಂಬೆ ಶರಬತ್ತು',0],['🥬 ಕಾಡು ತರಕಾರಿಗಳು',1],['🌽 ಮೆಕ್ಕೆಜೋಳದ ತೆನೆ',1],['🍐 ಸೀಬೆಹಣ್ಣು',2],['🫐 ಬೋರೆಹಣ್ಣುಗಳು',2],['🥜 ಒಣ ಹಣ್ಣುಗಳು',2],['🍇 ದ್ರಾಕ್ಷಿ',0],['🍬 ಎಳ್ಳು-ಬೆಲ್ಲ',2]],[['☀️ ಬೇಸಿಗೆ','or'],['🌧️ ಮಳೆಗಾಲ','sm'],['❄️ ಚಳಿಗಾಲ','pu']],'food')}`,a:()=>drawGames()},
+{h:'ಪಕ್ಷಿಗಳ ವಲಸೆ',s:'ಕೆಲವು ಪ್ರಾಣಿಗಳು ಒಂದು ಸ್ಥಳದಿಂದ ಇನ್ನೊಂದು ಸ್ಥಳಕ್ಕೆ ಹೋಗುವುದಕ್ಕೆ ವಲಸೆ ಎನ್ನುತ್ತಾರೆ. ವಲಸೆ ಹೋಗುವ ಪ್ರಾಣಿಗಳಲ್ಲಿ ಪಕ್ಷಿಗಳ ಪ್ರಮಾಣ ಅತ್ಯಧಿಕ. ಹೆಚ್ಚಿನ ಪಕ್ಷಿಗಳು ಚಳಿಗಾಲದಲ್ಲಿ ಭಾರತಕ್ಕೆ ಬರುತ್ತವೆ.',b:()=>`
+ <div class="key">ಬದಲಾಗುವ ಹವಾಮಾನಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಎಲ್ಲ ಜೀವಿಗಳು ತಮ್ಮಲ್ಲಿ ಬದಲಾವಣೆ ತರುತ್ತವೆ. ಕೆಲವು ಪ್ರಾಣಿಗಳು ಒಂದು ಸ್ಥಳದಿಂದ ಇನ್ನೊಂದು ಸ್ಥಳಕ್ಕೆ ಹೋಗುತ್ತವೆ, ಇದಕ್ಕೆ <b>‘ಸ್ಥಳಾಂತರ’</b> ಎನ್ನುತ್ತಾರೆ. ವಲಸೆ ಹೋಗುವ ಪ್ರಾಣಿಗಳಲ್ಲಿ <b>ಪಕ್ಷಿಗಳ ಪ್ರಮಾಣ ಅತ್ಯಧಿಕ</b> ಇದೆ.</div>
+ <div id="migBox">${migSvg()}</div>
+ <div class="chips" style="justify-content:center"><span class="chip ${MIG?'on':''}" onclick="MIG=1;$('migBox').innerHTML=migSvg();drawStep()">❄️ ಚಳಿಗಾಲ – ಪಕ್ಷಿಗಳು ಭಾರತಕ್ಕೆ ಬರುತ್ತವೆ</span><span class="chip ${MIG?'':'on'}" onclick="MIG=0;$('migBox').innerHTML=migSvg();drawStep()">☀️ ಹವಾಮಾನ ಬದಲಾದಾಗ – ಹಿಂತಿರುಗುತ್ತವೆ</span></div>
+ <div>ಪಕ್ಷಿಗಳು ಮುಖ್ಯವಾಗಿ <b>ಹವಾಮಾನ ಬದಲಾವಣೆ, ಆಹಾರ ಲಭ್ಯತೆ</b> ಮತ್ತು ತಮ್ಮ <b>ಮರಿಗಳ ಪಾಲನೆ</b> ಇವುಗಳಿಗಾಗಿ ಕೆಲವು ಕಾಲ (ಋತುಮಾನಿಕ) ವಲಸೆ ಹೋಗುತ್ತವೆ. ಅವು <b>ಸಾವಿರಾರು ಕಿಲೋಮೀಟರ್</b> ಪ್ರಯಾಣಿಸುತ್ತವೆ. ಕೆಲವು ಪಕ್ಷಿಗಳು ಬೇರೆ ದೇಶಗಳಿಂದ ಭಾರತಕ್ಕೆ ಬರುತ್ತವೆ, ಇನ್ನು ಕೆಲವು ಭಾರತದಿಂದ ಬೇರೆ ದೇಶಗಳಿಗೆ ಹೋಗುತ್ತವೆ. <b>ಹೆಚ್ಚಿನ ಪಕ್ಷಿಗಳು ಚಳಿಗಾಲದಲ್ಲಿ ಭಾರತಕ್ಕೆ ಬರುತ್ತವೆ.</b></div>
+ <div class="know"><b class="h">💡 ನಿಮಗೆ ಗೊತ್ತೇ?</b><br>ಸಾತಾರಾ ಜಿಲ್ಲೆಯ ಖಟಾವ್ ತಾಲ್ಲೂಕಿನಲ್ಲಿ <b>ಮಾಯಣಿ ಪಕ್ಷಿ ಅಭಯಾರಣ್ಯ</b> ಇದೆ. ಮಹಾರಾಷ್ಟ್ರದ ಇಂತಹ ಪಕ್ಷಿ ವಲಸೆಯ ಸ್ಥಳಗಳ ಮಾಹಿತಿ ಪಡೆಯಿರಿ.</div>`},
+{h:'ವೃಕ್ಷ ನೆಡುವ ಸಪ್ತಾಹ ಮತ್ತು ವನ ಮಹೋತ್ಸವ',s:'ಮಳೆಗಾಲ ಆರಂಭವಾದ ಮೇಲೆ ಒಂದು ಜುಲೈನಿಂದ ಏಳು ಜುಲೈ ನಡುವೆ ವೃಕ್ಷ ನೆಡುವ ಸಪ್ತಾಹ ಆಚರಿಸುತ್ತಾರೆ. ಮಳೆಗಾಲದಲ್ಲಿ ವನ ಮಹೋತ್ಸವವನ್ನೂ ಆಯೋಜಿಸಲಾಗುತ್ತದೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#f0fdf4"><div class="ic">🌳📅</div><div class="tt">ವೃಕ್ಷ ನೆಡುವ ಸಪ್ತಾಹ</div><div class="dd"><b>೧ ಜುಲೈನಿಂದ ೭ ಜುಲೈ</b> ರವರೆಗೆ ಆಚರಿಸುತ್ತಾರೆ. ಅನೇಕ ಬಗೆಯ ಮರಗಳ ನಾಟಿಯನ್ನು ಎಲ್ಲರೂ ಸೇರಿ ಮಾಡುತ್ತಾರೆ.</div></div>
+  <div class="tile op" style="background:#f0fdf4"><div class="ic">🎉🌿</div><div class="tt">ವನ ಮಹೋತ್ಸವ</div><div class="dd">ಮಳೆಗಾಲದಲ್ಲಿ ಆಯೋಜನೆ. ಚಟುವಟಿಕೆ: <b>ಶತಕೋಟಿ ವೃಕ್ಷಾರೋಪಣ</b>, <b>‘ತಾಯಿಯ ಹೆಸರಿನಲ್ಲಿ ಒಂದು ಮರ’</b> ಇತ್ಯಾದಿ.</div></div>
+ </div>
+ <div class="know"><b class="h">✍️ ಚಟುವಟಿಕೆ ಮಾಡಿ</b><br>ವೃಕ್ಷಾರೋಪಣದ ಚಿತ್ರವನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ಆ ಚಿತ್ರದ ಬಗ್ಗೆ <b>ನಾಲ್ಕೈದು ಸಾಲುಗಳಲ್ಲಿ</b> ಮಾಹಿತಿ ಬರೆಯಿರಿ.</div>
+ <textarea style="width:100%;min-height:80px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8" placeholder="ನಾಲ್ಕೈದು ಸಾಲುಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea>`},
+{h:'ಇದನ್ನು ನಾವು ಕಲಿತೆವು',s:'ಋತುಬದಲಾವಣೆ ಭೂಮಿ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವುದರಿಂದ ಮತ್ತು ಭೂಮಿಯ ವಾಲಿದ ಅಕ್ಷದಿಂದ ಆಗುತ್ತದೆ. ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಆಹಾರ ಮತ್ತು ಉಡುಪಿನಲ್ಲಿ ಬದಲಾವಣೆ ಮಾಡಲಾಗುತ್ತದೆ.',b:()=>`
+ <ul>
+  <li>ಋತುಬದಲಾವಣೆಗಳು <b>ಭೂಮಿ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವುದರಿಂದ</b> ಮತ್ತು ಭೂಮಿಯ <b>ವಾಲಿದ ಅಕ್ಷದಿಂದ</b> ಆಗುತ್ತವೆ.</li>
+  <li>ಭಾರತದಲ್ಲಿ <b>ಬೇಸಿಗೆ, ಮಳೆಗಾಲ, ಚಳಿಗಾಲ</b> ಎಂದು ಮೂರು ಪ್ರಮುಖ ಋತುಗಳು; ತಲಾ ನಾಲ್ಕು ತಿಂಗಳು.</li>
+  <li>ಋತುಬದಲಾವಣೆಯ <b>ಮಾನವ ಜೀವನ ಮತ್ತು ಆರೋಗ್ಯದ ಮೇಲೆ</b> ಪರಿಣಾಮವಾಗುತ್ತದೆ.</li>
+  <li>ಋತುಬದಲಾವಣೆಯಿಂದ <b>ಉಡುಪಿನಲ್ಲಿ</b> ವೈವಿಧ್ಯ ಕಾಣಿಸುತ್ತದೆ.</li>
+  <li>ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ <b>ಆಹಾರದಲ್ಲಿ</b> ಬದಲಾವಣೆ ಮಾಡಲಾಗುತ್ತದೆ.</li>
+  <li>ಹವಾಮಾನ ಬದಲಾವಣೆಗೆ ಅನುಗುಣವಾಗಿ ಪಕ್ಷಿಗಳು <b>ಸ್ಥಳಾಂತರ</b> ಮಾಡುತ್ತಾರೆ.</li>
+ </ul>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>• ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಯಾವ ಆಹಾರ ಪದಾರ್ಥಗಳನ್ನು ಮಾಡಲಾಗುತ್ತದೆ ಎಂಬುದರ ಪಟ್ಟಿ ಮಾಡಿ.<br>• ಮನೆಯ ಸದಸ್ಯರ ಸಹಾಯದಿಂದ ನಿಂಬೆ ಶರಬತ್ತು, ಕೋಕಂ ಶರಬತ್ತು, ಹಸಿ ಮಾವಿನ ಪಾನಕ ಇತ್ಯಾದಿ ಪಾನೀಯಗಳನ್ನು ತಯಾರಿಸಿ.<br>• ಇಂಟರ್ನೆಟ್ ಸಹಾಯದಿಂದ ಋತುಮಾನಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಜನರ ಉಡುಪಿನಲ್ಲಿ ಆಗುವ ಬದಲಾವಣೆಗಳ ಮಾಹಿತಿ ಪಡೆಯಿರಿ.</div>
+ <div class="msg ok" style="text-align:center;font-size:19px">🌈 ಈ ಪಾಠದಲ್ಲಿ ನೀವು ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು: <b>${(award('end','ಅಭಿನಂದನೆ! ನೀವು ಇಡೀ ಪಾಠ ಕಲಿತಿರಿ.'),STARS.size)}</b> ⭐</div>
+ <div class="tool">${tool('N')}</div>`}
+];
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));SEAID++;drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ಭೂಮಿಯ ಅಕ್ಷ ಎಷ್ಟು ಡಿಗ್ರಿ ವಾಲಿದೆ?',['೧೦°','೨೩°೩೦′','೪೫°','೯೦°'],1,'ಭೂಮಿಯ ಅಕ್ಷ ೨೩°೩೦′ (೨೩½°) ವಾಲಿದೆ.'],
+['ಋತುಬದಲಾವಣೆ ಯಾವುದರಿಂದ ಆಗುತ್ತದೆ?',['ಭೂಮಿ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವುದರಿಂದ ಮತ್ತು ವಾಲಿದ ಅಕ್ಷದಿಂದ','ಚಂದ್ರನಿಂದ','ಮೋಡಗಳಿಂದ','ಸಮುದ್ರದಿಂದ'],0,'ಭೂಮಿಯ ಪರಿಭ್ರಮಣ ಮತ್ತು ವಾಲಿದ ಅಕ್ಷದಿಂದ ಋತುಗಳು ಬದಲಾಗುತ್ತವೆ.'],
+['ಉತ್ತರ ಧ್ರುವ ಸೂರ್ಯನ ಎದುರು ಬರತೊಡಗಿದಾಗ ಉತ್ತರ ಅರ್ಧಗೋಳದಲ್ಲಿ ಏನಾಗುತ್ತದೆ?',['ಹಗಲು ಚಿಕ್ಕದಾಗುತ್ತದೆ','ಹಗಲಿನ ಅವಧಿ ಹೆಚ್ಚುತ್ತದೆ','ಯಾವಾಗಲೂ ರಾತ್ರಿ ಇರುತ್ತದೆ','ಯಾವ ಬದಲಾವಣೆಯೂ ಆಗುವುದಿಲ್ಲ'],1,'ಹಗಲು ದೊಡ್ಡದಾಗಿ ತಾಪಮಾನ ಹೆಚ್ಚಿ ಬೇಸಿಗೆ ಆರಂಭವಾಗುತ್ತದೆ.'],
+['ಉತ್ತರ ಅರ್ಧಗೋಳದಲ್ಲಿ ಬೇಸಿಗೆ ಇರುವಾಗ ದಕ್ಷಿಣ ಅರ್ಧಗೋಳದಲ್ಲಿ ಯಾವ ಋತು ಇರುತ್ತದೆ?',['ಬೇಸಿಗೆ','ಮಳೆಗಾಲ','ಚಳಿಗಾಲ','ವಸಂತ'],2,'ವಿರುದ್ಧ ಅರ್ಧಗೋಳದಲ್ಲಿ ವಿರುದ್ಧ ಋತು – ಚಳಿಗಾಲ.'],
+['ತಾಪಮಾನದ ವ್ಯತ್ಯಾಸದಿಂದ ಯಾವುದರಲ್ಲಿ ವ್ಯತ್ಯಾಸವಾಗುತ್ತದೆ?',['ವಾಯುಭಾರದಲ್ಲಿ','ಚಂದ್ರಕಲೆಯಲ್ಲಿ','ಗ್ರಹಗಳ ಕ್ರಮದಲ್ಲಿ','ಹಗಲಿನ ಗಂಟೆಗಳಲ್ಲಿ'],0,'ತಾಪಮಾನದ ಬದಲಾವಣೆಗಳಿಂದ ವಾಯುಭಾರದಲ್ಲಿ ವ್ಯತ್ಯಾಸವಾಗಿ ಗಾಳಿ ಉಂಟಾಗುತ್ತದೆ.'],
+['ಮಳೆ ತರುವ ಗಾಳಿ ಎಲ್ಲಿಂದ ಬರುತ್ತದೆ?',['ಮರುಭೂಮಿಯಿಂದ','ಸಾಗರದಿಂದ (ತೇವಾಂಶಯುಕ್ತ ಗಾಳಿ)','ಬೆಟ್ಟದಿಂದ','ನಗರಗಳಿಂದ'],1,'ಸಾಗರದಿಂದ ತೇವಾಂಶಯುಕ್ತ ಗಾಳಿ ಬೀಸಿ ಬರುತ್ತದೆ, ಅದರಿಂದ ಮಳೆ ಬೀಳುತ್ತದೆ.'],
+['ನಮ್ಮ ದೇಶದಲ್ಲಿ ಮಳೆ ಯಾವ ಗಾಳಿಯಿಂದ ಬೀಳುತ್ತದೆ?',['ಮಾನ್ಸೂನ್ ಗಾಳಿಯಿಂದ','ಶೀತ ಗಾಳಿಯಿಂದ','ಬಿರುಗಾಳಿಯಿಂದ','ಒಣ ಗಾಳಿಯಿಂದ'],0,'ಭಾರತದಲ್ಲಿ ಮಾನ್ಸೂನ್ ಗಾಳಿಯಿಂದ ಮಳೆ ಬೀಳುತ್ತದೆ.'],
+['ಭಾರತದಲ್ಲಿ ಒಟ್ಟು ಎಷ್ಟು ಪ್ರಮುಖ ಋತುಗಳಿವೆ?',['ಎರಡು','ಮೂರು','ಐದು','ಆರು'],1,'ಬೇಸಿಗೆ, ಮಳೆಗಾಲ, ಚಳಿಗಾಲ – ಮೂರು ಪ್ರಮುಖ ಋತುಗಳು.'],
+['ಪ್ರತಿ ಮುಖ್ಯ ಋತುವಿನ ಅವಧಿ ಎಷ್ಟು ತಿಂಗಳು?',['ಎರಡು','ಮೂರು','ನಾಲ್ಕು','ಆರು'],2,'ಪ್ರತಿ ಮುಖ್ಯ ಋತು ಸುಮಾರು ನಾಲ್ಕು ತಿಂಗಳು.'],
+['ಜೂನ್‌ನಿಂದ ಸೆಪ್ಟೆಂಬರ್ ಅವಧಿಯಲ್ಲಿ ನಮ್ಮ ದೇಶದಲ್ಲಿ ಯಾವ ಋತು ಇರುತ್ತದೆ?',['ಬೇಸಿಗೆ','ಮಳೆಗಾಲ','ಚಳಿಗಾಲ','ಶರದ್'],1,'ಜೂನ್‌ನಿಂದ ಸೆಪ್ಟೆಂಬರ್ – ಮಳೆಗಾಲ.'],
+['ಮಳೆ ಸಾಮಾನ್ಯವಾಗಿ ಯಾವ ತಿಂಗಳಿಂದ ಆರಂಭವಾಗುತ್ತದೆ?',['ಮಾರ್ಚ್','ಜೂನ್','ಅಕ್ಟೋಬರ್','ಡಿಸೆಂಬರ್'],1,'ಜೂನ್ ತಿಂಗಳಿಂದ ಮಳೆ ಆರಂಭವಾಗುತ್ತದೆ.'],
+['ಬೇಸಿಗೆಯಲ್ಲಿ ನಾವು ಯಾವ ಬಟ್ಟೆ ಧರಿಸುತ್ತೇವೆ?',['ಉಣ್ಣೆಯ','ಸಡಿಲ ಮತ್ತು ಹತ್ತಿಯ','ದಪ್ಪ ಮತ್ತು ಬಿಗಿಯಾದ','ರೇನ್‌ಕೋಟ್'],1,'ಉಷ್ಣತೆಯಿಂದಾಗಿ ಸಡಿಲ ಮತ್ತು ಹತ್ತಿಯ ಬಟ್ಟೆ ಧರಿಸುತ್ತೇವೆ.'],
+['ಶರಬತ್ತು, ಮಜ್ಜಿಗೆ ಈ ಪಾನೀಯಗಳನ್ನು ಯಾವ ಋತುವಿನಲ್ಲಿ ಹೆಚ್ಚಾಗಿ ಕುಡಿಯಬೇಕು?',['ಬೇಸಿಗೆ','ಮಳೆಗಾಲ','ಚಳಿಗಾಲ','ಯಾವುದರಲ್ಲೂ ಅಲ್ಲ'],0,'ಬೇಸಿಗೆಯಲ್ಲಿ ದೇಹಕ್ಕೆ ತಂಪು ಮತ್ತು ನೀರು ಸಿಗಲೆಂದು.'],
+['ಹೆಚ್ಚು ಶಕ್ತಿ ನೀಡುವ ಪದಾರ್ಥಗಳನ್ನು ಯಾವ ಋತುವಿನಲ್ಲಿ ತಿನ್ನಬೇಕು?',['ಬೇಸಿಗೆ','ಮಳೆಗಾಲ','ಚಳಿಗಾಲ','ಗ್ರೀಷ್ಮ ಕಾಲ'],2,'ಚಳಿಯಲ್ಲಿ ದೇಹಕ್ಕೆ ಹೆಚ್ಚು ಶಕ್ತಿ ಬೇಕು – ಚಳಿಗಾಲ.'],
+['ಬೇಸಿಗೆಯಲ್ಲಿ ಮಾರುಕಟ್ಟೆಗೆ ಯಾವ ಹಣ್ಣುಗಳು ಹೇರಳವಾಗಿ ಬರುತ್ತವೆ?',['ಸೀಬೆ, ಬೋರೆ ಹಣ್ಣು','ಮಾವು, ಕಲ್ಲಂಗಡಿ, ಕಿತ್ತಳೆ, ದ್ರಾಕ್ಷಿ','ಕೇವಲ ಬಾಳೆಹಣ್ಣು','ಕಾಡು ತರಕಾರಿಗಳು'],1,'ಬೇಸಿಗೆಯಲ್ಲಿ ಮಾವು, ಕಲ್ಲಂಗಡಿ, ಕಿತ್ತಳೆ, ದ್ರಾಕ್ಷಿ ಹೇರಳವಾಗಿ ಬರುತ್ತವೆ.'],
+['ಕೊಂಕಣದಲ್ಲಿ ಬೇಸಿಗೆಯಲ್ಲಿ ಯಾವುದರ ಋತು ಆರಂಭವಾಗುತ್ತದೆ?',['ಗೇರುಬೀಜದ','ಸೇಬಿನ','ಗೋಧಿಯ','ಹತ್ತಿಯ'],0,'ಕೊಂಕಣದಲ್ಲಿ ಗೇರುಬೀಜದ ಋತು ಆರಂಭವಾಗುತ್ತದೆ.'],
+['ಬೇಸಿಗೆಯಲ್ಲಿ ಸಾಮಾನ್ಯವಾಗಿ ಹೊರಗೆ ಬರದ ಪ್ರಾಣಿಗಳು ಯಾವುವು?',['ಹಸು, ಎಮ್ಮೆ','ಹಾವು, ಕಪ್ಪೆ','ನಾಯಿ, ಬೆಕ್ಕು','ಗುಬ್ಬಚ್ಚಿ, ಕಾಗೆ'],1,'ಹಾವು, ಕಪ್ಪೆ ಬೇಸಿಗೆಯಲ್ಲಿ ಸಾಮಾನ್ಯವಾಗಿ ಹೊರಗೆ ಬರುವುದಿಲ್ಲ.'],
+['ಮಳೆಗಾಲದಲ್ಲಿ ರೈತರು ಯಾವ ಕೆಲಸ ಆರಂಭಿಸುತ್ತಾರೆ?',['ಕೊಯ್ಲು','ಬಿತ್ತನೆ','ಒಕ್ಕಣೆ','ಮಾರಾಟ'],1,'ಮಳೆಗಾಲದಲ್ಲಿ ರೈತರು ಬಿತ್ತನೆ ಆರಂಭಿಸುತ್ತಾರೆ.'],
+['ಮಳೆಯಿಂದ ರಕ್ಷಣೆಗಾಗಿ ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದನ್ನು ಬಳಸುವುದಿಲ್ಲ?',['ಛತ್ರಿ','ಕೊಪ್ಪೆ','ಕಂಬಳಿ','ಸ್ವೆಟರ್'],3,'ಸ್ವೆಟರ್ ಅನ್ನು ಚಳಿಯಿಂದ ರಕ್ಷಣೆಗಾಗಿ ಬಳಸುತ್ತಾರೆ.'],
+['ನದಿ-ಹಳ್ಳಗಳಿಗೆ ಪ್ರವಾಹ ಬಂದಾಗ ನಾವು ಏನು ಮಾಡಬೇಕು?',['ಪ್ರವಾಹದ ನೀರಿನಲ್ಲಿ ಹೋಗಬೇಕು','ಪರ್ಯಾಯ ರಸ್ತೆ ಬಳಸಬೇಕು','ನೀರಿನಲ್ಲಿ ಆಡಬೇಕು','ಈಜಲು ಹೋಗಬೇಕು'],1,'ಪ್ರವಾಹದ ನೀರಿನಲ್ಲಿ ಹೋಗಬಾರದು; ಪರ್ಯಾಯ ರಸ್ತೆ ಬಳಸಬೇಕು.'],
+['ಮಳೆಗಾಲದಲ್ಲಿ ಆಹಾರದಲ್ಲಿ ಯಾವ ತರಕಾರಿಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ?',['ಕಾಡು ತರಕಾರಿಗಳು','ಕೇವಲ ಆಲೂಗಡ್ಡೆ','ಒಣ ಹಣ್ಣುಗಳು','ಗೇರುಬೀಜ'],0,'ಮಳೆಗಾಲದಲ್ಲಿ ವಿವಿಧ ಕಾಡು ತರಕಾರಿಗಳನ್ನು ಆಹಾರದಲ್ಲಿ ಬಳಸಲಾಗುತ್ತದೆ.'],
+['ಚಳಿಗಾಲದಲ್ಲಿ ಯಾವ ಹಣ್ಣುಗಳು ಸಿಗುತ್ತವೆ?',['ಮಾವು, ಕಲ್ಲಂಗಡಿ','ಸೀಬೆ, ಬೋರೆ ಹಣ್ಣು','ಗೇರುಬೀಜ, ಕರವಂದ','ದ್ರಾಕ್ಷಿ, ಕರಬೂಜ'],1,'ಚಳಿಗಾಲದಲ್ಲಿ ಸೀಬೆ, ಬೋರೆ ಹಣ್ಣಿನಂತಹ ಹಣ್ಣುಗಳು ಸಿಗುತ್ತವೆ.'],
+['ದೀಪಾವಳಿಯ ರಜೆಗಳು ಯಾವ ಋತುವಿನಲ್ಲಿ ಇರುತ್ತವೆ?',['ಬೇಸಿಗೆ','ಮಳೆಗಾಲ','ಚಳಿಗಾಲ','ಯಾವುದರಲ್ಲೂ ಅಲ್ಲ'],2,'ದೀಪಾವಳಿಯ ರಜೆಗಳು ಚಳಿಗಾಲದಲ್ಲೇ ಇರುತ್ತವೆ.'],
+['ಚಳಿಗಾಲದ ಕೊನೆಯಲ್ಲಿ ಮರಗಳಲ್ಲಿ ಏನು ಆರಂಭವಾಗುತ್ತದೆ?',['ಹೂಗೊಂಚಲು','ಎಲೆ ಉದುರುವಿಕೆ','ಹಣ್ಣು ಬಿಡುವುದು','ಬೇರುಗಳು ಒಡೆಯುವುದು'],1,'ಚಳಿಗಾಲದ ಕೊನೆಯಲ್ಲಿ ಮರಗಳ ಎಲೆ ಉದುರುವಿಕೆ ಆರಂಭವಾಗುತ್ತದೆ.'],
+['ಪ್ರಾಣಿಗಳು ಒಂದು ಸ್ಥಳದಿಂದ ಇನ್ನೊಂದು ಸ್ಥಳಕ್ಕೆ ಹೋಗುವುದಕ್ಕೆ ಏನೆನ್ನುತ್ತಾರೆ?',['ಸ್ಥಳಾಂತರ','ಭ್ರಮಣೆ','ಪರಿಭ್ರಮಣೆ','ಎಲೆ ಉದುರುವಿಕೆ'],0,'ಇದಕ್ಕೆ ವಲಸೆ ಎನ್ನುತ್ತಾರೆ.'],
+['ವಲಸೆ ಹೋಗುವ ಪ್ರಾಣಿಗಳಲ್ಲಿ ಯಾರ ಪ್ರಮಾಣ ಅತ್ಯಧಿಕ?',['ಮೀನು','ಹಕ್ಕಿ','ಹಾವು','ಕೀಟ'],1,'ವಲಸೆ ಹೋಗುವವುಗಳಲ್ಲಿ ಪಕ್ಷಿಗಳ ಪ್ರಮಾಣ ಅತ್ಯಧಿಕ.'],
+['ಹೆಚ್ಚಿನ ವಲಸೆ ಪಕ್ಷಿಗಳು ಭಾರತಕ್ಕೆ ಯಾವ ಋತುವಿನಲ್ಲಿ ಬರುತ್ತವೆ?',['ಬೇಸಿಗೆ','ಮಳೆಗಾಲ','ಚಳಿಗಾಲ','ಯಾವುದರಲ್ಲೂ ಅಲ್ಲ'],2,'ಹೆಚ್ಚಿನ ಪಕ್ಷಿಗಳು ಚಳಿಗಾಲದಲ್ಲಿ ಭಾರತಕ್ಕೆ ಬರುತ್ತವೆ.'],
+['ಮಾಯಣಿ ಪಕ್ಷಿ ಅಭಯಾರಣ್ಯ ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿದೆ?',['ಸಾಂಗ್ಲಿ','ಸಾತಾರಾ','ಕೊಲ್ಲಾಪುರ','ಪುಣೆ'],1,'ಸಾತಾರಾ ಜಿಲ್ಲೆಯ ಖಟಾವ್ ತಾಲ್ಲೂಕಿನಲ್ಲಿ ಮಾಯಣಿ ಪಕ್ಷಿ ಅಭಯಾರಣ್ಯ ಇದೆ.'],
+['ವೃಕ್ಷ ನೆಡುವ ಸಪ್ತಾಹ ಯಾವ ದಿನಾಂಕಗಳ ನಡುವೆ ಆಚರಿಸುತ್ತಾರೆ?',['೧ ರಿಂದ ೭ ಜೂನ್','೧ ರಿಂದ ೭ ಜುಲೈ','೧ ರಿಂದ ೭ ಆಗಸ್ಟ್','೧ ರಿಂದ ೭ ಜನವರಿ'],1,'೧ ಜುಲೈನಿಂದ ೭ ಜುಲೈ – ವೃಕ್ಷ ನೆಡುವ ಸಪ್ತಾಹ.'],
+['ಋತುಬದಲಾವಣೆಯಿಂದ ಮಾನವನ ಆರೋಗ್ಯದ ಮೇಲೆ ಆಗುವ ಪರಿಣಾಮ ಯಾವುದು?',['ಆಯಾಸ, ಮೈಕೈ ನೋವು, ಸೋಂಕಿನ ಅಪಾಯ','ಎತ್ತರ ಹೆಚ್ಚುವುದು','ಕಣ್ಣಿನ ಬಣ್ಣ ಬದಲಾಗುವುದು','ಯಾವ ಪರಿಣಾಮವೂ ಇಲ್ಲ'],0,'ದೈಹಿಕ ಬದಲಾವಣೆ (ಆಯಾಸ, ಮೈಕೈ ನೋವು) ಮತ್ತು ಸೋಂಕಿನ ಅಪಾಯ ಹೆಚ್ಚುತ್ತದೆ.']
+];
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ಭಾರತದಲ್ಲಿ ಒಟ್ಟು .......... ಪ್ರಮುಖ ಋತುಗಳಿವೆ.',['ಎರಡು','ಮೂರು','ಐದು','ಆರು'],1],
+  ['ಹೆಚ್ಚು ಶಕ್ತಿ ನೀಡುವ ಪದಾರ್ಥಗಳನ್ನು .......... ಋತುವಿನಲ್ಲಿ ತಿನ್ನಬೇಕು.',['ಬೇಸಿಗೆ','ಮಳೆಗಾಲ','ಚಳಿಗಾಲ','ಗ್ರೀಷ್ಮ ಕಾಲ'],2],
+  ['ಭೂಮಿ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವುದರಿಂದ ಮತ್ತು ಭೂಮಿಯ ವಾಲಿದ ಅಕ್ಷದಿಂದ .......... ಆಗುತ್ತವೆ.',['ಋತು ಬದಲಾವಣೆ','ಜಲಚಕ್ರ','ಹಬ್ಬ-ಸಮಾರಂಭ','ಹಗಲು ಮತ್ತು ರಾತ್ರಿ'],0],
+  ['ಪ್ರತಿ ಮುಖ್ಯ ಋತುವಿನ ಅವಧಿ .......... ತಿಂಗಳು ಇರುತ್ತದೆ.',['ನಾಲ್ಕು','ಮೂರು','ಎರಡು','ಐದು'],0]],
+ aa:[['ಭೂಮಿಯ ಅಕ್ಷ ಎಷ್ಟು ಡಿಗ್ರಿ ವಾಲಿದೆ?','ಭೂಮಿಯ ಅಕ್ಷ ೨೩°೩೦′ (೨೩½°) ವಾಲಿದೆ.'],['ಜೂನ್‌ನಿಂದ ಸೆಪ್ಟೆಂಬರ್ ಅವಧಿಯಲ್ಲಿ ನಮ್ಮ ದೇಶದಲ್ಲಿ ಯಾವ ಋತು ಇರುತ್ತದೆ?','ಜೂನ್‌ನಿಂದ ಸೆಪ್ಟೆಂಬರ್ ಅವಧಿಯಲ್ಲಿ ನಮ್ಮ ದೇಶದಲ್ಲಿ ಮಳೆಗಾಲ ಇರುತ್ತದೆ.'],['ಶರಬತ್ತು, ಮಜ್ಜಿಗೆ ಈ ಪಾನೀಯಗಳನ್ನು ಯಾವ ಋತುವಿನಲ್ಲಿ ಹೆಚ್ಚಾಗಿ ಕುಡಿಯಬೇಕು?','ಶರಬತ್ತು, ಮಜ್ಜಿಗೆ ಈ ಪಾನೀಯಗಳನ್ನು ಬೇಸಿಗೆಯಲ್ಲಿ ಹೆಚ್ಚಾಗಿ ಕುಡಿಯಬೇಕು.']],
+ i:[['ಋತುಬದಲಾವಣೆಯಿಂದ ಮಾನವನ ಆರೋಗ್ಯದ ಮೇಲೆ ಯಾವ ಪರಿಣಾಮಗಳಾಗುತ್ತವೆ? ಬರೆಯಿರಿ.','ಋತುಬದಲಾವಣೆಯಿಂದ ಆಯಾಸ, ಮೈಕೈ ನೋವಿನಂತಹ ದೈಹಿಕ ಬದಲಾವಣೆಗಳಾಗುತ್ತವೆ. ನೆಗಡಿ, ಜ್ವರ, ಹೊಟ್ಟೆಯ ಕಾಯಿಲೆಗಳಂತಹ ಸೋಂಕಿನ ಅಪಾಯ ಹೆಚ್ಚುತ್ತದೆ. ಆದ್ದರಿಂದ ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಆಹಾರ ಮತ್ತು ಉಡುಪಿನಲ್ಲಿ ಬದಲಾವಣೆ ಮಾಡಬೇಕಾಗುತ್ತದೆ.'],
+  ['ಋತುಗಳು ಹೇಗೆ ಉಂಟಾಗುತ್ತವೆ? ಎರಡು-ಮೂರು ವಾಕ್ಯಗಳಲ್ಲಿ ಬರೆಯಿರಿ.','ಭೂಮಿ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವಾಗ ಅದರ ಅಕ್ಷ ೨೩½° ವಾಲಿರುತ್ತದೆ. ಆದ್ದರಿಂದ ಉತ್ತರ ಮತ್ತು ದಕ್ಷಿಣ ಧ್ರುವಗಳು ಬೇರೆ ಬೇರೆ ಕಾಲದಲ್ಲಿ ಸೂರ್ಯನ ಎದುರು ಬರುತ್ತವೆ ಮತ್ತು ಹಗಲಿನ ಅವಧಿ ಹಾಗೂ ತಾಪಮಾನ ಬದಲಾಗುತ್ತದೆ. ತಾಪಮಾನದ ಈ ಬದಲಾವಣೆಗಳಿಂದ ಬೇಸಿಗೆ, ಮಳೆಗಾಲ ಮತ್ತು ಚಳಿಗಾಲ ಈ ಋತುಗಳು ಉಂಟಾಗುತ್ತವೆ.']],
+ ss:[['ಬೇಸಿಗೆ','ಗುಡಿಪಾಡ್ವಾ, ಹೋಳಿ, ಅಕ್ಷಯ ತೃತೀಯ','ಸಡಿಲ ಹತ್ತಿ ಬಟ್ಟೆ, ಟೋಪಿ, ಸನ್‌ಕೋಟ್'],['ಮಳೆಗಾಲ','ನಾಗರ ಪಂಚಮಿ, ರಕ್ಷಾಬಂಧನ, ಗಣೇಶೋತ್ಸವ, ಬೈಲಪೋಳಾ','ರೇನ್‌ಕೋಟ್, ಕೊಡೆ, ಕೊಪ್ಪೆ, ಕಂಬಳಿ'],['ಚಳಿಗಾಲ','ದಸರಾ, ದೀಪಾವಳಿ, ಮಕರ ಸಂಕ್ರಾಂತಿ','ಸ್ವೆಟರ್, ಶಾಲು, ಮಫ್ಲರ್, ಬೆಚ್ಚಗಿನ ಬಟ್ಟೆ']]
+};
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಅಭ್ಯಾಸ – ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ</h2>
+ <h3>(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</h3>${pickGame('swa',SW.a,'swa')}
+ <h3>(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಇ) ಸಂಕ್ಷಿಪ್ತವಾಗಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.i.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಈ) ಕೋಷ್ಟಕ ಪೂರ್ಣಗೊಳಿಸಿ – ಋತು, ಹಬ್ಬ-ಸಮಾರಂಭ, ಉಡುಪು</h3>
+ <div class="tap">ಮೊದಲು ಆಟ ಆಡಿ: ಪ್ರತಿ ಹಬ್ಬ ಯಾವ ಋತುವಿನಲ್ಲಿ ಬರುತ್ತದೆ?</div>
+ ${sortGame('fest',[['ಗುಡಿಪಾಡ್ವಾ',0],['ರಕ್ಷಾಬಂಧನ',1],['ದೀಪಾವಳಿ',2],['ಗಣೇಶೋತ್ಸವ',1],['ಮಕರ ಸಂಕ್ರಾಂತಿ',2],['ಹೋಳಿ',0],['ಬೈಲಪೋಳಾ',1],['ದಸರಾ',2],['ನಾಗರ ಪಂಚಮಿ',1],['ಅಕ್ಷಯ ತೃತೀಯ',0]],[['☀️ ಬೇಸಿಗೆ','or'],['🌧️ ಮಳೆಗಾಲ','sm'],['❄️ ಚಳಿಗಾಲ','pu']],'fest')}
+ <table class="t"><tr><th>ಋತುಗಳು</th><th>ಹಬ್ಬ-ಸಮಾರಂಭ</th><th>ಉಡುಪು</th></tr>${SW.ss.map(x=>`<tr><td><b>${x[0]}</b></td><td><input type="text" style="width:100%;font:inherit;padding:4px;border-radius:6px;border:1.5px solid #94a3b8"></td><td><input type="text" style="width:100%;font:inherit;padding:4px;border-radius:6px;border:1.5px solid #94a3b8"></td></tr>`).join('')}</table>
+ <div class="sq"><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಮಾದರಿ ಕೋಷ್ಟಕ ನೋಡಿ</button><div class="ans"><table class="t"><tr><th>ಋತುಗಳು</th><th>ಹಬ್ಬ-ಸಮಾರಂಭ</th><th>ಉಡುಪು</th></tr>${SW.ss.map(x=>`<tr><td><b>${x[0]}</b></td><td class="l">${x[1]}</td><td class="l">${x[2]}</td></tr>`).join('')}</table></div></div>
+ <h3>(ಉ) ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಆಹಾರ ಮತ್ತು ಉಡುಪಿನಲ್ಲಿ ಬದಲಾವಣೆ ಮಾಡದಿದ್ದರೆ ನಮ್ಮ ದೈನಂದಿನ ಜೀವನದ ಮೇಲೆ ಯಾವ ಪರಿಣಾಮಗಳಾಗುತ್ತವೆ? ತರಗತಿಯಲ್ಲಿ ಚರ್ಚಿಸಿ.</h3>
+ <div class="sq"><textarea placeholder="ಚರ್ಚೆಯ ಅಂಶಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…" style="min-height:80px"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಚರ್ಚೆಯ ಕೆಲವು ಅಂಶಗಳನ್ನು ನೋಡಿ</button><div class="ans">• ಬೇಸಿಗೆಯಲ್ಲಿ ಕಡಿಮೆ ನೀರು ಕುಡಿದರೆ ಮತ್ತು ದಪ್ಪ ಬಟ್ಟೆ ಧರಿಸಿದರೆ ಉಷ್ಣಾಘಾತ, ತಲೆಸುತ್ತು ಬರಬಹುದು.<br>• ಮಳೆಗಾಲದಲ್ಲಿ ರೇನ್‌ಕೋಟ್/ಕೊಡೆ ಬಳಸದಿದ್ದರೆ ನೆನೆದು ನೆಗಡಿ-ಜ್ವರ ಬರಬಹುದು; ತೆರೆದ ಆಹಾರ, ಕುದಿಸದ ನೀರಿನಿಂದ ಹೊಟ್ಟೆಯ ಕಾಯಿಲೆಗಳಾಗುತ್ತವೆ.<br>• ಚಳಿಗಾಲದಲ್ಲಿ ಬೆಚ್ಚಗಿನ ಬಟ್ಟೆ ಧರಿಸದಿದ್ದರೆ ಚಳಿ ಬಾಧಿಸುತ್ತದೆ; ಶಕ್ತಿ ನೀಡುವ ಪದಾರ್ಥಗಳನ್ನು ತಿನ್ನದಿದ್ದರೆ ಆಯಾಸವಾಗುತ್ತದೆ.<br>• ಅನಾರೋಗ್ಯದಿಂದ ಶಾಲೆ, ಆಟ, ಕೆಲಸಗಳು ತಪ್ಪುತ್ತವೆ.</div></div>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>• ಮನೆಯಲ್ಲಿ ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ತಯಾರಿಸುವ ಖಾದ್ಯಗಳ ಪಟ್ಟಿ ಮಾಡಿ.<br>• ನಿಂಬೆ ಶರಬತ್ತು, ಕೋಕಂ ಶರಬತ್ತು, ಹಸಿ ಮಾವಿನ ಪಾನಕ ತಯಾರಿಸಿ.<br>• ಇಂಟರ್ನೆಟ್‌ನಿಂದ ಋತುಮಾನಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಉಡುಪಿನಲ್ಲಿನ ಬದಲಾವಣೆಗಳ ಮಾಹಿತಿ ಪಡೆಯಿರಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಭೂಮಿಯ ಅಕ್ಷ ವಾಲಿರದಿದ್ದರೆ ಏನಾಗುತ್ತಿತ್ತು?','ಋತುಗಳು ಯಾವುದರಿಂದ ಬದಲಾಗುತ್ತವೆ?','ಅಕ್ಷ ವಾಲಿರದಿದ್ದರೆ ವರ್ಷಪೂರ್ತಿ ಹಗಲು ಮತ್ತು ರಾತ್ರಿ ಸುಮಾರು ಸಮಾನವಾಗಿರುತ್ತಿದ್ದವು ಮತ್ತು ತಾಪಮಾನದಲ್ಲಿ ಹೆಚ್ಚು ಬದಲಾವಣೆ ಆಗುತ್ತಿರಲಿಲ್ಲ. ಆದ್ದರಿಂದ ಬೇಸಿಗೆ, ಮಳೆಗಾಲ, ಚಳಿಗಾಲ ಎಂಬ ಋತುಬದಲಾವಣೆ ಅನುಭವಕ್ಕೆ ಬರುತ್ತಿರಲಿಲ್ಲ.'],
+['ಭಾರತದಲ್ಲಿ ಡಿಸೆಂಬರ್‌ನಲ್ಲಿ ಚಳಿ ಇರುತ್ತದೆ, ಆದರೆ ಆಸ್ಟ್ರೇಲಿಯಾದಲ್ಲಿ (ದಕ್ಷಿಣ ಅರ್ಧಗೋಳ) ಡಿಸೆಂಬರ್‌ನಲ್ಲಿ ಬೇಸಿಗೆ ಇರುತ್ತದೆ. ಏಕೆ ಹೀಗೆ?','ವಿರುದ್ಧ ಅರ್ಧಗೋಳಗಳಲ್ಲಿ ಋತುಗಳು ಹೇಗಿರುತ್ತವೆ?','ಡಿಸೆಂಬರ್‌ನಲ್ಲಿ ದಕ್ಷಿಣ ಧ್ರುವ ಸೂರ್ಯನ ಕಡೆಗೆ ಬಾಗಿರುತ್ತದೆ. ಆದ್ದರಿಂದ ದಕ್ಷಿಣ ಅರ್ಧಗೋಳದಲ್ಲಿ ಹಗಲು ದೊಡ್ಡದಾಗಿದ್ದು ತಾಪಮಾನ ಹೆಚ್ಚಿರುತ್ತದೆ (ಬೇಸಿಗೆ), ಆದರೆ ಉತ್ತರ ಅರ್ಧಗೋಳದಲ್ಲಿ (ಭಾರತದಲ್ಲಿ) ಚಳಿಗಾಲ ಇರುತ್ತದೆ.'],
+['ಬೇಸಿಗೆಯಲ್ಲಿ ಬಿಳಿ ಅಥವಾ ತಿಳಿ ಬಣ್ಣದ ಹತ್ತಿ ಬಟ್ಟೆ ಧರಿಸುವುದು ಏಕೆ ಒಳ್ಳೆಯದು?','ಗಾಢ ಬಣ್ಣಗಳು ಉಷ್ಣತೆಯನ್ನು ಹೆಚ್ಚು ಹೀರುತ್ತವೆಯೇ ಅಥವಾ ಕಡಿಮೆಯೇ?','ತಿಳಿ ಬಣ್ಣದ ಬಟ್ಟೆಗಳು ಸೂರ್ಯನ ಉಷ್ಣತೆಯನ್ನು ಕಡಿಮೆ ಹೀರುತ್ತವೆ ಮತ್ತು ಹತ್ತಿ ಬಟ್ಟೆಗಳಿಂದ ಬೆವರು ಸುಲಭವಾಗಿ ಒಣಗುತ್ತದೆ, ಗಾಳಿ ಆಡುತ್ತಿರುತ್ತದೆ. ಆದ್ದರಿಂದ ದೇಹ ತಂಪಾಗಿರುತ್ತದೆ.'],
+['ಬೆಟ್ಟದ ಒಂದು ಬದಿಯಲ್ಲಿ ತುಂಬಾ ಮಳೆ ಬೀಳುತ್ತದೆ, ಇನ್ನೊಂದು ಬದಿಯಲ್ಲಿ ಕಡಿಮೆ. ಏಕೆ ಹೀಗಾಗುತ್ತಿರಬಹುದು?','ತೇವಾಂಶಯುಕ್ತ ಗಾಳಿ ಮೊದಲು ಯಾವ ಬದಿಯಲ್ಲಿ ತಡೆಯಲ್ಪಡುತ್ತದೆ?','ಸಾಗರದಿಂದ ಬರುವ ತೇವಾಂಶಯುಕ್ತ ಗಾಳಿ ಬೆಟ್ಟಕ್ಕೆ ತಡೆಯಾಗಿ ಮೊದಲು ಎದುರಿನ ಬದಿಯಲ್ಲಿ ಹೇರಳ ಮಳೆ ನೀಡುತ್ತದೆ. ಬೆಟ್ಟ ದಾಟುವಷ್ಟರಲ್ಲಿ ಗಾಳಿಯಲ್ಲಿನ ತೇವಾಂಶ ಕಡಿಮೆಯಾಗುತ್ತದೆ, ಆದ್ದರಿಂದ ಆಚೆ ಬದಿಯಲ್ಲಿ ಕಡಿಮೆ ಮಳೆ ಬೀಳುತ್ತದೆ. ಅಂದರೆ ಮಳೆಯ ಪ್ರಮಾಣ ಭೌಗೋಳಿಕ ಪ್ರದೇಶಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಬದಲಾಗುತ್ತದೆ.'],
+['ವಲಸೆ ಪಕ್ಷಿಗಳು ಸಾವಿರಾರು ಕಿಲೋಮೀಟರ್ ಪ್ರಯಾಣ ಏಕೆ ಮಾಡುತ್ತವೆ? ಅವು ತಂಪು ಪ್ರದೇಶದಲ್ಲೇ ಉಳಿದರೆ ಏನಾಗುತ್ತದೆ?','ಚಳಿಗಾಲದಲ್ಲಿ ತಂಪು ಪ್ರದೇಶದಲ್ಲಿ ಆಹಾರ ಸಿಗುತ್ತದೆಯೇ?','ಚಳಿಗಾಲದಲ್ಲಿ ತಂಪು ಪ್ರದೇಶದಲ್ಲಿ ಬಹಳ ಚಳಿ ಬೀಳುತ್ತದೆ, ನೀರು ಹೆಪ್ಪುಗಟ್ಟುತ್ತದೆ ಮತ್ತು ಆಹಾರ ಸಿಗುವುದಿಲ್ಲ. ಅಲ್ಲೇ ಉಳಿದರೆ ಪಕ್ಷಿಗಳಿಗೂ ಅವುಗಳ ಮರಿಗಳಿಗೂ ಬದುಕುವುದು ಕಷ್ಟವಾಗುತ್ತದೆ. ಆದ್ದರಿಂದ ಬೆಚ್ಚಗಿನ ಮತ್ತು ಆಹಾರ ಸಿಗುವ ಭಾರತದಂತಹ ಪ್ರದೇಶಕ್ಕೆ ಅವು ಬರುತ್ತವೆ.'],
+['ವೃಕ್ಷ ನೆಡುವಿಕೆಯನ್ನು ಮಳೆಗಾಲದ ಆರಂಭದಲ್ಲೇ (೧ ರಿಂದ ೭ ಜುಲೈ) ಏಕೆ ಮಾಡುತ್ತಾರೆ?','ಸಸಿಗೆ ಆರಂಭದಲ್ಲಿ ಏನು ಹೇರಳವಾಗಿ ಬೇಕು?','ಮಳೆಗಾಲದಲ್ಲಿ ನೆಲದಲ್ಲಿ ತೇವ ಇರುತ್ತದೆ ಮತ್ತು ಸಸಿಗಳಿಗೆ ನೈಸರ್ಗಿಕವಾಗಿ ಹೇರಳ ನೀರು ಸಿಗುತ್ತದೆ. ಆದ್ದರಿಂದ ಸಸಿಗಳು ಬೇಗ ಬೇರೂರಿ ಬೆಳೆಯುತ್ತವೆ; ಬೇರೆ ನೀರು ಹಾಕುವ ಖರ್ಚು ಮತ್ತು ಶ್ರಮ ಉಳಿಯುತ್ತದೆ.'],
+['ಬೇಸಿಗೆಯಲ್ಲಿ ಮಧ್ಯಾಹ್ನ ಪ್ರಖರ ಬಿಸಿಲಿನಲ್ಲಿ ಆಡಿದರೆ ಏನಾಗಬಹುದು? ಯಾವ ಎಚ್ಚರಿಕೆ ವಹಿಸುವಿರಿ?','ದೇಹದ ನೀರು ಕಡಿಮೆಯಾದರೆ ಏನಾಗುತ್ತದೆ?','ದೇಹದ ನೀರು ಕಡಿಮೆಯಾಗಿ ತಲೆಸುತ್ತು, ಆಯಾಸ, ಉಷ್ಣಾಘಾತ ಆಗಬಹುದು. ಆದ್ದರಿಂದ ನಡುಮಧ್ಯಾಹ್ನದ ಬಿಸಿಲಿನಲ್ಲಿ ಆಡುವುದನ್ನು ತಪ್ಪಿಸಬೇಕು, ತಲೆಗೆ ಟೋಪಿ/ಕರವಸ್ತ್ರ ಹಾಕಿಕೊಳ್ಳಬೇಕು, ಪದೇ ಪದೇ ನೀರು, ಮಜ್ಜಿಗೆ, ಶರಬತ್ತು ಕುಡಿಯಬೇಕು.'],
+['ಮಳೆಗಾಲದಲ್ಲಿ ರೋಗಗಳು ಏಕೆ ಹೆಚ್ಚುತ್ತವೆ? ಅದನ್ನು ತಪ್ಪಿಸಲು ಏನು ಮಾಡುವಿರಿ?','ನಿಂತ ನೀರು ಮತ್ತು ಕೊಳಕು ನೀರಿನ ಬಗ್ಗೆ ಯೋಚಿಸಿ.','ಮಳೆಗಾಲದಲ್ಲಿ ನೀರು ನಿಲ್ಲುತ್ತದೆ, ಸೊಳ್ಳೆಗಳು ಹೆಚ್ಚುತ್ತವೆ, ಕುಡಿಯುವ ನೀರು ಕೊಳಕಾಗುತ್ತದೆ; ಇದರಿಂದ ಸೋಂಕು ಹರಡುತ್ತದೆ. ನೀರನ್ನು ಕುದಿಸಿ ಕುಡಿಯಬೇಕು, ಮನೆಯ ಸುತ್ತ ನೀರು ನಿಲ್ಲದಂತೆ ನೋಡಿಕೊಳ್ಳಬೇಕು, ಬಿಸಿ ಮತ್ತು ತಾಜಾ ಆಹಾರ ತಿನ್ನಬೇಕು, ಒದ್ದೆ ಬಟ್ಟೆಗಳನ್ನು ತಕ್ಷಣ ಬದಲಿಸಬೇಕು.'],
+['ಚಳಿಗಾಲದ ಕೊನೆಯಲ್ಲಿ ಆಗುವ ಎಲೆ ಉದುರುವಿಕೆ ಮರಗಳಿಗೆ ಹೇಗೆ ಉಪಯುಕ್ತವಾಗುತ್ತದೆ?','ಒಣ ಕಾಲದಲ್ಲಿ ಮರಗಳಿಗೆ ನೀರು ಕಡಿಮೆ ಬೇಕಾಗಲೆಂದು…','ಎಲೆಗಳು ಉದುರುವುದರಿಂದ ಮರದಲ್ಲಿನ ನೀರು ಆವಿಯ ರೂಪದಲ್ಲಿ ಕಡಿಮೆ ಹಾರಿಹೋಗುತ್ತದೆ, ಆದ್ದರಿಂದ ಒಣ ಕಾಲದಲ್ಲಿ ಮರ ನೀರನ್ನು ಉಳಿಸಿಕೊಳ್ಳುತ್ತದೆ. ಉದುರಿದ ಎಲೆಗಳು ಕೊಳೆತು ಮಣ್ಣಿಗೆ ನೈಸರ್ಗಿಕ ಗೊಬ್ಬರ ತಯಾರಾಗುತ್ತದೆ.'],
+['ನಿಮ್ಮ ಊರಿನ ಮಾರುಕಟ್ಟೆಯಲ್ಲಿ ಯಾವ ತಿಂಗಳಲ್ಲಿ ಯಾವ ಹಣ್ಣುಗಳು ಬರುತ್ತವೆ ಎಂಬುದರ ‘ಹಣ್ಣಿನ ಕ್ಯಾಲೆಂಡರ್’ ಕೋಷ್ಟಕ ತಯಾರಿಸಿ. ಇದರಿಂದ ಏನು ಗಮನಕ್ಕೆ ಬರುತ್ತದೆ?','ಬೇಸಿಗೆ, ಮಳೆಗಾಲ, ಚಳಿಗಾಲ ಎಂದು ಹಣ್ಣುಗಳನ್ನು ವಿಭಾಗಿಸಿ ನೋಡಿ.','ಉದಾ. ಬೇಸಿಗೆ – ಮಾವು, ಕಲ್ಲಂಗಡಿ, ದ್ರಾಕ್ಷಿ; ಮಳೆಗಾಲ – ನೇರಳೆ ಹಣ್ಣು, ಕರವಂದ, ಮೆಕ್ಕೆಜೋಳ; ಚಳಿಗಾಲ – ಸೀಬೆ, ಬೋರೆ ಹಣ್ಣು, ಕಿತ್ತಳೆ. ಇದರಿಂದ ಪ್ರತಿ ಋತುವಿನಲ್ಲಿ ಪ್ರಕೃತಿ ಬೇರೆ ಬೇರೆ ಹಣ್ಣುಗಳನ್ನು ನೀಡುತ್ತದೆ ಮತ್ತು ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಆಹಾರ ಬದಲಿಸುವುದು ಸರಿ ಎಂಬುದು ಗಮನಕ್ಕೆ ಬರುತ್ತದೆ.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೫ : ಋತುಬದಲಾವಣೆಯ ಮೋಜು — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${[...document.querySelectorAll('#stepBox ul li')].map(l=>`<li>${l.innerHTML}</li>`).join('')}</ol>
+ <p class="pq">ಋತುಗಳು ಹೇಗೆ ಆಗುತ್ತವೆ?</p><div>ಭೂಮಿಯ ಅಕ್ಷ ೨೩½° ವಾಲಿರುವುದರಿಂದ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವಾಗ ಎರಡೂ ಧ್ರುವಗಳು ಬೇರೆ ಬೇರೆ ಕಾಲದಲ್ಲಿ ಸೂರ್ಯನ ಎದುರು ಬರುತ್ತವೆ. ಯಾವ ಅರ್ಧಗೋಳದಲ್ಲಿ ಹಗಲು ದೊಡ್ಡದೋ – ಅಲ್ಲಿ ಬೇಸಿಗೆ; ವಿರುದ್ಧ ಅರ್ಧಗೋಳದಲ್ಲಿ ಚಳಿಗಾಲ. ತಾಪಮಾನ ಬದಲಾವಣೆ → ವಾಯುಭಾರದಲ್ಲಿ ವ್ಯತ್ಯಾಸ → ಗಾಳಿ → ಸಾಗರದಿಂದ ತೇವಾಂಶಯುಕ್ತ (ಮಾನ್ಸೂನ್) ಗಾಳಿ → ಮಳೆ.</div>
+ <p class="pq">ಭಾರತದ ಋತುಗಳು</p><table class="w"><tr><th>ಋತುಗಳು</th><th>ತಿಂಗಳುಗಳು</th><th>ಉಡುಪು / ವಸ್ತು</th><th>ಆಹಾರ / ಹಣ್ಣುಗಳು</th><th>ಹಬ್ಬ</th></tr>
+ <tr><td><b>ಬೇಸಿಗೆ</b></td><td>ಫೆಬ್ರವರಿ – ಮೇ</td><td class="l">ಸಡಿಲ ಹತ್ತಿ ಬಟ್ಟೆ, ಕೊಡೆ, ಸನ್‌ಕೋಟ್, ಕರವಸ್ತ್ರ</td><td class="l">ನೀರು, ಶರಬತ್ತು, ಮಜ್ಜಿಗೆ; ಮಾವು, ಕಲ್ಲಂಗಡಿ, ಕಿತ್ತಳೆ, ದ್ರಾಕ್ಷಿ, ಗೇರುಬೀಜ</td><td class="l">ಗುಡಿಪಾಡ್ವಾ, ಹೋಳಿ</td></tr>
+ <tr><td><b>ಮಳೆಗಾಲ</b></td><td>ಜೂನ್ – ಸೆಪ್ಟೆಂಬರ್</td><td class="l">ಕೊಡೆ, ರೇನ್‌ಕೋಟ್, ಕೊಪ್ಪೆ, ಕಂಬಳಿ</td><td class="l">ಕಾಡು ತರಕಾರಿಗಳು, ವಿವಿಧ ಹಣ್ಣುಗಳು</td><td class="l">ನಾಗರ ಪಂಚಮಿ, ರಕ್ಷಾಬಂಧನ, ಗಣೇಶೋತ್ಸವ</td></tr>
+ <tr><td><b>ಚಳಿಗಾಲ</b></td><td>ಅಕ್ಟೋಬರ್ – ಜನವರಿ</td><td class="l">ಬೆಚ್ಚಗಿನ ಬಟ್ಟೆ, ಸ್ವೆಟರ್, ಶಾಲು</td><td class="l">ಶಕ್ತಿ ನೀಡುವ ಪದಾರ್ಥಗಳು; ಸೀಬೆ, ಬೋರೆ ಹಣ್ಣು</td><td class="l">ದಸರಾ, ದೀಪಾವಳಿ, ಮಕರ ಸಂಕ್ರಾಂತಿ</td></tr></table>
+ <p class="pq">ನೆನಪಿಡಿ</p><div>• ಪಕ್ಷಿಗಳು ಹವಾಮಾನ ಬದಲಾವಣೆ, ಆಹಾರ ಮತ್ತು ಮರಿಗಳ ಪಾಲನೆಗಾಗಿ <b>ಸ್ಥಳಾಂತರ</b> ಮಾಡುತ್ತವೆ; ಹೆಚ್ಚಿನ ಪಕ್ಷಿಗಳು ಚಳಿಗಾಲದಲ್ಲಿ ಭಾರತಕ್ಕೆ ಬರುತ್ತವೆ (ಉದಾ. ಮಾಯಣಿ ಪಕ್ಷಿ ಅಭಯಾರಣ್ಯ, ತಾ. ಖಟಾವ್, ಜಿ. ಸಾತಾರಾ).<br>• ವೃಕ್ಷ ನೆಡುವ ಸಪ್ತಾಹ : <b>೧ ರಿಂದ ೭ ಜುಲೈ</b>; ಮಳೆಗಾಲದಲ್ಲಿ ವನ ಮಹೋತ್ಸವ.</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</div>${SW.a.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div><div class="po">${x[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ <div class="pq">(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(1)}</div>`).join('')}
+ <div class="pq">(ಇ) ಸಂಕ್ಷಿಪ್ತವಾಗಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.i.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ <div class="avoid"><div class="pq">(ಈ) ಕೋಷ್ಟಕ ಪೂರ್ಣಗೊಳಿಸಿ.</div><table class="w"><tr><th style="width:28mm">ಋತುಗಳು</th><th>ಹಬ್ಬ-ಸಮಾರಂಭ</th><th>ಉಡುಪು</th></tr>${SW.ss.map(x=>`<tr><td style="height:12mm"><b>${x[0]}</b></td><td></td><td></td></tr>`).join('')}</table></div>
+ <div class="avoid"><div class="pq">(ಉ) ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಆಹಾರ ಮತ್ತು ಉಡುಪಿನಲ್ಲಿ ಬದಲಾವಣೆ ಮಾಡದಿದ್ದರೆ ದೈನಂದಿನ ಜೀವನದ ಮೇಲೆ ಯಾವ ಪರಿಣಾಮಗಳಾಗುತ್ತವೆ? (ಚರ್ಚೆಯ ಅಂಶಗಳನ್ನು ಬರೆಯಿರಿ)</div>${lines(4)}</div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>(ಅ)</b> ${SW.a.map((x,i)=>`${i+1}) ${x[1][x[2]]}`).join('; ')}</div><div><b>(ಆ)</b><ol>${SW.aa.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಇ)</b><ol>${SW.i.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಈ)</b> ${SW.ss.map(x=>`<b>${x[0]}</b> – ${x[1]}; ${x[2]}`).join('<br>')}</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>ಇ. ೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೫</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

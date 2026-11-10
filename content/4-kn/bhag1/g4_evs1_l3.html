@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ – ಪಾಠ ೩ ಗ್ರಹಗಳು ಮತ್ತು ನಕ್ಷತ್ರಗಳು</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೩ : ಗ್ರಹಗಳು ಮತ್ತು ನಕ್ಷತ್ರಗಳು</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">🌌 ಬನ್ನಿ, ಆಕಾಶದ ಸಂಚಾರ ಮಾಡೋಣ! ಸೂರ್ಯ, ಗ್ರಹಗಳು, ಚಂದ್ರ ಮತ್ತು ನಕ್ಷತ್ರಗಳ ಜಗತ್ತು. ಆಟ ಆಡಿ ಮತ್ತು ⭐ ಪಡೆಯಿರಿ! <span id="starHome"></span> ಕೆಳಗಿನ ಒಂದು ಕಾರ್ಡ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೧೨ ಮೆಟ್ಟಿಲುಗಳು · ತಿರುಗುವ ಸೂರ್ಯಮಂಡಲ · ಆಟ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೨೦ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೩ : ಗ್ರಹಗಳು ಮತ್ತು ನಕ್ಷತ್ರಗಳು';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🌟','✨','🎉'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಗ್ರಹಗಳ ಮಾಹಿತಿ ---------- */
+const PL=[
+ {n:'ಬುಧ',c:'#a8a29e',s:3,R:30,T:88,au:0.387,f:'ಸೂರ್ಯನಿಂದ ಅತ್ಯಂತ ಹತ್ತಿರದ ಗ್ರಹ.'},
+ {n:'ಶುಕ್ರ',c:'#fbbf24',s:5,R:44,T:225,au:0.723,f:'ಸೂರ್ಯನಿಂದ ಎರಡನೇ ಸ್ಥಾನದಲ್ಲಿರುವ ಗ್ರಹ. ಬೆಳಗಿನ ಜಾವ ಅಥವಾ ಸಂಜೆ ಅದು ತುಂಬಾ ಪ್ರಕಾಶಮಾನವಾಗಿ ಕಾಣುತ್ತದೆ.'},
+ {n:'ಭೂಮಿ',c:'#3b82f6',s:5,R:58,T:365,au:1.000,f:'ಸೂರ್ಯಮಂಡಲದ ಮೂರನೇ ಗ್ರಹ. ಅದರ ಅಕ್ಷ ೨೩½° ಓರೆಯಾಗಿದೆ. ಭೂಮಿಯ ಮೇಲೆ ಜೀವಸೃಷ್ಟಿ ಇದೆ.'},
+ {n:'ಮಂಗಳ',c:'#dc2626',s:4,R:72,T:687,au:1.524,f:'ಸೂರ್ಯಮಂಡಲದ ನಾಲ್ಕನೇ ಗ್ರಹ. ಇದನ್ನು ಕೆಂಪು ಗ್ರಹ ಎನ್ನುತ್ತಾರೆ. ಮಾನವ ಈ ಗ್ರಹಕ್ಕೆ ಮಂಗಳಯಾನ ಕಳುಹಿಸಿದ್ದಾನೆ.'},
+ {n:'ಗುರು',c:'#d97706',s:11,R:100,T:4333,au:5.203,f:'ಸೂರ್ಯಮಂಡಲದ ಐದನೇ ಮತ್ತು ಗಾತ್ರದಲ್ಲಿ ಅತಿ ದೊಡ್ಡ ಗ್ರಹ.'},
+ {n:'ಶನಿ',c:'#ca8a04',s:8,R:124,T:10759,au:9.539,f:'ಸೂರ್ಯಮಂಡಲದ ಆರನೇ ಗ್ರಹ. ಇದರ ಸುತ್ತ ಸುಂದರ ಉಂಗುರಗಳಿವೆ.'},
+ {n:'ಯುರೇನಸ್',c:'#22d3ee',s:7,R:146,T:30687,au:19.182,f:'ಸೂರ್ಯಮಂಡಲದ ಏಳನೇ ಗ್ರಹ.'},
+ {n:'ನೆಪ್ಚೂನ್',c:'#4f46e5',s:7,R:166,T:60190,au:30.058,f:'ಸೂರ್ಯಮಂಡಲದ ಎಂಟನೇ ಗ್ರಹ ಮತ್ತು ಸೂರ್ಯನಿಂದ ಅತ್ಯಂತ ದೂರದ ಗ್ರಹ.'}];
+let SSID=0,SSRUN=true,SSA=PL.map(()=>Math.random()*6.28);
+function ssSvg(){let g=`<svg viewBox="0 0 360 360" id="ss" style="max-width:420px;display:block;margin:0 auto;background:radial-gradient(#1e1b4b,#020617);border-radius:16px">`;
+ for(let i=0;i<60;i++)g+=`<circle cx="${(i*97)%360}" cy="${(i*53+i*i)%360}" r="${i%5?0.7:1.2}" fill="#fff" opacity=".7"/>`;
+ PL.forEach(p=>g+=`<circle cx="180" cy="180" r="${p.R}" fill="none" stroke="#475569" stroke-width=".8" stroke-dasharray="2 3"/>`);
+ for(let i=0;i<70;i++){const a=i*0.0898*Math.PI*2/6.3,r=84+(i*7%9);g+=`<circle cx="${180+r*Math.cos(a)}" cy="${180+r*Math.sin(a)}" r=".9" fill="#94a3b8"/>`}
+ g+=`<circle cx="180" cy="180" r="18" fill="url(#sunG)" onclick="planetInfo(-1)" style="cursor:pointer"/><defs><radialGradient id="sunG"><stop offset="0" stop-color="#fff7ae"/><stop offset=".6" stop-color="#fbbf24"/><stop offset="1" stop-color="#f97316"/></radialGradient></defs>`;
+ PL.forEach((p,i)=>{g+=`<g id="pl${i}" style="cursor:pointer" onclick="planetInfo(${i})">${i==5?`<ellipse rx="${p.s+6}" ry="3" fill="none" stroke="#fde68a" stroke-width="2"/>`:''}<circle r="${p.s}" fill="${p.c}"/><circle r="${p.s+9}" fill="transparent"/></g>`});
+ return g+'</svg>'}
+function ssStart(){const id=++SSID;let last=performance.now();
+ function f(now){if(id!==SSID||!$('ss'))return;const dt=(now-last)/1000;last=now;
+  PL.forEach((p,i)=>{if(SSRUN)SSA[i]+=dt*2.2/Math.sqrt(p.T/88);const e=$('pl'+i);if(e)e.setAttribute('transform',`translate(${180+p.R*Math.cos(SSA[i])},${180+p.R*Math.sin(SSA[i])})`)});
+  requestAnimationFrame(f)}requestAnimationFrame(f)}
+let PSEEN=new Set();
+function planetInfo(i){const b=$('plInfo');if(!b)return;
+ if(i<0){b.innerHTML=`<div class="msg in"><b>☀️ ಸೂರ್ಯ</b> – ಸೂರ್ಯಮಂಡಲದ ಕೇಂದ್ರದಲ್ಲಿರುವ ಏಕೈಕ ನಕ್ಷತ್ರ. ಬೆಳಕು ಮತ್ತು ಶಾಖದ ಏಕೈಕ ಮೂಲ.</div>`;say('ಸೂರ್ಯ. ಸೂರ್ಯಮಂಡಲದ ಕೇಂದ್ರದಲ್ಲಿರುವ ಏಕೈಕ ನಕ್ಷತ್ರ.');return}
+ const p=PL[i];PSEEN.add(i);b.innerHTML=`<div class="msg ok"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:${p.c};vertical-align:middle"></span> <b>${i+1}. ${p.n}</b> – ${p.f}<br>ಸೂರ್ಯನಿಂದ ದೂರ : <b>${p.au} AU</b> · ನೋಡಿದ ಗ್ರಹಗಳು: ${PSEEN.size}/8</div>`;
+ say(p.n+'. '+p.f);if(PSEEN.size==8)award('ss','ಭೇಷ್! ನೀವು ಎಲ್ಲ ಗ್ರಹಗಳನ್ನು ನೋಡಿದಿರಿ.')}
+
+/* ---------- ನಕ್ಷತ್ರಗಳು ಮಿನುಗುತ್ತವೆ ---------- */
+const SKY=[[40,40,0],[90,70,0],[150,30,1],[200,90,0],[260,50,0],[310,80,1],[60,120,0],[120,140,0],[230,130,0],[290,150,0],[180,160,1],[330,30,0]];
+let SKYF=new Set();
+function skySvg(){return `<svg viewBox="0 0 360 190" style="max-width:460px;display:block;margin:0 auto;background:linear-gradient(#020617,#1e3a8a);border-radius:16px">
+ <path d="M0 175 Q60 160 120 172 T240 168 T360 172 V190 H0Z" fill="#052e16"/>
+ ${SKY.map((s,i)=>s[2]?`<circle cx="${s[0]}" cy="${s[1]}" r="5" fill="#fde68a" style="cursor:pointer" onclick="skyTap(${i})"/><circle cx="${s[0]}" cy="${s[1]}" r="14" fill="transparent" style="cursor:pointer" onclick="skyTap(${i})"/>`
+ :`<text x="${s[0]}" y="${s[1]}" font-size="16" text-anchor="middle" fill="#fff" style="cursor:pointer" onclick="skyTap(${i})"><tspan class="tw" style="animation-delay:${(i*0.37)%1.4}s">✦</tspan></text>`).join('')}
+ ${[...SKYF].map(i=>`<circle cx="${SKY[i][0]}" cy="${SKY[i][1]}" r="12" fill="none" stroke="#22c55e" stroke-width="2.5"/>`).join('')}</svg>`}
+function skyTap(i){const m=$('skyMsg');if(SKY[i][2]){SKYF.add(i);m.innerHTML=`<div class="msg ok">✔ ಸರಿ! ಇದು ಮಿನುಗುವುದಿಲ್ಲ – ಇದು <b>ಗ್ರಹ</b> ಇದೆ. (${SKYF.size}/3)</div>`;if(SKYF.size==3)award('sky','ಭೇಷ್! ನೀವು ಮೂರೂ ಗ್ರಹಗಳನ್ನು ಹುಡುಕಿದಿರಿ.')}
+ else m.innerHTML='<div class="msg no">✘ ಇದು ಮಿನುಗುತ್ತಿದೆ – ಇದು <b>ನಕ್ಷತ್ರ</b> ಆಗಿದೆ. ಮಿನುಗದಿರುವುದನ್ನು ಹುಡುಕಿ.</div>';$('skyBox').innerHTML=skySvg()}
+
+/* ---------- ಗ್ರಹಗಳ ಕ್ರಮ ---------- */
+let ORD=[],ORDS=[];
+function ordInit(){ORDS=shuf(PL.map((_,i)=>i));ORD=[];drawOrd()}
+function drawOrd(){const b=$('ordBox');if(!b)return;
+ b.innerHTML=`<div class="msg in">☀️ ಸೂರ್ಯನಿಗೆ ಹತ್ತಿರದ ಗ್ರಹದಿಂದ ಆರಂಭಿಸಿ ಕ್ರಮವಾಗಿ ಕ್ಲಿಕ್ ಮಾಡಿ.</div>
+ <div style="display:flex;gap:4px;flex-wrap:wrap;margin:8px 0;min-height:44px;align-items:center"><span style="font-size:30px">☀️</span>${ORD.map(i=>`<span class="chip on" style="background:${PL[i].c};color:#fff;border-color:${PL[i].c}">${PL[i].n}</span>`).join('➜')}</div>
+ <div class="chips">${ORDS.filter(i=>!ORD.includes(i)).map(i=>`<span class="chip" onclick="ordTap(${i})"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${PL[i].c}"></span> ${PL[i].n}</span>`).join('')}</div>
+ <div id="ordMsg">${ORD.length==8?'<div class="msg ok">🎉 ಎಲ್ಲ ಗ್ರಹಗಳು ಸರಿಯಾದ ಕ್ರಮದಲ್ಲಿ! ಬುಧ, ಶುಕ್ರ, ಭೂಮಿ, ಮಂಗಳ, ಗುರು, ಶನಿ, ಯುರೇನಸ್, ನೆಪ್ಚೂನ್.</div>':''}</div>
+ <button class="btn ln sm" onclick="ordInit()">🔄 ಮತ್ತೆ ಆಡಿ</button>`}
+function ordTap(i){if(i==ORD.length){ORD.push(i);drawOrd();say(PL[i].n);if(ORD.length==8)award('ord','ಭೇಷ್! ಗ್ರಹಗಳ ಕ್ರಮ ಸರಿ.')}
+ else{$('ordMsg').innerHTML=`<div class="msg no">✘ ${PL[i].n} ಈಗ ಅಲ್ಲ. ಸೂರ್ಯನಿಂದ ${ORD.length+1} ಸಂಖ್ಯೆಯ ಗ್ರಹ ಯಾವುದು?</div>`}}
+
+/* ---------- ಒಳಗ್ರಹ / ಹೊರಗ್ರಹ ---------- */
+let IOA={};
+function drawIO(){const b=$('ioBox');if(!b)return;
+ b.innerHTML=PL.map((p,i)=>`<div class="sort ${IOA[i]==null?'':(IOA[i]==(i>3?1:0)?'ok':'no')}"><span><b>${p.n}</b></span><span class="bb"><button class="btn or sm" onclick="IOA[${i}]=0;drawIO()">ಒಳಗ್ರಹ</button><button class="btn pu sm" onclick="IOA[${i}]=1;drawIO()">ಹೊರಗ್ರಹ</button></span></div>`).join('');
+ const n=Object.keys(IOA).length,c=Object.keys(IOA).filter(i=>IOA[i]==(i>3?1:0)).length;
+ $('ioRes').innerHTML=n?`<div class="msg ${c==n?'ok':'in'}">${c} / 8 ಸರಿ</div>`:'';if(n==8&&c==8)award('io','ಭೇಷ್!')}
+
+/* ---------- ಹಗಲು-ರಾತ್ರಿ (ಭ್ರಮಣ) ---------- */
+let ROT=0,ROTRUN=false,ROTID=0,ROTN=0;
+function rotSvg(){return `<svg viewBox="0 0 360 200" style="max-width:460px;display:block;margin:0 auto;background:#0f172a;border-radius:16px">
+ <circle cx="30" cy="100" r="34" fill="#fbbf24"/><text x="30" y="106" text-anchor="middle" font-size="14" font-weight="800">ಸೂರ್ಯ</text>
+ ${[0,1,2,3,4].map(i=>`<line x1="72" y1="${60+i*20}" x2="150" y2="${60+i*20}" stroke="#fde68a" stroke-width="2" stroke-dasharray="6 5"/>`).join('')}
+ <g transform="translate(240,100)"><circle r="70" fill="#1d4ed8"/>
+  <g id="rotG"><path d="M-30 -50 q20 10 10 30 q-25 5 -20 25 q10 15 -5 30 M20 -55 q15 25 35 15 q10 20 -10 35 q15 20 0 40" fill="none" stroke="#22c55e" stroke-width="9" stroke-linecap="round"/>
+   <g transform="translate(0,-70)"><circle r="8" fill="#fff" stroke="#000"/><text y="5" text-anchor="middle" font-size="11">🧒</text></g></g>
+  <path d="M0 -70 A70 70 0 0 1 0 70 Z" fill="#000" opacity=".55"/>
+  <text x="-35" y="88" fill="#fde68a" font-size="12" font-weight="700" text-anchor="middle">ದಿನ</text><text x="35" y="88" fill="#cbd5e1" font-size="12" font-weight="700" text-anchor="middle">ರಾತ್ರಿ</text></g></svg>`}
+function rotUpd(){const g=$('rotG');if(!g)return;g.setAttribute('transform',`rotate(${ROT})`);
+ const a=((ROT%360)+360)%360;const day=a>180;const h=Math.round(a/15);
+ $('rotMsg').innerHTML=`<div class="msg ${day?'in':'ok'}" style="${day?'':'background:#1e293b;color:#e2e8f0'}">${day?'☀️ ಹುಡುಗನ ಸ್ಥಳದಲ್ಲಿ ಈಗ <b>ದಿನ</b> ಇದೆ.':'🌙 ಹುಡುಗನ ಸ್ಥಳದಲ್ಲಿ ಈಗ <b>ರಾತ್ರಿ</b> ಇದೆ.'} &nbsp; (${h} ಗಂಟೆ ತಿರುಗಿತು) &nbsp; ಪೂರ್ಣ ಸುತ್ತುಗಳು: <b>${ROTN}</b></div>`}
+function rotPlay(){ROTRUN=!ROTRUN;const id=++ROTID;$('rotBtn').textContent=ROTRUN?'⏸ ನಿಲ್ಲಿಸಿ':'▶ ಭೂಮಿ ತಿರುಗಿಸಿ';let last=performance.now();
+ function f(now){if(id!==ROTID||!ROTRUN||!$('rotG'))return;const old=ROT;ROT+=(now-last)/1000*45;last=now;if(Math.floor(ROT/360)>Math.floor(old/360)){ROTN++;if(ROTN==1)award('rot','ಒಂದು ಸುತ್ತು ಎಂದರೆ ಒಂದು ದಿನ, ಅಂದರೆ ೨೪ ಗಂಟೆ!')}rotUpd();requestAnimationFrame(f)}requestAnimationFrame(f)}
+
+/* ---------- ಪರಿಭ್ರಮಣ (ವರ್ಷ) ---------- */
+let REV=0,REVRUN=false,REVID=0;
+const MON=['ಜನವರಿ','ಫೆಬ್ರವರಿ','ಮಾರ್ಚ್','ಏಪ್ರಿಲ್','ಮೇ','ಜೂನ್','ಜುಲೈ','ಆಗಸ್ಟ್','ಸೆಪ್ಟೆಂಬರ್','ಅಕ್ಟೋಬರ್','ನವೆಂಬರ್','ಡಿಸೆಂಬರ್'];
+function revSvg(){return `<svg viewBox="0 0 360 230" style="max-width:460px;display:block;margin:0 auto;background:#020617;border-radius:16px">
+ <ellipse cx="180" cy="115" rx="140" ry="80" fill="none" stroke="#64748b" stroke-dasharray="4 4"/>
+ <circle cx="180" cy="115" r="24" fill="#fbbf24"/><text x="180" y="120" text-anchor="middle" font-size="12" font-weight="800">ಸೂರ್ಯ</text>
+ <g id="revE"><circle r="10" fill="#3b82f6"/><path d="M-4-6q4 3 2 7M3 0q3 3 1 6" stroke="#22c55e" stroke-width="2.5" fill="none"/></g>
+ <text id="revT" x="180" y="222" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700"></text></svg>`}
+function revUpd(){const e=$('revE');if(!e)return;const a=REV/365*Math.PI*2;e.setAttribute('transform',`translate(${180+140*Math.cos(a)},${115+80*Math.sin(a)})`);
+ const d=Math.min(365,Math.floor(REV));$('revT').textContent=`ದಿನ : ${d} / ೩೬೫  ·  ತಿಂಗಳು : ${MON[Math.min(11,Math.floor(d/30.42))]}`}
+function revPlay(){REVRUN=!REVRUN;const id=++REVID;$('revBtn').textContent=REVRUN?'⏸ ನಿಲ್ಲಿಸಿ':'▶ ಸೂರ್ಯನ ಸುತ್ತ ಒಂದು ಸುತ್ತು';let last=performance.now();
+ function f(now){if(id!==REVID||!REVRUN||!$('revE'))return;REV+=(now-last)/1000*40;last=now;if(REV>=365){REV=365;revUpd();REVRUN=false;$('revBtn').textContent='🔄 ಮತ್ತೆ';REV=0;award('rev','ಒಂದು ಸುತ್ತು ಪೂರ್ಣ! ಅಂದರೆ ಒಂದು ವರ್ಷ, ಸುಮಾರು ೩೬೫ ದಿನ.');$('revT').textContent='✔ ಒಂದು ವರ್ಷ ಪೂರ್ಣ – ಸುಮಾರು ೩೬೫ ದಿನ!';return}revUpd();requestAnimationFrame(f)}requestAnimationFrame(f)}
+
+/* ---------- ಚಂದ್ರಕಲೆ ---------- */
+const TN=['ಪಾಡ್ಯ','ಬಿದಿಗೆ','ತದಿಗೆ','ಚೌತಿ','ಪಂಚಮಿ','ಷಷ್ಠಿ','ಸಪ್ತಮಿ','ಅಷ್ಟಮಿ','ನವಮಿ','ದಶಮಿ','ಏಕಾದಶಿ','ದ್ವಾದಶಿ','ತ್ರಯೋದಶಿ','ಚತುರ್ದಶಿ'];
+function tithi(t){if(t==0||t==30)return['ಅಮಾವಾಸ್ಯೆ',''];if(t==15)return['ಹುಣ್ಣಿಮೆ',''];return t<15?['ಶುದ್ಧ '+TN[t-1],'ಶುಕ್ಲ ಪಕ್ಷ – ಬೆಳಗಿದ ಭಾಗ ಹೆಚ್ಚುತ್ತದೆ'] :['ಕೃಷ್ಣ '+TN[t-16],'ಕೃಷ್ಣ ಪಕ್ಷ – ಬೆಳಗಿದ ಭಾಗ ಕಡಿಮೆಯಾಗುತ್ತದೆ']}
+function moonPath(t,cx,cy,r){const f=t/30;if(t==0||t==30)return'';if(t==15)return`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#fef9c3"/>`;
+ const k=Math.cos(2*Math.PI*f),rx=Math.abs(k)*r,wax=f<.5;const s1=wax?1:0,s2=wax?(k>0?0:1):(k>0?1:0);
+ return `<path d="M${cx} ${cy-r} A${r} ${r} 0 0 ${s1} ${cx} ${cy+r} A${rx} ${r} 0 0 ${s2} ${cx} ${cy-r}Z" fill="#fef9c3"/>`}
+function moonSvg(t,r,bg){r=r||50;const W=r*2+20;return `<svg viewBox="0 0 ${W} ${W}" style="width:${W}px;max-width:100%;${bg===false?'':'background:#0f172a;border-radius:12px'}"><circle cx="${W/2}" cy="${W/2}" r="${r}" fill="#334155"/>${moonPath(t,W/2,W/2,r)}</svg>`}
+let MT=0,MSEEN=new Set();
+function moonUpd(){const t=+MT;const [n,p]=tithi(t);$('moonBig').innerHTML=moonSvg(t,70);
+ $('moonMsg').innerHTML=`<div class="msg ${t==0||t==30?'no':'ok'}" style="font-size:18px"><b>${n}</b>${p?'<br><span style="font-size:15px">'+p+'</span>':''}${t==0||t==30?'<br><span style="font-size:15px">ಅಮಾವಾಸ್ಯೆಯಂದು ಚಂದ್ರ ಆಕಾಶದಲ್ಲಿದ್ದರೂ ನಮಗೆ ಕಾಣುವುದಿಲ್ಲ.</span>':''}</div>`;
+ MSEEN.add(t==30?0:t);if([0,15].every(x=>MSEEN.has(x))&&MSEEN.size>=8)award('moon','ಭೇಷ್! ನೀವು ಚಂದ್ರಕಲೆಗಳನ್ನು ನೋಡಿದಿರಿ.')}
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+let S=0;
+const L=[
+{h:'ಗಮನಿಸಿ – ಆಕಾಶ ವೀಕ್ಷಣೆ',s:'ರಾತ್ರಿಯ ಆಕಾಶ ನೋಡಿ. ಆಕಾಶ ವೀಕ್ಷಣೆಯನ್ನು ಯಾವಾಗಲೂ ಸಂಜೆ ಅಥವಾ ರಾತ್ರಿ ಏಕೆ ಮಾಡುತ್ತಾರೆ? ರಾತ್ರಿ ಆಕಾಶದ ಬಣ್ಣ ಯಾವುದು ಕಾಣುತ್ತದೆ?',b:()=>`
+ <div>ಶಿಕ್ಷಕರು ಮಕ್ಕಳಿಗೆ ರಾತ್ರಿಯ ಆಕಾಶದಲ್ಲಿ ಮಿನುಗುವ ನಕ್ಷತ್ರಗಳನ್ನು ತೋರಿಸುತ್ತಿದ್ದಾರೆ. ನೀವು ಎಂದಾದರೂ ಹೀಗೆ ಆಕಾಶ ವೀಕ್ಷಣೆ ಮಾಡಿದ್ದೀರಾ?</div>
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🌌</div><div class="tt">ಆಕಾಶ ವೀಕ್ಷಣೆಯನ್ನು ಸಂಜೆ ಅಥವಾ ರಾತ್ರಿಯೇ ಏಕೆ ಮಾಡುತ್ತಾರೆ?</div><div class="dd">ಹಗಲಿನಲ್ಲಿ ಸೂರ್ಯನ ಪ್ರಕಾಶಮಾನ ಬೆಳಕಿನಿಂದ ನಕ್ಷತ್ರಗಳು ಕಾಣುವುದಿಲ್ಲ. ಕತ್ತಲಾದ ಮೇಲೆಯೇ ನಕ್ಷತ್ರ, ಗ್ರಹ, ಚಂದ್ರ ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುತ್ತವೆ.</div><div class="tap">ಉತ್ತರಕ್ಕಾಗಿ ಕ್ಲಿಕ್</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🖤</div><div class="tt">ರಾತ್ರಿ ಆಕಾಶದ ಬಣ್ಣ ಯಾವುದು ಕಾಣುತ್ತದೆ?</div><div class="dd">ಕಪ್ಪು / ಗಾಢ ನೀಲಿ.</div><div class="tap">ಉತ್ತರಕ್ಕಾಗಿ ಕ್ಲಿಕ್</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🏞️</div><div class="tt">ಆಕಾಶ ವೀಕ್ಷಣೆಗೆ ಎಲ್ಲಿ ನಿಲ್ಲಬೇಕು?</div><div class="dd">ತೆರೆದ ಮೈದಾನದಲ್ಲಿ ಅಥವಾ ತಾರಸಿಯ ಮೇಲೆ, ಅಲ್ಲಿ ದೀಪಗಳ ಬೆಳಕು ಕಡಿಮೆ ಇರುತ್ತದೆ.</div><div class="tap">ಉತ್ತರಕ್ಕಾಗಿ ಕ್ಲಿಕ್</div></div>
+ </div>`},
+{h:'ನಕ್ಷತ್ರ ಮತ್ತು ಗ್ರಹ – ವ್ಯತ್ಯಾಸ ಗುರುತಿಸಿ',s:'ಆಕಾಶದಲ್ಲಿ ಮಿನುಗುವ ಚುಕ್ಕೆಗಳನ್ನು ನಕ್ಷತ್ರಗಳು ಎನ್ನುತ್ತಾರೆ. ಮಿನುಗದ ಚುಕ್ಕೆಗಳನ್ನು ಗ್ರಹಗಳು ಎನ್ನುತ್ತಾರೆ. ಗ್ರಹಗಳಿಗೆ ತಮ್ಮದೇ ಬೆಳಕು ಇರುವುದಿಲ್ಲ. ನಕ್ಷತ್ರಗಳು ಸ್ವಯಂ ಪ್ರಕಾಶಿತ.',b:()=>`
+ <div class="key">ಆಕಾಶದಲ್ಲಿ <b>ಮಿನುಗುವ</b> ಚುಕ್ಕೆಗಳನ್ನು <b>‘ನಕ್ಷತ್ರಗಳು’</b> ಎನ್ನುತ್ತಾರೆ. ಯಾವ ಚುಕ್ಕೆಗಳು <b>ಮಿನುಗುವುದಿಲ್ಲವೋ</b> ಅವುಗಳನ್ನು <b>‘ಗ್ರಹ’</b> ಎನ್ನುತ್ತಾರೆ.</div>
+ <div class="key">ಗ್ರಹಗಳಿಗೆ <b>ತಮ್ಮದೇ ಬೆಳಕು ಇರುವುದಿಲ್ಲ</b>. ನಕ್ಷತ್ರಗಳು <b>ಸ್ವಯಂ ಪ್ರಕಾಶಿತ</b> ಆಗಿರುತ್ತವೆ.</div>
+ <h3>🔭 ಆಟ: ಆಕಾಶದ ೩ ಗ್ರಹಗಳನ್ನು ಹುಡುಕಿ!</h3><div class="tap">ಯಾವುವು ಮಿನುಗುವುದಿಲ್ಲವೋ, ಸ್ಥಿರವಾಗಿ ಕಾಣುತ್ತವೆಯೋ ಅವುಗಳ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.</div>
+ <div id="skyBox">${skySvg()}</div><div id="skyMsg"></div>`},
+{h:'ಸೂರ್ಯ, ಭೂಮಿ ಮತ್ತು ಚಂದ್ರ',s:'ಸೂರ್ಯ ಒಂದು ನಕ್ಷತ್ರ, ಆದರೆ ನಮ್ಮ ಭೂಮಿ ಒಂದು ಗ್ರಹ. ಭೂಮಿಯ ಸುತ್ತ ಸುತ್ತುವ ಚಂದ್ರ ಭೂಮಿಯ ಉಪಗ್ರಹ.',b:()=>`
+ <svg viewBox="0 0 360 170" style="max-width:460px;display:block;margin:0 auto;background:#020617;border-radius:16px">
+  <circle cx="60" cy="85" r="40" fill="#fbbf24"><animate attributeName="r" values="40;43;40" dur="2s" repeatCount="indefinite"/></circle><text x="60" y="140" fill="#fde68a" text-anchor="middle" font-size="13" font-weight="800">ಸೂರ್ಯ = ನಕ್ಷತ್ರ</text>
+  <g><animateTransform attributeName="transform" type="rotate" from="0 240 85" to="360 240 85" dur="6s" repeatCount="indefinite"/>
+   <circle cx="240" cy="35" r="9" fill="#e5e7eb"/></g>
+  <circle cx="240" cy="85" r="22" fill="#3b82f6"/><path d="M228 76q8 4 4 12M246 74q6 8 0 16" stroke="#22c55e" stroke-width="4" fill="none"/>
+  <text x="240" y="140" fill="#93c5fd" text-anchor="middle" font-size="13" font-weight="800">ಭೂಮಿ = ಗ್ರಹ</text><text x="320" y="40" fill="#e5e7eb" text-anchor="middle" font-size="12" font-weight="700">ಚಂದ್ರ = ಉಪಗ್ರಹ</text></svg>
+ <div class="g2">
+  <div class="tile op"><div class="ic">☀️</div><div class="tt">ಸೂರ್ಯ</div><div class="dd">ಒಂದು <b>ನಕ್ಷತ್ರ</b> – ಸ್ವಯಂ ಪ್ರಕಾಶಿತ</div></div>
+  <div class="tile op"><div class="ic">🌍</div><div class="tt">ಭೂಮಿ</div><div class="dd">ಒಂದು <b>ಗ್ರಹ</b> – ಸೂರ್ಯನ ಸುತ್ತ ಸುತ್ತುತ್ತದೆ</div></div>
+  <div class="tile op"><div class="ic">🌙</div><div class="tt">ಚಂದ್ರ</div><div class="dd">ಭೂಮಿಯ <b>ಉಪಗ್ರಹ</b> – ಭೂಮಿಯ ಸುತ್ತ ಸುತ್ತುತ್ತಾನೆ</div></div>
+ </div>`},
+{h:'ಗರಗರ ತಿರುಗುವ ಆಟ',s:'ಶಿಕ್ಷಕರು ಮೈದಾನದಲ್ಲಿ ಎಂಟು ದೀರ್ಘವೃತ್ತಗಳನ್ನು ಬರೆದರು. ರಾಜೇಶ ಮಧ್ಯದಲ್ಲಿ ಸೂರ್ಯ ಆದ. ಎಂಟು ಮಕ್ಕಳು ಗ್ರಹಗಳಾಗಿ ತಮ್ಮ ಸುತ್ತ ತಿರುಗುತ್ತಾ ರಾಜೇಶನ ಸುತ್ತ ಸುತ್ತತೊಡಗಿದರು.',b:()=>`
+ <div>ಶಿಕ್ಷಕರು ಮೈದಾನದಲ್ಲಿ <b>ಎಂಟು ದೀರ್ಘವೃತ್ತಗಳನ್ನು</b> ಬರೆದರು. ರಾಜೇಶನಿಗೆ ಮಧ್ಯದಲ್ಲಿ ನಿಲ್ಲಲು ಹೇಳಿದರು – ಅವನು <b>ಸೂರ್ಯ</b> ಆದ. ಅವನ ಸುತ್ತ ಎಂಟು ಮಕ್ಕಳು <b>ಬುಧ, ಶುಕ್ರ, ಭೂಮಿ, ಮಂಗಳ, ಗುರು, ಶನಿ, ಯುರೇನಸ್ ಮತ್ತು ನೆಪ್ಚೂನ್</b> ಆಗಿ ನಿಂತರು. ಪ್ರತಿಯೊಬ್ಬರೂ <b>ತಮ್ಮ ಸುತ್ತ ತಿರುಗುತ್ತಾ</b> ರಾಜೇಶನ ಸುತ್ತ ಸುತ್ತಬೇಕಿತ್ತು.</div>
+ <svg viewBox="0 0 360 220" style="max-width:460px;display:block;margin:8px auto;background:#dcfce7;border-radius:16px">
+  ${[30,48,66,84,104,124,144,164].map(r=>`<ellipse cx="180" cy="110" rx="${r}" ry="${r*0.55}" fill="none" stroke="#fff" stroke-width="2"/>`).join('')}
+  <text x="180" y="118" text-anchor="middle" font-size="22">🧒<animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="1s" repeatCount="indefinite" additive="sum"/></text>
+  ${[30,48,66,84,104,124,144,164].map((r,i)=>`<g><animateMotion dur="${4+i*1.6}s" repeatCount="indefinite" path="M${180+r} 110 A${r} ${r*0.55} 0 1 1 ${180-r} 110 A${r} ${r*0.55} 0 1 1 ${180+r} 110"/><text font-size="15" text-anchor="middle" y="5">${['👦','👧','🧑','👦','👧','🧒','👦','👧'][i]}</text></g>`).join('')}</svg>
+ <div class="key">ರಾಜೇಶನ ಸುತ್ತ ಮಕ್ಕಳು ಸುತ್ತುತ್ತಿರುವಂತೆಯೇ ಆಕಾಶದಲ್ಲಿ <b>ಸೂರ್ಯನ ಸುತ್ತ ಗ್ರಹಗಳು ಸುತ್ತುತ್ತವೆ</b>. ಪ್ರತಿ ಗ್ರಹ <b>ದೀರ್ಘವೃತ್ತಾಕಾರದ ಕಕ್ಷೆಯಲ್ಲಿ</b> ಸುತ್ತುತ್ತದೆ, ಆದ್ದರಿಂದ ಒಂದು ಪ್ರದಕ್ಷಿಣೆಯ ಸಮಯದಲ್ಲಿ ಅದರ ಸೂರ್ಯನಿಂದ ದೂರ ಬದಲಾಗುತ್ತಿರುತ್ತದೆ. ಗ್ರಹಗಳನ್ನು ನಾವು <b>ದೂರದರ್ಶಕದ</b> ಸಹಾಯದಿಂದ ನೋಡಬಹುದು.</div>`},
+{h:'ನಮ್ಮ ಸೂರ್ಯಮಂಡಲ',s:'ಭೂಮಿ ಸೇರಿ ಒಟ್ಟು ಎಂಟು ಗ್ರಹಗಳು, ಉಪಗ್ರಹಗಳು, ಕ್ಷುದ್ರಗ್ರಹಗಳು, ಕುಬ್ಜ ಗ್ರಹಗಳು, ಧೂಮಕೇತುಗಳು ಮತ್ತು ಸೂರ್ಯ ಇವೆಲ್ಲವುಗಳಿಂದ ನಮ್ಮ ಸೂರ್ಯಮಂಡಲ ರೂಪುಗೊಂಡಿದೆ. ಪ್ರತಿ ಗ್ರಹದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.',b:()=>`
+ <div class="key">ಭೂಮಿ ಸೇರಿ ಒಟ್ಟು <b>ಎಂಟು ಗ್ರಹಗಳು</b>, ಉಪಗ್ರಹಗಳು, ಕ್ಷುದ್ರಗ್ರಹಗಳು, ಕುಬ್ಜ ಗ್ರಹಗಳು, ಧೂಮಕೇತುಗಳು ಮತ್ತು ಸೂರ್ಯ ಇವೆಲ್ಲವುಗಳಿಂದ ನಮ್ಮ <b>ಸೂರ್ಯಮಂಡಲ</b> ರೂಪುಗೊಂಡಿದೆ. ಸೂರ್ಯಮಂಡಲದ ಹೊರತಾಗಿ ಇಂತಹ ಅನೇಕ ಗ್ರಹ ಮಾಲಿಕೆಗಳು ಅಂತರಿಕ್ಷದಲ್ಲಿವೆ.</div>
+ <div class="tap">👆 ಸುತ್ತುವ ಪ್ರತಿ ಗ್ರಹದ ಮತ್ತು ಸೂರ್ಯನ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ. (೮ ಗ್ರಹಗಳನ್ನು ನೋಡಿದರೆ ⭐ ಸಿಗುತ್ತದೆ)</div>
+ ${ssSvg()}
+ <div class="chips" style="justify-content:center"><span class="chip" onclick="SSRUN=!SSRUN;this.textContent=SSRUN?'⏸ ನಿಲ್ಲಿಸಿ':'▶ ತಿರುಗಿಸಿ'">⏸ ನಿಲ್ಲಿಸಿ</span></div>
+ <div id="plInfo"><div class="msg in">☀️ ಮಧ್ಯದಲ್ಲಿ ಸೂರ್ಯ ಇದ್ದಾನೆ. ಗ್ರಹಗಳ ನಡುವೆ (ಮಂಗಳ ಮತ್ತು ಗುರುವಿನ ನಡುವೆ) ಬೂದು ಚುಕ್ಕೆಗಳ ಪಟ್ಟಿ ಎಂದರೆ ಕ್ಷುದ್ರಗ್ರಹಗಳು.</div></div>`,a:()=>ssStart()},
+{h:'ಗ್ರಹಗಳ ಮಾಹಿತಿ',s:'ಸೂರ್ಯಮಂಡಲದಲ್ಲಿ ಒಟ್ಟು ಎಂಟು ಗ್ರಹಗಳಿವೆ. ಅವುಗಳ ಕ್ರಮ ಸೂರ್ಯನಿಂದ ದೂರದ ಪ್ರಕಾರ ಬುಧ, ಶುಕ್ರ, ಭೂಮಿ, ಮಂಗಳ, ಗುರು, ಶನಿ, ಯುರೇನಸ್, ನೆಪ್ಚೂನ್ ಎಂದು.',b:()=>`
+ <div>ಸೂರ್ಯನಿಂದ ದೂರದ ಪ್ರಕಾರ ಗ್ರಹಗಳ ಕ್ರಮ: <b>ಬುಧ, ಶುಕ್ರ, ಭೂಮಿ, ಮಂಗಳ, ಗುರು, ಶನಿ, ಯುರೇನಸ್, ನೆಪ್ಚೂನ್</b>. (AU = ಖಗೋಳ ಏಕಮಾನ)</div>
+ <div class="g2">${PL.map((p,i)=>`<div class="tile" onclick="tog(this);say('${p.n}. ${p.f}')"><div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:${p.s*3+8}px;height:${p.s*3+8}px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff8,${p.c})"></span><div class="tt">${i+1}. ${p.n}</div></div><div class="dd">${p.f}<br>ಸೂರ್ಯನಿಂದ ದೂರ : <b>${p.au} AU</b></div><div class="tap">ಮಾಹಿತಿಗಾಗಿ ಕ್ಲಿಕ್ ಮಾಡಿ</div></div>`).join('')}</div>
+ <h3>ಸೂರ್ಯನಿಂದ ದೂರ (AU)</h3>
+ ${PL.map(p=>`<div style="display:flex;align-items:center;gap:6px;margin:3px 0"><span style="width:70px;font-weight:700;font-size:15px">${p.n}</span><div style="flex:1;background:#e2e8f0;border-radius:99px;height:14px"><div style="width:${Math.max(1.5,p.au/30.058*100)}%;background:${p.c};height:100%;border-radius:99px"></div></div><span style="width:52px;font-size:14px;text-align:right">${p.au}</span></div>`).join('')}
+ <div class="tap">ನೆಪ್ಚೂನ್ ಭೂಮಿಗಿಂತ ಸೂರ್ಯನಿಂದ ಸುಮಾರು ೩೦ ಪಟ್ಟು ದೂರದಲ್ಲಿದೆ!</div>`},
+{h:'ಆಟ: ಗ್ರಹಗಳ ಕ್ರಮ ಜೋಡಿಸಿ',s:'ಸೂರ್ಯನಿಗೆ ಹತ್ತಿರದ ಗ್ರಹದಿಂದ ಆರಂಭಿಸಿ ಗ್ರಹಗಳ ಮೇಲೆ ಕ್ರಮವಾಗಿ ಕ್ಲಿಕ್ ಮಾಡಿ.',b:()=>`<div id="ordBox"></div>
+ <div class="know"><b class="h">💡 ಸುಲಭ ಉಪಾಯ</b><br>“<b>ಬು</b>ಧನು <b>ಶು</b>ಕ್ರನ <b>ಭೂ</b>ಮಿಯಲ್ಲಿ <b>ಮಂ</b>ಗಳ <b>ಗು</b>ರುವಿಗೆ <b>ಶ</b>ನಿಯ <b>ಯು</b>ಕ್ತಿಯನ್ನು <b>ನೆ</b>ನಪಿಸಿದ” – ಮೊದಲ ಅಕ್ಷರಗಳೇ ಗ್ರಹಗಳ ಕ್ರಮ!</div>`,a:()=>ordInit()},
+{h:'ಉಪಗ್ರಹ, ಕ್ಷುದ್ರಗ್ರಹ, ಕುಬ್ಜ ಗ್ರಹ, ಧೂಮಕೇತು',s:'ಗ್ರಹದ ಸುತ್ತ ಸುತ್ತುವ ಖಗೋಳ ಪಿಂಡಗಳನ್ನು ಉಪಗ್ರಹ ಎನ್ನುತ್ತಾರೆ. ಮಂಗಳ ಮತ್ತು ಗುರುವಿನ ನಡುವಿನ ಪಟ್ಟಿಯಲ್ಲಿನ ಸಣ್ಣ ಖಗೋಳ ಪಿಂಡಗಳನ್ನು ಕ್ಷುದ್ರಗ್ರಹ ಎನ್ನುತ್ತಾರೆ. ಪ್ಲುಟೋ ಒಂದು ಕುಬ್ಜ ಗ್ರಹ. ಹ್ಯಾಲಿ ಧೂಮಕೇತು ಪ್ರತಿ ೭೬ ವರ್ಷಗಳಿಗೊಮ್ಮೆ ಕಾಣುತ್ತದೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🌙</div><div class="tt">ಉಪಗ್ರಹ</div><div class="dd">ಬೇರೆಬೇರೆ ಗ್ರಹಗಳ ಸುತ್ತ ಪ್ರದಕ್ಷಿಣೆ ಮಾಡುವ ಖಗೋಳ ಪಿಂಡಗಳನ್ನು ಉಪಗ್ರಹ ಎನ್ನುತ್ತಾರೆ. ಉದಾ. ಭೂಮಿಯ ಸುತ್ತ ಸುತ್ತುವ ಚಂದ್ರ ನೈಸರ್ಗಿಕ ಉಪಗ್ರಹ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🪨</div><div class="tt">ಕ್ಷುದ್ರಗ್ರಹ</div><div class="dd">ಮಂಗಳ ಮತ್ತು ಗುರುವಿನ ನಡುವೆ ಅಸಂಖ್ಯ ಸಣ್ಣ ಸಣ್ಣ ಖಗೋಳ ಪಿಂಡಗಳ ಪಟ್ಟಿ ಇದೆ. ಅದರಲ್ಲಿನ ಖಗೋಳ ಪಿಂಡಗಳನ್ನು ಕ್ಷುದ್ರಗ್ರಹ ಎನ್ನುತ್ತಾರೆ. ಅವು ಒಟ್ಟಾಗಿ ಸೂರ್ಯನ ಸುತ್ತ ಸುತ್ತುತ್ತವೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">⚪</div><div class="tt">ಕುಬ್ಜ ಗ್ರಹ</div><div class="dd">ಯಾವುದೇ ಗ್ರಹದ ಸುತ್ತ ಸುತ್ತದೆ ಕೇವಲ ಸೂರ್ಯನ ಸುತ್ತ ಸ್ವತಂತ್ರವಾಗಿ ಸುತ್ತುವ ಸಣ್ಣ ವಸ್ತುಗಳು. ಉದಾ. ಪ್ಲುಟೋ.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">☄️</div><div class="tt">ಧೂಮಕೇತು</div><div class="dd">ಮಂಜುಗಡ್ಡೆ, ಧೂಳು ಮತ್ತು ಕಲ್ಲಿನಿಂದ ಮಾಡಲ್ಪಟ್ಟ, ಸೂರ್ಯನ ಸುತ್ತ ಪ್ರದಕ್ಷಿಣೆ ಹಾಕುವ ಖಗೋಳ ವಸ್ತುಗಳು. ಅವು ಬಹಳ ಕಾಲದ ನಂತರ ಕಾಣುತ್ತವೆ. ಉದಾ. <b>ಹ್ಯಾಲಿ ಧೂಮಕೇತು ಪ್ರತಿ ೭೬ ವರ್ಷಗಳಿಗೊಮ್ಮೆ</b> ಕಾಣುತ್ತದೆ.</div><div class="tap">ಒತ್ತಿ</div></div>
+ </div>
+ <div class="know"><b class="h">💡 ನಿಮಗೆ ಗೊತ್ತೇ?</b><br>• ಭೂಮಿಯ ಸೂರ್ಯನಿಂದ ಸರಾಸರಿ ದೂರ ಸುಮಾರು <b>೧೪೯ ದಶಲಕ್ಷ ಕಿ.ಮೀ.</b> ಇದೆ. ಈ ದೂರಕ್ಕೆ <b>ಒಂದು ಖಗೋಳ ಏಕಮಾನ (1 AU)</b> ಎಂದು ಪರಿಗಣಿಸಲಾಗುತ್ತದೆ.<br>• ಸೂರ್ಯನಿಂದ ಕ್ಷುದ್ರಗ್ರಹ ಪಟ್ಟಿಯವರೆಗಿನ ಗ್ರಹಗಳಿಗೆ <b>ಒಳಗ್ರಹ</b> ಎನ್ನುತ್ತಾರೆ – ಅವು ಕಲ್ಲಿನವು.<br>• ಕ್ಷುದ್ರಗ್ರಹ ಪಟ್ಟಿಯಿಂದಾಚೆಗಿನ ಗ್ರಹಗಳಿಗೆ <b>ಹೊರಗ್ರಹ</b> ಎನ್ನುತ್ತಾರೆ – ಅವು ಗಾತ್ರದಲ್ಲಿ ದೊಡ್ಡವು ಮತ್ತು ಅನಿಲರೂಪದವು.<br>• <b>ಸೂರ್ಯ</b> ಇದು ಸೂರ್ಯಮಂಡಲದ ಏಕೈಕ ನಕ್ಷತ್ರ ಆಗಿದ್ದು ಅತಿ ಬಿಸಿಯಾದ ಅನಿಲಗಳಿಂದ ಮಾಡಲ್ಪಟ್ಟಿದೆ. ಇದು ಬೆಳಕು ಮತ್ತು ಶಾಖದ ಏಕೈಕ ಮೂಲ.</div>
+ <h3>ಆಟ: ಒಳಗ್ರಹವೋ ಹೊರಗ್ರಹವೋ?</h3><div id="ioBox"></div><div id="ioRes"></div>`,a:()=>drawIO()},
+{h:'ಭ್ರಮಣ – ಹಗಲು ಮತ್ತು ರಾತ್ರಿ',s:'ಭೂಮಿ ತನ್ನ ಸುತ್ತ ಒಂದು ಸುತ್ತು ಪೂರ್ಣಗೊಳಿಸುವುದಕ್ಕೆ ಭ್ರಮಣ ಎನ್ನುತ್ತಾರೆ. ಅದಕ್ಕೆ ಒಂದು ದಿನ ಅಂದರೆ ಇಪ್ಪತ್ನಾಲ್ಕು ಗಂಟೆ ಬೇಕಾಗುತ್ತದೆ. ಸೂರ್ಯನ ಎದುರಿನ ಭಾಗದಲ್ಲಿ ಹಗಲು ಮತ್ತು ಉಳಿದ ಭಾಗದಲ್ಲಿ ರಾತ್ರಿ ಇರುತ್ತದೆ.',b:()=>`
+ <div class="key">ಭೂಮಿಗೆ ತನ್ನ ಸುತ್ತ ಒಂದು ಸುತ್ತು ಪೂರ್ಣಗೊಳಿಸಲು ಬೇಕಾಗುವ ಸಮಯಕ್ಕೆ <b>ಒಂದು ದಿನ</b> ಎನ್ನುತ್ತಾರೆ. ಅದರ <b>೨೪ ಭಾಗ</b> ಅಂದರೆ ೨೪ <b>ಗಂಟೆ</b>. ಭೂಮಿ ತನ್ನ ಸುತ್ತ ತಿರುಗುವ ವೇಗಕ್ಕೆ <b>‘ದೈನಿಕ ಗತಿ’</b> ಅಥವಾ <b>‘ಭ್ರಮಣೆ’</b> ಎನ್ನುತ್ತಾರೆ.</div>
+ <div>ಭೂಮಿ ಗೋಳಾಕಾರವಾಗಿರುವುದರಿಂದ ಸೂರ್ಯನ ಬೆಳಕು ಭೂಮಿಯ <b>ಅರ್ಧ ಭಾಗದ ಮೇಲೆ ಮಾತ್ರ</b> ಬೀಳುತ್ತದೆ. ಬೆಳಗಿದ ಭಾಗದಲ್ಲಿ <b>ದಿನ</b>, ಮತ್ತು ಕತ್ತಲೆಯ ಭಾಗದಲ್ಲಿ <b>ರಾತ್ರಿ</b> ಇರುತ್ತದೆ.</div>
+ ${rotSvg()}
+ <div style="text-align:center"><button class="btn gr" id="rotBtn" onclick="rotPlay()">▶ ಭೂಮಿ ತಿರುಗಿಸಿ</button></div>
+ <div id="rotMsg"></div>
+ <div class="tap">ಸೂರ್ಯೋದಯದಿಂದ ಸೂರ್ಯಾಸ್ತದವರೆಗಿನ ಕಾಲವೇ <b>ಹಗಲು</b>; ಸೂರ್ಯ ಮುಳುಗಿದ ನಂತರ ಮತ್ತೆ ಉದಯಿಸುವವರೆಗಿನ ಕಾಲವೇ <b>ರಾತ್ರಿ</b>. ಹಗಲು ಮತ್ತು ರಾತ್ರಿ ಸೇರಿ ಒಂದು ದಿನ.</div>`,a:()=>{ROTRUN=false;rotUpd()}},
+{h:'ಪರಿಭ್ರಮಣ – ಒಂದು ವರ್ಷ',s:'ಭೂಮಿ ತನ್ನ ಸುತ್ತ ತಿರುಗುತ್ತಾ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುತ್ತದೆ, ಅದಕ್ಕೆ ಪರಿಭ್ರಮಣ ಎನ್ನುತ್ತಾರೆ. ಸೂರ್ಯನ ಸುತ್ತ ಒಂದು ಸುತ್ತು ಪೂರ್ಣಗೊಳಿಸಲು ಸುಮಾರು ಮುನ್ನೂರ ಅರವತ್ತೈದು ದಿನ ಬೇಕಾಗುತ್ತದೆ, ಇದನ್ನೇ ವರ್ಷ ಎನ್ನುತ್ತಾರೆ.',b:()=>`
+ <div class="key">ಭೂಮಿ ತನ್ನ ಸುತ್ತ ತಿರುಗುತ್ತಾ-ತಿರುಗುತ್ತಾ ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುತ್ತದೆ, ಅದಕ್ಕೆ <b>‘ಪರಿಭ್ರಮಣೆ’</b> ಎನ್ನುತ್ತಾರೆ. ಸೂರ್ಯನ ಸುತ್ತ ಒಂದು ಸುತ್ತು ಪೂರ್ಣಗೊಳಿಸಲು ಸುಮಾರು <b>೩೬೫ ದಿನ</b> ಬೇಕಾಗುತ್ತದೆ, ಇದನ್ನೇ <b>‘ವರ್ಷ’</b> ಎನ್ನುತ್ತಾರೆ. ಈ ಗತಿಗೆ <b>‘ವಾರ್ಷಿಕ ಗತಿ’</b> ಎನ್ನುತ್ತಾರೆ. ವರ್ಷದ ವಿಭಜನೆಯನ್ನು <b>೧೨ ತಿಂಗಳುಗಳಲ್ಲಿ</b> ಮಾಡಲಾಗಿದೆ.</div>
+ ${revSvg()}
+ <div style="text-align:center"><button class="btn gr" id="revBtn" onclick="revPlay()">▶ ಸೂರ್ಯನ ಸುತ್ತ ಒಂದು ಸುತ್ತು</button></div>
+ <div class="know"><b class="h">🔬 ಚಟುವಟಿಕೆ ಮಾಡಿ</b><br>ತರಗತಿಯಲ್ಲಿ ಒಬ್ಬ ಹುಡುಗಿ ಸೂರ್ಯ ಆಗಲಿ. ನೀವು (೧) ಕೇವಲ ನಿಮ್ಮ ಸುತ್ತ ಒಂದು ಸುತ್ತು ತಿರುಗಿ ಮತ್ತು (೨) ನಿಮ್ಮ ಸುತ್ತ ತಿರುಗುತ್ತಾ ಗೆಳತಿಯ ಸುತ್ತ ಒಂದು ಸುತ್ತು ಹಾಕಿ. ಯಾವ ಕ್ರಿಯೆಗೆ ಹೆಚ್ಚು ಸಮಯ ಬೇಕಾಯಿತು? – ಎರಡನೆಯದಕ್ಕೆ! ಹಾಗೆಯೇ ಭೂಮಿಗೆ ತನ್ನ ಸುತ್ತ ತಿರುಗಲು ಕಡಿಮೆ (೧ ದಿನ) ಮತ್ತು ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗಲು ಹೆಚ್ಚು (೧ ವರ್ಷ) ಸಮಯ ಬೇಕಾಗುತ್ತದೆ.</div>`,a:()=>{REVRUN=false;revUpd()}},
+{h:'ಚಂದ್ರಕಲೆ',s:'ಚಂದ್ರನ ಬೆಳಗಿದ ಭಾಗ ನಮಗೆ ಪ್ರತಿದಿನ ಬದಲಾಗುತ್ತಿರುವಂತೆ ಕಾಣುತ್ತದೆ. ಆ ಆಕಾರಗಳನ್ನು ಚಂದ್ರಕಲೆ ಎನ್ನುತ್ತಾರೆ. ಅಮಾವಾಸ್ಯೆಯಿಂದ ಹುಣ್ಣಿಮೆಯವರೆಗೆ ಶುಕ್ಲ ಪಕ್ಷ, ಹುಣ್ಣಿಮೆಯಿಂದ ಅಮಾವಾಸ್ಯೆಯವರೆಗೆ ಕೃಷ್ಣ ಪಕ್ಷ.',b:()=>`
+ <div>ಅನಿತಾ ವಾರವಿಡೀ ಚಂದ್ರನನ್ನು ವೀಕ್ಷಿಸುತ್ತಾಳೆ. ಅಜ್ಜ ಹೇಳುತ್ತಾರೆ – ಚಂದ್ರನ ಆಕಾರ <b>ಪ್ರತಿದಿನ ಬದಲಾಗುತ್ತಿರುವಂತೆ</b> ಕಾಣುತ್ತದೆ. ಚಂದ್ರನ ಇಂತಹ ಬದಲಾಗುವ ಆಕಾರಗಳಿಗೆ <b>‘ಚಂದ್ರಕಲೆ’</b> ಎನ್ನುತ್ತಾರೆ.</div>
+ <div class="key">• ಚಂದ್ರ ಭೂಮಿಯ <b>ಉಪಗ್ರಹ</b> ಆಗಿದೆ. ಅದರ ಗತಿಯನ್ನು ನಾವು <b>ತಿಂಗಳು</b> ಈ ಕಾಲಗಣನೆಗೆ ಬಳಸುತ್ತೇವೆ.<br>• ಚಂದ್ರನ <b>ಅರ್ಧ ಭಾಗ ಯಾವಾಗಲೂ ಬೆಳಗಿದ</b> ಆಗಿರುತ್ತದೆ, ಆದರೆ ಭೂಮಿಯಿಂದ ಅದರ ಕೆಲವು ಭಾಗ ಮಾತ್ರ ಕಾಣುತ್ತದೆ.<br>• ಅಮಾವಾಸ್ಯೆಯಿಂದ ಹುಣ್ಣಿಮೆಯವರೆಗೆ ಬೆಳಗಿದ ಭಾಗ ಹೆಚ್ಚುತ್ತದೆ – <b>ಶುಕ್ಲ ಪಕ್ಷ</b>.<br>• ಹುಣ್ಣಿಮೆಯಿಂದ ಅಮಾವಾಸ್ಯೆಯವರೆಗೆ ಬೆಳಗಿದ ಭಾಗ ಕಡಿಮೆಯಾಗುತ್ತದೆ – <b>ಕೃಷ್ಣ ಪಕ್ಷ</b>.</div>
+ <h3>🌙 ಚಂದ್ರಕಲಾ ಯಂತ್ರ – ಸ್ಲೈಡರ್ ಸರಿಸಿ</h3>
+ <div style="text-align:center" id="moonBig"></div>
+ <input type="range" min="0" max="30" value="${MT}" style="width:100%" oninput="MT=this.value;moonUpd()">
+ <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><span>ಅಮಾವಾಸ್ಯೆ</span><span>ಹುಣ್ಣಿಮೆ</span><span>ಅಮಾವಾಸ್ಯೆ</span></div>
+ <div id="moonMsg"></div>
+ <h3>ಚಂದ್ರನ ಕೆಲವು ಕಲೆಗಳು</h3>
+ <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center">${[[0,'ಅಮಾವಾಸ್ಯೆ'],[4,'ಶುಕ್ಲ ಚೌತಿ'],[8,'ಶುಕ್ಲ ಅಷ್ಟಮಿ'],[12,'ಶುಕ್ಲ ದ್ವಾದಶಿ'],[15,'ಹುಣ್ಣಿಮೆ'],[19,'ಕೃಷ್ಣ ಚೌತಿ'],[23,'ಕೃಷ್ಣ ಅಷ್ಟಮಿ'],[27,'ಕೃಷ್ಣ ದ್ವಾದಶಿ']].map(x=>`<div style="text-align:center;font-size:12px;font-weight:700;cursor:pointer" onclick="MT=${x[0]};moonUpd()">${moonSvg(x[0],22)}<br>${x[1]}</div>`).join('')}</div>`,a:()=>moonUpd()},
+{h:'ಇದನ್ನು ನಾವು ಕಲಿತೆವು',s:'ಸೂರ್ಯ ಸೂರ್ಯಮಂಡಲದ ಕೇಂದ್ರದಲ್ಲಿದ್ದು ಅವನ ಸುತ್ತ ಗ್ರಹಗಳು ಸುತ್ತುತ್ತಿರುತ್ತವೆ.',b:()=>`
+ <div class="know"><b class="h">📜 ತಿಳಿದುಕೊಳ್ಳೋಣ – ವರಾಹಮಿಹಿರ</b><br>ಭಾರತದಲ್ಲಿ ಪ್ರಾಚೀನ ಕಾಲದಲ್ಲಿ ಖಗೋಳಶಾಸ್ತ್ರದಲ್ಲಿ ಬಹಳ ಪ್ರಗತಿ ಆಗಿತ್ತು. ಆರನೇ ಶತಮಾನದ <b>ವರಾಹಮಿಹಿರ</b> ಇವರಿಗೆ ಖಗೋಳಶಾಸ್ತ್ರದ ಜ್ಞಾನ ಇತ್ತು. ಅದನ್ನು ಅವರು <b>ಪಂಚಸಿದ್ಧಾಂತಿಕಾ</b> ಮತ್ತು <b>ಬೃಹತ್ಸಂಹಿತಾ</b> ಈ ಗ್ರಂಥಗಳಲ್ಲಿ ಹೇಳಿದರು. ವಿಶ್ವದ ರಚನೆ, ಭೂಮಿಯ ಗೋಳ ಅಂತರಿಕ್ಷದಲ್ಲಿ ಆಧಾರವಿಲ್ಲದೆ ಸುತ್ತುತ್ತಿದೆ ಎಂಬುದನ್ನು ಅವರು ಹೇಳಿದರು.</div>
+ <ul>
+  <li>ಸೂರ್ಯ ಸೂರ್ಯಮಂಡಲದ <b>ಕೇಂದ್ರದಲ್ಲಿ</b> ಇದ್ದು ಅವನ ಸುತ್ತ ಗ್ರಹಗಳು ಸುತ್ತುತ್ತಿರುತ್ತವೆ.</li>
+  <li>ಮಿನುಗುವವು <b>ನಕ್ಷತ್ರಗಳು</b>; ಮಿನುಗದಿರುವವು <b>ಗ್ರಹ</b>. ನಕ್ಷತ್ರಗಳು ಸ್ವಯಂ ಪ್ರಕಾಶಿತ, ಗ್ರಹಗಳಿಗೆ ತಮ್ಮದೇ ಬೆಳಕು ಇಲ್ಲ.</li>
+  <li>ಗ್ರಹಗಳ ಕ್ರಮ: ಬುಧ, ಶುಕ್ರ, ಭೂಮಿ, ಮಂಗಳ, ಗುರು, ಶನಿ, ಯುರೇನಸ್, ನೆಪ್ಚೂನ್.</li>
+  <li>ಉಪಗ್ರಹ, ಕ್ಷುದ್ರಗ್ರಹ, ಕುಬ್ಜ ಗ್ರಹ ಮತ್ತು ಧೂಮಕೇತು ಇವು ಸೂರ್ಯಮಂಡಲದ ಇತರ ಘಟಕಗಳು.</li>
+  <li>ಭ್ರಮಣದಿಂದ <b>ಹಗಲು-ರಾತ್ರಿ</b> ಆಗುತ್ತವೆ (೨೪ ಗಂಟೆ); ಪರಿಭ್ರಮಣದಿಂದ <b>ವರ್ಷ</b> ಆಗುತ್ತದೆ (ಸುಮಾರು ೩೬೫ ದಿನ).</li>
+  <li>ಚಂದ್ರನ ಬದಲಾಗುವ ಆಕಾರಗಳಿಗೆ <b>ಚಂದ್ರಕಲೆ</b> ಎನ್ನುತ್ತಾರೆ; <b>ಅಮಾವಾಸ್ಯೆಯಂದು</b> ಚಂದ್ರ ಕಾಣುವುದಿಲ್ಲ, <b>ಹುಣ್ಣಿಮೆಯಂದು</b> ಪೂರ್ಣ ಗೋಳ ಕಾಣುತ್ತದೆ.</li>
+ </ul>
+ <div class="know"><b class="h">🎭 ಚಟುವಟಿಕೆ</b><br>ಶಿಕ್ಷಕರ ಸಹಾಯದಿಂದ ಸೂರ್ಯ, ಚಂದ್ರ, ಗ್ರಹ ಮತ್ತು ನಕ್ಷತ್ರಗಳ ಪಾತ್ರ ವಹಿಸಿ ನಾಟಕ (Role play) ಪ್ರಸ್ತುತಪಡಿಸಿ. ‘ನಮ್ಮ ಸೂರ್ಯಮಂಡಲ’ ಪ್ರತಿಕೃತಿ ತಯಾರಿಸಿ.</div>
+ <div class="msg ok" style="text-align:center;font-size:19px">🌟 ಈ ಪಾಠದಲ್ಲಿ ನೀವು ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು: <b>${(award('end','ಅಭಿನಂದನೆ! ನೀವು ಇಡೀ ಪಾಠ ಕಲಿತಿರಿ.'),STARS.size)}</b> ⭐</div>
+ <div class="tool">${tool('N')}</div>`}
+];
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));SSID++;ROTID++;REVID++;ROTRUN=false;REVRUN=false;drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ಆಕಾಶದಲ್ಲಿ ಮಿನುಗುವ ಚುಕ್ಕೆಗಳನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ಗ್ರಹ','ನಕ್ಷತ್ರಗಳು','ಧೂಮಕೇತು','ಕುಬ್ಜ ಗ್ರಹ'],1,'ಮಿನುಗುವ ಚುಕ್ಕೆಗಳನ್ನು ನಕ್ಷತ್ರಗಳು ಎನ್ನುತ್ತಾರೆ.'],
+['ಯಾವ ಚುಕ್ಕೆಗಳು ಮಿನುಗುವುದಿಲ್ಲವೋ ಅವುಗಳನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ನಕ್ಷತ್ರಗಳು','ಗ್ರಹ','ಉಲ್ಕೆ','ಮೋಡ'],1,'ಮಿನುಗದ ಚುಕ್ಕೆಗಳನ್ನು ಗ್ರಹಗಳು ಎನ್ನುತ್ತಾರೆ.'],
+['ಸ್ವಯಂ ಪ್ರಕಾಶಿತ ಯಾರು?',['ಗ್ರಹ','ಉಪಗ್ರಹ','ನಕ್ಷತ್ರಗಳು','ಕ್ಷುದ್ರಗ್ರಹ'],2,'ನಕ್ಷತ್ರಗಳು ಸ್ವಯಂ ಪ್ರಕಾಶಿತ; ಗ್ರಹಗಳಿಗೆ ತಮ್ಮದೇ ಬೆಳಕು ಇಲ್ಲ.'],
+['ಸೂರ್ಯ ಏನು?',['ಗ್ರಹ','ಉಪಗ್ರಹ','ನಕ್ಷತ್ರ','ಧೂಮಕೇತು'],2,'ಸೂರ್ಯ ಒಂದು ನಕ್ಷತ್ರ.'],
+['ಭೂಮಿಯ ಉಪಗ್ರಹ ಯಾವುದು?',['ಸೂರ್ಯ','ಚಂದ್ರ','ಮಂಗಳ','ಶುಕ್ರ'],1,'ಭೂಮಿಯ ಸುತ್ತ ಸುತ್ತುವ ಚಂದ್ರ ಭೂಮಿಯ ಉಪಗ್ರಹ.'],
+['ಸೂರ್ಯಮಂಡಲದಲ್ಲಿ ಒಟ್ಟು ಎಷ್ಟು ಗ್ರಹಗಳಿವೆ?',['ಏಳು','ಎಂಟು','ಒಂಬತ್ತು','ಹತ್ತು'],1,'ಸೂರ್ಯಮಂಡಲದಲ್ಲಿ ಒಟ್ಟು ಎಂಟು ಗ್ರಹಗಳಿವೆ.'],
+['ಸೂರ್ಯನಿಂದ ಅತ್ಯಂತ ಹತ್ತಿರದ ಗ್ರಹ ಯಾವುದು?',['ಬುಧ','ಶುಕ್ರ','ಶನಿ','ಮಂಗಳ'],0,'ಬುಧ ಸೂರ್ಯನಿಂದ ಅತ್ಯಂತ ಹತ್ತಿರದ ಗ್ರಹ.'],
+['ಗಾತ್ರದಲ್ಲಿ ಅತಿ ದೊಡ್ಡ ಗ್ರಹ ಯಾವುದು?',['ಭೂಮಿ','ಶನಿ','ಗುರು','ನೆಪ್ಚೂನ್'],2,'ಗುರು ಗಾತ್ರದಲ್ಲಿ ಅತಿ ದೊಡ್ಡ ಗ್ರಹ.'],
+['ಯಾವ ಗ್ರಹದ ಸುತ್ತ ಉಂಗುರಗಳಿವೆ?',['ಮಂಗಳ','ಶನಿ','ಬುಧ','ಭೂಮಿ'],1,'ಶನಿ ಗ್ರಹದ ಸುತ್ತ ಉಂಗುರಗಳಿವೆ.'],
+['ಸೂರ್ಯನಿಂದ ಅತ್ಯಂತ ದೂರದ ಗ್ರಹ ಯಾವುದು?',['ಯುರೇನಸ್','ಶನಿ','ನೆಪ್ಚೂನ್','ಗುರು'],2,'ನೆಪ್ಚೂನ್ ಸೂರ್ಯನಿಂದ ಅತ್ಯಂತ ದೂರದಲ್ಲಿದೆ.'],
+['ಜೀವಸೃಷ್ಟಿ ಇರುವ ಗ್ರಹ ಯಾವುದು?',['ಮಂಗಳ','ಭೂಮಿ','ಶುಕ್ರ','ಗುರು'],1,'ಭೂಮಿ ಗ್ರಹದಲ್ಲಿ ಜೀವಸೃಷ್ಟಿ ಇದೆ.'],
+['ಕ್ಷುದ್ರಗ್ರಹ ಪಟ್ಟಿ ಯಾವ ಎರಡು ಗ್ರಹಗಳ ನಡುವೆ ಇದೆ?',['ಭೂಮಿ ಮತ್ತು ಮಂಗಳ','ಮಂಗಳ ಮತ್ತು ಗುರು','ಗುರು ಮತ್ತು ಶನಿ','ಬುಧ ಮತ್ತು ಶುಕ್ರ'],1,'ಮಂಗಳ ಮತ್ತು ಗುರುವಿನ ನಡುವೆ ಕ್ಷುದ್ರಗ್ರಹ ಪಟ್ಟಿ ಇದೆ.'],
+['ಪ್ಲೂಟೋ ಏನು?',['ಗ್ರಹ','ಉಪಗ್ರಹ','ಕುಬ್ಜ ಗ್ರಹ','ನಕ್ಷತ್ರ'],2,'ಪ್ಲೂಟೋ ಒಂದು ಕುಬ್ಜ ಗ್ರಹ.'],
+['ಹ್ಯಾಲಿಯ ಧೂಮಕೇತು ಎಷ್ಟು ವರ್ಷಗಳಿಗೊಮ್ಮೆ ಕಾಣಿಸುತ್ತದೆ?',['೧೨','೨೫','೭೬','೧೦೦'],2,'ಹ್ಯಾಲಿಯ ಧೂಮಕೇತು ಪ್ರತಿ ೭೬ ವರ್ಷಗಳಿಗೊಮ್ಮೆ ಕಾಣಿಸುತ್ತದೆ.'],
+['ಭೂಮಿ ತನ್ನ ಸುತ್ತ ತಿರುಗುವ ಗತಿಗೆ ಏನೆನ್ನುತ್ತಾರೆ?',['ವಾರ್ಷಿಕ ಗತಿ','ಪರಿಭ್ರಮಣೆ','ದೈನಿಕ ಗತಿ','ಮಾಸಿಕ ಗತಿ'],2,'ತನ್ನ ಸುತ್ತ ತಿರುಗುವುದು = ದೈನಿಕ ಗತಿ ಅಥವಾ ಭ್ರಮಣ.'],
+['ಭೂಮಿಗೆ ಸೂರ್ಯನ ಸುತ್ತ ಒಂದು ಸುತ್ತು ಪೂರ್ಣಗೊಳಿಸಲು ಸುಮಾರು ಎಷ್ಟು ದಿನ ಬೇಕಾಗುತ್ತದೆ?',['೩೦ ದಿನ','೨೪ ದಿನ','೩೬೫ ದಿನ','೧೨ ದಿನ'],2,'ಸುಮಾರು ೩೬೫ ದಿನ – ಇದನ್ನೇ ವರ್ಷ ಎನ್ನುತ್ತಾರೆ.'],
+['ಒಂದು ದಿನದಲ್ಲಿ ಎಷ್ಟು ಗಂಟೆಗಳಿರುತ್ತವೆ?',['೧೨','೨೪','೩೦','೬೦'],1,'ಒಂದು ದಿನದ ೨೪ ಭಾಗಗಳೇ ೨೪ ಗಂಟೆ.'],
+['ಚಂದ್ರನ ಪ್ರತಿದಿನ ಬದಲಾಗುವ ಆಕಾರಗಳಿಗೆ ಏನೆನ್ನುತ್ತಾರೆ?',['ಚಂದ್ರಕೋರೆ','ಚಂದ್ರಕಲೆ','ಗ್ರಹಣ','ಕ್ಷುದ್ರಗ್ರಹ'],1,'ಚಂದ್ರನ ಬದಲಾಗುವ ಆಕಾರಗಳಿಗೆ ಚಂದ್ರಕಲೆ ಎನ್ನುತ್ತಾರೆ.'],
+['ಯಾವ ದಿನ ಚಂದ್ರ ಕಾಣುವುದಿಲ್ಲ?',['ಹುಣ್ಣಿಮೆ','ಅಮಾವಾಸ್ಯೆ','ಅಷ್ಟಮಿ','ಚೌತಿ'],1,'ಅಮಾವಾಸ್ಯೆಯಂದು ಚಂದ್ರ ಆಕಾಶದಲ್ಲಿದ್ದರೂ ಕಾಣುವುದಿಲ್ಲ.'],
+['ಅಮಾವಾಸ್ಯೆಯಿಂದ ಹುಣ್ಣಿಮೆಯವರೆಗಿನ ಕಾಲಕ್ಕೆ ಏನೆನ್ನುತ್ತಾರೆ?',['ಕೃಷ್ಣ ಪಕ್ಷ','ಶುಕ್ಲ ಪಕ್ಷ','ಬಹುಳ ಪಕ್ಷ','ವರ್ಷ'],1,'ಈ ಅವಧಿಯಲ್ಲಿ ಬೆಳಗಿದ ಭಾಗ ಹೆಚ್ಚುತ್ತದೆ – ಶುಕ್ಲ (ಶುದ್ಧ) ಪಕ್ಷ.']
+];
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ಆಕಾಶದಲ್ಲಿ ಮಿನುಗುವ ಚುಕ್ಕೆಗಳನ್ನು ............ ಎನ್ನುತ್ತಾರೆ.',['ಗ್ರಹ','ನಕ್ಷತ್ರಗಳು','ಧೂಮಕೇತು','ಕುಬ್ಜ ಗ್ರಹ'],1],
+  ['ಸೂರ್ಯಮಂಡಲದಲ್ಲಿ ಸೂರ್ಯನಿಗೆ ............ ಅತ್ಯಂತ ಹತ್ತಿರದ ಗ್ರಹ.',['ಬುಧ','ಶುಕ್ರ','ಶನಿ','ಮಂಗಳ'],0],
+  ['ಭೂಮಿ ಒಂದು ದಿನದಲ್ಲಿ ತನ್ನ ಸುತ್ತ ಒಂದು ಪ್ರದಕ್ಷಿಣೆ ಪೂರ್ಣಗೊಳಿಸುತ್ತದೆ, ಇದಕ್ಕೆ ಭೂಮಿಯ ............ ಗತಿ ಎನ್ನುತ್ತಾರೆ.',['ವಾರ್ಷಿಕ','ಪರಿಭ್ರಮಣೆ','ದೈನಿಕ','ಮಾಸಿಕ'],2],
+  ['ಚಂದ್ರನ ಪ್ರತಿದಿನ ಬದಲಾಗುವ ಆಕಾರಕ್ಕೆ ............ ಎನ್ನುತ್ತಾರೆ.',['ಚಂದ್ರಕೋರೆ','ಚಂದ್ರಕಲೆ','ಗ್ರಹ','ಕ್ಷುದ್ರಗ್ರಹ'],1]],
+ aa:[['ಭೂಮಿಯ ಉಪಗ್ರಹ ಯಾವುದು?','ಚಂದ್ರ ಭೂಮಿಯ ಉಪಗ್ರಹ.'],['ಧೂಮಕೇತು ಎಂದರೇನು?','ಸೂರ್ಯನ ಸುತ್ತ ಪ್ರದಕ್ಷಿಣೆ ಹಾಕುವ, ಮಂಜುಗಡ್ಡೆ, ಧೂಳು ಮತ್ತು ಬಂಡೆಗಳಿಂದ ಮಾಡಲ್ಪಟ್ಟ ಖಗೋಳ ವಸ್ತುಗಳಿಗೆ ಧೂಮಕೇತು ಎನ್ನುತ್ತಾರೆ.'],['ಚಂದ್ರಕಲೆ ಎಂದರೇನು?','ಭೂಮಿಯಿಂದ ಕಾಣುವ ಚಂದ್ರನ ಬೆಳಗಿದ ಭಾಗದ ಪ್ರತಿದಿನ ಬದಲಾಗುವ ಆಕಾರಗಳಿಗೆ ಚಂದ್ರಕಲೆ ಎನ್ನುತ್ತಾರೆ.']],
+ i:[['ಗ್ರಹ ಮತ್ತು ನಕ್ಷತ್ರಗಳ ನಡುವಿನ ವ್ಯತ್ಯಾಸ ಬರೆಯಿರಿ.','ನಕ್ಷತ್ರಗಳು: ಆಕಾಶದಲ್ಲಿ ಮಿನುಗುತ್ತವೆ; ಅವು ಸ್ವಯಂ ಪ್ರಕಾಶಿತ (ಉದಾ. ಸೂರ್ಯ).<br>ಗ್ರಹಗಳು: ಮಿನುಗುವುದಿಲ್ಲ; ಅವಕ್ಕೆ ತಮ್ಮದೇ ಬೆಳಕು ಇಲ್ಲ; ಅವು ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುತ್ತವೆ (ಉದಾ. ಭೂಮಿ).'],['ಸೂರ್ಯಮಂಡಲದ ಯಾವುದೇ ಎರಡು ಒಳಗ್ರಹಗಳ ಹೆಸರು ಬರೆಯಿರಿ.','ಬುಧ, ಶುಕ್ರ (ಭೂಮಿ ಮತ್ತು ಮಂಗಳ ಕೂಡ ಒಳಗ್ರಹಗಳು).'],['‘ಚಂದ್ರನ ಕಲೆಗಳು ಪ್ರತಿದಿನ ಏಕೆ ಬದಲಾಗುತ್ತವೆ? ಬರೆಯಿರಿ.','ಚಂದ್ರ ಭೂಮಿಯ ಸುತ್ತ ಪ್ರದಕ್ಷಿಣೆ ಹಾಕುತ್ತಿರುವುದರಿಂದ ಭೂಮಿಯಿಂದ ಕಾಣುವ ಚಂದ್ರನ ಸ್ಥಾನ ಯಾವಾಗಲೂ ಬದಲಾಗುತ್ತಿರುತ್ತದೆ. ಚಂದ್ರನ ಅರ್ಧ ಭಾಗ ಯಾವಾಗಲೂ ಬೆಳಗಿರುತ್ತದೆ, ಆದರೆ ಅದರಲ್ಲಿ ಭೂಮಿಯಿಂದ ಕಾಣುವ ಭಾಗ ಪ್ರತಿದಿನ ಬದಲಾಗುತ್ತದೆ. ಆದ್ದರಿಂದ ಚಂದ್ರನ ಕಲೆಗಳು ಪ್ರತಿದಿನ ಬದಲಾಗುತ್ತಿರುವಂತೆ ಕಾಣುತ್ತವೆ.']],
+ u:[['ಸೂರ್ಯಾಸ್ತದ ಸಮಯದಲ್ಲಿ ಆಕಾಶ ಯಾವ ಬಣ್ಣದಲ್ಲಿ ಕಾಣುತ್ತದೆ? ವೀಕ್ಷಿಸಿ ಮಾಹಿತಿ ಬರೆಯಿರಿ.','ಸೂರ್ಯಾಸ್ತದ ಸಮಯದಲ್ಲಿ ಆಕಾಶ ಕೇಸರಿ, ಕೆಂಪು, ಗುಲಾಬಿ ಮತ್ತು ಹಳದಿ ಬಣ್ಣಗಳಲ್ಲಿ ಕಾಣುತ್ತದೆ. ಸೂರ್ಯ ಮುಳುಗಿದ ನಂತರ ನಿಧಾನವಾಗಿ ಆಕಾಶ ಗಾಢ ನೀಲಿ ಮತ್ತು ನಂತರ ಕಪ್ಪಾಗುತ್ತದೆ.'],['ಭೂಮಿಯ ಮೇಲೆ ಹಗಲು ಮತ್ತು ರಾತ್ರಿ ಹೇಗೆ ಆಗುತ್ತವೆ? ಯೋಚಿಸಿ ಮಾಹಿತಿ ಬರೆಯಿರಿ.','ಭೂಮಿ ಗೋಳಾಕಾರವಾಗಿದ್ದು ಅದು ತನ್ನ ಸುತ್ತ ತಿರುಗುತ್ತದೆ (ಭ್ರಮಣ). ಆದ್ದರಿಂದ ಭೂಮಿಯ ಸೂರ್ಯನ ಎದುರಿನ ಅರ್ಧ ಭಾಗದ ಮೇಲೆ ಬೆಳಕು ಬೀಳುತ್ತದೆ, ಅಲ್ಲಿ ಹಗಲು ಇರುತ್ತದೆ; ಉಳಿದ ಅರ್ಧ ಭಾಗದಲ್ಲಿ ಕತ್ತಲೆ ಇರುತ್ತದೆ, ಅಲ್ಲಿ ರಾತ್ರಿ ಇರುತ್ತದೆ. ಭೂಮಿ ತಿರುಗುತ್ತಲೇ ಇರುವುದರಿಂದ ಹಗಲು-ರಾತ್ರಿ ಒಂದರ ನಂತರ ಒಂದು ಆಗುತ್ತವೆ.']]
+};
+let SWA={},EI=[4,15,23],MO=Array(8).fill(null);
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಅಭ್ಯಾಸ – ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ</h2>
+ <h3>(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</h3><div id="swA"></div>
+ <h3>(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಇ) ಸಂಕ್ಷಿಪ್ತವಾಗಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.i.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಈ) ಕೆಳಗೆ ಕೊಟ್ಟಿರುವ ಚೌಕಟ್ಟಿನಲ್ಲಿ ಯಾವುದೇ ಚಂದ್ರಕಲೆಯ ಮೂರು ಆಕೃತಿಗಳನ್ನು ಬರೆದು ಹೆಸರು ಬರೆಯಿರಿ.</h3><div class="tap">ಪ್ರತಿ ಚೌಕಟ್ಟಿನ ಕೆಳಗಿನ ಸ್ಲೈಡರ್ ಸರಿಸಿ ಚಂದ್ರಕಲೆ ಆರಿಸಿ, ನಂತರ ಪುಸ್ತಕದಲ್ಲಿ ಅದೇ ಆಕೃತಿ ಬರೆಯಿರಿ.</div>
+ <div class="g2">${EI.map((t,i)=>`<div class="tile op" style="text-align:center;cursor:default"><div id="ei${i}">${moonSvg(t,40)}</div><input type="range" min="0" max="30" value="${t}" style="width:100%" oninput="EI[${i}]=+this.value;$('ei${i}').innerHTML=moonSvg(EI[${i}],40);$('ein${i}').textContent=tithi(EI[${i}])[0]"><b id="ein${i}">${tithi(t)[0]}</b></div>`).join('')}</div>
+ <h3>(ಉ) ಹೇಳಿ ನೋಡೋಣ!</h3>${SW.u.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಊ) ಪೋಷಕರ ಜೊತೆಗೂಡಿ ಆಕಾಶದಲ್ಲಿ ಚಂದ್ರನ ಕಲೆಗಳಲ್ಲಿ ಆಗುವ ಬದಲಾವಣೆಗಳನ್ನು ತಿಂಗಳಿಡೀ ವೀಕ್ಷಿಸಿ. ಕೋಷ್ಟಕ ತಯಾರಿಸಿ.</h3>
+ <div class="tap">ಪ್ರತಿ ರಾತ್ರಿ ಚಂದ್ರನನ್ನು ನೋಡಿ ಮತ್ತು ಅದಕ್ಕೆ ಹೊಂದುವ ಕಲೆ ಆರಿಸಿ. (ಮಾದರಿ – ೮ ದಾಖಲೆಗಳು)</div>
+ <div style="overflow-x:auto"><table class="t"><tr><th>ದಾಖಲೆ</th><th>ದಿನಾಂಕ</th><th>ಚಂದ್ರನ ಆಕಾರ ಆರಿಸಿ</th><th>ಚಿತ್ರ</th></tr>${MO.map((m,i)=>`<tr><td>${i+1}</td><td><input type="date" style="width:130px"></td><td><select style="font:inherit;padding:4px;border-radius:6px" onchange="MO[${i}]=this.value===''?null:+this.value;$('mo${i}').innerHTML=MO[${i}]==null?'':moonSvg(MO[${i}],14,false)"><option value="">— ಆರಿಸಿ —</option>${Array.from({length:30},(_,t)=>`<option value="${t}">${tithi(t)[0]}</option>`).join('')}</select></td><td id="mo${i}"></td></tr>`).join('')}</table></div>
+ <h3>(ಎ) ‘ನಮ್ಮ ಸೂರ್ಯಮಂಡಲ’ ಈ ವಿಷಯದ ಮೇಲೆ ಘೋಷಣೆ, ಗೀತೆ ಅಥವಾ ಕಥೆ ರಚಿಸಿ.</h3>
+ <div class="sq"><textarea placeholder="ನಿಮ್ಮ ಘೋಷಣೆ / ಗೀತೆ / ಕಥೆ ಇಲ್ಲಿ ಬರೆಯಿರಿ…" style="min-height:90px"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಮಾದರಿ ಘೋಷಣೆಗಳನ್ನು ನೋಡಿ</button><div class="ans">☀️ ಸೂರ್ಯ ಇದ್ದಾನೆ ಕೇಂದ್ರದಲ್ಲಿ, ಎಂಟು ಗ್ರಹಗಳು ಸುತ್ತುತ್ತಿವೆ ಅವನ ಸುತ್ತಲೂ!<br>🌍 ಬುಧ, ಶುಕ್ರ, ಭೂಮಿ, ಮಂಗಳ – ಗುರು, ಶನಿ, ಯುರೇನಸ್, ನೆಪ್ಚೂನ್ ಎಲ್ಲರೂ!<br>🌙 ಅಮಾವಾಸ್ಯೆಯಿಂದ ಹುಣ್ಣಿಮೆಯವರೆಗೆ, ಚಂದ್ರ ತೋರಿಸುತ್ತಾನೆ ಕಲೆಗಳ ಮಹಿಮೆ!</div></div>
+ <div class="know"><b class="h">🎭 ಚಟುವಟಿಕೆ</b><br>ಸೂರ್ಯ, ಚಂದ್ರ, ಗ್ರಹ ಮತ್ತು ನಕ್ಷತ್ರಗಳ ಪಾತ್ರ ವಹಿಸಿ ನಾಟಕ ಪ್ರಸ್ತುತಪಡಿಸಿ. ‘ನಮ್ಮ ಸೂರ್ಯಮಂಡಲ’ ಪ್ರತಿಕೃತಿ ತಯಾರಿಸಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawSwA()}
+function drawSwA(){$('swA').innerHTML=SW.a.map((x,i)=>`<div class="sq"><b>${i+1}) ${x[0].replace('............',SWA[i]!=null?`<u style="color:${SWA[i]==x[2]?'#15803d':'#b91c1c'}">${x[1][SWA[i]]}</u>`:'............')}</b><div class="chips">${x[1].map((o,j)=>`<span class="chip ${SWA[i]==j?'on':''}" onclick="SWA[${i}]=${j};drawSwA()">${'ಅಆಇಈ'[j]}) ${o}</span>`).join('')}</div>${SWA[i]!=null?`<div class="msg ${SWA[i]==x[2]?'ok':'no'}">${SWA[i]==x[2]?'✔ ಸರಿ!':'✘ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(SW.a.every((x,i)=>SWA[i]==x[2]))award('swa','ಭೇಷ್!')}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಹಗಲಿನಲ್ಲಿ ಆಕಾಶದಲ್ಲಿ ನಕ್ಷತ್ರಗಳು ಏಕೆ ಕಾಣುವುದಿಲ್ಲ? ಅವು ಆಕಾಶದಿಂದ ಮಾಯವಾಗುತ್ತವೆಯೇ?','ಸೂರ್ಯನ ಬೆಳಕು ಎಷ್ಟು ಪ್ರಖರವಾಗಿರುತ್ತದೆ?','ನಕ್ಷತ್ರಗಳು ಹಗಲಿನಲ್ಲೂ ಆಕಾಶದಲ್ಲಿರುತ್ತವೆ, ಮಾಯವಾಗುವುದಿಲ್ಲ. ಆದರೆ ಸೂರ್ಯನ ಅತಿ ಪ್ರಖರ ಬೆಳಕಿನಿಂದ ಅವುಗಳ ಮಂದ ಬೆಳಕು ನಮಗೆ ಕಾಣುವುದಿಲ್ಲ. ರಾತ್ರಿ ಕತ್ತಲೆಯಲ್ಲಿ ಅವು ಕಾಣುತ್ತವೆ.'],
+['ಗ್ರಹಗಳಿಗೆ ತಮ್ಮದೇ ಬೆಳಕು ಇಲ್ಲ, ಆದರೂ ರಾತ್ರಿ ಅವು ಆಕಾಶದಲ್ಲಿ ಹೊಳೆಯುತ್ತಾ ಏಕೆ ಕಾಣುತ್ತವೆ?','ಅವುಗಳ ಮೇಲೆ ಯಾರ ಬೆಳಕು ಬೀಳುತ್ತದೆ?','ಗ್ರಹಗಳ ಮೇಲೆ ಸೂರ್ಯನ ಬೆಳಕು ಬೀಳುತ್ತದೆ. ಆ ಬೆಳಕು ಪ್ರತಿಫಲಿಸಿ ನಮ್ಮವರೆಗೆ ಬರುತ್ತದೆ, ಆದ್ದರಿಂದ ಗ್ರಹಗಳು ಹೊಳೆಯುತ್ತಾ ಕಾಣುತ್ತವೆ. ಆದರೆ ಅವು ನಕ್ಷತ್ರಗಳಂತೆ ಮಿನುಗುವುದಿಲ್ಲ.'],
+['ಚಂದ್ರ ಸ್ವಯಂ ಪ್ರಕಾಶಿತ ಅಲ್ಲ. ಹಾಗಾದರೆ ಹುಣ್ಣಿಮೆಯಂದು ಅದು ಇಷ್ಟು ಪ್ರಕಾಶಮಾನವಾಗಿ ಏಕೆ ಕಾಣುತ್ತದೆ?','ಚಂದ್ರನ ಮೇಲೆ ಯಾರ ಬೆಳಕು ಬೀಳುತ್ತದೆ?','ಸೂರ್ಯನ ಬೆಳಕು ಚಂದ್ರನ ಮೇಲೆ ಬಿದ್ದು ಪ್ರತಿಫಲಿಸುತ್ತದೆ. ಹುಣ್ಣಿಮೆಯಂದು ಚಂದ್ರನ ಸಂಪೂರ್ಣ ಬೆಳಗಿದ ಭಾಗ ಭೂಮಿಯ ಕಡೆಗೆ ಇರುತ್ತದೆ, ಆದ್ದರಿಂದ ಅದು ಪೂರ್ಣ ಗೋಳವಾಗಿ ಮತ್ತು ಪ್ರಕಾಶಮಾನವಾಗಿ ಕಾಣುತ್ತದೆ.'],
+['ಭೂಮಿ ತನ್ನ ಸುತ್ತ ತಿರುಗುವುದನ್ನು ನಿಲ್ಲಿಸಿದರೆ ಏನಾಗುತ್ತದೆ?','ಸೂರ್ಯನ ಎದುರಿನ ಭಾಗ ಯಾವುದು ಉಳಿಯುತ್ತದೆ?','ಭೂಮಿಯ ಸೂರ್ಯನ ಎದುರಿನ ಅರ್ಧ ಭಾಗ ಯಾವಾಗಲೂ ಬೆಳಕಿನಲ್ಲಿರುತ್ತದೆ – ಅಲ್ಲಿ ನಿರಂತರ ಹಗಲು ಮತ್ತು ಬಹಳ ಬಿಸಿ ಇರುತ್ತದೆ. ಇನ್ನೊಂದು ಅರ್ಧ ಭಾಗದಲ್ಲಿ ನಿರಂತರ ರಾತ್ರಿ ಮತ್ತು ಬಹಳ ಚಳಿ ಇರುತ್ತದೆ. ಹಗಲು-ರಾತ್ರಿಯ ಚಕ್ರ ನಿಲ್ಲುತ್ತದೆ ಮತ್ತು ಜೀವಿಗಳ ಬದುಕು ಕಠಿಣವಾಗುತ್ತದೆ.'],
+['ಭಾರತದಲ್ಲಿ ಮಧ್ಯಾಹ್ನ ಇದ್ದಾಗ ಭೂಮಿಯ ಇನ್ನೊಂದು ಬದಿಯ ದೇಶಗಳಲ್ಲಿ ರಾತ್ರಿ ಏಕೆ ಇರುತ್ತದೆ?','ಸೂರ್ಯನ ಬೆಳಕು ಭೂಮಿಯ ಎಷ್ಟು ಭಾಗದ ಮೇಲೆ ಬೀಳುತ್ತದೆ?','ಭೂಮಿ ಗೋಳಾಕಾರವಾಗಿರುವುದರಿಂದ ಸೂರ್ಯನ ಬೆಳಕು ಒಂದು ಸಮಯದಲ್ಲಿ ಅದರ ಅರ್ಧ ಭಾಗದ ಮೇಲೆ ಮಾತ್ರ ಬೀಳುತ್ತದೆ. ಭಾರತ ಸೂರ್ಯನ ಎದುರಿಗೆ ಇರುವಾಗ ಭೂಮಿಯ ಇನ್ನೊಂದು ಬದಿಯ ದೇಶಗಳು ಕತ್ತಲೆಯ ಭಾಗದಲ್ಲಿರುತ್ತವೆ, ಆದ್ದರಿಂದ ಅಲ್ಲಿ ರಾತ್ರಿ ಇರುತ್ತದೆ.'],
+['ಇಂದು ಶುದ್ಧ ಅಷ್ಟಮಿ. ಸುಮಾರು ಏಳು ದಿನಗಳ ನಂತರ ಚಂದ್ರ ಹೇಗೆ ಕಾಣುತ್ತಾನೆ? ಏಕೆ?','ಶುಕ್ಲ ಪಕ್ಷದಲ್ಲಿ ಬೆಳಗಿದ ಭಾಗ ಹೆಚ್ಚುತ್ತದೆಯೇ ಅಥವಾ ಕಡಿಮೆಯಾಗುತ್ತದೆಯೇ?','ಶುದ್ಧ ಅಷ್ಟಮಿಯಂದು ಅರ್ಧ ಚಂದ್ರ ಕಾಣುತ್ತಾನೆ. ಶುಕ್ಲ ಪಕ್ಷದಲ್ಲಿ ಬೆಳಗಿದ ಭಾಗ ಹೆಚ್ಚುತ್ತಾ ಹೋಗುತ್ತದೆ. ಸುಮಾರು ಏಳು ದಿನಗಳ ನಂತರ ಹುಣ್ಣಿಮೆ ಬರುತ್ತದೆ, ಆದ್ದರಿಂದ ಚಂದ್ರ ಪೂರ್ಣ ಗೋಳವಾಗಿ ಕಾಣುತ್ತಾನೆ.'],
+['ಸೂರ್ಯ ಇಲ್ಲದಿದ್ದರೆ ಭೂಮಿಯ ಮೇಲೆ ಏನಾಗುತ್ತಿತ್ತು?','ಬೆಳಕು ಮತ್ತು ಶಾಖ ಎಲ್ಲಿಂದ ಸಿಗುತ್ತಿತ್ತು?','ಸೂರ್ಯ ಬೆಳಕು ಮತ್ತು ಶಾಖದ ಏಕೈಕ ಮೂಲ. ಸೂರ್ಯ ಇಲ್ಲದಿದ್ದರೆ ಭೂಮಿಯ ಮೇಲೆ ಯಾವಾಗಲೂ ಕತ್ತಲೆ ಮತ್ತು ಅತಿಯಾದ ಚಳಿ ಇರುತ್ತಿತ್ತು. ಸಸ್ಯಗಳಿಗೆ ಆಹಾರ ತಯಾರಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿರಲಿಲ್ಲ ಮತ್ತು ಭೂಮಿಯ ಮೇಲೆ ಜೀವಸೃಷ್ಟಿ ಇರುತ್ತಿರಲಿಲ್ಲ.'],
+['ಗುರು ಮತ್ತು ಶನಿಯಂತಹ ಹೊರಗ್ರಹಗಳ ಮೇಲೆ ಮನುಷ್ಯ ಇಳಿಯಲು ಸಾಧ್ಯವೇ? ಏಕೆ?','ಹೊರಗ್ರಹಗಳು ಯಾವುದರಿಂದ ಮಾಡಲ್ಪಟ್ಟಿರುತ್ತವೆ?','ಇಲ್ಲ. ಹೊರಗ್ರಹಗಳು ಗಾತ್ರದಲ್ಲಿ ದೊಡ್ಡವು ಮತ್ತು ಅನಿಲರೂಪದವು. ಅವುಗಳ ಮೇಲೆ ಭೂಮಿಯಂತಹ ಗಟ್ಟಿ ನೆಲ ಇಲ್ಲ, ಆದ್ದರಿಂದ ಅವುಗಳ ಮೇಲೆ ನಿಲ್ಲಲು ಅಥವಾ ಇಳಿಯಲು ಸಾಧ್ಯವಿಲ್ಲ.'],
+['ನೀವು ಮಂಗಳ ಗ್ರಹಕ್ಕೆ ಪ್ರವಾಸ ಹೋದರೆ, ಜೊತೆಗೆ ಯಾವ ಯಾವ ವಸ್ತುಗಳನ್ನು ಒಯ್ಯುವಿರಿ? ಏಕೆ?','ಅಲ್ಲಿ ಉಸಿರಾಡಲು ಗಾಳಿ ಇದೆಯೇ? ನೀರು ಇದೆಯೇ?','ಮಂಗಳದಲ್ಲಿ ಭೂಮಿಯಂತೆ ಉಸಿರಾಡಲು ಯೋಗ್ಯವಾದ ಗಾಳಿ ಮತ್ತು ಕುಡಿಯುವ ನೀರು ಇಲ್ಲ ಹಾಗೂ ಅಲ್ಲಿ ಬಹಳ ಚಳಿ ಇರುತ್ತದೆ. ಆದ್ದರಿಂದ ಆಮ್ಲಜನಕದ ಸಿಲಿಂಡರ್, ನೀರು, ಆಹಾರ, ಬೆಚ್ಚಗಿನ ವಿಶೇಷ ಉಡುಪು (ಸ್ಪೇಸ್ ಸೂಟ್) ಜೊತೆಗೆ ಒಯ್ಯಬೇಕಾಗುತ್ತದೆ.'],
+['ಒಂದು ವರ್ಷದಲ್ಲಿ ಸುಮಾರು ಎಷ್ಟು ಅಮಾವಾಸ್ಯೆ ಮತ್ತು ಎಷ್ಟು ಹುಣ್ಣಿಮೆ ಬರುತ್ತವೆ? ಹೇಗೆ ನಿರ್ಧರಿಸುವಿರಿ?','ಅಮಾವಾಸ್ಯೆಯಿಂದ ಅಮಾವಾಸ್ಯೆಗೆ ಸಾಮಾನ್ಯವಾಗಿ ಎಷ್ಟು ದಿನ?','ಅಮಾವಾಸ್ಯೆಯಿಂದ ಮುಂದಿನ ಅಮಾವಾಸ್ಯೆಗೆ ಸುಮಾರು ೩೦ ದಿನ (ಒಂದು ತಿಂಗಳು) ಇರುತ್ತದೆ. ವರ್ಷದಲ್ಲಿ ೧೨ ತಿಂಗಳು ಇರುವುದರಿಂದ ಸಾಮಾನ್ಯವಾಗಿ ೧೨ ಅಮಾವಾಸ್ಯೆ ಮತ್ತು ೧೨ ಹುಣ್ಣಿಮೆ ಬರುತ್ತವೆ (ಕೆಲವೊಮ್ಮೆ ಒಂದು ಹೆಚ್ಚು).']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೩ : ಗ್ರಹಗಳು ಮತ್ತು ನಕ್ಷತ್ರಗಳು — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${[...document.querySelectorAll('#stepBox ul li')].map(l=>`<li>${l.innerHTML}</li>`).join('')}</ol>
+ <p class="pq">ಸೂರ್ಯಮಂಡಲದ ಗ್ರಹಗಳು</p><table class="w"><tr><th>ಕ್ರ.</th><th>ಗ್ರಹ</th><th>ಸೂರ್ಯನಿಂದ ದೂರ</th><th>ವೈಶಿಷ್ಟ್ಯ</th></tr>${PL.map((p,i)=>`<tr><td>${i+1}</td><td><b>${p.n}</b></td><td>${p.au} AU</td><td class="l">${p.f}</td></tr>`).join('')}</table>
+ <p class="pq">ಭೂಮಿಯ ಗತಿ</p><table class="w"><tr><th>ಚಲನೆ</th><th>ಅರ್ಥ</th><th>ಅವಧಿ</th><th>ಪರಿಣಾಮ</th></tr><tr><td>ಭ್ರಮಣ (ದೈನಿಕ ಗತಿ)</td><td class="l">ತನ್ನ ಸುತ್ತ ತಿರುಗುವುದು</td><td>ಒಂದು ದಿನ (೨೪ ಗಂಟೆ)</td><td>ಹಗಲು ಮತ್ತು ರಾತ್ರಿ</td></tr><tr><td>ಪರಿಭ್ರಮಣ (ವಾರ್ಷಿಕ ಗತಿ)</td><td class="l">ಸೂರ್ಯನ ಸುತ್ತ ತಿರುಗುವುದು</td><td>ಸುಮಾರು ೩೬೫ ದಿನ</td><td>ವರ್ಷ</td></tr></table>
+ <p class="pq">ಚಂದ್ರಕಲೆ</p><div style="display:flex;justify-content:space-between;text-align:center;font-size:9pt">${[[0,'ಅಮಾವಾಸ್ಯೆ'],[4,'ಶುಕ್ಲ ಚೌತಿ'],[8,'ಶುಕ್ಲ ಅಷ್ಟಮಿ'],[12,'ಶುಕ್ಲ ದ್ವಾದಶಿ'],[15,'ಹುಣ್ಣಿಮೆ'],[19,'ಕೃಷ್ಣ ಚೌತಿ'],[23,'ಕೃಷ್ಣ ಅಷ್ಟಮಿ'],[27,'ಕೃಷ್ಣ ದ್ವಾದಶಿ']].map(x=>`<div>${moonSvg(x[0],16)}<br>${x[1]}</div>`).join('')}</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ)</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><table class="w" style="margin-top:4px"><tr>${MCQ.map((q,i)=>`<td>${i+1}) ${A[q[2]]}</td>`).slice(0,10).join('')}</tr><tr>${MCQ.map((q,i)=>`<td>${i+1}) ${A[q[2]]}</td>`).slice(10).join('')}</tr></table></div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</div>${SW.a.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div><div class="po">${x[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ <div class="pq">(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(1)}</div>`).join('')}
+ <div class="pq">(ಇ) ಸಂಕ್ಷಿಪ್ತವಾಗಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.i.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ <div class="avoid"><div class="pq">(ಈ) ಕೆಳಗೆ ಕೊಟ್ಟಿರುವ ಚೌಕಟ್ಟಿನಲ್ಲಿ ಯಾವುದೇ ಚಂದ್ರಕಲೆಯ ಮೂರು ಆಕೃತಿಗಳನ್ನು ಬರೆದು ಹೆಸರು ಬರೆಯಿರಿ.</div>
+ <div style="display:flex;gap:5mm">${[1,2,3].map(()=>`<div style="flex:1;border:1.2px solid #000;height:40mm;position:relative"><div style="position:absolute;bottom:2mm;left:3mm;right:3mm;border-bottom:1px dotted #555;font-size:9pt">ಹೆಸರು :</div></div>`).join('')}</div></div>
+ <div class="pq">(ಉ) ಹೇಳಿ ನೋಡೋಣ!</div>${SW.u.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(2)}</div>`).join('')}
+ <div class="avoid"><div class="pq">(ಊ) ತಿಂಗಳಿಡೀ ಚಂದ್ರನ ಕಲೆಯನ್ನು ವೀಕ್ಷಿಸಿ ಕೋಷ್ಟಕ ತುಂಬಿ.</div><table class="w"><tr><th style="width:12mm">ದಾಖಲೆ</th><th>ದಿನಾಂಕ</th><th>ತಿಥಿ</th><th>ಚಂದ್ರನ ಆಕಾರ (ಆಕೃತಿ)</th></tr>${Array.from({length:8},(_,i)=>`<tr><td style="height:9mm">${i+1}</td><td></td><td></td><td></td></tr>`).join('')}</table></div>
+ <div class="avoid"><div class="pq">(ಎ) ‘ನಮ್ಮ ಸೂರ್ಯಮಂಡಲ’ ಈ ವಿಷಯದ ಮೇಲೆ ಘೋಷಣೆ, ಗೀತೆ ಅಥವಾ ಕಥೆ ರಚಿಸಿ.</div>${lines(3)}</div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>(ಅ)</b> ${SW.a.map((x,i)=>`${i+1}) ${x[1][x[2]]}`).join('; ')}</div><div><b>(ಆ)</b><ol>${SW.aa.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಇ)</b><ol>${SW.i.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಉ)</b><ol>${SW.u.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>ಇ. ೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೩</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೧ – ಪಾಠ ೧೦ ಬನ್ನಿ ಕಲಿಯೋಣ ನಕ್ಷೆ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೧೦ : ಬನ್ನಿ ಕಲಿಯೋಣ ನಕ್ಷೆ</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">🗺️🧭 ಕಂಬಸಾಲು-ಅಡ್ಡಸಾಲು, ದಿಕ್ಕು, ಚಿಹ್ನೆಗಳು ಮತ್ತು ಪ್ರಮಾಣ – ಬನ್ನಿ, ನಕ್ಷೆ ಓದಲು ಮತ್ತು ಬಿಡಿಸಲು ಕಲಿಯೋಣ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೯ ಮೆಟ್ಟಿಲುಗಳು · ದಿಕ್ಕು ಆಟ · ಪ್ರಮಾಣ ಯಂತ್ರ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೩೦ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೧೦ : ಬನ್ನಿ ಕಲಿಯೋಣ ನಕ್ಷೆ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🗺️','🧭','📍'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ಕಂಬಸಾಲು ಮತ್ತು ಅಡ್ಡಸಾಲು ---------- */
+const KIDS=['👦','👧','🧒','👦','👧'];
+let RQ=null,RQN=0;
+function rqNew(){const o=1+Math.floor(Math.random()*4),r=1+Math.floor(Math.random()*5);RQ={o,r,pick:null};drawRQ()}
+function drawRQ(){const b=$('rqBox');if(!b)return;const U={o:3,r:4};
+ let g='<div style="overflow-x:auto"><table style="border-collapse:collapse;margin:6px auto"><tr><th></th>'+[1,2,3,4,5].map(r=>`<th style="font-size:13px;padding:2px 6px">ಸಾಲು ${r}</th>`).join('')+'</tr>';
+ for(let o=1;o<=4;o++){g+=`<tr><th style="font-size:13px;padding:2px 6px">ಸಾಲು ${o}</th>`;for(let r=1;r<=5;r++){const odd=o==U.o&&r==U.r;const sel=RQ&&RQ.pick&&RQ.pick[0]==o&&RQ.pick[1]==r;
+  g+=`<td style="padding:2px"><button onclick="rqTap(${o},${r})" style="font-size:26px;border:2px solid ${sel?(RQ.pick[0]==RQ.o&&RQ.pick[1]==RQ.r?'#16a34a':'#dc2626'):'#cbd5e1'};background:${odd?'#fef3c7':'#e0f2fe'};border-radius:10px;width:46px;height:46px;cursor:pointer">${odd?'🧑‍🎤':KIDS[(o+r)%5]}</button></td>`}g+='</tr>'}
+ g+='</table></div>';
+ b.innerHTML=`<div style="text-align:center;font-weight:800">⬆ ಹಲಗೆ / ಶಿಕ್ಷಕ (ಮುಂದೆ)</div>${g}
+ <div class="msg in">🎯 <b>ಸಾಲು ${RQ.o}, ಸಾಲು ${RQ.r}</b> ಮೇಲಿನ ವಿದ್ಯಾರ್ಥಿಯ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.</div>${RQ.pick?`<div class="msg ${RQ.pick[0]==RQ.o&&RQ.pick[1]==RQ.r?'ok':'no'}">${RQ.pick[0]==RQ.o&&RQ.pick[1]==RQ.r?'✔ ಸರಿ! (ಸರಿ ಉತ್ತರಗಳು: '+RQN+')':'✘ ಈ ಸಾಲು '+RQ.pick[0]+', ಸಾಲು '+RQ.pick[1]+' ಇದೆ.'}</div><button class="btn gr sm" onclick="rqNew()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}`}
+function rqTap(o,r){RQ.pick=[o,r];if(o==RQ.o&&r==RQ.r){RQN++;say('ಸರಿ');if(RQN>=3)award('rq','ಭೇಷ್! ಕಂಬಸಾಲು-ಅಡ್ಡಸಾಲು ಗುರುತಿಸಿದಿರಿ.')}drawRQ()}
+
+/* ---------- ದಿಕ್ಕು ---------- */
+const DIRS=[['ಉತ್ತರ',0],['ಈಶಾನ್ಯ',45],['ಪೂರ್ವ',90],['ಆಗ್ನೇಯ',135],['ದಕ್ಷಿಣ',180],['ನೈಋತ್ಯ',225],['ಪಶ್ಚಿಮ',270],['ವಾಯವ್ಯ',315]];
+let DQ=2,DOK=0,DMSG='';
+function dirSvg(){return `<svg viewBox="0 0 240 240" style="width:260px;max-width:100%;display:block;margin:0 auto">
+ <circle cx="120" cy="120" r="100" fill="#f0f9ff" stroke="#0369a1" stroke-width="2"/>
+ ${DIRS.map((d,i)=>{const a=(d[1]-90)*Math.PI/180,x=120+80*Math.cos(a),y=120+80*Math.sin(a),main=i%2==0;return `<g style="cursor:pointer" onclick="dirTap(${i})"><line x1="120" y1="120" x2="${120+96*Math.cos(a)}" y2="${120+96*Math.sin(a)}" stroke="${main?'#0369a1':'#94a3b8'}" stroke-width="${main?3:1.5}"/><circle cx="${x}" cy="${y}" r="${main?17:14}" fill="${main?'#dbeafe':'#f1f5f9'}" stroke="#0369a1"/><text x="${x}" y="${y+4}" text-anchor="middle" font-size="${main?11:9}" font-weight="800">${i==0?'ಉ':'?'}</text></g>`}).join('')}
+ <text x="120" y="126" text-anchor="middle" font-size="18">🧭</text></svg>`}
+function dirTap(i){const t=DIRS[DQ];if(i==DQ){DOK++;DMSG=`<div class="msg ok">✔ ಸರಿ! ಇದು <b>${t[0]}</b> ದಿಕ್ಕು.</div>`;say(t[0]);DQ=(DQ+3)%8;if(DOK>=5)award('dir','ಭೇಷ್! ದಿಕ್ಕುಗಳನ್ನು ಗುರುತಿಸಿದಿರಿ.')}else DMSG=`<div class="msg no">✘ ಇದು <b>${DIRS[i][0]}</b> ದಿಕ್ಕು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</div>`;drawDir()}
+function drawDir(){const b=$('dirBox');if(!b)return;b.innerHTML=`<div class="msg in" style="font-size:18px;text-align:center">🎯 <b>${DIRS[DQ][0]}</b> ದಿಕ್ಕು ಯಾವುದು? ಕ್ಲಿಕ್ ಮಾಡಿ. (ಸರಿ: ${DOK})</div>${dirSvg()}${DMSG}<div class="tap" style="text-align:center">ಉತ್ತರ ಯಾವಾಗಲೂ ಮೇಲ್ಭಾಗದಲ್ಲಿ. ಉತ್ತರ-ಪೂರ್ವದ ನಡುವೆ ಈಶಾನ್ಯ, ಪೂರ್ವ-ದಕ್ಷಿಣದ ನಡುವೆ ಆಗ್ನೇಯ, ದಕ್ಷಿಣ-ಪಶ್ಚಿಮದ ನಡುವೆ ನೈಋತ್ಯ, ಪಶ್ಚಿಮ-ಉತ್ತರದ ನಡುವೆ ವಾಯವ್ಯ.</div>`}
+
+/* ---------- ಆನಂದನಗರದ ನಕ್ಷೆ ---------- */
+const MAPPL={home:[60,150,'🏠','ಮನೆ'],school:[220,150,'🏫','ಶಾಲೆ'],temple:[60,50,'🛕','ದೇವಸ್ಥಾನ'],po:[220,50,'PO','ಅಂಚೆ ಕಚೇರಿ'],lake:[140,40,'💧','ಕೆರೆ'],bus:[140,150,'🚏','ಬಸ್ ನಿಲ್ದಾಣ'],tree:[290,110,'🌳','ಮರಗಳು'],market:[290,170,'🏪','ಮಾರುಕಟ್ಟೆ']};
+function anandMap(lab){const f=v=>v;return `<svg viewBox="0 0 340 250" style="max-width:440px;display:block;margin:0 auto;background:#fff;border:2px solid #334155;border-radius:8px">
+ <text x="170" y="18" text-anchor="middle" font-size="14" font-weight="800">ಆನಂದನಗರ – ಹಳ್ಳಿಯ ನಕ್ಷೆ</text>
+ <text x="170" y="32" text-anchor="middle" font-size="10">(ಉಪಶೀರ್ಷಿಕೆ: ಮನೆ ಮತ್ತು ಪರಿಸರ)</text>
+ ${[...Array(9)].map((_,i)=>`<line x1="${30+i*35}" y1="40" x2="${30+i*35}" y2="200" stroke="#e2e8f0"/>`).join('')}${[...Array(5)].map((_,i)=>`<line x1="30" y1="${40+i*40}" x2="310" y2="${40+i*40}" stroke="#e2e8f0"/>`).join('')}
+ <path d="M30 100 Q100 90 170 105 T310 95" stroke="#38bdf8" stroke-width="8" fill="none"/><text x="250" y="88" font-size="10" fill="#0369a1" font-weight="700">ನದಿ</text>
+ <line x1="30" y1="130" x2="310" y2="130" stroke="#78716c" stroke-width="6"/><text x="36" y="125" font-size="9" font-weight="700">ರಸ್ತೆ</text>
+ ${Object.entries(MAPPL).map(([k,p])=>`<g><text x="${p[0]}" y="${p[1]}" text-anchor="middle" font-size="${p[2]=='PO'?13:20}" font-weight="800" fill="#b91c1c">${p[2]}</text>${lab?`<text x="${p[0]}" y="${p[1]+13}" text-anchor="middle" font-size="9">${p[3]}</text>`:''}</g>`).join('')}
+ <g transform="translate(300,60)"><path d="M0 -16 L6 6 L0 2 L-6 6Z" fill="#111"/><text x="0" y="-19" text-anchor="middle" font-size="11" font-weight="800">ಉ</text></g>
+ <g transform="translate(30,218)"><rect width="35" height="6" fill="#000"/><rect x="35" width="35" height="6" fill="#fff" stroke="#000"/><rect x="70" width="35" height="6" fill="#000"/><text x="0" y="17" font-size="9">0</text><text x="35" y="17" font-size="9">100</text><text x="70" y="17" font-size="9">200</text><text x="105" y="17" font-size="9">300 ಮೀ</text><text x="0" y="28" font-size="9" font-weight="700">ಪ್ರಮಾಣ ಪಟ್ಟಿ: ೧ ಚೌಕ = ೧೦೦ ಮೀಟರ್</text></g>
+ <g transform="translate(200,208)"><rect width="135" height="38" fill="#f8fafc" stroke="#334155"/><text x="4" y="11" font-size="9" font-weight="800">ಸೂಚಿ:</text><text x="4" y="22" font-size="8">🏠 ಮನೆ 🏫 ಶಾಲೆ 🛕 ದೇವಸ್ಥಾನ PO ಅಂಚೆ ಕಚೇರಿ</text><text x="4" y="33" font-size="8">💧 ಕೆರೆ 🚏 ಬಸ್ ನಿಲ್ದಾಣ 🌳 ಮರಗಳು</text></g></svg>`}
+
+/* ---------- ಪ್ರಮಾಣ ಯಂತ್ರ ---------- */
+let SCM=10,SCK=1;
+function scaleUpd(){const ground=SCM*SCK;$('scOut').innerHTML=`<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center"><div style="height:16px;width:${Math.min(300,SCM*14)}px;background:repeating-linear-gradient(90deg,#1e293b 0 14px,#fff 14px 28px);border:1px solid #000"></div><b>${SCM} ಸೆಂ.ಮೀ.</b></div>
+ <div class="msg ok" style="font-size:18px;text-align:center">ನಕ್ಷೆಯಲ್ಲಿ <b>${SCM} ಸೆಂ.ಮೀ.</b> = ನೆಲದ ಮೇಲೆ <b>${ground} ${SCK>=1000?'':'ಮೀಟರ್'}</b>${SCK>=1000?' ಮೀಟರ್ = '+(ground/1000)+' ಕಿಲೋಮೀಟರ್':''}</div>`}
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+let S=0;
+const L=[
+{h:'ಕಂಬಸಾಲು ಮತ್ತು ಅಡ್ಡಸಾಲು',s:'ಚಿತ್ರದಲ್ಲಿ ತೋರಿಸಿದಂತೆ ಯಾವುದೇ ವಸ್ತು ಅಥವಾ ವ್ಯಕ್ತಿಯ ಸ್ಥಾನ ಹೇಳುವಾಗ ಕಂಬಸಾಲು ಮತ್ತು ಅಡ್ಡಸಾಲನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.',b:()=>`
+ <div>ಶಾಲೆಯ ಪ್ರಾರ್ಥನೆಯಲ್ಲಿ ಮಕ್ಕಳು ಸಾಲಾಗಿ ನಿಂತಿದ್ದಾರೆ. ಸಮವಸ್ತ್ರದಲ್ಲಿ ಇಲ್ಲದ ವಿದ್ಯಾರ್ಥಿ (🧑‍🎤) ಯಾವ ಅಡ್ಡಸಾಲಿನಲ್ಲಿ ಮತ್ತು ಯಾವ ಕಂಬಸಾಲಿನಲ್ಲಿ ನಿಂತಿದ್ದಾನೆ? <button class="btn ln sm" onclick="this.nextElementSibling.style.display='inline'">ಉತ್ತರ</button><b style="display:none"> ಅಡ್ಡಸಾಲು ೩, ಕಂಬಸಾಲು ೪</b></div>
+ <div class="key">ಯಾವುದೇ ವಸ್ತು ಅಥವಾ ವ್ಯಕ್ತಿಯ <b>ಸ್ಥಳ</b> ಹೇಳುವಾಗ <b>ಕಂಬಸಾಲು ಮತ್ತು ಅಡ್ಡಸಾಲು</b> ಇವುಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ. ಇಲ್ಲಿ <b>ಸಾಲು</b> = ಎಡದಿಂದ ಬಲಕ್ಕೆ ಅಡ್ಡ, <b>ಸಾಲು</b> = ಮುಂದಿನಿಂದ ಹಿಂದಕ್ಕೆ ಉದ್ದ.</div>
+ <h3>🎯 ಆಟ: ಹೇಳಿದ ಜಾಗದಲ್ಲಿ ಯಾರಿದ್ದಾರೆ?</h3><div id="rqBox"></div>`,a:()=>{if(!RQ)rqNew();else drawRQ()}},
+{h:'ನಕ್ಷೆ ಎಂದರೇನು?',s:'ಇಡೀ ಭೂಮಿಯ ಅಥವಾ ಅದರ ಕೆಲವು ಭಾಗದ ಪ್ರಮಾಣಬದ್ಧ ರೇಖಾಚಿತ್ರವೇ ನಕ್ಷೆ. ಇಂತಹ ರೇಖಾಚಿತ್ರ ಬಿಡಿಸುವಾಗ ದಿಕ್ಕು, ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳು, ಪ್ರಕ್ಷೇಪಣ ಮತ್ತು ಪ್ರಮಾಣವನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.',b:()=>`
+ <div class="key">ಇಡೀ ಭೂಮಿಯ ಅಥವಾ ಅದರ ಕೆಲವು ಭಾಗದ <b>ಪ್ರಮಾಣಬದ್ಧ ರೇಖಾಚಿತ್ರ</b> ಎಂದರೆ <b>‘ನಕ್ಷೆ’</b> ಹೌದು. ಇಂತಹ ರೇಖಾಚಿತ್ರ ಬಿಡಿಸುವಾಗ <b>ದಿಕ್ಕು, ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳು, ಪ್ರಕ್ಷೇಪಣ ಮತ್ತು ಪ್ರಮಾಣ</b> ಇವುಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.</div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">🛕🕌</div><div class="tt">ಸಂಕೇತ</div><div class="dd">ಯಾವುದೇ ವಿಷಯದ <b>ಚಿಕ್ಕ ರೂಪದ ಚಿತ್ರ</b> ಎಂದರೆ ಚಿಹ್ನೆ. ಉದಾ. ದೇವಸ್ಥಾನ, ಮಸೀದಿಯ ಚಿತ್ರಗಳು.</div></div>
+  <div class="tile op"><div class="ic">PO ▲ ●</div><div class="tt">ಗುರುತುಗಳು</div><div class="dd">ನಿರ್ದಿಷ್ಟ <b>ಜ್ಯಾಮಿತೀಯ ಆಕೃತಿ</b> ಅಥವಾ <b>ಇಂಗ್ಲಿಷ್ ಆದ್ಯಕ್ಷರಗಳು</b> – ಉದಾ. <b>PO = ಅಂಚೆ ಕಚೇರಿ</b>.</div></div>
+ </div>
+ <h3>🧭 ದಿಕ್ಕು ಗುರುತಿಸಿ</h3><div id="dirBox"></div>`,a:()=>drawDir()},
+{h:'ಮನೆ ಮತ್ತು ಪರಿಸರದ ನೀಲನಕ್ಷೆ',s:'ಮನೆ ಮತ್ತು ಪರಿಸರದ ನೀಲನಕ್ಷೆಯನ್ನು ನೋಡಿ. ಅದರಲ್ಲಿರುವ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳನ್ನು ಗಮನಿಸಿ. ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಿದ ಪ್ರಕೃತಿನಿರ್ಮಿತ ಅಂಶಗಳು ಮತ್ತು ಮಾನವನಿರ್ಮಿತ ಅಂಶಗಳನ್ನು ಗುರುತಿಸಿ.',b:()=>`
+ <div class="tap">ನೀಲನಕ್ಷೆಯಲ್ಲಿನ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳನ್ನು ನೋಡಿ. (“ಹೆಸರು ತೋರಿಸಿ” ಒತ್ತಿ ಪರಿಶೀಲಿಸಿ)</div>
+ <div id="amap">${anandMap(false)}</div>
+ <div style="text-align:center"><button class="btn ln sm" onclick="$('amap').innerHTML=anandMap(true)">🏷️ ಹೆಸರು ತೋರಿಸಿ</button></div>
+ <h3>ಆಟ: ಪ್ರಕೃತಿನಿರ್ಮಿತ ಅಥವಾ ಮಾನವನಿರ್ಮಿತ ಅಂಶ?</h3>
+ ${sortGame('nm',[['🌳 ಮರಗಳು',0],['🏪 ಮಾರುಕಟ್ಟೆ',1],['🚏 ಬಸ್ ನಿಲ್ದಾಣ',1],['🏫 ಶಾಲೆ',1],['🏠 ಮನೆ',1],['〰️ ನದಿ',0],['💧 ನೈಸರ್ಗಿಕ ಕೆರೆ',0],['🛣️ ರಸ್ತೆ',1],['⛰️ ಬೆಟ್ಟ',0]],[['🌿 ಪ್ರಕೃತಿ ನಿರ್ಮಿತ','gr'],['🏗️ ಮಾನವ ನಿರ್ಮಿತ','or']],'nm')}`,a:()=>drawGames()},
+{h:'ಪ್ರಮಾಣ – ನೆಲದ ಮೇಲಿನ ದೂರ ಕಾಗದದ ಮೇಲೆ',s:'ತರಗತಿ ಕೋಣೆಯ ಉದ್ದ ಹತ್ತು ಮೀಟರ್ ಇದ್ದರೆ, ಅದನ್ನು ಕಾಗದದ ಮೇಲೆ ಹತ್ತು ಸೆಂಟಿಮೀಟರ್‌ನಿಂದ ತೋರಿಸಬಹುದು. ಅಂದರೆ ಒಂದು ಸೆಂಟಿಮೀಟರ್ ಸಮ ಒಂದು ಮೀಟರ್. ನೆಲದ ಮೇಲಿನ ದೂರವನ್ನು ಕೆಲವು ಪಟ್ಟು ಕಡಿಮೆ ಮಾಡಿ ಕಾಗದದ ಮೇಲೆ ತೋರಿಸುವುದೇ ಪ್ರಮಾಣ ತೆಗೆದುಕೊಳ್ಳುವುದು.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#eff6ff"><div class="ic">👩‍🏫</div><div class="tt">ಶಿಕ್ಷಕ</div><div class="dd">ತರಗತಿ ಕೋಣೆಯ ಉದ್ದ ೧೦ ಮೀಟರ್ ಮತ್ತು ಅಗಲ ೫ ಮೀಟರ್ ಇದ್ದರೆ, ನಾವು ೧೦ ಸೆಂ.ಮೀ. ಮತ್ತು ೫ ಸೆಂ.ಮೀ. ಉದ್ದದ ಗೆರೆಗಳನ್ನು ಎಳೆದು ಅದನ್ನು ತೋರಿಸಬಹುದು. ನಾವು ನೆಲದ ಮೇಲಿನ ದೂರವನ್ನು ಕೆಲವು ಪಟ್ಟು <b>ಕಡಿಮೆ</b> ಮಾಡಿ ಕಾಗದದ ಮೇಲೆ ತೋರಿಸಿದೆವು – ಅಂದರೆ <b>ಮಾನಕ</b> ತೆಗೆದುಕೊಂಡೆವು.</div></div>
+  <div class="tile op" style="background:#f0fdf4"><div class="ic">🧒</div><div class="tt">ವಿದ್ಯಾರ್ಥಿ</div><div class="dd">೧೦ ಮೀಟರ್ ಉದ್ದದ ಗೋಡೆಯನ್ನು ೧೦ ಸೆಂ.ಮೀ.ನಿಂದ ತೋರಿಸಿದೆವು.<br><b>೧೦ ಸೆಂ.ಮೀ = ೧೦ ಮೀಟರ್</b>, ಅಂದರೆ <b>೧ ಸೆಂ.ಮೀ = ೧ ಮೀಟರ್</b>.</div></div>
+ </div>
+ <div class="key">ಪ್ರಮಾಣ ಹೇಳುವಾಗ ನಕ್ಷೆಯ ದೂರದ <b>ಒಂದು ಏಕಕ</b> ಇದು ನೆಲದ ದೂರದ <b>ಎಷ್ಟು ಏಕಮಾನ</b> ತೋರಿಸುತ್ತದೆ ಎಂಬುದನ್ನು ಹೇಳಲಾಗುತ್ತದೆ. ಯಾವುದೇ ನಕ್ಷೆ ಬಿಡಿಸುವಾಗ ಪ್ರಮಾಣ ತೆಗೆದುಕೊಳ್ಳುವುದು ಅಗತ್ಯ.</div>
+ <h3>📏 ಪ್ರಮಾಣ ಯಂತ್ರ</h3>
+ <div class="chips" style="justify-content:center">${[[1,'೧ ಸೆಂ.ಮೀ = ೧ ಮೀಟರ್'],[100,'೧ ಸೆಂ.ಮೀ = ೧೦೦ ಮೀಟರ್'],[1000,'೧ ಸೆಂ.ಮೀ. = ೧ ಕಿ.ಮೀ.']].map(x=>`<span class="chip ${SCK==x[0]?'on':''}" onclick="SCK=${x[0]};drawStep()">${x[1]}</span>`).join('')}</div>
+ <input type="range" min="1" max="20" value="${SCM}" style="width:100%" oninput="SCM=+this.value;scaleUpd()"><div id="scOut"></div>
+ ${pickGame('scq',[['ಪ್ರಮಾಣ ೧ ಸೆಂ.ಮೀ. = ೧ ಮೀಟರ್ ಆಗಿದ್ದರೆ, ೫ ಸೆಂ.ಮೀ. ಗೆರೆ ನೆಲದ ಮೇಲೆ ಎಷ್ಟು?',['೫ ಮೀಟರ್','೫೦ ಮೀಟರ್','೧ ಮೀಟರ್'],0],['ಪ್ರಮಾಣ ೧ ಸೆಂ.ಮೀ. = ೧೦೦ ಮೀಟರ್ ಆಗಿದ್ದರೆ, ನಕ್ಷೆಯಲ್ಲಿ ೩ ಸೆಂ.ಮೀ. ಎಂದರೆ?',['೩ ಮೀಟರ್','೩೦೦ ಮೀಟರ್','೧೦೦ ಮೀಟರ್'],1],['ನಕ್ಷೆ ಬಿಡಿಸುವಾಗ ಪ್ರಮಾಣ ಏಕೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?',['ನೆಲದ ಮೇಲಿನ ದೊಡ್ಡ ದೂರವನ್ನು ಚಿಕ್ಕ ಕಾಗದದ ಮೇಲೆ ತೋರಿಸಲು','ಬಣ್ಣ ಹಚ್ಚಲು','ಹೆಸರು ಬರೆಯಲು'],0]],'scq')}`,a:()=>{scaleUpd();drawGames()}},
+{h:'ನಕ್ಷೆಯ ಮೂಲಭೂತ ಅಂಶಗಳು',s:'ನಕ್ಷೆ ತಯಾರಿಸುವಾಗ ಶೀರ್ಷಿಕೆ, ಉಪಶೀರ್ಷಿಕೆ, ದಿಕ್ಕು, ಸೂಚಿ, ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳು ಹಾಗೂ ಪ್ರಮಾಣ ಈ ಮೂಲಭೂತ ಅಂಶಗಳನ್ನು ಪರಿಗಣಿಸಲಾಗುತ್ತದೆ.',b:()=>`
+ ${anandMap(true)}
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">📝</div><div class="tt">ಶೀರ್ಷಿಕೆ ಮತ್ತು ಉಪಶೀರ್ಷಿಕೆ</div><div class="dd">ಇವುಗಳಿಂದ ನಕ್ಷೆಯಲ್ಲಿನ <b>ಪ್ರದೇಶ ಮತ್ತು ಉದ್ದೇಶ</b> ತಿಳಿಯುತ್ತದೆ.</div><div class="tap">ಏನು ಉಪಯೋಗ?</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🧭</div><div class="tt">ದಿಕ್ಕು (ದಿಕ್ಸೂಚಿ)</div><div class="dd">ದಿಕ್ಸೂಚಿಯಿಂದ ನಕ್ಷೆಯನ್ನು <b>ಸರಿಯಾಗಿ ಜೋಡಿಸಲು</b> ಬರುತ್ತದೆ.</div><div class="tap">ಏನು ಉಪಯೋಗ?</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">📋</div><div class="tt">ಸೂಚಿ</div><div class="dd">ಸೂಚಿಯಲ್ಲಿ ಕೊಟ್ಟಿರುವ <b>ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳ ಮೂಲಕ</b> ನಕ್ಷೆಯ ಅಂಶಗಳ ಸ್ಥಾನ ತಿಳಿಯುತ್ತದೆ ಮತ್ತು ಮಾಹಿತಿ ಸಿಗುತ್ತದೆ.</div><div class="tap">ಏನು ಉಪಯೋಗ?</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">📏</div><div class="tt">ಪ್ರಮಾಣ (ಪ್ರಮಾಣ ಪಟ್ಟಿ)</div><div class="dd">ಪ್ರಮಾಣ ಪಟ್ಟಿಯ ಉಪಯೋಗ ವಿವಿಧ ಸ್ಥಳಗಳ ನಡುವಿನ <b>ದೂರಗಳನ್ನು ತಿಳಿಯಲು</b> ಆಗುತ್ತದೆ.</div><div class="tap">ಏನು ಉಪಯೋಗ?</div></div>
+ </div>
+ <div class="msg ok">ನಕ್ಷೆಯ ಅಂಶಗಳಿಂದ ನಕ್ಷೆಯ <b>ಓದುವುದು ಸುಲಭ</b> ಹೋಗುತ್ತದೆ.</div>
+ <h3>ಆಟ: ಆನಂದನಗರದ ನಕ್ಷೆ ಓದಿ</h3>
+ ${pickGame('amq',[['ನಕ್ಷೆಯ ಶೀರ್ಷಿಕೆ ಏನು?',['ಆನಂದನಗರ – ಹಳ್ಳಿಯ ನಕ್ಷೆ','ಮಹಾರಾಷ್ಟ್ರ','ಭಾರತ'],0],['ಕೆರೆ ಮನೆಯ ಯಾವ ದಿಕ್ಕಿಗಿದೆ? (ಮೇಲೆ = ಉತ್ತರ)',['ಈಶಾನ್ಯ','ನೈಋತ್ಯ','ದಕ್ಷಿಣ'],0],['ಶಾಲೆ ಮನೆಯ ಯಾವ ದಿಕ್ಕಿಗಿದೆ?',['ಪಶ್ಚಿಮ','ಪೂರ್ವ','ಉತ್ತರ'],1],['ಮನೆ ಮತ್ತು ಶಾಲೆಯ ನಡುವೆ ಎಷ್ಟು ಚೌಕಗಳಿವೆ? (೧ ಚೌಕ = ೧೦೦ ಮೀಟರ್)',['ಸುಮಾರು ೪–೫ ಚೌಕ, ಅಂದರೆ ೪೦೦ ರಿಂದ ೫೦೦ ಮೀಟರ್','೧ ಚೌಕ','೨೦ ಚೌಕ'],0],['ನದಿ ಮತ್ತು ರಸ್ತೆಯಲ್ಲಿ ಪ್ರಕೃತಿನಿರ್ಮಿತ ಅಂಶ ಯಾವುದು?',['ನದಿ','ರಸ್ತೆ','ಎರಡೂ'],0]],'amq')}`,a:()=>drawGames()},
+{h:'ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳು',s:'ನಕ್ಷೆಯಲ್ಲಿ ವಿವಿಧ ಅಂಶಗಳನ್ನು ತೋರಿಸಲು ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳನ್ನು ಬಳಸುತ್ತಾರೆ. ನಕ್ಷೆಯಲ್ಲಿ ನೀರನ್ನು ನೀಲಿ ಬಣ್ಣದಿಂದ ತೋರಿಸುತ್ತಾರೆ.',b:()=>`
+ <div class="key">ನಕ್ಷೆಯಲ್ಲಿ ಬಣ್ಣಗಳನ್ನೂ ನಿರ್ದಿಷ್ಟವಾಗಿ ಬಳಸಲಾಗುತ್ತದೆ – <b>ನೀರು (ನದಿ, ಸಮುದ್ರ, ಕೆರೆ) ನೀಲಿ ಬಣ್ಣದಿಂದ</b>, ಕಾಡು/ಸಸ್ಯವರ್ಗ ಹಸಿರು ಬಣ್ಣದಿಂದ, ಬೆಟ್ಟ ಕಂದು ಬಣ್ಣದಿಂದ ತೋರಿಸುತ್ತಾರೆ.</div>
+ <div class="g2" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">${[['<svg width="90" height="20"><line x1="0" y1="10" x2="90" y2="10" stroke="#000" stroke-width="3" stroke-dasharray="10 4 2 4"/></svg>','ಅಂತರರಾಷ್ಟ್ರೀಯ ಗಡಿ'],['<svg width="90" height="20"><path d="M0 12 Q15 2 30 12 T60 12 T90 12" stroke="#0369a1" stroke-width="3" fill="none"/></svg>','ಕರಾವಳಿ'],['<svg width="90" height="20"><line x1="0" y1="10" x2="90" y2="10" stroke="#000" stroke-width="4"/>'+[10,30,50,70].map(x=>`<line x1="${x}" y1="4" x2="${x}" y2="16" stroke="#000" stroke-width="2"/>`).join('')+'</svg>','ರೈಲು ಮಾರ್ಗ'],['<svg width="90" height="20"><line x1="0" y1="10" x2="90" y2="10" stroke="#dc2626" stroke-width="5"/></svg>','ರಾಷ್ಟ್ರೀಯ ಹೆದ್ದಾರಿ'],['<svg width="90" height="20"><path d="M0 10 Q22 0 45 10 T90 10" stroke="#38bdf8" stroke-width="4" fill="none"/></svg>','ನದಿ'],['<span style="font-size:24px">⭐</span>','ರಾಜಧಾನಿ'],['<span style="font-size:24px">✈️</span>','ವಿಮಾನ ನಿಲ್ದಾಣ'],['<span style="font-size:24px">⚓</span>','ಬಂದರು'],['<span style="font-size:24px">🛕</span>','ದೇವಸ್ಥಾನ'],['<span style="font-size:24px">🕌</span>','ಮಸೀದಿ'],['<b style="font-size:20px">PO</b>','ಅಂಚೆ ಕಚೇರಿ'],['<span style="font-size:24px">⛰️</span>','ಘಟ್ಟ / ಬೆಟ್ಟ']].map(x=>`<div class="tile" onclick="tog(this)" style="text-align:center"><div style="height:30px;display:flex;align-items:center;justify-content:center">${x[0]}</div><div class="dd" style="font-weight:800">${x[1]}</div><div class="tap">ಹೆಸರು ನೋಡಿ</div></div>`).join('')}</div>
+ <h3>ಆಟ: ಚಿಹ್ನೆ ಗುರುತಿಸಿ</h3>
+ ${pickGame('sym',[['✈️ ಈ ಚಿಹ್ನೆ ಯಾವುದರ್ದು?',['ವಿಮಾನ ನಿಲ್ದಾಣ','ಬಂದರು','ದೇವಸ್ಥಾನ'],0],['⚓ ಈ ಚಿಹ್ನೆ ಯಾವುದರ್ದು?',['ಘಟ್ಟ','ಬಂದರು','ಮಸೀದಿ'],1],['PO ಈ ಗುರುತು ಯಾವುದರದ್ದು?',['ಪೊಲೀಸ್','ಅಂಚೆ ಕಚೇರಿ','ಪೆಟ್ರೋಲ್ ಪಂಪ್'],1],['ನಕ್ಷೆಯಲ್ಲಿ ನೀರನ್ನು ಯಾವ ಬಣ್ಣದಿಂದ ತೋರಿಸುತ್ತಾರೆ?',['ನೀಲಿ','ಕೆಂಪು','ಹಳದಿ'],0],['⭐ ಈ ಚಿಹ್ನೆಯನ್ನು ನಕ್ಷೆಯಲ್ಲಿ ಯಾವುದಕ್ಕೆ ಬಳಸುತ್ತಾರೆ?',['ರಾಜಧಾನಿ','ಶಾಲೆ','ಮರ'],0]],'sym')}`,a:()=>drawGames()},
+{h:'ಬನ್ನಿ, ಮಹಾರಾಷ್ಟ್ರದ ನಕ್ಷೆ ಓದೋಣ',s:'ಶಿಕ್ಷಕರ ಸಹಾಯದಿಂದ ಪಠ್ಯಪುಸ್ತಕದ ಮಹಾರಾಷ್ಟ್ರದ ನಕ್ಷೆಯ ಆಧಾರದ ಮೇಲೆ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಹುಡುಕಿ.',b:()=>`
+ <div class="msg in">📖 ಪಠ್ಯಪುಸ್ತಕದ <b>ಮಹಾರಾಷ್ಟ್ರದ ನಕ್ಷೆ</b> ಮುಂದೆ ಇಟ್ಟುಕೊಂಡು ಕೆಳಗಿನ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ಹುಡುಕಿ.</div>
+ ${pickGame('mh',[['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜಧಾನಿ ಯಾವುದು?',['ಪುಣೆ','ಮುಂಬೈ','ನಾಗಪುರ'],1],['ಮುಂಬೈ ಮಹಾರಾಷ್ಟ್ರದ ಯಾವ ದಿಕ್ಕಿಗಿದೆ?',['ಪೂರ್ವ','ಪಶ್ಚಿಮ','ಉತ್ತರ'],1],['ಮಹಾರಾಷ್ಟ್ರದ ಉಪರಾಜಧಾನಿ ಯಾವುದು?',['ನಾಗಪುರ','ನಾಶಿಕ್','ಕೊಲ್ಲಾಪುರ'],0],['ಮಹಾರಾಷ್ಟ್ರದ ಪಶ್ಚಿಮಕ್ಕೆ ಯಾವ ಸಮುದ್ರವಿದೆ?',['ಬಂಗಾಳ ಕೊಲ್ಲಿ','ಅರಬ್ಬಿ ಸಮುದ್ರ','ಹಿಂದೂ ಮಹಾಸಾಗರ'],1],['ಛತ್ತೀಸ್‌ಗಢ ರಾಜ್ಯ ಮಹಾರಾಷ್ಟ್ರದ ಯಾವ ದಿಕ್ಕಿಗಿದೆ?',['ಪೂರ್ವ','ಪಶ್ಚಿಮ','ದಕ್ಷಿಣ'],0],['ಪುಣೆಯಿಂದ ಕೊಲ್ಹಾಪುರಕ್ಕೆ ಹೋಗುವಾಗ ಯಾವ ಮಾರ್ಗ ಬಳಸಬೇಕು?',['ರಾಷ್ಟ್ರೀಯ ಹೆದ್ದಾರಿ','ಸಮುದ್ರ ಮಾರ್ಗ','ಕೇವಲ ವಿಮಾನ ಮಾರ್ಗ'],0],['ಮುಂಬೈ–ಚೆನ್ನೈ ರೈಲು ಮಾರ್ಗದಲ್ಲಿ ಮಹಾರಾಷ್ಟ್ರದ ಮುಖ್ಯ ನಿಲ್ದಾಣ ಯಾವುದು?',['ಸೊಲ್ಲಾಪುರ','ನಾಗಪುರ','ನಾಶಿಕ್'],0],['ಮುಂಬೈ ಮತ್ತು ನಾಗಪುರದ ನಡುವಿನ ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ ಎಷ್ಟು ಜಿಲ್ಲೆಗಳ ಮೂಲಕ ಹಾದುಹೋಗುತ್ತದೆ?',['೪','೧೦','೧೩'],1]],'mh')}
+ <div class="tap">ನಕ್ಷೆಯಲ್ಲಿ ಕಾಣುವ ಕೆಲವು ವಿಮಾನ ನಿಲ್ದಾಣಗಳು: ಮುಂಬೈ, ಪುಣೆ, ನಾಗಪುರ, ಛತ್ರಪತಿ ಸಂಭಾಜಿನಗರ, ಕೊಲ್ಹಾಪುರ.</div>`,a:()=>drawGames()},
+{h:'ಸನಾಳ ನಕ್ಷೆ – ಏನು ತೋರಿಸಬೇಕು?',s:'ಸನಾಗೆ ತನ್ನ ಪರಿಸರದ ನಕ್ಷೆ ತಯಾರಿಸಬೇಕು. ನಕ್ಷೆಯಲ್ಲಿ ಯಾವಾಗಲೂ ಒಂದೇ ಜಾಗದಲ್ಲಿರುವ ವಸ್ತುಗಳನ್ನು ತೋರಿಸುತ್ತಾರೆ; ಚಲಿಸುವ ವಸ್ತುಗಳನ್ನು ತೋರಿಸುವುದಿಲ್ಲ.',b:()=>`
+ <div>ಸನಾಗೆ ತನ್ನ ಪರಿಸರದ ನಕ್ಷೆ ತಯಾರಿಸಬೇಕು. ಅವಳಿಗೆ ಪರಿಸರದಲ್ಲಿ ಕೆಳಗಿನ ವಸ್ತುಗಳು ಕಂಡವು. ಇವುಗಳಲ್ಲಿ ಯಾವ ವಸ್ತುಗಳನ್ನು ಅವಳು ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಬೇಕು? ಅವಳಿಗೆ ಸಹಾಯ ಮಾಡಿ.</div>
+ <div class="key">💡 ನಕ್ಷೆಯಲ್ಲಿ <b>ಯಾವಾಗಲೂ ಒಂದೇ ಜಾಗದಲ್ಲಿ</b> ಇರುವ ವಸ್ತುಗಳನ್ನು ತೋರಿಸುತ್ತಾರೆ. ನಿರಂತರವಾಗಿ <b>ಜಾಗ ಬದಲಾಯಿಸುವ</b> ವಸ್ತುಗಳನ್ನು (ಪಕ್ಷಿ, ಹಸು, ವಾಹನ) ತೋರಿಸುವುದಿಲ್ಲ.</div>
+ ${sortGame('sana',[['🏠 ಮನೆ',0],['🐦 ಹಾರುವ ಪಕ್ಷಿಗಳು',1],['🚓 ಪೊಲೀಸ್ ಠಾಣೆ',0],['🐄 ಹಸುಗಳು',1],['📮 ಅಂಚೆ ಕಚೇರಿ',0],['🐂 ಎತ್ತು',1],['🏫 ಶಾಲೆ',0],['🚗 ಕಾರು',1],['⭕ ವೃತ್ತ',0],['🛣️ ರಸ್ತೆ',0],['📡 ಟವರ್',0],['🚆 ರೈಲುಗಾಡಿ',1],['🚉 ರೈಲು ನಿಲ್ದಾಣ',0],['🌾 ಹೊಲ',0],['🌳 ಮರ',0]],[['✔ ತೋರಿಸಬೇಕು','gr'],['✘ ತೋರಿಸಬಾರದು','or']],'sana')}`,a:()=>drawGames()},
+{h:'ಇದನ್ನು ನಾವು ಕಲಿತೆವು',s:'ನಕ್ಷೆಯ ಮೂಲಕ ಒಂದು ಸ್ಥಳದ ಸ್ಥಾನವನ್ನು ಹೇಗೆ ಹುಡುಕಬೇಕು ಎಂಬುದು ತಿಳಿಯಿತು. ನಕ್ಷೆ ತಯಾರಿಸುವಾಗ ನಕ್ಷೆಯ ಮೂಲಭೂತ ಅಂಶಗಳು ಮುಖ್ಯ. ನಕ್ಷೆಯಲ್ಲಿ ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳನ್ನು ಬಳಸುವುದು ಅಗತ್ಯ. ಭೂಮಿಯ ಮೇಲಿನ ಒಂದು ಸ್ಥಳದ ಸ್ಥಾನವನ್ನು ನಿರ್ದಿಷ್ಟ ಪ್ರಮಾಣ ತೆಗೆದುಕೊಂಡು ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಬಹುದು.',b:()=>`
+ <ul>
+  <li>ನಕ್ಷೆಯ ಮೂಲಕ ಒಂದು ಸ್ಥಳದ <b>ಸ್ಥಾನವನ್ನು ಹೇಗೆ ಹುಡುಕಬೇಕು</b> ಎಂಬುದು ತಿಳಿಯಿತು.</li>
+  <li>ನಕ್ಷೆ ತಯಾರಿಸುವಾಗ ನಕ್ಷೆಯ <b>ಮೂಲಭೂತ ಅಂಶಗಳು</b> (ಶೀರ್ಷಿಕೆ, ದಿಕ್ಕು, ಸೂಚಿ, ಪ್ರಮಾಣ) ಮುಖ್ಯವಾಗಿರುತ್ತವೆ.</li>
+  <li>ನಕ್ಷೆಯಲ್ಲಿ <b>ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳ</b> ಬಳಕೆ ಅಗತ್ಯ.</li>
+  <li>ಭೂಮಿಯ ಮೇಲಿನ ಒಂದು ಸ್ಥಳದ ಸ್ಥಾನವನ್ನು <b>ನಿರ್ದಿಷ್ಟ ಪ್ರಮಾಣ</b> ತೆಗೆದುಕೊಂಡು ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಬಹುದು.</li>
+ </ul>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>೧. ಪಠ್ಯಪುಸ್ತಕದ ನಕ್ಷೆಯಲ್ಲಿ ಜಲಗಡಿ ಅಥವಾ ಭೂಗಡಿ ಇರುವ ಎರಡು ಜಿಲ್ಲೆಗಳನ್ನು ಇಷ್ಟದ ಬಣ್ಣದಿಂದ ತೋರಿಸಿ; ಮುಖ್ಯ ೩ ರಿಂದ ೭ ನಗರಗಳ ಹೆಸರುಗಳನ್ನು ಸರಿಯಾದ ಸ್ಥಾನದಲ್ಲಿ ಬರೆಯಿರಿ; ರಾಜಧಾನಿ ಮತ್ತು ಉಪರಾಜಧಾನಿಯನ್ನು ಸರಿಯಾದ ಜಾಗದಲ್ಲಿ ಬರೆಯಿರಿ.<br>೨. ನಿಮ್ಮ ಜಿಲ್ಲೆಯ ಉತ್ತರಕ್ಕೆ ಯಾವ ಜಿಲ್ಲೆಗಳು/ರಾಜ್ಯ ಇವೆ ಎಂಬುದನ್ನು ನಕ್ಷೆಯಲ್ಲಿ ನೋಡಿ ಬರೆಯಿರಿ.<br>೩. ಶಿಕ್ಷಕರ ಸಹಾಯದಿಂದ ಶಾಲಾ ಪರಿಸರದ ನೀಲನಕ್ಷೆ (ಶೀರ್ಷಿಕೆ, ದಿಕ್ಕು, ಸೂಚಿ, ಪ್ರಮಾಣ) ತಯಾರಿಸಿ.</div>
+ <div class="msg ok" style="text-align:center;font-size:19px">🗺️ ಈ ಪಾಠದಲ್ಲಿ ನೀವು ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು: <b>${(award('end','ಅಭಿನಂದನೆ! ನೀವು ಇಡೀ ಪಾಠ ಕಲಿತಿರಿ.'),STARS.size)}</b> ⭐</div>
+ <div class="tool">${tool('N')}</div>`}
+];
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ಯಾವುದೇ ವಸ್ತು ಅಥವಾ ವ್ಯಕ್ತಿಯ ಸ್ಥಾನ ಹೇಳುವಾಗ ಯಾವುದನ್ನು ಬಳಸುತ್ತಾರೆ?',['ಬಣ್ಣ ಮತ್ತು ಆಕಾರ','ಕಂಬಸಾಲು ಮತ್ತು ಅಡ್ಡಸಾಲು','ತೂಕ ಮತ್ತು ಎತ್ತರ','ಹೆಸರು ಮತ್ತು ವಿಳಾಸ'],1,'ಸ್ಥಾನ ಹೇಳುವಾಗ ಕಂಬಸಾಲು ಮತ್ತು ಅಡ್ಡಸಾಲನ್ನು ಬಳಸುತ್ತಾರೆ.'],
+['ಇಡೀ ಭೂಮಿಯ ಅಥವಾ ಅದರ ಕೆಲವು ಭಾಗದ ಪ್ರಮಾಣಬದ್ಧ ರೇಖಾಚಿತ್ರ ಎಂದರೇನು?',['ಚಿತ್ರ','ನಕ್ಷೆ','ಭೂಗೋಳ','ಫೋಟೋ'],1,'ಅದನ್ನು ನಕ್ಷೆ ಎನ್ನುತ್ತಾರೆ.'],
+['ನಕ್ಷೆ ತಯಾರಿಸುವಾಗ ಯಾವುದನ್ನು ಬಳಸುವುದಿಲ್ಲ?',['ದಿಕ್ಕು','ಮಾನಕ','ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು','ಸಂಗೀತ'],3,'ದಿಕ್ಕು, ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳು, ಪ್ರಕ್ಷೇಪಣ, ಪ್ರಮಾಣ ಇವುಗಳನ್ನು ಬಳಸುತ್ತಾರೆ.'],
+['ಒಂದು ವಿಷಯದ ಚಿಕ್ಕ ರೂಪದ ಚಿತ್ರ ಎಂದರೇನು?',['ಗುರುತು','ಸಂಕೇತ','ಮಾನಕ','ದಿಕ್ಕು'],1,'ಚಿಕ್ಕ ರೂಪದ ಚಿತ್ರ ಎಂದರೆ ಚಿಹ್ನೆ.'],
+['ನಕ್ಷೆಯಲ್ಲಿ ಇಂಗ್ಲಿಷ್ ಆದ್ಯಕ್ಷರಗಳು ಅಥವಾ ಜ್ಯಾಮಿತೀಯ ಆಕೃತಿ ಬಳಸುತ್ತಾರೆ, ಅವುಗಳನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ಗುರುತುಗಳು','ಚಿಹ್ನೆಗಳು','ಶೀರ್ಷಿಕೆ','ಸೂಚಿ'],0,'ಅವುಗಳನ್ನು ಗುರುತುಗಳು ಎನ್ನುತ್ತಾರೆ.'],
+['ನಕ್ಷೆಯಲ್ಲಿ ‘PO’ ಈ ಗುರುತನ್ನು ಯಾವುದಕ್ಕೆ ಬಳಸುತ್ತಾರೆ?',['ಪೊಲೀಸ್ ಠಾಣೆ','ಅಂಚೆ ಕಚೇರಿ','ಪೆಟ್ರೋಲ್ ಪಂಪ್','ಉದ್ಯಾನ'],1,'PO = ಅಂಚೆ ಕಚೇರಿ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಪ್ರಕೃತಿನಿರ್ಮಿತ ಅಂಶ ಯಾವುದು?',['ಶಾಲೆ','ಮಾರುಕಟ್ಟೆ','ನದಿ','ಬಸ್ ನಿಲ್ದಾಣ'],2,'ನದಿ ಪ್ರಕೃತಿನಿರ್ಮಿತ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಮಾನವನಿರ್ಮಿತ ಅಂಶ ಯಾವುದು?',['ಮರ','ಕೆರೆ (ನೈಸರ್ಗಿಕ)','ಬೆಟ್ಟ','ರಸ್ತೆ'],3,'ರಸ್ತೆಯನ್ನು ಮನುಷ್ಯ ಕಟ್ಟಿದ.'],
+['ನಕ್ಷೆಯ ಮೂಲಭೂತ ಅಂಶಗಳಲ್ಲಿ ಪ್ರಮುಖ ಅಂಶ ಯಾವುದು?',['ದಿಕ್ಕು','ನಕ್ಷೆಯ ಪ್ರಕಾರ','ಉದ್ದ-ಅಗಲ','ಆಕಾರ'],0,'ದಿಕ್ಕು ನಕ್ಷೆಯ ಪ್ರಮುಖ ಅಂಶ.'],
+['ನಕ್ಷೆಯಲ್ಲಿ ಎರಡು ಸ್ಥಳಗಳ ನಡುವಿನ ದೂರ ಅಳೆಯಲು ಯಾವುದನ್ನು ಬಳಸುತ್ತಾರೆ?',['ದಿಕ್ಕು','ಮಾನಕ','ಚಿಹ್ನೆಗಳು','ಚಿತ್ರ'],1,'ಪ್ರಮಾಣ ಪಟ್ಟಿಯಿಂದ ದೂರ ತಿಳಿಯುತ್ತದೆ.'],
+['ನಕ್ಷೆಯ ಶೀರ್ಷಿಕೆ ಮತ್ತು ಉಪಶೀರ್ಷಿಕೆಯಿಂದ ಏನು ತಿಳಿಯುತ್ತದೆ?',['ಪ್ರದೇಶ ಮತ್ತು ಉದ್ದೇಶ','ದೂರ','ಎತ್ತರ','ತೂಕ'],0,'ಶೀರ್ಷಿಕೆಯಿಂದ ಪ್ರದೇಶ ಮತ್ತು ಉದ್ದೇಶ ತಿಳಿಯುತ್ತದೆ.'],
+['ಸೂಚಿಯಿಂದ ಏನು ತಿಳಿಯುತ್ತದೆ?',['ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳ ಅರ್ಥ','ಕೇವಲ ಶೀರ್ಷಿಕೆ','ಕೇವಲ ದೂರ','ಏನೂ ಇಲ್ಲ'],0,'ಸೂಚಿಯಿಂದ ಅಂಶಗಳ ಸ್ಥಾನ ಮತ್ತು ಮಾಹಿತಿ ತಿಳಿಯುತ್ತದೆ.'],
+['ದಿಕ್ಸೂಚಿಯ ಉಪಯೋಗ ಯಾವುದು?',['ನಕ್ಷೆಯನ್ನು ಸರಿಯಾಗಿ ಜೋಡಿಸಬಹುದು','ಬಣ್ಣ ಹಚ್ಚಬಹುದು','ದೂರ ಕಡಿಮೆಯಾಗುತ್ತದೆ','ಹೆಸರು ಬರೆಯಬಹುದು'],0,'ದಿಕ್ಸೂಚಿಯಿಂದ ನಕ್ಷೆಯನ್ನು ಸರಿಯಾಗಿ ಜೋಡಿಸಬಹುದು.'],
+['ನಕ್ಷೆಯಲ್ಲಿ ದಿಕ್ಸೂಚಿಯ ಬಾಣ ಸಾಮಾನ್ಯವಾಗಿ ಯಾವ ದಿಕ್ಕನ್ನು ತೋರಿಸುತ್ತದೆ?',['ದಕ್ಷಿಣ','ಉತ್ತರ','ಪೂರ್ವ','ಪಶ್ಚಿಮ'],1,'ಬಾಣ ಉತ್ತರ ದಿಕ್ಕನ್ನು ತೋರಿಸುತ್ತದೆ.'],
+['ನಕ್ಷೆಯ ಮೇಲ್ಭಾಗದಲ್ಲಿ ಸಾಮಾನ್ಯವಾಗಿ ಯಾವ ದಿಕ್ಕು ಇರುತ್ತದೆ?',['ಉತ್ತರ','ದಕ್ಷಿಣ','ಪೂರ್ವ','ಪಶ್ಚಿಮ'],0,'ಮೇಲೆ ಉತ್ತರ ದಿಕ್ಕು ಇರುತ್ತದೆ.'],
+['ಉತ್ತರ ಮತ್ತು ಪೂರ್ವದ ನಡುವಿನ ಉಪದಿಕ್ಕು ಯಾವುದು?',['ಈಶಾನ್ಯ','ಆಗ್ನೇಯ','ನೈಋತ್ಯ','ವಾಯವ್ಯ'],0,'ಉತ್ತರ-ಪೂರ್ವದ ನಡುವಿನ ಉಪದಿಕ್ಕು – ಈಶಾನ್ಯ.'],
+['ದಕ್ಷಿಣ ಮತ್ತು ಪಶ್ಚಿಮದ ನಡುವಿನ ಉಪದಿಕ್ಕು ಯಾವುದು?',['ಈಶಾನ್ಯ','ಆಗ್ನೇಯ','ನೈಋತ್ಯ','ವಾಯವ್ಯ'],2,'ದಕ್ಷಿಣ-ಪಶ್ಚಿಮದ ನಡುವಿನ ಉಪದಿಕ್ಕು – ನೈಋತ್ಯ.'],
+['ತರಗತಿ ಕೋಣೆಯ ೧೦ ಮೀಟರ್ ಉದ್ದದ ಗೋಡೆಯನ್ನು ಕಾಗದದ ಮೇಲೆ ೧೦ ಸೆಂ.ಮೀ.ನಿಂದ ತೋರಿಸಿದರೆ, ಪ್ರಮಾಣ ಎಷ್ಟು?',['೧ ಸೆಂ.ಮೀ = ೧ ಮೀಟರ್','೧ ಸೆಂ.ಮೀ = ೧೦ ಮೀಟರ್','೧ ಮೀಟರ್ = ೧ ಸೆಂ.ಮೀ. ಅಲ್ಲ','೧ ಸೆಂ.ಮೀ = ೧೦೦ ಮೀಟರ್'],0,'೧೦ ಸೆಂ.ಮೀ. = ೧೦ ಮೀಟರ್, ಅಂದರೆ ೧ ಸೆಂ.ಮೀ. = ೧ ಮೀಟರ್.'],
+['ಪ್ರಮಾಣ ೧ ಸೆಂ.ಮೀ. = ೧೦೦ ಮೀಟರ್ ಆಗಿದ್ದರೆ ನಕ್ಷೆಯಲ್ಲಿ ೪ ಸೆಂ.ಮೀ. ಎಂದರೆ ನೆಲದ ಮೇಲೆ ಎಷ್ಟು?',['೪ ಮೀಟರ್','೪೦ ಮೀಟರ್','೪೦೦ ಮೀಟರ್','೪೦೦೦ ಮೀಟರ್'],2,'೪ × ೧೦೦ = ೪೦೦ ಮೀಟರ್.'],
+['ನಕ್ಷೆಯಲ್ಲಿ ಪ್ರಮಾಣ ಏಕೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?',['ನೆಲದ ಮೇಲಿನ ದೊಡ್ಡ ದೂರವನ್ನು ಕಡಿಮೆ ಮಾಡಿ ಕಾಗದದ ಮೇಲೆ ತೋರಿಸಲು','ನಕ್ಷೆ ಸುಂದರವಾಗಿ ಕಾಣಲೆಂದು','ಬಣ್ಣಗಳಿಗಾಗಿ','ಹೆಸರು ಬರೆಯಲು'],0,'ದೊಡ್ಡ ದೂರವನ್ನು ಕೆಲವು ಪಟ್ಟು ಕಡಿಮೆ ಮಾಡಿ ತೋರಿಸುತ್ತಾರೆ.'],
+['ನಕ್ಷೆಯಲ್ಲಿ ನೀರನ್ನು ಯಾವ ಬಣ್ಣದಿಂದ ತೋರಿಸುತ್ತಾರೆ?',['ನೀಲಿ','ಕೆಂಪು','ಹಸಿರು','ಕಪ್ಪು'],0,'ನೀರನ್ನು ನೀಲಿ ಬಣ್ಣದಿಂದ ತೋರಿಸುತ್ತಾರೆ.'],
+['✈️ ಈ ಚಿಹ್ನೆ ನಕ್ಷೆಯಲ್ಲಿ ಯಾವುದಕ್ಕೆ ಇರುತ್ತದೆ?',['ಬಂದರು','ವಿಮಾನ ನಿಲ್ದಾಣ','ಘಟ್ಟ','ದೇವಸ್ಥಾನ'],1,'ಇದು ವಿಮಾನ ನಿಲ್ದಾಣದ ಚಿಹ್ನೆ.'],
+['⚓ ಈ ಚಿಹ್ನೆ ನಕ್ಷೆಯಲ್ಲಿ ಯಾವುದಕ್ಕೆ ಇರುತ್ತದೆ?',['ಬಂದರು','ವಿಮಾನ ನಿಲ್ದಾಣ','ಮಸೀದಿ','ರೈಲು ನಿಲ್ದಾಣ'],0,'ಲಂಗರು ಬಂದರಿನ ಚಿಹ್ನೆ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜಧಾನಿ ಯಾವುದು?',['ಪುಣೆ','ನಾಗಪುರ','ಮುಂಬೈ','ನಾಶಿಕ್'],2,'ಮುಂಬೈ ರಾಜಧಾನಿ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಉಪರಾಜಧಾನಿ ಯಾವುದು?',['ನಾಗಪುರ','ಪುಣೆ','ಕೊಲ್ಲಾಪುರ','ಸೊಲ್ಲಾಪುರ'],0,'ನಾಗಪುರ ಉಪರಾಜಧಾನಿ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಪಶ್ಚಿಮಕ್ಕೆ ಯಾವ ಸಮುದ್ರವಿದೆ?',['ಅರಬ್ಬಿ ಸಮುದ್ರ','ಬಂಗಾಳ ಕೊಲ್ಲಿ','ಕೆಂಪು ಸಮುದ್ರ','ಕಪ್ಪು ಸಮುದ್ರ'],0,'ಪಶ್ಚಿಮಕ್ಕೆ ಅರಬ್ಬಿ ಸಮುದ್ರವಿದೆ.'],
+['ಮುಂಬೈ ಮತ್ತು ನಾಗಪುರದ ನಡುವಿನ ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ ಎಷ್ಟು ಜಿಲ್ಲೆಗಳ ಮೂಲಕ ಹಾದುಹೋಗುತ್ತದೆ?',['೧೨','೦೪','೧೦','೧೩'],2,'ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ ೧೦ ಜಿಲ್ಲೆಗಳ ಮೂಲಕ ಹಾದುಹೋಗುತ್ತದೆ.'],
+['ಸನಾ ಪರಿಸರದ ನಕ್ಷೆಯಲ್ಲಿ ಯಾವ ವಸ್ತುವನ್ನು ತೋರಿಸಬಾರದು?',['ಶಾಲೆ','ರಸ್ತೆ','ಹಾರುವ ಪಕ್ಷಿಗಳು','ರೈಲು ನಿಲ್ದಾಣ'],2,'ನಿರಂತರವಾಗಿ ಜಾಗ ಬದಲಾಯಿಸುವ ವಸ್ತುಗಳನ್ನು ತೋರಿಸುವುದಿಲ್ಲ.'],
+['ನಕ್ಷೆಯಲ್ಲಿ ಯಾವ ರೀತಿಯ ವಸ್ತುಗಳನ್ನು ತೋರಿಸುತ್ತಾರೆ?',['ಯಾವಾಗಲೂ ಒಂದೇ ಜಾಗದಲ್ಲಿರುವ','ನಿರಂತರವಾಗಿ ಚಲಿಸುವ','ಕೇವಲ ಪ್ರಾಣಿಗಳು','ಕೇವಲ ಮನುಷ್ಯರು'],0,'ಯಾವಾಗಲೂ ಒಂದೇ ಜಾಗದಲ್ಲಿರುವ ವಸ್ತುಗಳನ್ನು ತೋರಿಸುತ್ತಾರೆ.'],
+['ನಕ್ಷೆ ಮತ್ತು ಭೂಗೋಳದಲ್ಲಿ ಭೂಮಿಯ ಪ್ರತಿಕೃತಿ ಯಾವುದು?',['ನಕ್ಷೆ','ಭೂಗೋಳ','ಎರಡೂ','ಯಾವುದೂ ಇಲ್ಲ'],1,'ಭೂಗೋಳ ಭೂಮಿಯ ಪ್ರತಿಕೃತಿ; ನಕ್ಷೆ ಪ್ರಮಾಣಬದ್ಧ ರೇಖಾಚಿತ್ರ.']
+];
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ನಕ್ಷೆಯ ಮೂಲಭೂತ ಅಂಶಗಳಲ್ಲಿ ............ ನಕ್ಷೆಯ ಪ್ರಮುಖ ಅಂಶ.',['ದಿಕ್ಕು','ನಕ್ಷೆಯ ಪ್ರಕಾರ','ನಕ್ಷೆಯ ಉದ್ದ-ಅಗಲ','ನಕ್ಷೆಯ ಗಾತ್ರ'],0],
+  ['ನಕ್ಷೆಯಲ್ಲಿ ಎರಡು ಸ್ಥಳಗಳ ನಡುವಿನ ದೂರ ಅಳೆಯಲು ಯಾವುದನ್ನು ಬಳಸುತ್ತಾರೆ?',['ದಿಕ್ಕು','ಮಾನಕ','ಚಿಹ್ನೆಗಳು','ಚಿತ್ರ'],1],
+  ['ನಕ್ಷೆಯಲ್ಲಿ ಅಂಚೆ ಕಚೇರಿ ತೋರಿಸಲು ಯಾವ ಗುರುತು ಬಳಸುತ್ತಾರೆ?',['PS','PO','BS','H'],1],
+  ['ಮುಂಬೈ ಮತ್ತು ನಾಗಪುರದ ನಡುವಿನ ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ ಎಷ್ಟು ಜಿಲ್ಲೆಗಳ ಮೂಲಕ ಹಾದುಹೋಗುತ್ತದೆ?',['೧೨','೦೪','೧೦','೧೩'],2]],
+ aa:[['ನಕ್ಷೆ ಎಂದರೇನು?','ಇಡೀ ಭೂಮಿಯ ಅಥವಾ ಅದರ ಕೆಲವು ಭಾಗದ ಪ್ರಮಾಣಬದ್ಧ ರೇಖಾಚಿತ್ರವೇ ನಕ್ಷೆ.'],['ನಕ್ಷೆಯಲ್ಲಿ ಪ್ರಮಾಣ ಏಕೆ ಹೇಳಬೇಕಾಗುತ್ತದೆ?','ನೆಲದ ಮೇಲಿನ ದೂರವನ್ನು ಎಷ್ಟು ಪಟ್ಟು ಕಡಿಮೆ ಮಾಡಿ ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಲಾಗಿದೆ ಎಂಬುದು ತಿಳಿಯಲು ಮತ್ತು ಎರಡು ಸ್ಥಳಗಳ ನಡುವಿನ ನಿಜವಾದ ದೂರ ಕಂಡುಹಿಡಿಯಲು ಪ್ರಮಾಣ ಹೇಳಬೇಕಾಗುತ್ತದೆ.'],['ನಕ್ಷೆಯ ಮೂಲಭೂತ ಅಂಶಗಳು ಯಾವುವು?','ಶೀರ್ಷಿಕೆ (ಮತ್ತು ಉಪಶೀರ್ಷಿಕೆ), ದಿಕ್ಕು, ಸೂಚಿ (ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳು) ಮತ್ತು ಪ್ರಮಾಣ ಇವು ನಕ್ಷೆಯ ಮೂಲಭೂತ ಅಂಶಗಳು.'],['ನಕ್ಷೆಯಲ್ಲಿ ನೀರನ್ನು ಯಾವ ಬಣ್ಣದಿಂದ ತೋರಿಸಲಾಗುತ್ತದೆ?','ನಕ್ಷೆಯಲ್ಲಿ ನೀರನ್ನು ನೀಲಿ ಬಣ್ಣದಿಂದ ತೋರಿಸಲಾಗುತ್ತದೆ.']],
+ ii:[['ನಕ್ಷೆ ತಯಾರಿಸುವಾಗ ಪ್ರಮಾಣವನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.',0],['ನಕ್ಷೆ ಭೂಮಿಯ ಪ್ರತಿಕೃತಿ.',1],['ನಕ್ಷೆ ಅರ್ಥವಾಗಲು ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.',0]],
+ dist:['ಮುಂಬೈ ನಗರ','ಮುಂಬೈ ಉಪನಗರ','ಠಾಣೆ','ಪಾಲ್ಘರ್','ರಾಯಗಡ','ರತ್ನಾಗಿರಿ','ಸಿಂಧುದುರ್ಗ','ನಾಶಿಕ್','ಧುಳೆ','ನಂದುರ್ಬಾರ್','ಜಲಗಾಂವ್','ಅಹಿಲ್ಯಾನಗರ','ಪುಣೆ','ಸಾತಾರಾ','ಸಾಂಗ್ಲಿ','ಸೊಲ್ಲಾಪುರ','ಕೊಲ್ಲಾಪುರ','ಛತ್ರಪತಿ ಸಂಭಾಜಿನಗರ','ಜಾಲನಾ','ಬೀಡ್','ಲಾತೂರ್','ಧಾರಾಶಿವ','ನಾಂದೇಡ್','ಪರಭಣಿ','ಹಿಂಗೋಲಿ','ಅಮರಾವತಿ','ಅಕೋಲಾ','ವಾಶಿಂ','ಬುಲಢಾಣಾ','ಯವತ್ಮಾಳ್','ನಾಗಪುರ','ವರ್ಧಾ','ಭಂಡಾರಾ','ಗೊಂದಿಯಾ','ಚಂದ್ರಪುರ','ಗಡಚಿರೋಲಿ']
+};
+/* ಮನೆಯ ನೀಲನಕ್ಷೆ ಮಾಡಿ */
+const PB=[['🏠','ಮನೆ'],['🌳','ಮರ'],['🛕','ದೇವಸ್ಥಾನ'],['🏫','ಶಾಲೆ'],['💧','ಬಾವಿ/ಕೆರೆ'],['🛣️','ರಸ್ತೆ'],['🏪','ಅಂಗಡಿ'],['🌾','ಹೊಲ']];
+let PBS=0,PBG={},PBT='ನನ್ನ ಮನೆಯ ಪರಿಸರ';
+function drawPB(){const b=$('pbBox');if(!b)return;const used=[...new Set(Object.values(PBG))];
+ b.innerHTML=`<div class="tap">೧) ಕೆಳಗಿನಿಂದ ಚಿಹ್ನೆ ಆಯ್ಕೆ ಮಾಡಿ ೨) ಚೌಕಟ್ಟಿನಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ ಇಡಿ (ಮತ್ತೆ ಕ್ಲಿಕ್ = ತೆಗೆಯುವುದು).</div>
+ <div class="chips">${PB.map((p,i)=>`<span class="chip ${PBS==i?'on':''}" onclick="PBS=${i};drawPB()">${p[0]} ${p[1]}</span>`).join('')}</div>
+ <input type="text" value="${PBT}" oninput="PBT=this.value;document.getElementById('pbT').textContent=this.value" style="width:100%;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-bottom:6px" placeholder="ನಕ್ಷೆಯ ಶೀರ್ಷಿಕೆ">
+ <div style="border:2px solid #334155;border-radius:8px;padding:6px;background:#fff;position:relative;max-width:380px;margin:0 auto">
+  <div id="pbT" style="text-align:center;font-weight:800">${PBT}</div>
+  <div style="position:absolute;right:8px;top:6px;text-align:center;font-weight:800;font-size:12px">⬆<br>ಉ</div>
+  <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:2px;margin-top:6px">${[...Array(36)].map((_,i)=>`<div onclick="PBG[${i}]!=null?delete PBG[${i}]:PBG[${i}]=PBS;drawPB()" style="aspect-ratio:1;border:1px solid #cbd5e1;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;background:#f8fafc">${PBG[i]!=null?PB[PBG[i]][0]:''}</div>`).join('')}</div>
+  <div style="font-size:12px;margin-top:4px"><b>ಮಾನಕ:</b> ೧ ಚೌಕ = ೧೦ ಮೀಟರ್ &nbsp; <b>ಸೂಚಿ:</b> ${used.map(u=>PB[u][0]+' '+PB[u][1]).join(', ')||'—'}</div></div>`;
+ if(used.length>=4&&used.includes(0))award('pb','ಸುಂದರ ನೀಲನಕ್ಷೆ!')}
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಅಭ್ಯಾಸ – ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ</h2>
+ <h3>(ಅ) ಗುರುತಿಸಿ ನೋಡೋಣ!</h3>${pickGame('swa',SW.a,'swa')}
+ <h3>(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಇ) ತಪ್ಪೋ ಸರಿಯೋ ಎಂದು ಬರೆಯಿರಿ.</h3>${sortGame('swi',SW.ii,[['✔ ಸರಿ','gr'],['✘ ತಪ್ಪು','or']],'swi')}
+ <div class="tap">(೨) ಸರಿಯಾದ ವಿಧಾನ: <b>ಭೂಗೋಳ</b> ಇದು ಭೂಮಿಯ ಪ್ರತಿಕೃತಿ; ನಕ್ಷೆ ಪ್ರಮಾಣಬದ್ಧ ರೇಖಾಚಿತ್ರ.</div>
+ <h3>(ಈ) ಶಿಕ್ಷಕರ ಸಹಾಯದಿಂದ ನಿಮ್ಮ ಮನೆಯ ಪರಿಸರದ ನಕ್ಷೆ ನೀಲನಕ್ಷೆ ತಯಾರಿಸಿ.</h3><div id="pbBox"></div>
+ <h3>(ಉ) ಮಹಾರಾಷ್ಟ್ರದ ಆಡಳಿತ ನಕ್ಷೆಯಲ್ಲಿ ನಿಮಗೆ ಗೊತ್ತಿರುವ ಜಿಲ್ಲೆಗಳನ್ನು ಹುಡುಕಿ ಅವುಗಳ ಹೆಸರು ಬರೆಯಿರಿ.</h3>
+ <div class="tap">ನಕ್ಷೆಯಲ್ಲಿ ಹುಡುಕಿದ ಜಿಲ್ಲೆಗಳ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ. (ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ೩೬ ಜಿಲ್ಲೆಗಳಿವೆ)</div>
+ <div class="chips">${SW.dist.map(d=>`<span class="chip" onclick="chip(this)">${d}</span>`).join('')}</div><div class="msg in" data-cnt="ನೀವು # ಜಿಲ್ಲೆಗಳನ್ನು ನಕ್ಷೆಯಲ್ಲಿ ಹುಡುಕಿದಿರಿ.">ನಕ್ಷೆಯಲ್ಲಿ ಹುಡುಕಿದ ಜಿಲ್ಲೆಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿ.</div>
+ <h3>(ಊ) ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳನ್ನು ಗುರುತಿಸಿ.</h3>
+ ${pickGame('swu',[['🛕 – ಹೆಸರು?',['ದೇವಸ್ಥಾನ','ಮಸೀದಿ','ಬಂದರು'],0],['⛰️ (ಘಟ್ಟ ತೋರಿಸುವ) – ಹೆಸರು?',['ಘಟ್ಟ','ವಿಮಾನ ನಿಲ್ದಾಣ','ಕೆರೆ'],0],['✈️ – ಹೆಸರು?',['ಬಂದರು','ವಿಮಾನ ನಿಲ್ದಾಣ','ಅಂಚೆ ಕಚೇರಿ'],1],['🕌 – ಹೆಸರು?',['ದೇವಸ್ಥಾನ','ಮಸೀದಿ','ಶಾಲೆ'],1],['⚓ – ಹೆಸರು?',['ಬಂದರು','ಘಟ್ಟ','ರೈಲು'],0],['PO – ಹೆಸರು?',['ಪೊಲೀಸ್','ಅಂಚೆ ಕಚೇರಿ','ಪೆಟ್ರೋಲ್ ಪಂಪ್'],1]],'swu')}
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>೧. ಕೊಟ್ಟ ನಕ್ಷೆಯಲ್ಲಿ ಜಲಗಡಿ/ಭೂಗಡಿ ಇರುವ ಎರಡು ಜಿಲ್ಲೆಗಳಿಗೆ ಬಣ್ಣ ಹಚ್ಚಿ, ಮುಖ್ಯ ೩ ರಿಂದ ೭ ನಗರಗಳು, ರಾಜಧಾನಿ ಮತ್ತು ಉಪರಾಜಧಾನಿಯನ್ನು ಸರಿಯಾದ ಜಾಗದಲ್ಲಿ ಬರೆಯಿರಿ.<br>೨. ನಿಮ್ಮ ಜಿಲ್ಲೆಯ ಉತ್ತರಕ್ಕೆ ಯಾವ ಜಿಲ್ಲೆಗಳು/ರಾಜ್ಯ ಇವೆ? ಛತ್ತೀಸ್‌ಗಢ ಮಹಾರಾಷ್ಟ್ರದ ಯಾವ ದಿಕ್ಕಿಗಿದೆ? ಪಶ್ಚಿಮಕ್ಕೆ ಯಾವ ಸಮುದ್ರವಿದೆ?</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames();drawPB()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ನಕ್ಷೆಯಲ್ಲಿ ಪ್ರಮಾಣ ಕೊಟ್ಟಿರದಿದ್ದರೆ ಯಾವ ತೊಂದರೆ ಬರುತ್ತಿತ್ತು?','ಎರಡು ಹಳ್ಳಿಗಳ ನಡುವಿನ ದೂರ ಹೇಗೆ ಕಂಡುಹಿಡಿಯುವಿರಿ?','ನಕ್ಷೆಯಲ್ಲಿನ ದೂರ ನೆಲದ ಮೇಲೆ ನಿಜವಾಗಿ ಎಷ್ಟು ಎಂದು ತಿಳಿಯುತ್ತಿರಲಿಲ್ಲ. ಆದ್ದರಿಂದ ಎರಡು ಸ್ಥಳಗಳ ನಡುವಿನ ದೂರ, ಪ್ರಯಾಣಕ್ಕೆ ಬೇಕಾಗುವ ಸಮಯ ನಿರ್ಧರಿಸಲು ಆಗುತ್ತಿರಲಿಲ್ಲ.'],
+['ನಕ್ಷೆಯಲ್ಲಿ ದಿಕ್ಸೂಚಿ ಇಲ್ಲದಿದ್ದರೆ ಏನಾಗುತ್ತದೆ?','ನಕ್ಷೆಯನ್ನು ತಲೆಕೆಳಗಾಗಿ ಹಿಡಿದರೆ?','ಯಾವ ಬದಿ ಉತ್ತರ ಎಂದು ತಿಳಿಯುವುದಿಲ್ಲ, ನಕ್ಷೆಯನ್ನು ತಲೆಕೆಳಗಾಗಿ ಹಿಡಿಯಲಾಗುತ್ತದೆ ಮತ್ತು ತಪ್ಪು ದಿಕ್ಕಿನಲ್ಲಿ ಪ್ರಯಾಣವಾಗಬಹುದು. ಆದ್ದರಿಂದ ದಿಕ್ಸೂಚಿ ಅಗತ್ಯ.'],
+['ಭೂಗೋಳ ಇರುವಾಗ ನಮಗೆ ನಕ್ಷೆಗಳ ಅಗತ್ಯ ಏಕೆ ಬೀಳುತ್ತದೆ?','ಭೂಗೋಳವನ್ನು ಜೇಬಿನಲ್ಲಿ ಒಯ್ಯಲು ಸಾಧ್ಯವೇ?','ನಕ್ಷೆಯನ್ನು ಮಡಚಿ ಎಲ್ಲಿ ಬೇಕಾದರೂ ಜೊತೆಗೆ ಒಯ್ಯಬಹುದು. ಒಂದು ಚಿಕ್ಕ ಭಾಗದ (ಹಳ್ಳಿ, ಜಿಲ್ಲೆ) ವಿವರವನ್ನು ನಕ್ಷೆಯಲ್ಲಿ ತೋರಿಸಬಹುದು; ಭೂಗೋಳದ ಮೇಲೆ ಅದು ಕಾಣುವುದಿಲ್ಲ.'],
+['ಮೊಬೈಲ್‌ನ ನಕ್ಷೆ ಮತ್ತು ಕಾಗದದ ನಕ್ಷೆಯಲ್ಲಿ ಯಾವ ಸಾಮ್ಯಗಳಿವೆ?','ಚಿಹ್ನೆಗಳು, ದಿಕ್ಕು, ದೂರ…','ಎರಡರಲ್ಲೂ ದಿಕ್ಕು (ಉತ್ತರ ಮೇಲೆ), ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು (ಆಸ್ಪತ್ರೆ, ಪೆಟ್ರೋಲ್ ಪಂಪ್), ರಸ್ತೆಗಳು, ನದಿಗಳು ಮತ್ತು ಪ್ರಮಾಣ/ದೂರ ತೋರಿಸಿರುತ್ತದೆ. ಮೊಬೈಲ್ ನಕ್ಷೆಯನ್ನು ದೊಡ್ಡದು-ಚಿಕ್ಕದು (ಜೂಮ್) ಮಾಡಬಹುದು ಎನ್ನುವುದೊಂದೇ ವ್ಯತ್ಯಾಸ.'],
+['ಹೊಸದಾಗಿ ಬಂದ ಗೆಳೆಯನಿಗೆ ಶಾಲೆಯಿಂದ ನಿಮ್ಮ ಮನೆಗೆ ಬರಲು ನೀಲನಕ್ಷೆಯನ್ನು ಹೇಗೆ ಬಿಡಿಸಿ ಕೊಡುವಿರಿ?','ಶೀರ್ಷಿಕೆ, ದಿಕ್ಕು, ಗುರುತುಗಳು, ದೂರ…','ಶೀರ್ಷಿಕೆ ಬರೆದು ಉತ್ತರ ದಿಕ್ಕು ತೋರಿಸುತ್ತೇನೆ; ಶಾಲೆ ಮತ್ತು ಮನೆಯ ಗುರುತುಗಳನ್ನು ಬಿಡಿಸಿ ನಡುವಿನ ರಸ್ತೆ, ವೃತ್ತ, ದೇವಸ್ಥಾನ, ಅಂಗಡಿಯಂತಹ ಪರಿಚಿತ ಗುರುತುಗಳನ್ನು ತೋರಿಸುತ್ತೇನೆ; ಅಂದಾಜು ದೂರ (ಪ್ರಮಾಣ) ಮತ್ತು ಸೂಚಿ ಕೊಡುತ್ತೇನೆ.'],
+['ಎಲ್ಲಾ ನಕ್ಷೆಗಳಲ್ಲಿ ನೀರನ್ನು ನೀಲಿ ಬಣ್ಣದಿಂದಲೇ ಏಕೆ ತೋರಿಸುತ್ತಾರೆ?','ಎಲ್ಲರಿಗೂ ಒಂದೇ ರೀತಿ ಅರ್ಥವಾಗಲೆಂದು…','ಎಲ್ಲಾ ನಕ್ಷೆಗಳಲ್ಲಿ ನಿರ್ದಿಷ್ಟ ಬಣ್ಣಗಳನ್ನು ಬಳಸುವುದರಿಂದ ಯಾವುದೇ ದೇಶದ ವ್ಯಕ್ತಿಗೆ ನಕ್ಷೆ ಸುಲಭವಾಗಿ ಅರ್ಥವಾಗುತ್ತದೆ. ನೀರಿನ ನೈಸರ್ಗಿಕ ಬಣ್ಣ ನೀಲಿಯಾಗಿ ಕಾಣುತ್ತದೆ, ಆದ್ದರಿಂದ ನೀರನ್ನು ನೀಲಿ ಬಣ್ಣದಿಂದ ತೋರಿಸುತ್ತಾರೆ.'],
+['ಪ್ರಮಾಣ ೧ ಸೆಂ.ಮೀ. = ೧ ಕಿ.ಮೀ. ಇರುವ ನಕ್ಷೆಯಲ್ಲಿ ಎರಡು ಹಳ್ಳಿಗಳ ನಡುವಿನ ದೂರ ೭ ಸೆಂ.ಮೀ. ಇದೆ. ನಿಜವಾದ ದೂರ ಎಷ್ಟು? ನಡೆದು ಹೋಗಲು ೧ ಕಿ.ಮೀ.ಗೆ ೧೫ ನಿಮಿಷ ಬೇಕಾದರೆ ಎಷ್ಟು ಸಮಯ ಬೇಕಾಗುತ್ತದೆ?','೭ × ೧ ಕಿ.ಮೀ.; ೭ × ೧೫ ನಿಮಿಷ','ನಿಜವಾದ ದೂರ ೭ ಕಿ.ಮೀ. ನಡೆಯಲು ೭ × ೧೫ = ೧೦೫ ನಿಮಿಷ, ಅಂದರೆ ಸುಮಾರು ೧ ಗಂಟೆ ೪೫ ನಿಮಿಷ ಬೇಕಾಗುತ್ತದೆ.'],
+['ನಕ್ಷೆಯಲ್ಲಿ ಚಿಹ್ನೆಗಳ ಬದಲು ಎಲ್ಲಾ ವಿಷಯಗಳ ಪೂರ್ಣ ಹೆಸರುಗಳನ್ನು ಬರೆದರೆ ಯಾವ ತೊಂದರೆ ಬರುತ್ತದೆ?','ನಕ್ಷೆಯಲ್ಲಿ ಎಷ್ಟು ಜಾಗ ಇರುತ್ತದೆ?','ನಕ್ಷೆಯಲ್ಲಿ ಜಾಗ ಕಡಿಮೆ ಇರುತ್ತದೆ. ಎಲ್ಲಾ ಹೆಸರುಗಳನ್ನು ಬರೆದರೆ ಜನಜಂಗುಳಿಯಾಗಿ ನಕ್ಷೆ ಓದುವುದು ಕಷ್ಟವಾಗುತ್ತದೆ. ಚಿಕ್ಕ ಚಿಹ್ನೆಗಳು ಮತ್ತು ಗುರುತುಗಳು ಕಡಿಮೆ ಜಾಗದಲ್ಲಿ ಸ್ಪಷ್ಟ ಮಾಹಿತಿ ನೀಡುತ್ತವೆ.'],
+['ನಿಮ್ಮ ಜಿಲ್ಲೆಯನ್ನು ಮಹಾರಾಷ್ಟ್ರದ ನಕ್ಷೆಯಲ್ಲಿ ಹೇಗೆ ಹುಡುಕುವಿರಿ?','ಸೂಚಿ, ನಗರಗಳು, ನದಿಗಳು, ನೆರೆಯ ಜಿಲ್ಲೆಗಳು…','ನಕ್ಷೆಯ ಸೂಚಿಯಲ್ಲಿನ ಜಿಲ್ಲಾ ಗಡಿಯ ಗುರುತು ನೋಡುತ್ತೇನೆ, ಜಿಲ್ಲೆಯ ಮುಖ್ಯ ನಗರದ ಹೆಸರು ಹುಡುಕುತ್ತೇನೆ, ಹತ್ತಿರದ ನದಿ ಮತ್ತು ನೆರೆಯ ಜಿಲ್ಲೆಗಳನ್ನು ನೋಡುತ್ತೇನೆ ಮತ್ತು ದಿಕ್ಕುಗಳ ಸಹಾಯದಿಂದ ಸ್ಥಾನ ನಿರ್ಧರಿಸುತ್ತೇನೆ.'],
+['ತರಗತಿಯಲ್ಲಿ ‘ನಿಧಿ ಶೋಧ’ ಆಟ ಆಡಬೇಕಿದೆ. ದಿಕ್ಕು ಮತ್ತು ಹೆಜ್ಜೆಗಳನ್ನು ಬಳಸಿ ನಿಧಿಯವರೆಗೆ ತಲುಪುವ ಸೂಚನೆಗಳನ್ನು ಬರೆಯಿರಿ.','ಉದಾ. ಬಾಗಿಲಿನಿಂದ…','ಉದಾ. ಬಾಗಿಲಿನಿಂದ ಉತ್ತರಕ್ಕೆ ೫ ಹೆಜ್ಜೆ ನಡೆಯಿರಿ → ಪೂರ್ವಕ್ಕೆ ತಿರುಗಿ ೩ ಹೆಜ್ಜೆ ನಡೆಯಿರಿ → ಈಶಾನ್ಯ ಮೂಲೆಯ ಕಪಾಟಿನ ಬಳಿ ನಿಧಿ! (ಇಂತಹ ಸೂಚನೆಗಳಲ್ಲಿ ದಿಕ್ಕು ಮತ್ತು ದೂರ ಎರಡೂ ಬೇಕು.)']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೧೦ : ಬನ್ನಿ ಕಲಿಯೋಣ ನಕ್ಷೆ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${[...document.querySelectorAll('#stepBox ul li')].map(l=>`<li>${l.innerHTML}</li>`).join('')}</ol>
+ <div><b>ನಕ್ಷೆ</b> – ಇಡೀ ಭೂಮಿಯ ಅಥವಾ ಅದರ ಕೆಲವು ಭಾಗದ ಪ್ರಮಾಣಬದ್ಧ ರೇಖಾಚಿತ್ರ. <b>ಸಂಕೇತ</b> – ಚಿಕ್ಕ ರೂಪದ ಚಿತ್ರ (ದೇವಸ್ಥಾನ, ಮಸೀದಿ). <b>ಗುರುತುಗಳು</b> – ಜ್ಯಾಮಿತೀಯ ಆಕೃತಿ / ಇಂಗ್ಲಿಷ್ ಆದ್ಯಕ್ಷರಗಳು (PO = ಅಂಚೆ ಕಚೇರಿ).</div>
+ <p class="pq">ನಕ್ಷೆಯ ಮೂಲಭೂತ ಅಂಶಗಳು</p><table class="w"><tr><th>ಶೀರ್ಷಿಕೆ, ಉಪಶೀರ್ಷಿಕೆ</th><th>ದಿಕ್ಕು</th><th>ಸೂಚಿ</th><th>ಮಾನಕ</th></tr><tr><td>ಪ್ರದೇಶ ಮತ್ತು ಉದ್ದೇಶ ತಿಳಿಯುತ್ತದೆ</td><td>ನಕ್ಷೆಯನ್ನು ಸರಿಯಾಗಿ ಜೋಡಿಸಬಹುದು</td><td>ಚಿಹ್ನೆ ಮತ್ತು ಗುರುತುಗಳ ಅರ್ಥ, ಅಂಶಗಳ ಸ್ಥಾನ</td><td>ಸ್ಥಳಗಳ ನಡುವಿನ ದೂರ ತಿಳಿಯುತ್ತದೆ</td></tr></table>
+ <p class="pq">ದಿಕ್ಕು ಮತ್ತು ಉಪದಿಕ್ಕು</p><div>ಉತ್ತರ, ಪೂರ್ವ, ದಕ್ಷಿಣ, ಪಶ್ಚಿಮ • ಈಶಾನ್ಯ (ಉ-ಪೂ), ಆಗ್ನೇಯ (ಪೂ-ದ), ನೈಋತ್ಯ (ದ-ಪ), ವಾಯವ್ಯ (ಪ-ಉ)</div>
+ <p class="pq">ಪ್ರಮಾಣದ ಉದಾಹರಣೆ</p><div>೧೦ ಮೀಟರ್ ಉದ್ದದ ಗೋಡೆ = ೧೦ ಸೆಂ.ಮೀ. ಗೆರೆ → ೧ ಸೆಂ.ಮೀ = ೧ ಮೀಟರ್.</div>
+ <p class="pq">ನೆನಪಿಡಿ</p><div>ನೀರು – ನೀಲಿ ಬಣ್ಣ • ರಾಜಧಾನಿ – ಮುಂಬೈ • ಉಪರಾಜಧಾನಿ – ನಾಗಪುರ • ಪಶ್ಚಿಮಕ್ಕೆ ಅರಬ್ಬಿ ಸಮುದ್ರ • ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ – ೧೦ ಜಿಲ್ಲೆಗಳು • ನಕ್ಷೆಯಲ್ಲಿ ಯಾವಾಗಲೂ ಒಂದೇ ಜಾಗದಲ್ಲಿರುವ ವಸ್ತುಗಳನ್ನು ತೋರಿಸುತ್ತಾರೆ.</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">(ಅ) ಗುರುತಿಸಿ ನೋಡೋಣ!</div>${SW.a.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div><div class="po">${x[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ <div class="pq">(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(1)}</div>`).join('')}
+ <div class="pq">(ಇ) ತಪ್ಪೋ ಸರಿಯೋ ಎಂದು ಬರೆಯಿರಿ.</div>${SW.ii.map((x,i)=>`<div>${i+1}) ${x[0]} &nbsp; ________</div>`).join('')}
+ <div class="avoid"><div class="pq">(ಈ) ನಿಮ್ಮ ಮನೆಯ ಪರಿಸರದ ನಕ್ಷೆ ನೀಲನಕ್ಷೆ ತಯಾರಿಸಿ. (ಶೀರ್ಷಿಕೆ, ದಿಕ್ಕು, ಸೂಚಿ ಮತ್ತು ಪ್ರಮಾಣ ಕೊಡಿ)</div><div style="height:70mm;border:1.2px solid #000;background-image:linear-gradient(#ddd 1px,transparent 1px),linear-gradient(90deg,#ddd 1px,transparent 1px);background-size:6mm 6mm"></div></div>
+ <div class="avoid"><div class="pq">(ಉ) ಮಹಾರಾಷ್ಟ್ರದ ಆಡಳಿತ ನಕ್ಷೆಯಲ್ಲಿ ನಿಮಗೆ ಗೊತ್ತಿರುವ ಜಿಲ್ಲೆಗಳನ್ನು ಹುಡುಕಿ ಅವುಗಳ ಹೆಸರು ಬರೆಯಿರಿ.</div>${lines(2)}</div>
+ <div class="avoid"><div class="pq">(ಊ) ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆಗಳು/ಗುರುತುಗಳನ್ನು ಬಿಡಿಸಿ ಮತ್ತು ಹೆಸರು ಬರೆಯಿರಿ.</div><table class="w"><tr><th>ಕ್ರ.</th><th>ಹೆಸರು</th><th>ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆ / ಗುರುತು</th><th>ಕ್ರ.</th><th>ಹೆಸರು</th><th>ಸಾಂಕೇತಿಕ ಚಿಹ್ನೆ / ಗುರುತು</th></tr>${[['ದೇವಸ್ಥಾನ','ಘಟ್ಟ'],['ವಿಮಾನ ನಿಲ್ದಾಣ','ಮಸೀದಿ'],['ಬಂದರು','ಅಂಚೆ ಕಚೇರಿ']].map((r,i)=>`<tr><td>${i*2+1}</td><td>${r[0]}</td><td style="height:11mm;width:28mm"></td><td>${i*2+2}</td><td>${r[1]}</td><td style="width:28mm"></td></tr>`).join('')}</table></div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>(ಅ)</b> ${SW.a.map((x,i)=>`${i+1}) ${x[1][x[2]]}`).join('; ')}</div><div><b>(ಆ)</b><ol>${SW.aa.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಇ)</b> ${SW.ii.map((x,i)=>`${i+1}) ${x[1]?'ತಪ್ಪು (ಭೂಗೋಳ ಪ್ರತಿಕೃತಿ)':'ಸರಿ'}`).join('; ')}</div><div><b>(ಉ)</b> ಮಹಾರಾಷ್ಟ್ರದ ೩೬ ಜಿಲ್ಲೆಗಳು: ${SW.dist.join(', ')}.</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>ಇ. ೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೧೦</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

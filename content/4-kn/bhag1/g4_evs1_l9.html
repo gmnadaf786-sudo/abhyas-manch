@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೧ – ಪಾಠ ೯ ಪ್ರಾಣಿಗಳ ಅದ್ಭುತ ಲೋಕದಲ್ಲಿ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೯ : ಪ್ರಾಣಿಗಳ ಅದ್ಭುತ ಲೋಕದಲ್ಲಿ…</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">🦋🐦🐝 ರಮಾ ಅಕ್ಕನೊಂದಿಗೆ ಗುಡ್ಡದ ಮೇಲೆ ಸುತ್ತಾಡೋಣ – ಪಕ್ಷಿ, ಕೀಟ ಮತ್ತು ಪ್ರಾಣಿಗಳ ಅದ್ಭುತ ಲೋಕ ನೋಡೋಣ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೧೨ ಮೆಟ್ಟಿಲುಗಳು · ಅಡಗಿದ ಕೀಟಗಳು · ಹಗಲು-ರಾತ್ರಿ ಗಡಿಯಾರ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೪೪ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೯ : ಪ್ರಾಣಿಗಳ ಅದ್ಭುತ ಲೋಕದಲ್ಲಿ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🦋','🐝','🐦'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ಪಕ್ಷಿ ವೀಕ್ಷಣೆ ಅರ್ಜಿ ---------- */
+const BF=[['ಪಕ್ಷಿಯ ಹೆಸರು','ಮೀಂಚುಳ್ಳಿ'],['ದಿನಾಂಕ','೩ ಜುಲೈ'],['ಸಮಯ','ಬೆಳಿಗ್ಗೆ ೮:೦೦ ಗಂಟೆಗೆ'],['ಆಕಾರ','ಗುಬ್ಬಚ್ಚಿಗಿಂತ ದೊಡ್ಡದು ಮತ್ತು ಕಾಗೆಗಿಂತ ಚಿಕ್ಕದು'],['ಕೊಕ್ಕಿನ ಆಕಾರ','ಉದ್ದ ಮತ್ತು ಚೂಪು'],['ಕೊಕ್ಕಿನ ಬಣ್ಣ','ಕೆಂಪು ಮಿಶ್ರಿತ ಗುಲಾಬಿ'],['ತಲೆಯ ಮೇಲಿನ ಬಣ್ಣ','ಕಂದು'],['ಕುತ್ತಿಗೆಯ ಭಾಗದ ಬಣ್ಣ','ಬಿಳಿ'],['ಬೆನ್ನಿನ ಬಣ್ಣ','ನೀಲಿ'],['ಕಾಲಿನ ಬಣ್ಣ','ಕೆಂಪು ಮಿಶ್ರಿತ ಗುಲಾಬಿ'],['ಕಾಲಿನ ರಚನೆ','ಗಿಡ್ಡ ಕಾಲುಗಳು'],['ವೀಕ್ಷಣೆಯ ಸಮಯದಲ್ಲಿ ಪಕ್ಷಿ ಏನು ಮಾಡುತ್ತಿತ್ತು?','ಕೊಂಬೆಯ ಮೇಲೆ ಕುಳಿತು ಮೀನು ತಿನ್ನುತ್ತಿತ್ತು']];
+let BFV=BF.map(()=>'');
+function bfCard(){return `<div style="border:3px solid #0ea5e9;border-radius:14px;padding:10px;background:#f0f9ff"><div style="text-align:center;font-size:40px">🐦</div><table class="t">${BF.map((f,i)=>`<tr><td class="l" style="width:45%">${f[0]}</td><td class="l"><b>${BFV[i]||'<span style="color:#94a3b8">…</span>'}</b></td></tr>`).join('')}</table></div>`}
+
+/* ---------- ಚಿಟ್ಟೆಯ ಜೀವನಚಕ್ರ ---------- */
+const LCB=[['🥚','ಮೊಟ್ಟೆ','ಹೆಣ್ಣು ಚಿಟ್ಟೆ ಎಲೆಯ ಮೇಲೆ ಮೊಟ್ಟೆ ಇಡುತ್ತದೆ.'],['🐛','ಹುಳು / ಕಂಬಳಿಹುಳು','ಮೊಟ್ಟೆಯಿಂದ ಹುಳು (ಕಂಬಳಿಹುಳು) ಹೊರಬರುತ್ತದೆ ಮತ್ತು ಎಲೆಗಳನ್ನು ತಿಂದು ದೊಡ್ಡದಾಗುತ್ತದೆ.'],['🫘','ಕೋಶ','ಹುಳು ತನ್ನ ಸುತ್ತ ಕೋಶ ಕಟ್ಟಿಕೊಳ್ಳುತ್ತದೆ ಮತ್ತು ಅದರಲ್ಲಿ ಬದಲಾವಣೆಗಳಾಗುತ್ತವೆ.'],['🦋','ಚಿಟ್ಟೆ','ಕೋಶದಿಂದ ಸುಂದರ ಚಿಟ್ಟೆ ಹೊರಬರುತ್ತದೆ.']];
+let LBK=0;
+function lcbSvg(k){const pos=[[110,40],[180,110],[110,180],[40,110]];return `<svg viewBox="0 0 220 220" style="width:250px;max-width:100%;background:#f0fdf4;border-radius:50%">
+ <circle cx="110" cy="110" r="70" fill="none" stroke="#86efac" stroke-width="3" stroke-dasharray="6 5"><animateTransform attributeName="transform" type="rotate" from="0 110 110" to="360 110 110" dur="12s" repeatCount="indefinite"/></circle>
+ ${LCB.map((s,i)=>`<g style="cursor:pointer" onclick="LBK=${i};lcbUpd()"><circle cx="${pos[i][0]}" cy="${pos[i][1]}" r="${i==k?30:22}" fill="${i==k?'#fef08a':'#fff'}" stroke="${i==k?'#ca8a04':'#86efac'}" stroke-width="3"/><text x="${pos[i][0]}" y="${pos[i][1]+(i==k?10:8)}" text-anchor="middle" font-size="${i==k?28:20}">${s[0]}</text></g>`).join('')}
+ <text x="110" y="114" text-anchor="middle" font-size="13" font-weight="800">ಜೀವನಕ್ರಮ</text></svg>`}
+let LBS=new Set();
+function lcbUpd(){LBS.add(LBK);$('lcbBox').innerHTML=lcbSvg(LBK);const s=LCB[LBK];$('lcbMsg').innerHTML=`<div class="msg ok"><b>${LBK+1}. ${s[1]}</b> – ${s[2]}</div>`;say(s[1]+'. '+s[2]);if(LBS.size==4)award('lcb','ಭೇಷ್! ಚಿಟ್ಟೆಯ ಜೀವನಚಕ್ರ ಪೂರ್ಣವಾಯಿತು.')}
+
+/* ---------- ಆಹಾರ ಸರಪಳಿ ---------- */
+const FC=[['🌾','ಹುಲ್ಲು'],['🐛','ಹುಳು'],['🐸','ಕಪ್ಪೆ'],['🐍','ಹಾವು'],['🦅','ಗರುಡ']];
+
+/* ---------- ಹಗಲು-ರಾತ್ರಿ ಗಡಿಯಾರ ---------- */
+let HR=8,HRS=new Set();
+function clockUpd(){const h=HR,sky=h>=6&&h<17?'linear-gradient(#7dd3fc,#e0f2fe)':h>=17&&h<20?'linear-gradient(#fb923c,#fde68a)':'linear-gradient(#020617,#1e3a8a)';
+ const grp=h>=6&&h<17?0:h>=17&&h<20?1:2;HRS.add(grp);
+ const A=[['🐶 ನಾಯಿ','🦌 ಜಿಂಕೆ','🐄 ಹಸು','🐃 ಎಮ್ಮೆ','🐝 ಕೀಟ','🐦 ಹಕ್ಕಿ'],['🐇 ಮೊಲ','🐦 ಗೂಡಿಗೆ ಮರಳುವ ಪಕ್ಷಿಗಳು'],['🦉 ಗೂಬೆ','🦇 ಬಾವಲಿ','🦊 ನರಿ','🐺 ತೋಳ','🐆 ಚಿರತೆ','🦔 ಚಿಪ್ಪುಹಂದಿ','🐍 ಹಾವು','🦋 ಗಾಳಿಪಟ']][grp];
+ $('clkBox').innerHTML=`<div style="border-radius:16px;padding:12px;background:${sky};min-height:150px;text-align:center"><div style="font-size:38px">${grp==2?'🌙':grp==1?'🌇':'☀️'}</div><div style="font-weight:800;font-size:18px;color:${grp==2?'#fff':'#0f172a'}">ಸಮಯ: ${h<12?'ಬೆಳಿಗ್ಗೆ':h<17?'ಮಧ್ಯಾಹ್ನ':h<20?'ಸಂಜೆ':'ರಾತ್ರಿ'} ${String(h%12||12).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d])} ಗಂಟೆಗೆ</div>
+ <div style="font-size:22px;margin-top:6px;color:${grp==2?'#fff':'#0f172a'}">${A.join(' &nbsp;')}</div>
+ ${h>=12&&h<=15?`<div style="color:#7c2d12;font-weight:800">🐦 ಕಂಚುಕುಟಿಗ: “ಪುಕ್-ಪುಕ್-ಪುಕ್”</div>`:''}${h>=5&&h<=7?'<div style="font-weight:800">🐦 ಪಕ್ಷಿಗಳ ಕಲರವ</div>':''}</div>
+ <div class="msg ${['ok','in','in'][grp]}">${['ಹಗಲಿನಲ್ಲಿ ಆಹಾರ ಹುಡುಕಲು ಹೊರಡುವ ಪ್ರಾಣಿಗಳು – <b>ದಿನಚರ</b>','ಸಂಜೆ ಹೊರಡುವ ಪ್ರಾಣಿಗಳು (ಉದಾ. ಮೊಲ)','ರಾತ್ರಿ ಹೊರಡುವ ಪ್ರಾಣಿಗಳು – <b>ನಿಶಾಚರ</b>'][grp]}</div>`;
+ if(HRS.size==3)award('clk','ಭೇಷ್! ದಿನಚರ ಮತ್ತು ನಿಶಾಚರ ಪ್ರಾಣಿಗಳನ್ನು ಗುರುತಿಸಿದಿರಿ.')}
+
+/* ---------- ಅಡಗಿದ ಪ್ರಾಣಿಗಳು ---------- */
+let CAM=new Set();
+function camSvg(){return `<svg viewBox="0 0 320 170" style="max-width:420px;display:block;margin:0 auto;background:#ecfccb;border-radius:16px">
+ ${[[20,30,140,90],[60,20,200,120],[150,10,300,80],[180,60,310,150],[30,100,170,160],[90,140,250,40]].map(l=>`<line x1="${l[0]}" y1="${l[1]}" x2="${l[2]}" y2="${l[3]}" stroke="#92400e" stroke-width="4" stroke-linecap="round"/>`).join('')}
+ ${[[40,140],[90,60],[230,130],[270,30],[150,150],[200,90]].map(p=>`<ellipse cx="${p[0]}" cy="${p[1]}" rx="18" ry="8" fill="#65a30d" transform="rotate(-30 ${p[0]} ${p[1]})"/>`).join('')}
+ <g style="cursor:pointer" onclick="camTap(0)"><line x1="214" y1="104" x2="262" y2="80" stroke="#a16207" stroke-width="4" stroke-linecap="round"/>${[0,1,2].map(i=>`<line x1="${222+i*14}" y1="${100-i*7}" x2="${218+i*14}" y2="${112-i*7}" stroke="#a16207" stroke-width="1.5"/><line x1="${222+i*14}" y1="${100-i*7}" x2="${228+i*14}" y2="${90-i*7}" stroke="#a16207" stroke-width="1.5"/>`).join('')}<circle cx="238" cy="92" r="18" fill="transparent"/></g>
+ <g style="cursor:pointer" onclick="camTap(1)"><ellipse cx="92" cy="60" rx="12" ry="5" fill="#4d7c0f" transform="rotate(-30 92 60)"/><line x1="84" y1="64" x2="76" y2="72" stroke="#4d7c0f" stroke-width="1.5"/><circle cx="98" cy="56" r="1.5" fill="#000"/><circle cx="92" cy="60" r="16" fill="transparent"/></g>
+ ${CAM.has(0)?'<circle cx="238" cy="92" r="24" fill="none" stroke="#dc2626" stroke-width="3"/>':''}${CAM.has(1)?'<circle cx="92" cy="60" r="18" fill="none" stroke="#dc2626" stroke-width="3"/>':''}</svg>`}
+function camTap(i){CAM.add(i);$('camBox').innerHTML=camSvg();$('camMsg').innerHTML=`<div class="msg ok">✔ ${i?'ಹಸಿರು ಮಿಡತೆ ಸಿಕ್ಕಿತು! ಎಲೆಯಂತೆ ಹಸಿರು ಬಣ್ಣ.':'ಕಡ್ಡಿ ಹುಳು ಸಿಕ್ಕಿತು! ಅದು ಥೇಟ್ ಕಡ್ಡಿಯಂತೆ ಕಾಣುತ್ತದೆ.'} (${CAM.size}/೨)</div>`;say(i?'ಹಸಿರು ಮಿಡತೆ ಸಿಕ್ಕಿತು':'ಕಡ್ಡಿ ಹುಳು ಸಿಕ್ಕಿತು');if(CAM.size==2)award('cam','ಭೇಷ್! ಅಡಗಿದ ಕೀಟಗಳನ್ನು ಹುಡುಕಿದಿರಿ.')}
+
+/* ---------- ಆಯುಷ್ಯ ---------- */
+const LIFE=[['🦋 ಚಿಟ್ಟೆ','೧ ರಿಂದ ೨ ವಾರ',0.03],['🪰 ಮನೆನೊಣ','೧೫ ರಿಂದ ೨೫ ದಿನ',0.06],['🐦 ಗುಬ್ಬಚ್ಚಿ','೩ ರಿಂದ ೫ ವರ್ಷ',4],['🐦‍⬛ ಕಾಗೆ','೬ ರಿಂದ ೧೦ ವರ್ಷ',8],['🐶 ನಾಯಿ','೧೦ ರಿಂದ ೧೪ ವರ್ಷ',12],['🐅 ಹುಲಿ','೧೦ ರಿಂದ ೧೫ ವರ್ಷ',12.5],['🦚 ನವಿಲು','೧೦ ರಿಂದ ೨೫ ವರ್ಷ',17],['🐺 ತೋಳ','೧೩ ರಿಂದ ೧೪ ವರ್ಷ',13.5],['🐱 ಬೆಕ್ಕು','೧೩ ರಿಂದ ೨೦ ವರ್ಷ',16],['🐃 ಎಮ್ಮೆ','೧೫ ರಿಂದ ೨೦ ವರ್ಷ',17.5],['🐘 ಆನೆ','೬೦ ರಿಂದ ೭೦ ವರ್ಷ',65],['🧑 ಮಾನವ','೮೦ ರಿಂದ ೧೦೦ ವರ್ಷ',90]];
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+let S=0;
+const L=[
+{h:'ಬನ್ನಿ, ಗುಡ್ಡಕ್ಕೆ ಹೋಗೋಣ!',s:'ಆಯಾ, ಯಾಸ್ಮಿನ್, ಸಮೀರ್, ರಾಜವೀರ್ ಅವರು ತಮ್ಮ ರಮಾ ಅಕ್ಕನೊಂದಿಗೆ ಗುಡ್ಡಕ್ಕೆ ಹೋಗಲು ಸಿದ್ಧರಾದರು. ಬನ್ನಿ, ನಾವೂ ಅವರೊಂದಿಗೆ ಗುಡ್ಡಕ್ಕೆ ಹೋಗೋಣ!',b:()=>`
+ <div>ಆಯಾ, ಯಾಸ್ಮಿನ್, ಸಮೀರ್, ರಾಜವೀರ್ ಅವರು ತಮ್ಮ <b>ರಮಾ ಅಕ್ಕನೊಂದಿಗೆ</b> ಗುಡ್ಡಕ್ಕೆ ಹೋಗಲು ಸಿದ್ಧರಾದರು. ಇಂದು ಅವರು ಗುಡ್ಡದ ಮೇಲೆ ದಿನವಿಡೀ ಮಜವಾಗಿ ಸುತ್ತಾಡಲಿದ್ದಾರೆ. ಬನ್ನಿ, ನಾವೂ ಹೋಗೋಣ! 🏞️</div>
+ <div class="msg in">ರಮಾ ಅಕ್ಕ ಅಲ್ಲಿ ಕಾಣುವ ಪ್ರಾಣಿಗಳ ದಾಖಲೆ ಮಾಡಲು ಹೇಳಿದರು. ಆದರೆ <b>ಸಮೀರ ದಾಖಲೆ ಮಾಡುವಾಗ ಕೆಲವು ತಪ್ಪುಗಳಾದವು</b>. ಆ ತಪ್ಪುಗಳನ್ನು ಹುಡುಕಿ!</div>
+ <h3>📝 ಸಮೀರನ ದಾಖಲೆಗಳು – ಸರಿಯೋ ತಪ್ಪೋ?</h3>
+ ${sortGame('sam',[['🐒 ಕೋತಿ ಮರದ ಕೊಂಬೆಯ ಮೇಲೆ ಕುಳಿತಿತ್ತು.',0],['🐟 ಮೀನು ಮರ ಹತ್ತುತ್ತಿತ್ತು.',1],['🦋 ಚಿಟ್ಟೆ ಹೂವಿನ ಮೇಲೆ ಕುಳಿತಿತ್ತು.',0],['🐄 ಹಸು ಆಕಾಶದಲ್ಲಿ ಹಾರುತ್ತಿತ್ತು.',1],['🐸 ಕಪ್ಪೆ ಕೆರೆಯ ದಡದಲ್ಲಿ ಜಿಗಿಯುತ್ತಿತ್ತು.',0],['🐍 ಹಾವು ರೆಕ್ಕೆ ಬಡಿದು ಹಾರುತ್ತಿತ್ತು.',1],['🐜 ಇರುವೆಗಳು ಸಾಲಾಗಿ ಆಹಾರ ಒಯ್ಯುತ್ತಿದ್ದವು.',0]],[['✔ ಸರಿ','gr'],['✘ ತಪ್ಪು','or']],'sam')}`,a:()=>drawGames()},
+{h:'ಪಕ್ಷಿ ವೀಕ್ಷಣೆ',s:'ಪ್ರತಿ ಮರ, ಪ್ರಾಣಿ, ಕೀಟಕ್ಕೆ ತನ್ನದೇ ಆದ ವೈಶಿಷ್ಟ್ಯಗಳಿರುತ್ತವೆ. ಅವುಗಳ ಸೂಕ್ಷ್ಮ ಅಂಶಗಳನ್ನು ಅರಿಯಲು ಶಾಂತವಾಗಿ ವೀಕ್ಷಿಸುವುದು ಅಗತ್ಯ.',b:()=>`
+ <div class="key">ರಮಾ ಅಕ್ಕ ಹೇಳಿದರು, “ಪ್ರತಿ ಮರ, ಪ್ರಾಣಿ, ಕೀಟಕ್ಕೆ <b>ತನ್ನದೇ ವೈಶಿಷ್ಟ್ಯಗಳು</b> ಇರುತ್ತವೆ. ಅವುಗಳ ಸೂಕ್ಷ್ಮ ಅಂಶಗಳನ್ನು ಅರಿಯಲು <b>ಶಾಂತವಾಗಿ ವೀಕ್ಷಿಸುವುದು</b> ಅಗತ್ಯ.”</div>
+ <h3>🔭 ರಮಾ ಅಕ್ಕನ ವೀಕ್ಷಣಾ ದಾಖಲೆ – ಮೀಂಚುಳ್ಳಿ</h3>
+ <div class="tap">“ಮಾದರಿ ತುಂಬಿ” ಒತ್ತಿ ಅಥವಾ ನಿಮ್ಮ ಪರಿಸರದ ಪಕ್ಷಿಯ ಮಾಹಿತಿಯನ್ನು ನೀವೇ ತುಂಬಿ.</div>
+ <table class="t">${BF.map((f,i)=>`<tr><td class="l" style="width:42%">${f[0]}</td><td><input type="text" value="${BFV[i]}" style="width:100%;font:inherit;padding:4px;border-radius:6px;border:1.5px solid #94a3b8" oninput="BFV[${i}]=this.value;$('bfCard').innerHTML=bfCard()"></td></tr>`).join('')}</table>
+ <button class="btn sm" onclick="BFV=BF.map(f=>f[1]);drawStep()">📋 ಮೀಂಚುಳ್ಳಿಯ ಮಾದರಿ ತುಂಬಿ</button><button class="btn ln sm" onclick="BFV=BF.map(()=>'');drawStep()">ಅಳಿಸಿ</button>
+ <div id="bfCard" style="margin-top:8px">${bfCard()}</div>
+ <div class="msg in">✍️ ಬರೆಯಿರಿ: ನಿಮ್ಮ ಪರಿಸರದ ಒಂದು ಪಕ್ಷಿಯನ್ನು ವೀಕ್ಷಿಸಿ, ಮೇಲಿನ ಅಂಶಗಳ ಪ್ರಕಾರ ಮಾಹಿತಿ ಬರೆಯಿರಿ, ಅದರ ಚಿತ್ರ ಬಿಡಿಸಿ ಬಣ್ಣ ಹಚ್ಚಿ.</div>`,a:()=>{if(BFV.every(v=>v))award('bf','ಒಳ್ಳೆಯ ವೀಕ್ಷಣೆ!')}},
+{h:'ಪಕ್ಷಿಗಳ ವೈಶಿಷ್ಟ್ಯ',s:'ಎಲ್ಲಾ ಪಕ್ಷಿಗಳಲ್ಲಿ ಕೊಕ್ಕು, ಕಾಲು, ರೆಕ್ಕೆ, ಪುಕ್ಕ ಒಂದೇ ರೀತಿ ಕಾಣುತ್ತವೆ. ಆದರೆ ಅವುಗಳ ಆಹಾರ, ವಾಸದ ಜಾಗ ಮತ್ತು ಹಾರುವ ವಿಧಾನ ಬೇರೆ ಬೇರೆಯಾಗಿರುತ್ತವೆ. ಗಿಡುಗ ಆಕಾಶದಲ್ಲಿ ಬಹಳ ಎತ್ತರದಲ್ಲಿ ಹಾರುತ್ತದೆ, ಆದರೆ ಗುಬ್ಬಚ್ಚಿ, ಪಾರಿವಾಳ ಕಡಿಮೆ ಎತ್ತರದಲ್ಲಿ ಹಾರುತ್ತವೆ.',b:()=>`
+ <div class="key">ಎಲ್ಲಾ ಪಕ್ಷಿಗಳಲ್ಲಿ ಒಂದೇ ರೀತಿ ಕಾಣುವ ಅಂಗಗಳು: <b>ಕೊಕ್ಕು, ಕಾಲು, ರೆಕ್ಕೆ, ಪುಕ್ಕ</b>. ಆದರೆ ಅವುಗಳ <b>ಆಹಾರ, ವಾಸದ ಜಾಗ ಮತ್ತು ಹಾರುವ ವಿಧಾನ</b> ಬೇರೆ ಬೇರೆಯಾಗಿರುತ್ತವೆ. ಗಿಡುಗ ಆಕಾಶದಲ್ಲಿ ಬಹಳ ಎತ್ತರದಲ್ಲಿ ಹಾರುತ್ತದೆ; ಗುಬ್ಬಚ್ಚಿ, ಪಾರಿವಾಳ ಕಡಿಮೆ ಎತ್ತರದಲ್ಲಿ ಹಾರುತ್ತವೆ.</div>
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🐦💜</div><div class="tt">ನೇರಳೆ ಸೂರಕ್ಕಿ</div><div class="dd">ಉದ್ದ, ಬಾಗಿದ ಕೊಕ್ಕು – ಹೂವಿನ ಮಕರಂದವನ್ನು ಹೀರುತ್ತದೆ. ಹೊಳೆಯುವ ನೇರಳೆ ಬಣ್ಣ.</div><div class="tap">ವೈಶಿಷ್ಟ್ಯ ನೋಡಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🦆</div><div class="tt">ಅರಿಶಿನ-ಕುಂಕುಮ ಬಾತುಕೋಳಿ</div><div class="dd">ಕೊಕ್ಕಿನ ಮೇಲೆ ಹಳದಿ ಮತ್ತು ಕೆಂಪು ಚುಕ್ಕೆ (ಅರಿಶಿನ-ಕುಂಕುಮ); ನೀರಿನಲ್ಲಿ ಈಜುತ್ತದೆ, ಪೊರೆಯಿರುವ ಕಾಲುಗಳು.</div><div class="tap">ವೈಶಿಷ್ಟ್ಯ ನೋಡಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🦅</div><div class="tt">ಶಿಕ್ರಾ</div><div class="dd">ಬೇಟೆಯಾಡುವ ಪಕ್ಷಿ; ಬಾಗಿದ ಚೂಪು ಕೊಕ್ಕು ಮತ್ತು ಹರಿತ ಉಗುರುಗಳು – ಹಲ್ಲಿ, ಸಣ್ಣ ಪಕ್ಷಿಗಳನ್ನು ಹಿಡಿಯುತ್ತದೆ.</div><div class="tap">ವೈಶಿಷ್ಟ್ಯ ನೋಡಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🪺</div><div class="tt">ನೇಕಾರ ಹಕ್ಕಿ</div><div class="dd">ಹುಲ್ಲಿನ ಎಳೆಗಳಿಂದ ಮರಕ್ಕೆ ನೇತಾಡುವ ಸುಂದರ ನೇಯ್ದ ಗೂಡು ಕಟ್ಟುತ್ತದೆ.</div><div class="tap">ವೈಶಿಷ್ಟ್ಯ ನೋಡಿ</div></div>
+ </div>
+ <div class="msg no">⚠️ <b>ನಿಯಮ:</b> ಪಕ್ಷಿಗಳು, ಮೊಟ್ಟೆಗಳು, ಗೂಡುಗಳು, ಸಣ್ಣ ಕೀಟಗಳನ್ನು <b>ಮುಟ್ಟಬಾರದು</b>. ಸಂಗ್ರಹಿಸಲು ಕೇವಲ <b>ಕೆಳಗೆ ಬಿದ್ದಿರುವ ಮಾದರಿಗಳನ್ನೇ</b> ಬಳಸಬೇಕು.</div>
+ <div class="know"><b class="h">💡 ನಿಮಗೆ ಗೊತ್ತೇ?</b><br><b>ಮಾರುತಿ ಚಿತಮಪಳ್ಳಿ</b> ಅವರು ಅಂತರರಾಷ್ಟ್ರೀಯ ಖ್ಯಾತಿಯ ಪಕ್ಷಿತಜ್ಞ ಮತ್ತು ವನ್ಯಜೀವಿ ಅಧ್ಯಯನಕಾರರಾಗಿದ್ದರು. ಕರ್ನಾಳ ಪಕ್ಷಿಧಾಮ, ನವೇಗಾಂವ್ ರಾಷ್ಟ್ರೀಯ ಉದ್ಯಾನ, ನಾಗಝಿರಾ ಅಭಯಾರಣ್ಯ ಮತ್ತು ಮೇಳಘಾಟ ಹುಲಿ ಯೋಜನೆಯ ಅಭಿವೃದ್ಧಿಯಲ್ಲಿ ಅವರ ವಿಶೇಷ ಕೊಡುಗೆ ಇದೆ. ‘<b>ಪಕ್ಷಿಪ್ರೇಮಿ ಮನುಷ್ಯ</b>’ ಇದು ಅವರ ಗುರುತು. ಅವರು ‘<b>ಪಕ್ಷಿಕೋಶ</b>’ ಎಂಬ ಗ್ರಂಥ ಬರೆದರು. ಅವರಿಗೆ ‘<b>ಅರಣ್ಯಋಷಿ</b>’ ಎನ್ನುತ್ತಾರೆ.</div>`},
+{h:'ಕೀಟಗಳ ಲೋಕ',s:'ನಮ್ಮ ಸುತ್ತಲೂ ವಿವಿಧ ಬಗೆಯ ಕೀಟಗಳು ಕಂಡುಬರುತ್ತವೆ. ಕೀಟಗಳು ಗಾತ್ರದಲ್ಲಿ ಚಿಕ್ಕವಾಗಿದ್ದರೂ ಅವುಗಳ ಸಂಖ್ಯೆ ಬಹಳ ಹೆಚ್ಚು ಮತ್ತು ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡಲು ಕೀಟಗಳು ಮುಖ್ಯ.',b:()=>`
+ <div class="key">ಕೀಟ <b>ನೆಲದ ಮೇಲೆ, ಮರಗಳ ಮೇಲೆ, ಮಣ್ಣಿನಲ್ಲಿ ಆಳವಾಗಿ, ಇನ್ನು ಕೆಲವು ನೀರಿನಲ್ಲಿ</b> ವಾಸಿಸುತ್ತವೆ. ಕೀಟಗಳು ಗಾತ್ರದಲ್ಲಿ ಚಿಕ್ಕವಾಗಿದ್ದರೂ ಅವುಗಳ <b>ಸಂಖ್ಯೆ ಬಹಳ ಹೆಚ್ಚು</b> ಇದೆ ಮತ್ತು <b>ಪರಿಸರ ಸ್ವಚ್ಛ</b> ಇಡಲು ಅವು ಮುಖ್ಯ.</div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">🪵➡️🟫</div><div class="dd"><b>ಗೆದ್ದಲಿನಂತಹ</b> ಕೀಟಗಳು ಸಸ್ಯಗಳ ಒಣಗಿದ ಭಾಗಗಳನ್ನು ವಿಘಟಿಸಿ <b>ಮಣ್ಣು</b> ತಯಾರಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತವೆ.</div></div>
+  <div class="tile op"><div class="ic">🐦🐛</div><div class="dd">ಕೀಟಗಳು ಅನೇಕ <b>ಪಕ್ಷಿಗಳು ಮತ್ತು ಪ್ರಾಣಿಗಳ ಆಹಾರ</b> ಇವೆ.</div></div>
+  <div class="tile op"><div class="ic">🐝🌸➡️🍎</div><div class="dd"><b>ಹೂವಿನಿಂದ ಹಣ್ಣು</b> ತಯಾರಾಗುವ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿ ಕೀಟಗಳ ಸಹಾಯವಾಗುತ್ತದೆ.</div></div>
+ </div>
+ <div class="know"><b class="h">💡 ಜೇನುನೊಣಗಳ ವೈದ್ಯ</b><br>ಕೇರಳದ <b>ವಿ. ಜೆ. ಜೋಸೆಫ್</b> ಅವರು ಜೇನು ಸಾಕಣೆಯ ತರಬೇತಿ ಪಡೆದರು. ಮಳೆಗಾಲದಲ್ಲಿ ಜೇನುನೊಣಗಳು ಬಹಳ ಅನಾರೋಗ್ಯಕ್ಕೀಡಾಗುತ್ತವೆ ಎಂಬುದು ಅವರ ಗಮನಕ್ಕೆ ಬಂತು. ಅವರು <b>೧೦ ವರ್ಷ ಪ್ರಯೋಗ</b> ಮಾಡಿ ಈ ರೋಗಕ್ಕೆ ಔಷಧ ಕಂಡುಹಿಡಿದರು. ಇದಕ್ಕಾಗಿ ‘ನ್ಯಾಷನಲ್ ಇನ್ನೋವೇಶನ್ ಫೌಂಡೇಶನ್’ ವತಿಯಿಂದ ರಾಷ್ಟ್ರೀಯ ಪ್ರಶಸ್ತಿ ನೀಡಿ ಅವರನ್ನು ಸನ್ಮಾನಿಸಲಾಯಿತು.</div>
+ <div class="msg in">ಆಯಾಗೆ ಒಂದು ಮರದ ಮೇಲೆ ಅರ್ಧ ತಿಂದ ಎಲೆಗಳು ಕಂಡವು. ರಮಾ ಅಕ್ಕ ಹೇಳಿದರು, “ಬಹಳಷ್ಟು ಕೀಟಗಳು ಮರದ <b>ಎಲೆ, ಹೂವು, ಹಣ್ಣು, ಬೇರು</b> ತಿಂದು ಬದುಕುತ್ತವೆ (<b>ಸಸ್ಯಾಹಾರಿ ಕೀಟಗಳು</b>), ಇನ್ನು ಕೆಲವು ಕೀಟಗಳು ಇಂತಹ ಸಸ್ಯಾಹಾರಿ ಕೀಟಗಳನ್ನು ತಿಂದು ಬದುಕುತ್ತವೆ (<b>ಮಾಂಸಾಹಾರಿ ಕೀಟಗಳು</b>).”</div>
+ <h3>ಆಟ: ಸಸ್ಯಾಹಾರಿ ಅಥವಾ ಮಾಂಸಾಹಾರಿ ಕೀಟ?</h3>
+ ${sortGame('ins',[['🦗 ಹುಲ್ಲು ಹುಳು',0],['🐝 ಜೇನುನೊಣ',0],['🪲 ಗೆದ್ದಲು',0],['🪰 ಡ್ರ್ಯಾಗನ್‌ಫ್ಲೈ',1],['🐞 ಚಿತ್ರಾಂಗ ದುಂಬಿ (ಲೇಡಿಬರ್ಡ್)',1],['🐛 ಕಂಬಳಿಹುಳು',0],['🦂 ಪ್ರಾರ್ಥನಾ ಹುಳು (ಮ್ಯಾಂಟಿಸ್)',1]],[['🌿 ಸಸ್ಯಾಹಾರಿ','gr'],['🍖 ಮಾಂಸಾಹಾರಿ','or']],'ins')}`,a:()=>drawGames()},
+{h:'ಅಂಡಜ, ಜರಾಯುಜ ಮತ್ತು ಚಿಟ್ಟೆಯ ಜೀವನಚಕ್ರ',s:'ಮೊಟ್ಟೆಯಿಂದ ಜನಿಸುವ ಪ್ರಾಣಿಗಳನ್ನು ಅಂಡಜ ಎನ್ನುತ್ತಾರೆ. ಮರಿಗಳಿಗೆ ಜನ್ಮ ನೀಡುವ ಪ್ರಾಣಿಗಳನ್ನು ಜರಾಯುಜ ಎನ್ನುತ್ತಾರೆ. ಚಿಟ್ಟೆಯ ಜೀವನಚಕ್ರ ಮೊಟ್ಟೆ, ಹುಳು, ಕೋಶ ಮತ್ತು ಚಿಟ್ಟೆ ಎಂದು ಇರುತ್ತದೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#fefce8"><div class="ic">🥚</div><div class="tt">ಅಂಡಜ</div><div class="dd">ಯಾವುದರ ಜನನ <b>ಮೊಟ್ಟೆಯಿಂದ</b> ಆಗುತ್ತದೋ – ಎಲ್ಲಾ ಕೀಟಗಳು, ಪಕ್ಷಿಗಳು, ಸರೀಸೃಪಗಳು, ಮೀನುಗಳು, ಕಪ್ಪೆ.</div></div>
+  <div class="tile op" style="background:#fdf2f8"><div class="ic">🍼</div><div class="tt">ಜರಾಯುಜ</div><div class="dd">ಯಾವುವು <b>ಮರಿಗಳಿಗೆ ಜನ್ಮ</b> ನೀಡುತ್ತವೆಯೋ – ಮನುಷ್ಯ, ಬೆಕ್ಕು, ನಾಯಿ, ಹಸು, ಕತ್ತೆ.</div></div>
+ </div>
+ <h3>🦋 ಚಿಟ್ಟೆಯ ಜೀವನಚಕ್ರ (ಪ್ರತಿ ಹಂತದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ)</h3>
+ <div style="text-align:center" id="lcbBox"></div><div id="lcbMsg"></div>
+ <div class="tap">ಚಿಟ್ಟೆಯಂತೆಯೇ ಮಿಂಚುಹುಳುವಿನ ಹೆಣ್ಣೂ ಮೊಟ್ಟೆ ಇಡುತ್ತದೆ. ಬಹಳಷ್ಟು ಕೀಟಗಳ ಜೀವನಚಕ್ರ ಹೀಗೆಯೇ (ಮೊಟ್ಟೆ – ಹುಳು – ಕೋಶ – ಪತಂಗ/ಚಿಟ್ಟೆ) ಇರುತ್ತದೆ.</div>
+ <h3>ಆಟ: ಅಂಡಜ ಅಥವಾ ಜರಾಯುಜ?</h3>
+ ${sortGame('az',[['🐔 ಕೋಳಿ',0],['🐄 ಹಸು',1],['🐟 ಮೀನು',0],['🐱 ಬೆಕ್ಕು',1],['🐍 ಹಾವು',0],['🐶 ನಾಯಿ',1],['🐸 ಕಪ್ಪೆ',0],['🫏 ಕತ್ತೆ',1],['🦋 ಚಿಟ್ಟೆ',0],['✨ ಮಿಂಚುಹುಳು',0]],[['🥚 ಅಂಡಜ','or'],['🍼 ಜರಾಯುಜ','pu']],'az')}`,a:()=>{lcbUpd();drawGames()}},
+{h:'ಕೀಟಗಳಿಂದ ಸಿಗುವ ಪದಾರ್ಥಗಳು',s:'ಜೇನುನೊಣಗಳ ಗೂಡಿನಿಂದ ಜೇನುತುಪ್ಪ ಮತ್ತು ಮೇಣ ಸಿಗುತ್ತದೆ. ರೇಷ್ಮೆ ಹುಳುವಿನಿಂದ ರೇಷ್ಮೆ ದಾರ ಸಿಗುತ್ತದೆ. ಅರಗಿನ ಹುಳುವಿನಿಂದ ಅರಗು ಸಿಗುತ್ತದೆ, ಅದನ್ನು ಬಳೆ, ಆಭರಣ ತಯಾರಿಸಲು ಮತ್ತು ದಾಖಲೆಗಳಿಗೆ ಮುದ್ರೆ ಹಾಕಲು ಬಳಸುತ್ತಾರೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#fef9c3"><div class="ic">🐝🍯</div><div class="tt">ಜೇನುನೊಣ</div><div class="dd">ಗೂಡಿನಿಂದ <b>ಜೇನುತುಪ್ಪ ಮತ್ತು ಮೇಣ</b>.</div></div>
+  <div class="tile op" style="background:#fdf4ff"><div class="ic">🐛🧵</div><div class="tt">ರೇಷ್ಮೆ ಹುಳು</div><div class="dd"><b>ರೇಷ್ಮೆ ದಾರ</b>.</div></div>
+  <div class="tile op" style="background:#fff7ed"><div class="ic">🐞🔴</div><div class="tt">ಅರಗಿನ ಹುಳು</div><div class="dd"><b>ಲಕ್ಷ</b> – ಬಳೆ, ಆಭರಣ ತಯಾರಿಸಲು ಮತ್ತು ಮುಖ್ಯ ದಾಖಲೆಗಳಿಗೆ <b>ಮುದ್ರೆ</b> ಹಾಕಲು.</div></div>
+ </div>
+ <div class="msg in">🤔 ಯೋಚಿಸಿ: ಕೀಟಗಳು ಈ ಜಗತ್ತಿನಲ್ಲಿ ಇಲ್ಲದಿದ್ದರೆ ಏನಾಗುತ್ತದೆ? <button class="btn ln sm" onclick="this.nextElementSibling.style.display='block'">ಉತ್ತರ</button><span style="display:none"> ಹೂವುಗಳಿಂದ ಹಣ್ಣುಗಳು ಕಡಿಮೆ ತಯಾರಾಗುತ್ತವೆ, ಅನೇಕ ಪಕ್ಷಿ-ಪ್ರಾಣಿಗಳಿಗೆ ಆಹಾರ ಸಿಗುವುದಿಲ್ಲ, ಒಣಗಿದ ಎಲೆ-ಮರ ಕೊಳೆತು ಮಣ್ಣಾಗುವುದಿಲ್ಲ; ಜೇನುತುಪ್ಪ, ಮೇಣ, ರೇಷ್ಮೆ, ಅರಗು ಸಿಗುವುದಿಲ್ಲ. ಪ್ರಕೃತಿಯ ಸಮತೋಲನ ಹದಗೆಡುತ್ತದೆ.</span></div>
+ ${pickGame('prod',[['ಜೇನುತುಪ್ಪ ಮತ್ತು ಮೇಣ ಯಾರಿಂದ ಸಿಗುತ್ತದೆ?',['ಜೇನುನೊಣ','ರೇಷ್ಮೆ ಹುಳು','ಅರಗಿನ ಹುಳು'],0],['ರೇಷ್ಮೆ ದಾರ ಯಾರಿಂದ ಸಿಗುತ್ತದೆ?',['ಜೇನುನೊಣ','ರೇಷ್ಮೆ ಹುಳು','ಗೆದ್ದಲು'],1],['ಬಳೆ ಮತ್ತು ದಾಖಲೆಗಳಿಗೆ ಮುದ್ರೆ ಹಾಕಲು ಏನನ್ನು ಬಳಸುತ್ತಾರೆ?',['ಮೇಣ','ರೇಷ್ಮೆ','ಲಕ್ಷ'],2]],'prod')}`,a:()=>drawGames()},
+{h:'ಆಹಾರ ಸರಪಳಿ',s:'ಪ್ರಕೃತಿಯ ಎಲ್ಲಾ ಪ್ರಾಣಿಗಳು ಆಹಾರಕ್ಕಾಗಿ ಒಂದನ್ನೊಂದು ಅವಲಂಬಿಸಿವೆ. ಉದಾಹರಣೆಗೆ ಹುಳು ಹುಲ್ಲು ತಿನ್ನುತ್ತದೆ. ಕಪ್ಪೆ ಹುಳು ತಿನ್ನುತ್ತದೆ. ಹಾವು ಕಪ್ಪೆಯನ್ನು ತಿನ್ನುತ್ತದೆ, ಹದ್ದು ಹಾವನ್ನು ತಿನ್ನುತ್ತದೆ. ಈ ರೀತಿ ಉಂಟಾಗುವ ಸರಪಳಿಯನ್ನು ಆಹಾರ ಸರಪಳಿ ಎನ್ನುತ್ತಾರೆ.',b:()=>`
+ <div class="key">ಪ್ರಕೃತಿಯ ಎಲ್ಲಾ ಪ್ರಾಣಿಗಳು ಆಹಾರಕ್ಕಾಗಿ <b>ಒಂದರ ಮೇಲೊಂದು ಅವಲಂಬಿತ</b> ಇವೆ. ಸೂರ್ಯನ ಬೆಳಕು, ಗಾಳಿ, ನೀರು, ಮಣ್ಣಿನಲ್ಲಿರುವ ಪೋಷಕಾಂಶಗಳನ್ನು ಬಳಸಿ <b>ಸಸ್ಯ</b> ತಮ್ಮ ಆಹಾರವನ್ನು ತಾವೇ ತಯಾರಿಸಿಕೊಳ್ಳುತ್ತವೆ. ಹುಲ್ಲು ಹುಳು, ಚಿಟ್ಟೆ, ಜಿಂಕೆ, ಹಸು, ಎಮ್ಮೆ ಇವು <b>ಸಸ್ಯಾಹಾರಿ</b>; ಅವುಗಳನ್ನು ತಿನ್ನುವ <b>ಮಾಂಸಾಹಾರಿ</b> ಪ್ರಾಣಿಗಳಾಗಿವೆ.</div>
+ <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;font-size:30px;margin:8px 0">${FC.map((f,i)=>`<span style="text-align:center;display:inline-block;animation:tw 1.6s ${i*.3}s infinite alternate"><span>${f[0]}</span><br><small style="font-size:13px;font-weight:800">${f[1]}</small></span>${i<FC.length-1?'<span style="color:#16a34a">➜</span>':''}`).join('')}</div>
+ <div class="msg ok">ಹುಳು ಹುಲ್ಲು ತಿನ್ನುತ್ತದೆ → ಕಪ್ಪೆ ಹುಳು ತಿನ್ನುತ್ತದೆ → ಹಾವು ಕಪ್ಪೆಯನ್ನು ತಿನ್ನುತ್ತದೆ → ಹದ್ದು ಹಾವನ್ನು ತಿನ್ನುತ್ತದೆ. ಈ ಸರಪಳಿಯನ್ನು <b>ಆಹಾರ ಸರಪಳಿ</b> ಎನ್ನುತ್ತಾರೆ.</div>
+ <h3>ಆಟ: ಆಹಾರ ಸರಪಳಿಯನ್ನು ಕ್ರಮವಾಗಿ ಜೋಡಿಸಿ</h3>${orderGame('fco',FC.map(f=>f[0]+' '+f[1]),'fco')}
+ <h3>🗣 ಹೇಳಿ ನೋಡೋಣ!</h3>
+ ${sortGame('eat9',[['🦌 ಜಿಂಕೆ',0],['🐅 ಹುಲಿ',1],['🐦 ಗುಬ್ಬಚ್ಚಿ (ಕೀಟ ಮತ್ತು ಕಾಳು)',2],['🐄 ಹಸು',0],['🦁 ಸಿಂಹ',1],['🐦‍⬛ ಕಾಗೆ',2],['🐐 ಮೇಕೆ',0],['🧑 ಮನುಷ್ಯ',2]],[['🌿 ಸಸ್ಯ ತಿನ್ನುವವು','gr'],['🍖 ಕೇವಲ ಮಾಂಸಾಹಾರಿ','or'],['🍽️ ಎರಡನ್ನೂ ತಿನ್ನುವವು','pu']],'eat9')}`,a:()=>drawGames()},
+{h:'ದಿನಚರ ಮತ್ತು ನಿಶಾಚರ ಪ್ರಾಣಿಗಳು',s:'ಆಹಾರ ಹುಡುಕಲು ಹಗಲಿನಲ್ಲಿ ಹೊರಡುವ ಪ್ರಾಣಿಗಳು ದಿನಚರ. ಮೊಲ ಸಂಜೆ ಹೊರಡುತ್ತದೆ. ಗೂಬೆ, ಬಾವಲಿ, ನರಿ, ತೋಳ, ಚಿರತೆ ಇವು ರಾತ್ರಿ ಹೊರಡುವ ನಿಶಾಚರ ಪ್ರಾಣಿಗಳು.',b:()=>`
+ <h3>🕰️ ಸಮಯ ಬದಲಾಯಿಸಿ – ಯಾವ ಪ್ರಾಣಿಗಳು ಹೊರಗಿವೆ?</h3>
+ <div id="clkBox"></div>
+ <input type="range" min="0" max="23" value="${HR}" style="width:100%" oninput="HR=+this.value;clockUpd()">
+ <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><span>🌙 ರಾತ್ರಿ</span><span>☀️ ಮಧ್ಯಾಹ್ನ</span><span>🌙 ರಾತ್ರಿ</span></div>
+ <div class="key">• ಬಹಳಷ್ಟು ಕೀಟಗಳು ಬೆಳಿಗ್ಗೆ ಬಿಸಿಲು ಬಿದ್ದ ಕೂಡಲೇ ಕೆಲಸಕ್ಕೆ ತೊಡಗುತ್ತವೆ. ಬಹಳಷ್ಟು ಪಕ್ಷಿಗಳು ನಸುಕಿನಲ್ಲಿ ಕಲರವ ಮಾಡುತ್ತವೆ. <b>ಕಂಚುಕುಟಿಗ</b> ಮಧ್ಯಾಹ್ನ “ಪುಕ್-ಪುಕ್-ಪುಕ್” ಎಂಬ ಶಬ್ದ ಮಾಡುತ್ತದೆ.<br>• ನಾಯಿ, ಜಿಂಕೆ, ಹಸು, ಎಮ್ಮೆ ಹಗಲಿನಲ್ಲಿ ಆಹಾರ ಹುಡುಕುತ್ತವೆ – <b>ದಿನಚರ</b>.<br>• <b>ಮೊಲ</b> ಸಂಜೆ ಹೊರಡುತ್ತದೆ. ಪತಂಗದಂತಹ ಅನೇಕ ಕೀಟಗಳು ಸೂರ್ಯಾಸ್ತದ ನಂತರ ಹೊರಡುತ್ತವೆ. <b>ಬಾವಲಿಗಳು</b> ರಾತ್ರಿ ಹಾರುವ ಕೀಟಗಳನ್ನು ತಿನ್ನುತ್ತವೆ.<br>• ನರಿ, ತೋಳ, ಗೂಬೆ, ಚಿರತೆ, ಬಾವಲಿ, ಚಿಪ್ಪುಹಂದಿ, ಕಾಡುಬೆಕ್ಕು, ವಿವಿಧ ಹಾವುಗಳು – <b>ನಿಶಾಚರ</b>.</div>
+ <div class="know"><b class="h">👂 ಮಾಡಿ ನೋಡಿ</b><br>ರಾತ್ರಿ ಟಿ.ವಿ., ಮೊಬೈಲ್, ಫ್ಯಾನ್ ಆಫ್ ಆಗಿರುವಾಗ ಯಾವ ಶಬ್ದಗಳು ಕೇಳಿಸುತ್ತವೆ ಎಂಬುದನ್ನು ಗುರುತಿಸಿ. ಮನೆಯೊಳಗಿಂದ ಬರುವ ಮತ್ತು ಮನೆಯ ಹೊರಗಿನಿಂದ ಬರುವ ಶಬ್ದಗಳನ್ನು ಬೇರೆ ಬೇರೆಯಾಗಿ ಗುರುತಿಸಿ.</div>`,a:()=>clockUpd()},
+{h:'ಗುಂಪಾಗಿ ವಾಸಿಸುವ ಪ್ರಾಣಿಗಳು',s:'ಬಹಳಷ್ಟು ಪ್ರಾಣಿಗಳು ಗುಂಪಿನಲ್ಲಿ ವಾಸಿಸುತ್ತವೆ. ಪಕ್ಷಿಗಳು ಹಿಂಡಾಗಿ ಹಾರುತ್ತವೆ, ಮೀನುಗಳು ಒಟ್ಟಿಗೆ ಈಜುತ್ತವೆ, ಆನೆ, ಜಿಂಕೆ, ಕುರಿ, ಮೇಕೆ, ಕುದುರೆಗಳು ಹಿಂಡಾಗಿ ವಾಸಿಸುತ್ತವೆ. ಗುಂಪಿನಲ್ಲಿ ವಾಸಿಸುವುದರಿಂದ ಆಹಾರ ಹುಡುಕಲು, ಮರಿಗಳ ಕಾಳಜಿ ವಹಿಸಲು, ಅಪಾಯ ಗುರುತಿಸಲು, ಒಂದನ್ನೊಂದು ರಕ್ಷಿಸಲು ಸಹಾಯವಾಗುತ್ತದೆ.',b:()=>`
+ <div>ಆಯಾ ನೋಡಿದಳು – ಪುಟ್ಟ ಪುಟ್ಟ <b>ಇರುವೆಗಳು ಒಟ್ಟಾಗಿ</b> ಒಂದು ಹುಳುವನ್ನು ಎತ್ತಿಕೊಂಡು ಹೋಗುತ್ತಿವೆ! ಎಲ್ಲವೂ ಒಟ್ಟಾಗಿ ಕೆಲಸ ಮಾಡುವುದರಿಂದ ಇದು ಸಾಧ್ಯವಾಗುತ್ತದೆ.</div>
+ <div class="key">ಹಕ್ಕಿ <b>ಹಿಂಡಾಗಿ</b> ಹಾರುತ್ತವೆ, ಬಹಳಷ್ಟು ಮೀನುಗಳು ಒಟ್ಟಿಗೆ ಈಜುತ್ತವೆ; ಆನೆ, ಜಿಂಕೆ, ಕುರಿ, ಮೇಕೆ, ಕುದುರೆ <b>ಹಿಂಡಿನಲ್ಲಿ</b> ವಾಸಿಸುತ್ತವೆ. ಜೇನುನೊಣಗಳು <b>ಜೇನುಗೂಡಿನಲ್ಲಿ</b>, ಇನ್ನು ಇರುವೆ, ಗೆದ್ದಲು <b>ಹುತ್ತದಲ್ಲಿ</b> ಸಾವಿರಾರು ಸಂಖ್ಯೆಯಲ್ಲಿ ಒಟ್ಟಿಗೆ ವಾಸಿಸುತ್ತವೆ.</div>
+ <div class="g2">${[['🔍','ಆಹಾರ ಹುಡುಕಲು'],['🐣','ಮರಿಗಳ ಕಾಳಜಿ ವಹಿಸಲು'],['⚠️','ಅಪಾಯ ಗುರುತಿಸಲು'],['🛡️','ಒಂದನ್ನೊಂದು ರಕ್ಷಿಸಲು']].map(x=>`<div class="tile op" style="text-align:center"><div class="ic">${x[0]}</div><div class="dd">${x[1]} ಸಹಾಯ</div></div>`).join('')}</div>
+ <h3>ಆಟ: ಒಂಟಿಯಾಗಿ ವಾಸಿಸುವವು ಅಥವಾ ಗುಂಪಾಗಿ ವಾಸಿಸುವವು?</h3>
+ ${sortGame('grp',[['🐘 ಆನೆ',1],['🐆 ಚಿರತೆ',0],['🐜 ಇರುವೆ',1],['🦎 ಊಸರವಳ್ಳಿ',0],['🐐 ಮೇಕೆಗಳು',1],['🐢 ಆಮೆ',0],['🐝 ಜೇನುನೊಣ',1],['🐅 ಹುಲಿ',0],['🦌 ಜಿಂಕೆ',1]],[['ಒಂಟಿಯಾಗಿ','or'],['ಗುಂಪಾಗಿ','gr']],'grp')}`,a:()=>drawGames()},
+{h:'ಪರಿಸರದೊಂದಿಗೆ ಬೆರೆತುಹೋದ ಪ್ರಾಣಿಗಳು',s:'ಪ್ರಾಣಿಗಳು ಯಾವ ಪರಿಸರದಲ್ಲಿ ವಾಸಿಸುತ್ತವೆಯೋ ಆ ಪರಿಸರಕ್ಕೆ ಹೊಂದುವಂತೆ ಅವುಗಳ ದೇಹದ ಬಣ್ಣ ಮತ್ತು ಆಕಾರ ಇರುತ್ತದೆ. ಅನೇಕ ಪ್ರಾಣಿಗಳು ತಮ್ಮ ಪರಿಸರದೊಂದಿಗೆ ಹೀಗೆಯೇ ಬೆರೆತುಹೋಗುತ್ತವೆ ಮತ್ತು ತಮ್ಮನ್ನು ರಕ್ಷಿಸಿಕೊಳ್ಳುತ್ತವೆ.',b:()=>`
+ <div>ರಾಜವೀರ ಹೇಳಿದ, “ಅಕ್ಕ ನೋಡಿ, ಈ ಕಡ್ಡಿ ಹೇಗೆ ಅಲುಗಾಡುತ್ತಿದೆ!” ಅಕ್ಕ ಹೇಳಿದರು, “ಇದು <b>ಕಡ್ಡಿ ಹುಳು</b> ಎಂಬ ಕೀಟ.”</div>
+ <h3>🔍 ಆಟ: ಚಿತ್ರದಲ್ಲಿ ಅಡಗಿರುವ ೨ ಕೀಟಗಳನ್ನು ಹುಡುಕಿ</h3>
+ <div id="camBox">${camSvg()}</div><div id="camMsg"><div class="msg in">ಕಡ್ಡಿ ಮತ್ತು ಎಲೆಗಳಲ್ಲಿ ಅಡಗಿರುವ ಕೀಟಗಳ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.</div></div>
+ <div class="key">ಪ್ರಾಣಿಗಳು ಯಾವ ಪರಿಸರದಲ್ಲಿ ವಾಸಿಸುತ್ತವೆಯೋ ಆ ಪರಿಸರಕ್ಕೆ <b>ಹೊಂದುವಂತೆ ಅವುಗಳ ದೇಹದ ಬಣ್ಣ ಮತ್ತು ಆಕಾರ</b> ಇರುತ್ತದೆ. ಅನೇಕ ಪ್ರಾಣಿಗಳು ತಮ್ಮ ಪರಿಸರದೊಂದಿಗೆ ಹೀಗೆಯೇ <b>ಸರ್ವಸಮ</b> ಬೆರೆತುಹೋಗುತ್ತವೆ ಮತ್ತು <b>ತಮ್ಮನ್ನು ರಕ್ಷಿಸಿಕೊಳ್ಳುತ್ತವೆ</b> ಮಾಡುತ್ತಾರೆ.</div>
+ <div class="g2">${[['🐆','ಚಿರತೆ','ಮೈಮೇಲಿನ ಚುಕ್ಕೆಗಳಿಂದ ಮರಗಳ ನೆರಳಿನಲ್ಲಿ, ಪೊದೆಗಳಲ್ಲಿ ಅಡಗುತ್ತದೆ.'],['🦎','ಊಸರವಳ್ಳಿ','ಸುತ್ತಮುತ್ತಲಿನಂತೆ ಬಣ್ಣ ಬದಲಾಯಿಸುತ್ತದೆ.'],['🦗','ಹಸಿರು ಮಿಡತೆ','ಎಲೆಯಂತೆ ಹಸಿರು ಬಣ್ಣ.'],['🐅','ಹುಲಿ','ಪಟ್ಟೆಗಳಿಂದ ಎತ್ತರದ ಹುಲ್ಲಿನಲ್ಲಿ ಕಾಣುವುದಿಲ್ಲ.']].map(x=>`<div class="tile" onclick="tog(this)"><div class="ic">${x[0]}</div><div class="tt">${x[1]}</div><div class="dd">${x[2]}</div><div class="tap">ಹೇಗೆ ಅಡಗುತ್ತದೆ?</div></div>`).join('')}</div>`},
+{h:'ಪ್ರಾಣಿಗಳ ಆಯುಷ್ಯ',s:'ಒಂದು ಜೀವಿಯ ಹುಟ್ಟಿನಿಂದ ಸಾವಿನವರೆಗಿನ ಸಂಪೂರ್ಣ ಅವಧಿಯೇ ಆಯುಷ್ಯ. ಪ್ರತಿ ಪ್ರಾಣಿಯ ಆಯುಷ್ಯ ಬೇರೆ ಬೇರೆಯಾಗಿರುತ್ತದೆ. ಕೆಲವು ಪ್ರಾಣಿಗಳು ಕೆಲವು ಗಂಟೆ, ಕೆಲವು ವಾರ, ಇನ್ನು ಕೆಲವು ವರ್ಷಗಳ ಕಾಲ ಬದುಕುತ್ತವೆ.',b:()=>`
+ <div class="key">ಒಂದು ಜೀವಿಯ <b>ಹುಟ್ಟಿನಿಂದ ಸಾವಿನವರೆಗಿನ</b> ಸಂಪೂರ್ಣ ಅವಧಿಯನ್ನು <b>‘ಆಯುಷ್ಯ’</b> ಆಯುಷ್ಯ ಎನ್ನುತ್ತಾರೆ. ಪ್ರತಿ ಪ್ರಾಣಿಯ ಆಯುಷ್ಯ ಬೇರೆ ಬೇರೆಯಾಗಿರುತ್ತದೆ.</div>
+ ${LIFE.map(x=>`<div style="display:flex;align-items:center;gap:6px;margin:4px 0"><span style="width:100px;font-weight:700;font-size:15px">${x[0]}</span><div style="flex:1;background:#e2e8f0;border-radius:99px;height:14px"><div style="width:${Math.max(1.5,x[2])}%;background:linear-gradient(90deg,#22c55e,#0ea5e9);height:100%;border-radius:99px"></div></div><span style="width:104px;font-size:13px;text-align:right">${x[1]}</span></div>`).join('')}
+ <h3>ಆಟ: ಹೆಚ್ಚು ಕಾಲ ಯಾರು ಬದುಕುತ್ತಾರೆ?</h3>
+ ${pickGame('lf9',[['🦋 ಚಿಟ್ಟೆ ಅಥವಾ 🐦 ಗುಬ್ಬಚ್ಚಿ?',['ಚಿಟ್ಟೆ','ಗುಬ್ಬಚ್ಚಿ'],1],['🐘 ಆನೆ ಅಥವಾ 🐅 ಹುಲಿ?',['ಆನೆ','ಹುಲಿ'],0],['🪰 ಮನೆನೊಣ ಅಥವಾ 🐦‍⬛ ಕಾಗೆ?',['ಮನೆನೊಣ','ಕಾಗೆ'],1],['🐱 ಬೆಕ್ಕು ಅಥವಾ 🐶 ನಾಯಿ? (ಸುಮಾರು)',['ಬೆಕ್ಕು','ನಾಯಿ'],0]],'lf9')}
+ <h3>💡 ನಿಮಗೆ ಗೊತ್ತೇ? – ಮಹಾರಾಷ್ಟ್ರದ ರಾಜ್ಯ ಚಿಹ್ನೆಗಳು</h3>
+ <div class="g2" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">${[['🕊️','ರಾಜ್ಯ ಪಕ್ಷಿ','ಹಸಿರು ಪಾರಿವಾಳ'],['🐿️','ರಾಜ್ಯ ಪ್ರಾಣಿ','ಶೇಕರು (ದೈತ್ಯ ಅಳಿಲು)'],['🦋','ರಾಜ್ಯ ಚಿಟ್ಟೆ','ಬ್ಲೂ ಮಾರ್ಮನ್'],['🐟','ರಾಜ್ಯ ಮೀನು','ಸಿಲ್ವರ್ ಪಾಂಫ್ರೆಟ್']].map(x=>`<div class="tile" onclick="tog(this);say('${x[1]} ${x[2]}')" style="text-align:center"><div class="ic">${x[0]}</div><div class="tt" style="font-size:15px">${x[1]}</div><div class="dd" style="font-size:18px;font-weight:800">${x[2]}</div><div class="tap">ಉತ್ತರ ನೋಡಿ</div></div>`).join('')}</div>`,a:()=>drawGames()},
+{h:'ಇದನ್ನು ನಾವು ಕಲಿತೆವು',s:'ಪ್ರತಿ ಪ್ರಾಣಿ ಮತ್ತು ಕೀಟಕ್ಕೆ ತನ್ನದೇ ವೈಶಿಷ್ಟ್ಯಗಳಿರುತ್ತವೆ. ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡಲು ಕೀಟಗಳು ಮುಖ್ಯ. ಒಂದು ಜೀವಿ ಆಹಾರಕ್ಕಾಗಿ ಇನ್ನೊಂದು ಜೀವಿಯನ್ನು ಅವಲಂಬಿಸಿರುತ್ತದೆ, ಇದನ್ನೇ ಆಹಾರ ಸರಪಳಿ ಎನ್ನುತ್ತಾರೆ.',b:()=>`
+ <ul>
+  <li>ಪ್ರತಿ ಪ್ರಾಣಿ ಮತ್ತು ಕೀಟಕ್ಕೆ <b>ತನ್ನದೇ ವೈಶಿಷ್ಟ್ಯಗಳು</b> ಆಗಿರುತ್ತವೆ.</li>
+  <li>ಪರಿಸರವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡಲು <b>ಕೀಟಗಳು ಮುಖ್ಯ</b> ವಾಗಿವೆ; ಬಹುತೇಕ ಕೀಟಗಳು ಇತರ ಜೀವಿಗಳಿಗೆ ಉಪಯೋಗವಾಗುತ್ತವೆ.</li>
+  <li>ಮೊಟ್ಟೆಯಿಂದ ಜನಿಸುವ ಪ್ರಾಣಿಗಳನ್ನು <b>ಅಂಡಜ</b>, ಮತ್ತು ಮರಿಗಳಿಗೆ ಜನ್ಮ ನೀಡುವ ಪ್ರಾಣಿಗಳನ್ನು <b>ಜರಾಯುಜ</b> ಎನ್ನುತ್ತಾರೆ.</li>
+  <li><b>ಮೊಟ್ಟೆ – ಹುಳು – ಕೋಶ – ಪತಂಗ</b> ಎಂಬ ಜೀವನಚಕ್ರ ಬಹಳಷ್ಟು ಕೀಟಗಳದ್ದು.</li>
+  <li>ಒಂದು ಜೀವಿ ಆಹಾರಕ್ಕಾಗಿ ಇನ್ನೊಂದು ಜೀವಿಯನ್ನು ಅವಲಂಬಿಸಿರುತ್ತದೆ – <b>ಆಹಾರ ಸರಪಳಿ</b>.</li>
+  <li>ಕೆಲವು ಪ್ರಾಣಿಗಳು ದೇಹದ ಆಕಾರ, ಬಣ್ಣದಿಂದ <b>ಪರಿಸರದೊಂದಿಗೆ ಬೆರೆತುಹೋಗುತ್ತವೆ</b> ಆಗುತ್ತವೆ.</li>
+  <li>ಪ್ರತಿ ಪ್ರಾಣಿಯ <b>ಆಯುಷ್ಯ</b> ಬೇರೆ ಬೇರೆಯಾಗಿರುತ್ತದೆ.</li>
+ </ul>
+ <div class="know"><b class="h">✂️ ಮಾಡಿ ನೋಡಿ</b><br>ನಿಮಗೆ ಇಷ್ಟವಾದ ಕೀಟದ ಚಿತ್ರ ಬಿಡಿಸಿ, ರಟ್ಟಿನ ಮೇಲೆ ಅಂಟಿಸಿ ಮತ್ತು ಬಣ್ಣದ ಮಣಿ, ಕಲ್ಲು, ಬೀಜಗಳನ್ನು ಬಳಸಿ ಅಲಂಕರಿಸಿ.<br>⚠️ ಕತ್ತರಿ, ಚಾಕು, ಸೂಜಿಯನ್ನು ಜಾಗರೂಕತೆಯಿಂದ ಮತ್ತು ಹಿರಿಯರ ಮೇಲ್ವಿಚಾರಣೆಯಲ್ಲಿ ಬಳಸಿ; ಬಳಸಿದ ನಂತರ ಮೊದಲಿದ್ದ ಜಾಗದಲ್ಲಿ ಇಡಿ.</div>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>೧. ವಿವಿಧ ತರಕಾರಿಗಳ ಮುದ್ರೆಗಳನ್ನು ಬಳಸಿ ಪಕ್ಷಿಗಳ ಚಿತ್ರ ತಯಾರಿಸಿ.<br>೨. ವಿವಿಧ ಪಕ್ಷಿಗಳ ಸಿಕ್ಕ ಪುಕ್ಕಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ ಬೀಸಣಿಗೆ ತಯಾರಿಸಿ.</div>
+ <div class="msg ok" style="text-align:center;font-size:19px">🦋 ಈ ಪಾಠದಲ್ಲಿ ನೀವು ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು: <b>${(award('end','ಅಭಿನಂದನೆ! ನೀವು ಇಡೀ ಪಾಠ ಕಲಿತಿರಿ.'),STARS.size)}</b> ⭐</div>
+ <div class="tool">${tool('N')}</div>`}
+];
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ಎಲ್ಲಾ ಪಕ್ಷಿಗಳಲ್ಲಿ ಒಂದೇ ರೀತಿ ಕಾಣುವ ಅಂಗಗಳು ಯಾವುವು?',['ಕೊಕ್ಕು, ಕಾಲು, ರೆಕ್ಕೆ, ಪುಕ್ಕ','ಕೊಂಬು, ಬಾಲ','ಗೊರಸು, ಕೊಂಬು','ಈಜುರೆಕ್ಕೆ, ಚಿಪ್ಪು'],0,'ಕೊಕ್ಕು, ಕಾಲು, ರೆಕ್ಕೆ, ಪುಕ್ಕ ಎಲ್ಲಾ ಪಕ್ಷಿಗಳಲ್ಲಿ ಇರುತ್ತವೆ.'],
+['ಆಕಾಶದಲ್ಲಿ ಬಹಳ ಎತ್ತರದಲ್ಲಿ ಹಾರುವ ಪಕ್ಷಿ ಯಾವುದು?',['ಗುಬ್ಬಚ್ಚಿ','ಪಾರಿವಾಳ','ಗಿಡುಗ','ಕೋಳಿ'],2,'ಗಿಡುಗ ಆಕಾಶದಲ್ಲಿ ಬಹಳ ಎತ್ತರದಲ್ಲಿ ಹಾರುತ್ತದೆ.'],
+['ರಮಾ ಅಕ್ಕನ ವೀಕ್ಷಣೆಯಲ್ಲಿದ್ದ ‘ಮೀಂಚುಳ್ಳಿ’ ಪಕ್ಷಿಯ ಬೆನ್ನಿನ ಬಣ್ಣ ಯಾವುದಾಗಿತ್ತು?',['ಕೆಂಪು','ನೀಲಿ','ಹಳದಿ','ಕಪ್ಪು'],1,'ಮೀಂಚುಳ್ಳಿಯ ಬೆನ್ನು ನೀಲಿಯಾಗಿತ್ತು.'],
+['ವೀಕ್ಷಣೆಯ ಸಮಯದಲ್ಲಿ ಮೀಂಚುಳ್ಳಿ ಏನು ಮಾಡುತ್ತಿತ್ತು?',['ಗೂಡು ಕಟ್ಟುತ್ತಿತ್ತು','ಕೊಂಬೆಯ ಮೇಲೆ ಕುಳಿತು ಮೀನು ತಿನ್ನುತ್ತಿತ್ತು','ಹಾಡುತ್ತಿತ್ತು','ಹಾರುತ್ತಿತ್ತು'],1,'ಅದು ಕೊಂಬೆಯ ಮೇಲೆ ಕುಳಿತು ಮೀನು ತಿನ್ನುತ್ತಿತ್ತು.'],
+['ಪಕ್ಷಿ ವೀಕ್ಷಣೆ ಮಾಡುವಾಗ ಯಾವ ನಿಯಮ ಪಾಲಿಸಬೇಕು?',['ಮೊಟ್ಟೆಗಳನ್ನು ಕೈಯಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬೇಕು','ಗೂಡುಗಳನ್ನು ಮನೆಗೆ ತರಬೇಕು','ಪಕ್ಷಿ, ಮೊಟ್ಟೆ, ಗೂಡುಗಳನ್ನು ಮುಟ್ಟಬಾರದು','ಪಕ್ಷಿಗಳನ್ನು ಹಿಡಿಯಬೇಕು'],2,'ಕೇವಲ ಕೆಳಗೆ ಬಿದ್ದಿರುವ ಮಾದರಿಗಳನ್ನು ಸಂಗ್ರಹಕ್ಕೆ ಬಳಸಬೇಕು.'],
+['‘ಅರಣ್ಯಋಷಿ’ ಎಂದು ಯಾರನ್ನು ಗುರುತಿಸಲಾಗುತ್ತದೆ?',['ಮಾರುತಿ ಚಿತಮಪಳ್ಳಿ','ವಿ. ಜೆ. ಜೋಸೆಫ್','ವರಾಹಮಿಹಿರ','ಪರಶುರಾಮ ಖಡೀವಾಲೆ'],0,'ಮಾರುತಿ ಚಿತಮಪಳ್ಳಿ ಅವರನ್ನು ಅರಣ್ಯಋಷಿ ಎನ್ನುತ್ತಾರೆ.'],
+['ಮಾರುತಿ ಚಿತಮಪಳ್ಳಿ ಅವರು ಯಾವ ಗ್ರಂಥ ಬರೆದರು?',['ಪಕ್ಷಿಕೋಶ','ಬೃಹತ್ಸಂಹಿತಾ','ಪಂಚಸಿದ್ಧಾಂತಿಕಾ','ಆಯುರ್ವೇದ'],0,'ಅವರು ‘ಪಕ್ಷಿಕೋಶ’ ಗ್ರಂಥ ಬರೆದರು.'],
+['ಉದ್ದ ಬಾಗಿದ ಕೊಕ್ಕಿನಿಂದ ಹೂವಿನ ಮಕರಂದ ಹೀರುವ ಪಕ್ಷಿ ಯಾವುದು?',['ಶಿಕ್ರಾ','ನೇರಳೆ ಸೂರಕ್ಕಿ','ಬಾತುಕೋಳಿ','ಕಾಗೆ'],1,'ನೇರಳೆ ಸೂರಕ್ಕಿ ಮಕರಂದ ಹೀರುತ್ತದೆ.'],
+['ಸುಂದರ ನೇಯ್ದ ನೇತಾಡುವ ಗೂಡನ್ನು ಯಾವ ಪಕ್ಷಿ ಕಟ್ಟುತ್ತದೆ?',['ನೇಕಾರ ಹಕ್ಕಿ','ಗಿಡುಗ','ಪಾರಿವಾಳ','ಕಾಗೆ'],0,'ನೇಕಾರ ಹಕ್ಕಿ ನೇಯ್ದ ಗೂಡು ಕಟ್ಟುತ್ತದೆ.'],
+['ಸಸ್ಯಗಳ ಒಣಗಿದ ಭಾಗಗಳನ್ನು ವಿಘಟಿಸಿ ಮಣ್ಣು ತಯಾರಿಸಲು ಯಾವ ಕೀಟ ಸಹಾಯ ಮಾಡುತ್ತದೆ?',['ಚಿಟ್ಟೆ','ಗೆದ್ದಲು','ಮಿಂಚುಹುಳು','ಡ್ರ್ಯಾಗನ್‌ಫ್ಲೈ'],1,'ಗೆದ್ದಲಿನಂತಹ ಕೀಟಗಳು ವಿಘಟನೆ ಮಾಡುತ್ತವೆ.'],
+['ಹೂವಿನಿಂದ ಹಣ್ಣು ತಯಾರಾಗುವ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿ ಯಾರು ಸಹಾಯ ಮಾಡುತ್ತಾರೆ?',['ಕೀಟ','ಕಲ್ಲು','ಮರಳು','ಮೀನು'],0,'ಕೀಟಗಳಿಂದ ಪರಾಗಸ್ಪರ್ಶವಾಗಿ ಹಣ್ಣುಗಳು ತಯಾರಾಗುತ್ತವೆ.'],
+['‘ಜೇನುನೊಣಗಳ ವೈದ್ಯ’ ಎಂದು ಯಾರನ್ನು ಗುರುತಿಸಲಾಗುತ್ತದೆ?',['ವಿ. ಜೆ. ಜೋಸೆಫ್','ಮಾರುತಿ ಚಿತಮಪಳ್ಳಿ','ಸಲೀಂ ಅಲಿ','ಶಿವಾಜಿ ಮಹಾರಾಜ'],0,'ಕೇರಳದ ವಿ. ಜೆ. ಜೋಸೆಫ್ ಅವರು ಜೇನುನೊಣಗಳ ರೋಗಕ್ಕೆ ಔಷಧ ಕಂಡುಹಿಡಿದರು.'],
+['ವಿ. ಜೆ. ಜೋಸೆಫ್ ಅವರು ಎಷ್ಟು ವರ್ಷ ಪ್ರಯೋಗ ಮಾಡಿ ಔಷಧ ಕಂಡುಹಿಡಿದರು?',['೨','೫','೧೦','೨೦'],2,'೧೦ ವರ್ಷ ಪ್ರಯೋಗ ಮಾಡಿ.'],
+['ಹುಲ್ಲು ಹುಳು, ಜೇನುನೊಣ, ಗೆದ್ದಲು ಇವು ಯಾವ ಬಗೆಯ ಕೀಟಗಳು?',['ಮಾಂಸಾಹಾರಿ','ಸಸ್ಯಾಹಾರಿ','ನಿಶಾಚರ','ಜರಾಯುಜ'],1,'ಅವು ಸಸ್ಯಾಹಾರಿ ಕೀಟಗಳು.'],
+['ಡ್ರ್ಯಾಗನ್‌ಫ್ಲೈ, ಚಿತ್ರಾಂಗ ದುಂಬಿ ಇವು ಯಾವ ಬಗೆಯ ಕೀಟಗಳು?',['ಸಸ್ಯಾಹಾರಿ','ಮಾಂಸಾಹಾರಿ','ಜರಾಯುಜ','ಸಾಕು'],1,'ಅವು ಮಾಂಸಾಹಾರಿ ಕೀಟಗಳು.'],
+['ಮೊಟ್ಟೆಯಿಂದ ಜನಿಸುವ ಪ್ರಾಣಿಗಳನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ಜರಾಯುಜ','ಅಂಡಜ','ನಿಶಾಚರ','ದಿನಚರ'],1,'ಅವುಗಳನ್ನು ಅಂಡಜ ಎನ್ನುತ್ತಾರೆ.'],
+['ಮರಿಗಳಿಗೆ ಜನ್ಮ ನೀಡುವ ಪ್ರಾಣಿಗಳನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ಅಂಡಜ','ಜರಾಯುಜ','ಸಸ್ಯಾಹಾರಿ','ಕೀಟ'],1,'ಅವುಗಳನ್ನು ಜರಾಯುಜ ಎನ್ನುತ್ತಾರೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಜರಾಯುಜ ಪ್ರಾಣಿ ಯಾವುದು?',['ಕೋಳಿ','ಮೀನು','ಹಸು','ಕಪ್ಪೆ'],2,'ಹಸು ಮರಿಗೆ ಜನ್ಮ ನೀಡುತ್ತದೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಅಂಡಜ ಪ್ರಾಣಿ ಯಾವುದು?',['ಬೆಕ್ಕು','ನಾಯಿ','ಹಾವು','ಕತ್ತೆ'],2,'ಹಾವು ಮೊಟ್ಟೆ ಇಡುತ್ತದೆ.'],
+['ಚಿಟ್ಟೆಯ ಸರಿಯಾದ ಜೀವನಚಕ್ರ ಯಾವುದು?',['ಮೊಟ್ಟೆ – ಕೋಶ – ಹುಳು – ಚಿಟ್ಟೆ','ಮೊಟ್ಟೆ – ಹುಳು – ಕೋಶ – ಚಿಟ್ಟೆ','ಹುಳು – ಮೊಟ್ಟೆ – ಚಿಟ್ಟೆ – ಕೋಶ','ಕೋಶ – ಮೊಟ್ಟೆ – ಹುಳು – ಚಿಟ್ಟೆ'],1,'ಮೊಟ್ಟೆ – ಹುಳು (ಕಂಬಳಿಹುಳು) – ಕೋಶ – ಚಿಟ್ಟೆ.'],
+['ಜೇನುನೊಣಗಳ ಗೂಡಿನಿಂದ ಏನು ಸಿಗುತ್ತದೆ?',['ರೇಷ್ಮೆ','ಜೇನುತುಪ್ಪ ಮತ್ತು ಮೇಣ','ಲಕ್ಷ','ಹಾಲು'],1,'ಜೇನುತುಪ್ಪ ಮತ್ತು ಮೇಣ ಸಿಗುತ್ತದೆ.'],
+['ರೇಷ್ಮೆ ದಾರ ಯಾರಿಂದ ಸಿಗುತ್ತದೆ?',['ಜೇನುನೊಣ','ರೇಷ್ಮೆ ಹುಳು','ಗೆದ್ದಲು','ಡ್ರ್ಯಾಗನ್‌ಫ್ಲೈ'],1,'ರೇಷ್ಮೆ ಹುಳುವಿನಿಂದ.'],
+['ಅರಗು ಯಾರಿಂದ ಸಿಗುತ್ತದೆ?',['ಅರಗಿನ ಹುಳು','ಜೇನುನೊಣ','ಚಿಟ್ಟೆ','ಮಿಂಚುಹುಳು'],0,'ಅರಗಿನ ಹುಳುವಿನಿಂದ ಅರಗು ಸಿಗುತ್ತದೆ.'],
+['ಅರಗನ್ನು ಯಾವುದಕ್ಕೆ ಬಳಸುತ್ತಾರೆ?',['ಬಳೆ, ಆಭರಣ ಮತ್ತು ದಾಖಲೆಗಳಿಗೆ ಮುದ್ರೆ ಹಾಕಲು','ಆಹಾರವಾಗಿ','ಔಷಧಿಯಾಗಿ','ಇಂಧನವಾಗಿ'],0,'ಬಳೆ, ಆಭರಣ ಮತ್ತು ಮುದ್ರೆ ಹಾಕಲು.'],
+['ಬೆಳಕು ನೀಡುವ ಕೀಟ ಯಾವುದು?',['ಮಿಂಚುಹುಳು','ಜೇನುನೊಣ','ಇರುವೆ','ಡ್ರ್ಯಾಗನ್‌ಫ್ಲೈ'],0,'ಮಿಂಚುಹುಳು ಬೆಳಕು ನೀಡುತ್ತದೆ.'],
+['ಸರಿಯಾದ ಆಹಾರ ಸರಪಳಿ ಯಾವುದು?',['ಹುಲ್ಲು → ಹುಳು → ಕಪ್ಪೆ → ಹಾವು → ಗರುಡ','ಗರುಡ → ಹಾವು → ಹುಲ್ಲು → ಹುಳು','ಹುಳು → ಹುಲ್ಲು → ಗರುಡ → ಕಪ್ಪೆ','ಹಾವು → ಹುಲ್ಲು → ಕಪ್ಪೆ → ಗರುಡ'],0,'ಹುಲ್ಲು → ಹುಳು → ಕಪ್ಪೆ → ಹಾವು → ಗರುಡ.'],
+['ಆಹಾರ ಸರಪಳಿಯಲ್ಲಿ ಕಪ್ಪೆಯನ್ನು ಯಾರು ತಿನ್ನುತ್ತಾರೆ?',['ಹುಳು','ಹಾವು','ಹುಲ್ಲು','ಜಿಂಕೆ'],1,'ಹಾವು ಕಪ್ಪೆಯನ್ನು ತಿನ್ನುತ್ತದೆ.'],
+['ತಮ್ಮ ಆಹಾರವನ್ನು ತಾವೇ ತಯಾರಿಸಿಕೊಳ್ಳುವವರು ಯಾರು?',['ಸಸ್ಯ','ಹುಲಿ','ಗರುಡ','ಕಪ್ಪೆ'],0,'ಸಸ್ಯಗಳು ತಮ್ಮ ಆಹಾರವನ್ನು ತಾವೇ ತಯಾರಿಸಿಕೊಳ್ಳುತ್ತವೆ.'],
+['ಹಗಲಿನಲ್ಲಿ ಆಹಾರ ಹುಡುಕಲು ಹೊರಡುವ ಪ್ರಾಣಿಗಳನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ನಿಶಾಚರ','ದಿನಚರ','ಅಂಡಜ','ಜರಾಯುಜ'],1,'ಅವುಗಳನ್ನು ದಿನಚರ ಎನ್ನುತ್ತಾರೆ.'],
+['ಮೊಲ ಆಹಾರ ಹುಡುಕಲು ಯಾವಾಗ ಹೊರಡುತ್ತದೆ?',['ಬೆಳಿಗ್ಗೆ','ಮಧ್ಯಾಹ್ನ','ಸಂಜೆ','ಮಧ್ಯರಾತ್ರಿ'],2,'ಮೊಲ ಸಂಜೆ ಹೊರಡುತ್ತದೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ನಿಶಾಚರ ಪ್ರಾಣಿ ಯಾವುದು?',['ಹಸು','ಗೂಬೆ','ಜಿಂಕೆ','ಎಮ್ಮೆ'],1,'ಗೂಬೆ ರಾತ್ರಿ ಹೊರಡುತ್ತದೆ.'],
+['ಮಧ್ಯಾಹ್ನ “ಪುಕ್-ಪುಕ್-ಪುಕ್” ಎಂಬ ಶಬ್ದ ಮಾಡುವ ಪಕ್ಷಿ ಯಾವುದು?',['ಕಂಚುಕುಟಿಗ','ಕಾಗೆ','ನವಿಲು','ಗಿಡುಗ'],0,'ಕಂಚುಕುಟಿಗ ಮಧ್ಯಾಹ್ನ ಹಾಡುತ್ತದೆ.'],
+['ರಾತ್ರಿ ಹಾರುವ ಕೀಟಗಳನ್ನು ಯಾರು ತಿನ್ನುತ್ತಾರೆ?',['ಬಾವಲಿಗಳು','ಹಸುಗಳು','ಜಿಂಕೆ','ಮೇಕೆಗಳು'],0,'ಬಾವಲಿಗಳು ರಾತ್ರಿ ಹಾರುವ ಕೀಟಗಳನ್ನು ತಿನ್ನುತ್ತವೆ.'],
+['ಇರುವೆ ಮತ್ತು ಗೆದ್ದಲು ಎಲ್ಲಿ ವಾಸಿಸುತ್ತವೆ?',['ಜೇನುಗೂಡಿನಲ್ಲಿ','ಹುತ್ತದಲ್ಲಿ','ಗೂಡಿನಲ್ಲಿ','ಗುಹೆಯಲ್ಲಿ'],1,'ಇರುವೆ, ಗೆದ್ದಲು ಹುತ್ತದಲ್ಲಿ ಸಾವಿರಾರು ಸಂಖ್ಯೆಯಲ್ಲಿ ವಾಸಿಸುತ್ತವೆ.'],
+['ಗುಂಪಿನಲ್ಲಿ ವಾಸಿಸುವುದರ ಲಾಭ ಯಾವುದು?',['ಅಪಾಯ ಗುರುತಿಸುವುದು ಮತ್ತು ಒಂದನ್ನೊಂದು ರಕ್ಷಿಸುವುದು','ಆಹಾರ ಕಡಿಮೆ ಸಿಗುವುದು','ಒಂಟಿ ಅನಿಸುವುದು','ಏನೂ ಇಲ್ಲ'],0,'ಆಹಾರ ಹುಡುಕುವುದು, ಮರಿಗಳ ಕಾಳಜಿ, ಅಪಾಯ ಗುರುತಿಸುವುದು, ರಕ್ಷಣೆ.'],
+['ಕಡ್ಡಿಯಂತೆ ಕಾಣುವ ಕೀಟ ಯಾವುದು?',['ಕಡ್ಡಿ ಹುಳು','ಜೇನುನೊಣ','ಮಿಂಚುಹುಳು','ಡ್ರ್ಯಾಗನ್‌ಫ್ಲೈ'],0,'ಕಡ್ಡಿ ಹುಳು ಪರಿಸರದೊಂದಿಗೆ ಬೆರೆತುಹೋಗುತ್ತದೆ.'],
+['ಪ್ರಾಣಿಗಳು ಪರಿಸರದೊಂದಿಗೆ ಬೆರೆತುಹೋಗಿ ಏನನ್ನು ಸಾಧಿಸುತ್ತವೆ?',['ತಮ್ಮನ್ನು ರಕ್ಷಿಸಿಕೊಳ್ಳುತ್ತವೆ','ಹೆಚ್ಚು ಶಬ್ದ','ಬೇಗ ನಿದ್ರೆ','ಏನೂ ಇಲ್ಲ'],0,'ಬಣ್ಣ ಮತ್ತು ಆಕಾರದಿಂದ ಅಡಗಿಕೊಂಡು ತಮ್ಮನ್ನು ರಕ್ಷಿಸಿಕೊಳ್ಳುತ್ತವೆ.'],
+['ಹುಟ್ಟಿನಿಂದ ಸಾವಿನವರೆಗಿನ ಅವಧಿಯನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?',['ಆಯುಷ್ಯ','ಜೀವನಕ್ರಮ','ಆಹಾರ ಸರಪಳಿ','ಸ್ಥಳಾಂತರ'],0,'ಅದನ್ನು ಆಯುಷ್ಯ ಎನ್ನುತ್ತಾರೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಅತ್ಯಂತ ಹೆಚ್ಚು ಆಯುಷ್ಯ ಯಾರದ್ದು?',['ಆನೆ','ಹುಲಿ','ನಾಯಿ','ಗುಬ್ಬಚ್ಚಿ'],0,'ಆನೆ ೬೦ ರಿಂದ ೭೦ ವರ್ಷ ಬದುಕುತ್ತದೆ.'],
+['ಚಿಟ್ಟೆಯ ಆಯುಷ್ಯ ಸುಮಾರು ಎಷ್ಟು ಇರುತ್ತದೆ?',['೧ ರಿಂದ ೨ ವಾರ','೧೦ ವರ್ಷ','೬೦ ವರ್ಷ','೧ ದಿನ'],0,'ಚಿಟ್ಟೆ ೧ ರಿಂದ ೨ ವಾರ ಬದುಕುತ್ತದೆ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜ್ಯ ಪಕ್ಷಿ ಯಾವುದು?',['ನವಿಲು','ಹಸಿರು ಪಾರಿವಾಳ','ಕಾಗೆ','ಗಿಳಿ'],1,'ಹಸಿರು ಪಾರಿವಾಳ ರಾಜ್ಯ ಪಕ್ಷಿ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜ್ಯ ಪ್ರಾಣಿ ಯಾವುದು?',['ಹುಲಿ','ಶೇಕರು (ದೈತ್ಯ ಅಳಿಲು)','ಆನೆ','ಜಿಂಕೆ'],1,'ಶೇಕರು ರಾಜ್ಯ ಪ್ರಾಣಿ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜ್ಯ ಚಿಟ್ಟೆ ಯಾವುದು?',['ಬ್ಲೂ ಮಾರ್ಮನ್','ಮೊನಾರ್ಕ್','ಕಾಮನ್ ಟೈಗರ್','ಇವುಗಳಲ್ಲಿ ಯಾವುದೂ ಅಲ್ಲ'],0,'ಬ್ಲೂ ಮಾರ್ಮನ್ ರಾಜ್ಯ ಚಿಟ್ಟೆ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜ್ಯ ಮೀನು ಯಾವುದು?',['ರೋಹು','ಸಿಲ್ವರ್ ಪಾಂಫ್ರೆಟ್','ಅಂಜಲ್','ಬಂಗುಡೆ'],1,'ಸಿಲ್ವರ್ ಪಾಂಫ್ರೆಟ್ ರಾಜ್ಯ ಮೀನು.']
+];
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ಹುಲ್ಲು ಹುಳು, ಜೇನುನೊಣ, ಗೆದ್ದಲು ಇವು ............ ಕೀಟಗಳು.',['ಮಾಂಸಾಹಾರಿ','ಸಂಜೆ','ಸಸ್ಯಾಹಾರಿ'],2],['ಡ್ರ್ಯಾಗನ್‌ಫ್ಲೈ, ಚಿತ್ರಾಂಗ ದುಂಬಿ ಇವು ............ ಕೀಟಗಳು.',['ಮಾಂಸಾಹಾರಿ','ಸಂಜೆ','ಸಸ್ಯಾಹಾರಿ'],0],['ಮೊಲ ಪ್ರಾಣಿ ಆಹಾರ ಹುಡುಕಲು ............ ಹೊರಡುತ್ತದೆ.',['ಮಾಂಸಾಹಾರಿ','ಸಂಜೆ','ಸಸ್ಯಾಹಾರಿ'],1]],
+ aa:[['ಪಕ್ಷಿಯ ಗೂಡನ್ನು ಮನೆಗೆ ತಂದು ಅಲಂಕಾರಕ್ಕಾಗಿ ಇಡುವುದು.',1],['ಬೇಸಿಗೆ ದಿನಗಳಲ್ಲಿ ಅಂಗಳದಲ್ಲಿ ಪಕ್ಷಿಗಳಿಗಾಗಿ ಪಾತ್ರೆಯಲ್ಲಿ ನೀರು ಇಡುವುದು.',0],['ಜೇನುನೊಣಗಳ ಗೂಡಿಗೆ ಕಲ್ಲು ಹೊಡೆಯುವುದು.',1]],
+ jj:[['ಜೇನುನೊಣ','ಮಕರಂದ ಸಂಗ್ರಹಿಸುವುದು'],['ಡ್ರ್ಯಾಗನ್‌ಫ್ಲೈ','ಸಣ್ಣ ಕೀಟಗಳನ್ನು ತಿನ್ನುತ್ತದೆ'],['ಲಕ್ಷ','ಮುದ್ರೆ ಹಾಕಲು'],['ಮಿಂಚುಹುಳು','ಬೆಳಕು ನೀಡುವ ಕೀಟ'],['ಚಿಟ್ಟೆ','ಬಣ್ಣಬಣ್ಣದ ಕೀಟ']],
+ ee:[['ಚಿರತೆ',0,1],['ಜಿಂಕೆ',1,1],['ಆಮೆ',0,0],['ಮೀನು',1,0],['ಊಸರವಳ್ಳಿ',0,0],['ಆನೆ',1,1],['ಜಿರಾಫೆ',1,1],['ಗಿಳಿ',1,0],['ಇರುವೆ',1,0],['ಜೇನುನೊಣ',1,0]],
+ u:'<b>ರೇಷ್ಮೆ ಹುಳು</b> – ರೇಷ್ಮೆ ದಾರ ಸಿಗುತ್ತದೆ; ಅದರಿಂದ ರೇಷ್ಮೆ ಬಟ್ಟೆ, ಸೀರೆಗಳು ತಯಾರಾಗುತ್ತವೆ.<br><b>ಜೇನುನೊಣ</b> – ಜೇನುತುಪ್ಪ ಮತ್ತು ಮೇಣ ಸಿಗುತ್ತದೆ; ಹೂವುಗಳಿಂದ ಹಣ್ಣು ತಯಾರಾಗಲು (ಪರಾಗಸ್ಪರ್ಶ) ಸಹಾಯ ಮಾಡುತ್ತದೆ.<br><b>ದುಂಬಿಗಳು</b> – ಹೂವಿನ ಮಕರಂದ ಹೀರುವಾಗ ಹೂವುಗಳಿಂದ ಹಣ್ಣು ತಯಾರಾಗಲು ಸಹಾಯ ಮಾಡುತ್ತವೆ; ಕೆಲವು ದುಂಬಿಗಳು (ಚಿತ್ರಾಂಗ ದುಂಬಿ) ಬೆಳೆಗಳ ಮೇಲಿನ ಕೀಟಗಳನ್ನು ತಿನ್ನುತ್ತವೆ.'
+};
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+const JR9=['ಮುದ್ರೆ ಹಾಕಲು','ಬಣ್ಣಬಣ್ಣದ ಕೀಟ','ಮಕರಂದ ಸಂಗ್ರಹಿಸುವುದು','ಬೆಳಕು ನೀಡುವ ಕೀಟ','ಸಣ್ಣ ಕೀಟಗಳನ್ನು ತಿನ್ನುತ್ತದೆ'];
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಅಭ್ಯಾಸ – ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ</h2>
+ <h3>(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಆವರಣದಲ್ಲಿರುವ ಸರಿಯಾದ ಪದ ತುಂಬಿ. (ಮಾಂಸಾಹಾರಿ, ಸಂಜೆ, ಸಸ್ಯಾಹಾರಿ)</h3>${pickGame('swa',SW.a,'swa')}
+ <h3>(ಆ) ಕೆಳಗಿನ ಕೃತಿ ಸರಿಯೋ ತಪ್ಪೋ ಎಂದು ಬರೆಯಿರಿ.</h3>${sortGame('swaa',SW.aa,[['✔ ಸರಿ','gr'],['✘ ತಪ್ಪು','or']],'swaa')}
+ <h3>(ಇ) ನನ್ನ ಜೋಡಿ ಯಾರು?</h3>${pickGame('swj',SW.jj.map(x=>[`‘‘ಅ’ ಗುಂಪು: <b>${x[0]}</b> – ‘ಬ’ ಗುಂಪಿನ ಜೋಡಿ?`,JR9,JR9.indexOf(x[1])]),'swj')}
+ <h3>(ಈ) ಕೆಳಗೆ ಆವರಣದಲ್ಲಿ ಕೊಟ್ಟಿರುವ ಪ್ರಾಣಿಗಳ ಗುಂಪುಗಳನ್ನು ಮಾಡಿ.</h3>
+ <div class="tap">(ಚಿರತೆ, ಜಿಂಕೆ, ಆಮೆ, ಮೀನು, ಊಸರವಳ್ಳಿ, ಆನೆ, ಜಿರಾಫೆ, ಗಿಳಿ, ಇರುವೆ, ಜೇನುನೊಣ)</div>
+ <b>(೧) ಒಂಟಿಯಾಗಿ ಅಥವಾ ಗುಂಪಾಗಿ ವಾಸಿಸುವವು?</b>${sortGame('swe1',SW.ee.map(x=>[x[0],x[1]]),[['ಒಂಟಿಯಾಗಿ','or'],['ಗುಂಪಾಗಿ','gr']],'swe1')}
+ <b>(೨) ಅಂಡಜ ಅಥವಾ ಜರಾಯುಜ?</b>${sortGame('swe2',SW.ee.map(x=>[x[0],x[2]]),[['🥚 ಅಂಡಜ','or'],['🍼 ಜರಾಯುಜ','pu']],'swe2')}
+ <h3>(ಉ) ರೇಷ್ಮೆ ಹುಳು, ಜೇನುನೊಣ, ದುಂಬಿಗಳ ಉಪಯೋಗಗಳನ್ನು ಬರೆಯಿರಿ.</h3>${sq('ರೇಷ್ಮೆ ಹುಳು, ಜೇನುನೊಣ, ದುಂಬಿಗಳ ಉಪಯೋಗಗಳನ್ನು ಬರೆಯಿರಿ.',SW.u,1)}
+ <h3>(ಊ) ಆಹಾರ ಸರಪಳಿಯ ಅಸ್ತವ್ಯಸ್ತ ಕ್ರಮವನ್ನು ಸರಿಯಾದ ಕ್ರಮದಲ್ಲಿ ಜೋಡಿಸಿ.</h3>${orderGame('swu',['🌿 ಹುಲ್ಲು','🦗 ಹುಲ್ಲುಗಾವಲು ಮಿಡತೆ','🐸 ಕಪ್ಪೆ','🐍 ಹಾವು','🦅 ಗರುಡ'],'swu')}
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>೧. ವಿವಿಧ ತರಕಾರಿಗಳ ಮುದ್ರೆಗಳನ್ನು ಬಳಸಿ ಪಕ್ಷಿಗಳ ಚಿತ್ರ ತಯಾರಿಸಿ.<br>೨. ವಿವಿಧ ಪಕ್ಷಿಗಳ ಸಿಕ್ಕ ಪುಕ್ಕಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ ಬೀಸಣಿಗೆ ತಯಾರಿಸಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಕಾಡಿನ ಎಲ್ಲಾ ಹಾವುಗಳು ನಾಶವಾದರೆ ಕಪ್ಪೆ ಮತ್ತು ಹದ್ದುಗಳಿಗೆ ಏನಾಗುತ್ತದೆ?','ಆಹಾರ ಸರಪಳಿಯಲ್ಲಿ ಹಾವು ಯಾರನ್ನು ತಿನ್ನುತ್ತದೆ ಮತ್ತು ಯಾರ ಆಹಾರವಾಗಿದೆ?','ಹಾವು ಇಲ್ಲದಿರುವುದರಿಂದ ಕಪ್ಪೆಗಳ ಸಂಖ್ಯೆ ಬಹಳ ಹೆಚ್ಚಾಗುತ್ತದೆ ಮತ್ತು ಅವು ಹುಳು/ಕೀಟಗಳನ್ನು ಮುಗಿಸುತ್ತವೆ. ಹದ್ದಿಗೆ ಆಹಾರ ಕಡಿಮೆ ಸಿಗುತ್ತದೆ, ಆದ್ದರಿಂದ ಹದ್ದುಗಳ ಸಂಖ್ಯೆ ಕಡಿಮೆಯಾಗುತ್ತದೆ. ಆಹಾರ ಸರಪಳಿಯ ಒಂದು ಕೊಂಡಿ ತುಂಡಾದರೂ ಪ್ರಕೃತಿಯ ಸಮತೋಲನ ಹದಗೆಡುತ್ತದೆ.'],
+['ಗೂಬೆ ರಾತ್ರಿ ಬೇಟೆಯಾಡಬಲ್ಲದು, ಆದರೆ ಹಸು ರಾತ್ರಿ ಮೇಯಲು ಹೋಗುವುದಿಲ್ಲ. ಇದರಿಂದ ಏನು ತಿಳಿಯುತ್ತದೆ?','ದಿನಚರ ಮತ್ತು ನಿಶಾಚರ.','ಪ್ರತಿ ಪ್ರಾಣಿಯ ಆಹಾರ ಹುಡುಕುವ ಸಮಯ ಬೇರೆ ಬೇರೆ ಇರುತ್ತದೆ. ಗೂಬೆ ನಿಶಾಚರ – ಅದರ ಕಣ್ಣು ಮತ್ತು ಕಿವಿ ಕತ್ತಲೆಯಲ್ಲಿ ಕೆಲಸ ಮಾಡಲು ಸಿದ್ಧವಾಗಿರುತ್ತವೆ. ಹಸು ದಿನಚರ, ಅದು ಹಗಲಿನಲ್ಲಿ ಆಹಾರ ಹುಡುಕುತ್ತದೆ.'],
+['ಪಕ್ಷಿಗಳ ಗೂಡು ಮತ್ತು ಮೊಟ್ಟೆಗಳನ್ನು ಏಕೆ ಮುಟ್ಟಬಾರದು?','ಪಕ್ಷಿ ಮತ್ತೆ ಬರುತ್ತದೆಯೇ?','ಮುಟ್ಟಿದರೆ ಮೊಟ್ಟೆಗಳು ಒಡೆಯಬಹುದು, ಮರಿಗಳು ಹೆದರುತ್ತವೆ ಅಥವಾ ಬೀಳುತ್ತವೆ. ಮನುಷ್ಯರ ವಾಸನೆ ತಗುಲಿದರೆ ಕೆಲವು ಪಕ್ಷಿಗಳು ಗೂಡು ಬಿಟ್ಟುಬಿಡುತ್ತವೆ. ಆದ್ದರಿಂದ ದೂರದಿಂದಲೇ ಶಾಂತವಾಗಿ ವೀಕ್ಷಿಸಬೇಕು.'],
+['ಹೊಲದಲ್ಲಿ ಕೀಟನಾಶಕಗಳನ್ನು ಬಹಳ ಬಳಸಿದರೆ ಜೇನುನೊಣಗಳ ಮೇಲೆ ಮತ್ತು ಬೆಳೆಗಳ ಮೇಲೆ ಏನು ಪರಿಣಾಮವಾಗುತ್ತದೆ?','ಜೇನುನೊಣ ಹೂವುಗಳ ಮೇಲೆ ಏನು ಮಾಡುತ್ತದೆ?','ಕೀಟನಾಶಕಗಳಿಂದ ಜೇನುನೊಣಗಳು ಸಾಯುತ್ತವೆ. ಜೇನುನೊಣಗಳು ಹೂವುಗಳಿಂದ ಹಣ್ಣು ತಯಾರಾಗಲು ಸಹಾಯ ಮಾಡುತ್ತವೆ, ಆದ್ದರಿಂದ ಹಣ್ಣು ಮತ್ತು ಧಾನ್ಯದ ಉತ್ಪಾದನೆ ಕಡಿಮೆಯಾಗುತ್ತದೆ ಮತ್ತು ಜೇನುತುಪ್ಪವೂ ಸಿಗುವುದಿಲ್ಲ.'],
+['ಹಸಿರು ಮಿಡತೆ ಹಸಿರು ಎಲೆಗಳ ಮೇಲೆ ಅಡಗುತ್ತದೆ. ಅದು ಕೆಂಪು ಹೂವಿನ ಮೇಲೆ ಕುಳಿತರೆ ಏನಾಗುತ್ತದೆ?','ಅದರ ಬಣ್ಣ ಪರಿಸರಕ್ಕೆ ಹೊಂದುತ್ತದೆಯೇ?','ಕೆಂಪು ಹೂವುಗಳ ಮೇಲೆ ಹಸಿರು ಮಿಡತೆ ಸುಲಭವಾಗಿ ಎದ್ದು ಕಾಣುತ್ತದೆ, ಆದ್ದರಿಂದ ಪಕ್ಷಿಗಳು ಅಥವಾ ಇತರ ಶತ್ರುಗಳು ಅದನ್ನು ತಕ್ಷಣ ಹಿಡಿಯುತ್ತವೆ. ಪರಿಸರದೊಂದಿಗೆ ಬೆರೆತಿದ್ದರೆ ಮಾತ್ರ ಅದಕ್ಕೆ ರಕ್ಷಣೆ ಸಿಗುತ್ತದೆ.'],
+['ಇರುವೆಗಳು ತಮಗಿಂತ ಬಹಳ ದೊಡ್ಡ ಹುಳುವನ್ನು ಹೇಗೆ ಹೊತ್ತೊಯ್ಯಬಲ್ಲವು? ಇದರಿಂದ ನಾವು ಏನು ಕಲಿಯುತ್ತೇವೆ?','ಒಟ್ಟಾಗಿ ಕೆಲಸ…','ಅನೇಕ ಇರುವೆಗಳು ಒಟ್ಟಿಗೆ ಸೇರಿ, ಶಿಸ್ತಿನಿಂದ ಮತ್ತು ಒಂದಕ್ಕೊಂದು ಸಹಾಯ ಮಾಡುತ್ತಾ ಕೆಲಸ ಮಾಡುತ್ತವೆ. ಇದರಿಂದ ಒಗ್ಗಟ್ಟಿನಿಂದ ಕೆಲಸ ಮಾಡಿದರೆ ದೊಡ್ಡ ಕೆಲಸವೂ ಸಾಧ್ಯವಾಗುತ್ತದೆ ಎಂದು ನಾವು ಕಲಿಯುತ್ತೇವೆ.'],
+['ಚಿಟ್ಟೆಗಳ ಸಂಖ್ಯೆ ಹೆಚ್ಚಾಗಲೆಂದು ನೀವು ಶಾಲೆಯಲ್ಲಿ ಏನು ಮಾಡುವಿರಿ?','ಚಿಟ್ಟೆಗಳಿಗೆ ಏನು ಬೇಕು – ಹೂವುಗಳು, ಹುಳುಗಳಿಗೆ ಎಲೆಗಳು…','ಶಾಲೆಯಲ್ಲಿ ಹೂವಿನ ತೋಟ (ಚೆಂಡು ಹೂವು, ನಿತ್ಯಪುಷ್ಪ, ದಾಸವಾಳ) ಮಾಡುವುದು, ಹುಳುಗಳು ತಿನ್ನುವಂತಹ ಗಿಡಗಳನ್ನು ನೆಡುವುದು, ಕೀಟನಾಶಕ ಬಳಸದಿರುವುದು ಮತ್ತು ಹುಳು/ಕೋಶಗಳಿಗೆ ಧಕ್ಕೆ ಮಾಡದಿರುವುದು.'],
+['ಆನೆ ೬೦–೭೦ ವರ್ಷ ಬದುಕುತ್ತದೆ, ಆದರೆ ಚಿಟ್ಟೆ ಕೇವಲ ೧–೨ ವಾರ. ಆದರೂ ಚಿಟ್ಟೆಗಳ ಸಂಖ್ಯೆ ಏಕೆ ಕಡಿಮೆಯಾಗುವುದಿಲ್ಲ?','ಹೆಣ್ಣು ಚಿಟ್ಟೆ ಎಷ್ಟು ಮೊಟ್ಟೆ ಇಡುತ್ತದೆ?','ಹೆಣ್ಣು ಚಿಟ್ಟೆ ಒಂದೇ ಬಾರಿಗೆ ಬಹಳ ಮೊಟ್ಟೆ ಇಡುತ್ತದೆ ಮತ್ತು ಜೀವನಚಕ್ರ ಬಹಳ ಬೇಗ ಪೂರ್ಣವಾಗುತ್ತದೆ. ಆದ್ದರಿಂದ ಆಯುಷ್ಯ ಕಡಿಮೆ ಇದ್ದರೂ ಹೊಸ ಚಿಟ್ಟೆಗಳು ನಿರಂತರವಾಗಿ ತಯಾರಾಗುತ್ತಿರುತ್ತವೆ.'],
+['ಗೆದ್ದಲು ಮರಕ್ಕೆ ಹಾನಿ ಮಾಡುತ್ತದೆ, ಆದರೂ ಕಾಡಿಗೆ ಅದು ಏಕೆ ಉಪಯುಕ್ತ?','ಕಾಡಿನಲ್ಲಿ ಬಿದ್ದಿರುವ ಒಣ ಕೊಂಬೆಗಳಿಗೆ ಏನಾಗುತ್ತದೆ?','ಕಾಡಿನಲ್ಲಿ ಬಿದ್ದಿರುವ ಒಣ ಮರ, ಎಲೆಗಳನ್ನು ಗೆದ್ದಲು ವಿಘಟಿಸಿ ಮಣ್ಣಿನಲ್ಲಿ ಬೆರೆಸುತ್ತದೆ. ಇದರಿಂದ ಫಲವತ್ತಾದ ಮಣ್ಣು ತಯಾರಾಗುತ್ತದೆ ಮತ್ತು ಕಾಡು ಸ್ವಚ್ಛವಾಗಿರುತ್ತದೆ. ಆದರೆ ಮನೆಯಲ್ಲಿ ಅದರಿಂದ ತೊಂದರೆಯಾಗುತ್ತದೆ.'],
+['ನಿಮ್ಮ ಪರಿಸರದ ಒಂದು ಪಕ್ಷಿಯನ್ನು ವಾರವಿಡೀ ವೀಕ್ಷಿಸಿದರೆ ಯಾವ ಯಾವ ವಿಷಯಗಳನ್ನು ದಾಖಲಿಸುವಿರಿ?','ರಮಾ ಅಕ್ಕನ ವೀಕ್ಷಣೆಯ ಅಂಶಗಳನ್ನು ನೆನಪಿಸಿಕೊಳ್ಳಿ.','ಪಕ್ಷಿಯ ಹೆಸರು, ದಿನಾಂಕ ಮತ್ತು ಸಮಯ, ಗಾತ್ರ, ಕೊಕ್ಕು ಮತ್ತು ಕಾಲುಗಳ ರಚನೆ, ವಿವಿಧ ಭಾಗಗಳ ಬಣ್ಣ, ಅದು ಏನು ತಿನ್ನುತ್ತದೆ, ಎಲ್ಲಿ ವಾಸಿಸುತ್ತದೆ/ಗೂಡು ಎಲ್ಲಿ, ಅದು ಒಂಟಿಯಾಗಿ ಅಥವಾ ಹಿಂಡಾಗಿ ಇರುತ್ತದೆಯೇ, ಅದರ ಧ್ವನಿ ಯಾವಾಗ ಕೇಳುತ್ತದೆ ಇತ್ಯಾದಿ.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೯ : ಪ್ರಾಣಿಗಳ ಅದ್ಭುತ ಲೋಕದಲ್ಲಿ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${[...document.querySelectorAll('#stepBox ul li')].map(l=>`<li>${l.innerHTML}</li>`).join('')}</ol>
+ <table class="w"><tr><th>ಅಂಡಜ</th><th>ಜರಾಯುಜ</th><th>ಸಸ್ಯಾಹಾರಿ ಕೀಟಗಳು</th><th>ಮಾಂಸಾಹಾರಿ ಕೀಟಗಳು</th></tr><tr><td>ಕೀಟ, ಪಕ್ಷಿ, ಸರೀಸೃಪ, ಮೀನು, ಕಪ್ಪೆ</td><td>ಮನುಷ್ಯ, ಬೆಕ್ಕು, ನಾಯಿ, ಹಸು, ಕತ್ತೆ</td><td>ಹುಲ್ಲು ಹುಳು, ಜೇನುನೊಣ, ಗೆದ್ದಲು</td><td>ಡ್ರ್ಯಾಗನ್‌ಫ್ಲೈ, ಚಿತ್ರಾಂಗ ದುಂಬಿ</td></tr></table>
+ <p class="pq">ಜೀವನಚಕ್ರ ಮತ್ತು ಆಹಾರ ಸರಪಳಿ</p><div>ಚಿಟ್ಟೆ: ಮೊಟ್ಟೆ → ಹುಳು (ಕಂಬಳಿಹುಳು) → ಕೋಶ → ಚಿಟ್ಟೆ &nbsp;|&nbsp; ಹುಲ್ಲು → ಹುಳು → ಕಪ್ಪೆ → ಹಾವು → ಗರುಡ</div>
+ <p class="pq">ಕೀಟಗಳಿಂದ ಸಿಗುವ ಪದಾರ್ಥಗಳು</p><div>ಜೇನುನೊಣ – ಜೇನುತುಪ್ಪ, ಮೇಣ • ರೇಷ್ಮೆ ಹುಳು – ರೇಷ್ಮೆ • ಅರಗಿನ ಹುಳು – ಅರಗು (ಬಳೆ, ಮುದ್ರೆ)</div>
+ <p class="pq">ದಿನಚರ / ನಿಶಾಚರ</p><div>ದಿನಚರ – ನಾಯಿ, ಜಿಂಕೆ, ಹಸು, ಎಮ್ಮೆ • ಸಂಜೆ – ಮೊಲ • ನಿಶಾಚರ – ನರಿ, ತೋಳ, ಗೂಬೆ, ಚಿರತೆ, ಬಾವಲಿ, ಚಿಪ್ಪುಹಂದಿ, ಕಾಡುಬೆಕ್ಕು, ಹಾವು</div>
+ <p class="pq">ಆಯುಷ್ಯ</p><table class="w"><tr>${LIFE.slice(0,6).map(x=>`<td>${x[0].slice(x[0].indexOf(' ')+1)}<br>${x[1]}</td>`).join('')}</tr><tr>${LIFE.slice(6).map(x=>`<td>${x[0].slice(x[0].indexOf(' ')+1)}<br>${x[1]}</td>`).join('')}</tr></table>
+ <p class="pq">ಮಹಾರಾಷ್ಟ್ರದ ರಾಜ್ಯ ಚಿಹ್ನೆಗಳು</p><div>ರಾಜ್ಯ ಪಕ್ಷಿ – ಹಸಿರು ಪಾರಿವಾಳ • ರಾಜ್ಯ ಪ್ರಾಣಿ – ಶೇಕರು • ರಾಜ್ಯ ಚಿಟ್ಟೆ – ಬ್ಲೂ ಮಾರ್ಮನ್ • ರಾಜ್ಯ ಮೀನು – ಸಿಲ್ವರ್ ಪಾಂಫ್ರೆಟ್</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಆವರಣದಲ್ಲಿರುವ ಸರಿಯಾದ ಪದ ತುಂಬಿ. (ಮಾಂಸಾಹಾರಿ, ಸಂಜೆ, ಸಸ್ಯಾಹಾರಿ)</div>${SW.a.map((x,i)=>`<div>${i+1}) ${x[0]}</div>`).join('')}
+ <div class="pq">(ಆ) ಕೆಳಗಿನ ಕೃತಿ ಸರಿಯೋ ತಪ್ಪೋ ಎಂದು ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div>${i+1}) ${x[0]} &nbsp; ________</div>`).join('')}
+ <div class="avoid"><div class="pq">(ಇ) ನನ್ನ ಜೋಡಿ ಯಾರು?</div><table class="w"><tr><th>‘‘ಅ’ ಗುಂಪು</th><th>‘‘ಬ’ ಗುಂಪು</th><th style="width:28mm">ಉತ್ತರ</th></tr>${SW.jj.map((x,i)=>`<tr><td>${i+1}) ${x[0]}</td><td class="l">(${A[i]||'ಇ'}) ${['ಬಣ್ಣಬಣ್ಣದ ಕೀಟ','ಸಣ್ಣ ಕೀಟಗಳನ್ನು ತಿನ್ನುತ್ತದೆ','ಮಕರಂದ ಸಂಗ್ರಹಿಸುವುದು','ಮುದ್ರೆ ಹಾಕಲು','ಬೆಳಕು ನೀಡುವ ಕೀಟ'][i]}</td><td></td></tr>`).join('')}</table></div>
+ <div class="avoid"><div class="pq">(ಈ) ಆವರಣದಲ್ಲಿರುವ ಪ್ರಾಣಿಗಳ ಗುಂಪುಗಳನ್ನು ಮಾಡಿ. (${SW.ee.map(x=>x[0]).join(', ')})</div><table class="w"><tr><th>ಒಂಟಿಯಾಗಿ ವಾಸಿಸುವವು</th><th>ಗುಂಪಾಗಿ ವಾಸಿಸುವವು</th><th>ಅಂಡಜ</th><th>ಜರಾಯುಜ</th></tr><tr><td style="height:22mm"></td><td></td><td></td><td></td></tr></table></div>
+ <div class="avoid"><div class="pq">(ಉ) ರೇಷ್ಮೆ ಹುಳು, ಜೇನುನೊಣ, ದುಂಬಿಗಳ ಉಪಯೋಗಗಳನ್ನು ಬರೆಯಿರಿ.</div>${lines(3)}</div>
+ <div class="avoid"><div class="pq">(ಊ) ಆಹಾರ ಸರಪಳಿಯ ಕ್ರಮ ಜೋಡಿಸಲು ಚೌಕಟ್ಟಿನಲ್ಲಿ ಸರಿಯಾದ ಸಂಖ್ಯೆ ಬರೆಯಿರಿ.</div><div style="display:flex;justify-content:space-around;margin-top:2mm">${['ಹಾವು','ಹುಲ್ಲು','ಗರುಡ','ಕಪ್ಪೆ','ಹುಲ್ಲುಗಾವಲು ಮಿಡತೆ'].map(x=>`<div style="text-align:center"><div style="width:12mm;height:10mm;border:1.2px solid #000;margin:0 auto 1mm"></div>${x}</div>`).join('')}</div></div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>(ಅ)</b> ${SW.a.map((x,i)=>`${i+1}) ${x[1][x[2]]}`).join('; ')}</div><div><b>(ಆ)</b> ${SW.aa.map((x,i)=>`${i+1}) ${x[1]?'ತಪ್ಪು':'ಸರಿ'}`).join('; ')}</div><div><b>(ಇ)</b> ${SW.jj.map(x=>`${x[0]} – ${x[1]}`).join('; ')}</div><div><b>(ಈ)</b> ಒಂಟಿಯಾಗಿ: ${SW.ee.filter(x=>!x[1]).map(x=>x[0]).join(', ')}; ಗುಂಪಾಗಿ: ${SW.ee.filter(x=>x[1]).map(x=>x[0]).join(', ')}.<br>ಅಂಡಜ: ${SW.ee.filter(x=>!x[2]).map(x=>x[0]).join(', ')}; ಜರಾಯುಜ: ${SW.ee.filter(x=>x[2]).map(x=>x[0]).join(', ')}.</div><div><b>(ಉ)</b> ${SW.u}</div><div><b>(ಊ)</b> ಹಾವು–೪, ಹುಲ್ಲು–೧, ಹದ್ದು–೫, ಕಪ್ಪೆ–೩, ಹುಲ್ಲುಗಾವಲು ಮಿಡತೆ–೨</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>ಇ. ೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೯</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

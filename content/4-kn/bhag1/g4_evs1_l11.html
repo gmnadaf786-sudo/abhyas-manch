@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೧ – ಪಾಠ ೧೧ ನನ್ನ ಮಹಾರಾಷ್ಟ್ರ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೧೧ : ನನ್ನ ಮಹಾರಾಷ್ಟ್ರ</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">🚩🏞️ ಬೆಟ್ಟ, ನದಿ, ಕಾಡು, ಖನಿಜ, ಕೃಷಿ, ಹಬ್ಬ ಮತ್ತು ಕೋಟೆಗಳು – ಬನ್ನಿ, ನಮ್ಮ ಮಹಾರಾಷ್ಟ್ರದ ಪ್ರವಾಸ ಮಾಡೋಣ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೧೬ ಮೆಟ್ಟಿಲುಗಳು · ಮಳೆ ಮಾಪಕ · ವಾದ್ಯವೃಂದ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೬೫ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೧೧ : ನನ್ನ ಮಹಾರಾಷ್ಟ್ರ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🚩','🏰','🌳'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ನೆರೆಯ ರಾಜ್ಯಗಳು (ಆಕೃತಿ) ---------- */
+function nbSvg(){return `<svg viewBox="0 0 340 250" style="max-width:420px;width:100%;display:block;margin:0 auto">
+ <rect x="0" y="0" width="340" height="250" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+ <rect x="4" y="60" width="62" height="150" rx="8" fill="#bae6fd"/><text x="35" y="130" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">ಅರಬ್ಬಿ</text><text x="35" y="145" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">ಸಮುದ್ರ</text>
+ <rect x="70" y="8" width="90" height="34" rx="8" fill="#fde68a"/><text x="115" y="30" text-anchor="middle" font-size="12" font-weight="800">ಗುಜರಾತ್</text>
+ <rect x="168" y="8" width="110" height="34" rx="8" fill="#fde68a"/><text x="223" y="30" text-anchor="middle" font-size="12" font-weight="800">ಮಧ್ಯಪ್ರದೇಶ</text>
+ <rect x="286" y="70" width="50" height="110" rx="8" fill="#fbcfe8"/><text x="311" y="122" text-anchor="middle" font-size="10" font-weight="800" transform="rotate(-90 311 122)">ಛತ್ತೀಸ್‌ಗಢ</text>
+ <rect x="70" y="208" width="60" height="34" rx="8" fill="#ddd6fe"/><text x="100" y="230" text-anchor="middle" font-size="12" font-weight="800">ಗೋವಾ</text>
+ <rect x="136" y="208" width="72" height="34" rx="8" fill="#ddd6fe"/><text x="172" y="230" text-anchor="middle" font-size="12" font-weight="800">ಕರ್ನಾಟಕ</text>
+ <rect x="214" y="208" width="80" height="34" rx="8" fill="#ddd6fe"/><text x="254" y="230" text-anchor="middle" font-size="12" font-weight="800">ತೆಲಂಗಾಣ</text>
+ <path d="M78 60 L270 60 L250 150 L150 198 L86 196 Z" fill="#bbf7d0" stroke="#15803d" stroke-width="3" class="tw"/>
+ <text x="172" y="118" text-anchor="middle" font-size="16" font-weight="900" fill="#14532d">ಮಹಾರಾಷ್ಟ್ರ</text>
+ <text x="172" y="136" text-anchor="middle" font-size="10" fill="#14532d">(ಸುಮಾರು ತ್ರಿಕೋನ ಆಕಾರ)</text>
+ <g transform="translate(316,30)"><path d="M0 -16 L6 6 L0 2 L-6 6Z" fill="#111"/><text x="0" y="-19" text-anchor="middle" font-size="11" font-weight="800">ಉ</text></g>
+ </svg><div class="tap" style="text-align:center">ಇದು ಕೇವಲ ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಇರುವ ಆಕೃತಿ; ನಿಖರ ನಕ್ಷೆಗಾಗಿ ಪಠ್ಯಪುಸ್ತಕದ ನಕ್ಷೆ ನೋಡಿ.</div>`}
+
+/* ---------- ಭೌಗೋಳಿಕ ವಿಭಾಗಗಳು ---------- */
+const PR=[['ಕೊಂಕಣ ಕರಾವಳಿ','ಅರಬ್ಬಿ ಸಮುದ್ರಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಕಿರಿದಾದ ತಗ್ಗು ಪ್ರದೇಶ. ಇಲ್ಲಿ ಬಹಳ ಮಳೆ ಬೀಳುತ್ತದೆ. ಭತ್ತ, ತೆಂಗು, ಮಾವು, ಗೋಡಂಬಿ ಬೆಳೆಯುತ್ತವೆ.','#4ade80'],
+ ['ಸಹ್ಯಾದ್ರಿ ಪರ್ವತ ಶ್ರೇಣಿ (ಪಶ್ಚಿಮ ಘಟ್ಟ)','ಉತ್ತರ-ದಕ್ಷಿಣ ಹರಡಿರುವ ಎತ್ತರದ ಪರ್ವತ ಶ್ರೇಣಿ. ‘ಕಳಸೂಬಾಯಿ’ ಮಹಾರಾಷ್ಟ್ರದ ಅತ್ಯಂತ ಎತ್ತರದ ಶಿಖರ ಇದೇ ಶ್ರೇಣಿಯಲ್ಲಿದೆ.','#15803d'],
+ ['ಮಹಾರಾಷ್ಟ್ರ ಪ್ರಸ್ಥಭೂಮಿ (ದಖ್ಖನ್ ಪ್ರಸ್ಥಭೂಮಿ)','ಸಹ್ಯಾದ್ರಿಯ ಪೂರ್ವದ ಸಮತಟ್ಟಾದ ಎತ್ತರದ ವಿಶಾಲ ಭಾಗ. ಮಹಾರಾಷ್ಟ್ರ ಪ್ರಸ್ಥಭೂಮಿ ದಖ್ಖನ್ ಪ್ರಸ್ಥಭೂಮಿಯ ಭಾಗವಾಗಿದೆ.','#d6a35c'],
+ ['ವಿದರ್ಭದ ಬಯಲು ಪ್ರದೇಶ','ರಾಜ್ಯದ ಪೂರ್ವ ಭಾಗದ ನದಿಗಳ ಸಮತಟ್ಟಾದ ಬಯಲು ಪ್ರದೇಶ. ಇಲ್ಲಿ ಖನಿಜಗಳು ಹೆಚ್ಚು ಸಿಗುತ್ತವೆ.','#a3e635']];
+let PRS=null;const PRV=new Set();
+function landSvg(){const hl=i=>PRS==i?'stroke="#dc2626" stroke-width="4"':'stroke="#334155" stroke-width="1"';
+ return `<svg viewBox="0 0 360 190" style="max-width:480px;width:100%;display:block;margin:0 auto;background:linear-gradient(#e0f2fe,#fff)">
+ <text x="8" y="16" font-size="11" font-weight="800">⬅ ಪಶ್ಚಿಮ</text><text x="352" y="16" text-anchor="end" font-size="11" font-weight="800">ಪೂರ್ವ ➡</text>
+ <circle cx="300" cy="34" r="12" fill="#facc15"/>
+ <rect x="0" y="140" width="45" height="50" fill="#38bdf8"/><text x="22" y="170" text-anchor="middle" font-size="9" fill="#fff" font-weight="800">ಸಮುದ್ರ</text>
+ <g onclick="prTap(0)" style="cursor:pointer"><path d="M45 140 L100 132 L100 190 L45 190Z" fill="${PR[0][2]}" ${hl(0)}/><text x="72" y="160" text-anchor="middle" font-size="16">🌴</text></g>
+ <g onclick="prTap(1)" style="cursor:pointer"><path d="M100 132 L118 70 L130 95 L142 40 L156 90 L168 100 L168 190 L100 190Z" fill="${PR[1][2]}" ${hl(1)}/><text x="142" y="36" text-anchor="middle" font-size="9" font-weight="800">ಕಳಸೂಬಾಯಿ</text></g>
+ <g onclick="prTap(2)" style="cursor:pointer"><path d="M168 100 L270 104 L270 190 L168 190Z" fill="${PR[2][2]}" ${hl(2)}/><text x="220" y="130" text-anchor="middle" font-size="16">🌾</text></g>
+ <g onclick="prTap(3)" style="cursor:pointer"><path d="M270 104 L360 122 L360 190 L270 190Z" fill="${PR[3][2]}" ${hl(3)}/><path d="M275 160 Q310 150 355 165" stroke="#0284c7" stroke-width="4" fill="none"/></g>
+ ${['೧','೨','೩','೪'].map((n,i)=>`<g onclick="prTap(${i})" style="cursor:pointer"><circle cx="${[72,134,220,315][i]}" cy="180" r="9" fill="#fff" stroke="#111"/><text x="${[72,134,220,315][i]}" y="184" text-anchor="middle" font-size="11" font-weight="800">${n}</text></g>`).join('')}
+ </svg>`}
+function prTap(i){PRS=i;PRV.add(i);say(PR[i][0]+'. '+PR[i][1]);drawPR();if(PRV.size==4)award('pr','ಭೇಷ್! ನಾಲ್ಕೂ ಭೌಗೋಳಿಕ ವಿಭಾಗಗಳನ್ನು ನೋಡಿದಿರಿ.')}
+function drawPR(){const b=$('prBox');if(!b)return;b.innerHTML=landSvg()+(PRS==null?'<div class="msg in">👆 ಆಕೃತಿಯ ಪ್ರತಿ ಭಾಗದ ಮೇಲೆ (೧ ರಿಂದ ೪) ಕ್ಲಿಕ್ ಮಾಡಿ.</div>':`<div class="msg ok"><b>${PRS+1}) ${PR[PRS][0]}</b><br>${PR[PRS][1]}</div>`)+`<div class="tap">ನೋಡಿದ ವಿಭಾಗಗಳು: ${PRV.size} / ೪</div>`}
+
+/* ---------- ಗೋದಾವರಿ ---------- */
+function godaAnim(){setTimeout(()=>{const a=$('gd1'),b=$('gd2');if(a)a.style.width='100%';if(b)b.style.width=(740/1465*100).toFixed(1)+'%'},150)}
+
+/* ---------- ಮಳೆ ಮತ್ತು ಕಾಡುಗಳು ---------- */
+const FOR=[['ನಿತ್ಯಹರಿದ್ವರ್ಣ ಕಾಡು','೩೦೦೦ ಮಿ.ಮೀ.ಗಿಂತ ಹೆಚ್ಚು','ಸಹ್ಯಾದ್ರಿಯ ದಕ್ಷಿಣ ಭಾಗ','ಅನೇಕ ಬಗೆಯ ಮರಗಳಿರುವುದರಿಂದ ಕಾಡುಗಳು ವರ್ಷವಿಡೀ ಹಸಿರಾಗಿ ಕಾಣುತ್ತವೆ.','ನಾಗಸಂಪಿಗೆ, ನೇರಳೆ, ಹಲಸು, ಬೆತ್ತ, ಬಿದಿರು','🌳🌴🌳🌲🌳🌴🌳🌲🌳'],
+ ['ಅರೆ ನಿತ್ಯಹರಿದ್ವರ್ಣ ಕಾಡು','೧೦೦೦ ರಿಂದ ೩೦೦೦ ಮಿ.ಮೀ.','ಸಹ್ಯಾದ್ರಿಯ ಪೂರ್ವ ಮತ್ತು ಪಶ್ಚಿಮದ ಇಳಿಜಾರಿನ ಭಾಗ','ಮರಗಳಲ್ಲಿ ವೈವಿಧ್ಯ ಕಡಿಮೆ ಇರುತ್ತದೆ.','ಮಾವು, ಹಲಸು, ಮತ್ತಿ, ಕಿಂಜಳ, ಕದಂಬ, ಬೂರುಗ','🌳🌲🌳🌿🌳🌲'],
+ ['ಎಲೆ ಉದುರುವ ಕಾಡು','೬೦೦ ರಿಂದ ೧೦೦೦ ಮಿ.ಮೀ.','ಕೊಂಕಣ, ಸಹ್ಯಾದ್ರಿಯ ಪೂರ್ವದ ಕಡಿಮೆ ಮಳೆಯ ಪ್ರದೇಶ, ಸಾತ್ಪುರ, ಪ್ರಸ್ಥಭೂಮಿಯ ಬೆಟ್ಟ ಶ್ರೇಣಿಗಳು, ರಾಜ್ಯದ ಪೂರ್ವ ಭಾಗ','ಮರಗಳ ಎಲೆಗಳು ನಿರ್ದಿಷ್ಟ ಋತುವಿನಲ್ಲಿ ಉದುರುತ್ತವೆ.','ತೇಗ, ಹರಿತಕಿ, ಆಲ, ಮುತ್ತುಗ, ಸಾಲೈ, ಇಪ್ಪೆ','🌳🍂🌳🍂🌿'],
+ ['ಪೊದೆ ಮತ್ತು ಮುಳ್ಳಿನ ಕಾಡು','೬೦೦ ಮಿ.ಮೀ.ಗಿಂತ ಕಡಿಮೆ','ಕಡಿಮೆ ಮಳೆಯ (ಮಳೆ ನೆರಳಿನ) ಪ್ರದೇಶ','ನೀರು ಕಡಿಮೆಯಾಗದಿರಲೆಂದು ಎಲೆಗಳು ಚಿಕ್ಕದಾಗಿ ಮತ್ತು ಮುಳ್ಳಿನಂತೆ ಇರುತ್ತವೆ.','ಜಾಲಿ, ಬೋರೆ, ಪಾಪಾಸುಕಳ್ಳಿ, ಕಗ್ಗಲಿ','🌵🌾🌵🪨'],
+ ['ಕಾಂಡ್ಲಾ ಕಾಡುಗಳು','ಸಮುದ್ರ ತೀರದ ಉಪ್ಪು ನೀರಿನಲ್ಲಿ','ಕರಾವಳಿಯಲ್ಲಿ ಉಬ್ಬರದ ಮಿತಿಯವರೆಗಿನ ಪ್ರದೇಶ, ಕೊಲ್ಲಿ ಪ್ರದೇಶ','ಉಪ್ಪು ತುಂಬಿದ ಕೆಸರು ನೀರಿನಲ್ಲಿ ಬೆಳೆಯುತ್ತವೆ.','ಕೆಂಪು ಕಾಂಡ್ಲಾ, ಕಪ್ಪು ಕಾಂಡ್ಲಾ','🌊🌿🌿🌊🌿']];
+let RAIN=1500,SALT=false;const FV=new Set();
+function forIdx(){return SALT?4:RAIN>3000?0:RAIN>=1000?1:RAIN>=600?2:3}
+function drawRain(){const b=$('rainBox');if(!b)return;const k=forIdx(),f=FOR[k];FV.add(k);
+ const drops=SALT?'':'💧'.repeat(Math.max(1,Math.round(RAIN/600)));
+ b.innerHTML=`<div style="text-align:center;font-size:20px;min-height:28px">${drops}</div>
+ <div style="text-align:center;font-weight:800">ವಾರ್ಷಿಕ ಮಳೆ: <span style="color:#0369a1">${SALT?'—':RAIN.toLocaleString('hi-IN').replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d])+' ಮಿ.ಮೀ.'}</span></div>
+ <input type="range" min="300" max="4000" step="100" value="${RAIN}" style="width:100%" oninput="RAIN=+this.value;SALT=false;drawRain()">
+ <label style="display:block;margin:4px 0"><input type="checkbox" ${SALT?'checked':''} onchange="SALT=this.checked;drawRain()"> 🌊 ಸಮುದ್ರ ತೀರದ ಉಪ್ಪು, ಕೆಸರಿನ ನೀರು</label>
+ <div style="font-size:34px;text-align:center;letter-spacing:2px;transition:.3s">${f[5]}</div>
+ <div class="msg ok"><b>${f[0]}</b> – ${f[3]}<br>📍 ${f[2]}<br>🌳 ಉದಾ. ${f[4]}</div>
+ <div class="tap">ನೋಡಿದ ಕಾಡಿನ ವಿಧಗಳು: ${FV.size} / ೫</div>`;
+ if(FV.size==5)award('rain','ಭೇಷ್! ಐದೂ ಕಾಡಿನ ವಿಧಗಳನ್ನು ಹುಡುಕಿದಿರಿ.')}
+
+/* ---------- ಖನಿಜಗಳು ---------- */
+const MIN=[['ಮ್ಯಾಂಗನೀಸ್','ನಾಗಪುರ, ಗೊಂದಿಯಾ, ಭಂಡಾರಾ, ಸಿಂಧುದುರ್ಗ','ಕಬ್ಬಿಣ ಮತ್ತು ಉಕ್ಕು ಉದ್ಯಮ; ಬ್ಯಾಟರಿ, ಬಣ್ಣ, ಸೋಂಕುನಿವಾರಕ, ಗಾಜಿನ ಸಾಮಾನು, ಔಷಧ ತಯಾರಿಕೆ'],
+ ['ಕಬ್ಬಿಣದ ಅದಿರು','ಚಂದ್ರಪುರ, ಗಡಚಿರೋಲಿ, ನಾಗಪುರ, ಭಂಡಾರಾ, ಗೊಂದಿಯಾ, ಸಿಂಧುದುರ್ಗ','ಶುದ್ಧ ಕಬ್ಬಿಣ ಮತ್ತು ಉಕ್ಕು ತಯಾರಿಕೆ'],
+ ['ಬಾಕ್ಸೈಟ್','ಸಿಂಧುದುರ್ಗ, ರತ್ನಾಗಿರಿ, ಕೊಲ್ಹಾಪುರ, ರಾಯಗಡ','ಅಲ್ಯೂಮಿನಿಯಂ ತಯಾರಿಕೆ'],
+ ['ಸುಣ್ಣಕಲ್ಲು','ಗಡಚಿರೋಲಿ, ಯವತ್ಮಾಳ್, ಚಂದ್ರಪುರ, ನಾಗಪುರ, ಪುಣೆ, ಅಹಿಲ್ಯಾನಗರ','ರಾಸಾಯನಿಕ ಮತ್ತು ಸಿಮೆಂಟ್ ಉದ್ಯಮ, ಕಟ್ಟಡಕ್ಕಾಗಿ ಸುಣ್ಣ'],
+ ['ಕ್ರೋಮೈಟ್','ಭಂಡಾರಾ, ಸಿಂಧುದುರ್ಗ, ರತ್ನಾಗಿರಿ, ಚಂದ್ರಪುರ','ಲೋಹ ಉದ್ಯಮ, ರಾಸಾಯನಿಕ ಉದ್ಯಮ'],
+ ['ಡೋಲೋಮೈಟ್','ಯವತ್ಮಾಳ್, ರತ್ನಾಗಿರಿ, ಚಂದ್ರಪುರ','ಕಬ್ಬಿಣ ಮತ್ತು ಉಕ್ಕು ತಯಾರಿಕೆ'],
+ ['ಸಿಲಿಕಾ','ಸಿಂಧುದುರ್ಗ, ರತ್ನಾಗಿರಿ, ಕೊಲ್ಹಾಪುರ','ಗಾಜು ತಯಾರಿಕಾ ಉದ್ಯಮ'],
+ ['ಕಲ್ಲಿದ್ದಲು','ಚಂದ್ರಪುರ, ಯವತ್ಮಾಳ್, ನಾಗಪುರ','ಉಷ್ಣ ವಿದ್ಯುತ್ ಉತ್ಪಾದನೆ, ಇಂಧನ']];
+let MS=null;const MV=new Set();
+function drawMin(){const b=$('minBox');if(!b)return;b.innerHTML=`<div class="chips">${MIN.map((m,i)=>`<span class="chip ${MS==i?'on':''}" onclick="MS=${i};MV.add(${i});say('${m[0]}');drawMin()">${MV.has(i)?'⛏️':'🪨'} ${m[0]}</span>`).join('')}</div>
+ ${MS==null?'<div class="msg in">👆 ಒಂದು ಖನಿಜದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ – ಅದು ಎಲ್ಲಿ ಸಿಗುತ್ತದೆ ಮತ್ತು ಯಾವುದಕ್ಕೆ ಬಳಸುತ್ತಾರೆ ಎಂದು ನೋಡಿ.</div>':`<div class="msg ok"><b>⛏️ ${MIN[MS][0]}</b><br>📍 ಜಿಲ್ಲೆಗಳು: ${MIN[MS][1]}<br>🏭 ಉಪಯೋಗ: ${MIN[MS][2]}</div>`}<div class="tap">ನೋಡಿದ ಖನಿಜಗಳು: ${MV.size} / ೮</div>`;
+ if(MV.size==8)award('min','ಭೇಷ್! ಎಲ್ಲಾ ಖನಿಜಗಳ ಮಾಹಿತಿ ಪಡೆದಿರಿ.')}
+
+/* ---------- ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ ---------- */
+const HW=['ಠಾಣೆ','ನಾಶಿಕ್','ಅಹಿಲ್ಯಾನಗರ','ಛತ್ರಪತಿ ಸಂಭಾಜಿನಗರ','ಜಾಲನಾ','ಬುಲಢಾಣಾ','ವಾಶಿಂ','ಅಮರಾವತಿ','ವರ್ಧಾ','ನಾಗಪುರ'];
+let HWP=-1,HWT=null;
+function hwSvg(){const X=i=>30+i*30.5;return `<svg viewBox="0 0 340 110" style="max-width:520px;width:100%;display:block;margin:0 auto">
+ <text x="12" y="16" font-size="11" font-weight="800">ಮುಂಬೈ</text><text x="330" y="16" text-anchor="end" font-size="11" font-weight="800">ನಾಗಪುರ</text>
+ <rect x="20" y="44" width="300" height="14" rx="7" fill="#57534e"/><line x1="24" y1="51" x2="316" y2="51" stroke="#fff" stroke-dasharray="8 6" stroke-width="2"/>
+ ${HW.map((d,i)=>`<circle cx="${X(i)}" cy="51" r="6" fill="${i<=HWP?'#16a34a':'#e5e7eb'}" stroke="#111"/><text x="${X(i)}" y="${i%2?84:34}" text-anchor="middle" font-size="8.5" font-weight="700" ${i<=HWP?'fill="#166534"':''}>${'೧೨೩೪೫೬೭೮೯'[i]||'೧೦'}</text>`).join('')}
+ <text x="${HWP<0?14:X(HWP)}" y="${HWP<0?66:45}" text-anchor="middle" font-size="20">🚗</text>
+ </svg>`}
+function drawHW(){const b=$('hwBox');if(!b)return;b.innerHTML=hwSvg()+`<div class="msg ${HWP==9?'ok':'in'}">${HWP<0?'🚗 “ಪ್ರಯಾಣ ಆರಂಭ” ಒತ್ತಿ ಮತ್ತು ಮಹಾಮಾರ್ಗ ಯಾವ ಜಿಲ್ಲೆಗಳ ಮೂಲಕ ಹಾದುಹೋಗುತ್ತದೆ ನೋಡಿ.':HWP==9?'🎉 ನಾಗಪುರ ಬಂತು! ೭೦೧ ಕಿ.ಮೀ. ಪ್ರಯಾಣ ಪೂರ್ಣ – ೧೦ ಜಿಲ್ಲೆಗಳು: '+HW.join(', '):`📍 ಜಿಲ್ಲೆ ${HWP+1}: <b>${HW[HWP]}</b>`}</div>
+ <button class="btn gr sm" onclick="hwGo()">🚗 ಪ್ರಯಾಣ ಆರಂಭ</button>`}
+function hwGo(){clearInterval(HWT);HWP=-1;drawHW();HWT=setInterval(()=>{HWP++;if(!$('hwBox')){clearInterval(HWT);return}say(HW[HWP]);drawHW();if(HWP>=9){clearInterval(HWT);award('hw','ಭೇಷ್! ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗದ ಪ್ರಯಾಣ ಪೂರ್ಣವಾಯಿತು.')}},1400)}
+
+/* ---------- ವಾದ್ಯಗಳು (ಧ್ವನಿ) ---------- */
+const VAD=[['🥁','ಡೋಲು'],['🪘','ತಾಶಾ'],['🔔','ಗಂಟೆ'],['🥢','ತಾಳ'],['🎺','ಸನಾಯಿ'],['🪇','ಸಂಬಳ'],['🐚','ಶಂಖ'],['🎹','ಪೆಟ್ಟಿಗೆ']];
+const VV=new Set();
+function beat(n){try{const C=window._AC||(window._AC=new (window.AudioContext||window.webkitAudioContext)());const t=C.currentTime;
+ const tone=(f,st,d,type,vol)=>{const o=C.createOscillator(),g=C.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t+st);if(type=='sine'&&f<200)o.frequency.exponentialRampToValueAtTime(f*.5,t+st+d);g.gain.setValueAtTime(vol||.6,t+st);g.gain.exponentialRampToValueAtTime(.001,t+st+d);o.connect(g);g.connect(C.destination);o.start(t+st);o.stop(t+st+d+.05)};
+ const noise=(st,d,vol)=>{const bf=C.createBuffer(1,C.sampleRate*d,C.sampleRate),a=bf.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*(1-i/a.length);const s=C.createBufferSource(),g=C.createGain();s.buffer=bf;g.gain.value=vol||.4;s.connect(g);g.connect(C.destination);s.start(t+st)};
+ if(n==0)[0,.25,.5,.62].forEach(s=>tone(110,s,.3,'sine',.9));
+ if(n==1)[0,.12,.24,.36,.48,.6].forEach(s=>noise(s,.08,.5));
+ if(n==2)[0,.6].forEach(s=>{tone(880,s,1.1,'sine',.4);tone(1320,s,.8,'sine',.2)});
+ if(n==3)[0,.35,.7].forEach(s=>{tone(2400,s,.35,'triangle',.25);tone(3100,s,.25,'sine',.15)});
+ if(n==4)[[523,0],[587,.25],[659,.5],[587,.75],[523,1]].forEach(x=>tone(x[0],x[1],.25,'sawtooth',.12));
+ if(n==5)[0,.18,.36,.45,.6].forEach(s=>{tone(220,s,.15,'sine',.6);noise(s,.05,.25)});
+ if(n==6)tone(233,0,1.4,'sawtooth',.12);
+ if(n==7)[[392,0],[440,.3],[494,.6]].forEach(x=>{tone(x[0],x[1],.3,'square',.08);tone(x[0]*1.5,x[1],.3,'sine',.08)});
+}catch(e){}}
+function drawVad(){const b=$('vadBox');if(!b)return;b.innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px">${VAD.map((v,i)=>`<button class="tile ${VV.has(i)?'op':''}" style="text-align:center" onclick="vadTap(${i})"><div class="ic">${v[0]}</div><div class="tt">${v[1]}</div></button>`).join('')}</div><div class="tap">🔊 ವಾದ್ಯದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು ಧ್ವನಿ ಕೇಳಿ. (ನುಡಿಸಿದ: ${VV.size} / ${VAD.length})</div>`}
+function vadTap(i){VV.add(i);beat(i);drawVad();if(VV.size==VAD.length)award('vad','ವಾ! ಎಲ್ಲಾ ವಾದ್ಯಗಳನ್ನು ನುಡಿಸಿದಿರಿ.')}
+
+/* ---------- ಸಾರಾಂಶ ---------- */
+const SUM=['ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯ ದೇಶದ ಪಶ್ಚಿಮ ಭಾಗದಲ್ಲಿದೆ; ಪಶ್ಚಿಮ ಗಡಿಯನ್ನು ಅರಬ್ಬಿ ಸಮುದ್ರ ನಿರ್ಧರಿಸಿದೆ. ಆಕಾರ ಸಾಮಾನ್ಯವಾಗಿ ತ್ರಿಕೋನ.',
+ 'ವಿಸ್ತೀರ್ಣ ಸುಮಾರು ಮೂರು ಲಕ್ಷ ಚದರ ಕಿ.ಮೀ.; ವಿಸ್ತೀರ್ಣದ ದೃಷ್ಟಿಯಿಂದ ದೇಶದಲ್ಲಿ ಮೂರನೇ ಸ್ಥಾನ. ಆಡಳಿತದ ಅನುಕೂಲಕ್ಕಾಗಿ ೬ ವಿಭಾಗಗಳು: ಕೊಂಕಣ, ಪುಣೆ, ನಾಶಿಕ್, ಛತ್ರಪತಿ ಸಂಭಾಜಿನಗರ, ಅಮರಾವತಿ, ನಾಗಪುರ.',
+ 'ಸ್ಥಾಪನೆ ೧ ಮೇ ೧೯೬೦ (ಮಹಾರಾಷ್ಟ್ರ ದಿನ). ರಾಜಧಾನಿ – ಮುಂಬೈ, ಉಪರಾಜಧಾನಿ – ನಾಗಪುರ, ರಾಜ್ಯಭಾಷೆ – ಮರಾಠಿ. ಸಮುದ್ರ ತೀರ – ೭೨೦ ಕಿ.ಮೀ.',
+ 'ನೆರೆಯವು: ಉತ್ತರಕ್ಕೆ ಗುಜರಾತ್ ಮತ್ತು ಮಧ್ಯಪ್ರದೇಶ; ಪೂರ್ವಕ್ಕೆ ಛತ್ತೀಸ್‌ಗಢ; ದಕ್ಷಿಣಕ್ಕೆ ತೆಲಂಗಾಣ, ಕರ್ನಾಟಕ ಮತ್ತು ಗೋವಾ; ಪಶ್ಚಿಮಕ್ಕೆ ಅರಬ್ಬಿ ಸಮುದ್ರ.',
+ 'ಭೌಗೋಳಿಕ ವಿಭಾಗಗಳು: ಕೊಂಕಣ ಕರಾವಳಿ, ಸಹ್ಯಾದ್ರಿ ಪರ್ವತ ಶ್ರೇಣಿ (ಪಶ್ಚಿಮ ಘಟ್ಟ), ಮಹಾರಾಷ್ಟ್ರ ಪ್ರಸ್ಥಭೂಮಿ (ದಖ್ಖನ್ ಪ್ರಸ್ಥಭೂಮಿ), ವಿದರ್ಭದ ಬಯಲು ಪ್ರದೇಶ.',
+ 'ಸಹ್ಯಾದ್ರಿಯಲ್ಲಿ ಕಳಸೂಬಾಯಿ (ರಾಜ್ಯದ ಅತ್ಯಂತ ಎತ್ತರದ ಶಿಖರ); ಉತ್ತರದ ಸಾತ್ಪುರ ಶ್ರೇಣಿಯಲ್ಲಿ ಅಸ್ತಂಭ. ಪೂರ್ವ-ಪಶ್ಚಿಮ ಶ್ರೇಣಿಗಳು: ಸಾತ್ಮಾಳಾ-ಅಜಂತಾ, ಹರಿಶ್ಚಂದ್ರಗಡ-ಬಾಲಾಘಾಟ, ಮಹಾದೇವ.',
+ 'ಗೋದಾವರಿ – ರಾಜ್ಯದ ಅತ್ಯಂತ ಉದ್ದದ ನದಿ (ಒಟ್ಟು ಸುಮಾರು ೧೪೬೫ ಕಿ.ಮೀ., ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ೭೪೦ ಕಿ.ಮೀ.).',
+ 'ಕಾಡುಗಳ ೫ ವಿಧಗಳು: ನಿತ್ಯಹರಿದ್ವರ್ಣ, ಅರೆ ನಿತ್ಯಹರಿದ್ವರ್ಣ, ಎಲೆ ಉದುರುವ, ಪೊದೆ ಮತ್ತು ಮುಳ್ಳಿನ, ಕಾಂಡ್ಲಾ. ಕಾಡುಗಳ ಹಂಚಿಕೆ ಮಳೆಯ ಹಂಚಿಕೆಯ ಮೇಲೆ ಅವಲಂಬಿತ.',
+ 'ರಾಜ್ಯ ಪಕ್ಷಿ – ಹಸಿರು ಪಾರಿವಾಳ; ರಾಜ್ಯ ಪ್ರಾಣಿ – ಶೇಕರು (ದೊಡ್ಡ ಅಳಿಲು); ಮಾಳಢೋಕ (ಹೆಬ್ಬಕ) – ಅಪರೂಪವಾಗುತ್ತಿರುವ ಪಕ್ಷಿ.',
+ 'ಖನಿಜಗಳು ಮುಖ್ಯವಾಗಿ ಪೂರ್ವ ಭಾಗದಲ್ಲಿ ಕೇಂದ್ರೀಕೃತವಾಗಿವೆ; ಕೊಂಕಣದ ಜಂಬಿಟ್ಟಿಗೆ ಕಲ್ಲಿನಲ್ಲಿ ಬಾಕ್ಸೈಟ್, ಮ್ಯಾಂಗನೀಸ್.',
+ 'ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ – ಮುಂಬೈಯಿಂದ ನಾಗಪುರ, ೭೦೧ ಕಿ.ಮೀ., ೧೦ ಜಿಲ್ಲೆಗಳ ಮೂಲಕ ಹಾದುಹೋಗುತ್ತದೆ.',
+ 'ಖುಷ್ಕಿ ಬೇಸಾಯ – ಮಳೆನೀರಿನ ಮೇಲೆ; ನೀರಾವರಿ ಬೇಸಾಯ – ನೀರಾವರಿಯಿಂದ. ಮುಂಗಾರು – ಮಳೆಗಾಲದಲ್ಲಿ; ಹಿಂಗಾರು – ಚಳಿಗಾಲದಲ್ಲಿ.',
+ 'ಸೌರಶಕ್ತಿ – ಸೂರ್ಯನ ಬೆಳಕು ಮತ್ತು ಶಾಖ (ಉದಾ. ಸಾಕ್ರಿ, ಧುಳೆ); ಜೈವಿಕ ಶಕ್ತಿ – ಪ್ರಾಣಿಗಳ ಮಲ ಮತ್ತು ಜೈವಿಕ ತ್ಯಾಜ್ಯ ಪದಾರ್ಥಗಳು.',
+ 'ರಾಷ್ಟ್ರೀಯ ಹಬ್ಬಗಳು – ೧೫ ಆಗಸ್ಟ್ ಮತ್ತು ೨೬ ಜನವರಿ. ಮಹಾರಾಷ್ಟ್ರದ ೧೧ ಕೋಟೆಗಳನ್ನು ಯುನೆಸ್ಕೋ ವಿಶ್ವ ಪರಂಪರೆಯ ತಾಣಗಳೆಂದು ಘೋಷಿಸಿದೆ.'];
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+const L=[
+{h:'ನಮ್ಮ ರಾಜ್ಯ – ಮಹಾರಾಷ್ಟ್ರ',s:'ಭಾರತದ ವಿವಿಧ ರಾಜ್ಯಗಳಲ್ಲಿ ಮಹಾರಾಷ್ಟ್ರ ಒಂದು ಪ್ರಗತಿಪರ ರಾಜ್ಯ. ನಮ್ಮ ರಾಜ್ಯ ದೇಶದ ಪಶ್ಚಿಮ ಭಾಗದಲ್ಲಿದ್ದು ಅದರ ಪಶ್ಚಿಮ ಗಡಿಯನ್ನು ಅರಬ್ಬಿ ಸಮುದ್ರ ನಿರ್ಧರಿಸಿದೆ. ಮಹಾರಾಷ್ಟ್ರದ ಆಕಾರ ಸಾಮಾನ್ಯವಾಗಿ ತ್ರಿಕೋನ.',b:()=>`
+ <div class="know"><b class="h">👩‍🏫 ಶಿಕ್ಷಕ :</b> ನಾವೆಲ್ಲರೂ ಯಾವ ರಾಜ್ಯದಲ್ಲಿ ವಾಸಿಸುತ್ತೇವೆ?<br><b class="h">🧒 ವಿದ್ಯಾರ್ಥಿ :</b> ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದಲ್ಲಿ ವಾಸಿಸುತ್ತೇವೆ!<br><b class="h">👩‍🏫 ಶಿಕ್ಷಕ :</b> ಸರಿಯಾಗಿ ಹೇಳಿದಿರಿ, ಬನ್ನಿ ಹಾಗಾದರೆ ನಮ್ಮ ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಅಧ್ಯಯನ ಮಾಡೋಣ.</div>
+ <div class="key">ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯ ದೇಶದ <b>ಪಶ್ಚಿಮ ಭಾಗದಲ್ಲಿ</b> ಇದೆ. ಪಶ್ಚಿಮ ಗಡಿ <b>ಅರಬ್ಬಿ ಸಮುದ್ರದಿಂದ</b> ನಿರ್ಧಾರವಾಗಿದೆ. ರಾಜ್ಯದ ಆಕಾರ ಸಾಮಾನ್ಯವಾಗಿ <b>ತ್ರಿಕೋನ</b> ಇದೆ.</div>
+ ${nbSvg()}
+ <h3>🎯 ಆಟ: ಯಾವ ರಾಜ್ಯ ಯಾವ ದಿಕ್ಕಿಗೆ?</h3>${sortGame('nb',[['ಗುಜರಾತ್',0],['ಮಧ್ಯಪ್ರದೇಶ',0],['ಛತ್ತೀಸ್‌ಗಢ',1],['ತೆಲಂಗಾಣ',2],['ಕರ್ನಾಟಕ',2],['ಗೋವಾ',2],['🌊 ಅರಬ್ಬಿ ಸಮುದ್ರ',3]],[['⬆ ಉತ್ತರ','gr'],['➡ ಪೂರ್ವ','or'],['⬇ ದಕ್ಷಿಣ','pu'],['⬅ ಪಶ್ಚಿಮ','ln']],'nb')}`,a:()=>drawGames()},
+{h:'ಮಹಾರಾಷ್ಟ್ರದ ಗುರುತಿನ ಚೀಟಿ',s:'ಮಹಾರಾಷ್ಟ್ರದ ಒಟ್ಟು ವಿಸ್ತೀರ್ಣ ಸುಮಾರು ಮೂರು ಲಕ್ಷ ಚದರ ಕಿಲೋಮೀಟರ್ ಆಗಿದ್ದು ವಿಸ್ತೀರ್ಣದ ದೃಷ್ಟಿಯಿಂದ ದೇಶದಲ್ಲಿ ಮೂರನೇ ಸ್ಥಾನದಲ್ಲಿದೆ. ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದ ಸ್ಥಾಪನೆ ೧ ಮೇ ೧೯೬೦ ರಂದು ಆಯಿತು. ಮುಂಬೈ ರಾಜಧಾನಿ ಮತ್ತು ನಾಗಪುರ ಉಪರಾಜಧಾನಿ. ರಾಜ್ಯಭಾಷೆ ಮರಾಠಿ. ರಾಜ್ಯಕ್ಕೆ ಏಳುನೂರ ಇಪ್ಪತ್ತು ಕಿಲೋಮೀಟರ್ ಉದ್ದದ ಸಮುದ್ರ ತೀರ ಲಭಿಸಿದೆ.',b:()=>`
+ <div class="tap">ಪ್ರತಿ ಕಾರ್ಡ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು ಮಾಹಿತಿ ತೆರೆಯಿರಿ.</div>
+ <div class="g2">${[['🎂','ಸ್ಥಾಪನೆ','<b>೧ ಮೇ ೧೯೬೦</b> – ಈ ದಿನವನ್ನು ‘ಮಹಾರಾಷ್ಟ್ರ ದಿನ’ ಎಂದು ಆಚರಿಸುತ್ತಾರೆ.'],['🏙️','ರಾಜಧಾನಿ','<b>ಮುಂಬೈ</b>'],['🏛️','ಉಪರಾಜಧಾನಿ','<b>ನಾಗಪುರ</b>'],['🗣️','ರಾಜ್ಯಭಾಷೆ','<b>ಕನ್ನಡ</b>'],['📐','ವಿಸ್ತೀರ್ಣ','ಸುಮಾರು <b>೩ ಲಕ್ಷ ಚ. ಕಿ.ಮೀ.</b> – ದೇಶದಲ್ಲಿ <b>ಮೂರನೆಯದು</b> ಕ್ರಮಾಂಕ.'],['🌊','ಸಮುದ್ರ ತೀರ','<b>೭೨೦ ಕಿ.ಮೀ.</b> ಉದ್ದ'],['🗂️','ಆಡಳಿತ ವಿಭಾಗಗಳು','<b>೬</b> – ಕೊಂಕಣ, ಪುಣೆ, ನಾಶಿಕ್, ಛತ್ರಪತಿ ಸಂಭಾಜಿನಗರ, ಅಮರಾವತಿ, ನಾಗಪುರ.'],['🏞️','ಭೌಗೋಳಿಕ ವೈವಿಧ್ಯ','ಕೊಂಕಣದ ಸಮುದ್ರ ತೀರ, ಸಹ್ಯಾದ್ರಿ ಬೆಟ್ಟ ಶ್ರೇಣಿ, ಮರಾಠವಾಡದ ಪ್ರಸ್ಥಭೂಮಿ ಭಾಗ, ವಿದರ್ಭದ ನದಿಗಳು.']].map(x=>`<div class="tile" onclick="this.classList.add('op');say(this.innerText)"><div class="ic">${x[0]}</div><div class="tt">${x[1]}</div><div class="dd">${x[2]}</div></div>`).join('')}</div>
+ <h3>🎯 ಬೇಗ ಹೇಳಿ!</h3>${pickGame('idc',[['ಮಹಾರಾಷ್ಟ್ರ ದಿನ ಯಾವಾಗ?',['೨೬ ಜನವರಿ','೧ ಮೇ','೧೫ ಆಗಸ್ಟ್'],1],['ರಾಜ್ಯದ ರಾಜಧಾನಿ?',['ಪುಣೆ','ನಾಗಪುರ','ಮುಂಬೈ'],2],['ಉಪರಾಜಧಾನಿ?',['ನಾಗಪುರ','ನಾಶಿಕ್','ಕೊಲ್ಲಾಪುರ'],0],['ವಿಸ್ತೀರ್ಣದಲ್ಲಿ ದೇಶದಲ್ಲಿ ಸ್ಥಾನ?',['ಮೊದಲನೆಯದು','ಮೂರನೆಯದು','ಐದನೆಯ'],1],['ಆಡಳಿತ ವಿಭಾಗಗಳು ಎಷ್ಟು?',['೪','೬','೩೬'],1]],'idc')}`,a:()=>drawGames()},
+{h:'ಭೌಗೋಳಿಕ ವಿಭಾಗಗಳು',s:'ಭೌಗೋಳಿಕ ರಚನೆಯ ಪ್ರಕಾರ ಮಹಾರಾಷ್ಟ್ರವನ್ನು ನಾಲ್ಕು ಪ್ರಮುಖ ವಿಭಾಗಗಳಾಗಿ ಮಾಡಲಾಗುತ್ತದೆ. ಕೊಂಕಣ ಕರಾವಳಿ, ಸಹ್ಯಾದ್ರಿ ಪರ್ವತ ಶ್ರೇಣಿ ಅಂದರೆ ಪಶ್ಚಿಮ ಘಟ್ಟ, ಮಹಾರಾಷ್ಟ್ರ ಪ್ರಸ್ಥಭೂಮಿ ಅಂದರೆ ದಖ್ಖನ್ ಪ್ರಸ್ಥಭೂಮಿ, ಮತ್ತು ವಿದರ್ಭದ ಬಯಲು ಪ್ರದೇಶ.',b:()=>`
+ <div class="key">ಭೌಗೋಳಿಕ ರಚನೆಯ ಪ್ರಕಾರ ಮಹಾರಾಷ್ಟ್ರದ <b>ನಾಲ್ಕು</b> ಪ್ರಮುಖ ವಿಭಾಗಗಳು: <b>೧) ಕೊಂಕಣ ಕರಾವಳಿ ೨) ಸಹ್ಯಾದ್ರಿ ಪರ್ವತ ಶ್ರೇಣಿ (ಪಶ್ಚಿಮ ಘಟ್ಟ) ೩) ಮಹಾರಾಷ್ಟ್ರ ಪ್ರಸ್ಥಭೂಮಿ (ದಖ್ಖನ್ ಪ್ರಸ್ಥಭೂಮಿ) ೪) ವಿದರ್ಭದ ಬಯಲು ಪ್ರದೇಶ</b>.</div>
+ <h3>🏞️ ಪಶ್ಚಿಮದಿಂದ ಪೂರ್ವಕ್ಕೆ ಪ್ರಯಾಣಿಸಿ</h3><div id="prBox"></div>
+ <h3>🎯 ಕ್ರಮವಾಗಿ ಜೋಡಿಸಿ: ಸಮುದ್ರದಿಂದ ಪೂರ್ವಕ್ಕೆ ಹೋಗುವಾಗ</h3>${orderGame('prord',['🌊 ಅರಬ್ಬಿ ಸಮುದ್ರ','🌴 ಕೊಂಕಣ ಕರಾವಳಿ','⛰️ ಸಹ್ಯಾದ್ರಿ','🌾 ಮಹಾರಾಷ್ಟ್ರ ಪ್ರಸ್ಥಭೂಮಿ','🏞️ ವಿದರ್ಭ ಬಯಲು'],'prord')}`,a:()=>{drawPR();drawGames()}},
+{h:'ಪರ್ವತ ಶ್ರೇಣಿಗಳು ಮತ್ತು ಶಿಖರಗಳು',s:'ಸಹ್ಯಾದ್ರಿ ಪರ್ವತವನ್ನು ಪಶ್ಚಿಮ ಘಟ್ಟ ಎಂದೂ ಕರೆಯುತ್ತಾರೆ. ಇದೇ ಶ್ರೇಣಿಯಲ್ಲಿರುವ ಕಳಸೂಬಾಯಿ ಮಹಾರಾಷ್ಟ್ರದ ಅತ್ಯಂತ ಎತ್ತರದ ಶಿಖರ. ಉತ್ತರ ಭಾಗದಲ್ಲಿ ಸಾತ್ಪುರ ಪರ್ವತ ಶ್ರೇಣಿ ಇದೆ, ಅದರಲ್ಲಿ ಅಸ್ತಂಭ ಅತ್ಯಂತ ಎತ್ತರದ ಶಿಖರ. ಪೂರ್ವ-ಪಶ್ಚಿಮ ದಿಕ್ಕಿನಲ್ಲಿ ಸಾತ್ಮಾಳಾ-ಅಜಂತಾ, ಹರಿಶ್ಚಂದ್ರಗಡ-ಬಾಲಾಘಾಟ, ಮಹಾದೇವ ಬೆಟ್ಟ ಶ್ರೇಣಿಗಳಿವೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">⛰️🏔️</div><div class="tt">ಸಹ್ಯಾದ್ರಿ (ಪಶ್ಚಿಮ ಘಟ್ಟ)</div><div class="dd">ಉತ್ತರ-ದಕ್ಷಿಣ ಹರಡಿದ ಶ್ರೇಣಿ. ಅತ್ಯಂತ ಎತ್ತರದ ಶಿಖರ – <b>ಕಳಸೂಬಾಯಿ</b> (ಮಹಾರಾಷ್ಟ್ರದ ಅತ್ಯಂತ ಎತ್ತರದ).</div></div>
+  <div class="tile op"><div class="ic">🗻</div><div class="tt">ಸಾತ್ಪುರ</div><div class="dd">ಮಹಾರಾಷ್ಟ್ರದ <b>ಉತ್ತರ</b> ಭಾಗದಲ್ಲಿ. ಅತ್ಯಂತ ಎತ್ತರದ ಶಿಖರ – <b>ಅಸ್ತಂಭ</b>.</div></div>
+  <div class="tile op"><div class="ic">↔️</div><div class="tt">ಪೂರ್ವ-ಪಶ್ಚಿಮ ಬೆಟ್ಟ ಶ್ರೇಣಿಗಳು</div><div class="dd"><b>ಸಾತ್ಮಾಳಾ-ಅಜಂತಾ, ಹರಿಶ್ಚಂದ್ರಗಡ-ಬಾಲಾಘಾಟ, ಮಹಾದೇವ</b>.</div></div>
+ </div>
+ <div style="display:flex;align-items:flex-end;justify-content:center;gap:24px;margin:10px 0"><div style="text-align:center"><div style="font-size:64px;line-height:1">🏔️</div><b>ಕಳಸೂಬಾಯಿ</b><br><small>ಸಹ್ಯಾದ್ರಿ</small></div><div style="text-align:center"><div style="font-size:44px;line-height:1">⛰️</div><b>ಅಸ್ತಂಭ</b><br><small>ಸಾತ್ಪುರ</small></div></div>
+ <h3>🎯 ಯಾವ ಶ್ರೇಣಿ ಯಾವ ದಿಕ್ಕಿಗೆ ಹರಡಿದೆ?</h3>${sortGame('rng',[['ಸಹ್ಯಾದ್ರಿ',0],['ಸಾತ್ಮಾಳಾ-ಅಜಂತಾ',1],['ಹರಿಶ್ಚಂದ್ರಗಡ-ಬಾಲಾಘಾಟ',1],['ಮಹಾದೇವ ಬೆಟ್ಟ ಶ್ರೇಣಿ',1]],[['↕ ಉತ್ತರ-ದಕ್ಷಿಣ','gr'],['↔ ಪೂರ್ವ-ಪಶ್ಚಿಮ','or']],'rng')}
+ ${pickGame('pk',[['ಮಹಾರಾಷ್ಟ್ರದ ಅತ್ಯಂತ ಎತ್ತರದ ಶಿಖರ?',['ಅಸ್ತಂಭ','ಕಳಸೂಬಾಯಿ','ಮಹಾಬಳೇಶ್ವರ'],1],['ಅಸ್ತಂಭ ಶಿಖರ ಯಾವ ಶ್ರೇಣಿಯಲ್ಲಿದೆ?',['ಸಾತ್ಪುರ','ಸಹ್ಯಾದ್ರಿ','ಬಾಲಾಘಾಟ'],0],['ಸಹ್ಯಾದ್ರಿಯನ್ನು ಇನ್ನೇನು ಕರೆಯುತ್ತಾರೆ?',['ಪೂರ್ವ ಘಟ್ಟ','ಪಶ್ಚಿಮ ಘಟ್ಟ','ಸಾತ್ಮಾಳಾ'],1]],'pk')}`,a:()=>drawGames()},
+{h:'ಕೊಂಕಣ ಕರಾವಳಿ ಮತ್ತು ನದಿಗಳು',s:'ಮಹಾರಾಷ್ಟ್ರದ ಕರಾವಳಿ ಪ್ರದೇಶವನ್ನು ಕೊಂಕಣ ಎಂದೂ ಕರೆಯುತ್ತಾರೆ. ಗೋದಾವರಿ ಮಹಾರಾಷ್ಟ್ರದ ಅತ್ಯಂತ ಉದ್ದದ ನದಿ. ಅದರ ಒಟ್ಟು ಉದ್ದ ಸುಮಾರು ಒಂದು ಸಾವಿರ ನಾನೂರ ಅರವತ್ತೈದು ಕಿಲೋಮೀಟರ್ ಇದ್ದು ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿನ ಉದ್ದ ಏಳುನೂರ ನಲವತ್ತು ಕಿಲೋಮೀಟರ್.',b:()=>`
+ <div class="key">ಕರಾವಳಿ ಪ್ರದೇಶವನ್ನು <b>‘ಕೊಂಕಣ’</b> ಎನ್ನುತ್ತಾರೆ. ಕೊಂಕಣದ <b>ಪಾಲಘರ್, ನಾಗಾಂವ್, ಶ್ರೀವರ್ಧನ, ಗುಹಾಗರ, ಲಾಡಘರ ಮತ್ತು ಭೋಗವೆ</b> ಈ ಕಡಲ ತೀರಗಳು <b>ಸ್ವಚ್ಛತೆ, ನೀರಿನ ಗುಣಮಟ್ಟ, ಸುರಕ್ಷತೆ ಮತ್ತು ಪರಿಸರ ನಿರ್ವಹಣೆಗಾಗಿ</b> ಪ್ರಸಿದ್ಧವಾಗಿವೆ. 🏖️</div>
+ <h3>🏞️ ಗೋದಾವರಿ – ಅತ್ಯಂತ ಉದ್ದದ ನದಿ</h3>
+ <div style="margin:6px 0"><b>ಒಟ್ಟು ಉದ್ದ – ಸುಮಾರು ೧೪೬೫ ಕಿ.ಮೀ.</b><div style="background:#e2e8f0;border-radius:8px;height:22px"><div id="gd1" style="width:0;height:22px;border-radius:8px;background:linear-gradient(90deg,#38bdf8,#0369a1);transition:width 1.6s"></div></div></div>
+ <div style="margin:6px 0"><b>ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿನ ಉದ್ದ – ೭೪೦ ಕಿ.ಮೀ.</b><div style="background:#e2e8f0;border-radius:8px;height:22px"><div id="gd2" style="width:0;height:22px;border-radius:8px;background:linear-gradient(90deg,#4ade80,#15803d);transition:width 1.6s"></div></div></div>
+ <div class="tap">ಅಂದರೆ ಗೋದಾವರಿಯ ಸುಮಾರು ಅರ್ಧ ಪ್ರಯಾಣ ಮಹಾರಾಷ್ಟ್ರದ ಮೂಲಕ ನಡೆಯುತ್ತದೆ!</div>
+ <div class="know"><b class="h">💡 ನಕ್ಷೆ ಚಟುವಟಿಕೆ</b><br>• ಉತ್ತರದಲ್ಲಿರುವ ಪರ್ವತ ಶ್ರೇಣಿ – <b>ಸಾತ್ಪುರ</b> • ಉತ್ತರ-ದಕ್ಷಿಣ ಹರಡಿರುವ – <b>ಸಹ್ಯಾದ್ರಿ</b> • ಪೂರ್ವದಿಂದ ಪಶ್ಚಿಮಕ್ಕೆ ಹರಿಯುವ ನದಿ – <b>ತಾಪಿ</b> (ಹೆಚ್ಚಿನ ನದಿಗಳು ಪೂರ್ವಕ್ಕೆ ಹರಿಯುತ್ತವೆ).</div>
+ <h3>🎯 ಕರಾವಳಿಗೆ ಹೊಂದಿಕೊಂಡಿರುವ ಜಿಲ್ಲೆಗಳನ್ನು ಗುರುತಿಸಿ</h3>${sortGame('cst',[['ಪಾಲ್ಘರ್',0],['ಪುಣೆ',1],['ಠಾಣೆ',0],['ಮುಂಬೈ ನಗರ',0],['ನಾಶಿಕ್',1],['ಮುಂಬೈ ಉಪನಗರ',0],['ರಾಯಗಡ',0],['ಸಾತಾರಾ',1],['ರತ್ನಾಗಿರಿ',0],['ಸಿಂಧುದುರ್ಗ',0],['ನಾಗಪುರ',1]],[['🌊 ಕರಾವಳಿ','gr'],['🏞️ ಇಲ್ಲ','or']],'cst')}`,a:()=>{godaAnim();drawGames()}},
+{h:'ಕಾಡುಗಳ ವಿಧಗಳು – ಮಳೆ ಯಂತ್ರ',s:'ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಐದು ವಿಧದ ಕಾಡುಗಳು ಕಂಡುಬರುತ್ತವೆ. ಕಾಡುಗಳ ಹಂಚಿಕೆ ಮಳೆಯ ಹಂಚಿಕೆಯ ಮೇಲೆ ಅವಲಂಬಿತವಾಗಿರುತ್ತದೆ, ಆದ್ದರಿಂದ ಕಾಡುಗಳಲ್ಲಿ ವೈವಿಧ್ಯ ಕಂಡುಬರುತ್ತದೆ.',b:()=>`
+ <div class="key">ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ <b>ಐದು</b> ವಿಧದ ಕಾಡುಗಳು ಕಂಡುಬರುತ್ತವೆ – ಮುಳ್ಳಿನ ಕಾಡಿನಿಂದ ನಿತ್ಯಹರಿದ್ವರ್ಣ ಕಾಡಿನವರೆಗೆ; ಜೊತೆಗೆ ಸಮುದ್ರ ತೀರದಲ್ಲಿ <b>ಕಾಂಡ್ಲಾ</b> ಕಾಡುಗಳು. ಕಾಡುಗಳ ಹಂಚಿಕೆ <b>ಮಳೆಯ ಹಂಚಿಕೆಯ ಮೇಲೆ</b> ಅವಲಂಬಿತವಾಗಿರುತ್ತದೆ, ಆದ್ದರಿಂದ ಕಾಡುಗಳಲ್ಲಿ ವೈವಿಧ್ಯ ಕಂಡುಬರುತ್ತದೆ.</div>
+ <h3>🌧️ ಮಳೆಯನ್ನು ಹೆಚ್ಚು-ಕಡಿಮೆ ಮಾಡಿ ಮತ್ತು ಯಾವ ಕಾಡು ಬೆಳೆಯುತ್ತದೆ ನೋಡಿ!</h3><div id="rainBox"></div>`,a:()=>drawRain()},
+{h:'ಕಾಡುಗಳು ಮತ್ತು ಅವುಗಳಲ್ಲಿನ ಮರಗಳು',s:'ಕಾಡುಗಳ ವಿಧಗಳು, ಮಳೆ, ಪ್ರದೇಶ ಮತ್ತು ಮರಗಳ ಉದಾಹರಣೆಗಳನ್ನು ಕೋಷ್ಟಕದಲ್ಲಿ ಕೊಡಲಾಗಿದೆ.',b:()=>`
+ <div style="overflow-x:auto"><table class="w" style="min-width:560px;font-size:14px"><tr><th>ಕಾಡು</th><th>ಮಳೆ (ಮಿ.ಮೀ)</th><th>ಪ್ರದೇಶ</th><th>ವೈಶಿಷ್ಟ್ಯಗಳು</th><th>ಉದಾಹರಣೆಗಳು</th></tr>${FOR.map(f=>`<tr><td><b>${f[0]}</b></td><td>${f[1]}</td><td>${f[2]}</td><td>${f[3]}</td><td>${f[4]}</td></tr>`).join('')}</table></div>
+ <h3>🎯 ಮರ ಯಾವ ಕಾಡಿನಲ್ಲಿ?</h3>${sortGame('tr',[['🌳 ನಾಗಸಂಪಿಗೆ',0],['🌳 ತೇಗ',2],['🌵 ಪಾಪಾಸುಕಳ್ಳಿ',3],['🌿 ಕೆಂಪು ಕಾಂಡ್ಲಾ',4],['🌳 ಮತ್ತಿ',1],['🌳 ಮುತ್ತುಗ',2],['🌵 ಜಾಲಿ',3],['🎋 ಬೆತ್ತ',0],['🌳 ಕದಂಬ',1],['🌳 ಇಪ್ಪೆ',2]],[['ನಿತ್ಯಹರಿದ್ವರ್ಣ','gr'],['ಅರೆ ನಿತ್ಯಹರಿದ್ವರ್ಣ','ln'],['ಎಲೆ ಉದುರುವ','or'],['ಮುಳ್ಳಿನಂತಹವು','pu'],['ಕಾಂಡ್ಲಾ','gr']],'tr')}
+ <div class="know"><b class="h">🗺️ ಹೇಳಿ ನೋಡೋಣ!</b> (ನಕ್ಷೆ ನೋಡಿ)<br>• ರಾಮಲಿಂಗಘಾಟ ಅಭಯಾರಣ್ಯ – <b>ಬೀಡ್</b> ಜಿಲ್ಲೆ • ಠಾಣೆ ಜಿಲ್ಲೆಯ ರಾಷ್ಟ್ರೀಯ ಉದ್ಯಾನ – <b>ಸಂಜಯ ಗಾಂಧಿ ರಾಷ್ಟ್ರೀಯ ಉದ್ಯಾನ</b> • ನಿತ್ಯಹರಿದ್ವರ್ಣ ಕಾಡುಗಳು – ಸಹ್ಯಾದ್ರಿಯ ದಕ್ಷಿಣ ಭಾಗದ ಜಿಲ್ಲೆಗಳು (ಉದಾ. <b>ಕೊಲ್ಹಾಪುರ, ಸಿಂಧುದುರ್ಗ, ರತ್ನಾಗಿರಿ, ಸಾತಾರಾ</b>).</div>`,a:()=>drawGames()},
+{h:'ಉದ್ಯಾನಗಳು ಮತ್ತು ಅಭಯಾರಣ್ಯಗಳು',s:'ನಕ್ಷೆಯಲ್ಲಿ ಪ್ರಮುಖ ರಾಷ್ಟ್ರೀಯ ಉದ್ಯಾನಗಳು ಮತ್ತು ಅಭಯಾರಣ್ಯಗಳ ಸ್ಥಾನಗಳನ್ನು ಕೊಡಲಾಗಿದೆ. ಕೆಲವು ಉದಾಹರಣೆಗಳನ್ನು ನೋಡೋಣ.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">🐅</div><div class="tt">ರಾಷ್ಟ್ರೀಯ ಉದ್ಯಾನಗಳು</div><div class="dd">ತಾಡೋಬಾ (ಚಂದ್ರಪುರ), ಸಂಜಯ ಗಾಂಧಿ (ಮುಂಬೈ ಉಪನಗರ-ಠಾಣೆ), ಪೆಂಚ್ (ನಾಗಪುರ), ನವೇಗಾಂವ್ (ಗೊಂದಿಯಾ), ಗುಗಾಮಲ್ (ಅಮರಾವತಿ), ಚಾಂದೋಲಿ (ಸಾಂಗ್ಲಿ)</div></div>
+  <div class="tile op"><div class="ic">🦌</div><div class="tt">ವನ್ಯಪ್ರಾಣಿ ಅಭಯಾರಣ್ಯಗಳು</div><div class="dd">ರಾಧಾನಗರಿ (ಕೊಲ್ಹಾಪುರ), ಭೀಮಾಶಂಕರ (ಪುಣೆ), ಕೊಯ್ನಾ (ಸಾತಾರಾ), ರಾಮಲಿಂಗಘಾಟ (ಬೀಡ್)</div></div>
+  <div class="tile op"><div class="ic">🦩</div><div class="tt">ಪಕ್ಷಿ ಅಭಯಾರಣ್ಯಗಳು</div><div class="dd">ಕರ್ನಾಳಾ (ರಾಯಗಡ), ನಾಂದೂರ ಮಧಮೇಶ್ವರ (ನಾಶಿಕ್), ಮಾಳಢೋಕ ಪಕ್ಷಿ ಅಭಯಾರಣ್ಯ (ಸೋಲಾಪುರ)</div></div>
+  <div class="tile op"><div class="ic">🌵</div><div class="tt">ಪೊದೆ ಮತ್ತು ಮುಳ್ಳಿನ ಕಾಡು</div><div class="dd">ಕಡಿಮೆ ಮಳೆಯ ಜಿಲ್ಲೆಗಳು – ಉದಾ. ಸೋಲಾಪುರ, ಅಹಿಲ್ಯಾನಗರ, ಬೀಡ್</div></div>
+ </div>
+ <h3>🎯 ಜೋಡಿ ಮಾಡಿ</h3>${pickGame('np',[['ತಾಡೋಬಾ ರಾಷ್ಟ್ರೀಯ ಉದ್ಯಾನ ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?',['ಚಂದ್ರಪುರ','ಪುಣೆ','ರಾಯಗಡ'],0],['ಕರ್ನಾಳಾ ಯಾವ ರೀತಿಯ ಅಭಯಾರಣ್ಯ?',['ಹುಲಿ','ಹಕ್ಕಿ','ಮೀನು'],1],['ರಾಮಲಿಂಗಘಾಟ ಅಭಯಾರಣ್ಯ ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?',['ಬೀಡ್','ನಾಶಿಕ್','ಠಾಣೆ'],0],['ಸಂಜಯ ಗಾಂಧಿ ರಾಷ್ಟ್ರೀಯ ಉದ್ಯಾನ ಎಲ್ಲಿದೆ?',['ಮುಂಬೈ-ಠಾಣೆ','ನಾಗಪುರ','ಸೊಲ್ಲಾಪುರ'],0]],'np')}`,a:()=>drawGames()},
+{h:'ಪ್ರಾಣಿಜೀವನ ಮತ್ತು ರಾಜ್ಯ ಚಿಹ್ನೆಗಳು',s:'ಮಹಾರಾಷ್ಟ್ರದ ಪ್ರಾಣಿಜೀವನ ಸಮೃದ್ಧವಾಗಿದೆ. ಅದರಲ್ಲಿ ಬೆನ್ನೆಲುಬಿನ ಅಂದರೆ ಬೆನ್ನುಮೂಳೆ ಇರುವ ಪ್ರಾಣಿಗಳು ಪ್ರಮುಖ. ಮೀನು, ಉಭಯಚರ, ಸರೀಸೃಪ, ಸಸ್ತನಿ ಮತ್ತು ಪಕ್ಷಿ ಎಂಬ ಐದು ವಿಧಗಳಿವೆ. ಹಸಿರು ಪಾರಿವಾಳ ರಾಜ್ಯ ಪಕ್ಷಿ, ಶೇಕರು ಎಂಬ ದೊಡ್ಡ ಅಳಿಲು ರಾಜ್ಯ ಪ್ರಾಣಿ. ಮಾಳಢೋಕ ಅಪರೂಪವಾಗುತ್ತಿರುವ ಪಕ್ಷಿ.',b:()=>`
+ <div class="key"><b>ಬೆನ್ನೆಲುಬಿನ ಪ್ರಾಣಿಗಳು</b> = ಬೆನ್ನೆಲುಬು ಇರುವ. ಐದು ವಿಧ: <b>🐟 ಮೀನು, 🐸 ಉಭಯಚರ, 🐍 ಸರೀಸೃಪ, 🐄 ಸಸ್ತನಿ, 🐦 ಹಕ್ಕಿ</b>.</div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">🐅🐘</div><div class="tt">ನಿತ್ಯಹರಿದ್ವರ್ಣ ಮತ್ತು ಅರೆ ನಿತ್ಯಹರಿದ್ವರ್ಣ ಕಾಡುಗಳು</div><div class="dd">ಹುಲಿ, ಚಿರತೆ, ಕಾಟಿ, ಕರಡಿ, ಆನೆ, ನೀಲಗಾಯ್, ಕಾಡುಹಂದಿ</div></div>
+  <div class="tile op"><div class="ic">🦌🐺</div><div class="tt">ಎಲೆ ಉದುರುವ ಮತ್ತು ಕಡಿಮೆ ಮಳೆಯ ಪ್ರದೇಶ</div><div class="dd">ಜಿಂಕೆ, ಕತ್ತೆಕಿರುಬ, ತೋಳ, ನರಿ, ಕಾಟಿ</div></div>
+  <div class="tile op"><div class="ic">🦔🐇</div><div class="tt">ಮುಳ್ಳಿನ ಕಾಡುಗಳು</div><div class="dd">ಮುಳ್ಳುಹಂದಿ, ಮೊಲ, ಜಿಂಕೆ, ಕತ್ತೆಕಿರುಬ, ಓತಿಕ್ಯಾತ, ಹಾವು</div></div>
+  <div class="tile op"><div class="ic">🦚🦉</div><div class="tt">ಕಾಡಿನ ಪಕ್ಷಿಗಳು</div><div class="dd">ಕೆಂಬೂತ, ನವಿಲು, ಗೂಬೆ, ಹರಟೆಮಲ್ಲ. ಮುಳ್ಳಿನ ಕಾಡಿನಲ್ಲಿ <b>ಮಾಳಢೋಕ</b> – ಅಪರೂಪವಾಗುತ್ತಿರುವ ಪಕ್ಷಿ.</div></div>
+ </div>
+ <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:8px 0"><div class="tile op" style="text-align:center;flex:1 1 140px"><div class="ic">🕊️💚</div><div class="tt">ರಾಜ್ಯ ಪಕ್ಷಿ</div><div class="dd">ಹರಿಯಾಲ (ಹಸಿರು ಪಾರಿವಾಳ)</div></div><div class="tile op" style="text-align:center;flex:1 1 140px"><div class="ic">🐿️</div><div class="tt">ರಾಜ್ಯ ಪ್ರಾಣಿ</div><div class="dd">ಶೇಕರು (ದೊಡ್ಡ ಅಳಿಲು)</div></div></div>
+ <h3>🎯 ಪ್ರಾಣಿ ಯಾವ ಗುಂಪಿಗೆ ಸೇರಿದೆ?</h3>${sortGame('vert',[['🐟 ಮೀನು',0],['🐸 ಕಪ್ಪೆ',1],['🐍 ಹಾವು',2],['🐅 ಹುಲಿ',3],['🦚 ನವಿಲು',4],['🦎 ಊಸರವಳ್ಳಿ',2],['🐘 ಆನೆ',3],['🦉 ಗೂಬೆ',4]],[['ಮೀನು','ln'],['ಉಭಯಚರ','gr'],['ಸರೀಸೃಪ','or'],['ಸಸ್ತನಿ','pu'],['ಹಕ್ಕಿ','gr']],'vert')}`,a:()=>drawGames()},
+{h:'ಖನಿಜ ಸಂಪತ್ತು',s:'ಜಲಸಂಪತ್ತು ಮತ್ತು ಸಾಗರಸಂಪತ್ತಿನಂತೆಯೇ ಖನಿಜ ಸಂಪತ್ತು ಪ್ರಕೃತಿಯಿಂದ ಸಿಗುವ ಕೊಡುಗೆ. ಮಹಾರಾಷ್ಟ್ರದ ಖನಿಜ ಸಂಪತ್ತು ಪೂರ್ವ ಭಾಗದಲ್ಲಿ ಕೇಂದ್ರೀಕೃತವಾಗಿದೆ. ಕೊಂಕಣದ ಜಂಬಿಟ್ಟಿಗೆ ಕಲ್ಲಿನಲ್ಲಿ ಬಾಕ್ಸೈಟ್, ಮ್ಯಾಂಗನೀಸ್ ಸಿಗುತ್ತವೆ. ಪೂರ್ವ ಭಾಗದಲ್ಲಿ ಮ್ಯಾಂಗನೀಸ್, ಸುಣ್ಣಕಲ್ಲು ಮತ್ತು ಕಬ್ಬಿಣದ ಅದಿರು ಸಿಗುತ್ತವೆ.',b:()=>`
+ <div class="key">ಖನಿಜ ಸಂಪತ್ತು <b>ಪ್ರಕೃತಿಯ ಕೊಡುಗೆ</b>. ಆರ್ಥಿಕ ಅಭಿವೃದ್ಧಿಯಲ್ಲಿ ಖನಿಜಗಳು ಮತ್ತು ಶಕ್ತಿ ಸಾಧನಗಳಿಗೆ ತುಂಬಾ ಮಹತ್ವ. ಮಹಾರಾಷ್ಟ್ರದ ಖನಿಜಗಳು <b>ಪೂರ್ವ ಭಾಗದಲ್ಲಿ ಕೇಂದ್ರೀಕೃತವಾಗಿ</b> ಇವೆ. ಕೊಂಕಣದಲ್ಲಿ <b>ಜಂಬಿಟ್ಟಿಗೆ ಕಲ್ಲು</b> – ಅದರಲ್ಲಿ ಬಾಕ್ಸೈಟ್, ಮ್ಯಾಂಗನೀಸ್.</div>
+ <h3>⛏️ ಗಣಿ ಹುಡುಕಾಟ – ಖನಿಜ ಆಯ್ಕೆಮಾಡಿ</h3><div id="minBox"></div>
+ <h3>🎯 ಉಪಯೋಗ ಗುರುತಿಸಿ</h3>${pickGame('mu',[['ಅಲ್ಯೂಮಿನಿಯಂ ಯಾವ ಖನಿಜದಿಂದ?',['ಬಾಕ್ಸೈಟ್','ಸಿಲಿಕಾ','ಕಲ್ಲಿದ್ದಲು'],0],['ಗಾಜು ತಯಾರಿಕೆಗೆ?',['ಡೋಲೋಮೈಟ್','ಸಿಲಿಕಾ','ಕ್ರೋಮೈಟ್'],1],['ಉಷ್ಣ ವಿದ್ಯುತ್ ಉತ್ಪಾದನೆಗೆ?',['ಕಲ್ಲಿದ್ದಲು','ಸುಣ್ಣಕಲ್ಲು','ಮ್ಯಾಂಗನೀಸ್'],0],['ಸಿಮೆಂಟ್ ಉದ್ಯಮಕ್ಕೆ?',['ಸುಣ್ಣಕಲ್ಲು','ಬಾಕ್ಸೈಟ್','ಸಿಲಿಕಾ'],0],['ಬ್ಯಾಟರಿ, ಬಣ್ಣ, ಔಷಧಗಳಿಗೂ ಉಪಯುಕ್ತ?',['ಮ್ಯಾಂಗನೀಸ್','ಸಿಲಿಕಾ','ಡೋಲೋಮೈಟ್'],0]],'mu')}`,a:()=>{drawMin();drawGames()}},
+{h:'ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ ಮತ್ತು ಶಕ್ತಿ',s:'ಹಿಂದೂಹೃದಯಸಮ್ರಾಟ ಬಾಳಾಸಾಹೇಬ ಠಾಕ್ರೆ ಮಹಾರಾಷ್ಟ್ರ ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ ಮುಂಬೈ ಮತ್ತು ನಾಗಪುರ ಎಂಬ ಪ್ರಮುಖ ನಗರಗಳನ್ನು ಜೋಡಿಸುತ್ತದೆ ಮತ್ತು ಅದರ ಉದ್ದ ಏಳುನೂರ ಒಂದು ಕಿಲೋಮೀಟರ್. ಅದು ಹತ್ತು ಜಿಲ್ಲೆಗಳ ಮೂಲಕ ಹಾದುಹೋಗುತ್ತದೆ. ಸೌರಶಕ್ತಿ ಎಂದರೆ ಸೂರ್ಯನಿಂದ ಸಿಗುವ ಬೆಳಕು ಮತ್ತು ಶಾಖದಿಂದ ಪಡೆದ ಶಕ್ತಿ. ಜೈವಿಕ ಶಕ್ತಿ ಪ್ರಾಣಿಗಳ ಮಲ ಮತ್ತು ಜೈವಿಕ ತ್ಯಾಜ್ಯ ಪದಾರ್ಥಗಳಿಂದ ಸಿಗುತ್ತದೆ.',b:()=>`
+ <div class="key"><b>ಹಿಂದೂಹೃದಯಸಮ್ರಾಟ ಬಾಳಾಸಾಹೇಬ ಠಾಕ್ರೆ ಮಹಾರಾಷ್ಟ್ರ ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ</b> – ಆಧುನಿಕ ತಂತ್ರಜ್ಞಾನದಿಂದ ಕಟ್ಟಿದ, <b>ಮುಂಬೈಯಿಂದ ನಾಗಪುರ</b>, ಉದ್ದ <b>೭೦೧ ಕಿ.ಮೀ.</b>, <b>೧೦ ಜಿಲ್ಲೆಗಳ ಮೂಲಕ</b> ಹಾದುಹೋಗುತ್ತದೆ.</div>
+ <div id="hwBox"></div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">☀️🔆</div><div class="tt">ಸೌರಶಕ್ತಿ</div><div class="dd">ಸೂರ್ಯನಿಂದ ಸಿಗುವ <b>ಬೆಳಕು ಮತ್ತು ಶಾಖವನ್ನು</b> ಬಳಸಿ ಪಡೆದ ಶಕ್ತಿ. ಉದಾ. <b>ಧುಳೆ ಜಿಲ್ಲೆಯ ಸಾಕ್ರಿ</b> ಇಲ್ಲಿನ ಸೌರ ವಿದ್ಯುತ್ ಯೋಜನೆ.</div></div>
+  <div class="tile op"><div class="ic">🐄🍂🔥</div><div class="tt">ಜೈವಿಕ ಶಕ್ತಿ</div><div class="dd">ಪ್ರಾಣಿಗಳ <b>ಮಲ</b> ಮತ್ತು ಜೈವಿಕ ತ್ಯಾಜ್ಯ ಪದಾರ್ಥ (<b>ತರಗೆಲೆ, ಸಿಪ್ಪೆ</b>) ಬಳಸಿ ಸಿಗುವ ಶಕ್ತಿ.</div></div>
+ </div>
+ <h3>🎯 ಯಾವ ಶಕ್ತಿ?</h3>${sortGame('en',[['☀️ ಛಾವಣಿಯ ಮೇಲಿನ ಸೌರ ಫಲಕ',0],['🐄 ಸಗಣಿಯಿಂದ ಗೋಬರ್ ಗ್ಯಾಸ್',1],['🍂 ತರಗೆಲೆ ಕೊಳೆಸಿ ಗ್ಯಾಸ್',1],['🔆 ಸೌರ ದೀಪ',0],['🥜 ಸಿಪ್ಪೆಗಳಿಂದ ಇಂಧನ',1],['♨️ ಸೌರ ನೀರು ಕಾಯಿಸುವ ಸಾಧನ',0]],[['☀️ ಸೌರಶಕ್ತಿ','or'],['🌱 ಜೈವಿಕ ಶಕ್ತಿ','gr']],'en')}`,a:()=>{drawHW();drawGames()}},
+{h:'ಬೇಸಾಯ – ಪ್ರಮುಖ ಉದ್ಯೋಗ',s:'ಬೇಸಾಯ ಮಹಾರಾಷ್ಟ್ರದ ಪ್ರಮುಖ ಉದ್ಯೋಗ. ಹವಾಮಾನ, ಮಣ್ಣು ಮತ್ತು ನೀರಿನ ಲಭ್ಯತೆಯ ಮೇಲೆ ಬೆಳೆಗಳ ಉತ್ಪಾದನೆ ಅವಲಂಬಿತವಾಗಿರುತ್ತದೆ. ಮಳೆನೀರಿನ ಮೇಲೆ ಅವಲಂಬಿತ ಬೇಸಾಯ ಖುಷ್ಕಿ ಬೇಸಾಯ, ನೀರಾವರಿಯಿಂದ ನೀರು ಪೂರೈಸಿ ಮಾಡುವ ಬೇಸಾಯ ನೀರಾವರಿ ಬೇಸಾಯ. ಮಳೆಗಾಲದ ಹಂಗಾಮು ಮುಂಗಾರು, ಚಳಿಗಾಲದ್ದು ಹಿಂಗಾರು.',b:()=>`
+ <div class="key">ಬೆಳೆಗಳ ಉತ್ಪಾದನೆ <b>ಹವಾಮಾನ, ಮಣ್ಣು ಮತ್ತು ನೀರಿನ ಲಭ್ಯತೆ</b> ಇವುಗಳ ಮೇಲೆ ಅವಲಂಬಿತ. ಮಳೆ ಎಲ್ಲೆಡೆ ಒಂದೇ ರೀತಿ ಬೀಳುವುದಿಲ್ಲ, ಆದ್ದರಿಂದ ಬೆಳೆಗಳಲ್ಲಿ ವೈವಿಧ್ಯ.</div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">🌧️🌾</div><div class="tt">ಹೆಚ್ಚು ಮಳೆಯ ಭಾಗ</div><div class="dd">ಭತ್ತ, ಹಣ್ಣಿನ ತೋಟಗಳು</div></div>
+  <div class="tile op"><div class="ic">🌤️🌽</div><div class="tt">ಕಡಿಮೆ ಮಳೆಯ ಭಾಗ</div><div class="dd">ಜೋಳ, ಸಜ್ಜೆ, ಮೆಕ್ಕೆಜೋಳ, ದ್ವಿದಳ ಧಾನ್ಯಗಳು</div></div>
+  <div class="tile op"><div class="ic">☔</div><div class="tt">ಖುಷ್ಕಿ ಬೇಸಾಯ</div><div class="dd">ಮಳೆನೀರಿನ ಮೇಲೆ ಅವಲಂಬಿತ.</div></div>
+  <div class="tile op"><div class="ic">🚿</div><div class="tt">ನೀರಾವರಿ ಬೇಸಾಯ</div><div class="dd">ನೀರಾವರಿ ಮೂಲಕ ನೀರು ಪೂರೈಸಿ.</div></div>
+  <div class="tile op"><div class="ic">🌦️</div><div class="tt">ಮುಂಗಾರು ಹಂಗಾಮು</div><div class="dd">ಮಳೆಗಾಲದಲ್ಲಿ ಮಾಡುವ ಬೇಸಾಯ.</div></div>
+  <div class="tile op"><div class="ic">❄️</div><div class="tt">ಹಿಂಗಾರು ಹಂಗಾಮು</div><div class="dd">ಚಳಿಗಾಲದಲ್ಲಿ ಮಾಡುವ ಬೇಸಾಯ.</div></div>
+ </div>
+ <h3>🎯 ಬೆಳೆಗಳನ್ನು ಗುರುತಿಸಿ</h3>${sortGame('crop',[['🌾 ಜೋಳ',0],['🍊 ಕಿತ್ತಳೆ',1],['🌿 ಹತ್ತಿ',2],['🥭 ಮಾವು',1],['🌾 ಅಕ್ಕಿ',0],['🎋 ಕಬ್ಬು',2],['🍌 ಬಾಳೆಹಣ್ಣು',1],['🌾 ಸಜ್ಜೆ',0],['🥜 ಶೇಂಗಾ',2]],[['ಆಹಾರಧಾನ್ಯ','gr'],['ಹಣ್ಣು','or'],['ವಾಣಿಜ್ಯ','pu']],'crop')}
+ ${pickGame('frm',[['ಮಳೆನೀರಿನ ಮೇಲೆ ಅವಲಂಬಿತ ಬೇಸಾಯ?',['ನೀರಾವರಿ','ಖುಷ್ಕಿ'],1],['ಚಳಿಗಾಲದ ಹಂಗಾಮು?',['ಮುಂಗಾರು','ಹಿಂಗಾರು'],1],['ನಾಗಪುರ ಯಾವ ಹಣ್ಣಿಗೆ ಪ್ರಸಿದ್ಧ?',['ಕಿತ್ತಳೆ','ಬಾಳೆಹಣ್ಣು','ಮಾವು'],0],['ಪಾಲಘರ್ ಜಿಲ್ಲೆಯ ಪ್ರಮುಖ ಹಣ್ಣು?',['ಚಿಕ್ಕೂ ಹಣ್ಣು','ಕಿತ್ತಳೆ','ದಾಳಿಂಬೆ'],0],['ಮಾವು ಉತ್ಪಾದಿಸುವ ಜಿಲ್ಲೆಗಳು?',['ರತ್ನಾಗಿರಿ, ಸಿಂಧುದುರ್ಗ','ಸೋಲಾಪುರ, ಬೀಡ್','ವರ್ಧಾ, ಅಮರಾವತಿ'],0]],'frm')}`,a:()=>drawGames()},
+{h:'ಹಬ್ಬ, ಉತ್ಸವ ಮತ್ತು ವಾದ್ಯಗಳು',s:'ರಾಜ್ಯದಲ್ಲಿ ವಿವಿಧ ಧರ್ಮಗಳ ಹಬ್ಬ-ಸಮಾರಂಭಗಳನ್ನು ಉತ್ಸಾಹದಿಂದ ಆಚರಿಸಲಾಗುತ್ತದೆ. ಹದಿನೈದು ಆಗಸ್ಟ್ ಮತ್ತು ಇಪ್ಪತ್ತಾರು ಜನವರಿ ಎಂಬ ಎರಡು ರಾಷ್ಟ್ರೀಯ ಹಬ್ಬಗಳನ್ನು ದೇಶದಾದ್ಯಂತ ಆಚರಿಸಲಾಗುತ್ತದೆ. ಹಬ್ಬಗಳ ಉತ್ಸಾಹ ಹೆಚ್ಚಿಸಲು ಡೋಲು, ತಾಶಾ, ಹಾರ್ಮೋನಿಯಂ, ತಬಲಾ, ಸಂಬಳ, ಸನಾಯಿ, ತಾಳ, ಮೃದಂಗ, ಹಲಗೆ, ತಾರಪಾ ಮುಂತಾದ ವಾದ್ಯಗಳನ್ನು ನುಡಿಸಲಾಗುತ್ತದೆ.',b:()=>`
+ <div class="key">ರಾಜ್ಯದಲ್ಲಿ <b>ವಿವಿಧ ಧರ್ಮಗಳ ಹಬ್ಬ-ಸಮಾರಂಭಗಳು</b> ಉತ್ಸಾಹದಿಂದ ಆಚರಿಸಲ್ಪಡುತ್ತವೆ. <b>೧೫ ಆಗಸ್ಟ್ (ಸ್ವಾತಂತ್ರ್ಯ ದಿನ)</b> ಮತ್ತು <b>೨೬ ಜನವರಿ (ಗಣರಾಜ್ಯ ದಿನ)</b> ಈ ಎರಡು <b>ರಾಷ್ಟ್ರೀಯ ಹಬ್ಬಗಳು</b> ದೇಶಾದ್ಯಂತ ಆಚರಿಸಲಾಗುತ್ತವೆ. 🇮🇳</div>
+ <div class="tap">ಸಾರ್ವಜನಿಕ ಉತ್ಸವಗಳಲ್ಲಿ ನುಡಿಸುವ ವಾದ್ಯಗಳು: ಡೋಲು, ತಾಶಾ, ಹಾರ್ಮೋನಿಯಂ, ತಬಲಾ, ಸಂಬಳ, ಸನಾಯಿ, ತಾಳ, ಮೃದಂಗ, ಹಲಗೆ, ತಾರಪಾ, ಡೋಲಕ್, ಘಂಟೆ, ಶಂಖ.</div>
+ <h3>🎶 ವಾದ್ಯಗಳ ತಂಡ</h3><div id="vadBox"></div>
+ <div class="know"><b class="h">💬 ನೀವು ಹೇಳಿ</b><br>• ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ ಯಾವ ವಾದ್ಯಗಳನ್ನು ನುಡಿಸುತ್ತಾರೆ? • ನಿಮಗೆ ಯಾವ ವಾದ್ಯ ನುಡಿಸಲು ಇಷ್ಟ?</div>
+ ${pickGame('nf',[['ರಾಷ್ಟ್ರೀಯ ಹಬ್ಬಗಳು ಯಾವುವು?',['೧೫ ಆಗಸ್ಟ್ ಮತ್ತು ೨೬ ಜನವರಿ','೧ ಮೇ ಮತ್ತು ೨ ಅಕ್ಟೋಬರ್','ದೀಪಾವಳಿ ಮತ್ತು ಈದ್'],0],['ತಾರಪಾ ಎಂದರೇನು?',['ವಾದ್ಯ','ಬೆಳೆ','ಖನಿಜ'],0]],'nf')}`,a:()=>{drawVad();drawGames()}},
+{h:'ಉಡುಗೆ ಮತ್ತು ಆಹಾರ ಪದಾರ್ಥಗಳು',s:'ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದಲ್ಲಿ ಅನೇಕ ಅಂಶಗಳಲ್ಲಿ ವೈವಿಧ್ಯ ಕಂಡುಬರುತ್ತದೆ. ಅದೇ ರೀತಿ ವೈವಿಧ್ಯ ಉಡುಗೆಗಳಲ್ಲೂ ಕಂಡುಬರುತ್ತದೆ. ಮಹಾರಾಷ್ಟ್ರ ಒಂದು, ಉಡುಗೆ ಹಲವು.',b:()=>`
+ <div class="key"><b>‘ಮಹಾರಾಷ್ಟ್ರ ಒಂದು : ಉಡುಗೆ ಹಲವು’</b> – ಕೊಂಕಣಿ, ಗ್ರಾಮೀಣ, ಬಂಜಾರಾ, ನಗರ, ಆದಿವಾಸಿ ಹೀಗೆ ವಿವಿಧ ಉಡುಗೆಗಳು ಕಾಣುತ್ತವೆ.</div>
+ <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px">${[['🎣','ಕೊಂಕಣ'],['👳','ಗ್ರಾಮೀಣ'],['🪭','ಬಂಜಾರಾ'],['👔','ನಗರ'],['🪶','ಆದಿವಾಸಿ']].map(x=>`<div class="tile op" style="text-align:center" onclick="say('${x[1]} ಉಡುಪು')"><div class="ic">${x[0]}</div><div class="tt">${x[1]}</div></div>`).join('')}</div>
+ <h3>🍛 ಪ್ರಾದೇಶಿಕ ಆಹಾರ ಪದಾರ್ಥಗಳು</h3>
+ <div class="g2">${[['ಕೊಂಕಣ','ಅನ್ನ, ಮೀನು, ಸೋಲಕಢೀ, ಉಕಡೀಚೆ ಮೋದಕ'],['ಪಶ್ಚಿಮ ಮಹಾರಾಷ್ಟ್ರ','ಮಿಸಳ್, ಪೂರಣಪೋಳಿ, ಪಿಠಲ-ಭಾಕರಿ'],['ಖಾನದೇಶ','ಬದನೆಕಾಯಿ ಭರೀತ, ಶೇವ್ ಭಾಜಿ'],['ಮರಾಠವಾಡ','ಜೋಳದ ರೊಟ್ಟಿ, ಠೇಚಾ, ಹುರಡಾ'],['ವಿದರ್ಭ','ಪಾಟವಡಿ, ವಡಾಭಾತ, ಕಿತ್ತಳೆ ಬರ್ಫಿ']].map(x=>`<div class="tile" onclick="this.classList.add('op')"><div class="ic">🍽️</div><div class="tt">${x[0]}</div><div class="dd">${x[1]}</div></div>`).join('')}</div>
+ <div class="tap">ಇವು ಕೆಲವು ಉದಾಹರಣೆಗಳು – ಶಿಕ್ಷಕರ ಸಹಾಯದಿಂದ ನಿಮ್ಮ ಭಾಗದ ಪದಾರ್ಥಗಳ ಪಟ್ಟಿ ಮಾಡಿ.</div>
+ ${pickGame('fd',[['ಸೋಲಕಢೀ ಯಾವ ಭಾಗದಲ್ಲಿ ಪ್ರಸಿದ್ಧ?',['ಕೊಂಕಣ','ವಿದರ್ಭ','ಖಾನದೇಶ'],0],['ಬದನೆಕಾಯಿ ಭರೀತ ಯಾವ ಭಾಗದಲ್ಲಿ ಪ್ರಸಿದ್ಧ?',['ಖಾನದೇಶ','ಕೊಂಕಣ','ಮರಾಠವಾಡ'],0]],'fd')}`,a:()=>drawGames()},
+{h:'ಸ್ಫೂರ್ತಿದಾಯಕ ವ್ಯಕ್ತಿಗಳು ಮತ್ತು ಪರಂಪರೆ',s:'ರಾಹೀಬಾಯಿ ಪೋಪೆರೆ ಅಹಿಲ್ಯಾನಗರ ಜಿಲ್ಲೆಯ ಅಕೋಲೆ ತಾಲ್ಲೂಕಿನ ಕೊಂಭಾಳಣೆ ಗ್ರಾಮದ ಮಹಿಳಾ ರೈತರು. ದೇಶೀ ತಳಿಗಳ ಬೀಜಗಳನ್ನು ಜೋಪಾನ ಮಾಡಿದ್ದಕ್ಕಾಗಿ ಭಾರತ ಸರ್ಕಾರ ಅವರಿಗೆ ೨೦೨೦ ರಲ್ಲಿ ಪದ್ಮಶ್ರೀ ಪ್ರಶಸ್ತಿ ನೀಡಿತು. ಮಹಾರಾಷ್ಟ್ರದ ಹನ್ನೊಂದು ಕೋಟೆಗಳನ್ನು ಯುನೆಸ್ಕೋ ವಿಶ್ವ ಪರಂಪರೆಯ ತಾಣಗಳೆಂದು ಘೋಷಿಸಿದೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">👩‍🌾🌱</div><div class="tt">ಶ್ರೀಮತಿ ರಾಹೀಬಾಯಿ ಪೋಪೆರೆ</div><div class="dd">ಅಹಿಲ್ಯಾನಗರ ಜಿಲ್ಲೆ, ಅಕೋಲೆ ತಾಲ್ಲೂಕು, <b>ಕೊಂಭಾಳಣೆ</b> ಗ್ರಾಮ. ಸಾಂಪ್ರದಾಯಿಕ ಬೀಜ ತಳಿಗಳ <b>ರಕ್ಷಕರು ಮತ್ತು ಸಂವರ್ಧಕರು</b>. ದೇಶೀ ತಳಿಗಳ ಜೋಪಾನಕ್ಕಾಗಿ ಭಾರತ ಸರ್ಕಾರ <b>ಕ್ರಿ.ಶ. ೨೦೨೦ ರಲ್ಲಿ ‘ಪದ್ಮಶ್ರೀ’</b> ಪ್ರಶಸ್ತಿ ನೀಡಿತು. (ಅವರನ್ನು ‘ಬೀಜಮಾತೆ’ ಎನ್ನುತ್ತಾರೆ.)</div></div>
+  <div class="tile op"><div class="ic">🌾🏅</div><div class="tt">ದಾದಾಜೀ ಖೋಬ್ರಾಗಡೆ</div><div class="dd">ಭತ್ತದ ಹೊಸ ತಳಿಗಳನ್ನು ಸಂಶೋಧಿಸಿದ್ದಕ್ಕಾಗಿ ರಾಷ್ಟ್ರಪತಿ ಡಾ. ಎ.ಪಿ.ಜೆ. ಅಬ್ದುಲ್ ಕಲಾಂ ಮತ್ತು ವಿಜ್ಞಾನಿ ಡಾ. ರಘುನಾಥ ಮಾಶೇಲಕರ ಅವರ ಹಸ್ತದಿಂದ ಸನ್ಮಾನ. ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಭತ್ತ, ಗೋಧಿ, ಕಬ್ಬು, ದಾಳಿಂಬೆ, ದ್ರಾಕ್ಷಿ, ಅರಿಶಿನ, ತೊಗರಿ, ಸೋಯಾಬೀನ್ ಮುಂತಾದ ಬೆಳೆಗಳ ತಳಿಗಳ ಮೇಲೆ ಸಂಶೋಧನೆ ನಡೆಯುತ್ತಿದೆ.</div></div>
+ </div>
+ <div class="key">🏰 ಮಹಾರಾಷ್ಟ್ರ <b>ಗಡ ಮತ್ತು ಕೋಟೆಗಳಿಗೆ</b> ಪ್ರಸಿದ್ಧ. <b>೧೧ ಕೋಟೆಗಳನ್ನು</b> ಯುನೆಸ್ಕೋ <b>ವಿಶ್ವ ಪರಂಪರೆಯ ತಾಣಗಳೆಂದು</b> ಘೋಷಿಸಿದೆ: ಶಿವನೇರಿ, ಸಾಲ್ಹೇರ, ಲೋಹಗಡ, ಖಾಂದೇರಿ, ರಾಯಗಡ, ರಾಜಗಡ, ಪ್ರತಾಪಗಡ, ಸುವರ್ಣದುರ್ಗ, ಪನ್ಹಾಳಾ, ವಿಜಯದುರ್ಗ ಮತ್ತು ಸಿಂಧುದುರ್ಗ.</div>
+ <h3>🎯 ಕೋಟೆ ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿದೆ?</h3>${pickGame('fort',[['🏰 ಶಿವನೇರಿ',['ಪುಣೆ','ನಾಶಿಕ್','ಸಾತಾರಾ'],0],['🏰 ಸಾಲ್ಹೇರ್',['ನಾಶಿಕ್','ರಾಯಗಡ','ಕೊಲ್ಲಾಪುರ'],0],['🏰 ಪ್ರತಾಪಗಡ',['ಸಾತಾರಾ','ಪುಣೆ','ರತ್ನಾಗಿರಿ'],0],['🏰 ಸುವರ್ಣದುರ್ಗ',['ರತ್ನಾಗಿರಿ','ಸಿಂಧುದುರ್ಗ','ರಾಯಗಡ'],0],['🏰 ಪನ್ಹಾಳಾ',['ಕೊಲ್ಲಾಪುರ','ಸಾಂಗ್ಲಿ','ಪುಣೆ'],0],['🏰 ವಿಜಯದುರ್ಗ',['ಸಿಂಧುದುರ್ಗ','ರಾಯಗಡ','ಠಾಣೆ'],0],['🏰 ಖಾಂದೇರಿ',['ರಾಯಗಡ','ಪಾಲ್ಘರ್','ರತ್ನಾಗಿರಿ'],0]].map(q=>{const o=[...q[1]],c=o[0],s=(q[0].length%3);const r=[...o.slice(s),...o.slice(0,s)];return [q[0],r,r.indexOf(c)]}),'fort')}`,a:()=>drawGames()},
+{h:'ನಾವು ಇದನ್ನು ಅಧ್ಯಯನ ಮಾಡಿದೆವು',s:'ಈ ಪಾಠದಲ್ಲಿ ನಾವು ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದ ಬಗ್ಗೆ ಬಹಳಷ್ಟು ಮಾಹಿತಿ ಅಧ್ಯಯನ ಮಾಡಿದ್ದೇವೆ. ಬನ್ನಿ ಮನನ ಮಾಡೋಣ.',b:()=>`
+ <ul>${SUM.map(x=>`<li>${x}</li>`).join('')}</ul>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>೧. ‘ಮಹಾರಾಷ್ಟ್ರ ಒಂದು : ಉಡುಗೆ ಹಲವು’ – ವಿವಿಧ ವೇಷಭೂಷಣಗಳ ಚಿತ್ರಗಳನ್ನು ಬರೆದು ತರಗತಿಯಲ್ಲಿ ಹಚ್ಚಿ.<br>೨. ೧೫ ಆಗಸ್ಟ್ ಮತ್ತು ೨೬ ಜನವರಿ ಈ ರಾಷ್ಟ್ರೀಯ ಹಬ್ಬಗಳ ಮಾಹಿತಿ ಸಂಗ್ರಹಿಸಿ.<br>೩. ೧೧ ವಿಶ್ವ ಪರಂಪರೆಯ ಕೋಟೆಗಳು ಯಾವ ಜಿಲ್ಲೆಗಳಲ್ಲಿವೆ ಎಂದು ಕೋಷ್ಟಕ ಮಾಡಿ.<br>೪. ಶಿಕ್ಷಕರೊಂದಿಗೆ ಹೊಲಕ್ಕೆ ಭೇಟಿ ನೀಡಿ ಮತ್ತು ಹಂಗಾಮಿಗೆ ತಕ್ಕಂತೆ ಬೆಳೆಗಳ ವೈವಿಧ್ಯದ ಬಗ್ಗೆ ರೈತರೊಂದಿಗೆ ಚರ್ಚಿಸಿ.</div>
+ <div class="pledge">🚩 ಜೈ ಮಹಾರಾಷ್ಟ್ರ! ನಮ್ಮ ರಾಜ್ಯದ ಕಾಡುಗಳು, ಕೋಟೆಗಳು, ನದಿಗಳು ಮತ್ತು ಪರಂಪರೆಯನ್ನು ಕಾಪಾಡುವುದು ನಮ್ಮ ಕರ್ತವ್ಯ.</div>`,a:()=>award('end','ಪಾಠ ಪೂರ್ಣ! ಅಭಿನಂದನೆಗಳು!')}
+];
+let S=0;
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯ ಭಾರತದ ಯಾವ ಭಾಗದಲ್ಲಿದೆ?',['ಪೂರ್ವ','ಪಶ್ಚಿಮ','ಉತ್ತರ','ಈಶಾನ್ಯ'],1,'ಮಹಾರಾಷ್ಟ್ರ ದೇಶದ ಪಶ್ಚಿಮ ಭಾಗದಲ್ಲಿದೆ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಪಶ್ಚಿಮ ಗಡಿಯನ್ನು ಯಾವುದು ನಿರ್ಧರಿಸಿದೆ?',['ಬಂಗಾಳ ಕೊಲ್ಲಿ','ಹಿಂದೂ ಮಹಾಸಾಗರ','ಅರಬ್ಬಿ ಸಮುದ್ರ','ಸಾತ್ಪುರ ಪರ್ವತ'],2,'ಪಶ್ಚಿಮಕ್ಕೆ ಅರಬ್ಬಿ ಸಮುದ್ರವಿದೆ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಆಕಾರ ಸಾಮಾನ್ಯವಾಗಿ ಹೇಗಿದೆ?',['ಚೌಕ','ಸುರುಳಿ','ತ್ರಿಕೋನ','ಆಯತಾಕಾರದ'],2,'ಆಕಾರ ಸಾಮಾನ್ಯವಾಗಿ ತ್ರಿಕೋನ ಆಕಾರದಲ್ಲಿದೆ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ವಿಸ್ತೀರ್ಣ ಸುಮಾರು ಎಷ್ಟು?',['ಒಂದು ಲಕ್ಷ ಚ.ಕಿ.ಮೀ.','ಮೂರು ಲಕ್ಷ ಚ.ಕಿ.ಮೀ.','ಹತ್ತು ಲಕ್ಷ ಚ.ಕಿ.ಮೀ.','ಐವತ್ತು ಸಾವಿರ ಚ.ಕಿ.ಮೀ.'],1,'ಸುಮಾರು ಮೂರು ಲಕ್ಷ ಚದರ ಕಿ.ಮೀ.'],
+['ವಿಸ್ತೀರ್ಣದ ದೃಷ್ಟಿಯಿಂದ ಮಹಾರಾಷ್ಟ್ರಕ್ಕೆ ದೇಶದಲ್ಲಿ ಎಷ್ಟನೇ ಸ್ಥಾನ?',['ಮೊದಲನೆಯದು','ಎರಡನೆಯದು','ಮೂರನೆಯದು','ನಾಲ್ಕನೆಯ'],2,'ಮೂರನೇ ಸ್ಥಾನ.'],
+['ಆಡಳಿತದ ಅನುಕೂಲಕ್ಕಾಗಿ ಮಹಾರಾಷ್ಟ್ರವನ್ನು ಎಷ್ಟು ವಿಭಾಗಗಳನ್ನಾಗಿ ಮಾಡಲಾಗಿದೆ?',['೪','೫','೬','೮'],2,'ಆರು ಆಡಳಿತ ವಿಭಾಗಗಳು.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ಮಹಾರಾಷ್ಟ್ರದ ಆಡಳಿತ ವಿಭಾಗ ಅಲ್ಲ?',['ಕೊಂಕಣ','ಅಮರಾವತಿ','ನಾಶಿಕ್','ಗೋವಾ'],3,'ಗೋವಾ ನೆರೆಯ ರಾಜ್ಯ.'],
+['ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದ ಸ್ಥಾಪನೆ ಯಾವಾಗ ಆಯಿತು?',['೧೫ ಆಗಸ್ಟ್ ೧೯೪೭','೨೬ ಜನವರಿ ೧೯೫೦','೧ ಮೇ ೧೯೬೦','೧ ನವೆಂಬರ್ ೧೯೫೬'],2,'೧ ಮೇ ೧೯೬೦ – ಮಹಾರಾಷ್ಟ್ರ ದಿನ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜಧಾನಿ ಯಾವುದು?',['ಪುಣೆ','ಮುಂಬೈ','ನಾಗಪುರ','ನಾಶಿಕ್'],1,'ಮುಂಬೈ ರಾಜಧಾನಿ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಉಪರಾಜಧಾನಿ ಯಾವುದು?',['ನಾಗಪುರ','ಪುಣೆ','ಕೊಲ್ಲಾಪುರ','ಅಮರಾವತಿ'],0,'ನಾಗಪುರ ಉಪರಾಜಧಾನಿ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜ್ಯಭಾಷೆ ಯಾವುದು?',['ಹಿಂದಿ','ಇಂಗ್ಲಿಷ್','ಕನ್ನಡ','ಸಂಸ್ಕೃತ'],2,'ರಾಜ್ಯಭಾಷೆ ಮರಾಠಿ.'],
+['ಮಹಾರಾಷ್ಟ್ರಕ್ಕೆ ಎಷ್ಟು ಉದ್ದದ ಸಮುದ್ರ ತೀರ ಲಭಿಸಿದೆ?',['೭೨೦ ಕಿ.ಮೀ.','೧೪೬೫ ಕಿ.ಮೀ.','೭೦೧ ಕಿ.ಮೀ.','೩೦೦ ಕಿ.ಮೀ.'],0,'೭೨೦ ಕಿ.ಮೀ. ಉದ್ದದ ತೀರ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಉತ್ತರ ಗಡಿಯಲ್ಲಿ ಯಾವ ರಾಜ್ಯಗಳಿವೆ?',['ಗೋವಾ ಮತ್ತು ಕರ್ನಾಟಕ','ಗುಜರಾತ್ ಮತ್ತು ಮಧ್ಯಪ್ರದೇಶ','ತೆಲಂಗಾಣ ಮತ್ತು ಛತ್ತೀಸ್‌ಗಢ','ಕೇರಳ ಮತ್ತು ತಮಿಳುನಾಡು'],1,'ಉತ್ತರಕ್ಕೆ ಗುಜರಾತ್ ಮತ್ತು ಮಧ್ಯಪ್ರದೇಶ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಪೂರ್ವ ಗಡಿಯಲ್ಲಿ ಯಾವ ರಾಜ್ಯವಿದೆ?',['ಗುಜರಾತ್','ಗೋವಾ','ಛತ್ತೀಸ್‌ಗಢ','ಕರ್ನಾಟಕ'],2,'ಪೂರ್ವಕ್ಕೆ ಛತ್ತೀಸ್‌ಗಢ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವ ರಾಜ್ಯ ಮಹಾರಾಷ್ಟ್ರದ ದಕ್ಷಿಣ ಗಡಿಯಲ್ಲಿ ಇಲ್ಲ?',['ತೆಲಂಗಾಣ','ಕರ್ನಾಟಕ','ಗೋವಾ','ಮಧ್ಯಪ್ರದೇಶ'],3,'ಮಧ್ಯಪ್ರದೇಶ ಉತ್ತರಕ್ಕಿದೆ.'],
+['ಭೌಗೋಳಿಕ ರಚನೆಯ ಪ್ರಕಾರ ಮಹಾರಾಷ್ಟ್ರವನ್ನು ಎಷ್ಟು ಪ್ರಮುಖ ವಿಭಾಗಗಳಾಗಿ ಮಾಡಲಾಗುತ್ತದೆ?',['ಎರಡು','ನಾಲ್ಕು','ಆರು','ಎಂಟು'],1,'ನಾಲ್ಕು ಭೌಗೋಳಿಕ ವಿಭಾಗಗಳು.'],
+['ಮಹಾರಾಷ್ಟ್ರ ಪ್ರಸ್ಥಭೂಮಿ ಯಾವ ಪ್ರಸ್ಥಭೂಮಿಯ ಭಾಗ?',['ಮಾಳ್ವಾ ಪ್ರಸ್ಥಭೂಮಿ','ಛೋಟಾ ನಾಗಪುರ ಪ್ರಸ್ಥಭೂಮಿ','ದಖ್ಖನ್ ಪ್ರಸ್ಥಭೂಮಿ','ಟಿಬೆಟ್ ಪ್ರಸ್ಥಭೂಮಿ'],2,'ದಖ್ಖನ್ ಪ್ರಸ್ಥಭೂಮಿಯ ಭಾಗ.'],
+['ಸಹ್ಯಾದ್ರಿ ಪರ್ವತವನ್ನು ಇನ್ನೇನೆಂದು ಗುರುತಿಸುತ್ತಾರೆ?',['ಪೂರ್ವ ಘಟ್ಟ','ಪಶ್ಚಿಮ ಘಟ್ಟ','ಸಾತ್ಪುರ','ಹಿಮಾಲಯ'],1,'ಸಹ್ಯಾದ್ರಿ = ಪಶ್ಚಿಮ ಘಟ್ಟ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಅತ್ಯಂತ ಎತ್ತರದ ಶಿಖರ ಯಾವುದು?',['ಅಸ್ತಂಭ','ಕಳಸೂಬಾಯಿ','ಮಹಾಬಳೇಶ್ವರ','ಸಾಲ್ಹೇರ್'],1,'ಕಳಸೂಬಾಯಿ – ಸಹ್ಯಾದ್ರಿಯಲ್ಲಿ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಉತ್ತರ ಭಾಗದಲ್ಲಿ ಯಾವ ಪರ್ವತ ಶ್ರೇಣಿ ಇದೆ?',['ಸಾತ್ಪುರ','ಸಹ್ಯಾದ್ರಿ','ಬಾಲಾಘಾಟ','ಅಜಂತಾ'],0,'ಉತ್ತರಕ್ಕೆ ಸಾತ್ಪುರ.'],
+['ಸಾತ್ಪುರ ಪರ್ವತ ಶ್ರೇಣಿಯ ಅತ್ಯಂತ ಎತ್ತರದ ಶಿಖರ ಯಾವುದು?',['ಕಳಸೂಬಾಯಿ','ಅಸ್ತಂಭ','ಶಿವನೇರಿ','ತೋರಣಾ'],1,'ಅಸ್ತಂಭ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವ ಬೆಟ್ಟ ಶ್ರೇಣಿ ಪೂರ್ವ-ಪಶ್ಚಿಮ ದಿಕ್ಕಿನಲ್ಲಿ ಹರಡಿಲ್ಲ?',['ಸಾತ್ಮಾಳಾ-ಅಜಂತಾ','ಹರಿಶ್ಚಂದ್ರಗಡ-ಬಾಲಾಘಾಟ','ಮಹಾದೇವ','ಸಹ್ಯಾದ್ರಿ'],3,'ಸಹ್ಯಾದ್ರಿ ಉತ್ತರ-ದಕ್ಷಿಣ ಹರಡಿದೆ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಕರಾವಳಿ ಪ್ರದೇಶವನ್ನು ಏನೆಂದು ಕರೆಯುತ್ತಾರೆ?',['ವಿದರ್ಭ','ಮರಾಠವಾಡ','ಕೊಂಕಣ','ಖಾನದೇಶ'],2,'ಕರಾವಳಿ = ಕೊಂಕಣ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಅತ್ಯಂತ ಉದ್ದದ ನದಿ ಯಾವುದು?',['ಕೃಷ್ಣಾ','ಗೋದಾವರಿ','ತಾಪಿ','ಭೀಮಾ'],1,'ಗೋದಾವರಿ.'],
+['ಗೋದಾವರಿ ನದಿಯ ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿನ ಉದ್ದ ಎಷ್ಟು?',['೧೪೬೫ ಕಿ.ಮೀ.','೭೨೦ ಕಿ.ಮೀ.','೭೪೦ ಕಿ.ಮೀ.','೭೦೧ ಕಿ.ಮೀ.'],2,'ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ೭೪೦ ಕಿ.ಮೀ.; ಒಟ್ಟು ಸುಮಾರು ೧೪೬೫ ಕಿ.ಮೀ.'],
+['ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಎಷ್ಟು ವಿಧದ ಕಾಡುಗಳು ಕಂಡುಬರುತ್ತವೆ?',['ಮೂರು','ನಾಲ್ಕು','ಐದು','ಏಳು'],2,'ಐದು ವಿಧದ ಕಾಡುಗಳು.'],
+['ಕಾಡುಗಳ ಹಂಚಿಕೆ ಮುಖ್ಯವಾಗಿ ಯಾವುದರ ಮೇಲೆ ಅವಲಂಬಿತವಾಗಿರುತ್ತದೆ?',['ಮಳೆಯ ಹಂಚಿಕೆ','ಜನಸಂಖ್ಯೆ','ರಸ್ತೆಗಳು','ನಗರಗಳು'],0,'ಮಳೆಯ ಹಂಚಿಕೆಯ ಮೇಲೆ.'],
+['೩೦೦೦ ಮಿ.ಮೀ.ಗಿಂತ ಹೆಚ್ಚು ಮಳೆ ಇರುವ ಭಾಗದಲ್ಲಿ ಯಾವ ಕಾಡುಗಳು ಕಂಡುಬರುತ್ತವೆ?',['ಮುಳ್ಳಿನಂತಹವು','ಎಲೆ ಉದುರುವ','ನಿತ್ಯಹರಿದ್ವರ್ಣ','ಕಾಂಡ್ಲಾ'],2,'ನಿತ್ಯಹರಿದ್ವರ್ಣ ಕಾಡುಗಳು.'],
+['ವರ್ಷವಿಡೀ ಹಸಿರಾಗಿ ಕಾಣುವ ಕಾಡುಗಳು ಯಾವುವು?',['ನಿತ್ಯಹರಿದ್ವರ್ಣ','ಎಲೆ ಉದುರುವ','ಮುಳ್ಳಿನಂತಹವು','ಪೊದೆ'],0,'ಅನೇಕ ವಿಧದ ಮರಗಳು – ವರ್ಷವಿಡೀ ಹಸಿರು.'],
+['ನಿರ್ದಿಷ್ಟ ಋತುವಿನಲ್ಲಿ ಎಲೆ ಉದುರುವ ಕಾಡುಗಳು ಯಾವುವು?',['ನಿತ್ಯಹರಿದ್ವರ್ಣ','ಎಲೆ ಉದುರುವ','ಕಾಂಡ್ಲಾ','ಅರೆ ನಿತ್ಯಹರಿದ್ವರ್ಣ'],1,'ಎಲೆ ಉದುರುವ ಕಾಡುಗಳು.'],
+['ತೇಗ, ಹರಿತಕಿ, ಮುತ್ತುಗ, ಇಪ್ಪೆ ಈ ಮರಗಳು ಯಾವ ಕಾಡಿನಲ್ಲಿ ಕಂಡುಬರುತ್ತವೆ?',['ಎಲೆ ಉದುರುವ','ಕಾಂಡ್ಲಾ','ನಿತ್ಯಹರಿದ್ವರ್ಣ','ಮುಳ್ಳಿನಂತಹವು'],0,'ಎಲೆ ಉದುರುವ ಕಾಡಿನಲ್ಲಿ.'],
+['ಮುಳ್ಳಿನ ಕಾಡಿನ ಸಸ್ಯಗಳ ಎಲೆಗಳು ಚಿಕ್ಕದಾಗಿ ಮತ್ತು ಮುಳ್ಳಿನಂತೆ ಏಕೆ ಇರುತ್ತವೆ?',['ಸುಂದರವಾಗಿ ಕಾಣಲು','ನೀರು ಕಡಿಮೆಯಾಗದಿರಲು','ಪ್ರಾಣಿಗಳು ತಿನ್ನಲಿ ಎಂದು','ಬೇಗ ಬೆಳೆಯಲು'],1,'ನೀರು ಕಡಿಮೆಯಾಗದಿರಲು.'],
+['ಜಾಲಿ, ಬೋರೆ, ಪಾಪಾಸುಕಳ್ಳಿ, ಕಗ್ಗಲಿ ಯಾವ ಕಾಡಿನಲ್ಲಿ ಕಂಡುಬರುತ್ತವೆ?',['ನಿತ್ಯಹರಿದ್ವರ್ಣ','ಅರೆ ನಿತ್ಯಹರಿದ್ವರ್ಣ','ಪೊದೆ ಮತ್ತು ಮುಳ್ಳಿನ','ಕಾಂಡ್ಲಾ'],2,'ಕಡಿಮೆ ಮಳೆಯ (೬೦೦ ಮಿ.ಮೀ.ಗಿಂತ ಕಡಿಮೆ) ಭಾಗದಲ್ಲಿ.'],
+['ಕಾಂಡ್ಲಾ ಕಾಡುಗಳು ಎಲ್ಲಿ ಕಂಡುಬರುತ್ತವೆ?',['ಬೆಟ್ಟದ ತುದಿಯಲ್ಲಿ','ಸಮುದ್ರ ತೀರದ ಉಪ್ಪು ನೀರಿನಲ್ಲಿ','ಮರುಭೂಮಿಯಲ್ಲಿ','ಪ್ರಸ್ಥಭೂಮಿಯ ಮೇಲೆ'],1,'ಲವಣಯುಕ್ತ ಜೌಗು ನೀರಿನಲ್ಲಿ.'],
+['ಬೆನ್ನೆಲುಬು ಇರುವ ಪ್ರಾಣಿಗಳನ್ನು ಏನೆಂದು ಕರೆಯುತ್ತಾರೆ?',['ಬೆನ್ನೆಲುಬಿಲ್ಲದ','ಬೆನ್ನೆಲುಬಿನ','ಉಭಯಚರ','ಕೀಟ'],1,'ಬೆನ್ನೆಲುಬಿನ ಪ್ರಾಣಿಗಳು.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜ್ಯ ಪಕ್ಷಿ ಯಾವುದು?',['ನವಿಲು','ಹಸಿರು ಪಾರಿವಾಳ','ಮಾಳಢೋಕ','ಗಿಳಿ'],1,'ಹರಿಯಾಲ (ಹಸಿರು ಪಾರಿವಾಳ).'],
+['ಮಹಾರಾಷ್ಟ್ರದ ರಾಜ್ಯ ಪ್ರಾಣಿ ಯಾವುದು?',['ಹುಲಿ','ಆನೆ','ಶೇಕರು (ದೈತ್ಯ ಅಳಿಲು)','ಜಿಂಕೆ'],2,'ಶೇಕರು – ದೊಡ್ಡ ಅಳಿಲು.'],
+['ಅಪರೂಪವಾಗುತ್ತಿರುವ, ಮುಳ್ಳಿನ ಕಾಡಿನಲ್ಲಿ ಕಂಡುಬರುವ ಪಕ್ಷಿ ಯಾವುದು?',['ಕಾಗೆ','ಮಾಳಢೋಕ','ಗುಬ್ಬಚ್ಚಿ','ನವಿಲು'],1,'ಮಾಳಢೋಕ.'],
+['ನಿತ್ಯಹರಿದ್ವರ್ಣ ಮತ್ತು ಅರೆ ನಿತ್ಯಹರಿದ್ವರ್ಣ ಕಾಡಿನಲ್ಲಿ ಯಾವ ಪ್ರಾಣಿ ಕಂಡುಬರುತ್ತದೆ?',['ಒಂಟೆ','ಕಾಟಿ','ಪೆಂಗ್ವಿನ್','ಹಿಮಕರಡಿ'],1,'ಹುಲಿ, ಚಿರತೆ, ಕಾಟಿ, ಕರಡಿ, ಆನೆ ಇತ್ಯಾದಿ.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಖನಿಜ ಸಂಪತ್ತು ಮುಖ್ಯವಾಗಿ ಯಾವ ಭಾಗದಲ್ಲಿ ಕೇಂದ್ರೀಕೃತವಾಗಿದೆ?',['ಪಶ್ಚಿಮ','ಪೂರ್ವ','ಉತ್ತರ','ಮಧ್ಯ'],1,'ಪೂರ್ವ ಭಾಗದಲ್ಲಿ.'],
+['ಕೊಂಕಣದ ಜಂಬಿಟ್ಟಿಗೆ ಕಲ್ಲಿನಲ್ಲಿ ಯಾವ ಖನಿಜಗಳು ಸಿಗುತ್ತವೆ?',['ಬಾಕ್ಸೈಟ್ ಮತ್ತು ಮ್ಯಾಂಗನೀಸ್','ಕಲ್ಲಿದ್ದಲು','ಚಿನ್ನ','ವಜ್ರಗಳು'],0,'ಬಾಕ್ಸೈಟ್, ಮ್ಯಾಂಗನೀಸ್.'],
+['ಅಲ್ಯೂಮಿನಿಯಂ ತಯಾರಿಕೆಗೆ ಯಾವ ಖನಿಜ ಬಳಸುತ್ತಾರೆ?',['ಸಿಲಿಕಾ','ಬಾಕ್ಸೈಟ್','ಡೋಲೋಮೈಟ್','ಕಲ್ಲಿದ್ದಲು'],1,'ಬಾಕ್ಸೈಟ್.'],
+['ಕಲ್ಲಿದ್ದಲು ಮುಖ್ಯವಾಗಿ ಯಾವ ಜಿಲ್ಲೆಗಳಲ್ಲಿ ಸಿಗುತ್ತದೆ?',['ಚಂದ್ರಪುರ, ಯವತ್ಮಾಳ್, ನಾಗಪುರ','ರತ್ನಾಗಿರಿ, ರಾಯಗಡ','ಪುಣೆ, ಸಾತಾರಾ','ಠಾಣೆ, ಪಾಲಘರ್'],0,'ಚಂದ್ರಪುರ, ಯವತ್ಮಾಳ್, ನಾಗಪುರ.'],
+['ಗಾಜು ತಯಾರಿಕಾ ಉದ್ಯಮದಲ್ಲಿ ಯಾವ ಖನಿಜ ಉಪಯುಕ್ತ?',['ಸಿಲಿಕಾ','ಮ್ಯಾಂಗನೀಸ್','ಕ್ರೋಮೈಟ್','ಕಬ್ಬಿಣದ ಅದಿರು'],0,'ಸಿಲಿಕಾ.'],
+['ಸಿಮೆಂಟ್ ಉದ್ಯಮಕ್ಕೆ ಯಾವ ಖನಿಜ ಬಳಸುತ್ತಾರೆ?',['ಸುಣ್ಣಕಲ್ಲು','ಬಾಕ್ಸೈಟ್','ಸಿಲಿಕಾ','ಕಲ್ಲಿದ್ದಲು'],0,'ಸುಣ್ಣಕಲ್ಲು.'],
+['ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ ಯಾವ ಎರಡು ನಗರಗಳನ್ನು ಜೋಡಿಸುತ್ತದೆ?',['ಮುಂಬೈ–ಪುಣೆ','ಮುಂಬೈ–ನಾಗಪುರ','ಪುಣೆ–ನಾಶಿಕ್','ನಾಗಪುರ–ಅಮರಾವತಿ'],1,'ಮುಂಬೈಯಿಂದ ನಾಗಪುರ.'],
+['ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗದ ಉದ್ದ ಎಷ್ಟು?',['೭೨೦ ಕಿ.ಮೀ.','೭೪೦ ಕಿ.ಮೀ.','೭೦೧ ಕಿ.ಮೀ.','೧೪೬೫ ಕಿ.ಮೀ.'],2,'೭೦೧ ಕಿ.ಮೀ.'],
+['ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗ ಎಷ್ಟು ಜಿಲ್ಲೆಗಳ ಮೂಲಕ ಹಾದುಹೋಗುತ್ತದೆ?',['೬','೮','೧೦','೩೬'],2,'೧೦ ಜಿಲ್ಲೆಗಳು.'],
+['ಮಹಾರಾಷ್ಟ್ರದ ಪ್ರಮುಖ ಉದ್ಯೋಗ ಯಾವುದು?',['ಮೀನುಗಾರಿಕೆ','ಕೃಷಿ','ಗಣಿಗಾರಿಕೆ','ಪ್ರವಾಸೋದ್ಯಮ'],1,'ಕೃಷಿ.'],
+['ಮಳೆನೀರಿನ ಮೇಲೆ ಅವಲಂಬಿತ ಬೇಸಾಯವನ್ನು ಏನೆಂದು ಕರೆಯುತ್ತಾರೆ?',['ನೀರಾವರಿ','ಖುಷ್ಕಿ','ಹಣ್ಣಿನ ತೋಟ','ಮುಂಗಾರು'],1,'ಖುಷ್ಕಿ ಬೇಸಾಯ.'],
+['ನೀರಾವರಿ ಮೂಲಕ ನೀರು ಪೂರೈಸಿ ಮಾಡಿದ ಬೇಸಾಯವನ್ನು ಏನೆಂದು ಕರೆಯುತ್ತಾರೆ?',['ಖುಷ್ಕಿ','ನೀರಾವರಿ','ಹಿಂಗಾರು','ಒಣ ಬೇಸಾಯ'],1,'ನೀರಾವರಿ ಬೇಸಾಯ.'],
+['ಮಳೆಗಾಲದಲ್ಲಿ ಮಾಡುವ ಬೇಸಾಯದ ಹಂಗಾಮು ಯಾವುದು?',['ಹಿಂಗಾರು','ಬೇಸಿಗೆ','ಮುಂಗಾರು','ಚಳಿಗಾಲ'],2,'ಮುಂಗಾರು ಹಂಗಾಮು.'],
+['ಚಳಿಗಾಲದಲ್ಲಿ ಮಾಡುವ ಬೇಸಾಯದ ಹಂಗಾಮು ಯಾವುದು?',['ಮುಂಗಾರು','ಹಿಂಗಾರು','ಖುಷ್ಕಿ','ನೀರಾವರಿ'],1,'ಹಿಂಗಾರು ಹಂಗಾಮು.'],
+['ಹೆಚ್ಚು ಮಳೆ ಬೀಳುವ ಭಾಗದಲ್ಲಿ ಯಾವ ಬೆಳೆ ಬೆಳೆಯುತ್ತಾರೆ?',['ಅಕ್ಕಿ','ಸಜ್ಜೆ','ಜೋಳ','ಮೆಕ್ಕೆಜೋಳ'],0,'ಭತ್ತ, ಹಣ್ಣಿನ ತೋಟಗಳು.'],
+['ಕಬ್ಬು ಮತ್ತು ಹತ್ತಿ ಯಾವ ರೀತಿಯ ಬೆಳೆಗಳು?',['ಆಹಾರಧಾನ್ಯ','ವಾಣಿಜ್ಯ','ಹಣ್ಣು','ಎಣ್ಣೆಕಾಳುಗಳು'],1,'ವಾಣಿಜ್ಯ ಬೆಳೆಗಳು.'],
+['ಸೌರ ವಿದ್ಯುತ್ ಯೋಜನೆ ಇರುವ ಸಾಕ್ರಿ ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿದೆ?',['ಧುಳೆ','ಸೊಲ್ಲಾಪುರ','ನಾಗಪುರ','ಪುಣೆ'],0,'ಧುಳೆ ಜಿಲ್ಲೆ.'],
+['ಜೈವಿಕ ಶಕ್ತಿಯನ್ನು ಯಾವುದರಿಂದ ಪಡೆಯಬಹುದು?',['ಸೂರ್ಯನ ಬೆಳಕು','ಗಾಳಿ','ಪ್ರಾಣಿಗಳ ಮಲ ಮತ್ತು ಜೈವಿಕ ತ್ಯಾಜ್ಯ ಪದಾರ್ಥಗಳು','ಕಲ್ಲಿದ್ದಲು'],2,'ಮಲ, ತರಗೆಲೆ, ಸಿಪ್ಪೆ.'],
+['ದೇಶದ ರಾಷ್ಟ್ರೀಯ ಹಬ್ಬಗಳು ಯಾವುವು?',['೧ ಮೇ ಮತ್ತು ೧೫ ಆಗಸ್ಟ್','೧೫ ಆಗಸ್ಟ್ ಮತ್ತು ೨೬ ಜನವರಿ','೨೬ ಜನವರಿ ಮತ್ತು ೨ ಅಕ್ಟೋಬರ್','೧ ಮೇ ಮತ್ತು ೨೬ ಜನವರಿ'],1,'೧೫ ಆಗಸ್ಟ್ ಮತ್ತು ೨೬ ಜನವರಿ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವುದು ವಾದ್ಯ ಅಲ್ಲ?',['ಸನಾಯಿ','ಸಂಬಳ','ಹಲಗೆ','ತೇಗ'],3,'ತೇಗ ಒಂದು ಮರ.'],
+['ರಾಹೀಬಾಯಿ ಪೋಪೆರೆ ಅವರಿಗೆ ಯಾವ ಪ್ರಶಸ್ತಿ ಸಿಕ್ಕಿತು?',['ಭಾರತರತ್ನ','ಪದ್ಮಶ್ರೀ','ಪದ್ಮವಿಭೂಷಣ','ಅರ್ಜುನ ಪ್ರಶಸ್ತಿ'],1,'ಕ್ರಿ.ಶ. ೨೦೨೦ ರಲ್ಲಿ ಪದ್ಮಶ್ರೀ.'],
+['ರಾಹೀಬಾಯಿ ಪೋಪೆರೆ ಯಾವುದನ್ನು ರಕ್ಷಿಸುತ್ತಾರೆ?',['ಸಾಂಪ್ರದಾಯಿಕ ಬೀಜ ತಳಿಗಳು','ಕೋಟೆಗಳು','ಪ್ರಾಣಿ','ನದಿಗಳು'],0,'ದೇಶೀ ಬೀಜ ತಳಿಗಳ ಸಂರಕ್ಷಣೆ.'],
+['ಭತ್ತದ ಹೊಸ ತಳಿಗಳನ್ನು ಸಂಶೋಧಿಸಿದ್ದಕ್ಕಾಗಿ ಯಾರಿಗೆ ಸನ್ಮಾನವಾಯಿತು?',['ದಾದಾಜೀ ಖೋಬ್ರಾಗಡೆ','ರಾಹೀಬಾಯಿ ಪೋಪೆರೆ','ಡಾ. ಮಾಶೇಲಕರ','ಬಾಬಾ ಆಮ್ಟೆ'],0,'ದಾದಾಜೀ ಖೋಬ್ರಾಗಡೆ.'],
+['ಯುನೆಸ್ಕೋ ಮಹಾರಾಷ್ಟ್ರದ ಎಷ್ಟು ಕೋಟೆಗಳನ್ನು ವಿಶ್ವ ಪರಂಪರೆಯ ತಾಣಗಳೆಂದು ಘೋಷಿಸಿದೆ?',['೬','೧೧','೩೬','೨೦'],1,'೧೧ ಕೋಟೆಗಳನ್ನು.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವ ಕೋಟೆ ವಿಶ್ವ ಪರಂಪರೆಯ ಪಟ್ಟಿಯಲ್ಲಿದೆ?',['ಶಿವನೇರಿ','ಸಿಂಹಗಡ','ತೋರಣಾ','ಪುರಂದರ'],0,'ಶಿವನೇರಿ (೧೧ ರಲ್ಲಿ ಒಂದು).'],
+['‘ಮಹಾರಾಷ್ಟ್ರ ಒಂದು : ಉಡುಗೆ ಹಲವು’ ಇದರಿಂದ ಏನು ತಿಳಿಯುತ್ತದೆ?',['ಎಲ್ಲರ ಉಡುಗೆ ಒಂದೇ ರೀತಿ','ಉಡುಗೆಗಳಲ್ಲಿ ವೈವಿಧ್ಯ','ಉಡುಗೆಗಳೇ ಇರುವುದಿಲ್ಲ','ಕೇವಲ ನಗರ ಉಡುಗೆ'],1,'ಉಡುಗೆಗಳಲ್ಲಿ ವೈವಿಧ್ಯವಿದೆ.']
+];
+
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯಕ್ಕೆ ವಿಸ್ತೀರ್ಣದ ದೃಷ್ಟಿಯಿಂದ ದೇಶದಲ್ಲಿ ............ ಸ್ಥಾನ ಲಭಿಸುತ್ತದೆ.',['ಎರಡನೆಯದು','ಮೂರನೆಯದು','ನಾಲ್ಕನೆಯ','ಐದನೆಯ'],1],
+  ['ಮಹಾರಾಷ್ಟ್ರ ದಿನವನ್ನು ............ ರಂದು ಆಚರಿಸಲಾಗುತ್ತದೆ.',['೧ ಮೇ','೧ ನವೆಂಬರ್','೧ ಮಾರ್ಚ್','೧ ಡಿಸೆಂಬರ್'],0],
+  ['ಮಹಾರಾಷ್ಟ್ರದ ............ ನದಿ ಅತ್ಯಂತ ಹೆಚ್ಚು ಉದ್ದ ಹೊಂದಿದೆ.',['ಮಂಜರಾ','ಕೃಷ್ಣಾ','ಗೋದಾವರಿ','ಕೊಯ್ನಾ'],2],
+  ['ಕಬ್ಬು ಮತ್ತು ಹತ್ತಿ ಮಹಾರಾಷ್ಟ್ರದ ಪ್ರಮುಖ ............ ಬೆಳೆಗಳು.',['ಖುಷ್ಕಿ','ವಾಣಿಜ್ಯ','ಕೈಗಾರಿಕಾ','ನೀರಾವರಿ'],1]],
+ aa:[['ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯ ಯಾವ ಪ್ರಸ್ಥಭೂಮಿಯ ಭಾಗ?','ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯ (ಮಹಾರಾಷ್ಟ್ರ ಪ್ರಸ್ಥಭೂಮಿ) ದಖ್ಖನ್ ಪ್ರಸ್ಥಭೂಮಿಯ ಭಾಗ.'],
+  ['ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದ ಪಶ್ಚಿಮ ದಿಕ್ಕಿನಲ್ಲಿ ಯಾವ ಪರ್ವತ ಶ್ರೇಣಿ ಇದೆ?','ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದ ಪಶ್ಚಿಮ ದಿಕ್ಕಿನಲ್ಲಿ ಸಹ್ಯಾದ್ರಿ ಪರ್ವತ ಶ್ರೇಣಿ (ಪಶ್ಚಿಮ ಘಟ್ಟ) ಇದೆ.'],
+  ['ಮಹಾರಾಷ್ಟ್ರದ ಪ್ರಮುಖ ಆಹಾರಧಾನ್ಯ ಬೆಳೆಗಳು ಯಾವುವು?','ಭತ್ತ, ಜೋಳ, ಸಜ್ಜೆ, ಗೋಧಿ, ಮೆಕ್ಕೆಜೋಳ ಮತ್ತು ದ್ವಿದಳ ಧಾನ್ಯಗಳು ಮಹಾರಾಷ್ಟ್ರದ ಪ್ರಮುಖ ಆಹಾರಧಾನ್ಯ ಬೆಳೆಗಳು.']],
+ ii:[['ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದ ಆಡಳಿತ ವಿಭಾಗಗಳು ಎಷ್ಟಿವೆ? ಅವುಗಳ ಹೆಸರು ಬರೆಯಿರಿ.','ಆಡಳಿತದ ಅನುಕೂಲಕ್ಕಾಗಿ ಮಹಾರಾಷ್ಟ್ರವನ್ನು <b>ಆರು</b> ವಿಭಾಗಗಳನ್ನಾಗಿ ಮಾಡಲಾಗಿದೆ: (೧) ಕೊಂಕಣ (೨) ಪುಣೆ (೩) ನಾಶಿಕ್ (೪) ಛತ್ರಪತಿ ಸಂಭಾಜಿನಗರ (೫) ಅಮರಾವತಿ (೬) ನಾಗಪುರ.'],
+  ['ಮಹಾರಾಷ್ಟ್ರ ರಾಜ್ಯದ ಗಡಿ ಯಾವ ಯಾವ ರಾಜ್ಯಗಳೊಂದಿಗೆ ಸೇರಿದೆ? ಅವುಗಳನ್ನು ಬರೆಯಿರಿ.','ಉತ್ತರಕ್ಕೆ <b>ಗುಜರಾತ್ ಮತ್ತು ಮಧ್ಯಪ್ರದೇಶ</b>, ಪೂರ್ವಕ್ಕೆ <b>ಛತ್ತೀಸ್‌ಗಢ</b>, ದಕ್ಷಿಣಕ್ಕೆ <b>ತೆಲಂಗಾಣ, ಕರ್ನಾಟಕ ಮತ್ತು ಗೋವಾ</b> ಈ ರಾಜ್ಯಗಳೊಂದಿಗೆ ಮಹಾರಾಷ್ಟ್ರದ ಗಡಿ ಸೇರಿದೆ. ಪಶ್ಚಿಮಕ್ಕೆ ಅರಬ್ಬಿ ಸಮುದ್ರವಿದೆ.'],
+  ['ರಾಜ್ಯದ ಅಣೆಕಟ್ಟುಗಳ ಮಹತ್ವ ಬರೆಯಿರಿ.','ಅಣೆಕಟ್ಟುಗಳಿಂದ ಮಳೆನೀರು ಸಂಗ್ರಹವಾಗುತ್ತದೆ. ಆ ನೀರನ್ನು ಕುಡಿಯಲು, ಬೇಸಾಯಕ್ಕೆ ನೀರಾವರಿಗಾಗಿ (ನೀರಾವರಿ ಬೇಸಾಯ), ಉದ್ಯಮಗಳಿಗಾಗಿ ಮತ್ತು ವಿದ್ಯುತ್ ಉತ್ಪಾದನೆಗಾಗಿ ಬಳಸಲಾಗುತ್ತದೆ. ಅಣೆಕಟ್ಟುಗಳಿಂದ ಪ್ರವಾಹ ನಿಯಂತ್ರಣವಾಗುತ್ತದೆ ಮತ್ತು ಬೇಸಿಗೆಯಲ್ಲೂ ನೀರು ಸಿಗುತ್ತದೆ.'],
+  ['ಹಬ್ಬ-ಸಮಾರಂಭಗಳಲ್ಲಿ ಬಳಸುವ ವಾದ್ಯಗಳು ಯಾವುವು?','ಡೋಲು, ತಾಶಾ, ಹಾರ್ಮೋನಿಯಂ, ತಬಲಾ, ಸಂಬಳ, ಸನಾಯಿ, ತಾಳ, ಮೃದಂಗ, ಹಲಗೆ, ತಾರಪಾ, ಡೋಲಕ್, ಘಂಟೆ, ಶಂಖ ಇತ್ಯಾದಿ ವಾದ್ಯಗಳನ್ನು ಹಬ್ಬ-ಸಮಾರಂಭಗಳಲ್ಲಿ ಬಳಸಲಾಗುತ್ತದೆ.'],
+  ['ರಾಜ್ಯದ ಕಾಡುಗಳಲ್ಲಿ ವೈವಿಧ್ಯ ಏಕೆ ಇದೆ?','ರಾಜ್ಯದಲ್ಲಿ ಮಳೆ ಎಲ್ಲೆಡೆ ಒಂದೇ ಪ್ರಮಾಣದಲ್ಲಿ ಬೀಳುವುದಿಲ್ಲ. ಕಾಡುಗಳ ಹಂಚಿಕೆ ಮಳೆಯ ಹಂಚಿಕೆಯ ಮೇಲೆ ಅವಲಂಬಿತ – ಹೆಚ್ಚು ಮಳೆಯಲ್ಲಿ ನಿತ್ಯಹರಿದ್ವರ್ಣ, ಮಧ್ಯಮ ಮಳೆಯಲ್ಲಿ ಅರೆ ನಿತ್ಯಹರಿದ್ವರ್ಣ ಮತ್ತು ಎಲೆ ಉದುರುವ, ಕಡಿಮೆ ಮಳೆಯಲ್ಲಿ ಪೊದೆ ಮತ್ತು ಮುಳ್ಳಿನ ಕಾಡುಗಳು, ಹಾಗೂ ಕರಾವಳಿಯ ಉಪ್ಪು ನೀರಿನಲ್ಲಿ ಕಾಂಡ್ಲಾ ಕಾಡುಗಳು. ಆದ್ದರಿಂದ ಕಾಡುಗಳಲ್ಲಿ ವೈವಿಧ್ಯ ಕಂಡುಬರುತ್ತದೆ.']],
+ ee:[['ಸೌರಶಕ್ತಿ','ಜೈವಿಕ ಶಕ್ತಿ',[['ಶಕ್ತಿ ಯಾವುದರಿಂದ?','ಸೂರ್ಯನ ಬೆಳಕು ಮತ್ತು ಶಾಖದಿಂದ','ಪ್ರಾಣಿಗಳ ಮಲ ಮತ್ತು ಜೈವಿಕ ತ್ಯಾಜ್ಯ ಪದಾರ್ಥಗಳಿಂದ (ತರಗೆಲೆ, ಸಿಪ್ಪೆ)'],['ಉದಾಹರಣೆ','ಧುಳೆ ಜಿಲ್ಲೆಯ ಸಾಕ್ರಿ ಸೌರ ವಿದ್ಯುತ್ ಯೋಜನೆ, ಸೌರ ದೀಪಗಳು','ಗೋಬರ್ ಗ್ಯಾಸ್ (ಜೈವಿಕ ಅನಿಲ) ಯೋಜನೆ'],['ಲಭ್ಯತೆ','ಸೂರ್ಯನ ಬೆಳಕು ಇದ್ದಾಗ (ಹಗಲಿನಲ್ಲಿ)','ತ್ಯಾಜ್ಯ ಪದಾರ್ಥಗಳು ಇದ್ದಾಗ ಯಾವಾಗಲೂ']]],
+  ['ನಿತ್ಯಹರಿದ್ವರ್ಣ ಕಾಡುಗಳು','ಪೊದೆ-ಮುಳ್ಳಿನ ಕಾಡುಗಳು',[['ಮಳೆ','೩೦೦೦ ಮಿ.ಮೀ.ಗಿಂತ ಹೆಚ್ಚು','೬೦೦ ಮಿ.ಮೀ.ಗಿಂತ ಕಡಿಮೆ'],['ಪ್ರದೇಶ','ಸಹ್ಯಾದ್ರಿಯ ದಕ್ಷಿಣ ಭಾಗ','ಕಡಿಮೆ ಮಳೆಯ (ಮಳೆ ನೆರಳಿನ) ಪ್ರದೇಶ'],['ವೈಶಿಷ್ಟ್ಯ','ಅನೇಕ ವಿಧದ ಮರಗಳು; ವರ್ಷವಿಡೀ ಹಸಿರು','ನೀರು ಕಡಿಮೆಯಾಗದಿರಲು ಎಲೆಗಳು ಚಿಕ್ಕ ಮತ್ತು ಮುಳ್ಳಿನಂತಿವೆ'],['ಉದಾಹರಣೆಗಳು','ನಾಗಸಂಪಿಗೆ, ನೇರಳೆ, ಹಲಸು, ಬೆತ್ತ, ಬಿದಿರು','ಜಾಲಿ, ಬೋರೆ, ಪಾಪಾಸುಕಳ್ಳಿ, ಕಗ್ಗಲಿ']]]],
+ uu:[['ರಾಯಗಡ',['ಅಕ್ಕಿ (ಭತ್ತ)','ಕಿತ್ತಳೆ','ಹತ್ತಿ'],0,'ಅಕ್ಕಿ (ಭತ್ತ), ತೆಂಗು, ಮಾವು'],['ಸೊಲ್ಲಾಪುರ',['ಜೋಳ ಮತ್ತು ದಾಳಿಂಬೆ','ಚಿಕ್ಕೂ ಹಣ್ಣು','ಅನ್ನ'],0,'ಜೋಳ, ದಾಳಿಂಬೆ, ಕಬ್ಬು'],['ಜಲಗಾಂವ್',['ಬಾಳೆಹಣ್ಣು','ಗೇರುಬೀಜ','ಕಿತ್ತಳೆ'],0,'ಬಾಳೆ, ಹತ್ತಿ'],['ನಾಗಪುರ',['ಮಾವು','ಕಿತ್ತಳೆ','ತೆಂಗಿನಕಾಯಿ'],1,'ಕಿತ್ತಳೆ'],['ರತ್ನಾಗಿರಿ',['ಜೋಳ','ಬಾಳೆಹಣ್ಣು','ಮಾವು ಮತ್ತು ಗೇರು'],2,'ಮಾವು (ಹಾಪೂಸ್), ಗೇರು, ಭತ್ತ']],
+ forts:[['ಶಿವನೇರಿ','ಪುಣೆ'],['ಸಾಲ್ಹೇರ್','ನಾಶಿಕ್'],['ಲೋಹಗಡ','ಪುಣೆ'],['ಖಾಂದೇರಿ','ರಾಯಗಡ'],['ರಾಯಗಡ','ರಾಯಗಡ'],['ರಾಜಗಡ','ಪುಣೆ'],['ಪ್ರತಾಪಗಡ','ಸಾತಾರಾ'],['ಸುವರ್ಣದುರ್ಗ','ರತ್ನಾಗಿರಿ'],['ಪನ್ಹಾಳಾ','ಕೊಲ್ಲಾಪುರ'],['ವಿಜಯದುರ್ಗ','ಸಿಂಧುದುರ್ಗ'],['ಸಿಂಧುದುರ್ಗ','ಸಿಂಧುದುರ್ಗ']],
+ oo:'ಇಷ್ಟದ ಪದಾರ್ಥಗಳು (ಉದಾ.): ಬೇಳೆಸಾರು-ಅನ್ನ, ಚಪಾತಿ-ಪಲ್ಯ, ರೊಟ್ಟಿ, ಅವಲಕ್ಕಿ, ಉಪ್ಪಿಟ್ಟು, ಇಡ್ಲಿ, ಖಿಚಡಿ, ಹಣ್ಣುಗಳು, ಲಡ್ಡು, ಹಾಲು.<br>ಪೌಷ್ಟಿಕ ಪದಾರ್ಥಗಳು ಮತ್ತು ಕಾರಣಗಳು: <b>ರೊಟ್ಟಿ, ಬೇಳೆ, ಸೊಪ್ಪು ತರಕಾರಿಗಳು, ಹಣ್ಣುಗಳು, ಹಾಲು, ಮೊಟ್ಟೆ, ಶೇಂಗಾ</b> – ಇವುಗಳಿಂದ ದೇಹಕ್ಕೆ ಶಕ್ತಿ, ಪ್ರೋಟೀನ್, ಜೀವಸತ್ವಗಳು ಮತ್ತು ಖನಿಜಗಳು ಸಿಗುತ್ತವೆ; ಅದರಿಂದ ದೇಹ ಬೆಳೆಯುತ್ತದೆ ಮತ್ತು ರೋಗಗಳ ವಿರುದ್ಧ ಹೋರಾಡುವ ಶಕ್ತಿ ಸಿಗುತ್ತದೆ. (ಚಿಪ್ಸ್, ತಂಪು ಪಾನೀಯಗಳು, ಜಂಕ್ ಫುಡ್ ಕಡಿಮೆ ತಿನ್ನಬೇಕು.)'
+};
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function fTab(e){return `<div style="overflow-x:auto"><table class="w" style="font-size:14px"><tr><th>ವಿಷಯ</th><th>${e[0]}</th><th>${e[1]}</th></tr>${e[2].map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</table></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಅಭ್ಯಾಸ – ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ</h2>
+ <h3>(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</h3>${pickGame('swa',SW.a,'swa')}
+ <h3>(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಇ) ಸಂಕ್ಷಿಪ್ತವಾಗಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.ii.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಈ) ವ್ಯತ್ಯಾಸ ಸ್ಪಷ್ಟಪಡಿಸಿ.</h3>${SW.ee.map((e,i)=>`<div class="sq"><b>${i+1}) ${e[0]} ಮತ್ತು ${e[1]}</b><textarea placeholder="ವ್ಯತ್ಯಾಸ ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${fTab(e)}</div></div>`).join('')}
+ <h3>(ಉ) ಜಿಲ್ಲೆಗಳ ಪ್ರಮುಖ ಬೆಳೆಗಳು / ಹಣ್ಣುಗಳು ಯಾವುವು ಎಂದು ಆಯ್ಕೆಮಾಡಿ.</h3>${pickGame('swu',SW.uu.map(x=>[`📍 <b>${x[0]}</b> – ಪ್ರಮುಖ ಬೆಳೆ / ಹಣ್ಣು?`,x[1],x[2],'('+x[3]+')']),'swu')}
+ <h3>(ಊ) ನಿಮಗೆ ಇಷ್ಟವಾದ ಆಹಾರ ಪದಾರ್ಥಗಳ ಪಟ್ಟಿ ಮಾಡಿ. ಆರೋಗ್ಯಕ್ಕೆ ಪೌಷ್ಟಿಕವಾದ ಪದಾರ್ಥಗಳನ್ನು ಏಕೆ ತಿನ್ನಬೇಕು ಎಂದು ಬರೆಯಿರಿ.</h3>${sq('ಇಷ್ಟದ ಪದಾರ್ಥಗಳು ಮತ್ತು ಪೌಷ್ಟಿಕ ಪದಾರ್ಥಗಳನ್ನು ಏಕೆ ತಿನ್ನಬೇಕು?',SW.oo,1)}
+ <h3>(ಎ) ನಿಮಗೆ ಇಷ್ಟವಾದ ಯಾವುದಾದರೂ ಒಂದು ವಾದ್ಯದ ಚಿತ್ರ ಬರೆಯಿರಿ.</h3><div class="tap">🎨 ನೋಟ್‌ಬುಕ್‌ನಲ್ಲಿ ಚಿತ್ರ ಬರೆಯಿರಿ. (PDF ಇದರಲ್ಲಿ ಚಿತ್ರಕ್ಕಾಗಿ ಚೌಕಟ್ಟು ನೀಡಲಾಗಿದೆ.)</div>
+ <div class="know"><b class="h">🏰 ಚಟುವಟಿಕೆ – ೧೧ ವಿಶ್ವ ಪರಂಪರೆಯ ಕೋಟೆಗಳು ಮತ್ತು ಜಿಲ್ಲೆಗಳು</b><div style="overflow-x:auto"><table class="w" style="font-size:14px"><tr><th>ಕ್ರ.</th><th>ಕೋಟೆ</th><th>ಜಿಲ್ಲೆ</th></tr>${SW.forts.map((f,i)=>`<tr><td>${i+1}</td><td>${f[0]}</td><td>${f[1]}</td></tr>`).join('')}</table></div></div>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>ಶಿಕ್ಷಕರೊಂದಿಗೆ ಪರಿಸರದ ಹೊಲಕ್ಕೆ ಭೇಟಿ ನೀಡಿ. ಹಂಗಾಮಿಗೆ ತಕ್ಕಂತೆ ಬೆಳೆಗಳ ವೈವಿಧ್ಯದ ಬಗ್ಗೆ ರೈತರೊಂದಿಗೆ ಚರ್ಚಿಸಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಕೊಂಕಣದಲ್ಲಿ ತುಂಬಾ ಮಳೆ ಬೀಳುತ್ತದೆ, ಆದರೂ ಬೇಸಿಗೆಯಲ್ಲಿ ಅಲ್ಲಿ ಕೆಲವು ಕಡೆ ನೀರಿನ ಕೊರತೆ ಕಂಡುಬರುತ್ತದೆ. ಹೀಗೇಕೆ ಆಗುತ್ತಿರಬಹುದು?','ಇಳಿಜಾರು, ಭೂಮಿ ಮತ್ತು ನೀರು ಹರಿದು ಹೋಗುವುದು…','ಕೊಂಕಣದ ಭೂಮಿ ಇಳಿಜಾರಾಗಿದ್ದು ಮಳೆನೀರು ತಕ್ಷಣ ಹರಿದು ಸಮುದ್ರ ಸೇರುತ್ತದೆ. ಜಂಬಿಟ್ಟಿಗೆ ಕಲ್ಲಿನಲ್ಲಿ ನೀರು ಹೆಚ್ಚು ಸಂಗ್ರಹವಾಗುವುದಿಲ್ಲ. ಆದ್ದರಿಂದ ನೀರು ತಡೆಯುವುದು, ಸಂಗ್ರಹಿಸುವುದು (ಒಡ್ಡುಗಳು, ಬಾವಿ ಮರುಪೂರಣ) ಅಗತ್ಯ.'],
+['ಸಹ್ಯಾದ್ರಿ ಇಲ್ಲದಿದ್ದರೆ ಕೊಂಕಣ ಮತ್ತು ಪ್ರಸ್ಥಭೂಮಿಯ ಮಳೆಯ ಮೇಲೆ ಏನು ಪರಿಣಾಮವಾಗುತ್ತಿತ್ತು?','ಗಾಳಿ ಬೆಟ್ಟಕ್ಕೆ ತಡೆಯಾಗುತ್ತದೆ…','ಸಹ್ಯಾದ್ರಿಯಿಂದಾಗಿ ತೇವಾಂಶಭರಿತ ಗಾಳಿ ತಡೆಯಲ್ಪಟ್ಟು ಕೊಂಕಣದಲ್ಲಿ ತುಂಬಾ ಮಳೆ ಬೀಳುತ್ತದೆ, ಆದರೆ ಬೆಟ್ಟದ ಆಚೆಗಿನ ಪ್ರಸ್ಥಭೂಮಿಯಲ್ಲಿ ಕಡಿಮೆ ಮಳೆಯ (ಮಳೆ ನೆರಳಿನ) ಪ್ರದೇಶ ನಿರ್ಮಾಣವಾಗುತ್ತದೆ. ಸಹ್ಯಾದ್ರಿ ಇಲ್ಲದಿದ್ದರೆ ಕೊಂಕಣದಲ್ಲಿ ಇಷ್ಟು ಹೆಚ್ಚು ಮಳೆ ಬೀಳುತ್ತಿರಲಿಲ್ಲ ಮತ್ತು ಪ್ರಸ್ಥಭೂಮಿಯಲ್ಲಿ ಸ್ವಲ್ಪ ಹೆಚ್ಚು ಮಳೆ ಬೀಳುತ್ತಿತ್ತು; ಆದ್ದರಿಂದ ಅಲ್ಲಿನ ಕಾಡುಗಳು ಮತ್ತು ಬೆಳೆಗಳೂ ಬೇರೆಯಾಗಿರುತ್ತಿದ್ದವು.'],
+['ಸೋಲಾಪುರ ಭಾಗದಲ್ಲಿ ಭತ್ತ ಬೆಳೆಯದೆ ಜೋಳ ಹೆಚ್ಚು ಏಕೆ ಬೆಳೆಯುತ್ತಾರೆ?','ಮಳೆ ಎಷ್ಟು ಬೀಳುತ್ತದೆ?','ಸೋಲಾಪುರ ಕಡಿಮೆ ಮಳೆಯ ಪ್ರದೇಶ. ಭತ್ತಕ್ಕೆ ತುಂಬಾ ನೀರು ಬೇಕು, ಆದರೆ ಜೋಳ-ಸಜ್ಜೆ ಕಡಿಮೆ ನೀರಿನಲ್ಲಿ ಬೆಳೆಯುತ್ತವೆ. ಆದ್ದರಿಂದ ಅಲ್ಲಿ ಜೋಳ ಹೆಚ್ಚು ಬೆಳೆಯುತ್ತಾರೆ.'],
+['ಕಾಂಡ್ಲಾ ಕಾಡುಗಳನ್ನು ಕಡಿದರೆ ಕರಾವಳಿಯ ಮೇಲೆ ಏನು ಪರಿಣಾಮವಾಗುತ್ತದೆ?','ಅಲೆಗಳು, ಮಣ್ಣು, ಮೀನುಗಳು…','ಕಾಂಡ್ಲಾ ಅಲೆಗಳಿಂದ ತೀರವನ್ನು ರಕ್ಷಿಸುತ್ತದೆ, ಮಣ್ಣನ್ನು ಹಿಡಿದಿಟ್ಟುಕೊಳ್ಳುತ್ತದೆ ಮತ್ತು ಮೀನು, ಏಡಿಗಳಿಗೆ ಆಶ್ರಯ ನೀಡುತ್ತದೆ. ಅದನ್ನು ಕಡಿದರೆ ತೀರದ ಸವೆತವಾಗುತ್ತದೆ, ಚಂಡಮಾರುತದ ಅಪಾಯ ಹೆಚ್ಚುತ್ತದೆ ಮತ್ತು ಮೀನುಗಾರಿಕೆಯ ಮೇಲೆ ಪರಿಣಾಮವಾಗುತ್ತದೆ.'],
+['ಮಾಳಢೋಕ ಪಕ್ಷಿ ಅಪರೂಪವಾಗುತ್ತಿದೆ. ಅದನ್ನು ಉಳಿಸಲು ನಾವು ಏನು ಮಾಡಬಹುದು?','ಅದರ ವಾಸಸ್ಥಾನ – ಹುಲ್ಲುಗಾವಲು, ಮುಳ್ಳಿನ ಪ್ರದೇಶ.','ಅದರ ವಾಸಸ್ಥಾನವಾದ ಹುಲ್ಲುಗಾವಲು ಮತ್ತು ಮುಳ್ಳಿನ ಪ್ರದೇಶಗಳನ್ನು ಕಾಪಾಡುವುದು, ಅಭಯಾರಣ್ಯದಲ್ಲಿ ಬೇಟೆ ಮತ್ತು ತೊಂದರೆ ನೀಡದಿರುವುದು, ಜನರಲ್ಲಿ ಜಾಗೃತಿ ಮೂಡಿಸುವುದು, ಕೀಟನಾಶಕಗಳ ಅತಿಬಳಕೆ ತಪ್ಪಿಸುವುದು.'],
+['ಖನಿಜಗಳು ಮುಗಿದುಹೋಗುವ ಸಂಪತ್ತು. ಅದು ದೀರ್ಘಕಾಲ ಉಳಿಯಲು ಏನು ಮಾಡಬೇಕು?','ಮರುಬಳಕೆ…','ಖನಿಜಗಳನ್ನು ಮಿತವಾಗಿ ಬಳಸಬೇಕು, ಕಬ್ಬಿಣ-ಅಲ್ಯೂಮಿನಿಯಂ-ಗಾಜಿನಂತಹ ವಸ್ತುಗಳನ್ನು ಮರುಬಳಕೆ ಮಾಡಬೇಕು, ಕಲ್ಲಿದ್ದಲಿನ ಬದಲು ಸೌರ ಮತ್ತು ಜೈವಿಕ ಶಕ್ತಿಯನ್ನು ಹೆಚ್ಚು ಬಳಸಬೇಕು.'],
+['ಕಲ್ಲಿದ್ದಲಿನ ಬದಲು ಸೌರಶಕ್ತಿ ಬಳಸುವುದರ ಪ್ರಯೋಜನಗಳು ಯಾವುವು?','ಮಾಲಿನ್ಯ, ಮುಗಿದುಹೋಗುವುದು…','ಸೌರಶಕ್ತಿ ಎಂದಿಗೂ ಮುಗಿಯದ್ದು, ಅದು ಮಾಲಿನ್ಯ ಮಾಡುವುದಿಲ್ಲ, ಹೊಗೆ ಆಗುವುದಿಲ್ಲ. ಕಲ್ಲಿದ್ದಲು ಮುಗಿದುಹೋಗುವುದು ಮತ್ತು ಸುಡುವುದರಿಂದ ಗಾಳಿ ಮಲಿನವಾಗುತ್ತದೆ.'],
+['ಸಮೃದ್ಧಿ ಮಹಾಮಾರ್ಗದಿಂದ ರೈತರಿಗೆ ಯಾವ ಪ್ರಯೋಜನವಾಗಬಹುದು?','ಸರಕು ಬೇಗ ಮಾರುಕಟ್ಟೆಗೆ…','ಕೃಷಿ ಉತ್ಪನ್ನಗಳು (ಹಣ್ಣು, ತರಕಾರಿ) ಕಡಿಮೆ ಸಮಯದಲ್ಲಿ ದೊಡ್ಡ ನಗರಗಳ ಮಾರುಕಟ್ಟೆ ತಲುಪುತ್ತವೆ, ಸರಕು ಹಾಳಾಗುವುದಿಲ್ಲ, ಒಳ್ಳೆಯ ಬೆಲೆ ಸಿಗುತ್ತದೆ, ಉದ್ಯಮ ಮತ್ತು ಉದ್ಯೋಗ ಹೆಚ್ಚುತ್ತವೆ.'],
+['ರಾಹೀಬಾಯಿ ಪೋಪೆರೆ ದೇಶೀ ಬೀಜಗಳನ್ನು ಕಾಪಾಡುತ್ತಾರೆ. ದೇಶೀ ಬೀಜಗಳನ್ನು ಕಾಪಾಡುವುದು ಏಕೆ ಮುಖ್ಯ?','ಮುಂದಿನ ಪೀಳಿಗೆಗೆ…','ದೇಶೀ ಬೀಜಗಳು ಸ್ಥಳೀಯ ಹವಾಮಾನಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುತ್ತವೆ, ಕಡಿಮೆ ನೀರು ಮತ್ತು ಕಡಿಮೆ ಗೊಬ್ಬರದಲ್ಲಿ ಬೆಳೆಯುತ್ತವೆ, ಅವುಗಳ ರುಚಿ ಮತ್ತು ಪೋಷಕಾಂಶ ಮೌಲ್ಯ ಚೆನ್ನಾಗಿರುತ್ತದೆ. ಅವು ನಾಶವಾದರೆ ಮತ್ತೆ ಸಿಗುವುದಿಲ್ಲ, ಆದ್ದರಿಂದ ಅವನ್ನು ಕಾಪಾಡುವುದು ಅಗತ್ಯ.'],
+['ಕೋಟೆ ನಮ್ಮ ವಿಶ್ವ ಪರಂಪರೆ. ಕೋಟೆಗಳಿಗೆ ಭೇಟಿ ನೀಡುವಾಗ ನೀವು ಯಾವ ಕಾಳಜಿ ವಹಿಸುವಿರಿ?','ಸ್ವಚ್ಛತೆ, ಗೋಡೆಯ ಮೇಲೆ ಬರೆಯುವುದು…','ಕಸ ಹಾಕದಿರುವುದು, ಗೋಡೆಗಳ ಮೇಲೆ ಹೆಸರು ಬರೆಯದಿರುವುದು, ಕಲ್ಲು ತೆಗೆಯದಿರುವುದು, ಪ್ಲಾಸ್ಟಿಕ್ ಒಯ್ಯದಿರುವುದು, ಸುರಕ್ಷಿತ ದಾರಿಯಲ್ಲೇ ತಿರುಗಾಡುವುದು ಮತ್ತು ಕೋಟೆಯ ಇತಿಹಾಸ ತಿಳಿದುಕೊಳ್ಳುವುದು.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೧೧ : ನನ್ನ ಮಹಾರಾಷ್ಟ್ರ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${SUM.map(x=>`<li>${x}</li>`).join('')}</ol>
+ <p class="pq">ಕಾಡುಗಳ ವಿಧಗಳು</p><table class="w"><tr><th>ಕಾಡು</th><th>ಮಳೆ (ಮಿ.ಮೀ)</th><th>ಪ್ರದೇಶ</th><th>ಉದಾಹರಣೆಗಳು</th></tr>${FOR.map(f=>`<tr><td>${f[0]}</td><td>${f[1]}</td><td class="l">${f[2]}</td><td class="l">${f[4]}</td></tr>`).join('')}</table>
+ <p class="pq">ಖನಿಜಗಳು, ಜಿಲ್ಲೆಗಳು ಮತ್ತು ಉಪಯೋಗಗಳು</p><table class="w"><tr><th>ಖನಿಜ</th><th>ಜಿಲ್ಲೆಗಳು</th><th>ಉಪಯೋಗ</th></tr>${MIN.map(m=>`<tr><td>${m[0]}</td><td class="l">${m[1]}</td><td class="l">${m[2]}</td></tr>`).join('')}</table>
+ <p class="pq">ಯುನೆಸ್ಕೋ ವಿಶ್ವ ಪರಂಪರೆ – ೧೧ ಕೋಟೆಗಳು</p><div>${SW.forts.map(f=>`${f[0]} (${f[1]})`).join(', ')}</div>
+ <p class="pq">ಸ್ಫೂರ್ತಿದಾಯಕ ವ್ಯಕ್ತಿಗಳು</p><div>ರಾಹೀಬಾಯಿ ಪೋಪೆರೆ – ಕೊಂಭಾಳಣೆ (ಅಕೋಲೆ, ಅಹಿಲ್ಯಾನಗರ), ದೇಶೀ ಬೀಜಗಳ ರಕ್ಷಕರು, ಪದ್ಮಶ್ರೀ ೨೦೨೦ • ದಾದಾಜೀ ಖೋಬ್ರಾಗಡೆ – ಭತ್ತದ ಹೊಸ ತಳಿಗಳ ಸಂಶೋಧಕರು.</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</div>${SW.a.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div><div class="po">${x[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ <div class="pq">(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(1)}</div>`).join('')}
+ <div class="pq">(ಇ) ಸಂಕ್ಷಿಪ್ತವಾಗಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.ii.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ <div class="pq">(ಈ) ವ್ಯತ್ಯಾಸ ಸ್ಪಷ್ಟಪಡಿಸಿ.</div>${SW.ee.map((e,i)=>`<div class="avoid"><div>${i+1}) ${e[0]} ಮತ್ತು ${e[1]}</div><table class="w"><tr><th style="width:24%">ವಿಷಯ</th><th>${e[0]}</th><th>${e[1]}</th></tr>${e[2].map(()=>`<tr><td style="height:10mm"></td><td></td><td></td></tr>`).join('')}</table></div>`).join('')}
+ <div class="avoid"><div class="pq">(ಉ) ಕೆಳಗಿನ ಕೋಷ್ಟಕದಲ್ಲಿ ಜಿಲ್ಲೆಗಳ ಪ್ರಮುಖ ಬೆಳೆಗಳು / ಹಣ್ಣುಗಳನ್ನು ಬರೆಯಿರಿ.</div><table class="w"><tr><th style="width:12%">ಕ್ರ.ಸಂ.</th><th>ಜಿಲ್ಲೆ</th><th>ಪ್ರಮುಖ ಬೆಳೆಗಳು / ಹಣ್ಣುಗಳು</th></tr>${SW.uu.map((x,i)=>`<tr><td>${i+1}</td><td>${x[0]}</td><td style="height:9mm"></td></tr>`).join('')}</table></div>
+ <div class="avoid"><div class="pq">(ಊ) ನಿಮಗೆ ಇಷ್ಟವಾದ ಆಹಾರ ಪದಾರ್ಥಗಳ ಪಟ್ಟಿ ಮಾಡಿ. ಆರೋಗ್ಯಕ್ಕೆ ಪೌಷ್ಟಿಕವಾದ ಪದಾರ್ಥಗಳನ್ನು ಏಕೆ ತಿನ್ನಬೇಕು ಎಂದು ಬರೆಯಿರಿ.</div>${lines(3)}</div>
+ <div class="avoid"><div class="pq">(ಎ) ನಿಮಗೆ ಇಷ್ಟವಾದ ಯಾವುದಾದರೂ ಒಂದು ವಾದ್ಯದ ಚಿತ್ರ ಬರೆಯಿರಿ.</div><div style="height:55mm;border:1.2px solid #000;border-radius:3mm"></div></div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>(ಅ)</b> ${SW.a.map((x,i)=>`${i+1}) ${x[1][x[2]]}`).join('; ')}</div><div><b>(ಆ)</b><ol>${SW.aa.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಇ)</b><ol>${SW.ii.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಈ)</b> ${SW.ee.map((e,i)=>`${i+1}) ${e[2].map(r=>`${r[0]}: ${e[0]} – ${r[1]}; ${e[1]} – ${r[2]}`).join(' | ')}`).join('<br>')}</div><div><b>(ಉ)</b> ${SW.uu.map(x=>`${x[0]} – ${x[3]}`).join('; ')}</div><div><b>(ಊ)</b> ${SW.oo}</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>ಇ. ೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೧೧</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

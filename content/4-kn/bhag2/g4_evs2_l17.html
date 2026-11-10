@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ ನೇ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ – ಪಾಠ ೧೭ ಗಡಕೋಟೆಗಳ ಮತ್ತು ನೌಕಾಪಡೆಯ ನಿರ್ವಹಣೆ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೧೭ : ಗಡಕೋಟೆಗಳ ಮತ್ತು ನೌಕಾಪಡೆಯ ನಿರ್ವಹಣೆ</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">🏰⚓ ಕೋಟೆಗಳ ಪ್ರಕಾರಗಳು, ಕಿಲ್ಲೇದಾರ-ಸಬನೀಸ-ಕಾರಖಾನೀಸ, ಫಿರಂಗಿಗಳು, ಸ್ವರಾಜ್ಯದ ನೌಕಾಪಡೆ, ಗೂಢಚಾರ ಇಲಾಖೆ ಮತ್ತು ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೧೦ ಮೆಟ್ಟಿಲುಗಳು · ಕೋಟೆಗಳನ್ನು ಗುರುತಿಸಿ · ಕೆಲಸಗಳನ್ನು ಹೊಂದಿಸಿ · ನೌಕಾಪಡೆ ನಿರ್ಮಿಸಿ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೫೦ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ · ಪಾಠ ೧೭ : ಗಡಕೋಟೆಗಳ ಮತ್ತು ನೌಕಾಪಡೆಯ ನಿರ್ವಹಣೆ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🚩','⚓','🏰'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ನೌಕಾಪಡೆ ನಿರ್ಮಿಸಿ ---------- */
+const JHZ=[['ಗುರಾಬ','🚢'],['ಗಲಬತ','⛵'],['ಪಾಲ','⛵'],['ಮಚವಾ','🛶'],['ಹೆಸರು','🚣'],['ದೋಣಿ','🛶']];
+let ARMD=[];
+function armAdd(i){if(ARMD.includes(i))return;ARMD.push(i);say(JHZ[i][0]);drawArmd();if(ARMD.length==6)award('armd','ನೌಕಾಪಡೆ ಸಜ್ಜು!')}
+function drawArmd(){const b=$('armdBox');if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">${JHZ.map((j,i)=>`<button class="btn sm ${ARMD.includes(i)?'gr':'ln'}" onclick="armAdd(${i})">${j[1]} ${j[0]}</button>`).join('')}</div>
+ <div style="position:relative;height:110px;margin-top:8px;border-radius:12px;overflow:hidden;background:linear-gradient(#bae6fd 0 45%,#0ea5e9 45%)">
+  <div style="position:absolute;left:6px;top:6px;font-size:12px">🏭 ಹಡಗು ನಿರ್ಮಾಣ ಕಾರ್ಖಾನೆ</div>
+  <div style="position:absolute;right:6px;top:4px;font-size:24px">🏰<div style="font-size:9px">ಜಲದುರ್ಗ</div></div>
+  <div style="position:absolute;left:0;right:0;top:46px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center">${ARMD.map(i=>`<div style="text-align:center;font-size:24px;animation:pop .4s">${JHZ[i][1]}<div style="font-size:10px;color:#fff;font-weight:700">${JHZ[i][0]}</div></div>`).join('')}</div></div>
+ <div class="msg ${ARMD.length==6?'ok':'in'}">${ARMD.length==6?'⚓ ಸ್ವರಾಜ್ಯದ <b>ನೌಕಾಪಡೆ</b> ಸಜ್ಜು! ಈಗ ಸಾಗರ ಶತ್ರುಗಳ ಬಂದೋಬಸ್ತು ಆಗುತ್ತದೆ!':'ಹಡಗುಗಳ ಹೆಸರುಗಳ ಮೇಲೆ ಚಿಟಿಕೆ ಹೊಡೆದು ನೌಕಾಪಡೆ ನಿರ್ಮಿಸಿ! ('+'೦೧೨೩೪೫೬'[ARMD.length]+'/೬)'}</div>`}
+
+/* ---------- ಫಿರಂಗಿಗೆ ಮೇಣದ ಲೇಪ ---------- */
+let TOF=0;
+function drawTof(){const b=$('tofBox');if(!b)return;
+ b.innerHTML=`<div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
+ <div style="text-align:center"><div style="font-size:14px">🌧️🌧️ ಮಳೆಗಾಲ</div><svg viewBox="0 0 120 60" style="width:140px"><rect x="10" y="22" width="90" height="18" rx="9" fill="${TOF?'#57534e':'#b45309'}"/><circle cx="25" cy="48" r="10" fill="#78350f"/><circle cx="80" cy="48" r="10" fill="#78350f"/>${TOF?'<rect x="10" y="22" width="90" height="18" rx="9" fill="#fef3c7" opacity=".45"/>':'<circle cx="40" cy="30" r="4" fill="#ea580c"/><circle cx="62" cy="27" r="3" fill="#ea580c"/><circle cx="85" cy="33" r="3" fill="#ea580c"/>'}</svg>
+ <div style="font-size:12px">${TOF?'✨ ಮೇಣದ ಲೇಪ – ತುಕ್ಕು ಇಲ್ಲ!':'🟠 ತುಕ್ಕು ಹಿಡಿಯುತ್ತಿದೆ!'}</div></div></div>
+ <div style="text-align:center">${TOF?'<button class="btn sm ln" onclick="TOF=0;drawTof()">🔄 ಮತ್ತೆ</button>':'<button class="btn or" onclick="TOF=1;drawTof();award(\'tof\',\'ಫಿರಂಗಿ ಸುರಕ್ಷಿತ!\')">🕯️ ಫಿರಂಗಿಗೆ ಮೇಣದ ಲೇಪ ಹಚ್ಚಿ</button>'}</div>`}
+
+/* ---------- ಸಾರಾಂಶ ---------- */
+const SUM=['ನಿರ್ವಹಣಾ ಕೌಶಲ ಎಂದರೆ ನಿಶ್ಚಿತ ಗುರಿ ಸಾಧಿಸಲು ಕೈಗೆತ್ತಿಕೊಂಡ ಕಾರ್ಯವನ್ನು ಶಿಸ್ತುಬದ್ಧ ರೀತಿಯಲ್ಲಿ ಮಾಡುವುದು; ಶಿವರಾಯರ ನಿರ್ವಹಣಾ ಕೌಶಲ ಯುದ್ಧಗಳಲ್ಲಿ ಮತ್ತು ರಾಜ್ಯಾಡಳಿತದಲ್ಲಿ ಕಾಣುತ್ತದೆ.',
+ '‘ಇಡೀ ರಾಜ್ಯದ ಸಾರ ಅದು ದುರ್ಗ’ – ಎಂದು ‘ಆಜ್ಞಾಪತ್ರ’ ಈ ಶಿವಕಾಲೀನ ಗ್ರಂಥದಲ್ಲಿ ಗಡಕೋಟೆಗಳ ಮಹತ್ವ ಹೇಳಲಾಗಿದೆ.',
+ 'ಶಿವರಾಯರು ವನದುರ್ಗ, ಗಿರಿದುರ್ಗ ಮತ್ತು ಜಲದುರ್ಗ (ಜಂಜಿರಾ) ಹೀಗೆ ಮೂರೂ ಪ್ರಕಾರದ ಕೋಟೆಗಳನ್ನು ಕಟ್ಟಿಸಿದರು; ಹಿರೋಜಿ ಇಂದುಲಕರ, ಅರ್ಜೋಜಿ ಯಾದವ ಈ ತಜ್ಞರ ಮೂಲಕ ರಾಜಗಡ, ಪ್ರತಾಪಗಡ, ಸಿಂಧುದುರ್ಗ ಮುಂತಾದ ಹೊಸ ಕೋಟೆಗಳನ್ನು ಕಟ್ಟಿಸಿದರು; ರಾಯಗಡವನ್ನು ಹೊಸದಾಗಿ ನಿರ್ಮಿಸಿದರು.',
+ 'ವಿಜಯದುರ್ಗ, ತೋರಣಾ, ರಾಂಗಣಾ ಮುಂತಾದ ಹಳೆಯ ಕೋಟೆಗಳ ದುರಸ್ತಿ ಮಾಡಿದರು; ಶಿವರಾಯರ ಬಳಿ ಸುಮಾರು ೩೦೦ ಕೋಟೆಗಳಿದ್ದವು.',
+ 'ಪ್ರತಿ ಕೋಟೆಯ ಮೇಲೆ ಕಿಲ್ಲೇದಾರ (ಹವಾಲದಾರ), ಸಬನೀಸ ಮತ್ತು ಕಾರಖಾನೀಸ ಈ ಅಧಿಕಾರಿಗಳು ಇರುತ್ತಿದ್ದರು; ಸಬನೀಸ ಮತ್ತು ಕಾರಖಾನೀಸ ಕಿಲ್ಲೇದಾರನ ಕೈಕೆಳಗೆ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದರು.',
+ 'ಫಿರಂಗಿಗಳನ್ನು ಕೋಟೆಗೋಡೆಯ ಮೇಲೆ ಮತ್ತು ಬುರುಜುಗಳ ಮೇಲೆ ಇಡುತ್ತಿದ್ದರು; ಪುರಂದರ, ಭೀಮಗಡ ಇಲ್ಲಿ ಫಿರಂಗಿಗಳ ಕಾರ್ಖಾನೆಗಳಿದ್ದವು; ಫಿರಂಗಿಗಳು ಕಬ್ಬಿಣ, ಹಿತ್ತಾಳೆ, ತಾಮ್ರ ಇವುಗಳಿಂದ ತಯಾರಾಗುತ್ತಿದ್ದವು; ತುಕ್ಕು ಹಿಡಿಯಬಾರದು ಎಂದು ಮೇಣದ ಲೇಪ ಹಚ್ಚುತ್ತಿದ್ದರು.',
+ 'ನೌಕಾಪಡೆ ಎಂದರೆ ಯುದ್ಧನೌಕೆಗಳ ಸಮೂಹ; ಇಂಗ್ಲಿಷರು, ಪೋರ್ಚುಗೀಸರು, ಸಿದ್ದಿಗಳು, ಡಚ್ಚರ ತೊಂದರೆಗೆ ಬಂದೋಬಸ್ತು ಮಾಡಲು ಶಿವರಾಯರು ಸ್ವತಂತ್ರ ನೌಕಾಪಡೆ ನಿರ್ಮಿಸಿದರು.',
+ 'ಹಡಗು ನಿರ್ಮಾಣದ ಕಾರ್ಖಾನೆಗಳನ್ನು ಸ್ಥಾಪಿಸಿದರು; ಸುವರ್ಣದುರ್ಗ, ವಿಜಯದುರ್ಗ ದುರಸ್ತಿ ಮಾಡಿದರು; ಮಾಲವಣ ಬಳಿ ಕುರಟೆ ದ್ವೀಪದಲ್ಲಿ ಸಿಂಧುದುರ್ಗ ಮತ್ತು ಮುಂಬೈ ಬಳಿ ಖಂದೇರಿ ಕೋಟೆ ಕಟ್ಟಿಸಿದರು.',
+ 'ನೌಕಾಪಡೆಯಲ್ಲಿ ಕೋಳಿ, ಭಂಡಾರಿ, ಆಗರಿ ಮುಂತಾದ ಸಮುದ್ರಯಾನಿ ಸೈನಿಕರು; ದೌಲತಖಾನ, ಮಾಯನಾಕ ಭಂಡಾರಿ, ಲಾಯ ಪಾಟೀಲ, ದರ್ಯಾಸಾರಂಗ, ತುಕೋಜಿ ಆಂಗ್ರೆ ಇವರು ಹೆಸರಾಂತ ನೌಕಾ ಯೋಧರು.',
+ 'ಮಧ್ಯಯುಗೀನ ಭಾರತದಲ್ಲಿ ಮೊದಲ ಸ್ವದೇಶೀ ನೌಕಾಪಡೆ ನಿರ್ಮಿಸಿದ್ದರಿಂದ ಶಿವಛತ್ರಪತಿಗಳನ್ನು ‘ಭಾರತೀಯ ನೌಕಾಪಡೆಯ ಜನಕ’ ಎನ್ನುತ್ತಾರೆ.',
+ 'ಬಹಿರ್ಜಿ ನಾಯಕ ಗೂಢಚಾರ ಇಲಾಖೆಯ ಮುಖ್ಯಸ್ಥ; ಗೂಢಚಾರರ ನಿಖರ ಮಾಹಿತಿಯ ಮೇಲೆ ದಾಳಿಯ ಯೋಜನೆ ರೂಪಿಸಲಾಗುತ್ತಿತ್ತು; ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರದಲ್ಲಿ ಸಹ್ಯಾದ್ರಿಯ ಕಾಡು, ಗುಡ್ಡಗಾಡು ಕೋಟೆಗಳು ಮತ್ತು ಪ್ರಜೆಗಳ ಬೆಂಬಲ ಉಪಯೋಗಕ್ಕೆ ಬಂದವು.',
+ 'ಶಿವರಾಯರ ಸೈನ್ಯ ಶಿಸ್ತುಬದ್ಧವಾಗಿತ್ತು – ಸ್ತ್ರೀಯರಿಗೆ ಗೌರವ, ಮದ್ಯ ಇಲ್ಲ, ಪ್ರಜೆಗಳಿಗೆ ತೊಂದರೆ ಇಲ್ಲ, ಲೂಟಿ ಇಲ್ಲ ಎಂಬ ಕಟ್ಟುನಿಟ್ಟಿನ ಎಚ್ಚರಿಕೆ ಇತ್ತು.'];
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+const L=[
+{h:'ನಿರ್ವಹಣಾ ಕೌಶಲ ಎಂದರೇನು?',s:'ಶಿವರಾಯರು ಅನೇಕ ಶತ್ರುಗಳನ್ನು ಮೀರಿ ಸ್ವರಾಜ್ಯವನ್ನು ಸ್ಥಾಪಿಸಿದರು. ಯುದ್ಧವಾಗಲಿ ಅಥವಾ ರಾಜ್ಯಾಡಳಿತವಾಗಲಿ, ಶಿವರಾಯರ ನಿರ್ವಹಣಾ ಕೌಶಲ ಎಲ್ಲ ಕ್ಷೇತ್ರಗಳಲ್ಲಿ ಕಾಣಲು ಸಿಗುತ್ತದೆ. ನಿರ್ವಹಣಾ ಕೌಶಲ ಎಂದರೆ ನಿಶ್ಚಿತ ಗುರಿ ಸಾಧಿಸಲು ಕೈಗೆತ್ತಿಕೊಂಡ ಕಾರ್ಯವನ್ನು ಶಿಸ್ತುಬದ್ಧ ರೀತಿಯಲ್ಲಿ ಮಾಡುವುದು. ಶಿವರಾಯರ ನಿರ್ವಹಣಾ ಕೌಶಲ ಅವರು ಜೀವನಪೂರ್ತಿ ಮಾಡಿದ ಯುದ್ಧಗಳಲ್ಲಿ ಕಂಡುಬರುವಂತೆ, ಅವರ ಒಟ್ಟು ರಾಜ್ಯಾಡಳಿತದಲ್ಲೂ ಕಾಣಲು ಸಿಗುತ್ತದೆ.',b:()=>`
+ <div class="pledge" style="text-align:center">📋 <b>ನಿರ್ವಹಣಾ ಕೌಶಲ</b> = <b>ನಿಶ್ಚಿತ ಗುರಿ</b> ಸಾಧಿಸಲು ಕೈಗೆತ್ತಿಕೊಂಡ ಕಾರ್ಯ <b>ಶಿಸ್ತುಬದ್ಧ ರೀತಿಯಲ್ಲಿ</b> ಮಾಡುವುದು.</div>
+ <div style="display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;font-size:14px;text-align:center;margin:6px 0">
+  <div class="tile op" style="min-width:70px">🎯<br>ಗುರಿ</div><span>➜</span><div class="tile op" style="min-width:70px">🗺️<br>ಯೋಜನೆ</div><span>➜</span><div class="tile op" style="min-width:70px">📏<br>ಶಿಸ್ತು</div><span>➜</span><div class="tile op" style="min-width:70px">🏆<br>ಯಶಸ್ಸು</div></div>
+ <h3>🏰 ಈ ಪಾಠದಲ್ಲಿ ಶಿವರಾಯರ ನಿರ್ವಹಣೆ ಎಲ್ಲಿ ಕಾಣುತ್ತದೆ?</h3>
+ <div class="g2"><div class="tile op" style="text-align:center"><div class="ic">🏰</div><div class="dd">ಗಡಕೋಟೆ</div></div><div class="tile op" style="text-align:center"><div class="ic">⚓</div><div class="dd">ನೌಕಾಪಡೆ</div></div><div class="tile op" style="text-align:center"><div class="ic">🕵️</div><div class="dd">ಗೂಢಚಾರ ಇಲಾಖೆ</div></div><div class="tile op" style="text-align:center"><div class="ic">🌳⚔️</div><div class="dd">ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರ</div></div></div>
+ <div class="msg in">🎒 ನಿಮ್ಮ ದಿನನಿತ್ಯದ ಜೀವನದಲ್ಲಿ ನಿರ್ವಹಣೆ: <b>ಶಾಲಾ ಬ್ಯಾಗನ್ನು ಹಿಂದಿನ ದಿನವೇ ತುಂಬಿಡುವುದು</b>, ಅಧ್ಯಯನದ ವೇಳಾಪಟ್ಟಿ, ಪ್ರವಾಸದ ಯೋಜನೆ!</div>`},
+{h:'ಗಡಕೋಟೆಗಳ ನಿರ್ಮಾಣ',s:'ಗಡಕೋಟೆ ಕೋಟೆಗಳ ಸಹಾಯದಿಂದ ಶಿವರಾಯರು ಸ್ವರಾಜ್ಯದ ರಕ್ಷಣೆ ಮಾಡಿದರು. ಇಡೀ ರಾಜ್ಯದ ಸಾರ ಅದು ದುರ್ಗ, ಈ ನಿಖರ ಮತ್ತು ಮಿತ ಮಾತುಗಳಲ್ಲಿ ಆಜ್ಞಾಪತ್ರ ಎಂಬ ಶಿವಕಾಲೀನ ಗ್ರಂಥದಲ್ಲಿ ದುರ್ಗಗಳ, ಅಂದರೆ ಗಡಕೋಟೆ ಕೋಟೆಗಳ ಮಹತ್ವ ಹೇಳಲಾಗಿದೆ. ಶಿವರಾಯರು ಯೌವನದಲ್ಲಿ ಸಹ್ಯಾದ್ರಿಯ ಪರ್ವತಶ್ರೇಣಿಗಳಲ್ಲಿ ಸುತ್ತಾಡಿದ್ದರು. ಸಹ್ಯಾದ್ರಿಯ ಮಡಿಲಲ್ಲಿ ನಿಂತಿರುವ ಗಡ-ದುರ್ಗಗಳನ್ನು ಅವರು ಅಸಂಖ್ಯ ಬಾರಿ ದಿಟ್ಟಿಸಿ ನೋಡಿದ್ದರು. ಸ್ವರಾಜ್ಯದ ರಕ್ಷಣೆಗಾಗಿ ಗಡಕೋಟೆಗಳ ಮಹತ್ವ ಅವರಿಗೆ ಅರಿವಾಗಿತ್ತು.',b:()=>`
+ <div class="pledge" style="text-align:center;font-size:20px">📜 “ಇಡೀ ರಾಜ್ಯದ ಸಾರ ಅದು <b>ದುರ್ಗ</b>”<br><small>– ‘<b>ಆಜ್ಞಾಪತ್ರ</b>’ (ಶಿವಕಾಲೀನ ಗ್ರಂಥ)</small></div>
+ <div class="know"><b class="h">💡 ಗೊತ್ತೇ?</b><br>ಶಿವಾಜಿ ಮಹಾರಾಜರ ಕಿರಿಯ ಪುತ್ರ <b>ಛತ್ರಪತಿ ರಾಜಾರಾಮ ಮಹಾರಾಜ</b> ಇವರ ಆಜ್ಞೆಯಂತೆ <b>ರಾಮಚಂದ್ರಪಂತ ಅಮಾತ್ಯ</b> ಇವರು ‘ಆಜ್ಞಾಪತ್ರ’ ಎಂಬ ಗ್ರಂಥ ಬರೆದಿದ್ದಾರೆ ಎಂದು ಭಾವಿಸಲಾಗಿದೆ. ಇದರಲ್ಲಿ ಶಿವಛತ್ರಪತಿಗಳ <b>ರಾಜನೀತಿಯ</b> ಸ್ಪಷ್ಟ ಪ್ರತಿಬಿಂಬ ಮೂಡಿದೆ.</div>
+ <div style="text-align:center;font-size:34px">⛰️🏰⛰️🏰⛰️</div><div class="key">ಶಿವರಾಯರು ಯೌವನದಲ್ಲಿ <b>ಸಹ್ಯಾದ್ರಿಯ ಪರ್ವತಶ್ರೇಣಿಗಳಲ್ಲಿ</b> ಸುತ್ತಾಡಿದರು; ಗಡ-ದುರ್ಗಗಳನ್ನು ಅಸಂಖ್ಯ ಬಾರಿ <b>ದಿಟ್ಟಿಸಿ ನೋಡಿದರು</b> ➜ ಸ್ವರಾಜ್ಯದ ರಕ್ಷಣೆಗಾಗಿ ಗಡಕೋಟೆಗಳ ಮಹತ್ವ <b>ಅರಿವಾಯಿತು</b>.</div>
+ <div class="tap">💡 <b>ದುರ್ಗ</b> = ಕೋಟೆ. <b>ಸಾರ</b> = ಮುಖ್ಯ ತಿರುಳು. <b>ದಿಟ್ಟಿಸಿ ನೋಡುವುದು</b> = ಸೂಕ್ಷ್ಮವಾಗಿ ನೋಡುವುದು. <b>ಅರಿವಾಗುವುದು</b> = ತಿಳಿಯುವುದು.</div>`},
+{h:'ಕೋಟೆಗಳ ಪ್ರಕಾರಗಳು',s:'ಶಿವರಾಯರು ವನದುರ್ಗ, ಗಿರಿದುರ್ಗ ಮತ್ತು ಜಲದುರ್ಗ ಈ ಮೂರೂ ಪ್ರಕಾರದ ಕೋಟೆಗಳನ್ನು ಕಟ್ಟಿಸಿದರು. ಜಲದುರ್ಗಗಳನ್ನು ಜಂಜಿರಾ ಎಂದೂ ಕರೆಯುತ್ತಾರೆ. ಅವರು ಹಿರೋಜಿ ಇಂದುಲಕರ ಮತ್ತು ಅರ್ಜೋಜಿ ಯಾದವ ಇಂತಹ ತಜ್ಞರ ಮೂಲಕ ರಾಜಗಡ, ಪ್ರತಾಪಗಡ, ಸಿಂಧುದುರ್ಗ ಮುಂತಾದ ಅನೇಕ ಹೊಸ ಕೋಟೆಗಳನ್ನು ಕಟ್ಟಿಸಿದರು. ಅದೇ ರೀತಿ ರಾಯಗಡ ಕೋಟೆಯನ್ನು ಹೊಸದಾಗಿ ನಿರ್ಮಿಸಿದರು. ಇಷ್ಟೇ ಅಲ್ಲ, ವಿಜಯದುರ್ಗ, ತೋರಣಾ, ರಾಂಗಣಾ ಮುಂತಾದ ಕೆಲವು ಹಳೆಯ ಕೋಟೆಗಳ ದುರಸ್ತಿ ಮಾಡಿದರು. ಶಿವರಾಯರ ಬಳಿ ಸುಮಾರು ಮುನ್ನೂರು ಕೋಟೆಗಳಿದ್ದವು.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="text-align:center"><div class="ic">🌳🏰</div><div class="tt">ವನದುರ್ಗ</div><div class="dd">ದಟ್ಟ ಕಾಡಿನಲ್ಲಿ</div></div>
+  <div class="tile op" style="text-align:center"><div class="ic">⛰️🏰</div><div class="tt">ಗಿರಿದುರ್ಗ</div><div class="dd">ಬೆಟ್ಟದ ಮೇಲೆ</div></div>
+  <div class="tile op" style="text-align:center"><div class="ic">🌊🏰</div><div class="tt">ಜಲದುರ್ಗ</div><div class="dd">ನೀರಿನಿಂದ ಸುತ್ತುವರಿದ – <b>‘ಜಂಜಿರಾ’</b></div></div>
+ </div>
+ <h3>🧩 ಕೋಟೆಗಳನ್ನು ಗುರುತಿಸಿ – ಗಿರಿದುರ್ಗ ಅಥವಾ ಜಲದುರ್ಗ?</h3>${sortGame('kp',[['ರಾಜಗಡ',0],['ಪ್ರತಾಪಗಡ',0],['ರಾಯಗಡ',0],['ತೋರಣಾ',0],['ಸಿಂಧುದುರ್ಗ',1],['ವಿಜಯದುರ್ಗ',1],['ಸುವರ್ಣದುರ್ಗ',1],['ಖಂದೇರಿ',1]],[['⛰️ ಗಿರಿದುರ್ಗ','or'],['🌊 ಜಲದುರ್ಗ','pu']],'kp')}
+ <div class="g2">
+  <div class="tile op"><div class="ic">🆕</div><div class="tt">ಹೊಸದಾಗಿ ಕಟ್ಟಿಸಿದರು</div><div class="dd">ರಾಜಗಡ, ಪ್ರತಾಪಗಡ, ಸಿಂಧುದುರ್ಗ… (ತಜ್ಞ: <b>ಹಿರೋಜಿ ಇಂದುಲಕರ, ಅರ್ಜೋಜಿ ಯಾದವ</b>); <b>ರಾಯಗಡದ</b> ಹೊಸದಾಗಿ ನಿರ್ಮಾಣ</div></div>
+  <div class="tile op"><div class="ic">🔧</div><div class="tt">ದುರಸ್ತಿ ಮಾಡಿದರು</div><div class="dd">ವಿಜಯದುರ್ಗ, ತೋರಣಾ, ರಾಂಗಣಾ</div></div>
+ </div>
+ <div class="key">🏰 ಶಿವರಾಯರ ಬಳಿ ಸುಮಾರು <b>೩೦೦</b> ಕೋಟೆಗಳಿದ್ದವು!</div>
+ <div class="tap">💡 <b>ತಜ್ಞ</b> = ಯಾವುದೋ ಕೆಲಸದಲ್ಲಿ ಪರಿಣತ ವ್ಯಕ್ತಿ. <b>ಮೂಲಕ</b> = ಇವರಿಂದ.</div>`,a:()=>drawGames()},
+{h:'ಗಡಗಳ ನಿರ್ವಹಣೆ',s:'ಗಡಕೋಟೆಗಳ ರಕ್ಷಣೆಯ ನಿಶ್ಚಿತ ವ್ಯವಸ್ಥೆಯನ್ನು ಮಹಾರಾಜರು ಮಾಡಿದ್ದರು. ಪ್ರತಿ ಗಡಕೋಟೆಯ ಮೇಲೆ ಕಿಲ್ಲೇದಾರ, ಸಬನೀಸ ಮತ್ತು ಕಾರಖಾನೀಸ ಈ ಅಧಿಕಾರಿಗಳನ್ನು ನೇಮಿಸಲಾಗುತ್ತಿತ್ತು. ಕಿಲ್ಲೇದಾರನ ಕೈಕೆಳಗೆ ಸಬನೀಸ ಮತ್ತು ಕಾರಖಾನೀಸ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದರು. ಕಿಲ್ಲೇದಾರ ಎಂದರೆ ಹವಾಲದಾರ, ಕೋಟೆಯ ರಕ್ಷಣೆ ಮತ್ತು ಆಡಳಿತ ನಡೆಸುವುದು, ಸಬನೀಸ ಮತ್ತು ಕಾರಖಾನೀಸರಿಗೆ ಆಜ್ಞೆ ನೀಡುವುದು, ಸರ್ಕಾರಿ ಪತ್ರ, ಹುಕುಂ ಮತ್ತು ಆದೇಶಗಳ ಪಾಲನೆ ಮಾಡುವುದು. ಸಬನೀಸ, ಗಡದ ಮೇಲಿನ ಜಮಾಖರ್ಚಿನ ಲೆಕ್ಕ ಇಡುವುದು, ಗಡದ ಮೇಲಿನ ಮತ್ತು ಗಡದ ಕೆಳಗಿನ ಪ್ರಜೆಗಳಿಂದ ತೆರಿಗೆ ವಸೂಲಿ ಮಾಡುವುದು, ಪತ್ರವ್ಯವಹಾರ ನಿಭಾಯಿಸುವುದು. ಕಾರಖಾನೀಸ, ಗಡದ ಮೇಲೆ ವಾಸಿಸುವ ಜನರಿಗೆ ಧಾನ್ಯ ಮತ್ತು ವಸ್ತುಗಳ ಪೂರೈಕೆ ಮಾಡುವುದು, ಯುದ್ಧದ ಸಮಯದಲ್ಲಿ ಫಿರಂಗಿಗಳಿಗೆ, ಬಂದೂಕುಗಳಿಗೆ ಬೇಕಾಗುವ ಮದ್ದುಗುಂಡಿನ ವ್ಯವಸ್ಥೆ ಮಾಡುವುದು, ಗಡ ಮತ್ತು ಗಡದ ಮೇಲಿನ ಕಟ್ಟಡಗಳ ಉಸ್ತುವಾರಿ ಮತ್ತು ದುರಸ್ತಿ ಮಾಡುವುದು.',b:()=>`
+ <div style="text-align:center"><div class="tile op" style="display:inline-block;min-width:150px">🛡️ <b>ಕಿಲ್ಲೇದಾರ (ಹವಾಲದಾರ)</b></div><div style="font-size:20px">⬇️ ಕೈಕೆಳಗೆ ⬇️</div>
+ <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><div class="tile op" style="min-width:120px">📒 <b>ಸಬನೀಸ</b></div><div class="tile op" style="min-width:120px">📦 <b>ಕಾರಖಾನೀಸ</b></div></div></div>
+ <h3>🧩 ಯಾರ ಕೆಲಸ? – ಹೊಂದಿಸಿ</h3>${sortGame('ad',[['🛡️ ಕೋಟೆಯ ರಕ್ಷಣೆ ಮತ್ತು ಆಡಳಿತ',0],['📢 ಸಬನೀಸ, ಕಾರಖಾನೀಸರಿಗೆ ಆಜ್ಞೆ ನೀಡುವುದು',0],['📜 ಸರ್ಕಾರಿ ಪತ್ರ, ಹುಕುಂ, ಆದೇಶಗಳ ಪಾಲನೆ',0],['🧮 ಜಮಾಖರ್ಚಿನ ಲೆಕ್ಕ ಇಡುವುದು',1],['💰 ಪ್ರಜೆಗಳಿಂದ ತೆರಿಗೆ ವಸೂಲಿ',1],['✉️ ಪತ್ರವ್ಯವಹಾರ ನಿಭಾಯಿಸುವುದು',1],['🌾 ಧಾನ್ಯ ಮತ್ತು ವಸ್ತುಗಳ ಪೂರೈಕೆ',2],['💣 ಮದ್ದುಗುಂಡಿನ ವ್ಯವಸ್ಥೆ',2],['🔧 ಕಟ್ಟಡಗಳ ಉಸ್ತುವಾರಿ ಮತ್ತು ದುರಸ್ತಿ',2]],[['ಕೋಟೆದಾರ','or'],['ಸಬನೀಸ','pu'],['ಕಾರಖಾನೀಸ','gr']],'ad')}
+ <div class="tap">💡 <b>ಜಮಾಖರ್ಚು</b> = ಬಂದ ಮತ್ತು ಖರ್ಚಾದ ಹಣ. <b>ವಸೂಲಿ</b> = ಸಂಗ್ರಹಿಸುವುದು. <b>ಪತ್ರವ್ಯವಹಾರ</b> = ಪತ್ರಗಳ ವಿನಿಮಯ. <b>ಉಸ್ತುವಾರಿ</b> = ಕಾಳಜಿ ವಹಿಸುವುದು.</div>`,a:()=>drawGames()},
+{h:'ಫಿರಂಗಿಗಳು ಮತ್ತು ಮದ್ದುಗುಂಡು',s:'ಶಿವರಾಯರ ಕಾಲದಲ್ಲಿ ಶತ್ರುವಿನಿಂದ ಗಡಕೋಟೆಗಳನ್ನು ರಕ್ಷಿಸಲು ಚಿಕ್ಕದೊಡ್ಡ ಫಿರಂಗಿಗಳನ್ನು ಬಳಸಲಾಗುತ್ತಿತ್ತು. ಈ ಫಿರಂಗಿಗಳನ್ನು ಕೋಟೆಗಳ ಕೋಟೆಗೋಡೆಯ ಮೇಲೆ ಮತ್ತು ಬುರುಜುಗಳ ಮೇಲೆ ಇಡಲಾಗುತ್ತಿತ್ತು. ಪುರಂದರ, ಭೀಮಗಡದಂತಹ ಕೆಲವು ಗಡಗಳ ಮೇಲೆ ಫಿರಂಗಿಗಳನ್ನು ತಯಾರಿಸುವ ಕಾರ್ಖಾನೆಗಳೂ ಇದ್ದವು. ಕಬ್ಬಿಣ, ಹಿತ್ತಾಳೆ, ತಾಮ್ರ ಮುಂತಾದ ಲೋಹಗಳಿಂದ ಫಿರಂಗಿಗಳನ್ನು ತಯಾರಿಸಲಾಗುತ್ತಿತ್ತು. ಮಳೆಗಾಲದ ದಿನಗಳಲ್ಲಿ ಗಡದ ಮೇಲಿನ ಫಿರಂಗಿಗಳಿಗೆ ತುಕ್ಕು ಹಿಡಿಯಬಾರದು ಎಂದು ಅವುಗಳಿಗೆ ಮೇಣದ ಲೇಪ ಹಚ್ಚಲಾಗುತ್ತಿತ್ತು. ಫಿರಂಗಿಗಳಲ್ಲಿ ಶತ್ರುವಿನ ಮೇಲೆ ಮಾರಾ ಮಾಡಲು ಕಬ್ಬಿಣದ, ಕಲ್ಲಿನ ಮತ್ತು ಕಲಪಿ ಗುಂಡುಗಳು, ಇವುಗಳಲ್ಲಿ ಸೀಸದ ಗುಂಡುಗಳಿರುತ್ತಿದ್ದವು, ಇವುಗಳನ್ನು ಬಳಸುತ್ತಿದ್ದರು. ಈ ಫಿರಂಗಿಗಳನ್ನು ಹಾರಿಸಲು ಸ್ಫೋಟಕ ಮದ್ದು ಬಳಸಲಾಗುತ್ತಿತ್ತು.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">🏰</div><div class="tt">ಎಲ್ಲಿ ಇಡುತ್ತಿದ್ದರು?</div><div class="dd">ಕೋಟೆಗಳ <b>ಕೋಟೆಗೋಡೆಯ ಮೇಲೆ</b> ಮತ್ತು <b>ಬುರುಜುಗಳ ಮೇಲೆ</b></div></div>
+  <div class="tile op"><div class="ic">🏭</div><div class="tt">ಕಾರ್ಖಾನೆಗಳು</div><div class="dd"><b>ಪುರಂದರ, ಭೀಮಗಡ</b> ಮುಂತಾದ ಗಡಗಳಲ್ಲಿ</div></div>
+  <div class="tile op"><div class="ic">⚙️</div><div class="tt">ಲೋಹ</div><div class="dd">ಕಬ್ಬಿಣ, ಹಿತ್ತಾಳೆ, ತಾಮ್ರ</div></div>
+  <div class="tile op"><div class="ic">⚫</div><div class="tt">ಗುಂಡುಗಳು</div><div class="dd">ಕಬ್ಬಿಣದ, ಕಲ್ಲಿನ ಮತ್ತು <b>ಕಲಪಿ</b> (ಒಳಗೆ ಸೀಸದ ಗುಂಡುಗಳು); ಹಾರಿಸಲು <b>ಸ್ಫೋಟಕ ಮದ್ದು</b></div></div>
+ </div>
+ <h3>🕯️ ಚರ್ಚಿಸಿ: ಫಿರಂಗಿಗಳಿಗೆ ತುಕ್ಕು ಹಿಡಿಯಬಾರದು ಎಂದರೆ?</h3><div id="tofBox"></div>
+ <div class="tap">💡 <b>ತುಕ್ಕು</b> = ಕಬ್ಬಿಣದ ಮೇಲೆ ತೇವದಿಂದ ಏರುವ ಕೆಂಪು ಪದರ. <b>ಮೇಣ</b> = ನೀರು ಒಳಗೆ ಹೋಗಲು ಬಿಡದ ಮೃದು ವಸ್ತು. <b>ಸೀಸ</b> = ಒಂದು ಭಾರ ಲೋಹ.</div>`,a:()=>drawTof()},
+{h:'ಸ್ವರಾಜ್ಯದ ನೌಕಾಪಡೆ',s:'ನೌಕಾಪಡೆ ಎಂದರೆ ಯುದ್ಧನೌಕೆಗಳ ಸಮೂಹ. ಇಂಗ್ಲಿಷರು, ಪೋರ್ಚುಗೀಸರು, ಸಿದ್ದಿಗಳು, ಡಚ್ಚರ ಬಳಿ ಪ್ರಬಲ ನೌಕಾದಳ ಇತ್ತು. ಅವರಲ್ಲಿ ಕೆಲವರು ಸಮುದ್ರತೀರದಲ್ಲಿರುವ ಹಳ್ಳಿಗಳನ್ನು ಲೂಟಿ ಮಾಡುತ್ತಿದ್ದರು. ಅಲ್ಲಿನ ಜನರಿಗೆ ಕಿರುಕುಳ ನೀಡುತ್ತಿದ್ದರು. ಶಿವರಾಯರು ಈ ಸಾಗರ ಶತ್ರುಗಳ ಶಾಶ್ವತ ಬಂದೋಬಸ್ತಿಗಾಗಿ ಸ್ವತಂತ್ರ ನೌಕಾಪಡೆ ನಿರ್ಮಿಸಿದರು. ಶಿವರಾಯರು ಚಿಕ್ಕದೊಡ್ಡ ಹಡಗುಗಳು, ದೋಣಿಗಳನ್ನು ತಯಾರಿಸುವ ಕಾರ್ಖಾನೆಗಳನ್ನು ಸ್ಥಾಪಿಸಿದರು. ಸಮುದ್ರದ ಹಳೆಯ ಕೋಟೆಗಳನ್ನು ಗೆದ್ದು ವಶಪಡಿಸಿಕೊಂಡರು. ಸುವರ್ಣದುರ್ಗ, ವಿಜಯದುರ್ಗದಂತಹ ಜಲದುರ್ಗಗಳನ್ನು ಅವರು ದುರಸ್ತಿ ಮಾಡಿದರು. ಶಿವರಾಯರು ಮಾಲವಣ ಬಳಿ ಕುರಟೆ ಎಂಬ ದ್ವೀಪದಲ್ಲಿ ಸಿಂಧುದುರ್ಗ ಎಂಬ ಹೊಸ ಜಲದುರ್ಗ ಕಟ್ಟಿಸಿದರು. ಹಾಗೆಯೇ ಮುಂಬೈ ಬಳಿ ಖಂದೇರಿ ಕೋಟೆ ಕಟ್ಟಿಸಿದರು.',b:()=>`
+ <div class="key">⚓ <b>ನೌಕಾಪಡೆ</b> = ಯುದ್ಧನೌಕೆಗಳ ಸಮೂಹ. ಸಾಗರ ಶತ್ರು: <b>ಇಂಗ್ಲಿಷರು, ಪೋರ್ಚುಗೀಸರು, ಸಿದ್ದಿಗಳು, ಡಚ್ಚರು</b> – ಕರಾವಳಿಯ ಹಳ್ಳಿಗಳ <b>ಲೂಟಿ</b>, ಜನರ <b>ಕಿರುಕುಳ</b>.</div>
+ <h3>🚢 ನೌಕಾಪಡೆ ನಿರ್ಮಿಸಿ!</h3><div id="armdBox"></div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">🏝️🏰</div><div class="tt">ಸಿಂಧುದುರ್ಗ (ಹೊಸ)</div><div class="dd"><b>ಮಾಲವಣ ಬಳಿ ಕುರಟೆ</b> ದ್ವೀಪದಲ್ಲಿ</div></div>
+  <div class="tile op"><div class="ic">🏰🌊</div><div class="tt">ಖಂದೇರಿ (ಹೊಸ)</div><div class="dd"><b>ಮುಂಬೈ ಬಳಿ</b></div></div>
+  <div class="tile op"><div class="ic">🔧</div><div class="tt">ದುರಸ್ತಿ</div><div class="dd"><b>ಸುವರ್ಣದುರ್ಗ, ವಿಜಯದುರ್ಗ</b></div></div>
+ </div>
+ <div class="tap">💡 <b>ಹೇಳಿ ನೋಡೋಣ:</b> ಸ್ವತಂತ್ರ ಭಾರತದ ನೌಕಾದಳದ ಹಡಗುಗಳ ಹೆಸರುಗಳನ್ನು ಹುಡುಕಿ (ಉದಾ. ಐಎನ್ಎಸ್ ವಿಕ್ರಾಂತ).</div>`,a:()=>drawArmd()},
+{h:'ಭಾರತೀಯ ನೌಕಾಪಡೆಯ ಜನಕ',s:'ಸ್ವರಾಜ್ಯದ ನೌಕಾಪಡೆಯಲ್ಲಿ ಕೋಳಿ, ಭಂಡಾರಿ, ಆಗರಿ ಮುಂತಾದ ವಿವಿಧ ಸಮುದ್ರಯಾನಿ ಜಾತಿ-ಧರ್ಮಗಳ ಸೈನಿಕರಿದ್ದರು. ದೌಲತಖಾನ, ಮಾಯನಾಕ ಭಂಡಾರಿ, ಲಾಯ ಪಾಟೀಲ, ದರ್ಯಾಸಾರಂಗ, ತುಕೋಜಿ ಆಂಗ್ರೆ ಮುಂತಾದ ಹೆಸರಾಂತ ನೌಕಾ ಯೋಧರು ಇದೇ ಕಾಲದಲ್ಲಿ ಪ್ರಸಿದ್ಧಿಗೆ ಬಂದರು. ಮರಾಠರ ನೌಕಾಪಡೆಯಿಂದ ಇಂಗ್ಲಿಷರು, ಪೋರ್ಚುಗೀಸರು, ಸಿದ್ದಿಗಳು ಮತ್ತು ಡಚ್ಚರು ಎಂಬ ಶತ್ರುಗಳಿಗೆ ಅವರ ಬಗ್ಗೆ ಭಯ ಹುಟ್ಟತೊಡಗಿತು. ಆದ್ದರಿಂದ ಶತ್ರುಗಳಿಂದ ಸ್ವರಾಜ್ಯಕ್ಕೆ ಆಗುತ್ತಿದ್ದ ತೊಂದರೆ ಕಡಿಮೆಯಾಯಿತು. ಶಿವರಾಯರು ಸ್ವತಂತ್ರ ನೌಕಾಪಡೆಯ ನಿರ್ಮಾಣ ಮಾಡಿ ಅದರ ಬಲದಿಂದ ತಮ್ಮ ಸಾಗರ ಗಡಿಯನ್ನು ನಿಶ್ಚಿತಗೊಳಿಸಿ ಕರಾವಳಿಗೆ ಹೊಂದಿಕೊಂಡ ಪ್ರದೇಶದ ಮೇಲೆ ಒಡೆತನ ಸ್ಥಾಪಿಸಿದರು. ತಮ್ಮ ಸಮುದ್ರತೀರವನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸಿದರು. ಮಧ್ಯಯುಗೀನ ಕಾಲದ ಭಾರತದಲ್ಲಿ ಶಿವರಾಯರು ನಿರ್ಮಿಸಿದ ಇದು ಮೊದಲ ಸ್ವದೇಶೀ ನೌಕಾಪಡೆ. ಆದ್ದರಿಂದ ಶಿವಛತ್ರಪತಿಗಳಿಗೆ ಭಾರತೀಯ ನೌಕಾಪಡೆಯ ಜನಕ ಎಂದು ಉಚಿತ ಗೌರವ ನೀಡಲಾಗುತ್ತದೆ.',b:()=>`
+ <div class="tile op"><div class="ic">👥⚓</div><div class="tt">ನೌಕಾಪಡೆಯ ಸೈನಿಕರು</div><div class="dd"><b>ಕೋಳಿ, ಭಂಡಾರಿ, ಆಗರಿ</b> ಮುಂತಾದ ವಿವಿಧ ಸಮುದ್ರಯಾನಿ ಜಾತಿ-ಧರ್ಮಗಳ.</div></div>
+ <div class="tile op"><div class="ic">🦸</div><div class="tt">ಹೆಸರಾಂತ ನೌಕಾ ಯೋಧರು</div><div class="dd">ದೌಲತಖಾನ, ಮಾಯನಾಕ ಭಂಡಾರಿ, ಲಾಯ ಪಾಟೀಲ, ದರ್ಯಾಸಾರಂಗ, ತುಕೋಜಿ ಆಂಗ್ರೆ</div></div>
+ <div class="key">ಪರಿಣಾಮ: ಶತ್ರುಗಳಿಗೆ <b>ಹೆದರಿಕೆ</b> ➜ ಸ್ವರಾಜ್ಯಕ್ಕೆ ತೊಂದರೆ ಕಡಿಮೆ ➜ <b>ಸಾಗರ ಗಡಿ</b> ನಿಶ್ಚಿತ ➜ ಕರಾವಳಿಯಲ್ಲಿ <b>ಒಡೆತನ</b> ➜ ಸಮುದ್ರತೀರ <b>ಸುರಕ್ಷಿತ</b>.</div>
+ <div class="pledge" style="text-align:center">⚓ ಮಧ್ಯಯುಗೀನ ಭಾರತದ <b>ಮೊದಲ ಸ್ವದೇಶೀ ನೌಕಾಪಡೆ</b><br>ಆದ್ದರಿಂದ ಶಿವಛತ್ರಪತಿ = <b style="font-size:20px">‘ಭಾರತೀಯ ನೌಕಾಪಡೆಯ ಜನಕ’</b></div>
+ <div class="tap">💡 <b>ಸಮುದ್ರಯಾನಿ</b> = ಸಮುದ್ರದ ಮೇಲೆ ಕೆಲಸ ಮಾಡುವವರು. <b>ಹೆದರಿಕೆ</b> = ಭಯ. <b>ಗಡಿ</b> = ಸೀಮಾ. <b>ಒಡೆತನ</b> = ಮಾಲೀಕತ್ವ. <b>ಸ್ವಕೀಯ</b> = ನಮ್ಮ, ಸ್ವಂತ. <b>ಜನಕ</b> = ನಿರ್ಮಾತೃ.</div>`},
+{h:'ಗೂಢಚಾರ ಇಲಾಖೆ ಮತ್ತು ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರ',s:'ಶಿವರಾಯರ ಸೈನ್ಯ ವ್ಯವಸ್ಥೆಯಲ್ಲಿ ಗುಪ್ತ ಗೂಢಚಾರ ಇಲಾಖೆ ಇತ್ತು. ಬಹಿರ್ಜಿ ನಾಯಕ ಅವರ ಗೂಢಚಾರ ಇಲಾಖೆಯ ಮುಖ್ಯಸ್ಥನಾಗಿದ್ದ. ಮಹಾರಾಜರ ಸೂರತ್ ದಂಡಯಾತ್ರೆಯಂತಹ ದಂಡಯಾತ್ರೆಗಳು ಯಶಸ್ವಿಯಾಗಲು ಅವನು ತಂದ ನಿಖರ ಮಾಹಿತಿ ಬಹಳ ಸಹಾಯ ಮಾಡಿತು. ಶಿವರಾಯರ ಗೂಢಚಾರರು ಗುಟ್ಟಾಗಿ ಶತ್ರುವಿನ ಶಿಬಿರದಲ್ಲಿ ನುಗ್ಗಿ ಶಿಬಿರದ ಇಂಚಿಂಚೂ ಮಾಹಿತಿ ಹೊರತರುತ್ತಿದ್ದರು. ಯಾವುದೇ ದಾಳಿಗೆ ಮೊದಲು ಶಿವರಾಯರು ಗೂಢಚಾರರಿಂದ ಸುದ್ದಿ ಪಡೆಯುತ್ತಿದ್ದರು ಮತ್ತು ನಂತರವೇ ದಾಳಿಯ ಯೋಜನೆ ರೂಪಿಸುತ್ತಿದ್ದರು. ಶಿವಾಜಿ ಮಹಾರಾಜರ ಯುದ್ಧನೀತಿಯಲ್ಲಿ ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರಕ್ಕೆ ವಿಶೇಷ ಮಹತ್ವ ಇತ್ತು. ಗೆರಿಲ್ಲಾ ಯುದ್ಧ ತಂತ್ರದಲ್ಲಿ ತಮಗೆ ಅನುಕೂಲದ ಸ್ಥಳದಲ್ಲಿ ಮತ್ತು ಅನುಕೂಲದ ಸಮಯದಲ್ಲಿ ಶತ್ರುವಿನ ಮೇಲೆ ಅಚಾನಕ್ ಮತ್ತು ಅನಿರೀಕ್ಷಿತವಾಗಿ ದಾಳಿ ಮಾಡಿ, ಶತ್ರು ಅದರಿಂದ ಚೇತರಿಸಿಕೊಳ್ಳುವ ಮೊದಲೇ ಸೈನ್ಯ ಸುರಕ್ಷಿತ ಸ್ಥಳ ತಲುಪುತ್ತಿತ್ತು. ಈ ತಂತ್ರವನ್ನು ಅನುಸರಿಸುವಾಗ ಶಿವಾಜಿ ಮಹಾರಾಜರಿಗೆ ಸಹ್ಯಾದ್ರಿ ಪರ್ವತಶ್ರೇಣಿಗಳ ದಟ್ಟ ಕಾಡು, ಗುಡ್ಡಗಾಡು ಕೋಟೆಗಳು ಮತ್ತು ಪ್ರಜೆಗಳ ಬೆಂಬಲದ ಸಹಾಯ ಸಿಕ್ಕಿತು.',b:()=>`
+ <div class="tile op"><div class="ic">🕵️</div><div class="tt">ಬಹಿರ್ಜಿ ನಾಯಕ – ಗೂಢಚಾರ ಇಲಾಖೆಯ ಮುಖ್ಯಸ್ಥ</div><div class="dd">ಗೂಢಚಾರರು ಶತ್ರುವಿನ ಶಿಬಿರದಲ್ಲಿ ನುಗ್ಗಿ <b>ಇಂಚಿಂಚೂ‌ಸಂಪೂರ್ಣ</b> ಮಾಹಿತಿ ತರುತ್ತಿದ್ದರು. ಉದಾ. <b>ಸೂರತ್ ದಂಡಯಾತ್ರೆ</b> ಯಶಸ್ವಿಯಾಯಿತು. ಮೊದಲು <b>ಸುದ್ದಿಗಳು</b>, ನಂತರವೇ <b>ದಾಳಿಯ ಯೋಜನೆ</b>!</div></div>
+ <h3>🪜 ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರ – ಕ್ರಮ ಹಚ್ಚಿ</h3>${orderGame('gk',['📍 ಅನುಕೂಲದ ಸ್ಥಳ ಮತ್ತು ಸಮಯ ಆರಿಸುವುದು','⚡ ಶತ್ರುವಿನ ಮೇಲೆ ಅಚಾನಕ್, ಅನಿರೀಕ್ಷಿತ ದಾಳಿ','😵 ಶತ್ರು ಚೇತರಿಸಿಕೊಳ್ಳುವ ಮೊದಲೇ…','🏞️ ಸೈನ್ಯ ಸುರಕ್ಷಿತ ಸ್ಥಳ ತಲುಪುವುದು'],'gk')}
+ <div class="g2"><div class="tile op" style="text-align:center"><div class="ic">🌳</div><div class="dd">ದಟ್ಟ ಕಾಡು</div></div><div class="tile op" style="text-align:center"><div class="ic">⛰️🏰</div><div class="dd">ಗುಡ್ಡಗಾಡು ಕೋಟೆಗಳು</div></div><div class="tile op" style="text-align:center"><div class="ic">👥🤝</div><div class="dd">ಪ್ರಜೆಗಳ ಬೆಂಬಲ</div></div></div>
+ <div class="tap">💡 <b>ಗೂಢಚಾರರು</b> = ಗುಟ್ಟಾಗಿ ಮಾಹಿತಿ ತೆಗೆಯುವವನು. <b>ಇಂಚಿಂಚೂ‌ಸಂಪೂರ್ಣ</b> = ಸೂಕ್ಷ್ಮಾತಿಸೂಕ್ಷ್ಮ ಎಲ್ಲ. <b>ದಾಳಿ</b> = ದಾಳಿ. <b>ಅನುಕೂಲ</b> = ಅನುಕೂಲದ. <b>ಅನಿರೀಕ್ಷಿತ</b> = ಕಿಂಚಿತ್ತೂ ಯೋಚನೆ ಇಲ್ಲದಿರುವಾಗ.</div>`,a:()=>drawGames()},
+{h:'ಶಿಸ್ತುಬದ್ಧ ಸೈನ್ಯ ಮತ್ತು ಸಹಚರರು',s:'ಶಿವರಾಯರ ಸೈನ್ಯ ಶಿಸ್ತುಬದ್ಧವಾಗಿತ್ತು. ಅವರ ಸೈನಿಕರು ಸ್ತ್ರೀಯರಿಗೆ ಗೌರವ ನೀಡುತ್ತಿದ್ದರು. ಆದ್ದರಿಂದ ಸ್ತ್ರೀಯರ ರಕ್ಷಕರೆಂದು ಶಿವರಾಯರ ಕೀರ್ತಿ ಎಲ್ಲೆಡೆ ಹರಡಿತ್ತು. ಸೈನಿಕರು ಮದ್ಯ ಕುಡಿಯಬಾರದು, ಪ್ರಜೆಗಳಿಗೆ ತೊಂದರೆ ಕೊಡಬಾರದು, ಪ್ರಜೆಗಳನ್ನು ಲೂಟಿ ಮಾಡಬಾರದು ಎಂಬ ಕಟ್ಟುನಿಟ್ಟಿನ ಎಚ್ಚರಿಕೆ ಸೈನಿಕರಿಗೆ ಅವರದ್ದಿತ್ತು. ಶಿವರಾಯರ ಕೆಲವು ಸಹಚರರು, ಕಾನ್ಹೋಜಿ ಜೇಧೆ, ಬಾಜಿ ಪಾಸಲಕರ, ಫಿರಂಗೋಜಿ ನರಸಾಳೆ, ಪ್ರತಾಪರಾವ ಗುಜರ, ಸಿಧೋಜಿ ನಿಂಬಾಳಕರ ಮತ್ತು ಸಿದ್ದಿ ಹಿಲಾಲ.',b:()=>`
+ <h3>📏 ಸೈನಿಕರಿಗಾಗಿ ನಿಯಮಗಳು – ✔ ಮಾಡಬೇಕು / ✘ ಮಾಡಬಾರದು</h3>${sortGame('sn',[['🙏 ಸ್ತ್ರೀಯರಿಗೆ ಗೌರವ ನೀಡುವುದು',0],['📏 ಶಿಸ್ತು ಪಾಲಿಸುವುದು',0],['🍺 ಮದ್ಯ ಕುಡಿಯುವುದು',1],['😠 ಪ್ರಜೆಗಳಿಗೆ ತೊಂದರೆ ಕೊಡುವುದು',1],['💰 ಪ್ರಜೆಗಳನ್ನು ಲೂಟಿ ಮಾಡುವುದು',1]],[['✔ ಮಾಡಬೇಕು','gr'],['✘ ಕಟ್ಟುನಿಟ್ಟಿನ ನಿಷೇಧ','ln']],'sn')}
+ <h3>🤝 ಶಿವರಾಯರ ಕೆಲವು ಸಹಚರರು</h3>
+ <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center">${['ಕಾನ್ಹೋಜಿ ಜೇಧೆ','ಬಾಜಿ ಪಾಸಲಕರ','ಫಿರಂಗೋಜಿ ನರಸಾಳೆ','ಪ್ರತಾಪರಾವ ಗುಜರ','ಸಿಧೋಜಿ ನಿಂಬಾಳಕರ','ಸಿದ್ದಿ ಹಿಲಾಲ'].map(n=>`<span class="tile op" style="padding:6px 10px">🧔 ${n}</span>`).join('')}</div>
+ <div class="tap">💡 <b>ಶಿಸ್ತುಬದ್ಧ</b> = ನಿಯಮದಂತೆ ನಡೆಯುವವರು. <b>ಕಟ್ಟುನಿಟ್ಟಿನ ಎಚ್ಚರಿಕೆ</b> = ಕಠಿಣ ಸೂಚನೆ. <b>ಪ್ರಜೆಗಳು</b> = ಪ್ರಜೆ.</div>`,a:()=>drawGames()},
+{h:'ನಾವು ಇದನ್ನು ಅಧ್ಯಯನ ಮಾಡಿದೆವು',s:'ಈ ಪಾಠದಲ್ಲಿ ನಾವು ಶಿವರಾಯರ ಗಡಕೋಟೆ ಮತ್ತು ನೌಕಾಪಡೆಯ ನಿರ್ವಹಣೆಯನ್ನು ಅಧ್ಯಯನ ಮಾಡಿದೆವು. ಬನ್ನಿ ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ.',b:()=>`
+ <ul>${SUM.map(x=>`<li>${x}</li>`).join('')}</ul>
+ <div class="know"><b class="h">🛠️ ಮಾಡಿ ನೋಡಿ</b><br>ದೀಪಾವಳಿ ರಜೆಯಲ್ಲಿ ಸ್ನೇಹಿತರ ಸಹಾಯದಿಂದ ಒಂದು ಕೋಟೆಯ <b>ಪ್ರತಿಕೃತಿ</b> ತಯಾರಿಸಿ: ① ಸಾಮಗ್ರಿಗಳ ಪಟ್ಟಿ ② ಸ್ಥಳದ ಆಯ್ಕೆ ③ ನೀರಿನ, ಮನೆಗಳ ವ್ಯವಸ್ಥೆಯ ನೀಲನಕ್ಷೆ.</div>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>(ಅ) ‘ಶಿವರಾಯರ ಸಂದರ್ಶನದ ಆಯೋಜನೆ’ – ಈ ಸಂದರ್ಶನ ನಾಟಕವನ್ನು ತರಗತಿಯಲ್ಲಿ ಪ್ರಸ್ತುತಪಡಿಸಿ.<br>(ಆ) ಭಾರತೀಯ ನೌಕಾದಳದ ಯುದ್ಧನೌಕೆಗಳ ಬಗ್ಗೆ ಮಾಹಿತಿ ಪಡೆಯಿರಿ.<br>(ಇ) ವಿವಿಧ ರೀತಿಯ ಕೋಟೆಗಳಿಗೆ ಭೇಟಿ ನೀಡಿ ಮತ್ತು ಕೋಟೆಗಳ ವಿವಿಧ ಭಾಗಗಳ ಹೆಸರುಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಿ.</div>`,a:()=>award('end','ಪಾಠ ಪೂರ್ಣ! ಅಭಿನಂದನೆಗಳು!')}
+];
+let S=0;
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ನಿರ್ವಹಣಾ ಕೌಶಲ ಎಂದರೇನು?',['ನಿಶ್ಚಿತ ಗುರಿಗಾಗಿ ಕಾರ್ಯವನ್ನು ಶಿಸ್ತುಬದ್ಧ ರೀತಿಯಲ್ಲಿ ಮಾಡುವುದು','ಕೇವಲ ಯುದ್ಧ ಮಾಡುವುದು','ಕೆಲಸ ಮುಂದೂಡುವುದು','ಯಾವುದೇ ಕೆಲಸವನ್ನು ಹೇಗೋ ಮಾಡುವುದು'],0,'ಶಿಸ್ತುಬದ್ಧ ಕಾರ್ಯ.'],
+['ಶಿವರಾಯರ ನಿರ್ವಹಣಾ ಕೌಶಲ ಎಲ್ಲಿ ಕಾಣುತ್ತದೆ?',['ಯುದ್ಧಗಳಲ್ಲಿ ಮತ್ತು ರಾಜ್ಯಾಡಳಿತದಲ್ಲಿ','ಕೇವಲ ಮನೆಯಲ್ಲಿ','ಕೇವಲ ವ್ಯಾಪಾರದಲ್ಲಿ','ಎಲ್ಲಿಯೂ ಇಲ್ಲ'],0,'ಎಲ್ಲ ಕ್ಷೇತ್ರಗಳಲ್ಲಿ.'],
+['‘ಇಡೀ ರಾಜ್ಯದ ಸಾರ ಅದು ದುರ್ಗ’ ಎಂದು ಯಾವ ಗ್ರಂಥದಲ್ಲಿ ಹೇಳಲಾಗಿದೆ?',['ಆಜ್ಞಾಪತ್ರ','ಜ್ಞಾನೇಶ್ವರಿ','ದಾಸಬೋಧ','ಗಾಥಾ'],0,'ಆಜ್ಞಾಪತ್ರ.'],
+['‘ದುರ್ಗ’ ಎಂದರೇನು?',['ಕೋಟೆ','ನದಿ','ಹಡಗು','ನಗರ'],0,'ಕೋಟೆ.'],
+['‘ಆಜ್ಞಾಪತ್ರ’ ಯಾರು ಬರೆದರು ಎಂದು ಭಾವಿಸಲಾಗಿದೆ?',['ರಾಮಚಂದ್ರಪಂತ ಅಮಾತ್ಯ','ಗಾಗಾಭಟ್ಟ','ರಾಮದಾಸ ಸ್ವಾಮಿ','ಬಹಿರ್ಜಿ ನಾಯಕ'],0,'ರಾಮಚಂದ್ರಪಂತ ಅಮಾತ್ಯ.'],
+['‘ಆಜ್ಞಾಪತ್ರ’ ಯಾರ ಆಜ್ಞೆಯಂತೆ ಬರೆಯಲಾಯಿತು?',['ಛತ್ರಪತಿ ರಾಜಾರಾಮ ಮಹಾರಾಜ','ಸಂಭಾಜಿ ಮಹಾರಾಜ','ಶಹಾಜಿರಾಜೇ','ಜಿಜಾಮಾತೆ'],0,'ಶಿವರಾಯರ ಕಿರಿಯ ಪುತ್ರ ರಾಜಾರಾಮ ಮಹಾರಾಜ.'],
+['ಶಿವರಾಯರು ಯೌವನದಲ್ಲಿ ಯಾವ ಪರ್ವತಶ್ರೇಣಿಗಳಲ್ಲಿ ಸುತ್ತಾಡಿದರು?',['ಸಹ್ಯಾದ್ರಿ','ಹಿಮಾಲಯ','ಸಾತ್ಪುಡಾ','ಅರಾವಳಿ'],0,'ಸಹ್ಯಾದ್ರಿ.'],
+['ಶಿವರಾಯರು ಎಷ್ಟು ಪ್ರಕಾರದ ಕೋಟೆಗಳನ್ನು ಕಟ್ಟಿಸಿದರು?',['ಮೂರು','ಎರಡು','ನಾಲ್ಕು','ಐದು'],0,'ವನದುರ್ಗ, ಗಿರಿದುರ್ಗ, ಜಲದುರ್ಗ.'],
+['ಜಲದುರ್ಗಗಳನ್ನು ಇನ್ನೇನು ಕರೆಯುತ್ತಾರೆ?',['ಜಂಜಿರಾ','ಗಿರಿದುರ್ಗ','ವನದುರ್ಗ','ಬುರುಜು'],0,'ಜಂಜಿರಾ.'],
+['ಬೆಟ್ಟದ ಮೇಲೆ ಕಟ್ಟಿದ ಕೋಟೆಯನ್ನು ಏನು ಕರೆಯುತ್ತಾರೆ?',['ಗಿರಿದುರ್ಗ','ಜಲದುರ್ಗ','ವನದುರ್ಗ','ಭೂಕೋಟೆ'],0,'ಗಿರಿದುರ್ಗ.'],
+['ಶಿವರಾಯರು ಯಾವ ತಜ್ಞರ ಮೂಲಕ ಹೊಸ ಕೋಟೆಗಳನ್ನು ಕಟ್ಟಿಸಿದರು?',['ಹಿರೋಜಿ ಇಂದುಲಕರ ಮತ್ತು ಅರ್ಜೋಜಿ ಯಾದವ','ಬಹಿರ್ಜಿ ನಾಯಕ ಮತ್ತು ದೌಲತಖಾನ','ತಾನಾಜಿ ಮತ್ತು ಸೂರ್ಯಾಜಿ','ಗಾಗಾಭಟ್ಟ ಮತ್ತು ರಾಮಚಂದ್ರಪಂತ'],0,'ಹಿರೋಜಿ ಇಂದುಲಕರ, ಅರ್ಜೋಜಿ ಯಾದವ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಶಿವರಾಯರು ಹೊಸದಾಗಿ ಕಟ್ಟಿಸಿದ ಕೋಟೆ ಯಾವುದು?',['ಸಿಂಧುದುರ್ಗ','ತೋರಣಾ','ರಾಂಗಣಾ','ವಿಜಯದುರ್ಗ'],0,'ರಾಜಗಡ, ಪ್ರತಾಪಗಡ, ಸಿಂಧುದುರ್ಗ ಹೊಸ.'],
+['ಯಾವ ಕೋಟೆಯನ್ನು ಶಿವರಾಯರು ಹೊಸದಾಗಿ ನಿರ್ಮಿಸಿದರು?',['ರಾಯಗಡ','ತೋರಣಾ','ಪುರಂದರ','ಸಿಂಹಗಡ'],0,'ರಾಯಗಡ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವ ಹಳೆಯ ಕೋಟೆಯ ದುರಸ್ತಿ ಮಾಡಿದರು?',['ತೋರಣಾ','ಪ್ರತಾಪಗಡ','ಸಿಂಧುದುರ್ಗ','ಖಂದೇರಿ'],0,'ವಿಜಯದುರ್ಗ, ತೋರಣಾ, ರಾಂಗಣಾ.'],
+['ಶಿವರಾಯರ ಬಳಿ ಸುಮಾರು ಎಷ್ಟು ಕೋಟೆಗಳಿದ್ದವು?',['೩೦೦','೩೦','೩೦೦೦','೧೦೦'],0,'ಸುಮಾರು ೩೦೦.'],
+['ಪ್ರತಿ ಕೋಟೆಯ ಮೇಲೆ ಯಾವ ಅಧಿಕಾರಿಗಳು ಇರುತ್ತಿದ್ದರು?',['ಕೋಟೆದಾರ, ಸಬನೀಸ, ಕಾರಖಾನೀಸ','ಸೇನಾಪತಿ, ದೂತ, ಗೂಢಚಾರ','ಪುರೋಹಿತ, ವೈದ್ಯ, ಗಾಯಕ','ವ್ಯಾಪಾರಿ, ರೈತ, ಕುಶಲಕರ್ಮಿ'],0,'ಮೂರು ಅಧಿಕಾರಿಗಳು.'],
+['ಕಿಲ್ಲೇದಾರನನ್ನು ಇನ್ನೇನು ಕರೆಯುತ್ತಿದ್ದರು?',['ಹವಾಲದಾರ','ಸಬನೀಸ','ಸರನೋಬತ','ಪೇಶ್ವೆ'],0,'ಹವಾಲದಾರ.'],
+['ಸಬನೀಸ ಮತ್ತು ಕಾರಖಾನೀಸ ಯಾರ ಕೈಕೆಳಗೆ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದರು?',['ಕಿಲ್ಲೇದಾರನ','ಸಬನೀಸನ','ಗೂಢಚಾರನ','ಸೇನಾಪತಿಯ'],0,'ಕಿಲ್ಲೇದಾರನ.'],
+['ಕೋಟೆಯ ರಕ್ಷಣೆ ಮತ್ತು ಆಡಳಿತವನ್ನು ಯಾರು ನೋಡಿಕೊಳ್ಳುತ್ತಿದ್ದರು?',['ಕೋಟೆದಾರ','ಸಬನೀಸ','ಕಾರಖಾನೀಸ','ಗೂಢಚಾರರು'],0,'ಕೋಟೆದಾರ.'],
+['ಗಡದ ಜಮಾಖರ್ಚಿನ ಲೆಕ್ಕ ಯಾರು ಇಡುತ್ತಿದ್ದರು?',['ಸಬನೀಸ','ಕಾರಖಾನೀಸ','ಕೋಟೆದಾರ','ಸೈನಿಕ'],0,'ಸಬನೀಸ.'],
+['ಪ್ರಜೆಗಳಿಂದ ತೆರಿಗೆ ವಸೂಲಿ ಯಾರು ಮಾಡುತ್ತಿದ್ದರು?',['ಸಬನೀಸ','ಕಾರಖಾನೀಸ','ಗೂಢಚಾರರು','ಫಿರಂಗಿಗಾರ'],0,'ಸಬನೀಸ.'],
+['ಗಡದಲ್ಲಿ ಧಾನ್ಯ ಮತ್ತು ವಸ್ತುಗಳ ಪೂರೈಕೆ ಯಾರು ಮಾಡುತ್ತಿದ್ದರು?',['ಕಾರಖಾನೀಸ','ಸಬನೀಸ','ಕೋಟೆದಾರ','ವಕೀಲ'],0,'ಕಾರಖಾನೀಸ.'],
+['ಯುದ್ಧದ ಸಮಯದಲ್ಲಿ ಮದ್ದುಗುಂಡುಗಳ ವ್ಯವಸ್ಥೆ ಯಾರು ಮಾಡುತ್ತಿದ್ದರು?',['ಕಾರಖಾನೀಸ','ಸಬನೀಸ','ಪುರೋಹಿತ','ವ್ಯಾಪಾರಿ'],0,'ಕಾರಖಾನೀಸ.'],
+['ಗಡದ ಕಟ್ಟಡಗಳ ನಿರ್ವಹಣೆ ಮತ್ತು ದುರಸ್ತಿ ಯಾರು ಮಾಡುತ್ತಿದ್ದರು?',['ಕಾರಖಾನೀಸ','ಸಬನೀಸ','ಗೂಢಚಾರರು','ರೈತ'],0,'ಕಾರಖಾನೀಸ.'],
+['ಕೋಟೆಯ ಮೇಲೆ ಫಿರಂಗಿಗಳನ್ನು ಎಲ್ಲಿ ಇಡುತ್ತಿದ್ದರು?',['ಕೋಟೆಗೋಡೆಯ ಮೇಲೆ ಮತ್ತು ಬುರುಜುಗಳ ಮೇಲೆ','ಬಾವಿಯಲ್ಲಿ','ದೇವಾಲಯದಲ್ಲಿ','ನೆಲಮಾಳಿಗೆಯಲ್ಲಿ ಮಾತ್ರ'],0,'ಕೋಟೆಗೋಡೆ ಮತ್ತು ಬುರುಜು.'],
+['ಯಾವ ಗಡಗಳಲ್ಲಿ ಫಿರಂಗಿ ತಯಾರಿಸುವ ಕಾರ್ಖಾನೆಗಳಿದ್ದವು?',['ಪುರಂದರ, ಭೀಮಗಡ','ಸಿಂಧುದುರ್ಗ, ಖಂದೇರಿ','ರಾಯಗಡ, ತೋರಣಾ','ಜಿಂಜಿ, ವೇಲೂರು'],0,'ಪುರಂದರ, ಭೀಮಗಡ.'],
+['ಫಿರಂಗಿಗಳನ್ನು ಯಾವ ಲೋಹಗಳಿಂದ ಮಾಡುತ್ತಿದ್ದರು?',['ಕಬ್ಬಿಣ, ಹಿತ್ತಾಳೆ, ತಾಮ್ರ','ಚಿನ್ನ, ಬೆಳ್ಳಿ','ಅಲ್ಯೂಮಿನಿಯಂ','ಪ್ಲಾಸ್ಟಿಕ್'],0,'ಕಬ್ಬಿಣ, ಹಿತ್ತಾಳೆ, ತಾಮ್ರ.'],
+['ಮಳೆಗಾಲದಲ್ಲಿ ಫಿರಂಗಿಗಳು ತುಕ್ಕು ಹಿಡಿಯಬಾರದೆಂದು ಏನು ಮಾಡುತ್ತಿದ್ದರು?',['ಮೇಣದ ಲೇಪ ಹಚ್ಚುತ್ತಿದ್ದರು','ನೀರು ಸುರಿಯುತ್ತಿದ್ದರು','ಬಣ್ಣ ಹಚ್ಚುತ್ತಿದ್ದರು','ಹೂತು ಇಡುತ್ತಿದ್ದರು'],0,'ಮೇಣದ ಲೇಪ.'],
+['ಕಲಪಿ ಗುಂಡುಗಳಲ್ಲಿ ಏನಿರುತ್ತಿತ್ತು?',['ಸೀಸದ ಗುಂಡುಗಳು','ನೀರು','ಮಣ್ಣು','ಹತ್ತಿ'],0,'ಸೀಸದ ಗುಂಡುಗಳು.'],
+['ಫಿರಂಗಿ ಸಿಡಿಸಲು ಏನು ಬಳಸುತ್ತಿದ್ದರು?',['ಸ್ಫೋಟಕ ಮದ್ದು','ನೀರು','ಎಣ್ಣೆ','ಮೇಣ'],0,'ಸ್ಫೋಟಕ ಮದ್ದು.'],
+['ನೌಕಾಪಡೆ ಎಂದರೇನು?',['ಯುದ್ಧನೌಕೆಗಳ ಸಮೂಹ','ಅಶ್ವದಳ','ಕಾಲಾಳು ಪಡೆ','ಕೋಟೆಗಳ ಸಮೂಹ'],0,'ಯುದ್ಧನೌಕೆಗಳ ಸಮೂಹ.'],
+['ಯಾರ ಬಳಿ ಪ್ರಬಲ ನೌಕಾದಳ ಇತ್ತು?',['ಇಂಗ್ಲಿಷರು, ಪೋರ್ಚುಗೀಸರು, ಸಿದ್ದಿಗಳು, ಡಚ್ಚರು','ಮೊಘಲರು, ಆದಿಲಶಹ','ಕುತುಬ್‌ಶಾಹ','ವ್ಯಂಕೋಜಿರಾಜೆ'],0,'ಸಮುದ್ರ ಶತ್ರುಗಳು.'],
+['ಶಿವರಾಯರು ಸ್ವತಂತ್ರ ನೌಕಾಪಡೆಯನ್ನು ಏಕೆ ನಿರ್ಮಿಸಿದರು?',['ಸಮುದ್ರ ಶತ್ರುಗಳ ಶಾಶ್ವತ ಬಂದೋಬಸ್ತಿಗಾಗಿ','ವ್ಯಾಪಾರಕ್ಕಾಗಿ ಮಾತ್ರ','ಮೀನುಗಾರಿಕೆಗಾಗಿ','ಪ್ರಯಾಣಕ್ಕಾಗಿ'],0,'ಸಮುದ್ರ ಶತ್ರುಗಳ ಬಂದೋಬಸ್ತು.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಶಿವರಾಯರ ನೌಕಾಪಡೆಯ ಹಡಗಿನ ಪ್ರಕಾರ ಯಾವುದು?',['ಗುರಾಬ','ವಿಮಾನ','ರೈಲು','ಬಸ್'],0,'ಗುರಾಬ, ಗಲಬತ, ಪಾಲ, ಮಚವಾ, ನಾವೆ, ದೋಣಿ.'],
+['ಸಿಂಧುದುರ್ಗ ಕೋಟೆಯನ್ನು ಎಲ್ಲಿ ಕಟ್ಟಿದರು?',['ಮಾಲವಣ ಬಳಿಯ ಕುರಟೆ ದ್ವೀಪದಲ್ಲಿ','ಮುಂಬೈ ಬಳಿ','ಪುಣೆಯ ಹತ್ತಿರ','ಚೆನ್ನೈ ಬಳಿ'],0,'ಮಾಲವಣ ಬಳಿಯ ಕುರಟೆ ದ್ವೀಪದಲ್ಲಿ.'],
+['ಮುಂಬೈ ಬಳಿ ಶಿವರಾಯರು ಯಾವ ಕೋಟೆ ಕಟ್ಟಿದರು?',['ಖಂದೇರಿ','ಸಿಂಧುದುರ್ಗ','ವಿಜಯದುರ್ಗ','ಸುವರ್ಣದುರ್ಗ'],0,'ಖಂದೇರಿ.'],
+['ಯಾವ ಜಲದುರ್ಗಗಳನ್ನು ಶಿವರಾಯರು ದುರಸ್ತಿ ಮಾಡಿದರು?',['ಸುವರ್ಣದುರ್ಗ, ವಿಜಯದುರ್ಗ','ರಾಜಗಡ, ಪ್ರತಾಪಗಡ','ತೋರಣಾ, ರಾಂಗಣಾ','ಜಿಂಜಿ, ವೇಲೂರು'],0,'ಸುವರ್ಣದುರ್ಗ, ವಿಜಯದುರ್ಗ.'],
+['ನೌಕಾಪಡೆಯಲ್ಲಿ ಯಾವ ಸಮುದ್ರಯಾನಿ ಜಾತಿಗಳ ಸೈನಿಕರಿದ್ದರು?',['ಕೋಳಿ, ಭಂಡಾರಿ, ಆಗರಿ','ಮಾವಳರು ಮಾತ್ರ','ಸರದಾರರು ಮಾತ್ರ','ಮೊಘಲ್'],0,'ಕೋಲಿ, ಭಂಡಾರಿ, ಆಗರಿ ಇತ್ಯಾದಿ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಹೆಸರಾಂತ ನೌಕಾ ಯೋಧ ಯಾರು?',['ಮಾಯನಾಕ ಭಂಡಾರಿ','ತಾನಾಜಿ ಮಾಲುಸರೆ','ಬಾಜಿಪ್ರಭು','ಮುರಾರಬಾಜಿ'],0,'ದೌಲತಖಾನ, ಮಾಯನಾಕ ಭಂಡಾರಿ, ಲಾಯ ಪಾಟೀಲ, ದರ್ಯಾಸಾರಂಗ, ತುಕೋಜಿ ಆಂಗ್ರೆ.'],
+['ಶಿವಛತ್ರಪತಿಯವರಿಗೆ ಯಾವ ಗೌರವ ನೀಡಲಾಗುತ್ತದೆ?',['ಭಾರತೀಯ ನೌಕಾಪಡೆಯ ಜನಕ','ಭಾರತೀಯ ರೈಲ್ವೆಯ ಜನಕ','ವಾಯುದಳದ ಜನಕ','ಶಿಕ್ಷಣದ ಜನಕ'],0,'ಭಾರತೀಯ ನೌಕಾಪಡೆಯ ಜನಕ.'],
+['ಶಿವರಾಯರ ನೌಕಾಪಡೆ ಹೇಗಿತ್ತು?',['ಮಧ್ಯಯುಗೀನ ಭಾರತದ ಮೊದಲ ಸ್ವದೇಶಿ ನೌಕಾಪಡೆ','ವಿದೇಶಿ ನೌಕಾಪಡೆ','ಬಾಡಿಗೆ ನೌಕಾಪಡೆ','ಸಣ್ಣ ದೋಣಿಗಳ ಗುಂಪು'],0,'ಮೊದಲ ಸ್ವದೇಶೀ ನೌಕಾಪಡೆ.'],
+['ಶಿವರಾಯರ ಗೂಢಚಾರ ಇಲಾಖೆಯ ಮುಖ್ಯಸ್ಥ ಯಾರಾಗಿದ್ದ?',['ಬಹಿರ್ಜಿ ನಾಯಕ','ದೌಲತಖಾನ','ಹಿರೋಜಿ ಇಂದುಲಕರ','ಪ್ರತಾಪರಾವ ಗುಜರ'],0,'ಬಹಿರ್ಜಿ ನಾಯಕ.'],
+['ಬಹಿರ್ಜಿಯ ನಿಖರ ಮಾಹಿತಿಯಿಂದ ಯಾವ ದಂಡಯಾತ್ರೆ ಯಶಸ್ವಿಯಾಯಿತು?',['ಸೂರತ್ ಮೇಲಿನ ದಂಡಯಾತ್ರೆ','ಆಗ್ರಾ ಭೇಟಿ','ಪುರಂದರದ ಒಪ್ಪಂದ','ರಾಜ್ಯಾಭಿಷೇಕ'],0,'ಸೂರತ್ ಮೇಲಿನ ದಂಡಯಾತ್ರೆ.'],
+['ದಾಳಿ ಮಾಡುವ ಮೊದಲು ಶಿವರಾಯರು ಏನು ಮಾಡುತ್ತಿದ್ದರು?',['ಗೂಢಚಾರರಿಂದ ಸುದ್ದಿ ಪಡೆಯುತ್ತಿದ್ದರು','ವಿಶ್ರಾಂತಿ ತೆಗೆದುಕೊಳ್ಳುತ್ತಿದ್ದರು','ಒಪ್ಪಂದ ಮಾಡಿಕೊಳ್ಳುತ್ತಿದ್ದರು','ಹಬ್ಬ ಆಚರಿಸುತ್ತಿದ್ದರು'],0,'ಮೊದಲು ಸುದ್ದಿ, ನಂತರ ಯೋಜನೆ.'],
+['ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರದಲ್ಲಿ ಶತ್ರುವಿನ ಮೇಲೆ ಹೇಗೆ ದಾಳಿ ಮಾಡುತ್ತಿದ್ದರು?',['ಅಚಾನಕ್ ಮತ್ತು ಅನಿರೀಕ್ಷಿತವಾಗಿ','ಬಹಿರಂಗವಾಗಿ ತಿಳಿಸಿ','ಹಗಲಿನಲ್ಲಿ ಮಾತ್ರ ಬಯಲಿನಲ್ಲಿ','ಎಂದಿಗೂ ಇಲ್ಲ'],0,'ಅಚಾನಕ್, ಅನಿರೀಕ್ಷಿತ.'],
+['ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರಕ್ಕೆ ಯಾವುದರ ಸಹಾಯವಾಯಿತು?',['ದಟ್ಟ ಕಾಡು, ಗುಡ್ಡಗಾಡು ಕೋಟೆಗಳು, ಪ್ರಜೆಗಳ ಬೆಂಬಲ','ಮರುಭೂಮಿ','ಸಮತಟ್ಟು ಬಯಲು','ವಿದೇಶಿ ಸೈನ್ಯ'],0,'ಸಹ್ಯಾದ್ರಿಯ ಕಾಡು, ಕೋಟೆಗಳು, ಪ್ರಜೆಗಳು.'],
+['ಶಿವರಾಯರ ಸೈನಿಕರಿಗೆ ಯಾವ ಕಟ್ಟುನಿಟ್ಟಿನ ಎಚ್ಚರಿಕೆ ಇತ್ತು?',['ಪ್ರಜೆಗಳನ್ನು ಲೂಟಿ ಮಾಡಬಾರದು','ಪ್ರಜೆಗಳಿಗೆ ತೊಂದರೆ ಕೊಡಬೇಕು','ಮದ್ಯ ಕುಡಿಯಬೇಕು','ಸ್ತ್ರೀಯರನ್ನು ಅವಮಾನಿಸಬೇಕು'],0,'ಲೂಟಿ, ತೊಂದರೆ, ಮದ್ಯ – ನಿಷೇಧ.'],
+['ಸ್ತ್ರೀಯರ ರಕ್ಷಕರೆಂದು ಶಿವರಾಯರ ಕೀರ್ತಿ ಏಕೆ ಹರಡಿತು?',['ಅವರ ಸೈನಿಕರು ಸ್ತ್ರೀಯರಿಗೆ ಗೌರವ ನೀಡುತ್ತಿದ್ದರು','ಅವರು ಕೋಟೆಗಳನ್ನು ಕಟ್ಟಿದರು','ಅವರು ತೆರಿಗೆ ಹೆಚ್ಚಿಸಿದರು','ಅವರು ಹಡಗುಗಳನ್ನು ಕಟ್ಟಿದರು'],0,'ಸೈನಿಕರು ಸ್ತ್ರೀಯರಿಗೆ ಗೌರವ ನೀಡುತ್ತಿದ್ದರು.'],
+['ಕೆಳಗಿನವರಲ್ಲಿ ಶಿವರಾಯರ ಸಹಚರ ಯಾರು?',['ಕಾನ್ಹೋಜಿ ಜೇಧೆ','ಔರಂಗಜೇಬ','ದಿಲೇರಖಾನ','ಶಾಯಿಸ್ತಾಖಾನ'],0,'ಕಾನ್ಹೋಜಿ ಜೇಧೆ, ಬಾಜಿ ಪಾಸಲಕರ ಇತ್ಯಾದಿ.'],
+['ಕೆಳಗಿನವರಲ್ಲಿ ಶಿವರಾಯರ ಸಹಚರನಲ್ಲದವನು ಯಾರು?',['ಉದೇಭಾನ','ಸಿದ್ದಿ ಹಿಲಾಲ','ಪ್ರತಾಪರಾವ ಗುಜರ','ಸಿಧೋಜಿ ನಿಂಬಾಳಕರ'],0,'ಉದೇಭಾನ ಶತ್ರುಪಕ್ಷದ ಕಿಲ್ಲೇದಾರ.']
+];
+
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ದುರ್ಗಗಳ ಅಂದರೆ ಗಡಕೋಟೆಗಳ ಮಹತ್ವ ಹೇಳುವ ಗ್ರಂಥ .................',['ಆಜ್ಞಾಪತ್ರ','ದಾಸಬೋಧ','ಗಾಥಾ'],0],
+  ['ಜಲದುರ್ಗಗಳನ್ನು ಹೀಗೂ ಕರೆಯುತ್ತಿದ್ದರು .................',['ಗಿರಿದುರ್ಗ','ಜಂಜಿರಾ','ವನದುರ್ಗ'],1]],
+ vt:[['ಶಿವಛತ್ರಪತಿಯವರನ್ನು ‘ಭಾರತೀಯ ನೌಕಾಪಡೆಯ ಜನಕ’ ಎಂದು ಸೂಕ್ತವಾಗಿ ಗೌರವಿಸಲಾಗುತ್ತದೆ.','ನನಗೆ ಅನಿಸುತ್ತದೆ ಈ ಗೌರವ ಸಂಪೂರ್ಣ ಸರಿಯಾಗಿದೆ. ಇಂಗ್ಲಿಷರು, ಪೋರ್ಚುಗೀಸರು, ಸಿದ್ದಿಗಳು, ಡಚ್ಚರು ಎಂಬ ಸಮುದ್ರ ಶತ್ರುಗಳು ಕಡಲತೀರದ ಗ್ರಾಮಗಳನ್ನು ಲೂಟಿ ಮಾಡುತ್ತಿದ್ದರು ಮತ್ತು ಜನರಿಗೆ ಕಿರುಕುಳ ಕೊಡುತ್ತಿದ್ದರು. ಶಿವರಾಯರು ಹಡಗು ನಿರ್ಮಾಣದ ಕಾರ್ಖಾನೆಗಳನ್ನು ಸ್ಥಾಪಿಸಿದರು, ಸಿಂಧುದುರ್ಗ-ಖಂದೇರಿಯಂತಹ ಜಲದುರ್ಗಗಳನ್ನು ಕಟ್ಟಿದರು ಮತ್ತು ಸ್ವತಂತ್ರ ನೌಕಾಪಡೆಯನ್ನು ಕಟ್ಟಿದರು. ಇದರಿಂದ ಶತ್ರುಗಳಿಗೆ ಭಯ ಹುಟ್ಟಿತು, ಸಮುದ್ರ ಗಡಿ ನಿಶ್ಚಿತವಾಯಿತು ಮತ್ತು ಕರಾವಳಿ ಸುರಕ್ಷಿತವಾಯಿತು. ಇದು ಮಧ್ಯಯುಗೀನ ಭಾರತದ ಮೊದಲ ಸ್ವದೇಶಿ ನೌಕಾಪಡೆಯಾಗಿತ್ತು.'],
+  ['ಶಿವರಾಯರ ನಿರ್ವಹಣೆ ಯಾವ ಯಾವ ಕ್ಷೇತ್ರಗಳಲ್ಲಿ ಕಾಣಸಿಗುತ್ತದೆ?','ಶಿವರಾಯರ ನಿರ್ವಹಣೆ ಗಡಕೋಟೆಗಳ ನಿರ್ಮಾಣ ಮತ್ತು ಅವುಗಳ ನಿರ್ವಹಣೆ (ಕಿಲ್ಲೇದಾರ, ಸಬನೀಸ, ಕಾರಖಾನೀಸ), ಫಿರಂಗಿ-ಮದ್ದುಗುಂಡು, ನೌಕಾಪಡೆ, ಗುಪ್ತ ಗೂಢಚಾರ ಇಲಾಖೆ, ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರ ಎಂಬ ಯುದ್ಧನೀತಿ, ಶಿಸ್ತುಬದ್ಧ ಸೈನ್ಯ ಮತ್ತು ಒಟ್ಟಾರೆ ರಾಜ್ಯಾಡಳಿತ ಇಂತಹ ಎಲ್ಲ ಕ್ಷೇತ್ರಗಳಲ್ಲಿ ಕಾಣಸಿಗುತ್ತದೆ.']],
+ kam:[['ಕೋಟೆದಾರ',['ಕೋಟೆಯ ರಕ್ಷಣೆ ಮತ್ತು ಆಡಳಿತ ಮಾಡುವುದು.','ಸಬನೀಸ, ಕಾರಖಾನೀಸರಿಗೆ ಆಜ್ಞೆ ನೀಡುವುದು.','(ಸರ್ಕಾರಿ ಪತ್ರ, ಆದೇಶ ಮತ್ತು ಆಜ್ಞೆಗಳ ಪಾಲನೆ ಮಾಡುವುದು.)']],
+  ['ಸಬನೀಸ',['ಗಡದ ಜಮಾಖರ್ಚಿನ ಲೆಕ್ಕ ಇಡುವುದು.','ಗಡದ ಮೇಲಿನ ಮತ್ತು ಗಡದ ಕೆಳಗಿನ ಪ್ರಜೆಗಳಿಂದ ತೆರಿಗೆ ವಸೂಲಿ ಮಾಡುವುದು.','(ಪತ್ರವ್ಯವಹಾರ ನಿಭಾಯಿಸುವುದು.)']],
+  ['ಕಾರಖಾನೀಸ',['ಗಡದ ಮೇಲಿನ ಜನರಿಗೆ ಧಾನ್ಯ ಮತ್ತು ವಸ್ತುಗಳ ಪೂರೈಕೆ ಮಾಡುವುದು.','ಯುದ್ಧದ ಸಮಯದಲ್ಲಿ ಮದ್ದುಗುಂಡುಗಳ ವ್ಯವಸ್ಥೆ ಮಾಡುವುದು.','(ಗಡ ಮತ್ತು ಕಟ್ಟಡಗಳ ನಿರ್ವಹಣೆ-ದುರಸ್ತಿ ಮಾಡುವುದು.)']]],
+ nk:[['ಸಿಂಧುದುರ್ಗ ಕೋಟೆ','ಸಿಂಧುದುರ್ಗ ಜಿಲ್ಲೆ – ಮಾಲವಣ ಬಳಿಯ ಕುರಟೆ ದ್ವೀಪ (ಸಮುದ್ರದಲ್ಲಿ)'],['ವಿಜಯದುರ್ಗ','ಸಿಂಧುದುರ್ಗ ಜಿಲ್ಲೆ – ದೇವಗಡ ಬಳಿ ಸಮುದ್ರತೀರದಲ್ಲಿ'],['ಮುಂಬೈ','ಅರಬ್ಬೀ ಸಮುದ್ರದ ತೀರದ ನಗರ (ಕೊಂಕಣ)'],['ಪ್ರತಾಪಗಡ','ಸಾತಾರಾ ಜಿಲ್ಲೆ – ಮಹಾಬಳೇಶ್ವರ ಬಳಿ ಸಹ್ಯಾದ್ರಿಯಲ್ಲಿ']]
+};
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಸ್ವಾಧ್ಯಾಯ</h2>
+ <h3>೧. ಹೇಳಿ ನೋಡೋಣ!</h3>${pickGame('swa',SW.a,'swa')}
+ <h3>೨. ನಿಮಗೇನು ಅನಿಸುತ್ತದೆ ಹೇಳಿ.</h3>${SW.vt.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>೩. ಕೋಟೆಗಳ ಮೇಲಿನ ಕೆಳಗಿನ ಅಧಿಕಾರಿಗಳ ಎರಡೆರಡು ಕೆಲಸಗಳನ್ನು ಬರೆಯಿರಿ.</h3>${SW.kam.map((x,i)=>sq(x[0],x[1].join('<br>'),i+1)).join('')}
+ <h3>೪. ಮಹಾರಾಷ್ಟ್ರದ ನಕ್ಷೆ ರೂಪರೇಖೆಯಲ್ಲಿ ಕೆಳಗಿನ ಸ್ಥಳಗಳನ್ನು ತೋರಿಸಿ.</h3>
+ <div class="tap">🗺️ ಶಿಕ್ಷಕರು ನೀಡಿದ ಮಹಾರಾಷ್ಟ್ರದ ನಕ್ಷೆ ರೂಪರೇಖೆಯಲ್ಲಿ ಈ ಸ್ಥಳಗಳನ್ನು ತೋರಿಸಿ. ಸಹಾಯಕ್ಕಾಗಿ ಸುಳಿವು:</div>
+ ${sortGame('swn',[['🏝️ ಸಿಂಧುದುರ್ಗ ಕೋಟೆ',0],['🏰 ವಿಜಯದುರ್ಗ',0],['🏙️ ಮುಂಬೈ',0],['⛰️ ಪ್ರತಾಪಗಡ',1]],[['🌊 ಸಮುದ್ರತೀರದಲ್ಲಿ (ಕೊಂಕಣ)','pu'],['⛰️ ಸಹ್ಯಾದ್ರಿಯಲ್ಲಿ','or']],'swn')}
+ ${SW.nk.map((x,i)=>sq(x[0]+' – ಎಲ್ಲಿದೆ?',x[1],'ಅಆಇಈ'[i])).join('')}
+ <h3>೫. ಛತ್ರಪತಿ ಶಿವಾಜಿ ಮಹಾರಾಜರ ನಿರ್ವಹಣಾ ಕೌಶಲದ ಯಾವ ಅಂಶ ನಿಮಗೆ ಅತಿ ಹೆಚ್ಚು ಇಷ್ಟವಾಯಿತು? ಈ ಅಂಶವನ್ನು ನಿಮ್ಮ ದೈನಂದಿನ ಜೀವನದಲ್ಲಿ ಹೇಗೆ ಬಳಸುವಿರಿ?</h3>
+ ${sq('ನಿಮ್ಮ ಉತ್ತರ','ಉದಾ. ನನಗೆ ‘ಗೂಢಚಾರ ಇಲಾಖೆ – ಮೊದಲು ಮಾಹಿತಿ, ನಂತರ ಯೋಜನೆ’ ಎಂಬ ಅಂಶ ಇಷ್ಟವಾಯಿತು. ಪರೀಕ್ಷೆಗೆ ಮೊದಲು ಪಠ್ಯಕ್ರಮದ ಸಂಪೂರ್ಣ ಮಾಹಿತಿ ಪಡೆದು, ವೇಳಾಪಟ್ಟಿ ಮಾಡಿ ನಂತರವೇ ಅಭ್ಯಾಸ ಮಾಡುತ್ತೇನೆ. (ಅಥವಾ: ಕಿಲ್ಲೇದಾರ-ಸಬನೀಸ-ಕಾರಖಾನೀಸರಂತೆ ತರಗತಿಯಲ್ಲಿ ಕೆಲಸಗಳನ್ನು ಹಂಚಿ ಶಿಸ್ತಿನಿಂದ ಕೆಲಸಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸುತ್ತೇವೆ.)',1)}
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>(ಅ) ‘ಶಿವರಾಯರ ಸಂದರ್ಶನದ ಆಯೋಜನೆ’ ಈ ಸಂದರ್ಶನ ನಾಟಕವನ್ನು ತರಗತಿಯಲ್ಲಿ ಪ್ರಸ್ತುತಪಡಿಸಿ.<br>(ಆ) ಭಾರತೀಯ ನೌಕಾದಳದ ಯುದ್ಧನೌಕೆಗಳ ಬಗ್ಗೆ ಮಾಹಿತಿ ಪಡೆಯಿರಿ.<br>(ಇ) ವಿವಿಧ ರೀತಿಯ ಕೋಟೆಗಳಿಗೆ ಭೇಟಿ ನೀಡಿ ಮತ್ತು ಕೋಟೆಗಳ ವಿವಿಧ ಭಾಗಗಳ ಹೆಸರುಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['‘ಇಡೀ ರಾಜ್ಯದ ಸಾರ ಅದು ದುರ್ಗ’ ಎಂದು ಏಕೆ ಹೇಳಿರಬಹುದು?','ರಕ್ಷಣೆ, ಆಶ್ರಯ…','ಕೋಟೆಗಳಿಂದ ಪ್ರದೇಶದ ರಕ್ಷಣೆಯಾಗುತ್ತದೆ, ಶತ್ರುವಿನ ಮೇಲೆ ಕಣ್ಣಿಡಬಹುದು, ಸಂಕಟದಲ್ಲಿ ಆಶ್ರಯ ಸಿಗುತ್ತದೆ, ಧಾನ್ಯ-ಮದ್ದುಗುಂಡು ಸಂಗ್ರಹಿಸಬಹುದು. ಕೋಟೆಗಳು ಕೈಯಲ್ಲಿದ್ದರೆ ರಾಜ್ಯ ಉಳಿಯುತ್ತದೆ, ಆದ್ದರಿಂದ ಕೋಟೆಗಳು ರಾಜ್ಯದ ಸಾರ.'],
+['ಜಲದುರ್ಗ ಕಟ್ಟುವುದು ಗಿರಿದುರ್ಗ ಕಟ್ಟುವುದಕ್ಕಿಂತ ಏಕೆ ಕಷ್ಟವಾಗಿರಬಹುದು?','ಸಮುದ್ರ, ಅಲೆಗಳು…','ಸಮುದ್ರದಲ್ಲಿ ಅಡಿಪಾಯ ಹಾಕುವುದು, ಅಲೆ-ಉಬ್ಬರ-ಇಳಿತ, ಉಪ್ಪುನೀರು, ಸಾಮಗ್ರಿಯನ್ನು ಹಡಗಿನಲ್ಲಿ ಸಾಗಿಸುವುದು, ಕುಡಿಯುವ ನೀರಿನ ವ್ಯವಸ್ಥೆ – ಈ ಎಲ್ಲ ಅಡಚಣೆಗಳು ಜಲದುರ್ಗದ ನಿರ್ಮಾಣದಲ್ಲಿ ಇರುತ್ತವೆ.'],
+['ಕೋಟೆಯಲ್ಲಿ ಕಿಲ್ಲೇದಾರ, ಸಬನೀಸ, ಕಾರಖಾನೀಸ ಎಂದು ಕೆಲಸಗಳ ಹಂಚಿಕೆ ಏಕೆ ಮಾಡಿರಬಹುದು?','ಒಬ್ಬರ ಮೇಲೆ ಹೊರೆ…','ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಮೇಲೆ ಎಲ್ಲ ಹೊರೆ ಹಾಕಿದರೆ ಕೆಲಸಗಳು ಸರಿಯಾಗಿ ಆಗುವುದಿಲ್ಲ. ಹಂಚಿಕೆಯಿಂದ ಪ್ರತಿಯೊಬ್ಬರೂ ತಮ್ಮ ಕೆಲಸವನ್ನು ಜವಾಬ್ದಾರಿಯಿಂದ ಮತ್ತು ಕಾರ್ಯಕ್ಷಮತೆಯಿಂದ ಮಾಡುತ್ತಾರೆ; ಲೆಕ್ಕ, ಪೂರೈಕೆ ಮತ್ತು ರಕ್ಷಣೆಯ ಪ್ರತ್ಯೇಕ ಕಾಳಜಿ ವಹಿಸಲಾಗುತ್ತದೆ.'],
+['ನಿಮ್ಮ ಶಾಲೆಯಲ್ಲಿ ಕಿಲ್ಲೇದಾರ, ಸಬನೀಸ, ಕಾರಖಾನೀಸರಂತಹ ಕೆಲಸಗಳನ್ನು ಯಾರು ಮಾಡುತ್ತಾರೆ?','ಮುಖ್ಯೋಪಾಧ್ಯಾಯ, ಗುಮಾಸ್ತ…','ಕಿಲ್ಲೇದಾರ – ಮುಖ್ಯೋಪಾಧ್ಯಾಯ (ಸಂಪೂರ್ಣ ಆಡಳಿತ); ಸಬನೀಸ – ಗುಮಾಸ್ತ/ಲೆಕ್ಕಿಗ (ಲೆಕ್ಕ, ಪತ್ರವ್ಯವಹಾರ); ಕಾರಖಾನೀಸ – ಪೋಷಣ ಆಹಾರ, ಸಾಮಗ್ರಿ ಪೂರೈಕೆ ಮತ್ತು ಕಟ್ಟಡ ನಿರ್ವಹಣೆ ನೋಡುವ ಶಿಕ್ಷಕರು/ಸಿಬ್ಬಂದಿ.'],
+['ಫಿರಂಗಿಗಳಿಗೆ ಮೇಣದ ಲೇಪ ಹಚ್ಚುವುದರ ಹಿಂದೆ ಯಾವ ವಿಜ್ಞಾನ ಇದೆ?','ನೀರು, ಗಾಳಿ…','ಕಬ್ಬಿಣಕ್ಕೆ ತೇವ ಮತ್ತು ಗಾಳಿಯ ಸಂಪರ್ಕ ಆದರೆ ತುಕ್ಕು ಹಿಡಿಯುತ್ತದೆ. ಮೇಣ ನೀರನ್ನು ಒಳಗೆ ಬಿಡುವುದಿಲ್ಲ, ಆದ್ದರಿಂದ ಲೋಹದ ತೇವದೊಂದಿಗಿನ ಸಂಪರ್ಕ ತಪ್ಪುತ್ತದೆ ಮತ್ತು ತುಕ್ಕು ಹಿಡಿಯುವುದಿಲ್ಲ. (ಇಂದು ನಾವು ಕಬ್ಬಿಣಕ್ಕೆ ಬಣ್ಣ ಅಥವಾ ಎಣ್ಣೆ ಹಚ್ಚುತ್ತೇವೆ.)'],
+['ನೌಕಾಪಡೆಯಲ್ಲಿ ವಿವಿಧ ಜಾತಿ-ಧರ್ಮಗಳ ಸೈನಿಕರಿದ್ದರು, ಇದರಿಂದ ಶಿವರಾಯರ ನಿರ್ವಹಣೆಯ ಬಗ್ಗೆ ಏನು ಕಾಣುತ್ತದೆ?','ಗುಣಗಳಿಗೆ ಮಹತ್ವ…','ಶಿವರಾಯರು ಜಾತಿ-ಧರ್ಮ ನೋಡದೆ ಮನುಷ್ಯನ ಕೌಶಲ ಮತ್ತು ಗುಣಗಳಿಗೆ ಮಹತ್ವ ನೀಡುತ್ತಿದ್ದರು. ಸಮುದ್ರದ ಮಾಹಿತಿ ಇರುವ ಕೋಲಿ, ಭಂಡಾರಿ, ಆಗರಿ ಜನರನ್ನು ಮತ್ತು ದೌಲತಖಾನನಂತಹ ಯೋಧರನ್ನು ಸರಿಯಾಗಿ ಬಳಸಿಕೊಂಡರು – ಎಲ್ಲರನ್ನೂ ಜೊತೆಗೆ ಕರೆದೊಯ್ಯುವ ಪ್ರವೃತ್ತಿ.'],
+['ಇಂದು ಭಾರತಕ್ಕೆ ನೌಕಾಪಡೆಯ ಅಗತ್ಯ ಏಕೆ ಇದೆ?','ಉದ್ದ ಕರಾವಳಿ…','ಭಾರತಕ್ಕೆ ಉದ್ದವಾದ ಸಮುದ್ರತೀರವಿದೆ. ಸಮುದ್ರ ಗಡಿಗಳ ರಕ್ಷಣೆ, ವ್ಯಾಪಾರಿ ಹಡಗುಗಳ ರಕ್ಷಣೆ, ಕಡಲ್ಗಳ್ಳರು ಮತ್ತು ನುಸುಳುಕೋರರಿಂದ ರಕ್ಷಣೆ ಮತ್ತು ಆಪತ್ತಿನಲ್ಲಿ ಸಹಾಯಕ್ಕಾಗಿ ನೌಕಾಪಡೆ ಅಗತ್ಯ – ಶಿವರಾಯರ ಇದೇ ವಿಚಾರ ಇಂದಿಗೂ ಅನ್ವಯಿಸುತ್ತದೆ.'],
+['ಗೂಢಚಾರರಿಂದ ಮಾಹಿತಿ ಪಡೆಯದೆ ದಾಳಿ ಮಾಡಿದ್ದರೆ ಏನಾಗುತ್ತಿತ್ತು?','ಅಂದಾಜು ತಪ್ಪುವುದು…','ಶತ್ರುವಿನ ಬಲ, ಕಾವಲು, ದಾರಿಗಳ ಅಂದಾಜು ತಪ್ಪುತ್ತಿತ್ತು; ಸೈನ್ಯ ಬಲೆಯಲ್ಲಿ ಸಿಲುಕಬಹುದಿತ್ತು ಮತ್ತು ದೊಡ್ಡ ನಷ್ಟವಾಗುತ್ತಿತ್ತು. ನಿಖರ ಮಾಹಿತಿಯಿಂದಲೇ ಕಡಿಮೆ ನಷ್ಟದಲ್ಲಿ ಯಶಸ್ಸು ಸಿಕ್ಕಿತು.'],
+['ಗೆರಿಲ್ಲಾ ಯುದ್ಧತಂತ್ರಕ್ಕೆ ‘ಪ್ರಜೆಗಳ ಬೆಂಬಲ’ ಏಕೆ ಮುಖ್ಯವಾಗಿತ್ತು?','ಮಾಹಿತಿ, ಆಹಾರ…','ಪ್ರಜೆಗಳು ಶತ್ರುವಿನ ಚಲನವಲನಗಳ ಮಾಹಿತಿ ನೀಡುತ್ತಿದ್ದರು, ಮಾವಳರಿಗೆ ಆಹಾರ-ಆಶ್ರಯ ನೀಡುತ್ತಿದ್ದರು ಮತ್ತು ಶತ್ರುವಿಗೆ ಮಾಹಿತಿ ನೀಡುತ್ತಿರಲಿಲ್ಲ. ಪ್ರಜೆಗಳ ಪ್ರೀತಿ ಇದ್ದುದರಿಂದಲೇ ಸೈನ್ಯ ಸುರಕ್ಷಿತವಾಗಿ ಅಡಗಿ-ಮರೆಯಾಗಿ ಚಲಿಸಬಹುದಾಗಿತ್ತು.'],
+['ಸೈನಿಕರಿಗೆ ‘ಪ್ರಜೆಗಳಿಗೆ ತೊಂದರೆ ಕೊಡಬಾರದು, ಲೂಟಿ ಮಾಡಬಾರದು’ ಎಂಬ ಎಚ್ಚರಿಕೆ ಏಕೆ ನೀಡಿರಬಹುದು?','ಪ್ರಜೆಗಳ ಪ್ರೀತಿ…','ಸ್ವರಾಜ್ಯ ಪ್ರಜೆಗಳ ಸುಖಕ್ಕಾಗಿತ್ತು. ಸೈನಿಕರೇ ಪ್ರಜೆಗಳಿಗೆ ತೊಂದರೆ ಕೊಟ್ಟಿದ್ದರೆ ಪ್ರಜೆಗಳ ವಿಶ್ವಾಸ ಮತ್ತು ಬೆಂಬಲ ಹೋಗುತ್ತಿತ್ತು. ಶಿಸ್ತುಬದ್ಧ ಸೈನ್ಯದಿಂದ ಪ್ರಜೆಗಳಿಗೆ ಸ್ವರಾಜ್ಯ ತಮ್ಮದು ಎನಿಸಿತು.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೧೭ : ಗಡಕೋಟೆಗಳ ಮತ್ತು ನೌಕಾಪಡೆಯ ನಿರ್ವಹಣೆ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${SUM.map(x=>`<li>${x}</li>`).join('')}</ol>
+ <p class="pq">ಕೋಟೆಯ ಮೇಲಿನ ಅಧಿಕಾರಿಗಳು</p><table class="w"><tr><th>ಕಿಲ್ಲೇದಾರ (ಹವಾಲದಾರ)</th><th>ಸಬನೀಸ</th><th>ಕಾರಖಾನೀಸ</th></tr><tr><td class="l">ರಕ್ಷಣೆ ಮತ್ತು ಆಡಳಿತ; ಸಬನೀಸ-ಕಾರಖಾನೀಸರಿಗೆ ಆಜ್ಞೆ; ಸರ್ಕಾರಿ ಆದೇಶಗಳ ಪಾಲನೆ</td><td class="l">ಜಮಾಖರ್ಚಿನ ಲೆಕ್ಕ; ತೆರಿಗೆ ವಸೂಲಿ; ಪತ್ರವ್ಯವಹಾರ</td><td class="l">ಧಾನ್ಯ-ವಸ್ತುಗಳ ಪೂರೈಕೆ; ಮದ್ದುಗುಂಡು ವ್ಯವಸ್ಥೆ; ಕಟ್ಟಡಗಳ ನಿರ್ವಹಣೆ-ದುರಸ್ತಿ</td></tr></table>
+ <p class="pq">ಕೋಟೆಗಳ ಪ್ರಕಾರಗಳು ಮತ್ತು ಉದಾಹರಣೆಗಳು</p><table class="w"><tr><th>ಗಿರಿದುರ್ಗ</th><th>ಜಲದುರ್ಗ (ಜಂಜಿರಾ)</th><th>ನೌಕಾಪಡೆಯ ಹಡಗುಗಳು</th><th>ನೌಕಾಪಡೆಯ ಯೋಧರು</th></tr><tr><td class="l">ರಾಜಗಡ, ಪ್ರತಾಪಗಡ, ರಾಯಗಡ, ತೋರಣಾ, ರಾಂಗಣಾ</td><td class="l">ಸಿಂಧುದುರ್ಗ (ಕುರಟೆ ದ್ವೀಪ), ಖಂದೇರಿ, ವಿಜಯದುರ್ಗ, ಸುವರ್ಣದುರ್ಗ</td><td class="l">ಗುರಾಬ, ಗಲಬತ, ಪಾಲ, ಮಚವಾ, ನಾವೆ, ದೋಣಿ</td><td class="l">ದೌಲತಖಾನ, ಮಾಯನಾಕ ಭಂಡಾರಿ, ಲಾಯ ಪಾಟೀಲ, ದರ್ಯಾಸಾರಂಗ, ತುಕೋಜಿ ಆಂಗ್ರೆ</td></tr></table>
+ <p class="pq">ಪದಾರ್ಥ</p><div>ನಿರ್ವಹಣೆ – ಶಿಸ್ತುಬದ್ಧ ಯೋಜನೆ • ದುರ್ಗ – ಕೋಟೆ • ಸಾರ – ಗಾಭ, ಸತ್ವ • ಗಮನಿಸುವುದು – ಸೂಕ್ಷ್ಮವಾಗಿ ನೋಡುವುದು • ಅರಿವಾಗುವುದು – ತಿಳಿಯುವುದು • ತಜ್ಞ – ನಿಪುಣ • ಜಮಾಖರ್ಚು – ಆದಾಯ-ಖರ್ಚು • ವಸೂಲಿ – ಸಂಗ್ರಹಿಸುವುದು • ತುಕ್ಕು – ಲೋಹದ ಮೇಲಿನ ಕೆಂಪು ಪದರ • ನೌಕಾಪಡೆ – ಯುದ್ಧನೌಕೆಗಳ ಸಮೂಹ • ಸಮುದ್ರಯಾನಿ – ಸಮುದ್ರದ ಮೇಲೆ ಕೆಲಸ ಮಾಡುವವರು • ಭಯ – ಹೆದರಿಕೆ • ಗಡಿ – ಸೀಮೆ • ಸ್ವಾಮಿತ್ವ – ಒಡೆತನ • ಸ್ವದೇಶಿ – ತನ್ನದೇ • ಜನಕ – ನಿರ್ಮಾತೃ • ಗೂಢಚಾರ – ಗುಪ್ತ ಮಾಹಿತಿ ತೆಗೆಯುವವನು • ಇಂಚಿಂಚೂ‌ಇಂಚಿಂಚೂ – ಎಲ್ಲ ಸೂಕ್ಷ್ಮ ವಿವರ • ಅನಿರೀಕ್ಷಿತ – ಕಿಂಚಿತ್ತೂ ಯೋಚನೆ ಇಲ್ಲದಿರುವಾಗ • ಕಟ್ಟುನಿಟ್ಟಿನ ಎಚ್ಚರಿಕೆ – ಕಠಿಣ ಸೂಚನೆ</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">೧. ಹೇಳಿ ನೋಡೋಣ!</div>${SW.a.map((x,i)=>`<div>(${'ಅಆ'[i]}) ${x[0]}</div>`).join('')}
+ <div class="pq">೨. ನಿಮಗೇನು ಅನಿಸುತ್ತದೆ ಹೇಳಿ.</div>${SW.vt.map((x,i)=>`<div class="avoid"><div>(${'ಅಆ'[i]}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ <div class="pq">೩. ಕೋಟೆಗಳ ಮೇಲಿನ ಕೆಳಗಿನ ಅಧಿಕಾರಿಗಳ ಎರಡೆರಡು ಕೆಲಸಗಳನ್ನು ಬರೆಯಿರಿ.</div>${SW.kam.map((x,i)=>`<div class="avoid"><div>(${'ಅಆಇ'[i]}) ${x[0]} – ೧. .................................... ೨. ....................................</div></div>`).join('')}
+ <div class="pq">೪. ಮಹಾರಾಷ್ಟ್ರದ ನಕ್ಷೆ ರೂಪರೇಖೆಯಲ್ಲಿ ಕೆಳಗಿನ ಸ್ಥಳಗಳನ್ನು ತೋರಿಸಿ.</div><div>(ಅ) ಸಿಂಧುದುರ್ಗ ಕೋಟೆ (ಆ) ವಿಜಯದುರ್ಗ (ಇ) ಮುಂಬೈ (ಈ) ಪ್ರತಾಪಗಡ <i>(ಶಿಕ್ಷಕರು ನೀಡಿದ ನಕ್ಷೆ ರೂಪರೇಖೆಯಲ್ಲಿ)</i></div>
+ <div class="pq">೫. ಶಿವಾಜಿ ಮಹಾರಾಜರ ನಿರ್ವಹಣಾ ಕೌಶಲದ ಯಾವ ಅಂಶ ನಿಮಗೆ ಅತಿ ಹೆಚ್ಚು ಇಷ್ಟವಾಯಿತು? ಈ ಅಂಶವನ್ನು ದೈನಂದಿನ ಜೀವನದಲ್ಲಿ ಹೇಗೆ ಬಳಸುವಿರಿ?</div>${lines(3)}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>೧.</b> (ಅ) ಆಜ್ಞಾಪತ್ರ (ಆ) ಜಂಜಿರಾ</div><div><b>೨.</b><ol>${SW.vt.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>೩.</b> ${SW.kam.map(x=>`<b>${x[0]}:</b> ${x[1].slice(0,2).join(' ')}`).join('<br>')}</div><div><b>೪.</b> ${SW.nk.map(x=>`${x[0]} – ${x[1]}`).join('; ')}</div><div><b>೫.</b> ವಿದ್ಯಾರ್ಥಿಗಳ ಸ್ವಂತ ಉತ್ತರ.</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ · ಪಾಠ ೧೭</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ – ಪಾಠ ೨ ಸಂತರ ಸಾಧನೆ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೨ : ಸಂತರ ಸಾಧನೆ</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">🙏📖 ಚಕ್ರಧರ, ನಾಮದೇವ, ಜ್ಞಾನೇಶ್ವರ, ಏಕನಾಥ, ತುಕಾರಾಮ ಮತ್ತು ರಾಮದಾಸ – ಬನ್ನಿ, ಸಂತರ ಬೋಧನೆಯನ್ನು ಅನುಭವಿಸೋಣ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೧೧ ಮೆಟ್ಟಿಲುಗಳು · ಮುಕ್ತಾಬಾಯಿಯ ತಟ್ಟಿ · ಸಾಲದ ಪತ್ರಗಳು</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೪೯ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ · ಪಾಠ ೨ : ಸಂತರ ಸಾಧನೆ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🙏','📖','🌼'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ಸಂತ ಸಮೂಹ ---------- */
+const SANT=['ಶ್ರೀಚಕ್ರಧರ','ಸಂತ ನಾಮದೇವ','ಸಂತ ಜ್ಞಾನೇಶ್ವರ','ಸಂತ ಚೋಖಾಮೇಳ','ಸಂತ ಗೋರೋಬಾ','ಸಂತ ಸಾವತಾ','ಸಂತ ನರಹರಿ','ಸಂತ ಏಕನಾಥ','ಸಂತ ಶೇಖ್ ಮಹಮ್ಮದ್','ಸಂತ ತುಕಾರಾಮ','ಸಂತ ನಿಳೋಬಾ','ಸಂತ ಜನಾಬಾಯಿ','ಸಂತ ಸೋಯರಾಬಾಯಿ','ಸಂತ ನಿರ್ಮಳಾಬಾಯಿ','ಸಂತ ಮುಕ್ತಾಬಾಯಿ','ಸಂತ ಕಾನ್ಹೋಪಾತ್ರಾ','ಸಂತ ಬಹಿಣಾಬಾಯಿ ಶಿಊರಕರ್'];
+const GUN=[['🤲','ದಯೆ'],['🕊️','ಅಹಿಂಸೆ'],['🎁','ಪರೋಪಕಾರ'],['🙏','ಸೇವೆ'],['⚖️','ಸಮಾನತೆ'],['🤝','ಭ್ರಾತೃತ್ವ']];
+const GV=new Set();
+function drawGun(){const b=$('gunBox');if(!b)return;b.innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px">${GUN.map((g,i)=>`<button class="tile ${GV.has(i)?'op':''}" style="text-align:center" onclick="GV.add(${i});say('${g[1]}');drawGun()"><div class="ic">${GV.has(i)?g[0]:'🎁'}</div><div class="tt">${GV.has(i)?g[1]:'ತೆರೆಯಿರಿ'}</div></button>`).join('')}</div>
+ <div class="msg ${GV.size==6?'ok':'in'}">${GV.size==6?'🎉 ಸಂತರು ಜನರಿಗೆ ಈ ಆರು ಗುಣಗಳನ್ನು ಕಲಿಸಿದರು ಮತ್ತು <b>“ಯಾರೂ ಚಿಕ್ಕವರಲ್ಲ, ಯಾರೂ ದೊಡ್ಡವರಲ್ಲ, ಎಲ್ಲರೂ ಸಮಾನ”</b> ಈ ಸಮಾನತೆಯ ಭಾವನೆಯನ್ನು ನಿರ್ಮಿಸಿದರು.':'ಸಂತರ ಗುಣಗಳ ಉಡುಗೊರೆಗಳನ್ನು ತೆರೆಯಿರಿ. ('+GV.size+' / ೬)'}</div>`;
+ if(GV.size==6)award('gun','ಭೇಷ್! ಸಂತರ ಗುಣಗಳನ್ನು ತೆರೆದಿರಿ.')}
+
+/* ---------- ಮುಕ್ತಾಬಾಯಿಯ ತಟ್ಟಿ ---------- */
+let TATI=0;
+function drawTati(){const b=$('tatiBox');if(!b)return;
+ b.innerHTML=`<svg viewBox="0 0 300 170" style="max-width:380px;width:100%;display:block;margin:0 auto;background:linear-gradient(#fde68a,#fef3c7);border-radius:12px">
+ <path d="M60 70 L150 20 L240 70Z" fill="#a16207"/><rect x="70" y="70" width="160" height="90" fill="#d6a35c" stroke="#78350f"/>
+ <rect x="125" y="95" width="50" height="65" fill="#451a03"/>
+ <g style="transition:transform .8s;transform-origin:125px 128px;transform:${TATI?'scaleX(.15)':'scaleX(1)'}">${[0,1,2,3,4].map(i=>`<rect x="${126+i*10}" y="96" width="7" height="63" fill="#a3e635" stroke="#3f6212"/>`).join('')}<line x1="125" y1="115" x2="175" y2="115" stroke="#3f6212" stroke-width="3"/><line x1="125" y1="140" x2="175" y2="140" stroke="#3f6212" stroke-width="3"/></g>
+ ${TATI?'<text x="152" y="140" text-anchor="middle" font-size="26">🧘</text>':'<text x="150" y="85" text-anchor="middle" font-size="9" fill="#78350f">(ಒಳಗೆ ಜ್ಞಾನೇಶ್ವರ ದುಃಖಿತರಾಗಿ ಕುಳಿತಿದ್ದಾರೆ)</text>'}
+ <text x="250" y="150" font-size="28">👧</text><text x="255" y="118" font-size="9" font-weight="800" fill="#7c2d12">ಮುಕ್ತಾ</text></svg>
+ ${TATI?'<div class="msg ok">🚪 ತಟ್ಟಿ ತೆರೆಯಿತು! ತಂಗಿಯ ಉಪದೇಶದಿಂದ ಜ್ಞಾನೇಶ್ವರರಿಗೆ ಹುರುಪು ಬಂತು. ದುಃಖ ಮರೆತು ಅವರು ಕೆಲಸಕ್ಕೆ ತೊಡಗಿದರು.</div>':'<div class="msg in">💬 ಮುಕ್ತಾ ಹುಲ್ಲಿನ ತಟ್ಟಿಯ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡುತ್ತಾ ಹೇಳಿದಳು, <b>“ತಟ್ಟಿ ತೆರೆಯಿರಿ ಜ್ಞಾನೇಶ್ವರ. ಅಯ್ಯೋ, ನಾವು ದುಃಖಿತರಾಗಿ ಕುಳಿತರೆ ಹೇಗೆ ನಡೆಯುತ್ತದೆ? ಜಗತ್ತಿನ ಕಲ್ಯಾಣ ಯಾರು ಮಾಡುತ್ತಾರೆ?”</b></div>'}
+ <div style="text-align:center"><button class="btn gr" onclick="TATI=1;say('ತಟ್ಟಿ ತೆರೆಯಿರಿ ಜ್ಞಾನೇಶ್ವರ. ಜಗತ್ತಿನ ಕಲ್ಯಾಣ ಯಾರು ಮಾಡುತ್ತಾರೆ?');drawTati();award('tati','ಭೇಷ್! ಮುಕ್ತಾಬಾಯಿಯ ಉಪದೇಶ ಕೇಳಿದಿರಿ.')">🖐️ ತಟ್ಟಿಯ ಮೇಲೆ ಟಕ್‌ಟಕ್ ಮಾಡಿ</button></div>`}
+
+/* ---------- ತುಕಾರಾಮರ ಸಾಲದ ಪತ್ರಗಳು ---------- */
+let KJ=0;
+function drawKj(){const b=$('kjBox');if(!b)return;
+ b.innerHTML=`<svg viewBox="0 0 320 150" style="max-width:420px;width:100%;display:block;margin:0 auto;background:#ecfeff;border-radius:12px">
+ <text x="10" y="18" font-size="11" font-weight="800" fill="#0e7490">ಇಂದ್ರಾಯಣಿ ನದಿ</text>
+ <path d="M0 95 Q80 80 160 95 T320 92 L320 150 L0 150Z" fill="#38bdf8"/>
+ ${[...Array(6)].map((_,i)=>i<KJ?`<text x="${30+i*48}" y="${118+(i%2)*8}" font-size="20" opacity=".55">📜</text>`:`<text x="${40+i*8}" y="${70-i*6}" font-size="20">📜</text>`).join('')}
+ <text x="20" y="80" font-size="30">🧑‍🌾</text>
+ ${KJ>=6?'<text x="250" y="60" font-size="26">😊😊</text>':''}</svg>
+ <div class="msg ${KJ>=6?'ok':'in'}">${KJ>=6?'🎉 ಎಲ್ಲ ಸಾಲದ ಪತ್ರಗಳನ್ನು ಇಂದ್ರಾಯಣಿಯಲ್ಲಿ ಮುಳುಗಿಸಿದರು! ಅನೇಕ ಬಡ ಜನರು <b>ಸಾಲಮುಕ್ತ</b> ಆದವು.':'ತುಕಾರಾಮರ ಹಿರಿಯರು ಅಗತ್ಯದಲ್ಲಿದ್ದವರಿಗೆ ಸಾಲ ನೀಡಿದ್ದರು. ತುಕಾರಾಮರು ತಮ್ಮ ಪಾಲಿನ ಸಾಲದ ಪತ್ರಗಳನ್ನು ಏನು ಮಾಡಿದರು? 📜 ಮುಳುಗಿಸಿ! ('+KJ+' / ೬)'}</div>
+ <div style="text-align:center"><button class="btn" onclick="if(KJ<6){KJ++;drawKj();if(KJ==6){say('ಅನೇಕರನ್ನು ಸಾಲಮುಕ್ತ ಮಾಡಿದರು');award('kj','ವಾ! ತುಕಾರಾಮರು ಜನರನ್ನು ಸಾಲಮುಕ್ತ ಮಾಡಿದರು.')}}">📜➡️🌊 ಸಾಲದ ಪತ್ರವನ್ನು ನದಿಗೆ ಹಾಕಿ</button></div>`}
+
+/* ---------- ರಾಮದಾಸರ ಸಾಮರ್ಥ್ಯ ---------- */
+let BAL=0;
+function drawBal(){const b=$('balBox');if(!b)return;b.innerHTML=`<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center"><div style="font-size:48px">${BAL<3?'🧍':BAL<6?'🧍‍♂️💪':'🦸'}</div>
+ <div style="flex:1 1 200px"><b>ಸಾಮರ್ಥ್ಯ (ಬಲ): ${BAL*10}%</b><div style="background:#e2e8f0;border-radius:10px;height:20px"><div style="width:${BAL*10}%;height:20px;border-radius:10px;background:linear-gradient(90deg,#f97316,#dc2626);transition:width .3s"></div></div></div></div>
+ <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:6px">${[['🏋️','ವ್ಯಾಯಾಮ (ಸೂರ್ಯನಮಸ್ಕಾರ)'],['🤼','ಕುಸ್ತಿ / ಅಖಾಡ'],['🤝','ಸಂಘಟನೆ – ಒಟ್ಟಾಗಿ ಬನ್ನಿ'],['📖','ಮನದ ಶ್ಲೋಕ – ಸದ್ವಿಚಾರ']].map(x=>`<button class="btn or sm" onclick="if(BAL<10){BAL=Math.min(10,BAL+${x[0]=='🤝'?3:2});drawBal()}if(BAL>=10)award('bal','ಸಾಮರ್ಥ್ಯ ಇರುವುದು ಚಳವಳಿಯಲ್ಲಿ!')">${x[0]} ${x[1]}</button>`).join('')}</div>
+ <div class="msg ${BAL>=10?'ok':'in'}">${BAL>=10?'💪 <b>“ಸಾಮರ್ಥ್ಯ ಇರುವುದು ಚಳವಳಿಯಲ್ಲಿ, ಯಾರು ಯಾರು ಮಾಡುತ್ತಾರೋ ಅವರದು”</b> – ಪ್ರಯತ್ನ ಮಾಡುವವರಿಗೇ ಬಲ ಸಿಗುತ್ತದೆ!':'ಗುಂಡಿಗಳನ್ನು ಒತ್ತಿ ಬಲ ಹೆಚ್ಚಿಸಿ.'}</div>`}
+
+/* ---------- ಸಾರಾಂಶ ---------- */
+const SUM=['ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಶ್ರೀಚಕ್ರಧರ, ಸಂತ ನಾಮದೇವ, ಸಂತ ಜ್ಞಾನೇಶ್ವರ, ಸಂತ ಚೋಖಾಮೇಳ ಇವರಿಂದ ಸಂತ ಪರಂಪರೆ ಆರಂಭವಾಯಿತು; ಸಮಾಜದ ವಿವಿಧ ಸ್ತರಗಳಿಂದ ಬಂದ ಸಂತರು ಅದನ್ನು ಮುಂದೆ ನಡೆಸಿದರು.',
+ 'ಸಂತ ಸಮೂಹ: ಗೋರೋಬಾ, ಸಾವತಾ, ನರಹರಿ, ಏಕನಾಥ, ಶೇಖ್ ಮಹಮ್ಮದ್, ತುಕಾರಾಮ, ನಿಳೋಬಾ; ಜನಾಬಾಯಿ, ಸೋಯರಾಬಾಯಿ, ನಿರ್ಮಳಾಬಾಯಿ, ಮುಕ್ತಾಬಾಯಿ, ಕಾನ್ಹೋಪಾತ್ರಾ, ಬಹಿಣಾಬಾಯಿ ಶಿಊರಕರ್.',
+ 'ಸಂತರು ದಯೆ, ಅಹಿಂಸೆ, ಪರೋಪಕಾರ, ಸೇವೆ, ಸಮಾನತೆ, ಭ್ರಾತೃತ್ವ ಇವುಗಳ ಬೋಧನೆ ನೀಡಿದರು – “ಯಾರೂ ಚಿಕ್ಕವರಲ್ಲ, ಯಾರೂ ದೊಡ್ಡವರಲ್ಲ, ಎಲ್ಲರೂ ಸಮಾನ.”',
+ 'ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿ – ಮೂಲತಃ ಗುಜರಾತಿನ ರಾಜಕುಮಾರ; ಸ್ತ್ರೀ-ಪುರುಷ, ಜಾತಿ-ಪಾತಿ ಭೇದಭಾವ ಒಪ್ಪುತ್ತಿರಲಿಲ್ಲ; ‘ಮಹಾನುಭಾವ ಪಂಥ’; ನೆನಪುಗಳ ಸಂಗ್ರಹ ‘ಲೀಳಾಚರಿತ್ರ’.',
+ 'ಸಂತ ನಾಮದೇವ – ನರಸೀ ಗ್ರಾಮದವರು, ವಿಠ್ಠಲನ ಅನನ್ಯ ಭಕ್ತ; ಅಭಂಗಗಳು, ಕೀರ್ತನೆಗಳು; ಭಾಗವತ ಧರ್ಮದ ಪ್ರಸಾರ; ಪಂಜಾಬಿನಲ್ಲಿ ಹಿಂದಿ ಪದಗಳು – ಕೆಲವು ಪದಗಳು ಸಿಖ್ಖರ ‘ಗುರುಗ್ರಂಥ ಸಾಹಿಬ್’ನಲ್ಲಿವೆ.',
+ 'ಸಂತ ಜ್ಞಾನೇಶ್ವರ – ಆಪೇಗಾಂವದವರು; ಸಹೋದರರು ನಿವೃತ್ತಿನಾಥ, ಸೋಪಾನದೇವ; ತಂಗಿ ಮುಕ್ತಾಬಾಯಿ. ಮರಾಠಿಯಲ್ಲಿ ‘ಜ್ಞಾನೇಶ್ವರಿ’ ಬರೆದರು; ಆಳಂದಿಯಲ್ಲಿ ಸಂಜೀವನ (ಜೀವಂತ) ಸಮಾಧಿ.',
+ 'ಸಂತ ಏಕನಾಥ – ಪೈಠಣದವರು; ಅಭಂಗ, ಓವಿ, ಭಾರೂಡಗಳು; ಮೇಲು-ಕೀಳು ಭೇದಭಾವ ಮಾಡಬೇಡಿ; ಪ್ರಾಣಿಮಾತ್ರರ ಮೇಲೆ ದಯೆ. ಮರಳುಗಾಡಿನಲ್ಲಿ ಅಳುತ್ತಿದ್ದ ಮಗುವನ್ನು ಸೊಂಟದಲ್ಲಿ ಎತ್ತಿಕೊಂಡು ಮನೆಗೆ ತಲುಪಿಸಿದರು.',
+ 'ಸಂತ ತುಕಾರಾಮ – ದೇಹೂ ಗ್ರಾಮದವರು; ಸಾಲದ ಪತ್ರಗಳನ್ನು ಇಂದ್ರಾಯಣಿಯಲ್ಲಿ ಮುಳುಗಿಸಿ ಅನೇಕರನ್ನು ಸಾಲಮುಕ್ತ ಮಾಡಿದರು; ಕೀರ್ತನೆಗಳು, ಅಭಂಗಗಳು; ‘ತುಕಾರಾಮ ಗಾಥಾ’; “ಜ್ಞಾನಬಾ-ತುಕಾರಾಮ” ಜಯಘೋಷ.',
+ 'ಸಮರ್ಥ ರಾಮದಾಸ – ಜಾಂಬ (ಗೋದಾವರಿ ದಂಡೆ, ಮರಾಠವಾಡ) ಎಂಬಲ್ಲಿ ರಾಮನವಮಿಯಂದು ಜನನ; ಮೂಲ ಹೆಸರು ನಾರಾಯಣ; ‘ದಾಸಬೋಧ’, ಮನದ ಶ್ಲೋಕ; ಹನುಮಂತನ ದೇವಾಲಯಗಳು; “ಸಾಮರ್ಥ್ಯ ಇರುವುದು ಚಳವಳಿಯಲ್ಲಿ…”.',
+ 'ಸಂತರ ಕಾರ್ಯದಿಂದ ಜನಜಾಗೃತಿ ಆಯಿತು, ಧರ್ಮದ ಬಗ್ಗೆ ಗೌರವ ಹೆಚ್ಚಿತು, ಜನರ ಮನಸ್ಸಿನಲ್ಲಿ ಆತ್ಮವಿಶ್ವಾಸ ಮೂಡಿತು; ಶಿವರಾಯರು ಇದನ್ನು ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಗೆ ಬಳಸಿಕೊಂಡರು.'];
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+const L=[
+{h:'ಸಂತ ಪರಂಪರೆ – ಸಂತರ ಸಮೂಹ',s:'ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಶ್ರೀಚಕ್ರಧರ, ಸಂತ ನಾಮದೇವ, ಸಂತ ಜ್ಞಾನೇಶ್ವರ, ಸಂತ ಚೋಖಾಮೇಳ ಈ ಸಂತರಿಂದ ಆರಂಭವಾದ ಸಂತ ಪರಂಪರೆಯನ್ನು ಸಮಾಜದ ವಿವಿಧ ಸ್ತರಗಳಿಂದ ಬಂದ ಸಂತರು ಮುಂದೆ ನಡೆಸಿದರು. ಅವರು ಜನರಿಗೆ ದಯೆ, ಅಹಿಂಸೆ, ಪರೋಪಕಾರ, ಸೇವೆ, ಸಮಾನತೆ, ಭ್ರಾತೃತ್ವ ಮುಂತಾದ ಗುಣಗಳ ಬೋಧನೆ ನೀಡಿದರು. ಯಾರೂ ಚಿಕ್ಕವರಲ್ಲ, ಯಾರೂ ದೊಡ್ಡವರಲ್ಲ, ಎಲ್ಲರೂ ಸಮಾನ ಎಂಬ ಸಮಾನತೆಯ ಭಾವನೆಯನ್ನು ಸಂತರು ಜನರ ಮನದಲ್ಲಿ ನಿರ್ಮಿಸಿದರು. ಹಾಗೆಯೇ ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಸಮರ್ಥ ರಾಮದಾಸರು ಸಮಾಜ ಜಾಗೃತಿಯ ಕಾರ್ಯ ಮಾಡಿದರು.',b:()=>`
+ <div class="key">ಸಂತ ಪರಂಪರೆಯ ಆರಂಭ: <b>ಶ್ರೀಚಕ್ರಧರ, ಸಂತ ನಾಮದೇವ, ಸಂತ ಜ್ಞಾನೇಶ್ವರ, ಸಂತ ಚೋಖಾಮೇಳ</b>. ಸಮಾಜದ <b>ವಿವಿಧ ಸ್ತರಗಳಿಂದ</b> ಬಂದ ಸಂತರು ಅದನ್ನು ಮುಂದೆ ನಡೆಸಿದರು.</div>
+ <div class="chips">${SANT.map(s=>`<span class="chip" onclick="say('${s}')">🙏 ${s}</span>`).join('')}</div>
+ <div class="tap">👆 ಹೆಸರಿನ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ – ಹೆಸರು ಕೇಳಿ. ಹಾಗೆಯೇ ಸಮರ್ಥ ರಾಮದಾಸರು ಸಮಾಜ ಜಾಗೃತಿಯ ಕಾರ್ಯ ಮಾಡಿದರು.</div>
+ <h3>🎁 ಸಂತರ ಗುಣ ಪೆಟ್ಟಿಗೆ</h3><div id="gunBox"></div>`,a:()=>drawGun()},
+{h:'ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿ',s:'ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿ ಮೂಲತಃ ಗುಜರಾತಿನ ಒಬ್ಬ ರಾಜಕುಮಾರ. ವೈರಾಗ್ಯ ವೃತ್ತಿಯನ್ನು ಧರಿಸಿ ಅವರು ಮಹಾರಾಷ್ಟ್ರಕ್ಕೆ ಬಂದರು. ಇಲ್ಲಿ ಸಂಚರಿಸುತ್ತಿರುವಾಗ ಅವರು ಸಮಾನತೆಯ ಉಪದೇಶ ಮಾಡಿದರು. ಅವರಿಗೆ ಸ್ತ್ರೀ-ಪುರುಷ, ಜಾತಿ-ಪಾತಿ ಈ ಭೇದಭಾವಗಳು ಒಪ್ಪಿತವಾಗಿರಲಿಲ್ಲ. ಆದ್ದರಿಂದ ಅವರಿಗೆ ಅನೇಕ ಸ್ತ್ರೀ-ಪುರುಷ ಅನುಯಾಯಿಗಳು ಸಿಕ್ಕರು. ಅವರು ಸ್ಥಾಪಿಸಿದ ಪಂಥಕ್ಕೆ ಮಹಾನುಭಾವ ಪಂಥ ಎನ್ನುತ್ತಾರೆ. ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿಯವರ ನೆನಪುಗಳ ಸಂಗ್ರಹವೇ ಲೀಳಾಚರಿತ್ರ ಎಂಬ ಗ್ರಂಥ.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">👑➡️🧘</div><div class="tt">ರಾಜಕುಮಾರನಿಂದ ಸಂನ್ಯಾಸಿಯವರೆಗೆ</div><div class="dd">ಬೇರು <b>ಗುಜರಾತಿನ ರಾಜಕುಮಾರ</b>. <b>ವೈರಾಗ್ಯ ವೃತ್ತಿ</b> ಧರಿಸಿ ಮಹಾರಾಷ್ಟ್ರಕ್ಕೆ ಬಂದರು; ಸಂಚರಿಸುತ್ತಾ <b>ಸಮಾನತೆಯ ಉಪದೇಶ</b> ನೀಡಿದರು.</div></div>
+  <div class="tile op"><div class="ic">⚖️</div><div class="tt">ಭೇದಭಾವ ಇಲ್ಲ</div><div class="dd"><b>ಸ್ತ್ರೀ-ಪುರುಷ, ಜಾತಿ-ಪಾತಿ</b> ಈ ಭೇದಭಾವಗಳು ಒಪ್ಪಿತವಾಗಿರಲಿಲ್ಲ ➜ ಅನೇಕ ಸ್ತ್ರೀ-ಪುರುಷ ಅನುಯಾಯಿಗಳು.</div></div>
+  <div class="tile op"><div class="ic">📿</div><div class="tt">ಮಹಾನುಭಾವ ಪಂಥ</div><div class="dd">ಅವರು ಸ್ಥಾಪಿಸಿದ ಪಂಥ.</div></div>
+  <div class="tile op"><div class="ic">📖</div><div class="tt">ಲೀಳಾಚರಿತ್ರ</div><div class="dd">ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿಯವರ <b>ನೆನಪುಗಳ ಸಂಗ್ರಹ</b>.</div></div>
+ </div>
+ ${pickGame('cka',[['ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿ ಮೂಲತಃ ಎಲ್ಲಿಯವರು?',['ಗುಜರಾತ್','ಪಂಜಾಬ್','ಕರ್ನಾಟಕ'],0],['ಅವರು ಸ್ಥಾಪಿಸಿದ ಪಂಥ?',['ವಾರಕರಿ ಪಂಥ','ಮಹಾನುಭಾವ ಪಂಥ','ನಾಥ ಪಂಥ'],1],['ಅವರ ನೆನಪುಗಳ ಸಂಗ್ರಹ?',['ದಾಸಬೋಧ','ಲೀಳಾಚರಿತ್ರ','ಗಾಥಾ'],1]],'cka')}`,a:()=>drawGames()},
+{h:'ಸಂತ ನಾಮದೇವ',s:'ಸಂತ ನಾಮದೇವರು ವಿಠ್ಠಲನ ಅನನ್ಯ ಭಕ್ತರಾಗಿದ್ದರು. ಅವರು ನರಸೀ ಗ್ರಾಮದವರು. ಅವರು ಅನೇಕ ಅಭಂಗಗಳನ್ನು ರಚಿಸಿದರು, ಕೀರ್ತನೆಗಳನ್ನು ಮಾಡಿದರು ಮತ್ತು ಜನರಲ್ಲಿ ಜಾಗೃತಿ ಮೂಡಿಸಿದರು. ಭಾಗವತ ಧರ್ಮದ ಪ್ರಸಾರಕ್ಕಾಗಿ ಮಹಾರಾಷ್ಟ್ರದಾದ್ಯಂತ ಸಂಚರಿಸಿದರು. ನಂತರ ಭಾರತದಾದ್ಯಂತ ಪ್ರಯಾಣಿಸಿ ಮಾನವಧರ್ಮದ ಸಂದೇಶ ತಲುಪಿಸಿದರು. ಅವರು ಪಂಜಾಬಿಗೆ ಹೋದರು. ಹಿಂದಿ ಭಾಷೆಯಲ್ಲಿ ಪದಗಳನ್ನು ಬರೆದರು. ಅವರ ಕೆಲವು ಪದಗಳು ಇಂದಿಗೂ ಸಿಖ್ ಜನರ ಗುರುಗ್ರಂಥ ಸಾಹಿಬ್ ಎಂಬ ಧರ್ಮಗ್ರಂಥದಲ್ಲಿ ಸೇರಿವೆ.',b:()=>`
+ <div class="key"><b>ವಿಠ್ಠಲನ ಅನನ್ಯ ಭಕ್ತ</b> · ಗ್ರಾಮ: <b>ನರಸೀ</b> · ಅನೇಕ <b>ಅಭಂಗ</b>, <b>ಕೀರ್ತನೆಗಳು</b> · ಭಾಗವತ ಧರ್ಮದ ಪ್ರಸಾರಕ್ಕಾಗಿ ಮಹಾರಾಷ್ಟ್ರದಾದ್ಯಂತ ಸಂಚಾರ · <b>ಧರ್ಮ ರಕ್ಷಣೆ ಮತ್ತು ಭಕ್ತಿಮಾರ್ಗದ</b> ದೃಢ ನಿರ್ಧಾರ.</div>
+ <h3>🗺️ ನಾಮದೇವರ ಪ್ರಯಾಣ (ಕ್ರಮವಾಗಿ ಜೋಡಿಸಿ)</h3>${orderGame('nam',['🏡 ನರಸೀ ಗ್ರಾಮ','🚶 ಮಹಾರಾಷ್ಟ್ರದಾದ್ಯಂತ ಸಂಚಾರ – ಭಾಗವತ ಧರ್ಮದ ಪ್ರಸಾರ','🇮🇳 ಭಾರತದಾದ್ಯಂತ ಪ್ರಯಾಣ – ಮಾನವಧರ್ಮದ ಸಂದೇಶ','🌾 ಪಂಜಾಬ್ – ಹಿಂದಿ ಭಾಷೆಯಲ್ಲಿ ಪದಗಳು','📗 ಕೆಲವು ಪದಗಳು ‘ಗುರುಗ್ರಂಥ ಸಾಹಿಬ್’ನಲ್ಲಿ'],'nam')}
+ <div class="know"><b class="h">💡 ಗೊತ್ತೇ?</b> ಸಂತ ನಾಮದೇವರ ಕೆಲವು ಪದಗಳು ಇಂದಿಗೂ <b>ಸಿಖ್</b> ಜನರ <b>‘ಗುರುಗ್ರಂಥ ಸಾಹಿಬ್’</b> ಈ ಧರ್ಮಗ್ರಂಥದಲ್ಲಿವೆ. ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಅವರ ಅಭಂಗಗಳನ್ನು ಮನೆಮನೆಗಳಲ್ಲಿ ಬಹಳ ಭಕ್ತಿಯಿಂದ ಹಾಡುತ್ತಾರೆ.</div>`,a:()=>drawGames()},
+{h:'ಸಂತ ಜ್ಞಾನೇಶ್ವರ – ಬಾಲ್ಯ',s:'ಸಂತ ಜ್ಞಾನೇಶ್ವರರು ಆಪೇಗಾಂವದವರು. ನಿವೃತ್ತಿನಾಥ ಮತ್ತು ಸೋಪಾನದೇವ ಅವರ ಸಹೋದರರು. ಮುಕ್ತಾಬಾಯಿ ಅವರ ತಂಗಿ. ಆಗಿನ ಸಂಪ್ರದಾಯವಾದಿ ಜನರು ಈ ಮಕ್ಕಳನ್ನು ಸಂನ್ಯಾಸಿಯ ಮಕ್ಕಳೆಂದು ಹೀಯಾಳಿಸುತ್ತಿದ್ದರು. ಜನರು ಅವರನ್ನು ಬಹಿಷ್ಕರಿಸಿದ್ದರು. ಜ್ಞಾನೇಶ್ವರರು ಒಮ್ಮೆ ಭಿಕ್ಷೆಯ ಜೋಳಿಗೆ ಹಿಡಿದು ಊರಿಗೆ ಹೋದರು; ಆದರೆ ಯಾರೂ ಅವರಿಗೆ ಭಿಕ್ಷೆ ಹಾಕಲಿಲ್ಲ. ಅವರ ಬಾಲ ಮನಸ್ಸಿಗೆ ತುಂಬ ದುಃಖವಾಯಿತು. ಅವರು ಗುಡಿಸಲಿನ ಬಾಗಿಲು ಮುಚ್ಚಿ ಒಳಗೆ ದುಃಖಿಸುತ್ತಾ ಕುಳಿತರು. ಅಷ್ಟರಲ್ಲಿ ಅಲ್ಲಿಗೆ ಮುಕ್ತಾ ಬಂದಳು.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">👨‍👩‍👧‍👦</div><div class="tt">ನಾಲ್ವರು ಒಡಹುಟ್ಟಿದವರು</div><div class="dd"><b>ನಿವೃತ್ತಿನಾಥ, ಜ್ಞಾನೇಶ್ವರ, ಸೋಪಾನದೇವ</b> ಮತ್ತು ತಂಗಿ <b>ಮುಕ್ತಾಬಾಯಿ</b>. ಗ್ರಾಮ: <b>ಆಪೇಗಾಂವ</b>.</div></div>
+  <div class="tile op"><div class="ic">😔</div><div class="tt">ಹಿಂಸೆ ಏಕೆ ಆಯಿತು?</div><div class="dd">ತಂದೆ ಸಂನ್ಯಾಸ ತೆಗೆದುಕೊಂಡು ಮನೆ ಬಿಟ್ಟಿದ್ದರು; ಗುರುವಿನ ಆಜ್ಞೆಯ ಮೇರೆಗೆ ಮರಳಿ ಬಂದು ಸಂಸಾರ ಮಾಡಿದರು. ಇದು ಆಗಿನ <b>ಸಂಪ್ರದಾಯವಾದಿಗಳಿಗೆ</b> ಒಪ್ಪಿತವಾಗಲಿಲ್ಲ; ಅವರು ಈ ಮಕ್ಕಳನ್ನು <b>ಬಹಿಷ್ಕರಿಸಿ</b> ಹಿಂಸಿಸಿದರು.</div></div>
+ </div>
+ <h3>🚪 ಮುಕ್ತಾಬಾಯಿಯ ತಟ್ಟಿ</h3><div id="tatiBox"></div>
+ <div class="tap">💡 <b>ಬಹಿಷ್ಕಾರ ಹಾಕುವುದು</b> = ಸಮಾಜ ಸಂಬಂಧ ಕಡಿದುಕೊಳ್ಳುವುದು. <b>ತಟ್ಟಿ</b> = ಹುಲ್ಲು/ಕಡ್ಡಿಗಳ ಬಾಗಿಲು. <b>ಸಂಪ್ರದಾಯವಾದಿ</b> = ಹಳೆಯ ರೂಢಿಗಳನ್ನು ಕಟ್ಟುನಿಟ್ಟಾಗಿ ಹಿಡಿದುಕೊಂಡಿರುವವರು.</div>`,a:()=>drawTati()},
+{h:'ಸಂತ ಜ್ಞಾನೇಶ್ವರ – ಜ್ಞಾನೇಶ್ವರಿ',s:'ತಂಗಿಯ ಉಪದೇಶದಿಂದ ಜ್ಞಾನೇಶ್ವರರಿಗೆ ಹುರುಪು ಬಂತು. ಅಲ್ಲಲ್ಲಿ ಬಡವರನ್ನು, ಹಿಂದುಳಿದ ಜನರನ್ನು ಧರ್ಮದ ಹೆಸರಿನಲ್ಲಿ ಹಿಂಸಿಸಲಾಗುತ್ತಿತ್ತು. ಆಗ ಜ್ಞಾನೇಶ್ವರರು ಉಪದೇಶ ಮಾಡಿದರು, ಈಶ್ವರನಲ್ಲಿ ಶ್ರದ್ಧೆ ಇಡಿ. ಎಲ್ಲರೊಂದಿಗೆ ಸಮಾನತೆಯಿಂದ ನಡೆದುಕೊಳ್ಳಿ. ದುಃಖಿತರಿಗೆ ಸಹಾಯ ಮಾಡಿ, ಅವರ ದುಃಖ ದೂರ ಮಾಡಿ. ಆ ಕಾಲದಲ್ಲಿ ಧರ್ಮದ ಜ್ಞಾನ ಸಂಸ್ಕೃತ ಗ್ರಂಥಗಳಲ್ಲಿ ಬಂಧಿಯಾಗಿತ್ತು. ಜ್ಞಾನೇಶ್ವರರು ಮರಾಠಿ ಭಾಷೆಯಲ್ಲಿ ಜ್ಞಾನೇಶ್ವರಿ ಎಂಬ ಬಹಳ ದೊಡ್ಡ ಗ್ರಂಥ ಬರೆದರು. ಜ್ಞಾನೇಶ್ವರರು ಯೌವನದಲ್ಲಿ ಪುಣೆಯ ಹತ್ತಿರ ಆಳಂದಿಯಲ್ಲಿ ಜೀವಂತ ಸಮಾಧಿ ಪಡೆದರು.',b:()=>`
+ <div class="pledge">🙏 ಜ್ಞಾನೇಶ್ವರರ ಉಪದೇಶ: <b>“ಈಶ್ವರನಲ್ಲಿ ಶ್ರದ್ಧೆ ಇಡಿ. ಎಲ್ಲರೊಂದಿಗೆ ಸಮಾನತೆಯಿಂದ ನಡೆದುಕೊಳ್ಳಿ. ದುಃಖಿತರಿಗೆ ಸಹಾಯ ಮಾಡಿ, ಅವರ ದುಃಖ ದೂರ ಮಾಡಿ.”</b><br><small>ಈ ಉಪದೇಶ ಕಳೆದ ಏಳುನೂರು ವರ್ಷಗಳಿಂದ ಮಹಾರಾಷ್ಟ್ರದ ಮೂಲೆಮೂಲೆಗಳಲ್ಲಿ ಮೊಳಗುತ್ತಿದೆ.</small></div>
+ <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0">
+  <div class="tile" style="text-align:center;min-width:120px"><div class="ic">🔒📜</div><div class="tt">ಸಂಸ್ಕೃತ ಗ್ರಂಥಗಳು</div><small>ಸಾಮಾನ್ಯರಿಗೆ ಅರ್ಥವಾಗದವು – ಜ್ಞಾನ ಬಂಧಿ</small></div>
+  <div style="font-size:28px">➜</div>
+  <div class="tile op" style="text-align:center;min-width:120px"><div class="ic">🔓📖</div><div class="tt">ಜ್ಞಾನೇಶ್ವರಿ (ಮರಾಠಿ)</div><small>ಜನರ ಆಡುಭಾಷೆಯಲ್ಲಿ – ಜ್ಞಾನದ ಭಂಡಾರ ತೆರೆದಿದೆ</small></div></div>
+ <div class="key">ಸಾಮಾನ್ಯ ಜನರ ಮಾತಿನ ಮತ್ತು ವ್ಯವಹಾರದ ಭಾಷೆ <b>ಕನ್ನಡ</b> ಆಗಿತ್ತು, ಆದ್ದರಿಂದ ಜ್ಞಾನೇಶ್ವರರು ಮರಾಠಿಯಲ್ಲಿ <b>‘ಜ್ಞಾನೇಶ್ವರಿ’</b> ಬರೆದರು. ಯೌವನದಲ್ಲಿ ಪುಣೆಯ ಹತ್ತಿರ <b>ಆಳಂದಿ</b> ಇಲ್ಲಿ <b>ಜೀವಂತ (ಸಂಜೀವನ) ಸಮಾಧಿ</b> ಪಡೆದರು. ಇಂದಿಗೂ ಲಕ್ಷಾಂತರ ಜನರು ಪ್ರತಿ ವರ್ಷ <b>ಆಷಾಢಿ-ಕಾರ್ತಿಕಿಗೆ ಆಳಂದಿ-ಪಂಢರಪುರಕ್ಕೆ</b> ಹಾದುಹೋಗುತ್ತವೆ.</div>
+ ${pickGame('dnya',[['ಜ್ಞಾನೇಶ್ವರರು ಯಾವ ಭಾಷೆಯಲ್ಲಿ ಜ್ಞಾನೇಶ್ವರಿ ಬರೆದರು?',['ಸಂಸ್ಕೃತ','ಕನ್ನಡ','ಹಿಂದಿ'],1],['ಜ್ಞಾನೇಶ್ವರರು ಸಮಾಧಿ ಎಲ್ಲಿ ಪಡೆದರು?',['ಪೈಠಣ','ದೇಹೂ','ಆಳಂದಿ'],2],['ಆ ಕಾಲದಲ್ಲಿ ಧರ್ಮದ ಜ್ಞಾನ ಯಾವ ಗ್ರಂಥಗಳಲ್ಲಿ ಬಂಧಿಯಾಗಿತ್ತು?',['ಸಂಸ್ಕೃತ','ಕನ್ನಡ','ಇಂಗ್ಲಿಷ್'],0]],'dnya')}`,a:()=>drawGames()},
+{h:'ಸಂತ ಏಕನಾಥ',s:'ಸಂತ ನಾಮದೇವ ಮತ್ತು ಸಂತ ಜ್ಞಾನೇಶ್ವರರ ಕಾರ್ಯದ ಪರಂಪರೆಯನ್ನು ಸಂತ ಏಕನಾಥರು ಮುಂದೆ ನಡೆಸಿದರು. ಅವರು ಪೈಠಣದವರು. ಅವರು ಭಕ್ತಿಮಾರ್ಗದ ಪ್ರಸಾರ ಮಾಡಿದರು. ಅನೇಕ ಅಭಂಗ, ಓವಿ ಮತ್ತು ಭಾರೂಡಗಳನ್ನು ಬರೆದರು. ಯಾವುದೇ ಮೇಲು-ಕೀಳು ಭೇದಭಾವ ಮಾಡಬೇಡಿ ಎಂದು ಉಪದೇಶ ಮಾಡಿದರು. ಬಡವರನ್ನು, ಹಿಂದುಳಿದ ಜನರನ್ನು ಹತ್ತಿರ ಮಾಡಿಕೊಂಡರು. ಮೂಕ ಪ್ರಾಣಿಗಳ ಮೇಲೂ ದಯೆ ತೋರಿದರು. ಸಂತ ಏಕನಾಥರು ಹೇಗೆ ಮಾತನಾಡುತ್ತಿದ್ದರೋ ಹಾಗೆಯೇ ನಡೆದುಕೊಳ್ಳುತ್ತಿದ್ದರು.',b:()=>`
+ <div class="key">ಗ್ರಾಮ: <b>ಪೈಠಣ</b> · <b>ಅಭಂಗ, ಓವಿ, ಭಾರೂಡ</b> · “ಯಾವುದಾದರೂ <b>ಮೇಲು-ಕೀಳು ಭೇದಭಾವ</b> ಮಾಡಬೇಡಿ” · ಬಡವರನ್ನು ಹತ್ತಿರ ಮಾಡಿಕೊಂಡರು · <b>ಮೂಕ ಪ್ರಾಣಿಗಳ ಮೇಲೂ ದಯೆ</b> · <b>ಹೇಗೆ ಮಾತನಾಡುತ್ತಿದ್ದರೋ ಹಾಗೆಯೇ ನಡೆದುಕೊಳ್ಳುತ್ತಿದ್ದರು</b>.</div>
+ <h3>📖 ಗೋದಾವರಿ ದಡದ ಕಥೆ – ಕ್ರಮವಾಗಿ ಜೋಡಿಸಿ</h3>${orderGame('ek',['🌊 ಮಧ್ಯಾಹ್ನ ಏಕನಾಥರು ಗೋದಾವರಿಯಲ್ಲಿ ಸ್ನಾನಕ್ಕೆ ಹೊರಟರು','☀️ ಬಿಸಿಲು ಸುಡುತ್ತಿತ್ತು, ಮರಳುಗಾಡು ಕಾದಿತ್ತು','😭 ಕಾದ ಮರಳಿನ ಮೇಲೆ ಒಂದು ಮಗು ಅಳುತ್ತಾ ಕುಳಿತಿತ್ತು','🏃 ಓಡಿ ಹೋಗಿ ಅವರು ಮಗುವನ್ನು ಸೊಂಟದಲ್ಲಿ ಎತ್ತಿಕೊಂಡು ಕಣ್ಣೀರು ಒರೆಸಿದರು','🏠 ಅದನ್ನು ಅದರ ಮನೆಗೆ ತಲುಪಿಸಿದರು'],'ek')}
+ <div class="msg ok">ಹೀಗೆ ತಮ್ಮದೇ <b>ನಡವಳಿಕೆಯಿಂದ</b> ಏಕನಾಥರು <b>ಸಮಾನತೆ ಮತ್ತು ಮಮತೆಯ</b> ಭಾವನೆಯನ್ನು ಜನರ ಮನಸ್ಸಿನಲ್ಲಿ ಬೇರೂರಿಸಿದರು.</div>`,a:()=>drawGames()},
+{h:'ಸಂತ ತುಕಾರಾಮ',s:'ಶಿವಾಜಿ ಮಹಾರಾಜರ ಕಾಲದಲ್ಲಿ ತುಕಾರಾಮ ಮತ್ತು ರಾಮದಾಸ ಎಂಬ ಸಂತರು ಆಗಿಹೋದರು. ಸಂತ ತುಕಾರಾಮರು ಪುಣೆಯ ಹತ್ತಿರದ ದೇಹೂ ಗ್ರಾಮದವರು. ಅವರ ಮನೆಯಲ್ಲಿ ಕೃಷಿ ಇತ್ತು. ದಿನಸಿ ಅಂಗಡಿಯೂ ಇತ್ತು. ತುಕಾರಾಮರು ತಮ್ಮ ಪಾಲಿನ ಸಾಲದ ಪತ್ರಗಳನ್ನು ಇಂದ್ರಾಯಣಿ ನದಿಯಲ್ಲಿ ಮುಳುಗಿಸಿ ಅನೇಕರನ್ನು ಸಾಲಮುಕ್ತ ಮಾಡಿದರು. ಅವರು ವಿಠ್ಠಲನ ಭಜನೆ ಮಾಡುತ್ತಿದ್ದರು, ಕೀರ್ತನೆ ಮಾಡುತ್ತಿದ್ದರು, ಅಭಂಗ ರಚಿಸುತ್ತಿದ್ದರು. ಶಿವರಾಯರೂ ಅವರ ಕೀರ್ತನೆಗೆ ಹೋಗುತ್ತಿದ್ದರು. ಜ್ಞಾನೇಶ್ವರರನ್ನೇ ಜ್ಞಾನಬಾ ಎನ್ನುತ್ತಾರೆ. ತುಕಾರಾಮ ಗಾಥಾ ಇಂದಿಗೂ ಮನೆಮನೆಗಳಲ್ಲಿ ಓದಲಾಗುತ್ತದೆ.',b:()=>`
+ <div class="key">ಗ್ರಾಮ: <b>ದೇಹೂ</b> (ಪುಣೆಯ ಹತ್ತಿರ) · ಮನೆಯಲ್ಲಿ ಕೃಷಿ ಮತ್ತು ದಿನಸಿ ಅಂಗಡಿ · ಆಷಾಢಿ-ಕಾರ್ತಿಕಿಗೆ <b>ಪಂಢರಿ</b> · ಕೀರ್ತನೆ, <b>ಅಭಂಗ</b> · <b>ಶಿವರಾಯರೂ</b> ಅವರ ಕೀರ್ತನೆಗೆ ಹೋಗುತ್ತಿದ್ದರು · ಬೋಧನೆ: <b>ದಯೆ, ಕ್ಷಮೆ, ಶಾಂತಿ</b>, ಸಮಾನತೆ.</div>
+ <h3>📜 ಸಾಲದ ಪತ್ರಗಳು ನದಿಯಲ್ಲಿ</h3><div id="kjBox"></div>
+ <div class="pledge">🎵 <b>“ಯಾರು ನೊಂದವರು ಬಳಲಿದವರು | ಅವರನ್ನು ತನ್ನವರೆಂದು ಹೇಳುವನು |<br>ಅವನನ್ನೇ ಸಾಧು ಎಂದು ಗುರುತಿಸಬೇಕು | ದೇವರು ಅಲ್ಲಿಯೇ ಎಂದು ತಿಳಿಯಬೇಕು ||”</b><br><small>ಅರ್ಥ: ನೊಂದವರು, ಪೀಡಿತರು ಯಾರೋ ಅವರನ್ನು ಯಾರು ತನ್ನವರೆಂದು ಭಾವಿಸುತ್ತಾನೋ, ಅವನೇ ನಿಜವಾದ ಸಾಧು; ದೇವರು ಅಲ್ಲಿಯೇ ಇದ್ದಾನೆ ಎಂದು ತಿಳಿಯಬೇಕು.</small> <button class="say" style="float:none" onclick="say('ಯಾರು ನೊಂದವರು ಬಳಲಿದವರು. ಅವರನ್ನು ತನ್ನವರೆಂದು ಹೇಳುವನು. ಅವನನ್ನೇ ಸಾಧು ಎಂದು ಗುರುತಿಸಬೇಕು. ದೇವರು ಅಲ್ಲಿಯೇ ಎಂದು ತಿಳಿಯಬೇಕು.')">🗣</button></div>
+ <div class="tap">ಇಂದಿಗೂ ಮಹಾರಾಷ್ಟ್ರದಾದ್ಯಂತ <b>“ಜ್ಞಾನಬಾ-ತುಕಾರಾಮ”</b> ಈ ಜಯಘೋಷ ಕೇಳಿಸುತ್ತದೆ (ಜ್ಞಾನೇಶ್ವರರನ್ನೇ ‘ಜ್ಞಾನಬಾ’ ಎನ್ನುತ್ತಾರೆ). <b>‘ತುಕಾರಾಮ ಗಾಥಾ’</b> ಇಂದಿಗೂ ಮನೆಮನೆಗಳಲ್ಲಿ ಓದಲಾಗುತ್ತದೆ.</div>`,a:()=>drawKj()},
+{h:'ಸಮರ್ಥ ರಾಮದಾಸ',s:'ಅದೇ ಕಾಲದಲ್ಲಿ ಮಹಾರಾಷ್ಟ್ರದ ಬೆಟ್ಟಗುಡ್ಡಗಳಲ್ಲಿ ಜಯ ಜಯ ರಘುವೀರ ಸಮರ್ಥ ಎಂಬ ರಾಮದಾಸರ ಗರ್ಜನೆ ಮೊಳಗುತ್ತಿತ್ತು. ಅವರು ಮರಾಠವಾಡದಲ್ಲಿ ಗೋದಾವರಿ ದಡದಲ್ಲಿರುವ ಜಾಂಬ ಎಂಬ ಗ್ರಾಮದಲ್ಲಿ ರಾಮನವಮಿಯ ದಿನ ಜನಿಸಿದರು. ರಾಮದಾಸರ ಮೂಲ ಹೆಸರು ನಾರಾಯಣ, ಆದರೆ ಅವರು ತಮ್ಮನ್ನು ರಾಮನ ದಾಸ ಎಂದು ಕರೆದುಕೊಳ್ಳತೊಡಗಿದರು. ದಾಸಬೋಧ ಎಂಬ ಗ್ರಂಥದ ಮೂಲಕ ಅವರು ಜನರಿಗೆ ಅಮೂಲ್ಯ ಉಪದೇಶ ಮಾಡಿದರು. ಮನದ ಶ್ಲೋಕಗಳ ಮೂಲಕ ಸದ್ವಿಚಾರ ಮತ್ತು ಸದ್ವರ್ತನೆಯ ಬೋಧನೆ ನೀಡಿದರು. ಬಲೋಪಾಸನೆಗಾಗಿ ಅಲ್ಲಲ್ಲಿ ಹನುಮಂತನ ದೇವಾಲಯಗಳನ್ನು ಕಟ್ಟಿಸಿದರು. ಸಾಮರ್ಥ್ಯ ಇರುವುದು ಚಳವಳಿಯಲ್ಲಿ, ಯಾರು ಯಾರು ಮಾಡುತ್ತಾರೋ ಅವರದು, ಎಂಬ ಸಂದೇಶ ನೀಡಿದರು.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">📣</div><div class="tt">ಗರ್ಜನೆ</div><div class="dd"><b>“ಜಯ ಜಯ ರಘುವೀರ ಸಮರ್ಥ”</b></div></div>
+  <div class="tile op"><div class="ic">👶🌊</div><div class="tt">ಜನನ</div><div class="dd">ಮರಾಠವಾಡದಲ್ಲಿ ಗೋದಾವರಿ ದಡದಲ್ಲಿ <b>ಜಾಂಬ</b> ಎಂಬ ಗ್ರಾಮದಲ್ಲಿ, <b>ರಾಮನವಮಿ</b>ಯಂದು. ಮೂಲ ಹೆಸರು <b>ನಾರಾಯಣ</b> – ತಮ್ಮನ್ನು ‘ರಾಮನ ದಾಸ’ ಎಂದು ಕರೆದುಕೊಳ್ಳತೊಡಗಿದರು.</div></div>
+  <div class="tile op"><div class="ic">📖</div><div class="tt">ದಾಸಬೋಧ ಮತ್ತು ಮನದ ಶ್ಲೋಕ</div><div class="dd">‘ದಾಸಬೋಧ’ – ಅಮೂಲ್ಯ ಉಪದೇಶ; ಮನದ ಶ್ಲೋಕ – <b>ಸದ್ವಿಚಾರ ಮತ್ತು ಸದ್ವರ್ತನೆ</b>.</div></div>
+  <div class="tile op"><div class="ic">🛕💪</div><div class="tt">ಬಲೋಪಾಸನೆ</div><div class="dd">ಅಲ್ಲಲ್ಲಿ <b>ಹನುಮಂತನ ದೇವಾಲಯಗಳು</b>; ಶಕ್ತಿಯ ಉಪಾಸನೆ; <b>ಸಂಘಟನೆ</b> ಮತ್ತು <b>ಅನ್ಯಾಯದ ವಿರುದ್ಧ ಪ್ರತಿರೋಧ</b> ಮಾಡುವ ಸ್ಫೂರ್ತಿ ➜ ಜನರಿಗೆ <b>ಧೈರ್ಯ</b> ಬಂತು.</div></div>
+ </div>
+ <h3>💪 ಸಾಮರ್ಥ್ಯ ಹೆಚ್ಚಿಸಿ</h3><div id="balBox"></div>`,a:()=>drawBal()},
+{h:'ಸಂತ – ಊರು – ಗ್ರಂಥ',s:'ಸಂತರು, ಅವರ ಊರುಗಳು ಮತ್ತು ಗ್ರಂಥಗಳ ಜೋಡಿ ಹೊಂದಿಸೋಣ.',b:()=>`
+ <h3>🏡 ಸಂತ ಯಾವ ಊರಿನವರು?</h3>${pickGame('gav',[['ಸಂತ ನಾಮದೇವ',['ನರಸೀ','ಪೈಠಣ','ದೇಹೂ'],0],['ಸಂತ ಜ್ಞಾನೇಶ್ವರ',['ಜಾಂಬ','ಆಪೇಗಾಂವ','ನರಸೀ'],1],['ಸಂತ ಏಕನಾಥ',['ಪೈಠಣ','ಆಳಂದಿ','ದೇಹೂ'],0],['ಸಂತ ತುಕಾರಾಮ',['ಆಪೇಗಾಂವ','ದೇಹೂ','ಜಾಂಬ'],1],['ಸಮರ್ಥ ರಾಮದಾಸ',['ನರಸೀ','ಪೈಠಣ','ಜಾಂಬ'],2]],'gav')}
+ <h3>📚 ಗ್ರಂಥ ಯಾರದ್ದು?</h3>${sortGame('gr',[['ಲೀಳಾಚರಿತ್ರ (ನೆನಪುಗಳು)',0],['ಜ್ಞಾನೇಶ್ವರಿ',1],['ಗಾಥಾ',2],['ದಾಸಬೋಧ',3]],[['ಶ್ರೀಚಕ್ರಧರ','ln'],['ಜ್ಞಾನೇಶ್ವರ','gr'],['ತುಕಾರಾಮ','or'],['ರಾಮದಾಸ','pu']],'gr')}
+ <h3>🎭 ನಾನು ಯಾರು?</h3>${pickGame('mk',[['ನಾನು ಪಾಲಿನ ಸಾಲದ ಪತ್ರಗಳನ್ನು ಇಂದ್ರಾಯಣಿಯಲ್ಲಿ ಮುಳುಗಿಸಿದೆ.',['ತುಕಾರಾಮ','ಏಕನಾಥ','ನಾಮದೇವ'],0],['ನಾನು ಕಾದ ಮರಳುಗಾಡಿನಿಂದ ಅಳುತ್ತಿದ್ದ ಮಗುವನ್ನು ಮನೆಗೆ ತಲುಪಿಸಿದೆ.',['ಜ್ಞಾನೇಶ್ವರ','ಏಕನಾಥ','ರಾಮದಾಸ'],1],['ನಾನು ‘ತಟ್ಟಿ ತೆರೆಯಿರಿ’ ಎಂದು ಅಣ್ಣನಿಗೆ ಉಪದೇಶ ಮಾಡಿದೆ.',['ಜನಾಬಾಯಿ','ಮುಕ್ತಾಬಾಯಿ','ಬಹಿಣಾಬಾಯಿ'],1],['ನನ್ನ ಪದಗಳು ‘ಗುರುಗ್ರಂಥ ಸಾಹಿಬ್’ನಲ್ಲಿವೆ.',['ನಾಮದೇವ','ತುಕಾರಾಮ','ಚಕ್ರಧರ'],0],['ನಾನು ಹನುಮಂತನ ದೇವಾಲಯಗಳನ್ನು ಕಟ್ಟಿಸಿದೆ.',['ರಾಮದಾಸ','ಜ್ಞಾನೇಶ್ವರ','ಏಕನಾಥ'],0]].map(q=>{const s=q[0].length%3,o=[...q[1].slice(s),...q[1].slice(0,s)];return [q[0],o,o.indexOf(q[1][0])]}),'mk')}`,a:()=>drawGames()},
+{h:'ಸಂತರ ಕಾರ್ಯದ ಪರಿಣಾಮ',s:'ಸಾಧು-ಸಂತರ ಕಾರ್ಯದಿಂದ ಜನಜಾಗೃತಿ ಆಯಿತು. ಧರ್ಮದ ಬಗ್ಗೆ ಗೌರವ ಹೆಚ್ಚಿತು. ಜನರ ಮನಸ್ಸಿನಲ್ಲಿ ಆತ್ಮವಿಶ್ವಾಸ ಮೂಡಿತು. ಸಂತರ ಸಾಧನೆಯನ್ನು ಶಿವರಾಯರು ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಗೆ ಬಳಸಿಕೊಂಡರು.',b:()=>`
+ <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px">${[['📢','ಜನಜಾಗೃತಿ ಆಯಿತು'],['🙏','ಧರ್ಮದ ಬಗ್ಗೆ ಗೌರವ ಹೆಚ್ಚಿತು'],['💪','ಆತ್ಮವಿಶ್ವಾಸ ಮೂಡಿತು'],['🚩','ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಗೆ ಬಳಕೆ']].map((x,i)=>`<div class="tile op" style="text-align:center"><div class="ic">${x[0]}</div><div class="tt" style="font-size:15px">${x[1]}</div></div>`).join('')}</div>
+ <h3>🎯 ಸಂತರು ಏನು ಕಲಿಸಿದರು? (ಸರಿ/ತಪ್ಪು)</h3>${sortGame('sk',[['ಎಲ್ಲರೊಂದಿಗೆ ಸಮಾನತೆಯಿಂದ ನಡೆದುಕೊಳ್ಳಿ',0],['ಪ್ರಾಣಿಮಾತ್ರರ ಮೇಲೆ ದಯೆ ತೋರಿ',0],['ಮೇಲು-ಕೀಳು ಭೇದಭಾವ ಪಾಲಿಸಿ',1],['ದುಃಖಿತರಿಗೆ ಸಹಾಯ ಮಾಡಿ',0],['ಅನ್ಯಾಯ ಸಹಿಸಿಕೊಂಡು ಸುಮ್ಮನೆ ಕುಳಿತುಕೊಳ್ಳಿ',1],['ಸಂಘಟಿತರಾಗಿ ಅನ್ಯಾಯವನ್ನು ಪ್ರತಿರೋಧಿಸಿ',0]],[['✔ ಸಂತರ ಬೋಧನೆ','gr'],['✘ ಇಲ್ಲ','or']],'sk')}`,a:()=>drawGames()},
+{h:'ನಾವು ಇದನ್ನು ಅಧ್ಯಯನ ಮಾಡಿದೆವು',s:'ಈ ಪಾಠದಲ್ಲಿ ನಾವು ಮಹಾರಾಷ್ಟ್ರದ ಸಂತರ ಸಾಧನೆಯನ್ನು ನೋಡಿದೆವು. ಬನ್ನಿ ಮನನ ಮಾಡೋಣ.',b:()=>`
+ <ul>${SUM.map(x=>`<li>${x}</li>`).join('')}</ul>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>ಪಾಠದಲ್ಲಿ ಬಂದ ಸಂತರ ಹೊರತಾಗಿ ಇತರ ಸಂತರ ಚಿತ್ರಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ ಅದರ ಕೆಳಗೆ ಅವರ ವಿಚಾರಗಳನ್ನು ಬರೆಯಿರಿ. (ಉದಾ. ಸಂತ ಗಾಡಗೇಬಾಬಾ – ಸ್ವಚ್ಛತೆ; ಸಂತ ತುಕಡೋಜಿ ಮಹಾರಾಜ್ – ಗ್ರಾಮಗೀತೆ)</div>`,a:()=>award('end','ಪಾಠ ಪೂರ್ಣ! ಅಭಿನಂದನೆಗಳು!')}
+];
+let S=0;
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ಮಹಾರಾಷ್ಟ್ರದ ಸಂತ ಪರಂಪರೆ ಯಾವ ಸಂತರಿಂದ ಆರಂಭವಾಯಿತು?',['ಶ್ರೀಚಕ್ರಧರ, ನಾಮದೇವ, ಜ್ಞಾನೇಶ್ವರ, ಚೋಖಾಮೇಳ','ತುಕಾರಾಮ, ರಾಮದಾಸ','ಏಕನಾಥ, ನಿಳೋಬಾ','ಗಾಡಗೇಬಾಬಾ, ತುಕಡೋಜಿ'],0,'ಈ ಸಂತರಿಂದ ಸಂತ ಪರಂಪರೆ ಆರಂಭವಾಯಿತು.'],
+['ಸಂತ ಪರಂಪರೆಯನ್ನು ಯಾರು ಮುಂದೆ ನಡೆಸಿದರು?',['ಸಮಾಜದ ವಿವಿಧ ಸ್ತರಗಳಿಂದ ಬಂದ ಸಂತರು','ಕೇವಲ ರಾಜರು','ಸುಲ್ತಾನರು','ವತನದಾರರು'],0,'ವಿವಿಧ ಸ್ತರಗಳ ಸಂತರು.'],
+['ಕೆಳಗಿನವರಲ್ಲಿ ಯಾರು ಸಂತ ಕವಯಿತ್ರಿ?',['ಸಂತ ಜನಾಬಾಯಿ','ಸಂತ ಸಾವತಾ','ಸಂತ ನರಹರಿ','ಸಂತ ಗೋರೋಬಾ'],0,'ಜನಾಬಾಯಿ, ಸೋಯರಾಬಾಯಿ, ಮುಕ್ತಾಬಾಯಿ, ಕಾನ್ಹೋಪಾತ್ರಾ ಇತ್ಯಾದಿ.'],
+['ಸಂತರು ಯಾವ ಗುಣಗಳ ಬೋಧನೆ ನೀಡಿದರು?',['ದಯೆ, ಅಹಿಂಸೆ, ಪರೋಪಕಾರ, ಸಮಾನತೆ','ಕೋಪ, ದ್ವೇಷ','ಭೇದಭಾವ','ಆಲಸ್ಯ'],0,'ದಯೆ, ಅಹಿಂಸೆ, ಪರೋಪಕಾರ, ಸೇವೆ, ಸಮಾನತೆ, ಭ್ರಾತೃತ್ವ.'],
+['“ಯಾರೂ ಚಿಕ್ಕವರಲ್ಲ, ಯಾರೂ ದೊಡ್ಡವರಲ್ಲ, ಎಲ್ಲರೂ ಸಮಾನ” ಇದು ಯಾವ ಭಾವನೆ?',['ಸಮಾನತೆಯ','ಭಯದ','ಕೋಪದ','ಸ್ಪರ್ಧೆಯ'],0,'ಸಮಾನತೆಯ ಭಾವನೆ.'],
+['ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಸಮಾಜ ಜಾಗೃತಿಯ ಕಾರ್ಯವನ್ನು ಯಾರು ಮಾಡಿದರು?',['ಸಮರ್ಥ ರಾಮದಾಸರು','ಆದಿಲ್‌ಶಾಹ','ನಿಜಾಮಶಾಹ','ವತನದಾರರು'],0,'ಸಮರ್ಥ ರಾಮದಾಸರು.'],
+['ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿ ಮೂಲತಃ ಎಲ್ಲಿಯವರಾಗಿದ್ದರು?',['ಗುಜರಾತ್','ಪಂಜಾಬ್','ಕರ್ನಾಟಕ','ಮರಾಠವಾಡ'],0,'ಗುಜರಾತಿನ ರಾಜಕುಮಾರ.'],
+['ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿ ಮೊದಲು ಯಾರಾಗಿದ್ದರು?',['ರಾಜಕುಮಾರ','ರೈತ','ವ್ಯಾಪಾರಿ','ಸೈನಿಕ'],0,'ರಾಜಕುಮಾರರಾಗಿದ್ದರು.'],
+['ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿಗೆ ಯಾವ ಭೇದಭಾವಗಳು ಒಪ್ಪಿತವಾಗಿರಲಿಲ್ಲ?',['ಸ್ತ್ರೀ-ಪುರುಷ, ಜಾತಿ-ಪಾತಿ','ಕೇವಲ ಭಾಷೆಯದು','ಕೇವಲ ಊರಿನದು','ಕೇವಲ ಶ್ರೀಮಂತ-ಬಡವ'],0,'ಸ್ತ್ರೀ-ಪುರುಷ, ಜಾತಿ-ಪಾತಿ ಭೇದಭಾವ.'],
+['ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿ ಸ್ಥಾಪಿಸಿದ ಪಂಥ ಯಾವುದು?',['ವಾರಕರಿ','ಮಹಾನುಭಾವ','ನಾಥ','ದತ್ತ'],1,'ಮಹಾನುಭಾವ ಪಂಥ.'],
+['ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿಯವರ ನೆನಪುಗಳ ಸಂಗ್ರಹ ಯಾವುದು?',['ಲೀಳಾಚರಿತ್ರ','ಜ್ಞಾನೇಶ್ವರಿ','ದಾಸಬೋಧ','ಗಾಥಾ'],0,'ಲೀಳಾಚರಿತ್ರ.'],
+['ಸಂತ ನಾಮದೇವರು ಯಾರ ಅನನ್ಯ ಭಕ್ತರಾಗಿದ್ದರು?',['ವಿಠ್ಠಲನ','ರಾಮನ','ಹನುಮಂತನ','ಗಣಪತಿಯ'],0,'ವಿಠ್ಠಲನ.'],
+['ಸಂತ ನಾಮದೇವರು ಯಾವ ಊರಿನವರು?',['ನರಸೀ','ದೇಹೂ','ಪೈಠಣ','ಜಾಂಬ'],0,'ನರಸೀ.'],
+['ಸಂತ ನಾಮದೇವರು ಯಾವ ಧರ್ಮದ ಪ್ರಸಾರಕ್ಕಾಗಿ ಮಹಾರಾಷ್ಟ್ರದಾದ್ಯಂತ ಸಂಚರಿಸಿದರು?',['ಭಾಗವತ ಧರ್ಮ','ಮಹಾನುಭಾವ','ನಾಥ','ಜೈನ'],0,'ಭಾಗವತ ಧರ್ಮ.'],
+['ಸಂತ ನಾಮದೇವರು ಯಾವ ರಾಜ್ಯಕ್ಕೆ ಹೋಗಿ ಹಿಂದಿ ಪದಗಳನ್ನು ಬರೆದರು?',['ಪಂಜಾಬ್','ಗುಜರಾತ್','ಬಂಗಾಳ','ಕೇರಳ'],0,'ಪಂಜಾಬ್.'],
+['ಸಂತ ನಾಮದೇವರ ಕೆಲವು ಪದಗಳು ಯಾವ ಧರ್ಮಗ್ರಂಥದಲ್ಲಿವೆ?',['ಗುರುಗ್ರಂಥ ಸಾಹಿಬ್','ಜ್ಞಾನೇಶ್ವರಿ','ದಾಸಬೋಧ','ಲೀಳಾಚರಿತ್ರ'],0,'ಸಿಖ್ಖರ ಗುರುಗ್ರಂಥ ಸಾಹಿಬ್‌ನಲ್ಲಿ.'],
+['ಸಂತ ಜ್ಞಾನೇಶ್ವರರು ಯಾವ ಊರಿನವರು?',['ಆಪೇಗಾಂವ','ದೇಹೂ','ನರಸೀ','ಪೈಠಣ'],0,'ಆಪೇಗಾಂವ.'],
+['ಸಂತ ಜ್ಞಾನೇಶ್ವರರ ಸಹೋದರರು ಯಾರು?',['ನಿವೃತ್ತಿನಾಥ ಮತ್ತು ಸೋಪಾನದೇವ','ಏಕನಾಥ ಮತ್ತು ತುಕಾರಾಮ','ನಾಮದೇವ ಮತ್ತು ಸಾವತಾ','ರಾಮದಾಸ ಮತ್ತು ನಿಳೋಬಾ'],0,'ನಿವೃತ್ತಿನಾಥ ಮತ್ತು ಸೋಪಾನದೇವ.'],
+['ಸಂತ ಜ್ಞಾನೇಶ್ವರರ ತಂಗಿ ಯಾರು?',['ಜನಾಬಾಯಿ','ಮುಕ್ತಾಬಾಯಿ','ಬಹಿಣಾಬಾಯಿ','ಕಾನ್ಹೋಪಾತ್ರಾ'],1,'ಮುಕ್ತಾಬಾಯಿ.'],
+['ಸಂಪ್ರದಾಯವಾದಿ ಜನರು ಜ್ಞಾನೇಶ್ವರ ಮತ್ತು ಒಡಹುಟ್ಟಿದವರಿಗೆ ಏನು ಮಾಡಿದರು?',['ಬಹಿಷ್ಕಾರ ಹಾಕಿದರು','ಬಹುಮಾನ ನೀಡಿದರು','ರಾಜನನ್ನಾಗಿ ಮಾಡಿದರು','ಶಾಲೆಗೆ ಸೇರಿಸಿದರು'],0,'ಬಹಿಷ್ಕರಿಸಿ ಹಿಂಸಿಸಿದರು.'],
+['“ತಟ್ಟಿ ತೆರೆಯಿರಿ ಜ್ಞಾನೇಶ್ವರ” ಎಂದು ಯಾರು ಹೇಳಿದರು?',['ಮುಕ್ತಾಬಾಯಿ','ಜನಾಬಾಯಿ','ನಿವೃತ್ತಿನಾಥ','ನಾಮದೇವ'],0,'ತಂಗಿ ಮುಕ್ತಾಬಾಯಿ.'],
+['ಜ್ಞಾನೇಶ್ವರರು ಜನರಿಗೆ ಯಾವ ಉಪದೇಶ ಮಾಡಿದರು?',['ಎಲ್ಲರೊಂದಿಗೆ ಸಮಾನತೆಯಿಂದ ನಡೆದುಕೊಳ್ಳಿ, ದುಃಖಿತರಿಗೆ ಸಹಾಯ ಮಾಡಿ','ಭೇದಭಾವ ಮಾಡಿ','ಯುದ್ಧ ಮಾಡಿ','ಹಣ ಸಂಗ್ರಹಿಸಿ'],0,'ಈಶ್ವರನಲ್ಲಿ ಶ್ರದ್ಧೆ, ಸಮಾನತೆ, ದುಃಖಿತರಿಗೆ ಸಹಾಯ.'],
+['ಜ್ಞಾನೇಶ್ವರರ ಕಾಲದಲ್ಲಿ ಧರ್ಮದ ಜ್ಞಾನ ಯಾವ ಭಾಷೆಯ ಗ್ರಂಥಗಳಲ್ಲಿ ಬಂಧಿಯಾಗಿತ್ತು?',['ಸಂಸ್ಕೃತ','ಕನ್ನಡ','ಹಿಂದಿ','ಪರ್ಷಿಯನ್'],0,'ಸಂಸ್ಕೃತ.'],
+['ಜ್ಞಾನೇಶ್ವರರು ಯಾವ ಭಾಷೆಯಲ್ಲಿ ‘ಜ್ಞಾನೇಶ್ವರಿ’ ಬರೆದರು?',['ಸಂಸ್ಕೃತ','ಕನ್ನಡ','ಹಿಂದಿ','ಕನ್ನಡ'],1,'ಜನರ ಭಾಷೆಯಲ್ಲಿ – ಮರಾಠಿ.'],
+['ಜ್ಞಾನೇಶ್ವರರು ಸಮಾಧಿ ಎಲ್ಲಿ ಪಡೆದರು?',['ಆಳಂದಿ','ಪೈಠಣ','ದೇಹೂ','ಪಂಢರಪುರ'],0,'ಪುಣೆಯ ಹತ್ತಿರ ಆಳಂದಿಯಲ್ಲಿ.'],
+['ಆಷಾಢಿ-ಕಾರ್ತಿಕಿಗೆ ಲಕ್ಷಾಂತರ ಜನರು ಎಲ್ಲಿಗೆ ಹೋಗುತ್ತಾರೆ?',['ಆಳಂದಿ-ಪಂಢರಿ','ಮುಂಬೈ-ಪುಣೆ','ದೆಹಲಿ','ಗೋವಾ'],0,'ಆಳಂದಿ ಮತ್ತು ಪಂಢರಪುರ.'],
+['ಸಂತ ಏಕನಾಥರು ಯಾವ ಊರಿನವರು?',['ಪೈಠಣ','ದೇಹೂ','ಜಾಂಬ','ಆಪೇಗಾಂವ'],0,'ಪೈಠಣ.'],
+['ಸಂತ ಏಕನಾಥರು ಯಾವ ರೀತಿಯ ಬರವಣಿಗೆ ಮಾಡಿದರು?',['ಅಭಂಗ, ಓವಿ, ಭಾರೂಡ','ಕಾದಂಬರಿ','ನಾಟಕ','ಇಂಗ್ಲಿಷ್ ಕವಿತೆ'],0,'ಅಭಂಗ, ಓವಿ, ಭಾರೂಡ.'],
+['ಸಂತ ಏಕನಾಥರು ಯಾವ ಉಪದೇಶ ಮಾಡಿದರು?',['ಮೇಲು-ಕೀಳು ಭೇದಭಾವ ಮಾಡಬೇಡಿ','ಭೇದಭಾವ ಪಾಲಿಸಿ','ಪ್ರಾಣಿಗಳನ್ನು ಕೊಲ್ಲಿ','ಬಡವರನ್ನು ದೂರವಿಡಿ'],0,'ಯಾವುದೇ ಮೇಲು-ಕೀಳು ಭೇದಭಾವ ಮಾಡಬೇಡಿ.'],
+['ಕಾದ ಮರಳುಗಾಡಿನಲ್ಲಿ ಅಳುತ್ತಿದ್ದ ಮಗುವಿಗೆ ಏಕನಾಥರು ಏನು ಮಾಡಿದರು?',['ಸೊಂಟದಲ್ಲಿ ಎತ್ತಿಕೊಂಡು ಮನೆಗೆ ತಲುಪಿಸಿದರು','ನಿರ್ಲಕ್ಷಿಸಿದರು','ಕೋಪಗೊಂಡರು','ಹಣ ಕೊಟ್ಟು ಹೊರಟುಹೋದರು'],0,'ಸೊಂಟದಲ್ಲಿ ಎತ್ತಿಕೊಂಡರು, ಕಣ್ಣೀರು ಒರೆಸಿದರು, ಮನೆಗೆ ತಲುಪಿಸಿದರು.'],
+['‘ಸಂತ ಏಕನಾಥರು ಹೇಗೆ ಮಾತನಾಡುತ್ತಿದ್ದರೋ ಹಾಗೆಯೇ ನಡೆದುಕೊಳ್ಳುತ್ತಿದ್ದರು’ ಇದರ ಅರ್ಥವೇನು?',['ಉಪದೇಶವನ್ನು ಆಚರಣೆಗೆ ತರುತ್ತಿದ್ದರು','ಕೇವಲ ಮಾತನಾಡುತ್ತಿದ್ದರು','ಸುಳ್ಳು ಹೇಳುತ್ತಿದ್ದರು','ಏನೂ ಮಾಡುತ್ತಿರಲಿಲ್ಲ'],0,'ಮಾತು ಮತ್ತು ಕೃತಿ ಒಂದೇ.'],
+['ಶಿವಾಜಿ ಮಹಾರಾಜರ ಕಾಲದಲ್ಲಿ ಯಾವ ಸಂತರು ಆಗಿಹೋದರು?',['ತುಕಾರಾಮ ಮತ್ತು ರಾಮದಾಸ','ಜ್ಞಾನೇಶ್ವರ ಮತ್ತು ನಾಮದೇವ','ಚಕ್ರಧರ ಮತ್ತು ಚೋಖಾಮೇಳ','ನಾಮದೇವ ಮತ್ತು ಏಕನಾಥ'],0,'ತುಕಾರಾಮ ಮತ್ತು ರಾಮದಾಸ.'],
+['ಸಂತ ತುಕಾರಾಮರು ಯಾವ ಊರಿನವರು?',['ದೇಹೂ','ಆಳಂದಿ','ಪೈಠಣ','ನರಸೀ'],0,'ಪುಣೆಯ ಹತ್ತಿರದ ದೇಹೂ.'],
+['ಸಂತ ತುಕಾರಾಮರು ಸಾಲದ ಪತ್ರಗಳನ್ನು ಯಾವ ನದಿಯಲ್ಲಿ ಮುಳುಗಿಸಿದರು?',['ಇಂದ್ರಾಯಣಿ','ಗೋದಾವರಿ','ಭೀಮಾ','ಕೃಷ್ಣಾ'],0,'ಇಂದ್ರಾಯಣಿ ನದಿಯಲ್ಲಿ.'],
+['ಸಾಲದ ಪತ್ರಗಳನ್ನು ಮುಳುಗಿಸಿದ್ದರಿಂದ ಏನಾಯಿತು?',['ಅನೇಕ ಜನರು ಸಾಲಮುಕ್ತರಾದರು','ಜನರ ಸಾಲ ಹೆಚ್ಚಿತು','ನದಿ ಬತ್ತಿತು','ಅಂಗಡಿ ಬೆಳೆಯಿತು'],0,'ಅನೇಕ ಜನರು ಸಾಲಮುಕ್ತರಾದರು.'],
+['ತುಕಾರಾಮರ ಕೀರ್ತನೆಗೆ ಯಾರು ಹೋಗುತ್ತಿದ್ದರು?',['ಶಿವರಾಯ','ಆದಿಲ್‌ಶಾಹ','ನಿಜಾಮಶಾಹ','ಕುತುಬ್‌ಶಾಹ'],0,'ಶಿವರಾಯರೂ ಹೋಗುತ್ತಿದ್ದರು.'],
+['ಸಂತ ತುಕಾರಾಮರು ಯಾವ ಗುಣಗಳ ಬೋಧನೆ ನೀಡುತ್ತಿದ್ದರು?',['ದಯೆ, ಕ್ಷಮೆ, ಶಾಂತಿ','ಕೋಪ, ದ್ವೇಷ','ಭಯ','ಮತ್ಸರ'],0,'ದಯೆ, ಕ್ಷಮೆ, ಶಾಂತಿ ಮತ್ತು ಸಮಾನತೆ.'],
+['“ಜ್ಞಾನಬಾ-ತುಕಾರಾಮ” ಈ ಜಯಘೋಷದಲ್ಲಿ ‘ಜ್ಞಾನಬಾ’ ಎಂದರೆ ಯಾರು?',['ಸಂತ ಜ್ಞಾನೇಶ್ವರ','ಸಂತ ನಾಮದೇವ','ಸಂತ ಏಕನಾಥ','ಸಮರ್ಥ ರಾಮದಾಸ'],0,'ಜ್ಞಾನೇಶ್ವರರನ್ನೇ ಜ್ಞಾನಬಾ ಎನ್ನುತ್ತಾರೆ.'],
+['ಇಂದಿಗೂ ಮನೆಮನೆಗಳಲ್ಲಿ ಯಾವ ಗಾಥಾ ಓದಲಾಗುತ್ತದೆ?',['ತುಕಾರಾಮ ಗಾಥಾ','ದಾಸಬೋಧ ಗಾಥಾ','ಲೀಳಾ ಗಾಥಾ','ನಾಮದೇವ ಗಾಥಾ ಮಾತ್ರ'],0,'ತುಕಾರಾಮ ಗಾಥಾ.'],
+['“ಜಯ ಜಯ ರಘುವೀರ ಸಮರ್ಥ” ಈ ಗರ್ಜನೆ ಯಾರದ್ದು?',['ಸಮರ್ಥ ರಾಮದಾಸರದ್ದು','ತುಕಾರಾಮರದ್ದು','ಜ್ಞಾನೇಶ್ವರರದ್ದು','ಏಕನಾಥರದ್ದು'],0,'ಸಮರ್ಥ ರಾಮದಾಸರದ್ದು.'],
+['ಸಮರ್ಥ ರಾಮದಾಸರ ಜನ್ಮ ಎಲ್ಲಿ ಆಯಿತು?',['ಜಾಂಬ','ದೇಹೂ','ಆಳಂದಿ','ಪೈಠಣ'],0,'ಮರಾಠವಾಡದಲ್ಲಿ ಗೋದಾವರಿ ದಡದ ಜಾಂಬ ಗ್ರಾಮದಲ್ಲಿ.'],
+['ಸಮರ್ಥ ರಾಮದಾಸರ ಜನ್ಮ ಯಾವ ದಿನ ಆಯಿತು?',['ರಾಮನವಮಿ','ದೀಪಾವಳಿ','ಗುಡಿಪಾಡ್ವಾ','ದಸರಾ'],0,'ರಾಮನವಮಿಯಂದು.'],
+['ಸಮರ್ಥ ರಾಮದಾಸರ ಮೂಲ ಹೆಸರು ಏನಾಗಿತ್ತು?',['ನಾರಾಯಣ','ವಿಠ್ಠಲ','ಜ್ಞಾನದೇವ','ತುಕೋಬಾ'],0,'ನಾರಾಯಣ.'],
+['ಸಮರ್ಥ ರಾಮದಾಸರ ಪ್ರಸಿದ್ಧ ಗ್ರಂಥ ಯಾವುದು?',['ದಾಸಬೋಧ','ಜ್ಞಾನೇಶ್ವರಿ','ಗಾಥಾ','ಲೀಳಾಚರಿತ್ರ'],0,'ದಾಸಬೋಧ.'],
+['ಮನದ ಶ್ಲೋಕಗಳ ಮೂಲಕ ರಾಮದಾಸರು ಯಾವುದರ ಬೋಧನೆ ನೀಡಿದರು?',['ಸದ್ವಿಚಾರ ಮತ್ತು ಸದ್ವರ್ತನೆ','ಯುದ್ಧಕಲೆ','ವ್ಯಾಪಾರ','ಕೃಷಿ'],0,'ಸದ್ವಿಚಾರ ಮತ್ತು ಸದ್ವರ್ತನೆ.'],
+['ಬಲೋಪಾಸನೆಗಾಗಿ ರಾಮದಾಸರು ಯಾರ ದೇವಾಲಯಗಳನ್ನು ಕಟ್ಟಿಸಿದರು?',['ಹನುಮಂತನ','ವಿಠ್ಠಲನ','ಗಣಪತಿಯ','ಶಂಕರನ'],0,'ಹನುಮಂತನ ದೇವಾಲಯಗಳು.'],
+['“ಸಾಮರ್ಥ್ಯ ಇರುವುದು ಚಳವಳಿಯಲ್ಲಿ, ಯಾರು ಯಾರು ಮಾಡುತ್ತಾರೋ ಅವರದು” ಈ ಸಂದೇಶವನ್ನು ಯಾರು ನೀಡಿದರು?',['ಸಮರ್ಥ ರಾಮದಾಸ','ಸಂತ ತುಕಾರಾಮ','ಸಂತ ನಾಮದೇವ','ಸಂತ ಏಕನಾಥ'],0,'ಸಮರ್ಥ ರಾಮದಾಸರು.'],
+['ಸಂತರ ಕಾರ್ಯದ ಪರಿಣಾಮ ಯಾವುದು?',['ಜನಜಾಗೃತಿ ಮತ್ತು ಆತ್ಮವಿಶ್ವಾಸ','ಭಯ ಹೆಚ್ಚಿತು','ಭೇದಭಾವ ಹೆಚ್ಚಿತು','ಯುದ್ಧಗಳು ಹೆಚ್ಚಿದವು'],0,'ಜನಜಾಗೃತಿ, ಧರ್ಮದ ಬಗ್ಗೆ ಗೌರವ, ಆತ್ಮವಿಶ್ವಾಸ.'],
+['ಸಂತರ ಸಾಧನೆಯನ್ನು ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಗೆ ಯಾರು ಬಳಸಿಕೊಂಡರು?',['ಶಿವರಾಯರು','ಆದಿಲ್‌ಶಾಹ','ನಿಜಾಮಶಾಹ','ವತನದಾರರು'],0,'ಶಿವರಾಯರು.']
+];
+
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ಸಂತ ನಾಮದೇವರು ............ ಅನನ್ಯ ಭಕ್ತರಾಗಿದ್ದರು.',['ರಾಮನ','ವಿಠ್ಠಲನ','ಹನುಮಂತನ'],1],
+  ['ಜ್ಞಾನೇಶ್ವರರು ಯೌವನದಲ್ಲಿ ಪುಣೆಯ ಹತ್ತಿರ ............ ಎಂಬಲ್ಲಿ ಜೀವಂತ ಸಮಾಧಿ ಪಡೆದರು.',['ಆಳಂದಿ','ದೇಹೂ','ಪೈಠಣ'],0],
+  ['ಸಂತ ತುಕಾರಾಮರು ತಮ್ಮ ಪಾಲಿನ ಸಾಲದ ಪತ್ರಗಳನ್ನು ............ ನದಿಯಲ್ಲಿ ಮುಳುಗಿಸಿದರು.',['ಗೋದಾವರಿ','ಇಂದ್ರಾಯಣಿ','ಭೀಮಾ'],1],
+  ['ಸಮರ್ಥ ರಾಮದಾಸರು ಬಲೋಪಾಸನೆಗಾಗಿ ಅಲ್ಲಲ್ಲಿ ............ ದೇವಾಲಯಗಳನ್ನು ಕಟ್ಟಿಸಿದರು.',['ವಿಠ್ಠಲನ','ಗಣಪತಿಯ','ಹನುಮಂತನ'],2]],
+ aa:[['ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿಗೆ ಯಾವ ಭೇದಭಾವಗಳು ಒಪ್ಪಿತವಾಗಿರಲಿಲ್ಲ?','ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿಗೆ ಸ್ತ್ರೀ-ಪುರುಷ, ಜಾತಿ-ಪಾತಿ ಈ ಭೇದಭಾವಗಳು ಒಪ್ಪಿತವಾಗಿರಲಿಲ್ಲ.'],
+  ['ಸಂತ ನಾಮದೇವರು ಜನರ ಮನಸ್ಸಿನಲ್ಲಿ ಯಾವ ನಿರ್ಧಾರ ಮೂಡಿಸಿದರು?','ಸಂತ ನಾಮದೇವರು ಜನರ ಮನಸ್ಸಿನಲ್ಲಿ ಧರ್ಮ ರಕ್ಷಣೆ ಮತ್ತು ಭಕ್ತಿಮಾರ್ಗದ ದೃಢ ನಿರ್ಧಾರ ಮೂಡಿಸಿದರು.'],
+  ['ಸಂತ ಏಕನಾಥರು ಜನರಿಗೆ ಯಾವ ಉಪದೇಶ ಮಾಡಿದರು?','ಯಾವುದೇ ಮೇಲು-ಕೀಳು ಭೇದಭಾವ ಮಾಡಬೇಡಿ, ಪ್ರಾಣಿಮಾತ್ರರ ಮೇಲೆ ದಯೆ ತೋರಿ, ಎಂಬ ಉಪದೇಶವನ್ನು ಸಂತ ಏಕನಾಥರು ಜನರಿಗೆ ಮಾಡಿದರು.'],
+  ['ಸಮರ್ಥ ರಾಮದಾಸರು ಯಾವ ಸಂದೇಶ ನೀಡಿದರು?','“ಸಾಮರ್ಥ್ಯ ಇರುವುದು ಚಳವಳಿಯಲ್ಲಿ, ಯಾರು ಯಾರು ಮಾಡುತ್ತಾರೋ ಅವರದು” ಈ ಸಂದೇಶವನ್ನು ಸಮರ್ಥ ರಾಮದಾಸರು ನೀಡಿದರು.']],
+ ii:[['ಸಂತ ಜ್ಞಾನೇಶ್ವರರು ಗುಡಿಸಲಿನಲ್ಲಿ ಬಾಗಿಲು ಮುಚ್ಚಿ ಏಕೆ ಕುಳಿತರು?','ಜ್ಞಾನೇಶ್ವರರು ಭಿಕ್ಷೆಯ ಜೋಳಿಗೆ ಹಿಡಿದು ಊರಿಗೆ ಹೋದರು, ಆದರೆ ಯಾರೂ ಅವರಿಗೆ ಭಿಕ್ಷೆ ಹಾಕಲಿಲ್ಲ. ಎಲ್ಲೆಡೆ ಅವರಿಗೆ ಕೆಟ್ಟ ಮಾತುಗಳನ್ನು ಕೇಳಬೇಕಾಯಿತು. ಅದರಿಂದ ಅವರ ಬಾಲ ಮನಸ್ಸಿಗೆ ತುಂಬ ದುಃಖವಾಯಿತು, ಆದ್ದರಿಂದ ಅವರು ಗುಡಿಸಲಿನ ಬಾಗಿಲು ಮುಚ್ಚಿ ಒಳಗೆ ದುಃಖಿಸುತ್ತಾ ಕುಳಿತರು.'],
+  ['ಸಂತ ತುಕಾರಾಮರು ಜನರ ಮನಸ್ಸಿನಲ್ಲಿ ಯಾವ ಸಂದೇಶ ಬೇರೂರಿಸಿದರು?','ಸಂತ ತುಕಾರಾಮರು ಜನರಿಗೆ ದಯೆ, ಕ್ಷಮೆ, ಶಾಂತಿ ಇವುಗಳ ಬೋಧನೆ ನೀಡಿದರು ಮತ್ತು ಸಮಾನತೆಯ ಉಪದೇಶ ಮಾಡಿದರು. “ಯಾರು ನೊಂದವರು ಬಳಲಿದವರು, ಅವರನ್ನು ತನ್ನವರೆಂದು ಹೇಳುವನು, ಅವನನ್ನೇ ಸಾಧು ಎಂದು ಗುರುತಿಸಬೇಕು, ದೇವರು ಅಲ್ಲಿಯೇ ಎಂದು ತಿಳಿಯಬೇಕು” – ಅಂದರೆ ದುಃಖಿತ-ಪೀಡಿತರನ್ನು ತನ್ನವರೆಂದು ಭಾವಿಸುವವನೇ ನಿಜವಾದ ಸಾಧು, ಈ ಸಂದೇಶವನ್ನು ಅವರು ಜನರ ಮನಸ್ಸಿನಲ್ಲಿ ಬೇರೂರಿಸಿದರು.']]
+};
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಸ್ವಾಧ್ಯಾಯ</h2>
+ <h3>೧. ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</h3>${pickGame('swa',SW.a,'swa')}
+ <h3>೨. ಪ್ರತಿಯೊಂದಕ್ಕೂ ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>೩. ಎರಡು-ಮೂರು ವಾಕ್ಯಗಳಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.ii.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>ಪಾಠದಲ್ಲಿ ಬಂದ ಸಂತರ ಹೊರತಾಗಿ ಇತರ ಸಂತರ ಚಿತ್ರಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ ಅದರ ಕೆಳಗೆ ಅವರ ವಿಚಾರಗಳನ್ನು ಬರೆಯಿರಿ.<br><small>ಉದಾ. ಸಂತ ಗಾಡಗೇಬಾಬಾ – “ಸ್ವಚ್ಛತೆಯೇ ಸೇವೆ”; ಸಂತ ತುಕಡೋಜಿ ಮಹಾರಾಜ್ – ‘ಗ್ರಾಮಗೀತೆ’, ಗ್ರಾಮ ಸ್ವಚ್ಛತೆ; ಸಂತ ಸಾವತಾ ಮಾಳಿ – “ಈರುಳ್ಳಿ ಮೂಲಂಗಿ ತರಕಾರಿ, ಎಲ್ಲವೂ ನನ್ನ ವಿಠಾಯಿ” (ಕೆಲಸದಲ್ಲೇ ದೇವರು).</small></div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಜ್ಞಾನೇಶ್ವರರು ಸಂಸ್ಕೃತದ ಬದಲು ಮರಾಠಿಯಲ್ಲಿ ಜ್ಞಾನೇಶ್ವರಿ ಬರೆದರು. ಇದರಿಂದ ಸಾಮಾನ್ಯ ಜನರಿಗೆ ಯಾವ ಲಾಭವಾಯಿತು?','ಜನರ ಭಾಷೆ…','ಸಾಮಾನ್ಯ ಜನರಿಗೆ ಸಂಸ್ಕೃತ ಬರುತ್ತಿರಲಿಲ್ಲ. ಮರಾಠಿ ಅವರ ಆಡುಭಾಷೆಯಾದ್ದರಿಂದ ಧರ್ಮದ ಜ್ಞಾನ ಅವರಿಗೆ ಅರ್ಥವಾಗತೊಡಗಿತು; ಜ್ಞಾನ ಎಲ್ಲರಿಗೂ ತೆರೆದುಕೊಂಡಿತು ಮತ್ತು ಮರಾಠಿ ಭಾಷೆಯ ಗೌರವ ಹೆಚ್ಚಿತು.'],
+['ಮುಕ್ತಾಬಾಯಿ ಚಿಕ್ಕ ವಯಸ್ಸಿನಲ್ಲಿ ದೊಡ್ಡ ಅಣ್ಣನಿಗೆ ಉಪದೇಶ ಮಾಡಿದಳು. ಇದರಿಂದ ನಾವು ಏನು ಕಲಿಯುತ್ತೇವೆ?','ವಯಸ್ಸೋ ವಿಚಾರವೋ?','ಒಳ್ಳೆಯ ವಿಚಾರ ಯಾರಿಂದಲೂ ಸಿಗಬಹುದು; ಚಿಕ್ಕ ವಯಸ್ಸಾಗಿದ್ದರೂ ಸರಿಯಾದ ಸಲಹೆ ನೀಡಬಹುದು. ಸಂಕಟದಲ್ಲಿ ಸೋಲೊಪ್ಪದೆ ಇತರರ ಕಲ್ಯಾಣಕ್ಕಾಗಿ ಕೆಲಸ ಮಾಡುತ್ತಿರಬೇಕು.'],
+['ತುಕಾರಾಮರು ಸಾಲದ ಪತ್ರಗಳನ್ನು ನದಿಯಲ್ಲಿ ಮುಳುಗಿಸಿದರು. ಇಂದಿನ ಕಾಲದಲ್ಲಿ ಅಗತ್ಯವಿರುವವರಿಗೆ ಸಹಾಯ ಮಾಡಲು ಯಾವ ಮಾರ್ಗಗಳಿವೆ?','ಆಹಾರ, ಶಿಕ್ಷಣ, ಆರೋಗ್ಯ…','ಅಗತ್ಯವಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ನೋಟ್‌ಬುಕ್-ಪುಸ್ತಕ ನೀಡುವುದು, ಅನ್ನದಾನ, ರಕ್ತದಾನ, ವೃದ್ಧರಿಗೆ ಸಹಾಯ, ವಿಪತ್ತು ಪೀಡಿತರಿಗೆ ಸಹಾಯ, ಸರ್ಕಾರಿ ಯೋಜನೆಗಳ ಮಾಹಿತಿ ನೀಡುವುದು ಇತ್ಯಾದಿ.'],
+['ಏಕನಾಥರು ಕಾದ ಮರಳುಗಾಡಿನಿಂದ ಮಗುವನ್ನು ಮನೆಗೆ ತಲುಪಿಸಿದರು. ನಿಮಗೆ ದಾರಿಯಲ್ಲಿ ತಪ್ಪಿಹೋದ ಚಿಕ್ಕ ಮಗು ಕಂಡರೆ ಏನು ಮಾಡುತ್ತೀರಿ?','ಸುರಕ್ಷಿತವಾಗಿ ಸಹಾಯ…','ಅದಕ್ಕೆ ಧೈರ್ಯ ಹೇಳುತ್ತೇನೆ, ಅದರ ಹೆಸರು-ವಿಳಾಸ ಕೇಳುತ್ತೇನೆ, ದೊಡ್ಡವರ/ಶಿಕ್ಷಕರ/ಪೊಲೀಸರ (೧೧೨) ಸಹಾಯದಿಂದ ಅದನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಪೋಷಕರ ಬಳಿ ತಲುಪಿಸುತ್ತೇನೆ.'],
+['ಸಂತರು “ಎಲ್ಲರೂ ಸಮಾನ” ಎಂಬ ಭಾವನೆ ಮೂಡಿಸಿದರು. ಇಂದಿನ ಶಾಲೆಯಲ್ಲಿ ಈ ಭಾವನೆ ಹೇಗೆ ಕಾಣುತ್ತದೆ?','ಸಮವಸ್ತ್ರ, ಮಧ್ಯಾಹ್ನದ ಬಿಸಿಯೂಟ…','ಎಲ್ಲ ಮಕ್ಕಳು ಒಂದೇ ತರಗತಿಯಲ್ಲಿ ಕುಳಿತುಕೊಳ್ಳುತ್ತಾರೆ, ಒಂದೇ ಸಮವಸ್ತ್ರ, ಒಟ್ಟಿಗೆ ಮಧ್ಯಾಹ್ನದ ಬಿಸಿಯೂಟ, ಎಲ್ಲರಿಗೂ ಸಮಾನ ಅವಕಾಶ; ಜಾತಿ-ಧರ್ಮ-ಶ್ರೀಮಂತಿಕೆಯ ಆಧಾರದಲ್ಲಿ ಭೇದಭಾವ ಮಾಡಲಾಗುವುದಿಲ್ಲ.'],
+['ಸಮರ್ಥ ರಾಮದಾಸರು ಹನುಮಂತನ ದೇವಾಲಯಗಳನ್ನು ಮತ್ತು ಅಖಾಡಗಳನ್ನು ಏಕೆ ಕಟ್ಟಿಸಿರಬಹುದು?','ಶರೀರ ಬಲಿಷ್ಠವಾದರೆ…','ಜನರು ವ್ಯಾಯಾಮ ಮಾಡಿ ಬಲಿಷ್ಠರಾಗಲಿ, ಸಂಘಟಿತರಾಗಲಿ ಮತ್ತು ಅನ್ಯಾಯವನ್ನು ಪ್ರತಿರೋಧಿಸಲಿ ಎಂಬುದಕ್ಕಾಗಿ; ಬಲಿಷ್ಠ ಮತ್ತು ಸಾಹಸಿ ಯುವಕರು ಮುಂದೆ ಸ್ವರಾಜ್ಯದ ಕಾರ್ಯಕ್ಕೂ ಉಪಯೋಗಕ್ಕೆ ಬಂದರು.'],
+['ಸಂತರ ಕಾರ್ಯವು ಶಿವರಾಯರಿಗೆ ಸ್ವರಾಜ್ಯ ಸ್ಥಾಪನೆಗೆ ಹೇಗೆ ಉಪಯೋಗವಾಗಿರಬಹುದು?','ಜನರ ಮನಸ್ಸಿನಲ್ಲಿ…','ಸಂತರಿಂದ ಜನರಲ್ಲಿ ಆತ್ಮವಿಶ್ವಾಸ, ಒಗ್ಗಟ್ಟು, ಸಮಾನತೆ ಮತ್ತು ಧರ್ಮದ ಬಗ್ಗೆ ಗೌರವ ಮೂಡಿತು. ಇಂತಹ ಜಾಗೃತ, ನಿರ್ಭಯ ಜನರು ಶಿವರಾಯರ ಸ್ವರಾಜ್ಯದ ಕಾರ್ಯದಲ್ಲಿ ಭಾಗಿಯಾದರು.'],
+['ಸಂತ ನಾಮದೇವರು ಪಂಜಾಬಿಗೆ ಹೋಗಿ ಹಿಂದಿಯಲ್ಲಿ ಪದಗಳನ್ನು ಬರೆದರು. ಇದರಿಂದ ಯಾವ ಗುಣ ಕಾಣುತ್ತದೆ?','ಗಡಿ, ಭಾಷೆ…','ಅವರು ಭಾಷೆ ಮತ್ತು ಪ್ರದೇಶದ ಗಡಿಗಳನ್ನು ಮೀರಿ ಎಲ್ಲ ಜನರಿಗೆ ಮಾನವಧರ್ಮದ ಸಂದೇಶ ತಲುಪಿಸಿದರು – ಇದರಿಂದ ರಾಷ್ಟ್ರೀಯ ಏಕತೆ ಮತ್ತು ವಿಶಾಲ ದೃಷ್ಟಿ ಕಾಣುತ್ತದೆ.'],
+['‘ಹೇಗೆ ಮಾತನಾಡಬೇಕೋ ಹಾಗೆಯೇ ನಡೆದುಕೊಳ್ಳಬೇಕು’ ಇದಕ್ಕೆ ನಿಮ್ಮ ಜೀವನದಿಂದ ಒಂದು ಉದಾಹರಣೆ ನೀಡಿ.','ಸ್ವಚ್ಛತೆ, ಸತ್ಯ ಮಾತನಾಡುವುದು…','ಉದಾ. “ಪ್ಲಾಸ್ಟಿಕ್ ಬಳಸಬೇಡಿ” ಎಂದು ಹೇಳುವುದಾದರೆ ತಾನೇ ಬಟ್ಟೆಯ ಚೀಲ ಬಳಸುವುದು; “ನೀರು ಉಳಿಸಿ” ಎನ್ನುವುದಾದರೆ ತಾನೇ ನಲ್ಲಿ ಮುಚ್ಚಿಡುವುದು.'],
+['ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿ ರಾಜಕುಮಾರರಾಗಿದ್ದರೂ ಸಂನ್ಯಾಸಿಯಾದರು. ಸುಖಸೌಕರ್ಯ ಬಿಟ್ಟು ಅವರು ಈ ಮಾರ್ಗವನ್ನು ಏಕೆ ಆರಿಸಿರಬಹುದು?','ತನ್ನ ಸುಖವೋ ಜನರ ಸುಖವೋ?','ತಮ್ಮ ಸುಖಕ್ಕಿಂತ ಜನರಿಗೆ ಸಮಾನತೆಯ, ಸರಿಯಾದ ಮಾರ್ಗ ತೋರಿಸುವುದು ಅವರಿಗೆ ಹೆಚ್ಚು ಮುಖ್ಯವೆನಿಸಿತು. ವೈರಾಗ್ಯದಿಂದ ಅವರು ಎಲ್ಲ ಜನರೊಂದಿಗೆ ಬೆರೆತು ಭೇದಭಾವ ದೂರ ಮಾಡುವ ಕಾರ್ಯ ಮಾಡಿದರು.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೨ : ಸಂತರ ಸಾಧನೆ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${SUM.map(x=>`<li>${x}</li>`).join('')}</ol>
+ <p class="pq">ಸಂತ – ಊರು – ಗ್ರಂಥ – ಬೋಧನೆ</p><table class="w"><tr><th>ಸಂತ</th><th>ಊರು / ಮೂಲ</th><th>ಗ್ರಂಥ / ರಚನೆ</th><th>ಬೋಧನೆ / ವೈಶಿಷ್ಟ್ಯ</th></tr>
+ <tr><td>ಶ್ರೀಚಕ್ರಧರ ಸ್ವಾಮಿ</td><td>ಗುಜರಾತ್ (ರಾಜಕುಮಾರ)</td><td>ಲೀಳಾಚರಿತ್ರ (ನೆನಪುಗಳು)</td><td class="l">ಮಹಾನುಭಾವ ಪಂಥ; ಸ್ತ್ರೀ-ಪುರುಷ, ಜಾತಿಭೇದ ಅಮಾನ್ಯ</td></tr>
+ <tr><td>ಸಂತ ನಾಮದೇವ</td><td>ನರಸೀ</td><td>ಅಭಂಗ, ಹಿಂದಿ ಪದಗಳು (ಗುರುಗ್ರಂಥ ಸಾಹಿಬ್)</td><td class="l">ವಿಠ್ಠಲ ಭಕ್ತಿ, ಭಾಗವತ ಧರ್ಮ, ಮಾನವಧರ್ಮ</td></tr>
+ <tr><td>ಸಂತ ಜ್ಞಾನೇಶ್ವರ</td><td>ಆಪೇಗಾಂವ; ಸಮಾಧಿ ಆಳಂದಿ</td><td>ಜ್ಞಾನೇಶ್ವರಿ (ಮರಾಠಿ)</td><td class="l">ಶ್ರದ್ಧೆ, ಸಮಾನತೆ, ದುಃಖಿತರಿಗೆ ಸಹಾಯ</td></tr>
+ <tr><td>ಸಂತ ಏಕನಾಥ</td><td>ಪೈಠಣ</td><td>ಅಭಂಗ, ಓವಿ, ಭಾರೂಡ</td><td class="l">ಮೇಲು-ಕೀಳು ಭೇದ ಬೇಡ; ಪ್ರಾಣಿಮಾತ್ರರ ಮೇಲೆ ದಯೆ</td></tr>
+ <tr><td>ಸಂತ ತುಕಾರಾಮ</td><td>ದೇಹೂ</td><td>ತುಕಾರಾಮ ಗಾಥಾ</td><td class="l">ದಯೆ, ಕ್ಷಮೆ, ಶಾಂತಿ; ಸಾಲದ ಪತ್ರಗಳು ಇಂದ್ರಾಯಣಿಯಲ್ಲಿ</td></tr>
+ <tr><td>ಸಮರ್ಥ ರಾಮದಾಸ</td><td>ಜಾಂಬ (ಮರಾಠವಾಡ)</td><td>ದಾಸಬೋಧ, ಮನದ ಶ್ಲೋಕ</td><td class="l">ಬಲೋಪಾಸನೆ, ಸಂಘಟನೆ, ಅನ್ಯಾಯದ ಪ್ರತಿರೋಧ</td></tr></table>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">೧. ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</div>${SW.a.map((x,i)=>`<div>(${'ಅಆಇಈ'[i]}) ${x[0]}</div>`).join('')}
+ <div class="pq">೨. ಪ್ರತಿಯೊಂದಕ್ಕೂ ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div class="avoid"><div>(${'ಅಆಇಈ'[i]}) ${x[0]}</div>${lines(1)}</div>`).join('')}
+ <div class="pq">೩. ಎರಡು-ಮೂರು ವಾಕ್ಯಗಳಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.ii.map((x,i)=>`<div class="avoid"><div>(${'ಅಆ'[i]}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ <div class="avoid"><div class="pq">೪. (ಹೆಚ್ಚಿನ ಅಭ್ಯಾಸ) ಜೋಡಿಗಳನ್ನು ಹೊಂದಿಸಿ.</div><table class="w"><tr><th>ಸಂತ</th><th>ಗ್ರಾಮ</th><th style="width:26mm">ಉತ್ತರ</th></tr>${[['ಸಂತ ನಾಮದೇವ','ಪೈಠಣ'],['ಸಂತ ಜ್ಞಾನೇಶ್ವರ','ದೇಹೂ'],['ಸಂತ ಏಕನಾಥ','ಜಾಂಬ'],['ಸಂತ ತುಕಾರಾಮ','ನರಸೀ'],['ಸಮರ್ಥ ರಾಮದಾಸ','ಆಪೇಗಾಂವ']].map((r,i)=>`<tr><td>(${'ಅಆಇಈಉ'[i]}) ${r[0]}</td><td class="l">(${i+1}) ${r[1]}</td><td></td></tr>`).join('')}</table></div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>೧.</b> ${SW.a.map((x,i)=>`(${'ಅಆಇಈ'[i]}) ${x[1][x[2]]}`).join('; ')}</div><div><b>೨.</b><ol>${SW.aa.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>೩.</b><ol>${SW.ii.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>೪.</b> (ಅ)–(೪) ನರಸೀ; (ಆ)–(೫) ಆಪೇಗಾಂವ; (ಇ)–(೧) ಪೈಠಣ; (ಈ)–(೨) ದೇಹೂ; (ಉ)–(೩) ಜಾಂಬ</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ · ಪಾಠ ೨</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

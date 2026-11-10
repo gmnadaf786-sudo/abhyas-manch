@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ ನೇ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೧ – ಪಾಠ ೬ ಆಹಾರ ಮತ್ತು ಆಶ್ರಯ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೬ : ಆಹಾರ ಮತ್ತು ಆಶ್ರಯ</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">🌾🍲🏠 ಹೊಲದಿಂದ ತಟ್ಟೆಯವರೆಗೆ ಆಹಾರದ ಪ್ರಯಾಣ, ಆಹಾರ ಬೇಯಿಸುವುದು-ಸಂಗ್ರಹಿಸುವುದು ಮತ್ತು ಪ್ರಾಣಿಗಳ ಹಾಗೂ ಮನುಷ್ಯರ ಆಶ್ರಯಗಳು – ಬನ್ನಿ ಕಲಿಯೋಣ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೧೭ ಮೆಟ್ಟಿಲುಗಳು · ೧೮ ಆಟ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೪೬ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೬ : ಆಹಾರ ಮತ್ತು ಆಶ್ರಯ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🌾','🍚','🏠'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ಹೊಲದಿಂದ ತಟ್ಟೆಯವರೆಗೆ ---------- */
+const FARM=[
+ ['🐂🚜','ಭೂಮಿ ಸಿದ್ಧತೆ','ಎತ್ತಿನ ಜೋಡಿ ಅಥವಾ ಟ್ರ್ಯಾಕ್ಟರ್‌ಗೆ ಸಲಕರಣೆಗಳನ್ನು ಜೋಡಿಸಿ ಭೂಮಿಯನ್ನು ಉಳುತ್ತಾರೆ. ಬೇಸಿಗೆಯಲ್ಲಿ ಕಾದ ಭೂಮಿಯ ಮೇಲೆ ಮಳೆ ಬಿದ್ದ ಕೂಡಲೇ ಭೂಮಿ ಸಿದ್ಧತೆ ಮಾಡುತ್ತಾರೆ.'],
+ ['🌰','ಬಿತ್ತನೆ','ಹೊಲದಲ್ಲಿ ಬಿತ್ತನೆ ಬೀಜ ಬಿತ್ತುತ್ತಾರೆ.'],
+ ['🌱','ಬೆಳೆಗಳು ಮೊಳಕೆಯೊಡೆಯುವುದು','ಬಿತ್ತನೆಯಾದ ಕೆಲವು ದಿನಗಳ ನಂತರ ಬೆಳೆಗಳು ಮೊಳಕೆಯೊಡೆಯಲು ಆರಂಭಿಸುತ್ತವೆ. ಲಭ್ಯವಿರುವ ನೀರಿನಿಂದ ಬೆಳೆಗಳು ಹುಲುಸಾಗಿ ಬೆಳೆಯುತ್ತವೆ.'],
+ ['🌾','ಕಾಳು ತುಂಬುವುದು','ಬೆಳೆಗಳಲ್ಲಿ ಕಾಳು ತುಂಬಲು ಆರಂಭವಾಗುತ್ತದೆ.'],
+ ['🔪','ಕೊಯ್ಲು','ಕಾಳು ಪೂರ್ಣ ತುಂಬಿದ ನಂತರ ಎಲ್ಲ ತೆನೆಗಳನ್ನು ಕೊಯ್ದು ಸಂಗ್ರಹಿಸುತ್ತಾರೆ.'],
+ ['🐂⭕','ಒಕ್ಕಣೆ','ತೆನೆಗಳನ್ನು ಒಕ್ಕಿ ಅವುಗಳ ಕಾಳುಗಳನ್ನು ಬೇರ್ಪಡಿಸುವುದು. ಕಣದ ಮಧ್ಯದಲ್ಲಿ ಗೂಟ ನೆಟ್ಟು ಅದಕ್ಕೆ ಎತ್ತನ್ನು ಕಟ್ಟುತ್ತಾರೆ; ಎತ್ತು ತೆನೆಗಳ ಮೇಲೆ ಸುತ್ತಿದಾಗ ಅದರ ತೂಕದಿಂದ ಕಾಳುಗಳು ಬಿಡುತ್ತವೆ.'],
+ ['🧺💨','ತೂರುವುದು','ಎತ್ತರದ ಜಾಗದಲ್ಲಿ ನಿಂತು ಒಕ್ಕಿದ ಧಾನ್ಯವನ್ನು ಮೊರದಲ್ಲಿ ತೆಗೆದುಕೊಂಡು ನೆಲದ ಮೇಲೆ ಸುರಿಯುತ್ತಾರೆ. ಗಾಳಿಯಿಂದ ಸಿಪ್ಪೆ ಮತ್ತು ಹಗುರ ಕಸ ದೂರ ಹೋಗುತ್ತದೆ, ಕಾಳುಗಳು ಹತ್ತಿರ ಬಿದ್ದು ಅವುಗಳ ರಾಶಿಯಾಗುತ್ತದೆ.'],
+ ['🛍️','ಗೋಣಿಚೀಲದಲ್ಲಿ ತುಂಬುವುದು','ಧಾನ್ಯವನ್ನು ಗೋಣಿಚೀಲಗಳಲ್ಲಿ ತುಂಬುತ್ತಾರೆ. ಕೀಟ, ಇಲಿ, ಹೆಗ್ಗಣಗಳಿಂದ ಕಾಪಾಡುತ್ತಾರೆ. ಕುಟುಂಬಕ್ಕೆ ವರ್ಷಪೂರ್ತಿ ಸಾಕಾಗುವಷ್ಟು ಧಾನ್ಯ ಇಡುತ್ತಾರೆ.'],
+ ['🛒','ಮಾರುಕಟ್ಟೆಯಲ್ಲಿ ಮಾರಾಟ','ಉಳಿದ ಚೀಲಗಳನ್ನು ಮಾರುಕಟ್ಟೆಗೆ ಒಯ್ಯುತ್ತಾರೆ. ವ್ಯಾಪಾರಿಗಳು ಧಾನ್ಯ ಖರೀದಿಸುತ್ತಾರೆ; ಜನರು ವ್ಯಾಪಾರಿಗಳ ಅಂಗಡಿಯಿಂದ ಖರೀದಿಸುತ್ತಾರೆ.'],
+ ['⚙️','ಆರಿಸುವುದು, ಬೀಸುವುದು','ಧಾನ್ಯವನ್ನು ಆರಿಸಿ, ಶುದ್ಧ ಮಾಡಿ ಬೀಸುತ್ತಾರೆ ಮತ್ತು ಹಿಟ್ಟು ಮಾಡುತ್ತಾರೆ.'],
+ ['🫓','ತಟ್ಟೆಯಲ್ಲಿ ರೊಟ್ಟಿ','ಹಿಟ್ಟಿನಿಂದ ರೊಟ್ಟಿ ಮಾಡುತ್ತಾರೆ – ಆಗ ಅದು ನಿಮ್ಮ ತಟ್ಟೆಗೆ ಬರುತ್ತದೆ!']];
+let FK=0,FSEEN=new Set();
+function farmUpd(){const f=FARM[FK];FSEEN.add(FK);$('farmBox').innerHTML=`<div class="tile op" style="text-align:center;background:linear-gradient(#ecfccb,#fef9c3);cursor:default"><div style="font-size:64px;line-height:1.1">${f[0]}</div><div class="tt" style="font-size:22px">${FK+1}. ${f[1]}</div><div class="dd" style="font-size:16px">${f[2]}</div></div>
+ <div style="display:flex;gap:3px;justify-content:center;margin-top:6px">${FARM.map((_,i)=>`<span style="width:18px;height:6px;border-radius:3px;background:${i<=FK?'#16a34a':'#cbd5e1'}"></span>`).join('')}</div>`;say(f[1]+'. '+f[2]);if(FSEEN.size==FARM.length)award('farm','ಭಲೇ! ಹೊಲದಿಂದ ತಟ್ಟೆಯವರೆಗಿನ ಪ್ರಯಾಣ ಪೂರ್ಣ.')}
+const winnowSvg=`<svg viewBox="0 0 320 170" style="max-width:380px;display:block;margin:0 auto;background:linear-gradient(#e0f2fe,#fef9c3);border-radius:16px">
+ <text x="60" y="40" font-size="30">🧍</text><path d="M84 46 l40 8 l-6 10 l-40 -6z" fill="#a16207"/><text x="130" y="30" font-size="12" font-weight="800" fill="#0369a1">ಗಾಳಿ ➜ ➜</text>
+ ${[0,1,2,3,4,5].map(i=>`<circle cx="${110+i*3}" cy="62" r="2.4" fill="#ca8a04"><animate attributeName="cy" values="62;150" dur="1.1s" begin="${i*.18}s" repeatCount="indefinite"/></circle>`).join('')}
+ ${[0,1,2,3].map(i=>`<path d="M112 62 q4 -2 8 0" stroke="#a8a29e" stroke-width="2" fill="none"><animateTransform attributeName="transform" type="translate" values="0 0;${160+i*15} ${60+i*10}" dur="1.6s" begin="${i*.4}s" repeatCount="indefinite"/></path>`).join('')}
+ <path d="M90 160 Q115 132 140 160Z" fill="#ca8a04"/><text x="115" y="168" font-size="10" text-anchor="middle" font-weight="800">ಕಾಳುಗಳ ರಾಶಿ</text>
+ <text x="270" y="150" font-size="11" text-anchor="middle" font-weight="800" fill="#57534e">ಸಿಪ್ಪೆ, ಕಸ ದೂರ</text></svg>`;
+
+/* ---------- ಪರಿಸರಸ್ನೇಹಿ ಮನೆ ---------- */
+let ECO={sun:0,wind:0,water:0,bio:0,win:0};
+const ECON={sun:'☀️ ಸೌರಶಕ್ತಿ',wind:'🌬️ ಪವನ ಶಕ್ತಿ',water:'💧 ನೀರಿನ ಮರುಬಳಕೆ',bio:'🔥 ಜೈವಿಕ ಅನಿಲ',win:'🪟 ನೈಸರ್ಗಿಕ ಬೆಳಕು ಮತ್ತು ಗಾಳಿ'};
+function ecoSvg(){return `<svg viewBox="0 0 320 200" style="max-width:400px;display:block;margin:0 auto;background:linear-gradient(#e0f2fe 0 78%,#86efac 78%);border-radius:16px">
+ <rect x="90" y="90" width="140" height="80" fill="#fde68a" stroke="#a16207" stroke-width="2"/><path d="M80 92 L160 40 L240 92Z" fill="#b45309"/>
+ <rect x="148" y="130" width="24" height="40" fill="#92400e"/>
+ ${ECO.win?`<rect x="104" y="104" width="30" height="24" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><rect x="186" y="104" width="30" height="24" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><path d="M60 110 q10 -6 20 0" stroke="#0ea5e9" fill="none" stroke-width="2"><animateTransform attributeName="transform" type="translate" values="0 0;40 0" dur="1.5s" repeatCount="indefinite"/></path>`:''}
+ ${ECO.sun?`<path d="M120 70 L150 50 L170 64 L140 84Z" fill="#1e3a8a" stroke="#93c5fd"/><circle cx="290" cy="24" r="14" fill="#fbbf24"/>`:''}
+ ${ECO.wind?`<line x1="40" y1="160" x2="40" y2="80" stroke="#64748b" stroke-width="3"/><g transform="translate(40,80)"><g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2s" repeatCount="indefinite"/>${[0,120,240].map(a=>`<path d="M0 0 L4 -26 L-4 -26Z" fill="#e2e8f0" stroke="#475569" transform="rotate(${a})"/>`).join('')}</g></g>`:''}
+ ${ECO.water?`<rect x="244" y="130" width="30" height="40" rx="4" fill="#38bdf8" stroke="#0369a1"/><path d="M232 92 L258 92 L258 130" stroke="#475569" stroke-width="3" fill="none"/><text x="259" y="185" font-size="9" text-anchor="middle" font-weight="700">ನೀರಿನ ಸಂಗ್ರಹ</text>`:''}
+ ${ECO.bio?`<ellipse cx="60" cy="178" rx="18" ry="9" fill="#78716c"/><text x="60" y="182" font-size="9" text-anchor="middle" fill="#fff" font-weight="700">ಜೈವಿಕ ಅನಿಲ</text>`:''}</svg>`}
+function ecoTog(k){ECO[k]=ECO[k]?0:1;$('ecoBox').innerHTML=ecoSvg();$('ecoBtns').innerHTML=ecoBtns();const n=Object.values(ECO).filter(Boolean).length;
+ $('ecoMsg').innerHTML=`<div class="msg ${n==5?'ok':'in'}">${n==5?'🎉 ನಿಮ್ಮ ಮನೆ ಸಂಪೂರ್ಣ ಪರಿಸರಸ್ನೇಹಿ ಆಯಿತು!':'ಜೋಡಿಸಿದ ವೈಶಿಷ್ಟ್ಯಗಳು: '+n+' / ೫'}</div>`;if(n==5)award('eco','ಭಲೇ! ಪರಿಸರಸ್ನೇಹಿ ಮನೆ ತಯಾರಾಯಿತು.')}
+function ecoBtns(){return Object.keys(ECON).map(k=>`<span class="chip ${ECO[k]?'on':''}" onclick="ecoTog('${k}')">${ECO[k]?'✔':'➕'} ${ECON[k]}</span>`).join('')}
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+let S=0;
+const L=[
+{h:'ಆಹಾರವನ್ನು ವ್ಯರ್ಥ ಮಾಡಬೇಡಿ',s:'ಅಮಿತ್ ಮತ್ತು ಸ್ವರಾ ಊಟಕ್ಕೆ ಕುಳಿತಿದ್ದರು. ಅಮ್ಮ ಹೇಳಿದರು, ಬೇಕಾದಷ್ಟು ತೆಗೆದುಕೊಳ್ಳಿ, ಆದರೆ ಆಹಾರ ವ್ಯರ್ಥ ಮಾಡಬೇಡಿ. ರೈತ ಬಹಳ ಕಷ್ಟಪಟ್ಟು ಧಾನ್ಯ ಬೆಳೆಯುತ್ತಾನೆ, ಆಗ ಅದು ನಮಗೆ ಸಿಗುತ್ತದೆ.',b:()=>`
+ <div class="g2">
+  <div class="tile op" style="background:#fff7ed"><div class="ic">👩‍🍳</div><div class="tt">ಅಮ್ಮ</div><div class="dd">“ಬೇಕಾದಷ್ಟು ತೆಗೆದುಕೊಳ್ಳಿ, ಆದರೆ <b>ಆಹಾರವನ್ನು ವ್ಯರ್ಥ ಮಾಡಬೇಡಿ</b>.”</div></div>
+  <div class="tile op" style="background:#f0f9ff"><div class="ic">👦</div><div class="tt">ಅಮಿತ್</div><div class="dd">“ಅಮ್ಮಾ, ನೀನು ಇದನ್ನು ಪ್ರತಿದಿನ ನಮಗೆ ಏಕೆ ಹೇಳುತ್ತೀಯ?”</div></div>
+  <div class="tile op" style="background:#fdf2f8"><div class="ic">👧</div><div class="tt">ಸ್ವರಾ</div><div class="dd">“ಏಕೆ?”</div></div>
+  <div class="tile op" style="background:#fff7ed"><div class="ic">👩‍🍳</div><div class="tt">ಅಮ್ಮ</div><div class="dd">“ಅಯ್ಯೋ ಮಗೂ,, <b>ರೈತ ಬಹಳ ಕಷ್ಟಪಟ್ಟು ಧಾನ್ಯ ಬೆಳೆಯುತ್ತಾನೆ</b>, ಆಗ ಅದು ನಮಗೆ ಸಿಗುತ್ತದೆ.”</div></div>
+ </div>
+ <div class="msg in">🤔 ರೈತ ಧಾನ್ಯವನ್ನು ಹೇಗೆ ಬೆಳೆಯುತ್ತಾನೆ? ಬನ್ನಿ, ಅಮ್ಮನಿಂದ ಕೇಳೋಣ – ಮುಂದಿನ ಹಂತದಲ್ಲಿ!</div>`},
+{h:'ಹೊಲದಿಂದ ತಟ್ಟೆಯವರೆಗೆ',s:'ರೈತ ಭೂಮಿ ಸಿದ್ಧತೆ, ಬಿತ್ತನೆ, ಕೊಯ್ಲು, ಒಕ್ಕಣೆ, ತೂರುವುದು ಮಾಡುತ್ತಾನೆ. ಧಾನ್ಯವನ್ನು ಗೋಣಿಚೀಲದಲ್ಲಿ ತುಂಬಿ ಮಾರುಕಟ್ಟೆಗೆ ಹೋಗುತ್ತದೆ. ಅದನ್ನು ಬೀಸಿ ಹಿಟ್ಟಾಗುತ್ತದೆ ಮತ್ತು ರೊಟ್ಟಿ ನಮ್ಮ ತಟ್ಟೆಗೆ ಬರುತ್ತದೆ.',b:()=>`
+ <div class="tap">▶ “ಮುಂದಿನ ಹಂತ” ಒತ್ತುತ್ತಾ ಧಾನ್ಯದ ಪ್ರಯಾಣ ನೋಡಿ.</div>
+ <div id="farmBox"></div>
+ <div style="display:flex;justify-content:space-between;margin-top:6px"><button class="btn ln sm" onclick="FK=Math.max(0,FK-1);farmUpd()">◀ ಹಿಂದಿನ</button><button class="btn gr sm" onclick="FK=Math.min(FARM.length-1,FK+1);farmUpd()">ಮುಂದಿನ ಹಂತ ▶</button></div>
+ <h3>🧺 ತೂರುವುದು ಹೇಗೆ ನಡೆಯುತ್ತದೆ?</h3>${winnowSvg}
+ <div class="key">ಇತ್ತೀಚೆಗೆ ಒಕ್ಕಣೆ ಮತ್ತು ತೂರುವುದನ್ನು <b>ಯಂತ್ರದಲ್ಲಿ</b> ಮಾಡುತ್ತಾರೆ. ಯಂತ್ರದಿಂದ ಕೆಲಸ <b>ಬೇಗ</b> ಆಗುತ್ತದೆ ಮತ್ತು <b>ಶ್ರಮ ಮತ್ತು ಖರ್ಚು ಕಡಿಮೆ</b> ತಗಲುತ್ತದೆ.</div>
+ <div class="msg ok">ಇಷ್ಟು ಜನರ ಪ್ರಯತ್ನದಿಂದ ಆಹಾರ ತಯಾರಾಗುತ್ತದೆ. ಅದನ್ನು ವ್ಯರ್ಥ ಮಾಡುವುದು ಒಳ್ಳೆಯದೇ? – <b>ಇಲ್ಲ!</b> “ಇನ್ನು ಮುಂದೆ ನಾವು ಎಂದಿಗೂ ಆಹಾರ ವ್ಯರ್ಥ ಮಾಡುವುದಿಲ್ಲ.” – ಅಮಿತ್, ಸ್ವರಾ</div>`,a:()=>farmUpd()},
+{h:'ಆಟ: ಧಾನ್ಯದ ಪ್ರಯಾಣವನ್ನು ಕ್ರಮದಲ್ಲಿ ಜೋಡಿಸಿ',s:'ಹೊಲದಿಂದ ನಿಮ್ಮ ತಟ್ಟೆಗೆ ಬರುವವರೆಗೆ ಆಹಾರಧಾನ್ಯದ ಪ್ರಯಾಣವನ್ನು ಸರಿಯಾದ ಕ್ರಮದಲ್ಲಿ ಜೋಡಿಸಿ.',b:()=>`
+ ${orderGame('farmo',['ಭೂಮಿ ಸಿದ್ಧತೆ','ಬಿತ್ತನೆ','ಕೊಯ್ಲು','ಒಕ್ಕಣೆ','ತೂರುವುದು','ಗೋಣಿಚೀಲದಲ್ಲಿ ತುಂಬುವುದು','ಮಾರುಕಟ್ಟೆಯಲ್ಲಿ ಮಾರಾಟ','ಬೀಸುವುದು','ರೊಟ್ಟಿ'],'farmo','🚜')}
+ <h3>ಪದ ಮತ್ತು ಅರ್ಥ ಹೊಂದಿಸಿ</h3>
+ ${pickGame('fw',[['ಒಕ್ಕಣೆ ಎಂದರೇನು?',['ತೆನೆಗಳನ್ನು ಒಕ್ಕಿ ಕಾಳುಗಳನ್ನು ಬೇರ್ಪಡಿಸುವುದು','ಭೂಮಿ ಉಳುವುದು','ಬೀಜ ಬಿತ್ತುವುದು'],0],['ತೂರುವುದು ಎಂದರೇನು?',['ಧಾನ್ಯವನ್ನು ಗೋಣಿಚೀಲದಲ್ಲಿ ತುಂಬುವುದು','ಗಾಳಿಯ ಸಹಾಯದಿಂದ ಸಿಪ್ಪೆ ಮತ್ತು ಕಸವನ್ನು ಬೇರ್ಪಡಿಸುವುದು','ಹಿಟ್ಟು ಬೀಸುವುದು'],1],['ಕೊಯ್ಲು ಎಂದರೇನು?',['ಎಲ್ಲ ತೆನೆಗಳನ್ನು ಕೊಯ್ದು ಸಂಗ್ರಹಿಸುವುದು','ನೀರು ಹಾಕುವುದು','ಧಾನ್ಯ ಮಾರುವುದು'],0]],'fw')}`,a:()=>drawGames()},
+{h:'ಅನ್ನವೇ ಪೂರ್ಣಬ್ರಹ್ಮ',s:'ನಾವು ಯಾವಾಗಲೂ ಹೇಳುತ್ತೇವೆ, ಅನ್ನವೇ ಪೂರ್ಣಬ್ರಹ್ಮ. ಅಂದರೆ ಆಹಾರ ಪವಿತ್ರ, ಪೂಜನೀಯ ಮತ್ತು ನಮ್ಮ ಜೀವನದ ಆಧಾರ. ದೇಹದ ಕೆಲಸ ನಡೆಯಲು ಬೇಕಾದ ಶಕ್ತಿ ಆಹಾರದಿಂದ ತಯಾರಾಗುತ್ತದೆ.',b:()=>`
+ <div class="key">ಆಹಾರವನ್ನು ಎಂದಿಗೂ ವ್ಯರ್ಥ ಮಾಡಬಾರದು. ನಾವು ಯಾವಾಗಲೂ ಹೇಳುತ್ತೇವೆ, <b>‘ಅನ್ನವೇ ಪೂರ್ಣಬ್ರಹ್ಮ’</b> – ಅಂದರೆ ಆಹಾರ <b>ಪವಿತ್ರ, ಪೂಜನೀಯ</b> ಮತ್ತು ನಮ್ಮ <b>ಜೀವನದ ಆಧಾರ</b> ಇದೆ.</div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">⚡</div><div class="tt">ಶಕ್ತಿ</div><div class="dd">ದೇಹದ ಕೆಲಸ ನಡೆಯಲು ಬೇಕಾದ ಶಕ್ತಿ ಆಹಾರದಿಂದ ತಯಾರಾಗುತ್ತದೆ.</div></div>
+  <div class="tile op"><div class="ic">⏰🍽️⚖️</div><div class="tt">ಸರಿಯಾದ ಸಮಯ, ಸರಿಯಾದ ಆಹಾರ, ಸರಿಯಾದ ಪ್ರಮಾಣ</div><div class="dd">ಹೀಗೆ ತಿಂದರೆ ದೇಹ <b>ಆರೋಗ್ಯವಂತ ಮತ್ತು ಸದೃಢ</b> ಇರುತ್ತದೆ.</div></div>
+ </div>`},
+{h:'ಪ್ರದೇಶಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಆಹಾರದಲ್ಲಿನ ವೈವಿಧ್ಯ',s:'ಮಹಾರಾಷ್ಟ್ರದ ಆಹಾರಧಾನ್ಯಗಳಲ್ಲಿ ವೈವಿಧ್ಯವಿದೆ. ಕೊಂಕಣದಲ್ಲಿ ಅನ್ನ ಮತ್ತು ಮೀನು, ಆದರೆ ವಿದರ್ಭ ಮತ್ತು ಮರಾಠವಾಡದಲ್ಲಿ ಜೋಳ, ಸಜ್ಜೆಯ ಪದಾರ್ಥಗಳು ಹೆಚ್ಚು ಪ್ರಮಾಣದಲ್ಲಿ ಆಹಾರದಲ್ಲಿರುತ್ತವೆ. ಸೋಲಾಪುರ ಜಿಲ್ಲೆಯನ್ನು ಜೋಳದ ಕಣಜ ಎನ್ನುತ್ತಾರೆ.',b:()=>`
+ <div>ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ <b>ಗೋಧಿ, ಅಕ್ಕಿ, ಜೋಳ, ಸಜ್ಜೆ, ಎಣ್ಣೆಕಾಳು, ಕಾಳುಗಳು</b> ಮತ್ತು ತರಕಾರಿಗಳಿಂದ ವಿವಿಧ ಪದಾರ್ಥಗಳು ತಯಾರಾಗುತ್ತವೆ. ಈ ವೈವಿಧ್ಯ <b>ಪ್ರಾದೇಶಿಕ ಮತ್ತು ಋತುಮಾನಿಕ</b> ಘಟಕಗಳಿಗೆ ಅನುಗುಣವಾಗಿಯೂ ಕಾಣುತ್ತದೆ.</div>
+ <div class="g2">
+  <div class="tile op" style="background:#ecfeff"><div class="ic">🌴🍚🐟</div><div class="tt">ಕೊಂಕಣ</div><div class="dd">ಸಮುದ್ರದ ಪಕ್ಕದಲ್ಲಿ – <b>ಅಕ್ಕಿ (ಅನ್ನ), ತೆಂಗು, ಮೀನು</b></div></div>
+  <div class="tile op" style="background:#fefce8"><div class="ic">🌾</div><div class="tt">ವಿದರ್ಭ, ಮರಾಠವಾಡ, ಮಧ್ಯ ಮಹಾರಾಷ್ಟ್ರ</div><div class="dd"><b>ಜೋಳ, ಸಜ್ಜೆ</b>, ನೆಲಗಡಲೆ, ಸೋಯಾಬೀನ್, ಎಳ್ಳು, ಸಾಸಿವೆ</div></div>
+  <div class="tile op" style="background:#fdf4ff"><div class="ic">🏞️</div><div class="tt">ಬುಡಕಟ್ಟು ಪ್ರದೇಶ</div><div class="dd"><b>ರಾಗಿ ಮತ್ತು ಸಾಮೆ</b> ಇವುಗಳ ರೊಟ್ಟಿ</div></div>
+ </div>
+ <div class="know"><b class="h">💡 ಜೋಳದ ಕಣಜ</b><br>ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಅತಿ ಹೆಚ್ಚು ಜೋಳದ ಉತ್ಪಾದನೆ <b>ಸೊಲ್ಲಾಪುರ</b> ಜಿಲ್ಲೆಯಲ್ಲಿ ಆಗುತ್ತದೆ, ಆದ್ದರಿಂದ ಸೋಲಾಪುರ ಜಿಲ್ಲೆಗೆ <b>‘ಜೋಳದ ಕಣಜ’</b> ಎನ್ನುತ್ತಾರೆ. ಪ್ರಸ್ಥಭೂಮಿ ಪ್ರದೇಶದಲ್ಲಿ ಜೋಳದಿಂದ <b>ಹುರಡಾ, ಅರಳು, ರೊಟ್ಟಿ, ಘುಗ್ರಿ, ಹಪ್ಪಳ, ಸಂಡಿಗೆ, ಅಂಬಲಿ, ಧಪಾಟೆ</b> ಇಂತಹ ಪದಾರ್ಥಗಳನ್ನು ಮಾಡಲಾಗುತ್ತದೆ.</div>
+ <div class="key">• ದೈನಂದಿನ ಜೀವನದಲ್ಲಿ ವಿವಿಧ ಪದಾರ್ಥಗಳನ್ನು ಸೇರಿಸಿಕೊಳ್ಳುವುದರಿಂದ <b>ಸಮತೋಲಿತ ಮತ್ತು ಪೌಷ್ಟಿಕ ಆಹಾರ</b> ಸಿಗುತ್ತದೆ.<br>• ಆಹಾರಧಾನ್ಯಗಳಲ್ಲಿನ ವೈವಿಧ್ಯ ಮುಖ್ಯವಾಗಿ <b>ಹವಾಮಾನ, ಭೌಗೋಳಿಕ ಪರಿಸ್ಥಿತಿ ಮತ್ತು ಸ್ಥಳೀಯ ಘಟಕಗಳನ್ನು</b> ಆಧರಿಸಿರುತ್ತದೆ.<br>• <b>ಒಂದೇ ಧಾನ್ಯದಿಂದ ವಿವಿಧ ಪದಾರ್ಥಗಳು</b> ತಯಾರಾಗುತ್ತವೆ – ಉದಾ. ಅಕ್ಕಿಯಿಂದ ರೊಟ್ಟಿ, ಅನ್ನ, ದೋಸೆ, ಮೋದಕ, ಇಡ್ಲಿ.</div>
+ <h3>ಆಟ: ಈ ಪದಾರ್ಥ ಯಾವ ಧಾನ್ಯದಿಂದ?</h3>
+ ${sortGame('grain',[['ಇಡ್ಲಿ',0],['ಚಪಾತಿ',1],['ಹುರಡಾ',2],['ದೋಸೆ',0],['ಹೋಳಿಗೆ',1],['ಅರಳು (ಜೋಳ)',2],['ಮೋದಕ',0],['ಧಪಾಟೆ',2],['ನರ',1]],[['🍚 ಅಕ್ಕಿ','sm'],['🌾 ಗೋಧಿ','or'],['🌽 ಜೋಳ','pu']],'grain')}`,a:()=>drawGames()},
+{h:'ಮಳೆ ಮತ್ತು ಬೆಳೆಗಳು',s:'ನಮ್ಮ ದೇಶದಲ್ಲಿ ಕೃಷಿ ಮುಖ್ಯವಾಗಿ ಮಳೆನೀರನ್ನು ಅವಲಂಬಿಸಿದೆ. ಹೆಚ್ಚು ಮಳೆಯ ಪ್ರದೇಶದಲ್ಲಿ ಅಕ್ಕಿ, ರಾಗಿ, ಸಾಮೆ, ತೆಂಗು; ಮಧ್ಯಮ ಮಳೆಯ ಪ್ರದೇಶದಲ್ಲಿ ಗೋಧಿ, ತೊಗರಿ, ಸೋಯಾಬೀನ್; ಕಡಿಮೆ ಮಳೆಯ ಪ್ರದೇಶದಲ್ಲಿ ಜೋಳ, ಸಜ್ಜೆ, ಹೆಸರುಕಾಳು, ಮಡಿಕೆಕಾಳು ಈ ಬೆಳೆಗಳನ್ನು ಬೆಳೆಯಲಾಗುತ್ತದೆ.',b:()=>`
+ <div class="key">ನಮ್ಮ ದೇಶದಲ್ಲಿ ಕೃಷಿ ಎಂಬ ಉದ್ಯೋಗ ಎಲ್ಲೆಡೆ ಮಾಡಲಾಗುತ್ತದೆ. ಕೃಷಿ ಮುಖ್ಯವಾಗಿ <b>ಮಳೆನೀರನ್ನು</b> ಅವಲಂಬಿಸಿದೆ. ಮಳೆ ಎಲ್ಲೆಡೆ ಒಂದೇ ರೀತಿ ಬೀಳುವುದಿಲ್ಲ.</div>
+ <div class="g2">
+  <div class="tile op" style="background:#e0f2fe"><div class="ic">🌧️🌧️🌧️</div><div class="tt">ಹೆಚ್ಚು ಮಳೆ</div><div class="dd">ಅಕ್ಕಿ, ರಾಗಿ, ಸಾಮೆ, ತೆಂಗು</div></div>
+  <div class="tile op" style="background:#f0f9ff"><div class="ic">🌧️🌧️</div><div class="tt">ಮಧ್ಯಮ ಮಳೆ</div><div class="dd">ಗೋಧಿ, ತೊಗರಿ, ಸೋಯಾಬೀನ್</div></div>
+  <div class="tile op" style="background:#fefce8"><div class="ic">🌧️</div><div class="tt">ಕಡಿಮೆ ಮಳೆ</div><div class="dd">ಜೋಳ, ಸಜ್ಜೆ, ಹೆಸರುಕಾಳು, ಮಡಿಕೆಕಾಳು</div></div>
+ </div>
+ <div class="msg in">ಬೆಳೆಗಳು ಉತ್ತಮವಾಗಿ ಬರಲು: <b>ಸುಧಾರಿತ ಬೀಜಗಳು, ಫಲವತ್ತಾದ ಭೂಮಿ, ಸಾಕಷ್ಟು ಸೂರ್ಯನ ಬೆಳಕು ಮತ್ತು ಬೇಕಾದಷ್ಟು ನೀರು</b> ಅಗತ್ಯವಿರುತ್ತದೆ.</div>
+ <h3>ಆಟ: ಯಾವ ಪ್ರದೇಶದ ಬೆಳೆ?</h3>
+ ${sortGame('crop',[['ಅಕ್ಕಿ',0],['ಜೋಳ',2],['ಗೋಧಿ',1],['ರಾಗಿ',0],['ಸಜ್ಜೆ',2],['ತೊಗರಿ',1],['ತೆಂಗಿನಕಾಯಿ',0],['ಹೆಸರುಕಾಳು',2],['ಸೋಯಾಬೀನ್',1],['ಮಡಿಕೆಕಾಳು',2],['ಸಾಮೆ',0]],[['ಹೆಚ್ಚು ಮಳೆ','sm'],['ಮಧ್ಯಮ','gr'],['ಕಡಿಮೆ ಮಳೆ','or']],'crop')}`,a:()=>drawGames()},
+{h:'ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಹಣ್ಣುಗಳು',s:'ಹಣ್ಣುಗಳ ಲಭ್ಯತೆ ಋತುವಿಗೆ ಅನುಗುಣವಾಗಿ ಕಡಿಮೆ-ಹೆಚ್ಚು ಆಗುತ್ತದೆ ಮತ್ತು ಅದರಲ್ಲಿ ಋತುವಿಗೆ ಅನುಗುಣವಾದ ವೈವಿಧ್ಯ ಕಂಡುಬರುತ್ತದೆ.',b:()=>`
+ <div class="msg in">🗣 ಹೇಳಿ ನೋಡೋಣ: ಹಣ್ಣಿನ ವ್ಯಾಪಾರಿಯ ಅಂಗಡಿಯಲ್ಲಿ ಯಾವ ಹಣ್ಣುಗಳಿವೆ? ಯಾವ ಹಣ್ಣುಗಳು ವರ್ಷಪೂರ್ತಿ ಸಿಗುತ್ತವೆ? (ಉದಾ. ಬಾಳೆಹಣ್ಣು, ಸೇಬು, ಪಪ್ಪಾಯ)</div>
+ <h3>ಆಟ: ಹಣ್ಣು ಯಾವ ಋತುವಿನಲ್ಲಿ ಹೆಚ್ಚು ಸಿಗುತ್ತದೆ?</h3>
+ ${sortGame('fruit',[['🥭 ಮಾವು',0],['🍉 ಕಲ್ಲಂಗಡಿ',0],['🫐 ನೇರಳೆಹಣ್ಣು',1],['🍐 ಸೀಬೆಹಣ್ಣು',2],['🍇 ದ್ರಾಕ್ಷಿ',0],['🍊 ಕಿತ್ತಳೆ',2],['🟣 ಕರವಂದ',0],['🟤 ಬೋರೆಹಣ್ಣುಗಳು',2],['🌽 ಮೆಕ್ಕೆಜೋಳದ ತೆನೆ',1],['🍏 ಸೀತಾಫಲ',1]],[['☀️ ಬೇಸಿಗೆ','or'],['🌧️ ಮಳೆಗಾಲ','sm'],['❄️ ಚಳಿಗಾಲ','pu']],'fruit')}`,a:()=>drawGames()},
+{h:'ರೈತ ಮತ್ತು ಕೃಷಿ',s:'ಆಹಾರದ ಅಗತ್ಯವನ್ನು ಪೂರೈಸುವಲ್ಲಿ ರೈತ ಮಹತ್ವದ ಪಾತ್ರ ವಹಿಸುತ್ತಾನೆ. ಕೃಷಿಯ ಉತ್ಪನ್ನ ಭೂಮಿ, ನೀರು, ಹವಾಮಾನ ಮತ್ತು ಸೂರ್ಯನ ಬೆಳಕು ಈ ಘಟಕಗಳನ್ನು ಅವಲಂಬಿಸಿರುತ್ತದೆ. ಸಾವಯವ ಕೃಷಿ ಎಂದರೆ ನೈಸರ್ಗಿಕ ಗೊಬ್ಬರ ಬಳಸಿ ಬೆಳೆ ಬೆಳೆಯುವ ವಿಧಾನ.',b:()=>`
+ <div class="key">ಮನುಷ್ಯ ಅಗತ್ಯಗಳನ್ನು ಪೂರೈಸಲು ವಿವಿಧ ಕೆಲಸಗಳನ್ನು ಮಾಡುತ್ತಾನೆ. <b>ಆಹಾರದ ಅಗತ್ಯ</b> ಪೂರೈಸುವಲ್ಲಿ <b>ರೈತ</b> ಮಹತ್ವದ ಪಾತ್ರ ವಹಿಸುತ್ತಾನೆ. ರೈತ ಧಾನ್ಯ, ಹಣ್ಣು, ಹೂವು, ತರಕಾರಿ, ಕಾಳುಗಳು, ಎಣ್ಣೆಕಾಳು ಬೆಳೆಯುತ್ತಾನೆ. ಕೃಷಿಯ ಉತ್ಪನ್ನ <b>ಭೂಮಿ, ನೀರು, ಹವಾಮಾನ ಮತ್ತು ಸೂರ್ಯನ ಬೆಳಕು</b> ಇವುಗಳನ್ನು ಅವಲಂಬಿಸಿರುತ್ತದೆ.</div>
+ <h3>🔧 ಕೃಷಿಯ ಸಲಕರಣೆಗಳು (ಕ್ಲಿಕ್ ಮಾಡಿ)</h3>
+ <div class="g2">${[['⛏️','ನೇಗಿಲು','ಭೂಮಿ ಉಳಲು'],['🪓','ಗುದ್ದಲಿ / ಹಾರೆ','ಮಣ್ಣು ಅಗೆಯಲು'],['🔪','ಕುಡುಗೋಲು','ಬೆಳೆ ಕೊಯ್ಯಲು'],['🧹','ಕುಂಟೆ','ಹೆಂಟೆಗಳನ್ನು ಒಡೆದು ಭೂಮಿಯನ್ನು ಸಮತಟ್ಟು ಮಾಡಲು'],['🧺','ಮೊರ','ತೂರಲು'],['🚜','ಟ್ರ್ಯಾಕ್ಟರ್','ಉಳುಮೆ, ಸಾಗಣೆ – ಕಡಿಮೆ ಸಮಯದಲ್ಲಿ']].map(x=>`<div class="tile" onclick="tog(this)"><div class="ic">${x[0]}</div><div class="tt">${x[1]}</div><div class="dd">${x[2]}</div><div class="tap">ಕ್ಲಿಕ್</div></div>`).join('')}</div>
+ <div class="msg in">🤔 ರೈತ ಯಾವ ಸಮಸ್ಯೆಗಳನ್ನು ಎದುರಿಸಬೇಕಾಗುತ್ತದೆ? <button class="btn ln sm" onclick="this.nextElementSibling.style.display='block'">ಉತ್ತರ ನೋಡಿ</button><span style="display:none"> ಕಡಿಮೆ ಅಥವಾ ಹೆಚ್ಚು ಮಳೆ, ಬರ, ಬೆಳೆಗಳ ಮೇಲಿನ ಕೀಟ ಮತ್ತು ರೋಗ, ಆಲಿಕಲ್ಲು ಮಳೆ, ಬೆಳೆಗಳಿಗೆ ಸರಿಯಾದ ಬೆಲೆ ಸಿಗದಿರುವುದು.</span></div>
+ <div class="g2">
+  <div class="tile op" style="background:#f0fdf4"><div class="ic">🐄🍂🪱</div><div class="tt">ಸಾವಯವ ಕೃಷಿ</div><div class="dd">ನೈಸರ್ಗಿಕ ಗೊಬ್ಬರ ಬಳಸಿ ಬೆಳೆ ಬೆಳೆಯುವ ವಿಧಾನ – <b>ಸಗಣಿ, ಕಾಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ, ಎರೆಹುಳು ಗೊಬ್ಬರ, ಒಣ ಎಲೆಗಳು</b>. ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ ಬಳಸುವುದಿಲ್ಲ; ಕೀಟ ಮತ್ತು ರೋಗ ನಿಯಂತ್ರಣಕ್ಕೆ ನೈಸರ್ಗಿಕ ಉಪಾಯಗಳು. ಆದ್ದರಿಂದ <b>ಭೂಮಿಯ ಫಲವತ್ತತೆ ಉಳಿದು</b> ಇರುತ್ತದೆ ಮತ್ತು ಉತ್ಪಾದನೆ <b>ಪೌಷ್ಟಿಕ</b> ಇರುತ್ತದೆ.</div></div>
+  <div class="tile op" style="background:#eff6ff"><div class="ic">🚜🤖</div><div class="tt">ಆಧುನಿಕ ತಂತ್ರಜ್ಞಾನ</div><div class="dd">ಆಧುನಿಕ ತಂತ್ರಜ್ಞಾನದಿಂದ ಕೃಷಿಯ <b>ಉತ್ಪಾದಕತೆ ಹೆಚ್ಚಿದೆ</b> ಯಂತ್ರಗಳ ಸಹಾಯದಿಂದ <b>ಕಡಿಮೆ ಖರ್ಚಿನಲ್ಲಿ ಮತ್ತು ಕಡಿಮೆ ಶ್ರಮದಲ್ಲಿ</b> ಕೃಷಿ ಕೆಲಸಗಳು ನಡೆಯುತ್ತವೆ.</div></div>
+ </div>`},
+{h:'ಆಹಾರ ಬೇಯಿಸುವುದು',s:'ಆಹಾರ ಬೇಯಿಸುವುದರಿಂದ ಅದು ಮೃದುವಾಗುತ್ತದೆ, ಜೀರ್ಣವಾಗಲು ಸುಲಭವಾಗುತ್ತದೆ ಮತ್ತು ಹೆಚ್ಚು ರುಚಿಯಾಗುತ್ತದೆ. ಹುರಿಯುವುದು, ಬೇಯಿಸುವುದು, ಕುದಿಸುವುದು, ಹಬೆಯಲ್ಲಿ ಬೇಯಿಸುವುದು, ಕರಿಯುವುದು ಇವು ಆಹಾರ ತಯಾರಿಸುವ ವಿಧಾನಗಳು. ಹಣ್ಣುಗಳು, ಸೌತೆಕಾಯಿ, ಟೊಮೆಟೊ ನಾವು ಹಸಿಯಾಗಿ ತಿನ್ನುತ್ತೇವೆ.',b:()=>`
+ <div class="key">ಆಹಾರ <b>ಬೇಯಿಸುವುದರಿಂದ</b> ಅವು <b>ಮೃದು</b> ಆಗುತ್ತದೆ, <b>ಜೀರ್ಣವಾಗಲು ಸುಲಭ</b> ಆಗುತ್ತದೆ ಮತ್ತು ಹೆಚ್ಚು <b>ರುಚಿಕರ ಮತ್ತು ಸ್ವಾದಿಷ್ಟ</b> ಆಗುತ್ತದೆ. ಕೆಲವು ಪದಾರ್ಥಗಳನ್ನು ನಾವು <b>ಹಸಿಯಾಗಿ</b> ತಿನ್ನುತ್ತೇವೆ – ಹಣ್ಣುಗಳು, ಸೌತೆಕಾಯಿ, ಟೊಮೆಟೊ.</div>
+ <h3>ಆಹಾರ ಬೇಯಿಸುವ ಸಾಧನಗಳು – ಪಾರಂಪರಿಕವೋ ಆಧುನಿಕವೋ?</h3>
+ ${sortGame('tool',[['🔥 ಒಲೆ',0],['🪔 ಸ್ಟೌವ್',1],['☀️ ಸೌರ ಒಲೆ',1],['☀️ ಸೌರ ಕುಕ್ಕರ್',1],['🔵 ಗ್ಯಾಸ್ ಒಲೆ',1],['🪵 ಕಟ್ಟಿಗೆ ಉರಿ / ಒಲೆ',0]],[['ಸಾಂಪ್ರದಾಯಿಕ','or'],['ಆಧುನಿಕ','gr']],'tool')}
+ <h3>ಆಟ: ಪದಾರ್ಥ ಯಾವ ವಿಧಾನದಿಂದ ತಯಾರಾಗುತ್ತದೆ?</h3>
+ ${sortGame('cook',[['ರೊಟ್ಟಿ',0],['ಇಡ್ಲಿ',3],['ಭಜಿ',4],['ಅನ್ನ',1],['ಮೋದಕ (ಹಬೆಯಲ್ಲಿ ಬೇಯಿಸಿದ)',3],['ನೆಲಗಡಲೆ ಕಾಯಿ / ಆಲೂಗಡ್ಡೆ',2],['ಹಪ್ಪಳ (ಸುಟ್ಟ)',0],['ಪೂರಿ',4]],[['ಹುರಿಯುವುದು','or'],['ಬೇಯಿಸುವುದು','gr'],['ಕುದಿಸುವುದು','sm'],['ಹಬೆಯಲ್ಲಿ ಬೇಯಿಸುವುದು','pu'],['ಕರಿಯುವುದು','or']],'cook')}`,a:()=>drawGames()},
+{h:'ಆಹಾರ ತಯಾರಿಸುವಾಗ ವಹಿಸಬೇಕಾದ ಎಚ್ಚರಿಕೆ',s:'ಹಣ್ಣು, ತರಕಾರಿಗಳನ್ನು ತಿನ್ನುವ ಮೊದಲು ಸ್ವಚ್ಛವಾಗಿ ತೊಳೆಯಬೇಕು. ಹೆಚ್ಚಿದ ತರಕಾರಿಗಳನ್ನು ಹೆಚ್ಚು ಹೊತ್ತು ನೀರಿನಲ್ಲಿ ನೆನೆಸಬಾರದು. ಆಹಾರವನ್ನು ಹೆಚ್ಚು ಹೊತ್ತು ಬೇಯಿಸಿದರೆ ಪೋಷಕಾಂಶಗಳು ಕಡಿಮೆಯಾಗುತ್ತವೆ. ತೆರೆದ ಆಹಾರ ತಿನ್ನಬಾರದು.',b:()=>`
+ <h3>ಆಟ: ಸರಿಯೇ ತಪ್ಪೇ?</h3>
+ ${sortGame('care6',[['ಹಣ್ಣು, ತರಕಾರಿಗಳನ್ನು ತಿನ್ನುವ ಮೊದಲು ಸ್ವಚ್ಛವಾಗಿ ತೊಳೆಯುವುದು',0],['ಹೆಚ್ಚಿದ ತರಕಾರಿಗಳನ್ನು ತುಂಬಾ ಹೊತ್ತು ನೀರಿನಲ್ಲಿ ನೆನೆಸಿಡುವುದು',1],['ಆಹಾರವನ್ನು ತುಂಬಾ ಹೆಚ್ಚು ಹೊತ್ತು ಬೇಯಿಸುತ್ತಿರುವುದು',1],['ರಸ್ತೆಬದಿಯ ತೆರೆದ ಆಹಾರ ತಿನ್ನುವುದು',1],['ಬಿಸಿ ಆಹಾರ ಬೇಯಿಸಿ ತಕ್ಷಣ ಫ್ರಿಜ್‌ನಲ್ಲಿ ಇಡುವುದು',1],['ಆಹಾರವನ್ನು ಮುಚ್ಚಿಡುವುದು',0]],[['✔ ಸರಿ','gr'],['✘ ತಪ್ಪು','or']],'care6')}
+ <div class="key">ಹೆಚ್ಚಿದ ತರಕಾರಿಗಳನ್ನು ಹೆಚ್ಚು ಹೊತ್ತು ನೀರಿನಲ್ಲಿ ನೆನೆಸಬಾರದು, ಏಕೆಂದರೆ ಅವುಗಳಲ್ಲಿನ <b>ಪೋಷಕ ಜೀವಸತ್ವಗಳು ನೀರಿನಲ್ಲಿ ಕರಗುತ್ತವೆ</b>. ಆಹಾರವನ್ನು ಹೆಚ್ಚು ಹೊತ್ತು ಬೇಯಿಸಿದರೆ ಅದರಲ್ಲಿನ <b>ಪೋಷಕಾಂಶಗಳು ಕಡಿಮೆ</b> ಆಗುತ್ತವೆ.</div>`,a:()=>drawGames()},
+{h:'ಆಹಾರ ಸಂಗ್ರಹಿಸುವುದು',s:'ಒಣಗಿಸುವುದು, ಊರಿಡುವುದು, ಉಪ್ಪು ಹಚ್ಚುವುದು, ಬೇವಿನ ಸೊಪ್ಪು ಬೆರೆಸಿ ಧಾನ್ಯ ಸಂಗ್ರಹಿಸುವುದು ಇವು ಆಹಾರ ಸಂಗ್ರಹಿಸುವ ಪಾರಂಪರಿಕ ವಿಧಾನಗಳು. ಉಪ್ಪಿನಕಾಯಿಯಲ್ಲಿ ಉಪ್ಪು, ಇಂಗು, ಸಾಸಿವೆ, ಅಡುಗೆ ಎಣ್ಣೆ ಇವು ಸಂರಕ್ಷಕಗಳಾಗಿರುತ್ತವೆ.',b:()=>`
+ <div class="key">ಆಹಾರ ಸಂಗ್ರಹಿಸುವ ಪಾರಂಪರಿಕ ವಿಧಾನಗಳು: <b>ಒಣಗಿಸುವುದು, ಊರಿಡುವುದು, ಉಪ್ಪು ಹಚ್ಚುವುದು, ಬೇವಿನ ಸೊಪ್ಪು ಬೆರೆಸಿ ಧಾನ್ಯ ಸಂಗ್ರಹಿಸುವುದು</b>. ಸಾಮಾನ್ಯ ವಿಧಾನಗಳು: <b>ಬಿಸಿಲಿನಲ್ಲಿ ಒಣಗಿಸುವುದು, ಗಾಳಿ ಆಡುವ ಜಾಗದಲ್ಲಿ ಸಂಗ್ರಹಿಸುವುದು</b> (ಉದಾ. ಈರುಳ್ಳಿ, ಆಲೂಗಡ್ಡೆ). ಇದರಿಂದ ಆಹಾರ ಹಾಳಾಗುವುದಿಲ್ಲ, ಹೆಚ್ಚು ದಿನ ಉಳಿಯುತ್ತದೆ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿರುತ್ತದೆ. ಆಹಾರಕ್ಕೆ <b>ಹುಳ ಅಥವಾ ಬೂಸು</b> ಹತ್ತದಂತೆ ಎಚ್ಚರ ವಹಿಸಬೇಕು.</div>
+ <h3>ಆಟ: ಯಾವ ಸಂಗ್ರಹ ವಿಧಾನ?</h3>
+ ${sortGame('store',[['ಹಪ್ಪಳ, ಕುರ್ಡಯಾ',0],['ಹಸಿ ಮಾವಿನ ಉಪ್ಪಿನಕಾಯಿ',1],['ಗೋಧಿ, ಜೋಳ (ಬೇವಿನ ಎಲೆಯೊಂದಿಗೆ)',2],['ಈರುಳ್ಳಿ, ಆಲೂಗಡ್ಡೆ',3],['ಮುರಬ್ಬ',1],['ಸಂಡಿಗೆ',0]],[['ಬಿಸಿಲಿನಲ್ಲಿ ಒಣಗಿಸುವುದು','or'],['ಊರಿಡುವುದು / ಉಪ್ಪು ಹಚ್ಚುವುದು','pu'],['ಬೇವಿನ ಎಲೆ','gr'],['ಗಾಳಿ ಆಡುವ ಜಾಗದಲ್ಲಿ','sm']],'store')}
+ <h3>🥭 ಮಾಡಿ ನೋಡಿ: ಹಸಿ ಮಾವಿನ ತುಂಡುಗಳಿಗೆ ಉಪ್ಪು ಹಚ್ಚುವುದು – ಹಂತಗಳನ್ನು ಕ್ರಮದಲ್ಲಿ ಜೋಡಿಸಿ</h3>
+ ${orderGame('pickle',['ಭರಣಿಯನ್ನು ಸ್ವಚ್ಛ ಮತ್ತು ಒಣಗಿಸುವುದು','ಹಸಿ ಮಾವಿನ ಸಣ್ಣ ತುಂಡುಗಳನ್ನು ಮಾಡುವುದು','ತುಂಡುಗಳು, ಉಪ್ಪಿನಕಾಯಿ ಮಸಾಲೆ, ಖಾರದ ಪುಡಿ, ಉಪ್ಪನ್ನು ಭರಣಿಯಲ್ಲಿ ಹಾಕುವುದು','ಚಮಚದಿಂದ ಚೆನ್ನಾಗಿ ಕಲಕುವುದು','ಎಣ್ಣೆಯ ತಣ್ಣನೆಯ ಒಗ್ಗರಣೆ ಹಾಕುವುದು','ಭರಣಿಯ ಬಾಯಿಗೆ ಬಟ್ಟೆ ಕಟ್ಟಿ ಮುಚ್ಚಳ ಹಾಕುವುದು'],'pickle')}
+ <div class="know"><b class="h">🧂 ಸಂರಕ್ಷಕಗಳು</b><br>ಉಪ್ಪಿನಕಾಯಿ, ಮುರಬ್ಬ ಉಳಿಯಲೆಂದು ಅದರಲ್ಲಿ ಕೆಲವು ವಿಶೇಷ ಪದಾರ್ಥಗಳನ್ನು ಹಾಕುತ್ತಾರೆ, ಆದ್ದರಿಂದ ಅವು ವರ್ಷಪೂರ್ತಿ ಉಳಿಯುತ್ತವೆ. ಅಂತಹ ಪದಾರ್ಥಗಳಿಗೆ <b>ಸಂರಕ್ಷಕಗಳು</b> ಎನ್ನುತ್ತಾರೆ. ಉದಾ. <b>ಉಪ್ಪು, ಇಂಗು, ಸಾಸಿವೆ, ಅಡುಗೆ ಎಣ್ಣೆ</b>. ಪದಾರ್ಥದಲ್ಲಿ <b>ನೀರಿನ ಅಂಶ ಉಳಿಯಬಾರದು</b> ಎಂಬುದರ ಬಗ್ಗೆ ಎಚ್ಚರ ವಹಿಸಬೇಕು.</div>
+ <div class="msg in">🗣 ಹೇಳಿ ನೋಡೋಣ: ಧಾನ್ಯ, ಕಾಳುಗಳು, ಹಪ್ಪಳವನ್ನು ಸಂಗ್ರಹಿಸುವ ಮೊದಲು ಬಿಸಿಲಿನಲ್ಲಿ ಏಕೆ ಒಣಗಿಸುತ್ತಾರೆ? <button class="btn ln sm" onclick="this.nextElementSibling.style.display='block'">ಉತ್ತರ</button><span style="display:none"> ತೇವ ಹೋಗುತ್ತದೆ; ತೇವದಿಂದ ಬೂಸು ಮತ್ತು ಕೀಟ ಹತ್ತುತ್ತವೆ. ಒಣ ಪದಾರ್ಥಗಳು ಹೆಚ್ಚು ದಿನ ಉಳಿಯುತ್ತವೆ.</span></div>`,a:()=>drawGames()},
+{h:'ಕಲುಷಿತ ಆಹಾರ',s:'ಕಲುಷಿತ ಆಹಾರ ಎಂದರೆ ಹಾಳಾದ, ವಿಷಕಾರಿ ಅಥವಾ ರೋಗ ಹರಡುವ ಆಹಾರ. ಸೂಕ್ಷ್ಮಜೀವಿಗಳು, ಅಶುದ್ಧ ನೀರು, ತೆರೆದಿಟ್ಟ ಆಹಾರದಿಂದ ಆಹಾರ ಕಲುಷಿತವಾಗುತ್ತದೆ. ಕಲುಷಿತ ಆಹಾರದಿಂದ ಹೊಟ್ಟೆನೋವು, ಭೇದಿ, ವಾಂತಿ, ಬಳಲಿಕೆ ಆಗುತ್ತದೆ.',b:()=>`
+ <div class="key"><b>ಕಲುಷಿತ ಆಹಾರ</b> ಇದು ಹಾಳಾದ, ವಿಷಕಾರಿ ಅಥವಾ ರೋಗ ಹರಡುವ ಆಹಾರ. ರೋಗಾಣುಗಳು ನಮ್ಮ ಆರೋಗ್ಯಕ್ಕೆ ಹಾನಿಕಾರಕ.</div>
+ <div class="g2">
+  <div class="tile" onclick="tog(this)"><div class="ic">🦠</div><div class="tt">ಆಹಾರ ಕಲುಷಿತವಾಗಲು ಕಾರಣಗಳು</div><div class="dd">೧) ಸೂಕ್ಷ್ಮಜೀವಿಗಳು, ರಾಸಾಯನಿಕ ವಿಷಕಾರಿ ವಸ್ತುಗಳು, ಮಲಿನ ಗಾಳಿ, ಅಶುದ್ಧ ನೀರಿನ ಸಂಪರ್ಕ.<br>೨) ಗಾಜಿನ ತುಂಡುಗಳು, ಲೋಹದ ಕಣಗಳು, ಪ್ಲಾಸ್ಟಿಕ್, ಮಣ್ಣು ಬೆರೆಯುವುದು.<br>೩) ಅಶುದ್ಧ ಪಾತ್ರೆಗಳು, ತೊಳೆಯದ ತರಕಾರಿ/ಹಣ್ಣುಗಳು.<br>೪) ಆಹಾರವನ್ನು ತೆರೆದಿಡುವುದು.<br>೫) ಹೆಚ್ಚು ಕಾಲ ಇಟ್ಟರೆ ಹಳಸುವುದು.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🤢</div><div class="tt">ದುಷ್ಪರಿಣಾಮ</div><div class="dd">ಹೊಟ್ಟೆನೋವು, ಭೇದಿ ಮತ್ತು ವಾಂತಿ, ಬಳಲಿಕೆ, ದೈಹಿಕ ಆಯಾಸ ಮತ್ತು ಸೋಂಕು.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">🔍</div><div class="tt">ಕಲುಷಿತ ಆಹಾರವನ್ನು ಹೇಗೆ ಗುರುತಿಸಬೇಕು?</div><div class="dd">ಆಹಾರ ತುಂಬಾ ಹಾಳಾದ, ಹಳೆಯ, ಕೊಳೆತ, ಬೂಸು ಬಂದಂತೆ ಕಾಣುತ್ತಿದ್ದರೆ, ದುರ್ವಾಸನೆ ಬರುತ್ತಿದ್ದರೆ ಅಥವಾ ಅಂಟಾಗಿದ್ದರೆ ಅದನ್ನು ಕಲುಷಿತ ಎಂದು ತಿಳಿಯಬೇಕು.</div><div class="tap">ಒತ್ತಿ</div></div>
+  <div class="tile" onclick="tog(this)"><div class="ic">✅</div><div class="tt">ಏನು ಮಾಡಬೇಕು?</div><div class="dd">೧) ಆಹಾರವನ್ನು ಮುಚ್ಚಿಡಬೇಕು. ೨) ಸ್ವಚ್ಛತೆ ಕಾಪಾಡಬೇಕು. ೩) ಶುದ್ಧ ನೀರು ಬಳಸಬೇಕು. ೪) ತಾಜಾ ಮತ್ತು ಪೌಷ್ಟಿಕ ಆಹಾರ ತಿನ್ನಬೇಕು.</div><div class="tap">ಒತ್ತಿ</div></div>
+ </div>
+ <h3>ಆಟ: ಇದನ್ನು ತಿನ್ನಬೇಕೋ ಬೇಡವೋ?</h3>
+ ${sortGame('spoil',[['🍞 ಬೂಸು ಬಂದ ಬ್ರೆಡ್',1],['🍎 ಸ್ವಚ್ಛವಾಗಿ ತೊಳೆದ ತಾಜಾ ಸೇಬು',0],['🥛 ಹುಳಿ ವಾಸನೆ ಬರುವ ಹಾಲು',1],['🍚 ಈಗತಾನೇ ಬೇಯಿಸಿದ ಬಿಸಿ ಅನ್ನ',0],['🍢 ರಸ್ತೆಯಲ್ಲಿ ತೆರೆದಿಟ್ಟ ಪದಾರ್ಥಗಳು',1],['🥫 ಉಬ್ಬಿದ ಗಾಳಿಯಾಡದ ಡಬ್ಬಿ/ಚೀಲ',1]],[['✔ ತಿನ್ನಬೇಕು','gr'],['✘ ಬೇಡ','or']],'spoil')}
+ <div class="msg in">ಅನಾರೋಗ್ಯದ ಸಮಯದಲ್ಲಿ ಹುಡುಗಿ ತುಂಬಾ ದುರ್ಬಲಳಾಗಿದ್ದಳು. ಅವಳಿಗೆ <b>ಸರಿಯಾದ ಆಹಾರ</b> ಸಿಕ್ಕಿತು ಮತ್ತು ಅವಳು <b>ವಿಶ್ರಾಂತಿ</b> ಪಡೆದಳು, ಆದ್ದರಿಂದ ಅವಳ ಆರೋಗ್ಯ ಸುಧಾರಿಸಿತು. ದೇಹದ ಕೆಲಸ ಸರಿಯಾಗಿ ನಡೆಯಲು ಆಹಾರದ ಅಗತ್ಯವಿದೆ.</div>`,a:()=>drawGames()},
+{h:'ಪ್ರಾಣಿಗಳ ಆಹಾರ',s:'ಪ್ರತಿ ಜೀವಿಗೂ ಆಹಾರದ ಅಗತ್ಯವಿದೆ, ಆದರೆ ಎಲ್ಲರ ಆಹಾರ ಒಂದೇ ಅಲ್ಲ. ಸಸ್ಯಗಳು ತಮ್ಮ ಆಹಾರವನ್ನು ತಾವೇ ತಯಾರಿಸುತ್ತವೆ. ಕೆಲವು ಜೀವಿಗಳು ಗಿಡಗಳ ಸೊಪ್ಪು ಮತ್ತು ಹುಲ್ಲು ತಿನ್ನುತ್ತವೆ, ಇನ್ನು ಕೆಲವು ಕ್ರೂರ ಪ್ರಾಣಿಗಳು ಇತರ ಪ್ರಾಣಿಗಳನ್ನು ತಿನ್ನುತ್ತವೆ.',b:()=>`
+ <div class="msg in">🐱 ಬೆಕ್ಕು ಹೊಂಚು ಹಾಕಿ ಕುಳಿತಿದೆ – ಯಾವುದಕ್ಕಾಗಿ? 🐦 ಪಕ್ಷಿಯ ಮೊಟ್ಟೆಗಳು ಎಲ್ಲಿವೆ? ಬೆಕ್ಕು ಗೂಡಿನ ಕಡೆಗೆ ಏಕೆ ನೋಡುತ್ತಿದೆ? – ಬೆಕ್ಕಿಗೆ ಆಹಾರ ಬೇಕು!</div>
+ ${pickGame('eat',[['ಎಲ್ಲ ಜೀವಿಗಳು ಒಂದೇ ರೀತಿಯ ಆಹಾರ ತಿನ್ನುತ್ತಿರಬಹುದೇ?',['ಹೌದು','ಇಲ್ಲ'],1,'ಪ್ರತಿಯೊಬ್ಬರ ಆಹಾರ ಬೇರೆ ಬೇರೆ.'],['ಹಸು ಹುಲ್ಲು ತಿನ್ನುತ್ತದೆ ಎಂದು ಬೆಕ್ಕೂ ಹುಲ್ಲು ತಿನ್ನುವುದೇ?',['ಹೌದು','ಇಲ್ಲ'],1,'ಬೆಕ್ಕು ಇಲಿ, ಹಾಲು ತಿನ್ನುತ್ತದೆ.'],['ಬೆಕ್ಕಿಗೆ ಇಲಿ ತಿನ್ನಲು ಇಷ್ಟ, ಹಾಗಾದರೆ ಮೇಕೆಗೆ ಇಲಿ ತಿನ್ನಲು ಇಷ್ಟವಾಗುವುದೇ?',['ಹೌದು','ಇಲ್ಲ'],1,'ಮೇಕೆ ಸೊಪ್ಪು, ಹುಲ್ಲು ತಿನ್ನುತ್ತದೆ.']],'eat')}
+ <div class="key">ಪ್ರತಿ ಜೀವಿಗೂ ಆಹಾರದ ಅಗತ್ಯವಿದೆ, ಆದರೆ <b>ಎಲ್ಲರ ಆಹಾರ ಒಂದೇ ಅಲ್ಲ</b>. ಸಸ್ಯಗಳು ತಮ್ಮ ಆಹಾರವನ್ನು ತಾವೇ ತಯಾರಿಸುತ್ತವೆ. ಕೆಲವು ಜೀವಿಗಳು ಗಿಡಗಳ <b>ಸೊಪ್ಪು ಮತ್ತು ಹುಲ್ಲು</b> ತಿನ್ನುತ್ತವೆ, ಇನ್ನು ಕೆಲವು <b>ಕ್ರೂರ ಪ್ರಾಣಿಗಳು</b> ಇತರ ಪ್ರಾಣಿಗಳನ್ನು ತಿನ್ನುತ್ತವೆ.</div>`,a:()=>drawGames()},
+{h:'ಪ್ರಾಣಿಗಳ ಆಶ್ರಯಗಳು',s:'ಕೊರೆಯುವ ಚಳಿ, ರಭಸದ ಗಾಳಿ, ಸುಡುವ ಬಿಸಿಲು, ಧಾರಾಕಾರ ಮಳೆಯಿಂದ ರಕ್ಷಣೆಗಾಗಿ ಆಶ್ರಯ ಬೇಕು. ಪಕ್ಷಿಗಳು ಗೂಡು ಕಟ್ಟುತ್ತವೆ, ಜೇನುನೊಣಗಳು ಜೇನುಗೂಡು ತಯಾರಿಸುತ್ತವೆ, ಇಲಿ ಮತ್ತು ಹೆಗ್ಗಣಗಳು ಬಿಲ ಮಾಡಿಕೊಂಡು ವಾಸಿಸುತ್ತವೆ.',b:()=>`
+ <div class="key"><b>ಮನೆಯ ಅಗತ್ಯ ಯಾವುದಕ್ಕಾಗಿ?</b> ಕೊರೆಯುವ ಚಳಿ, ರಭಸದ ಗಾಳಿ, ಸುಡುವ ಬಿಸಿಲು, ಧಾರಾಕಾರ ಮಳೆಯಿಂದ ರಕ್ಷಣೆ ಪಡೆಯಲು. ಪ್ರಾಣಿಗಳಿಗೂ ಮನೆಯ ಅಗತ್ಯವಿದೆ.</div>
+ <div class="g2">
+  <div class="tile op"><div class="ic">🪺</div><div class="tt">ತಾವೇ ಆಶ್ರಯ ತಯಾರಿಸಿಕೊಳ್ಳುವವು</div><div class="dd">ಹಕ್ಕಿ <b>ಗೂಡು</b> ಕಟ್ಟುತ್ತವೆ – ಮೊಟ್ಟೆ ಮತ್ತು ಮರಿಗಳ ರಕ್ಷಣೆಗಾಗಿ; ಎತ್ತರದ ಮತ್ತು ಅನುಕೂಲಕರ ಜಾಗ ಆರಿಸುತ್ತವೆ. <b>ಜೇನುನೊಣಗಳು</b> ಮರಗಳ ಮೇಲೆ, ಬೆಟ್ಟದ ಬಂಡೆ ಸಂದಿಯಲ್ಲಿ <b>ಜೇನುಗೂಡು</b>; <b>ಇಲಿ, ಹೆಗ್ಗಣ</b> ನೆಲದ ಕೆಳಗೆ <b>ಬಿಲಗಳು</b>.</div></div>
+  <div class="tile op"><div class="ic">🕳️🌳</div><div class="tt">ಪ್ರಕೃತಿ ನಿರ್ಮಿತ ಆಶ್ರಯ ಹುಡುಕುವವು</div><div class="dd">ಹುಲಿ, ಸಿಂಹ – ಗುಹೆ; ಗೂಬೆ, ಗಿಳಿ – ಮರದ ಪೊಟರೆ; ಕೋತಿ – ಮರಗಳು.</div></div>
+  <div class="tile op"><div class="ic">🐄🏠</div><div class="tt">ಸಾಕು ಪ್ರಾಣಿಗಳ ಆಶ್ರಯಗಳು</div><div class="dd">ಕೆಲವರು ಪ್ರಾಣಿಗಳನ್ನು ಸಾಕುತ್ತಾರೆ ಮತ್ತು ಅವುಗಳಿಗಾಗಿ ಆಶ್ರಯ ತಯಾರಿಸುತ್ತಾರೆ – ಹಸು/ಎಮ್ಮೆ: <b>ಕೊಟ್ಟಿಗೆ</b>, ಕುದುರೆ: <b>ಲಾಯ</b>, ಕೋಳಿ: <b>ಕೋಳಿಗೂಡು</b>.</div></div>
+ </div>
+ <h3>ಆಟ: ಯಾರ ಆಶ್ರಯ ಯಾವುದು?</h3>
+ ${pickGame('home',[['🐦 ಗುಬ್ಬಚ್ಚಿ',['ಗೂಡು','ಕೊಟ್ಟಿಗೆ','ಬಿಲ'],0],['🐝 ಜೇನುನೊಣ',['ಲಾಯ','ಜೇನುಗೂಡು','ಗುಹೆ'],1],['🐀 ಇಲಿ',['ಬಿಲ','ಗೂಡು','ಕೋಳಿಗೂಡು'],0],['🐅 ಹುಲಿ',['ಜೇನುಗೂಡು','ಗುಹೆ','ಕೊಟ್ಟಿಗೆ'],1],['🐄 ಹಸು',['ಕೊಟ್ಟಿಗೆ','ಪೊಟರೆ','ಬಿಲ'],0],['🐎 ಕುದುರೆ',['ಕೋಳಿಗೂಡು','ಲಾಯ','ಜೇನುಗೂಡು'],1],['🐓 ಕೋಳಿ',['ಕೋಳಿಗೂಡು','ಗುಹೆ','ಜೇನುಗೂಡು'],0],['🦉 ಗೂಬೆ',['ಲಾಯ','ಮರದ ಪೊಟರೆ','ಬಿಲ'],1]],'home')}
+ <div class="msg in">🤔 ಏನು ಮಾಡಬೇಕು? ಅಮಿತ್‌ನ ಮನೆಯ ಕಿಟಕಿಯ ಬಳಿ ಗುಬ್ಬಚ್ಚಿ ಗೂಡು ಕಟ್ಟಿದೆ. ಅದಕ್ಕೆ ಹಾನಿಯಾಗದಂತೆ ಏನು ಮಾಡಬೇಕು? <button class="btn ln sm" onclick="this.nextElementSibling.style.display='block'">ಉತ್ತರ</button><span style="display:none"> ಗೂಡನ್ನು ತೆಗೆಯಬಾರದು, ಕಿಟಕಿಯನ್ನು ಜೋರಾಗಿ ತೆರೆಯಬಾರದು-ಮುಚ್ಚಬಾರದು, ಅಲ್ಲಿ ಗದ್ದಲ ಮಾಡಬಾರದು, ಬೆಕ್ಕಿನಿಂದ ಗೂಡನ್ನು ರಕ್ಷಿಸಬೇಕು, ಹತ್ತಿರ ಸ್ವಲ್ಪ ನೀರು ಮತ್ತು ಕಾಳುಗಳನ್ನು ಇಡಬೇಕು.</span></div>`,a:()=>drawGames()},
+{h:'ಮನುಷ್ಯನ ಆಶ್ರಯ – ಗ್ರಾಮೀಣ ಮತ್ತು ನಗರ ಮನೆಗಳು',s:'ಸಂಕಟದಿಂದ ರಕ್ಷಣೆ ಪಡೆಯಬಹುದಾದ ಸುರಕ್ಷಿತ ಜಾಗ ಮತ್ತು ಬಿಸಿಲು, ಗಾಳಿ, ಮಳೆಯಿಂದ ರಕ್ಷಣೆ ಸಿಗುವಂತಹ ಆಸರೆಯೇ ಆಶ್ರಯ. ಮಾನವ ಆಶ್ರಯದಲ್ಲಿ ನಗರ ಮನೆಗಳು ಮತ್ತು ಗ್ರಾಮೀಣ ಮನೆಗಳು ಎಂದು ಎರಡು ಪ್ರಕಾರಗಳಿವೆ.',b:()=>`
+ <div class="key">ಸಂಕಟದಿಂದ ರಕ್ಷಣೆ ಪಡೆಯಬಹುದಾದ ಸುರಕ್ಷಿತ ಜಾಗ ಹಾಗೂ ಬಿಸಿಲು, ಗಾಳಿ ಮತ್ತು ಮಳೆಯಿಂದ ರಕ್ಷಣೆ ಸಿಗುವಂತಹ ಆಸರೆಯೇ <b>ಆಶ್ರಯ</b>. ಮಾನವ ಆಶ್ರಯದ <b>ನಗರ ಮನೆಗಳು ಮತ್ತು ಗ್ರಾಮೀಣ ಮನೆಗಳು</b> ಎಂದು ಎರಡು ಪ್ರಕಾರಗಳಿವೆ.</div>
+ <div class="g2">
+  <div class="tile op" style="background:#fefce8"><div class="ic">🛖</div><div class="tt">ಗ್ರಾಮೀಣ ಮನೆಗಳು</div><div class="dd">ಪರಿಸರದಲ್ಲಿ ಲಭ್ಯವಿರುವ ಸಾಧನಗಳಿಂದ – <b>ಮಣ್ಣು, ಬಿದಿರು, ಹುಲ್ಲು, ಕಲ್ಲು, ತೆಂಗಿನ ಗರಿಗಳು, ಸಗಣಿ, ಮರ</b>. ಹೆಚ್ಚಾಗಿ <b>ಕಚ್ಚಾ</b>. ರಚನೆಯ ಮೇಲೆ ಹವಾಮಾನ, ಮಳೆ, ಭೌಗೋಳಿಕ ಪರಿಸ್ಥಿತಿಯ ಪ್ರಭಾವ:<br>• ಕೊಂಕಣ (ಹೆಚ್ಚು ಮಳೆ) – <b>ಹಂಚಿನ, ಇಳಿಜಾರು ಛಾವಣಿಯ</b><br>• ಪ್ರಸ್ಥಭೂಮಿ ಪ್ರದೇಶ (ಮಧ್ಯಮ ಮಳೆ) – <b>ತಾರಸಿಯ, ಮಣ್ಣಿನ</b><br>• ವಿದರ್ಭ, ನಂದುರ್ಬಾರ್ ಬುಡಕಟ್ಟು ಪ್ರದೇಶ – <b>ಕಡ್ಡಿ-ಮಣ್ಣಿನ</b></div></div>
+  <div class="tile op" style="background:#eff6ff"><div class="ic">🏢</div><div class="tt">ನಗರ ಮನೆಗಳು</div><div class="dd">ದಟ್ಟ ವಸತಿ, <b>ಬಹುಮಹಡಿ ಕಟ್ಟಡಗಳು</b>, <b>ಪಕ್ಕಾ</b> ಮನೆಗಳು. <b>ಸಿಮೆಂಟ್, ಮರಳು, ಕಾಂಕ್ರೀಟ್, ಕಬ್ಬಿಣ, ಸರಳುಗಳು, ಉಕ್ಕು</b> ಇವುಗಳ ಬಳಕೆ. <b>ಸೌಲಭ್ಯಯುಕ್ತ</b>.</div></div>
+ </div>
+ <div class="msg no">⚠️ ಜನಸಂಖ್ಯೆ ಹೆಚ್ಚುತ್ತಿರುವಂತೆ ವಸತಿಗಳು ಮತ್ತು ಮನೆಗಳ ಸಂಖ್ಯೆಯೂ ಹೆಚ್ಚುತ್ತಿದೆ. ನಗರ ವಸತಿಗಳ ಅಪಾರ ಬೆಳವಣಿಗೆ <b>ಪರಿಸರಕ್ಕೆ ಹಾನಿಕಾರಕ</b> ಆಗುತ್ತಿದೆ.</div>
+ <h3>ಆಟ: ಈ ಸಾಮಗ್ರಿಯನ್ನು ಯಾವ ಮನೆಯಲ್ಲಿ ಹೆಚ್ಚು ಬಳಸುತ್ತಾರೆ?</h3>
+ ${sortGame('mat',[['ಮಣ್ಣು',0],['ಸಿಮೆಂಟ್',1],['ಬಿದಿರು',0],['ಕಬ್ಬಿಣದ ಸರಳುಗಳು',1],['ತೆಂಗಿನ ಗರಿಗಳು',0],['ಕಾಂಕ್ರೀಟ್',1],['ಹುಲ್ಲು',0],['ಸ್ಟೀಲ್',1]],[['🛖 ಗ್ರಾಮೀಣ','or'],['🏢 ನಗರ','sm']],'mat')}
+ ${pickGame('reg',[['ಕೊಂಕಣದಂತಹ ಹೆಚ್ಚು ಮಳೆಯ ಪ್ರದೇಶದಲ್ಲಿ ಮನೆಗಳು ಹೇಗಿರುತ್ತವೆ?',['ತಾರಸಿಯ','ಹಂಚಿನ, ಇಳಿಜಾರು ಛಾವಣಿಯ','ಗಾಜಿನ'],1,'ಮಳೆನೀರು ಬೇಗ ಹರಿದುಹೋಗಲೆಂದು.'],['ಪ್ರಸ್ಥಭೂಮಿ ಪ್ರದೇಶದ ಮನೆಗಳು ಹೇಗಿರುತ್ತವೆ?',['ತಾರಸಿಯ, ಮಣ್ಣಿನ','ಮಂಜುಗಡ್ಡೆಯ','ಕಡ್ಡಿ-ಮಣ್ಣಿನ'],0],['ವಿದರ್ಭ ಮತ್ತು ನಂದುರ್ಬಾರ್‌ನ ಬುಡಕಟ್ಟು ಪ್ರದೇಶಗಳಲ್ಲಿ ಯಾವ ಮನೆಗಳು ಕಂಡುಬರುತ್ತವೆ?',['ಕಡ್ಡಿ-ಮಣ್ಣಿನ','ಬಹುಮಹಡಿ','ಹಂಚಿನ'],0]],'reg')}`,a:()=>drawGames()},
+{h:'ಪರಿಸರಸ್ನೇಹಿ ಮನೆ',s:'ಪರಿಸರಸ್ನೇಹಿ ಮನೆ ಕಟ್ಟುವಾಗ ಬಳಸಿದ ಸಾಮಗ್ರಿಯಿಂದ ಪರಿಸರಕ್ಕೆ ಹಾನಿಯಾಗುವುದಿಲ್ಲ. ಇಂತಹ ಮನೆಯಲ್ಲಿ ನೈಸರ್ಗಿಕ ಸಾಧನಗಳು, ಸೌರ, ಪವನ, ಜೈವಿಕ ಅನಿಲ ಶಕ್ತಿ, ನೀರಿನ ಮರುಬಳಕೆ, ತ್ಯಾಜ್ಯ ವಸ್ತುಗಳ ಮರುಬಳಕೆ ಮತ್ತು ನೈಸರ್ಗಿಕ ಬೆಳಕು ಹಾಗೂ ಗಾಳಿಯ ವ್ಯವಸ್ಥೆ ಇರುತ್ತದೆ.',b:()=>`
+ <div class="key"><b>ಪರಿಸರಸ್ನೇಹಿ ಮನೆಗಳು</b>: ಇಂತಹ ಮನೆಗಳನ್ನು ಕಟ್ಟುವಾಗ ಬಳಸಿದ ಸಾಮಗ್ರಿಯಿಂದ ಪರಿಸರಕ್ಕೆ ಹಾನಿಯಾಗುವುದಿಲ್ಲ. ಅವು ಪರಿಸರವನ್ನು ರಕ್ಷಿಸುತ್ತವೆ.</div>
+ <h3>🏡 ನಿಮ್ಮ ಪರಿಸರಸ್ನೇಹಿ ಮನೆ ಮಾಡಿ – ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಜೋಡಿಸಿ</h3>
+ <div class="chips" id="ecoBtns" style="justify-content:center">${ecoBtns()}</div>
+ <div id="ecoBox">${ecoSvg()}</div><div id="ecoMsg"></div>
+ <ol>
+  <li>ನೈಸರ್ಗಿಕ ಸಾಧನಗಳ ಹೆಚ್ಚು ಬಳಕೆ.</li>
+  <li>ಪವನ ಶಕ್ತಿ, ಸೌರಶಕ್ತಿ, ಜೈವಿಕ ಅನಿಲದಂತಹ <b>ಸಾಂಪ್ರದಾಯಿಕವಲ್ಲದ ಶಕ್ತಿ</b> ಮೂಲಗಳ ಹೆಚ್ಚು ಬಳಕೆ.</li>
+  <li><b>ನೀರಿನ ಮರುಬಳಕೆ</b>.</li>
+  <li>ಯಾವ ವಸ್ತುಗಳು ತ್ಯಾಜ್ಯವೋ ಆ ವಸ್ತುಗಳ <b>ಮರುಬಳಕೆ</b>.</li>
+  <li><b>ನೈಸರ್ಗಿಕ ಬೆಳಕು ಮತ್ತು ಗಾಳಿ</b> ಗಾಳಿ ಹರಿದಾಡುವ ವ್ಯವಸ್ಥೆ.</li>
+ </ol>`},
+{h:'ಇದನ್ನು ನಾವು ಕಲಿತೆವು',s:'ಹೊಲದಿಂದ ಮನೆಗೆ ತಲುಪುವಾಗ ಆಹಾರದ ಮೇಲೆ ಆಗುವ ಪ್ರಕ್ರಿಯೆಗಳು, ಆಹಾರ ಸಂಗ್ರಹಿಸುವ ಮತ್ತು ತಯಾರಿಸುವ ವಿಧಾನಗಳು, ಕಲುಷಿತ ಆಹಾರದ ದುಷ್ಪರಿಣಾಮಗಳು, ಪ್ರಾಣಿಗಳ ಆಹಾರ ಮತ್ತು ಆಶ್ರಯಗಳು ಹಾಗೂ ಪರಿಸರಸ್ನೇಹಿ ಆಶ್ರಯವನ್ನು ನಾವು ಕಲಿತೆವು.',b:()=>`
+ <ul>
+  <li>ಹೊಲದಿಂದ ಮನೆಗೆ ತಲುಪುವಾಗ ಆಹಾರದ ಮೇಲೆ ಆಗುವ <b>ಪ್ರಕ್ರಿಯೆಗಳು</b> ಅರ್ಥವಾದವು.</li>
+  <li>ವಿವಿಧ ಪ್ರದೇಶಗಳ ಜನರ ಆಹಾರಧಾನ್ಯ ಮತ್ತು <b>ಜೀವನಶೈಲಿ</b> ಇವುಗಳ ನಡುವಿನ ಸಂಬಂಧವನ್ನು ಅಧ್ಯಯನ ಮಾಡಿದೆವು.</li>
+  <li>ಆಹಾರ ಉತ್ಪಾದನೆಯಲ್ಲಿ <b>ರೈತರ ಪಾತ್ರ</b> ಅರ್ಥವಾಯಿತು.</li>
+  <li>ಆಹಾರ <b>ಸಂಗ್ರಹಿಸುವ</b> ಮತ್ತು ಆಹಾರ <b>ತಯಾರಿಸುವ</b> ವಿಧಾನಗಳನ್ನು ಅಧ್ಯಯನ ಮಾಡಿದೆವು.</li>
+  <li><b>ಕಲುಷಿತ ಆಹಾರದ ದುಷ್ಪರಿಣಾಮಗಳು</b> ಗಮನಕ್ಕೆ ಬಂದವು.</li>
+  <li>ಪ್ರಾಣಿಗಳ ಮತ್ತು ಪಕ್ಷಿಗಳ <b>ಆಹಾರ ಮತ್ತು ಆಶ್ರಯಗಳು</b> ಅರ್ಥವಾದವು.</li>
+  <li>ಆಶ್ರಯದ ಪ್ರಕಾರಗಳು ಮತ್ತು <b>ಪರಿಸರಸ್ನೇಹಿ ಆಶ್ರಯಗಳು</b> ಇವುಗಳ ನಡುವಿನ ವ್ಯತ್ಯಾಸವನ್ನು ಅಧ್ಯಯನ ಮಾಡಿದೆವು.</li>
+ </ul>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>• ಪರಿಸರಸ್ನೇಹಿ ಮನೆಗಳ ಚಿತ್ರಗಳನ್ನು ಪಡೆಯಿರಿ ಮತ್ತು ಮಾಹಿತಿ ಬರೆಯಿರಿ.<br>• ಕೃಷಿ ಉತ್ಪಾದನೆಯ ಬಗ್ಗೆ ಆಧುನಿಕ ತಂತ್ರಜ್ಞಾನದ ಪಟ್ಟಿ ಮಾಡಿ.<br>• ‘ಆಹಾರದ ಮೇಲೆ ಆಗುವ ಪ್ರಕ್ರಿಯೆ’ ಇದರ ಬಗ್ಗೆ ಪಾತ್ರಾಭಿನಯದ ಮೂಲಕ ನಾಟಕ ಪ್ರಸ್ತುತಪಡಿಸಿ.<br>• ಶಿಕ್ಷಕರೊಂದಿಗೆ ಪರಿಸರದ ಹೈನುಗಾರಿಕೆ ಕೇಂದ್ರಕ್ಕೆ ಭೇಟಿ ನೀಡಿ.<br>• ಛತ್ರಪತಿ ಶಿವಾಜಿ ಮಹಾರಾಜರ ಕಾಲದಲ್ಲಿ ಕೋಟೆಗಳಲ್ಲಿ ಧಾನ್ಯವನ್ನು ಹೇಗೆ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತಿತ್ತು ಎಂಬ ಮಾಹಿತಿ ಪಡೆಯಿರಿ.<br>• ಭಾರತದ ವಿವಿಧ ರಾಜ್ಯಗಳ ಹಬ್ಬ-ಸಮಾರಂಭಗಳ ಸಮಯದಲ್ಲಿ ತಯಾರಿಸುವ ಪದಾರ್ಥಗಳ ವಿಡಿಯೋ, ಚಿತ್ರಗಳನ್ನು ನೋಡಿ.</div>
+ <div class="msg ok" style="text-align:center;font-size:19px">🍲🏠 ಈ ಪಾಠದಲ್ಲಿ ನೀವು ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು: <b>${(award('end','ಅಭಿನಂದನೆ! ನೀವು ಇಡೀ ಪಾಠ ಕಲಿತಿರಿ.'),STARS.size)}</b> ⭐</div>
+ <div class="tool">${tool('N')}</div>`}
+];
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ರೈತ ಹೊಲದಲ್ಲಿ ಮೊದಲು ಯಾವ ಕೆಲಸ ಮಾಡುತ್ತಾನೆ?',['ಒಕ್ಕಣೆ','ಭೂಮಿ ಸಿದ್ಧತೆ','ತೂರುವುದು','ಕೊಯ್ಲು'],1,'ಮೊದಲು ಭೂಮಿ ಸಿದ್ಧತೆ (ಉಳುಮೆ) ಮಾಡಲಾಗುತ್ತದೆ.'],
+['ಭೂಮಿ ಉಳಲು ಹಿಂದೆ ಯಾವುದನ್ನು ಬಳಸುತ್ತಿದ್ದರು?',['ಎತ್ತಿನ ಜೋಡಿ','ಕುದುರೆ','ಒಂಟೆ','ಆನೆ'],0,'ಎತ್ತಿನ ಜೋಡಿ ಅಥವಾ ಟ್ರ್ಯಾಕ್ಟರ್‌ಗೆ ಸಲಕರಣೆಗಳನ್ನು ಜೋಡಿಸಿ ಭೂಮಿಯನ್ನು ಉಳುತ್ತಾರೆ.'],
+['ಕಾಳು ಪೂರ್ಣ ತುಂಬಿದ ನಂತರ ಎಲ್ಲ ತೆನೆಗಳನ್ನು ಕೊಯ್ದು ಸಂಗ್ರಹಿಸುವುದಕ್ಕೆ ಏನೆನ್ನುತ್ತಾರೆ?',['ಬಿತ್ತನೆ','ಕೊಯ್ಲು','ಒಕ್ಕಣೆ','ತೂರುವುದು'],1,'ಇದಕ್ಕೆ ಕೊಯ್ಲು ಎನ್ನುತ್ತಾರೆ.'],
+['ತೆನೆಗಳನ್ನು ಒಕ್ಕಿ ಅವುಗಳ ಕಾಳುಗಳನ್ನು ಬೇರ್ಪಡಿಸುವುದು ಎಂದರೇನು?',['ಒಕ್ಕಣೆ','ತೂರುವುದು','ಬಿತ್ತನೆ','ಭೂಮಿ ಸಿದ್ಧತೆ'],0,'ಇದಕ್ಕೆ ಒಕ್ಕಣೆ ಎನ್ನುತ್ತಾರೆ.'],
+['ಒಕ್ಕಣೆಗಾಗಿ ಕಣದ ಮಧ್ಯದಲ್ಲಿ ಗೂಟ ನೆಟ್ಟು ಅದಕ್ಕೆ ಯಾವ ಪ್ರಾಣಿಯನ್ನು ಕಟ್ಟುತ್ತಾರೆ?',['ಹಸು','ಎತ್ತು','ಮೇಕೆ','ನಾಯಿ'],1,'ಎತ್ತು ತೆನೆಗಳ ಮೇಲೆ ಸುತ್ತಿದಾಗ ಅದರ ತೂಕದಿಂದ ಕಾಳುಗಳು ಬಿಡುತ್ತವೆ.'],
+['ತೂರುವಾಗ ಸಿಪ್ಪೆ ಮತ್ತು ಹಗುರ ಕಸ ಯಾವುದರಿಂದ ದೂರ ಹೋಗುತ್ತದೆ?',['ನೀರಿನಿಂದ','ಗಾಳಿಯಿಂದ','ಬಿಸಿಲಿನಿಂದ','ಬೆಂಕಿಯಿಂದ'],1,'ಗಾಳಿಯಿಂದ ಸಿಪ್ಪೆ ದೂರ ಹೋಗುತ್ತದೆ ಮತ್ತು ಕಾಳುಗಳ ರಾಶಿಯಾಗುತ್ತದೆ.'],
+['ತೂರಲು ಧಾನ್ಯವನ್ನು ಯಾವುದರಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳುತ್ತಾರೆ?',['ಮೊರ','ಬಕೆಟ್','ಗೋಣಿಚೀಲ','ಜರಡಿ'],0,'ಒಕ್ಕಿದ ಧಾನ್ಯವನ್ನು ಮೊರದಲ್ಲಿ ತೆಗೆದುಕೊಂಡು ನೆಲದ ಮೇಲೆ ಸುರಿಯುತ್ತಾರೆ.'],
+['ಇತ್ತೀಚೆಗೆ ಒಕ್ಕಣೆ ಮತ್ತು ತೂರುವುದನ್ನು ಯಾವುದರ ಮೇಲೆ ಮಾಡುತ್ತಾರೆ?',['ಕೈಯಿಂದ','ಯಂತ್ರದಲ್ಲಿ','ಎತ್ತಿನ ಮೇಲೆ','ನೀರಿನಲ್ಲಿ'],1,'ಯಂತ್ರದಿಂದ ಕೆಲಸ ಬೇಗ ಆಗುತ್ತದೆ, ಶ್ರಮ ಮತ್ತು ಖರ್ಚು ಕಡಿಮೆ ತಗಲುತ್ತದೆ.'],
+['ಧಾನ್ಯದ ಚೀಲಗಳನ್ನು ಯಾರಿಂದ ಸುರಕ್ಷಿತವಾಗಿ ಇಡಬೇಕಾಗುತ್ತದೆ?',['ಕೀಟ, ಇಲಿ, ಹೆಗ್ಗಣ','ಮಳೆಯಲ್ಲ, ಬಿಸಿಲು','ಪಕ್ಷಿಗಳು ಮಾತ್ರ','ಏನೂ ಇಲ್ಲ'],0,'ಕೀಟ, ಇಲಿ, ಹೆಗ್ಗಣ ಹಾಳು ಮಾಡದಂತೆ ಎಚ್ಚರ ವಹಿಸುತ್ತಾರೆ.'],
+['‘ಅನ್ನವೇ ಪೂರ್ಣಬ್ರಹ್ಮ’ ಇದರ ಅರ್ಥವೇನು?',['ಆಹಾರ ವ್ಯರ್ಥ ಮಾಡಬೇಕು','ಆಹಾರ ಪವಿತ್ರ, ಪೂಜನೀಯ ಮತ್ತು ಜೀವನದ ಆಧಾರ','ಆಹಾರ ಕೇವಲ ದೇವರಿಗಾಗಿ','ಆಹಾರ ಅಗ್ಗ'],1,'ಅನ್ನವೇ ಸಾಕ್ಷಾತ್ ಬ್ರಹ್ಮ – ಪವಿತ್ರ ಮತ್ತು ಜೀವನದ ಆಧಾರ.'],
+['ದೇಹದ ಕೆಲಸ ನಡೆಯಲು ಬೇಕಾದ ಶಕ್ತಿ ನಮಗೆ ಯಾವುದರಿಂದ ಸಿಗುತ್ತದೆ?',['ಆಹಾರದಿಂದ','ಆಶ್ರಯದಿಂದ','ಬಟ್ಟೆಗಳಿಂದ','ಮಾರುಕಟ್ಟೆಯಿಂದ'],0,'ಶಕ್ತಿ ಆಹಾರದಿಂದ ತಯಾರಾಗುತ್ತದೆ.'],
+['ಕೊಂಕಣದಲ್ಲಿ ಯಾವ ಆಹಾರದ ಬಳಕೆ ಹೆಚ್ಚು?',['ಜೋಳ ಮತ್ತು ಸಜ್ಜೆ','ಅಕ್ಕಿ ಮತ್ತು ತೆಂಗು','ಗೋಧಿ ಮತ್ತು ಕಡಲೆ','ರಾಗಿ ಮಾತ್ರ'],1,'ಸಮುದ್ರದ ಪಕ್ಕದ ಕೊಂಕಣದಲ್ಲಿ ಅಕ್ಕಿ ಮತ್ತು ತೆಂಗಿನ ಬಳಕೆ ಹೆಚ್ಚು.'],
+['‘ಜೋಳದ ಕಣಜ’ ಎಂದು ಯಾವ ಜಿಲ್ಲೆ ಗುರುತಿಸಲ್ಪಡುತ್ತದೆ?',['ಸಾಂಗ್ಲಿ','ಸೊಲ್ಲಾಪುರ','ರತ್ನಾಗಿರಿ','ನಾಗಪುರ'],1,'ಮಹಾರಾಷ್ಟ್ರದಲ್ಲಿ ಅತಿ ಹೆಚ್ಚು ಜೋಳ ಸೋಲಾಪುರ ಜಿಲ್ಲೆಯಲ್ಲಿ ಬೆಳೆಯುತ್ತದೆ.'],
+['ಹುರಡಾ, ಅರಳು, ಧಪಾಟೆ, ಅಂಬಲಿ ಈ ಪದಾರ್ಥಗಳು ಯಾವ ಧಾನ್ಯದಿಂದ ತಯಾರಾಗುತ್ತವೆ?',['ಅಕ್ಕಿ','ಗೋಧಿ','ಜೋಳ','ರಾಗಿ'],2,'ಪ್ರಸ್ಥಭೂಮಿ ಪ್ರದೇಶದಲ್ಲಿ ಜೋಳದಿಂದ ಈ ಪದಾರ್ಥಗಳು ತಯಾರಾಗುತ್ತವೆ.'],
+['ಬುಡಕಟ್ಟು ಪ್ರದೇಶದಲ್ಲಿ ಯಾವ ಧಾನ್ಯಗಳ ರೊಟ್ಟಿ ತಯಾರಿಸುತ್ತಾರೆ?',['ರಾಗಿ ಮತ್ತು ಸಾಮೆ','ಗೋಧಿ ಮತ್ತು ಮೆಕ್ಕೆಜೋಳ','ಅಕ್ಕಿ ಮತ್ತು ಬೇಳೆ','ಸೋಯಾಬೀನ್ ಮತ್ತು ಎಳ್ಳು'],0,'ಬುಡಕಟ್ಟು ಪ್ರದೇಶದಲ್ಲಿ ರಾಗಿ ಮತ್ತು ಸಾಮೆಯ ರೊಟ್ಟಿ ತಯಾರಿಸುತ್ತಾರೆ.'],
+['ಅಕ್ಕಿಯಿಂದ ಯಾವ ಪದಾರ್ಥ ತಯಾರಾಗುವುದಿಲ್ಲ?',['ಇಡ್ಲಿ','ದೋಸೆ','ಮೋದಕ','ಹುರಡಾ'],3,'ಹುರಡಾ ಜೋಳದಿಂದ ತಯಾರಾಗುತ್ತದೆ.'],
+['ಆಹಾರಧಾನ್ಯಗಳಲ್ಲಿನ ವೈವಿಧ್ಯ ಮುಖ್ಯವಾಗಿ ಯಾವುದನ್ನು ಆಧರಿಸಿರುತ್ತದೆ?',['ಹವಾಮಾನ, ಭೌಗೋಳಿಕ ಪರಿಸ್ಥಿತಿ ಮತ್ತು ಸ್ಥಳೀಯ ಘಟಕಗಳು','ಕೇವಲ ಹಣವನ್ನು','ಅಂಗಡಿಗಳನ್ನು','ಶಾಲೆಯನ್ನು'],0,'ಹವಾಮಾನ, ಭೌಗೋಳಿಕ ಪರಿಸ್ಥಿತಿ ಮತ್ತು ಸ್ಥಳೀಯ ಘಟಕಗಳನ್ನು.'],
+['ಹೆಚ್ಚು ಮಳೆಯ ಪ್ರದೇಶದಲ್ಲಿ ಯಾವ ಬೆಳೆ ಬೆಳೆಯುತ್ತಾರೆ?',['ಜೋಳ','ಸಜ್ಜೆ','ಅಕ್ಕಿ','ಮಡಿಕೆಕಾಳು'],2,'ಹೆಚ್ಚು ಮಳೆಯ ಪ್ರದೇಶದಲ್ಲಿ ಅಕ್ಕಿ, ರಾಗಿ, ಸಾಮೆ, ತೆಂಗು.'],
+['ಕಡಿಮೆ ಮಳೆಯ ಪ್ರದೇಶದಲ್ಲಿ ಯಾವ ಬೆಳೆ ಬೆಳೆಯುತ್ತಾರೆ?',['ಅಕ್ಕಿ','ತೆಂಗಿನಕಾಯಿ','ಜೋಳ, ಸಜ್ಜೆ','ಸಾಮೆ'],2,'ಕಡಿಮೆ ಮಳೆಯಲ್ಲಿ ಜೋಳ, ಸಜ್ಜೆ, ಹೆಸರುಕಾಳು, ಮಡಿಕೆಕಾಳು.'],
+['ಮಧ್ಯಮ ಮಳೆಯ ಪ್ರದೇಶದಲ್ಲಿ ಯಾವ ಬೆಳೆಗಳನ್ನು ಬೆಳೆಯುತ್ತಾರೆ?',['ಗೋಧಿ, ತೊಗರಿ, ಸೋಯಾಬೀನ್','ತೆಂಗು, ರಾಗಿ','ಹೆಸರುಕಾಳು, ಮಡಿಕೆಕಾಳು','ಸಾಮೆ, ಅಕ್ಕಿ'],0,'ಮಧ್ಯಮ ಮಳೆಯಲ್ಲಿ ಗೋಧಿ, ತೊಗರಿ, ಸೋಯಾಬೀನ್.'],
+['ನಮ್ಮ ದೇಶದಲ್ಲಿ ಕೃಷಿ ಮುಖ್ಯವಾಗಿ ಯಾವುದನ್ನು ಅವಲಂಬಿಸಿದೆ?',['ಮಳೆನೀರನ್ನು','ಸಮುದ್ರದ ನೀರನ್ನು','ಮಂಜುಗಡ್ಡೆಯನ್ನು','ಗಾಳಿಯನ್ನು'],0,'ಕೃಷಿ ಮುಖ್ಯವಾಗಿ ಮಳೆನೀರನ್ನು ಅವಲಂಬಿಸಿದೆ.'],
+['ಕೃಷಿ ಉತ್ಪಾದನೆ ಹೆಚ್ಚಿಸಲು ಯಾವ ತಂತ್ರಜ್ಞಾನ ಬಳಸಲಾಗುತ್ತದೆ?',['ಸಾಂಪ್ರದಾಯಿಕ','ಆಧುನಿಕ','ವೈದಿಕ','ನೈಸರ್ಗಿಕ'],1,'ಆಧುನಿಕ ತಂತ್ರಜ್ಞಾನದಿಂದ ಉತ್ಪಾದಕತೆ ಹೆಚ್ಚಿದೆ.'],
+['ಸಾವಯವ ಕೃಷಿಯಲ್ಲಿ ಯಾವ ಗೊಬ್ಬರ ಬಳಸುವುದಿಲ್ಲ?',['ಸಗಣಿ','ಎರೆಹುಳು ಗೊಬ್ಬರ','ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ','ಕಾಂಪೋಸ್ಟ್ ಗೊಬ್ಬರ'],2,'ಸಾವಯವ ಕೃಷಿಯಲ್ಲಿ ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ ಬಳಸುವುದಿಲ್ಲ.'],
+['ಸಾವಯವ ಕೃಷಿಯ ಪ್ರಯೋಜನ ಯಾವುದು?',['ಭೂಮಿಯ ಫಲವತ್ತತೆ ಉಳಿಯುತ್ತದೆ, ಉತ್ಪಾದನೆ ಪೌಷ್ಟಿಕ','ಮಣ್ಣು ಹಾಳಾಗುತ್ತದೆ','ನೀರು ಕಲುಷಿತವಾಗುತ್ತದೆ','ಬೆಳೆಗಳು ವಿಷಕಾರಿಯಾಗುತ್ತವೆ'],0,'ಫಲವತ್ತತೆ ಉಳಿಯುತ್ತದೆ ಮತ್ತು ಪೌಷ್ಟಿಕ ಉತ್ಪಾದನೆ ಸಿಗುತ್ತದೆ.'],
+['ಆಹಾರ ಬೇಯಿಸುವುದರಿಂದ ಏನಾಗುತ್ತದೆ?',['ಅದು ಗಟ್ಟಿಯಾಗುತ್ತದೆ','ಅದು ಮೃದು, ಜೀರ್ಣವಾಗಲು ಸುಲಭ ಮತ್ತು ರುಚಿಕರವಾಗುತ್ತದೆ','ಅದರ ರುಚಿ ಹೋಗುತ್ತದೆ','ಅದು ಬೇಗ ಹಾಳಾಗುತ್ತದೆ'],1,'ಬೇಯಿಸುವುದರಿಂದ ಆಹಾರ ಮೃದು, ಜೀರ್ಣವಾಗಲು ಸುಲಭ ಮತ್ತು ರುಚಿಕರವಾಗುತ್ತದೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಯಾವ ಪದಾರ್ಥವನ್ನು ನಾವು ಹಸಿಯಾಗಿ ತಿನ್ನುತ್ತೇವೆ?',['ಅನ್ನ','ಸೌತೆಕಾಯಿ','ರೊಟ್ಟಿ','ಇಡ್ಲಿ'],1,'ಹಣ್ಣುಗಳು, ಸೌತೆಕಾಯಿ, ಟೊಮೆಟೊ ಹಸಿಯಾಗಿ ತಿನ್ನುತ್ತೇವೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಆಹಾರ ಬೇಯಿಸುವ ಆಧುನಿಕ ಸಾಧನ ಯಾವುದು?',['ಒಲೆ','ಸೌರ ಕುಕ್ಕರ್','ಕಟ್ಟಿಗೆ ಉರಿ','ಕಲ್ಲಿನ ಒಲೆ'],1,'ಸೌರ ಕುಕ್ಕರ್, ಗ್ಯಾಸ್ ಒಲೆ ಆಧುನಿಕ ಸಾಧನಗಳು.'],
+['ಇಡ್ಲಿಯನ್ನು ಯಾವ ವಿಧಾನದಿಂದ ತಯಾರಿಸುತ್ತಾರೆ?',['ಕರಿಯುವುದು','ಹಬೆಯಲ್ಲಿ ಬೇಯಿಸುವುದು','ಹುರಿಯುವುದು','ಕುದಿಸುವುದು'],1,'ಇಡ್ಲಿಯನ್ನು ಹಬೆಯಲ್ಲಿ ಬೇಯಿಸಿ ತಯಾರಿಸುತ್ತಾರೆ.'],
+['ರೊಟ್ಟಿಯನ್ನು ಯಾವ ವಿಧಾನದಿಂದ ತಯಾರಿಸುತ್ತಾರೆ?',['ಹುರಿಯುವುದು','ಕರಿಯುವುದು','ಹಬೆಯಲ್ಲಿ ಬೇಯಿಸುವುದು','ಕುದಿಸುವುದು'],0,'ರೊಟ್ಟಿಯನ್ನು ಕಾವಲಿಯ ಮೇಲೆ ಸುಡುತ್ತಾರೆ.'],
+['ಹೆಚ್ಚಿದ ತರಕಾರಿಗಳನ್ನು ಹೆಚ್ಚು ಹೊತ್ತು ನೀರಿನಲ್ಲಿ ಏಕೆ ನೆನೆಸಬಾರದು?',['ತರಕಾರಿಗಳ ಬಣ್ಣ ಬದಲಾಗುತ್ತದೆ','ಪೋಷಕ ಜೀವಸತ್ವಗಳು ನೀರಿನಲ್ಲಿ ಕರಗುತ್ತವೆ','ತರಕಾರಿಗಳು ಗಟ್ಟಿಯಾಗುತ್ತವೆ','ನೀರು ಹಾಳಾಗುತ್ತದೆ'],1,'ಜೀವಸತ್ವಗಳು ನೀರಿನಲ್ಲಿ ಕರಗಿ ಹೋಗುತ್ತವೆ.'],
+['ಆಹಾರವನ್ನು ಹೆಚ್ಚು ಹೊತ್ತು ಬೇಯಿಸಿದರೆ ಏನಾಗುತ್ತದೆ?',['ಪೋಷಕಾಂಶಗಳು ಕಡಿಮೆಯಾಗುತ್ತವೆ','ಪೋಷಕಾಂಶಗಳು ಹೆಚ್ಚುತ್ತವೆ','ಆಹಾರ ಹಸಿಯಾಗಿಯೇ ಉಳಿಯುತ್ತದೆ','ಏನೂ ಇಲ್ಲ'],0,'ಹೆಚ್ಚು ಬೇಯಿಸುವುದರಿಂದ ಪೋಷಕಾಂಶಗಳು ಕಡಿಮೆಯಾಗುತ್ತವೆ.'],
+['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ಆಹಾರ ಸಂಗ್ರಹಿಸುವ ಪಾರಂಪರಿಕ ವಿಧಾನ ಯಾವುದಲ್ಲ?',['ಒಣಗಿಸುವುದು','ಉಪ್ಪು ಹಚ್ಚುವುದು','ಊರಿಡುವುದು','ತೆರೆದಿಡುವುದು'],3,'ತೆರೆದಿಡುವುದರಿಂದ ಆಹಾರ ಕಲುಷಿತವಾಗುತ್ತದೆ.'],
+['ಧಾನ್ಯ ಸಂಗ್ರಹಿಸುವಾಗ ಅದರಲ್ಲಿ ಯಾವುದರ ಸೊಪ್ಪು ಬೆರೆಸುತ್ತಾರೆ?',['ಬೇವು','ಮಾವು','ಆಲ','ಹುಣಸೆ'],0,'ಬೇವಿನ ಸೊಪ್ಪು ಬೆರೆಸುವುದರಿಂದ ಕೀಟ ಹತ್ತುವುದಿಲ್ಲ.'],
+['ಉಪ್ಪಿನಕಾಯಿ ಉಳಿಯಲೆಂದು ಹಾಕುವ ಪದಾರ್ಥಗಳಿಗೆ ಏನೆನ್ನುತ್ತಾರೆ?',['ಸಂರಕ್ಷಕಗಳು','ಜೀವಸತ್ವಗಳು','ಗೊಬ್ಬರಗಳು','ಬಣ್ಣ'],0,'ಉಪ್ಪು, ಇಂಗು, ಸಾಸಿವೆ, ಅಡುಗೆ ಎಣ್ಣೆ ಇವು ಸಂರಕ್ಷಕಗಳು.'],
+['ಧಾನ್ಯ, ಕಾಳುಗಳು, ಹಪ್ಪಳವನ್ನು ಸಂಗ್ರಹಿಸುವ ಮೊದಲು ಬಿಸಿಲಿನಲ್ಲಿ ಏಕೆ ಒಣಗಿಸುತ್ತಾರೆ?',['ತೇವ ತೆಗೆಯಲು, ಅಂದರೆ ಬೂಸು ಮತ್ತು ಕೀಟ ಹತ್ತಬಾರದೆಂದು','ಬಣ್ಣಕ್ಕಾಗಿ','ತೂಕ ಹೆಚ್ಚಲೆಂದು','ರುಚಿ ಬದಲಾಗಲೆಂದು'],0,'ಒಣ ಪದಾರ್ಥಗಳು ಹೆಚ್ಚು ದಿನ ಉಳಿಯುತ್ತವೆ.'],
+['ಕಲುಷಿತ ಆಹಾರ ಎಂದರೇನು?',['ತಾಜಾ ಆಹಾರ','ಹಾಳಾದ, ವಿಷಕಾರಿ ಅಥವಾ ರೋಗ ಹರಡುವ ಆಹಾರ','ಬಿಸಿ ಆಹಾರ','ಸಿಹಿ ಆಹಾರ'],1,'ಹಾಳಾದ, ವಿಷಕಾರಿ ಅಥವಾ ರೋಗ ಹರಡುವ ಆಹಾರ.'],
+['ಕಲುಷಿತ ಆಹಾರ ತಿನ್ನುವುದರಿಂದ ಯಾವ ತೊಂದರೆ ಆಗುತ್ತದೆ?',['ಹೊಟ್ಟೆನೋವು, ಭೇದಿ, ವಾಂತಿ','ಎತ್ತರ ಹೆಚ್ಚುವುದು','ಕೂದಲು ಕಪ್ಪಾಗುವುದು','ದೃಷ್ಟಿ ಸುಧಾರಿಸುವುದು'],0,'ಹೊಟ್ಟೆನೋವು, ಭೇದಿ, ವಾಂತಿ, ಬಳಲಿಕೆ, ಆಯಾಸ.'],
+['ಆಹಾರ ಕಲುಷಿತವಾಗದಿರಲು ಏನು ಮಾಡಬೇಕು?',['ಆಹಾರವನ್ನು ಮುಚ್ಚಿಡಬೇಕು','ಆಹಾರವನ್ನು ತೆರೆದಿಡಬೇಕು','ಅಶುದ್ಧ ಪಾತ್ರೆಗಳನ್ನು ಬಳಸಬೇಕು','ಹಳಸಿದ ಆಹಾರ ತಿನ್ನಬೇಕು'],0,'ಆಹಾರವನ್ನು ಮುಚ್ಚಿಡಬೇಕು, ಸ್ವಚ್ಛತೆ ಕಾಪಾಡಬೇಕು.'],
+['ಜೇನುನೊಣಗಳು ತಮ್ಮ ಆಶ್ರಯವನ್ನು ಎಲ್ಲಿ ತಯಾರಿಸುತ್ತವೆ?',['ಬಿಲದಲ್ಲಿ','ಮರಗಳ ಮೇಲೆ / ಬೆಟ್ಟದ ಬಂಡೆ ಸಂದಿಯಲ್ಲಿ ಜೇನುಗೂಡು','ಕೊಟ್ಟಿಗೆಯಲ್ಲಿ','ನೀರಿನಲ್ಲಿ'],1,'ಜೇನುನೊಣಗಳು ಜೇನುಗೂಡು ತಯಾರಿಸುತ್ತವೆ.'],
+['ಇಲಿ ಮತ್ತು ಹೆಗ್ಗಣಗಳು ಎಲ್ಲಿ ವಾಸಿಸುತ್ತವೆ?',['ಗೂಡಿನಲ್ಲಿ','ನೆಲದ ಕೆಳಗೆ ಬಿಲದಲ್ಲಿ','ಜೇನುಗೂಡಿನಲ್ಲಿ','ಲಾಯದಲ್ಲಿ'],1,'ಇಲಿ ಮತ್ತು ಹೆಗ್ಗಣಗಳು ನೆಲದ ಕೆಳಗೆ ಬಿಲ ಮಾಡಿ ವಾಸಿಸುತ್ತವೆ.'],
+['ಪಕ್ಷಿಗಳು ಗೂಡು ಏಕೆ ಕಟ್ಟುತ್ತವೆ?',['ಮೊಟ್ಟೆ ಮತ್ತು ಮರಿಗಳ ರಕ್ಷಣೆಗಾಗಿ','ಆಡಲು','ಆಹಾರ ಸಂಗ್ರಹಿಸಲು','ಹಾಡು ಹಾಡಲು'],0,'ಮರಿಗಳಲ್ಲಿ ತಮ್ಮನ್ನು ತಾವು ರಕ್ಷಿಸಿಕೊಳ್ಳುವಷ್ಟು ಶಕ್ತಿ ಇರುವುದಿಲ್ಲ.'],
+['ಕುದುರೆಯ ಆಶ್ರಯ ಯಾವುದು?',['ಕೊಟ್ಟಿಗೆ','ಲಾಯ','ಕೋಳಿಗೂಡು','ಜೇನುಗೂಡು'],1,'ಕುದುರೆಗೆ ಲಾಯ ಇರುತ್ತದೆ.'],
+['ಕೊಂಕಣದಲ್ಲಿ ಹೆಚ್ಚು ಮಳೆಯಿಂದಾಗಿ ಮನೆಗಳು ಹೇಗಿರುತ್ತವೆ?',['ತಾರಸಿಯ','ಹಂಚಿನ, ಇಳಿಜಾರು ಛಾವಣಿಯ','ಕಡ್ಡಿ-ಮಣ್ಣಿನ','ಬಹುಮಹಡಿ'],1,'ಮಳೆನೀರು ಸುಲಭವಾಗಿ ಹರಿದುಹೋಗಲೆಂದು.'],
+['ನಗರ ಮನೆಗಳನ್ನು ಕಟ್ಟಲು ಯಾವ ಸಾಮಗ್ರಿ ಬಳಸುತ್ತಾರೆ?',['ಮಣ್ಣು, ಬಿದಿರು','ಸಿಮೆಂಟ್, ಕಾಂಕ್ರೀಟ್, ಕಬ್ಬಿಣ, ಉಕ್ಕು','ಹುಲ್ಲು, ಗರಿಗಳು','ಸಗಣಿ, ಒಣಹುಲ್ಲು'],1,'ನಗರ ಮನೆಗಳು ಪಕ್ಕಾ ಮತ್ತು ಸೌಲಭ್ಯಯುಕ್ತವಾಗಿರುತ್ತವೆ.'],
+['ವಿದರ್ಭ ಮತ್ತು ನಂದುರ್ಬಾರ್‌ನ ಬುಡಕಟ್ಟು ಪ್ರದೇಶಗಳಲ್ಲಿ ಯಾವ ಮನೆಗಳು ಕಂಡುಬರುತ್ತವೆ?',['ಕಡ್ಡಿ-ಮಣ್ಣಿನ','ಹಂಚಿನ','ಬಹುಮಹಡಿ','ಗಾಜಿನ'],0,'ಬುಡಕಟ್ಟು ಪ್ರದೇಶದಲ್ಲಿ ಕಡ್ಡಿ-ಮಣ್ಣಿನ ಮನೆಗಳು ಕಂಡುಬರುತ್ತವೆ.'],
+['ಪರಿಸರಸ್ನೇಹಿ ಮನೆಯ ವೈಶಿಷ್ಟ್ಯ ಯಾವುದು?',['ಸೌರ, ಪವನ ಶಕ್ತಿ ಮತ್ತು ನೀರಿನ ಮರುಬಳಕೆ','ತುಂಬಾ ವಿದ್ಯುತ್ ಬಳಸುವುದು','ಕಿಟಕಿಗಳು ಇಲ್ಲದಿರುವುದು','ಪ್ಲಾಸ್ಟಿಕ್‌ನ ಹೆಚ್ಚು ಬಳಕೆ'],0,'ಸಾಂಪ್ರದಾಯಿಕವಲ್ಲದ ಶಕ್ತಿ, ಮರುಬಳಕೆ, ನೈಸರ್ಗಿಕ ಬೆಳಕು ಮತ್ತು ಗಾಳಿ.']
+];
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ a:[['ರೈತ ಹೊಲದಲ್ಲಿ ಮೊದಲು ............. ಕೆಲಸಗಳನ್ನು ಮಾಡುತ್ತಾನೆ.',['ಒಕ್ಕಣೆ','ಭೂಮಿ ಸಿದ್ಧತೆ','ತೂರುವುದು','ಕಳೆ ಕೀಳುವುದು'],1],
+  ['ಹೆಚ್ಚು ಮಳೆಯ ಪ್ರದೇಶಗಳಲ್ಲಿ ............. ಬೆಳೆ ಬೆಳೆಯಲಾಗುತ್ತದೆ.',['ಅಕ್ಕಿ','ಜೋಳ','ಸಜ್ಜೆ','ಗೋಧಿ'],0],
+  ['ಕೃಷಿ ಉತ್ಪಾದನೆ ಹೆಚ್ಚಿಸಲು ............. ತಂತ್ರಜ್ಞಾನ ಬಳಸಲಾಗುತ್ತದೆ.',['ಸಾಂಪ್ರದಾಯಿಕ','ಆಧುನಿಕ','ವೈದಿಕ','ನೈಸರ್ಗಿಕ'],1],
+  ['ನಮ್ಮ ದೇಹದ ಕೆಲಸ ಸರಿಯಾಗಿ ನಡೆಯಲು ಬೇಕಾದ ಶಕ್ತಿ ನಮಗೆ ............ ಸಿಗುತ್ತದೆ.',['ಆಹಾರದಿಂದ','ನೀರಿನಿಂದ','ಆಶ್ರಯದಿಂದ','ಮಾರುಕಟ್ಟೆಯಿಂದ'],0]],
+ aa:[['ಕೃಷಿ ಮುಖ್ಯವಾಗಿ ಯಾವುದನ್ನು ಅವಲಂಬಿಸಿದೆ?','ಕೃಷಿ ಮುಖ್ಯವಾಗಿ ಮಳೆನೀರನ್ನು ಅವಲಂಬಿಸಿದೆ.'],
+  ['ಕೃಷಿ ಉತ್ಪಾದನೆ ಹೆಚ್ಚಿಸುವ ವಿಧಾನಗಳು ಯಾವುವು?','ಸುಧಾರಿತ ಬೀಜಗಳು, ಫಲವತ್ತಾದ ಭೂಮಿ, ಅಗತ್ಯ ನೀರು, ಸಾವಯವ ಗೊಬ್ಬರ ಮತ್ತು ಆಧುನಿಕ ತಂತ್ರಜ್ಞಾನ ಹಾಗೂ ಯಂತ್ರಗಳ ಬಳಕೆ.'],
+  ['ಆಹಾರ ತಯಾರಿಸುವ ವಿಧಾನಗಳು ಯಾವುವು?','ಹುರಿಯುವುದು, ಬೇಯಿಸುವುದು, ಕುದಿಸುವುದು, ಹಬೆಯಲ್ಲಿ ಬೇಯಿಸುವುದು, ಕರಿಯುವುದು.'],
+  ['‘ಕಲುಷಿತ ಆಹಾರ’ ಎಂದರೇನು?','ಹಾಳಾದ, ವಿಷಕಾರಿ ಅಥವಾ ರೋಗ ಹರಡುವ ಆಹಾರವೇ ಕಲುಷಿತ ಆಹಾರ.']],
+ i:[['ಪೌಷ್ಟಿಕ ಆಹಾರದ ಮಹತ್ವ ಬರೆಯಿರಿ.','ಪೌಷ್ಟಿಕ ಆಹಾರದಿಂದ ದೇಹಕ್ಕೆ ಕೆಲಸ ಮಾಡಲು ಅಗತ್ಯವಾದ ಶಕ್ತಿ ಸಿಗುತ್ತದೆ. ಸರಿಯಾದ ಸಮಯದಲ್ಲಿ, ಸರಿಯಾದ ಆಹಾರವನ್ನು ಸರಿಯಾದ ಪ್ರಮಾಣದಲ್ಲಿ ಸೇವಿಸಿದರೆ ದೇಹ ಆರೋಗ್ಯವಂತ ಮತ್ತು ಸದೃಢವಾಗಿರುತ್ತದೆ. ಅನಾರೋಗ್ಯದಲ್ಲಿ ಪೌಷ್ಟಿಕ ಆಹಾರ ಮತ್ತು ವಿಶ್ರಾಂತಿಯಿಂದ ಆರೋಗ್ಯ ಬೇಗ ಸುಧಾರಿಸುತ್ತದೆ.'],
+  ['ಆಹಾರಧಾನ್ಯವನ್ನು ವರ್ಷಪೂರ್ತಿ ಉಳಿಸಿಕೊಳ್ಳಲು ಯಾವ ಯಾವ ಕ್ರಮಗಳನ್ನು ಕೈಗೊಳ್ಳುತ್ತಾರೆ?','ಧಾನ್ಯವನ್ನು ಬಿಸಿಲಿನಲ್ಲಿ ಚೆನ್ನಾಗಿ ಒಣಗಿಸುತ್ತಾರೆ, ಗಾಳಿ ಆಡುವ ಮತ್ತು ಒಣ ಜಾಗದಲ್ಲಿ ಸಂಗ್ರಹಿಸುತ್ತಾರೆ, ಬೇವಿನ ಸೊಪ್ಪು ಬೆರೆಸುತ್ತಾರೆ, ಚೀಲಗಳನ್ನು ಕೀಟ, ಇಲಿ, ಹೆಗ್ಗಣಗಳಿಂದ ರಕ್ಷಿಸುತ್ತಾರೆ; ಉಪ್ಪಿನಕಾಯಿ, ಮುರಬ್ಬದಲ್ಲಿ ಉಪ್ಪು, ಎಣ್ಣೆ, ಇಂಗು, ಸಾಸಿವೆಯಂತಹ ಸಂರಕ್ಷಕಗಳನ್ನು ಹಾಕುತ್ತಾರೆ.'],
+  ['ಪರಿಸರಸ್ನೇಹಿ ಮನೆಗಳ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಬರೆಯಿರಿ.','೧) ನೈಸರ್ಗಿಕ ಸಾಧನಗಳ ಹೆಚ್ಚು ಬಳಕೆ. ೨) ಸೌರ, ಪವನ ಶಕ್ತಿ, ಜೈವಿಕ ಅನಿಲದಂತಹ ಸಾಂಪ್ರದಾಯಿಕವಲ್ಲದ ಶಕ್ತಿಯ ಬಳಕೆ. ೩) ನೀರಿನ ಮರುಬಳಕೆ. ೪) ತ್ಯಾಜ್ಯ ವಸ್ತುಗಳ ಮರುಬಳಕೆ. ೫) ನೈಸರ್ಗಿಕ ಬೆಳಕು ಮತ್ತು ಗಾಳಿ ಹರಿದಾಡುವ ವ್ಯವಸ್ಥೆ.'],
+  ['ಕಲುಷಿತ ಆಹಾರ ತಿನ್ನುವುದರಿಂದ ದೇಹದ ಮೇಲೆ ಯಾವ ಪರಿಣಾಮಗಳಾಗುತ್ತವೆ?','ಹೊಟ್ಟೆನೋವು, ಭೇದಿ, ವಾಂತಿ, ಬಳಲಿಕೆ, ದೈಹಿಕ ಆಯಾಸ ಮತ್ತು ಸೋಂಕು ಉಂಟಾಗುತ್ತದೆ.'],
+  ['ಸಾವಯವ ಕೃಷಿಯ ಪ್ರಯೋಜನಗಳನ್ನು ಬರೆಯಿರಿ.','ಸಾವಯವ ಕೃಷಿಯಲ್ಲಿ ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ ಬಳಸುವುದಿಲ್ಲ, ಆದ್ದರಿಂದ ಭೂಮಿಯ ಫಲವತ್ತತೆ ಉಳಿಯುತ್ತದೆ. ನೀರು ಮತ್ತು ಮಣ್ಣು ಕಲುಷಿತವಾಗುವುದಿಲ್ಲ ಮತ್ತು ಸಿಗುವ ಉತ್ಪಾದನೆ ಪೌಷ್ಟಿಕ ಹಾಗೂ ಆರೋಗ್ಯದಾಯಕವಾಗಿರುತ್ತದೆ.']],
+ tk:[['ರಾಗಿ','ರೊಟ್ಟಿ, ಅಂಬಲಿ, ಸತ್ವ, ಲಾಡು'],['ಸಜ್ಜೆ','ರೊಟ್ಟಿ, ಖಿಚಡಿ, ಥಾಲೀಪೀಠ'],['ಕಡಲೆ','ಕಡಲೆಹಿಟ್ಟು, ಲಾಡು, ಉಸಳಿ, ಹುರಿಗಡಲೆ, ಹುರಡಾ'],['ಶೇಂಗಾ','ಎಣ್ಣೆ, ಚಿಕ್ಕಿ, ಚಟ್ನಿ, ಲಾಡು']],
+ u:[['ಪರಿಸರಸ್ನೇಹಿ ಮನೆಗಳ ಮಹತ್ವ – ಚರ್ಚೆಯ ಅಂಶಗಳು','• ನೈಸರ್ಗಿಕ ಸಾಧನಗಳಿಂದ ಪರಿಸರಕ್ಕೆ ಹಾನಿಯಾಗುವುದಿಲ್ಲ.<br>• ಸೌರ ಮತ್ತು ಪವನ ಶಕ್ತಿಯಿಂದ ವಿದ್ಯುತ್ ಮತ್ತು ಹಣ ಉಳಿಯುತ್ತದೆ, ಮಾಲಿನ್ಯ ಕಡಿಮೆ.<br>• ನೀರಿನ ಮರುಬಳಕೆಯಿಂದ ನೀರಿನ ಉಳಿತಾಯ.<br>• ನೈಸರ್ಗಿಕ ಬೆಳಕು ಮತ್ತು ಗಾಳಿ – ಆರೋಗ್ಯ ಒಳ್ಳೆಯದು, ಮನೆ ತಂಪು ಮತ್ತು ಗಾಳಿ ಆಡುವಂತಿರುತ್ತದೆ.<br>• ತ್ಯಾಜ್ಯ ವಸ್ತುಗಳ ಮರುಬಳಕೆಯಿಂದ ಕಸ ಕಡಿಮೆ.'],
+  ['ಹೆಚ್ಚುತ್ತಿರುವ ಜನಸಂಖ್ಯೆಯನ್ನು ಗಮನಿಸಿದರೆ ಕಲುಷಿತ ಆಹಾರದಿಂದ ಆಗುವ ರೋಗಗಳನ್ನು ತಡೆಯಲು ಏನು ಮಾಡಬೇಕು?','• ಆಹಾರವನ್ನು ಮುಚ್ಚಿಡಬೇಕು; ಶುದ್ಧ ನೀರು ಬಳಸಬೇಕು.<br>• ಹಣ್ಣು-ತರಕಾರಿಗಳನ್ನು ತೊಳೆದು ಬಳಸಬೇಕು; ಕೈ ತೊಳೆದ ನಂತರವೇ ಊಟ ಮಾಡಬೇಕು.<br>• ತಾಜಾ ಮತ್ತು ಪೌಷ್ಟಿಕ ಆಹಾರ ತಿನ್ನಬೇಕು; ಹಳಸಿದ, ತೆರೆದ ಆಹಾರ ತಪ್ಪಿಸಬೇಕು.<br>• ಅಡುಗೆಮನೆ ಮತ್ತು ಪಾತ್ರೆಗಳನ್ನು ಸ್ವಚ್ಛವಾಗಿ ಇಡಬೇಕು.<br>• ಆಹಾರವನ್ನು ಸರಿಯಾದ ರೀತಿಯಲ್ಲಿ ಸಂಗ್ರಹಿಸಬೇಕು ಮತ್ತು ಇದರ ಬಗ್ಗೆ ಜನರಲ್ಲಿ ಜಾಗೃತಿ ಮೂಡಿಸಬೇಕು.'],
+  ['ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲದಲ್ಲಿನ ಆಹಾರ ಪದಾರ್ಥ ತಿನ್ನುವುದರಿಂದ ಮನುಷ್ಯರಿಗೆ ಮತ್ತು ಪ್ರಾಣಿಗಳಿಗೆ ಆಗುವ ತೊಂದರೆ – ಚರ್ಚೆಯ ಅಂಶಗಳು','• ಬಿಸಿ ಆಹಾರವನ್ನು ಪ್ಲಾಸ್ಟಿಕ್‌ನಲ್ಲಿ ಇಟ್ಟರೆ ಪ್ಲಾಸ್ಟಿಕ್‌ನ ರಾಸಾಯನಿಕಗಳು ಆಹಾರದಲ್ಲಿ ಬೆರೆತು ಆರೋಗ್ಯಕ್ಕೆ ಹಾನಿಯಾಗುತ್ತದೆ.<br>• ಎಸೆದ ಚೀಲಗಳನ್ನು ಹಸು, ಮೇಕೆಗಳು ಆಹಾರದೊಂದಿಗೆ ನುಂಗುತ್ತವೆ – ಹೊಟ್ಟೆಯಲ್ಲಿ ಸಿಕ್ಕಿಕೊಂಡು ಅವು ಅನಾರೋಗ್ಯಕ್ಕೆ ಒಳಗಾಗುತ್ತವೆ ಅಥವಾ ಸಾಯುತ್ತವೆ.<br>• ಪ್ಲಾಸ್ಟಿಕ್ ಕೊಳೆಯುವುದಿಲ್ಲ – ಮಣ್ಣು ಮತ್ತು ನೀರು ಕಲುಷಿತವಾಗುತ್ತವೆ.<br>• ಆದ್ದರಿಂದ ಬಟ್ಟೆ ಚೀಲಗಳು ಮತ್ತು ಸ್ಟೀಲ್ ಡಬ್ಬಿಗಳನ್ನು ಬಳಸಬೇಕು.']],
+ rg:['ಕೊಂಕಣ','ಖಾನದೇಶ','ಪಶ್ಚಿಮ ಮಹಾರಾಷ್ಟ್ರ','ಮರಾಠವಾಡ','ವಿದರ್ಭ']
+};
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+const inp='style="width:100%;font:inherit;padding:4px;border-radius:6px;border:1.5px solid #94a3b8"';
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಅಭ್ಯಾಸ – ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ</h2>
+ <h3>(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</h3>${pickGame('swa',SW.a,'swa')}
+ <h3>(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಇ) ಸಂಕ್ಷಿಪ್ತವಾಗಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.i.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>(ಈ) ಕೋಷ್ಟಕ ಪೂರ್ಣಗೊಳಿಸಿ – ಧಾನ್ಯದಿಂದ ತಯಾರಾಗುವ ಪದಾರ್ಥಗಳು</h3>
+ <table class="t"><tr><th>ಧಾನ್ಯ</th><th>ತಯಾರಾಗುವ ಪದಾರ್ಥಗಳು</th></tr>${SW.tk.map(x=>`<tr><td><b>${x[0]}</b></td><td><input type="text" ${inp}></td></tr>`).join('')}</table>
+ <div class="sq"><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಮಾದರಿ ಉತ್ತರಗಳನ್ನು ನೋಡಿ</button><div class="ans">${SW.tk.map(x=>`<b>${x[0]}</b> – ${x[1]}`).join('<br>')}</div></div>
+ <h3>(ಉ) ಪರಿಸರಸ್ನೇಹಿ ಮನೆಗಳ ಮಹತ್ವದ ಬಗ್ಗೆ ಚರ್ಚಿಸಿ ಮತ್ತು ಅಂಶಗಳ ಪಟ್ಟಿ ಮಾಡಿ.</h3>${sq(SW.u[0][0],SW.u[0][1],1)}
+ <h3>(ಊ) ಕಲುಷಿತ ಆಹಾರದಿಂದ ಆಗುವ ರೋಗಗಳನ್ನು ತಡೆಯಲು ಏನು ಮಾಡಬೇಕು?</h3>${sq(SW.u[1][0],SW.u[1][1],1)}
+ <h3>(ಎ) ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲದಲ್ಲಿನ ಆಹಾರ ಪದಾರ್ಥ ತಿನ್ನುವುದರಿಂದ ಮನುಷ್ಯರಿಗೆ ಮತ್ತು ಪ್ರಾಣಿಗಳಿಗೆ ಆಗುವ ತೊಂದರೆಯ ಬಗ್ಗೆ ಚರ್ಚಿಸಿ.</h3>${sq(SW.u[2][0],SW.u[2][1],1)}
+ <h3>📝 ಪಾಠದ ಚಟುವಟಿಕೆ: ಪ್ರದೇಶಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಧಾನ್ಯದಿಂದ ತಯಾರಿಸಿದ ಪದಾರ್ಥಗಳು</h3>
+ <div style="overflow-x:auto"><table class="t" style="min-width:560px"><tr><th>ಧಾನ್ಯ</th>${SW.rg.map(r=>`<th>${r}</th>`).join('')}</tr>${['ಅಕ್ಕಿ','ಗೋಧಿ','ಜೋಳ','ಕಾಳುಗಳು'].map(g=>`<tr><td><b>${g}</b></td>${SW.rg.map(()=>`<td><input type="text" ${inp}></td>`).join('')}</tr>`).join('')}</table></div>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>• ಪರಿಸರಸ್ನೇಹಿ ಮನೆಗಳ ಚಿತ್ರಗಳನ್ನು ಪಡೆಯಿರಿ ಮತ್ತು ಮಾಹಿತಿ ಬರೆಯಿರಿ.<br>• ಕೃಷಿ ಉತ್ಪಾದನೆಯ ಬಗ್ಗೆ ಆಧುನಿಕ ತಂತ್ರಜ್ಞಾನದ ಪಟ್ಟಿ ಮಾಡಿ.<br>• ‘ಆಹಾರದ ಮೇಲೆ ಆಗುವ ಪ್ರಕ್ರಿಯೆ’ ಇದರ ಬಗ್ಗೆ ನಾಟಕ ಪ್ರಸ್ತುತಪಡಿಸಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಒಂದು ವರ್ಷ ಮಳೆ ಕೈಕೊಟ್ಟರೆ ರೈತನ ಮೇಲೆ ಮತ್ತು ನಮ್ಮ ತಟ್ಟೆಯ ಆಹಾರದ ಮೇಲೆ ಏನು ಪರಿಣಾಮವಾಗುತ್ತದೆ?','ಕೃಷಿ ಯಾವುದನ್ನು ಅವಲಂಬಿಸಿದೆ?','ಕೃಷಿ ಮಳೆಯನ್ನು ಅವಲಂಬಿಸಿರುವುದರಿಂದ ಬೆಳೆಗಳು ಕಡಿಮೆ ಬರುತ್ತವೆ ಅಥವಾ ಒಣಗಿಹೋಗುತ್ತವೆ. ರೈತನ ಆದಾಯ ಕುಸಿಯುತ್ತದೆ, ಮಾರುಕಟ್ಟೆಗೆ ಧಾನ್ಯ ಕಡಿಮೆ ಬಂದು ಬೆಲೆ ಹೆಚ್ಚುತ್ತದೆ ಮತ್ತು ಆಹಾರದ ಕೊರತೆ ಅನುಭವಕ್ಕೆ ಬರುತ್ತದೆ. ಆದ್ದರಿಂದ ನೀರು ಸಂಗ್ರಹಿಸುವುದು ಮತ್ತು ಆಹಾರ ವ್ಯರ್ಥ ಮಾಡದಿರುವುದು ಮುಖ್ಯ.'],
+['ಶಾಲೆಯ ಪೌಷ್ಟಿಕ ಆಹಾರದಲ್ಲಿ ಆಹಾರ ವ್ಯರ್ಥವಾಗದಂತೆ ನೀವು ಯಾವ ಉಪಾಯಗಳನ್ನು ಸೂಚಿಸುವಿರಿ?','ಬೇಕಾದಷ್ಟೇ…','ಬೇಕಾದಷ್ಟೇ ಆಹಾರ ಬಡಿಸಿಕೊಳ್ಳಬೇಕು, ಬೇಕಾದರೆ ಮತ್ತೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು; ಉಳಿದ ಸ್ವಚ್ಛ ಆಹಾರವನ್ನು ಅಗತ್ಯವಿರುವವರಿಗೆ/ಪ್ರಾಣಿಗಳಿಗೆ ಕೊಡಬೇಕು; ತಟ್ಟೆಯಲ್ಲಿ ಏನನ್ನೂ ಬಿಡಬಾರದೆಂಬ ನಿಯಮ ಮಾಡಬೇಕು; ರೈತರ ಕಷ್ಟವನ್ನು ತಿಳಿಸುವ ಫಲಕ ಹಾಕಬೇಕು.'],
+['ಕೊಂಕಣದಲ್ಲಿ ಜೋಳದ ಬದಲು ಅಕ್ಕಿಯನ್ನು ಹೆಚ್ಚು ಏಕೆ ಬೆಳೆಯಲಾಗುತ್ತದೆ?','ಕೊಂಕಣದಲ್ಲಿ ಎಷ್ಟು ಮಳೆ ಬೀಳುತ್ತದೆ?','ಕೊಂಕಣದಲ್ಲಿ ತುಂಬಾ ಮಳೆ ಬೀಳುತ್ತದೆ. ಅಕ್ಕಿ ಬೆಳೆಗೆ ಹೇರಳ ನೀರು ಬೇಕು, ಆದರೆ ಜೋಳ ಕಡಿಮೆ ಮಳೆಯಲ್ಲಿ ಬರುತ್ತದೆ. ಆದ್ದರಿಂದ ಕೊಂಕಣದಲ್ಲಿ ಅಕ್ಕಿ ಹೆಚ್ಚು ಬೆಳೆಯುತ್ತದೆ ಮತ್ತು ಆಹಾರದಲ್ಲೂ ಅನ್ನ ಹೆಚ್ಚು ಇರುತ್ತದೆ.'],
+['ಮಳೆಗಾಲದಲ್ಲಿ ಮತ್ತು ಬೇಸಿಗೆಯಲ್ಲಿ ಆಹಾರ ಬೇಗ ಏಕೆ ಹಾಳಾಗುತ್ತದೆ?','ಸೂಕ್ಷ್ಮಜೀವಿಗಳಿಗೆ ಬೆಳೆಯಲು ಏನು ಇಷ್ಟ?','ಉಷ್ಣತೆ ಮತ್ತು ತೇವದಿಂದ ಸೂಕ್ಷ್ಮಜೀವಿಗಳು ಮತ್ತು ಬೂಸು ಬೇಗ ಬೆಳೆಯುತ್ತವೆ. ಬೇಸಿಗೆಯಲ್ಲಿ ಉಷ್ಣತೆ, ಮಳೆಗಾಲದಲ್ಲಿ ತೇವ ಹೆಚ್ಚು ಇರುತ್ತದೆ, ಆದ್ದರಿಂದ ಆಹಾರ ಬೇಗ ಹಳಸುತ್ತದೆ ಮತ್ತು ಕಲುಷಿತವಾಗುತ್ತದೆ.'],
+['ಸೌರ ಕುಕ್ಕರ್ ಬಳಸುವುದರ ಪ್ರಯೋಜನಗಳು ಯಾವುವು?','ಇಂಧನ, ಹೊಗೆ, ಖರ್ಚು ಇವುಗಳ ಬಗ್ಗೆ ಯೋಚಿಸಿ.','ಸೌರ ಕುಕ್ಕರ್‌ನಲ್ಲಿ ಸೂರ್ಯನ ಶಕ್ತಿ ಬಳಸಲಾಗುತ್ತದೆ – ಗ್ಯಾಸ್, ಕಟ್ಟಿಗೆಯಂತಹ ಇಂಧನ ಬೇಕಾಗುವುದಿಲ್ಲ, ಹೊಗೆ ಆಗುವುದಿಲ್ಲ, ಖರ್ಚು ಉಳಿಯುತ್ತದೆ ಮತ್ತು ಪರಿಸರದ ರಕ್ಷಣೆಯಾಗುತ್ತದೆ. ಆಹಾರದಲ್ಲಿನ ಪೋಷಕಾಂಶಗಳೂ ಉಳಿಯುತ್ತವೆ.'],
+['ಅಂಗಡಿಯ ಗಾಳಿಯಾಡದ ಚೀಲ ಉಬ್ಬಿರುವಂತೆ ಕಂಡರೆ ಅದನ್ನು ಏಕೆ ಖರೀದಿಸಬಾರದು?','ಚೀಲದಲ್ಲಿ ಅನಿಲವನ್ನು ಯಾರು ಉತ್ಪತ್ತಿ ಮಾಡುತ್ತಾರೆ?','ಚೀಲದಲ್ಲಿನ ಆಹಾರದಲ್ಲಿ ಸೂಕ್ಷ್ಮಜೀವಿಗಳು ಬೆಳೆಯುವುದರಿಂದ ಅನಿಲ ಉತ್ಪತ್ತಿಯಾಗಿ ಚೀಲ ಉಬ್ಬುತ್ತದೆ. ಅಂದರೆ ಆಹಾರ ಕಲುಷಿತವಾಗಿದೆ; ಅದನ್ನು ತಿನ್ನುವುದರಿಂದ ಹೊಟ್ಟೆನೋವು, ಭೇದಿ, ವಾಂತಿ ಆಗಬಹುದು.'],
+['ಹಲವು ವರ್ಷಗಳಿಂದ ರಾಸಾಯನಿಕ ಗೊಬ್ಬರ ಬಳಸಿದ ಹೊಲ ಮತ್ತು ಸಾವಯವ ಕೃಷಿಯ ಹೊಲವನ್ನು ಹೋಲಿಸಿ.','ಮಣ್ಣಿನ ಫಲವತ್ತತೆಯ ಬಗ್ಗೆ ಯೋಚಿಸಿ.','ರಾಸಾಯನಿಕ ಗೊಬ್ಬರದ ಅತಿಬಳಕೆಯಿಂದ ಮಣ್ಣಿನ ಫಲವತ್ತತೆ ಕಡಿಮೆಯಾಗುತ್ತದೆ, ಮಣ್ಣು ಮತ್ತು ನೀರು ಕಲುಷಿತವಾಗುತ್ತವೆ. ಸಾವಯವ ಗೊಬ್ಬರದಿಂದ ಫಲವತ್ತತೆ ಉಳಿಯುತ್ತದೆ, ಎರೆಹುಳುಗಳು ಹೆಚ್ಚುತ್ತವೆ ಮತ್ತು ಪೌಷ್ಟಿಕ ಉತ್ಪಾದನೆ ಸಿಗುತ್ತದೆ.'],
+['ನಗರಗಳಲ್ಲಿ ಬಹುಮಹಡಿ ಕಟ್ಟಡಗಳನ್ನು ಏಕೆ ಕಟ್ಟಲಾಗುತ್ತದೆ?','ನಗರದಲ್ಲಿ ಜನ ಹೆಚ್ಚೋ ಜಾಗ ಹೆಚ್ಚೋ?','ನಗರದಲ್ಲಿ ಜನಸಂಖ್ಯೆ ಹೆಚ್ಚು ಮತ್ತು ಜಾಗ ಕಡಿಮೆ ಇರುತ್ತದೆ. ಕಡಿಮೆ ಜಾಗದಲ್ಲಿ ಹೆಚ್ಚು ಜನರಿಗೆ ಮನೆಗಳು ಸಿಗಲೆಂದು ಒಂದರ ಮೇಲೊಂದು ಮಹಡಿ ಕಟ್ಟಿ ಬಹುಮಹಡಿ ಕಟ್ಟಡಗಳನ್ನು ಮಾಡಲಾಗುತ್ತದೆ.'],
+['ಪಕ್ಷಿಗಳು ಗೂಡಿಗಾಗಿ ಎತ್ತರದ ಮತ್ತು ಅನುಕೂಲಕರ ಜಾಗವನ್ನು ಏಕೆ ಆರಿಸುತ್ತವೆ?','ಮರಿಗಳಿಗೆ ಯಾರಿಂದ ಅಪಾಯವಿರುತ್ತದೆ?','ಮರಿಗಳಲ್ಲಿ ತಮ್ಮನ್ನು ತಾವು ರಕ್ಷಿಸಿಕೊಳ್ಳುವಷ್ಟು ಶಕ್ತಿ ಇರುವುದಿಲ್ಲ. ಕೆಲವು ಪ್ರಾಣಿಗಳು ಮೊಟ್ಟೆ ಮತ್ತು ಮರಿಗಳನ್ನು ತಿನ್ನುತ್ತವೆ. ಎತ್ತರದ ಜಾಗಕ್ಕೆ ಇಂತಹ ಪ್ರಾಣಿಗಳು ಸುಲಭವಾಗಿ ತಲುಪಲಾರವು, ಆದ್ದರಿಂದ ಪಕ್ಷಿಗಳು ಎತ್ತರದ ಮತ್ತು ಸುರಕ್ಷಿತ ಜಾಗ ಆರಿಸುತ್ತವೆ.'],
+['ನಿಮ್ಮ ಮನೆಯನ್ನು ಹೆಚ್ಚು ಪರಿಸರಸ್ನೇಹಿ ಮಾಡಲು ಯಾವ ಮೂರು ಬದಲಾವಣೆಗಳನ್ನು ಸೂಚಿಸುವಿರಿ?','ಶಕ್ತಿ, ನೀರು, ಕಸ…','(೧) ಛಾವಣಿಯ ಮೇಲೆ ಸೌರ ಪ್ಯಾನಲ್ / ಸೌರ ಕುಕ್ಕರ್ ಬಳಸುವುದು. (೨) ಛಾವಣಿಯ ಮೇಲಿನ ಮಳೆನೀರನ್ನು ಸಂಗ್ರಹಿಸುವುದು ಮತ್ತು ಪಾತ್ರೆ ತೊಳೆದ ನೀರನ್ನು ಗಿಡಗಳಿಗೆ ಕೊಡುವುದು. (೩) ಹಸಿ ಕಸದಿಂದ ಗೊಬ್ಬರ ಮಾಡುವುದು, ಕಿಟಕಿಗಳನ್ನು ತೆರೆದಿಟ್ಟು ನೈಸರ್ಗಿಕ ಬೆಳಕು ಮತ್ತು ಗಾಳಿ ಬಳಸುವುದು.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೬ : ಆಹಾರ ಮತ್ತು ಆಶ್ರಯ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${[...document.querySelectorAll('#stepBox ul li')].map(l=>`<li>${l.innerHTML}</li>`).join('')}</ol>
+ <p class="pq">ಹೊಲದಿಂದ ತಟ್ಟೆಯವರೆಗೆ</p><div>${FARM.map(f=>f[1]).join(' → ')}</div>
+ <p class="pq">ಮಳೆ ಮತ್ತು ಬೆಳೆಗಳು</p><table class="w"><tr><th>ಹೆಚ್ಚು ಮಳೆ</th><th>ಮಧ್ಯಮ ಮಳೆ</th><th>ಕಡಿಮೆ ಮಳೆ</th></tr><tr><td>ಅಕ್ಕಿ, ರಾಗಿ, ಸಾಮೆ, ತೆಂಗು</td><td>ಗೋಧಿ, ತೊಗರಿ, ಸೋಯಾಬೀನ್</td><td>ಜೋಳ, ಸಜ್ಜೆ, ಹೆಸರುಕಾಳು, ಮಡಿಕೆಕಾಳು</td></tr></table>
+ <p class="pq">ಆಹಾರ ತಯಾರಿಸುವುದು ಮತ್ತು ಸಂಗ್ರಹಿಸುವುದು</p><table class="w"><tr><th>ಸಾಧನಗಳು</th><td class="l">ಒಲೆ, ಸ್ಟೌವ್, ಸೌರ ಒಲೆ, ಸೌರ ಕುಕ್ಕರ್, ಗ್ಯಾಸ್ ಒಲೆ</td></tr><tr><th>ಪದ್ಧತಿಗಳು</th><td class="l">ಹುರಿಯುವುದು, ಬೇಯಿಸುವುದು, ಕುದಿಸುವುದು, ಹಬೆಯಲ್ಲಿ ಬೇಯಿಸುವುದು, ಕರಿಯುವುದು</td></tr><tr><th>ಸಂಗ್ರಹ</th><td class="l">ಒಣಗಿಸುವುದು, ಊರಿಡುವುದು, ಉಪ್ಪು ಹಚ್ಚುವುದು, ಬೇವಿನ ಎಲೆ; ಸಂರಕ್ಷಕಗಳು – ಉಪ್ಪು, ಇಂಗು, ಸಾಸಿವೆ, ಅಡುಗೆ ಎಣ್ಣೆ</td></tr><tr><th>ಕಲುಷಿತ ಆಹಾರ ತಪ್ಪಿಸಿ</th><td class="l">ಆಹಾರ ಮುಚ್ಚಿಡಿ, ಸ್ವಚ್ಛತೆ, ಶುದ್ಧ ನೀರು, ತಾಜಾ ಮತ್ತು ಪೌಷ್ಟಿಕ ಆಹಾರ</td></tr></table>
+ <p class="pq">ಆಶ್ರಯ</p><table class="w"><tr><th>ಗ್ರಾಮೀಣ ಮನೆಗಳು</th><th>ನಗರ ಮನೆಗಳು</th><th>ಪರಿಸರಸ್ನೇಹಿ ಮನೆಗಳು</th></tr><tr><td class="l">ಮಣ್ಣು, ಬಿದಿರು, ಹುಲ್ಲು, ಕಲ್ಲು, ಗರಿಗಳು; ಕೊಂಕಣ – ಹಂಚಿನ; ಪ್ರಸ್ಥಭೂಮಿ – ತಾರಸಿಯ; ಬುಡಕಟ್ಟು – ಕಡ್ಡಿ-ಮಣ್ಣಿನ</td><td class="l">ಸಿಮೆಂಟ್, ಮರಳು, ಕಾಂಕ್ರೀಟ್, ಕಬ್ಬಿಣ, ಉಕ್ಕು; ಬಹುಮಹಡಿ, ಪಕ್ಕಾ</td><td class="l">ನೈಸರ್ಗಿಕ ಸಾಧನಗಳು, ಸೌರ/ಪವನ/ಜೈವಿಕ ಅನಿಲ, ನೀರು ಮತ್ತು ವಸ್ತುಗಳ ಮರುಬಳಕೆ, ಬೆಳಕು ಮತ್ತು ಗಾಳಿ</td></tr></table>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">(ಅ) ಖಾಲಿ ಜಾಗದಲ್ಲಿ ಸರಿಯಾದ ಪದ ಬರೆಯಿರಿ.</div>${SW.a.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div><div class="po">${x[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ <div class="pq">(ಆ) ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(1)}</div>`).join('')}
+ <div class="pq">(ಇ) ಸಂಕ್ಷಿಪ್ತವಾಗಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.i.map((x,i)=>`<div class="avoid"><div>${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ <div class="avoid"><div class="pq">(ಈ) ಕೋಷ್ಟಕ ಪೂರ್ಣಗೊಳಿಸಿ.</div><table class="w"><tr><th style="width:35mm">ಧಾನ್ಯ</th><th>ತಯಾರಾಗುವ ಪದಾರ್ಥಗಳು</th></tr>${SW.tk.map(x=>`<tr><td style="height:9mm"><b>${x[0]}</b></td><td></td></tr>`).join('')}</table></div>
+ <div class="avoid"><div class="pq">(ಉ) ಪರಿಸರಸ್ನೇಹಿ ಮನೆಗಳ ಮಹತ್ವ – ಚರ್ಚೆಯ ಅಂಶಗಳ ಪಟ್ಟಿ ಮಾಡಿ.</div>${lines(3)}</div>
+ <div class="avoid"><div class="pq">(ಊ) ಕಲುಷಿತ ಆಹಾರದಿಂದ ಆಗುವ ರೋಗಗಳನ್ನು ತಡೆಯಲು ಏನು ಮಾಡಬೇಕು?</div>${lines(3)}</div>
+ <div class="avoid"><div class="pq">(ಎ) ಪ್ಲಾಸ್ಟಿಕ್ ಚೀಲದಲ್ಲಿನ ಆಹಾರ ಪದಾರ್ಥ ತಿನ್ನುವುದರಿಂದ ಮನುಷ್ಯರಿಗೆ ಮತ್ತು ಪ್ರಾಣಿಗಳಿಗೆ ಆಗುವ ತೊಂದರೆ – ಅಂಶಗಳನ್ನು ಬರೆಯಿರಿ.</div>${lines(3)}</div>
+ <div class="avoid"><div class="pq">ಚಟುವಟಿಕೆ: ಪ್ರದೇಶಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಧಾನ್ಯದಿಂದ ತಯಾರಿಸಿದ ಪದಾರ್ಥಗಳು</div><table class="w"><tr><th>ಧಾನ್ಯ</th>${SW.rg.map(r=>`<th>${r}</th>`).join('')}</tr>${['ಅಕ್ಕಿ','ಗೋಧಿ','ಜೋಳ','ಕಾಳುಗಳು'].map(g=>`<tr><td style="height:10mm"><b>${g}</b></td>${SW.rg.map(()=>'<td></td>').join('')}</tr>`).join('')}</table></div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>(ಅ)</b> ${SW.a.map((x,i)=>`${i+1}) ${x[1][x[2]]}`).join('; ')}</div><div><b>(ಆ)</b><ol>${SW.aa.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಇ)</b><ol>${SW.i.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>(ಈ)</b> ${SW.tk.map(x=>`${x[0]} – ${x[1]}`).join('; ')}</div><div><b>(ಉ)</b> ${SW.u[0][1]}</div><div><b>(ಊ)</b> ${SW.u[1][1]}</div><div><b>(ಏ)</b> ${SW.u[2][1]}</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>ಇ. ೪ ನೇ ಪರಿಸರ ಅಭ್ಯಾಸ ಭಾಗ ೧ · ಪಾಠ ೬</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ – ಪಾಠ ೮ ಸ್ವಕೀಯ ಶತ್ರುಗಳ ನಿಗ್ರಹ</title>
+<style>
+:root{--b:#1d4ed8;--g:#15803d;--o:#ea580c;--p:#7c3aed;--bg:#f1f5f9;--ink:#0f172a;--mut:#64748b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#0f766e,#1d4ed8);color:#fff;padding:12px 14px}
+header h1{margin:0;font-size:19px}header small{opacity:.9}
+.tabs{display:flex;gap:6px;padding:8px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002;overflow-x:auto}
+.tabs button{flex:1;min-width:80px;padding:10px 6px;border:0;border-radius:10px;font:inherit;font-weight:700;background:#e2e8f0;color:#334155;cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--b);color:#fff}
+.tabs button.t2.on{background:var(--g)}.tabs button.t3.on{background:var(--o)}.tabs button.t4.on{background:var(--p)}
+.wrap{max-width:780px;margin:0 auto;padding:12px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0001}
+h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+h3{margin:10px 0 4px;font-size:17px;color:#0f766e}
+.step{font-size:13px;color:var(--mut);font-weight:700}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.or{background:var(--o)}.btn.pu{background:var(--p)}.btn.ln{background:#e2e8f0;color:#1e293b}.btn:disabled{opacity:.4}
+.btn.sm{padding:6px 12px;font-size:15px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:8px 13px;border-radius:999px;background:#e2e8f0;font-weight:700;border:2px solid transparent;cursor:pointer;user-select:none}
+.chip.on{background:#dbeafe;border-color:var(--b);color:var(--b)}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}
+.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.say{float:right;border:0;background:#eff6ff;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.key{background:#fef9c3;border-left:5px solid #eab308;padding:8px 10px;border-radius:8px;margin:8px 0}
+.know{background:#ecfeff;border:2px dashed #06b6d4;padding:8px 12px;border-radius:12px;margin:10px 0}
+.know b.h{color:#0e7490}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.tile{border:2px solid #cbd5e1;border-radius:14px;padding:10px;cursor:pointer;background:#f8fafc;transition:.2s}
+.tile:hover{border-color:var(--b)}
+.tile .ic{font-size:34px;line-height:1}
+.tile .tt{font-weight:800;font-size:17px;margin-top:2px}
+.tile .dd{display:none;font-size:15px;margin-top:6px;color:#334155}
+.tile.op{background:#eff6ff;border-color:var(--b)}.tile.op .dd{display:block}
+.tap{font-size:12px;color:var(--mut)}
+svg{max-width:100%;height:auto}
+.sort{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px;border:1.5px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin:6px 0;background:#fff}
+.sort.ok{background:#dcfce7;border-color:#86efac}.sort.no{background:#fee2e2;border-color:#fca5a5}
+.sort>span:first-child{flex:1 1 150px;min-width:0}.sort .bb{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 auto;justify-content:flex-end;max-width:100%}.sort .bb .btn{margin:0}
+html,body{overflow-x:hidden}.btn,.chip{max-width:100%}
+.qbox{font-size:18px;font-weight:700;margin:6px 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#22c55e}.opt.no{background:#fee2e2;border-color:#ef4444}
+.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g)}
+.sq{border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;margin:8px 0}
+.sq .ans{display:none;margin-top:6px;background:#f0fdf4;border-left:4px solid #22c55e;padding:6px 10px;border-radius:8px}
+.sq.op .ans{display:block}
+.sq textarea{width:100%;min-height:54px;font:inherit;padding:6px;border-radius:8px;border:1.5px solid #94a3b8;margin-top:4px}
+.hint{display:none;font-size:15px;color:#7c2d12;background:#fff7ed;padding:4px 8px;border-radius:8px;margin-top:4px}.sq.hi .hint{display:block}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+table.t th,table.t td{border:1.5px solid #94a3b8;padding:6px;text-align:center}
+table.t th{background:#dbeafe}table.t td.l{text-align:left}
+table.t input{width:64px;font:inherit;padding:4px;border:1.5px solid #94a3b8;border-radius:6px;text-align:center}
+.ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px;margin:8px auto}
+.ws div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid #cbd5e1;border-radius:8px;font-weight:800;font-size:20px;cursor:pointer;background:#fff;user-select:none}
+.ws div.sel{background:#fef08a;border-color:#ca8a04}.ws div.fd{background:#bbf7d0;border-color:#16a34a}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:12px;padding:8px 10px;margin-top:10px}
+.tool input[type=text]{font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px}
+.pledge{background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:2px solid #14b8a6;border-radius:14px;padding:12px;font-weight:600}
+footer.site{text-align:center;font-size:13px;color:var(--mut);padding:10px 0 20px}
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+.topbar b{font-size:18px}
+.hintro{background:#fff;border-radius:14px;padding:10px 14px;margin:4px 0 12px;font-weight:600;box-shadow:0 1px 6px #0001}
+.hgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hc{border-radius:20px;padding:22px 12px;min-height:170px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 14px #0003;transition:transform .15s}
+.hc:active,.hc:hover{transform:scale(1.03)}
+.hc .hi{font-size:54px;line-height:1.1}.hc .ht{font-size:26px;font-weight:800;margin-top:6px}.hc .hs{font-size:14px;opacity:.95;margin-top:2px}
+.hc.c1{background:linear-gradient(135deg,#2563eb,#1e40af)}.hc.c2{background:linear-gradient(135deg,#16a34a,#166534)}
+.hc.c3{background:linear-gradient(135deg,#f97316,#c2410c)}.hc.c4{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+@media(max-width:380px){.hc{min-height:140px}.hc .hi{font-size:42px}.hc .ht{font-size:21px}}
+#vP .ptool{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 6px #0001}
+#shw{background:#cbd5e1;border-radius:10px;padding:8px;overflow:auto}
+.sheet{background:#fff;color:#000;width:210mm;min-height:297mm;padding:12mm;margin:0 auto 10px;box-shadow:0 2px 10px #0004;font-size:11pt;line-height:1.45;position:relative;font-family:"Noto Sans Kannada","Nirmala UI","Mangal",sans-serif;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1123'%3E%3Cg transform='rotate(-30 397 560)' fill='rgba(29,78,216,0.09)' font-family='sans-serif' font-weight='800' text-anchor='middle'%3E%3Ctext x='397' y='540' font-size='86'%3E%E0%A4%A1%E0%A4%BF%E0%A4%9C%E0%A4%BF%E0%A4%9F%E0%A4%B2 %E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3 %E0%A4%AE%E0%A4%82%E0%A4%9A%3C/text%3E%3Ctext x='397' y='630' font-size='56'%3EG.M.Nadaf%3C/text%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat-y;background-size:210mm 297mm}
+.sheet h3{margin:4px 0;font-size:14pt;text-align:center;color:#000}
+.sh-head{border:1.5px solid #000;padding:4px 8px;margin-bottom:6px}
+.sh-head .r{display:flex;justify-content:space-between;gap:10px;margin:2px 0}
+.ln2{display:inline-block;border-bottom:1px solid #000;min-width:40mm}
+.pq{margin:6px 0 2px;font-weight:700}.pq small{font-weight:400}
+.pl{border-bottom:1px dotted #555;height:7mm}
+.po{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10mm;margin:0 0 4px 6mm}
+.pk{border-top:2px dashed #000;margin-top:8mm;padding-top:3mm;page-break-before:always;break-before:page}
+.fp{font-size:8.5pt;color:#222;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #777;padding-top:2px;margin-top:8mm}
+.wmp{display:none}
+.tw{animation:tw 1.4s ease-in-out infinite alternate}@keyframes tw{from{opacity:1}to{opacity:.15}}
+table.w{border-collapse:collapse;width:100%}table.w th,table.w td{border:1.2px solid #000;padding:3px 5px;text-align:center}table.w th{background:#eee}
+table.pt{width:100%;border-collapse:collapse}table.pt>thead td,table.pt>tfoot td,table.pt>tbody>tr>td{padding:0;border:0}
+@page{size:A4;margin:10mm 12mm 8mm}
+@media print{
+ html,body{background:#fff!important}
+ .cf,header,.topbar,#home,#vA,#vB,#vC,#vD,footer.site,.ptool{display:none!important}
+ .wrap{padding:0;max-width:none}#vP{display:block!important}
+ #shw{background:none;padding:0;overflow:visible}
+ .sheet{width:auto;min-height:0;padding:0;margin:0;box-shadow:none;zoom:1!important;background-image:none}
+ .wmp{display:block;position:fixed;top:40%;left:0;right:0;text-align:center;transform:rotate(-30deg);color:rgba(29,78,216,.10);font-size:56pt;font-weight:800;line-height:1.25;z-index:0;pointer-events:none}
+ .fp{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
+ .sp{height:9mm}
+ .avoid{page-break-inside:avoid;break-inside:avoid}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header><h1>ಪಾಠ ೮ : ಸ್ವಕೀಯ ಶತ್ರುಗಳ ನಿಗ್ರಹ</h1></header>
+<div class="topbar" id="topbar" style="display:none"><button class="btn ln sm" onclick="goHome()">🏠 ಮುಖ್ಯ ಪುಟ</button><b id="secName"></b><span id="starBox" style="margin-left:auto;font-weight:800;font-size:18px;background:#fef9c3;border-radius:99px;padding:4px 12px">⭐ 0</span></div>
+<div class="wrap">
+ <div id="home">
+  <div class="hintro">⚖️🌲 ಬಂಧುತ್ವಕ್ಕಿಂತ ಕರ್ತವ್ಯ, ಜಾವಳಿಯ ದಟ್ಟ ಕಾಡು, ಪತ್ರಗಳ ಸಮರ ಮತ್ತು ರಾಯಗಡ-ಪ್ರತಾಪಗಡ! ⭐ ಪಡೆಯಿರಿ!</div>
+  <div class="hgrid">
+   <div class="hc c1" onclick="showTab('A')"><div class="hi">📖</div><div class="ht">ಕಲಿಯೋಣ</div><div class="hs">೭ ಮೆಟ್ಟಿಲುಗಳು · ಜಾವಳಿಯ ಕಾಡು · ಪತ್ರಗಳ ಸಮರ</div></div>
+   <div class="hc c2" onclick="showTab('B')"><div class="hi">✅</div><div class="ht">MCQ</div><div class="hs">೪೧ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆ</div></div>
+   <div class="hc c3" onclick="showTab('C')"><div class="hi">✍️</div><div class="ht">ಸ್ವಾಧ್ಯಾಯ</div><div class="hs">ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</div></div>
+   <div class="hc c4" onclick="showTab('D')"><div class="hi">🧠</div><div class="ht">HOTS</div><div class="hs">ಯೋಚಿಸಲು ಪ್ರೇರೇಪಿಸುವ ಪ್ರಶ್ನೆಗಳು</div></div>
+  </div>
+ </div>
+ <div id="vA" style="display:none"><div id="stepBox"></div></div>
+ <div id="vB" style="display:none"></div>
+ <div id="vC" style="display:none"></div>
+ <div id="vD" style="display:none"></div>
+ <div id="vP" style="display:none"></div>
+</div>
+<footer class="site">ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986<br>© ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ · ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+
+<script src="../tracker.js"></script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=speechSynthesis.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const sx=t=>`<button class="say" onclick="say(\`${t.replace(/`/g,'')}\`)">🗣 ಆಲಿಸಿ</button>`;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tog(el){el.classList.toggle('op')}
+function chip(el){el.classList.toggle('on');const p=el.parentNode;const c=p.querySelectorAll('.chip.on').length;const m=p.nextElementSibling;if(m&&m.dataset.cnt)m.innerHTML=m.dataset.cnt.replace('#',c)}
+let SCH='';
+const TITLE='ತರಗತಿ ೪ ನೇ · ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ · ಪಾಠ ೮ : ಸ್ವಕೀಯ ಶತ್ರುಗಳ ನಿಗ್ರಹ';
+
+/* ---------- ⭐ ಬಹುಮಾನ ---------- */
+let STARS=new Set();
+function award(id,msg){if(STARS.has(id))return;STARS.add(id);const b=$('starBox');if(b)b.textContent='⭐ '+STARS.size;confetti();if(msg)say(msg)}
+function confetti(){for(let i=0;i<24;i++){const e=document.createElement('div');e.className='cf';e.textContent=['⭐','🚩','⚔️','🌲'][i%4];
+ e.style.cssText=`position:fixed;top:-30px;left:${Math.random()*100}vw;font-size:${18+Math.random()*16}px;z-index:99;pointer-events:none;transition:transform 1.8s ease-in,opacity 1.8s`;
+ document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*720}deg)`;e.style.opacity=.2});setTimeout(()=>e.remove(),1900)}}
+
+/* ---------- ಹೊಂದಿಸುವ ಆಟ ---------- */
+const GS={};
+/* ವರ್ಗೀಕರಣ ಆಟ: items [[ಹೆಸರು,ಗುಂಪುಸಂ.]] cats [[ಲೇಬಲ್,btn-class]] */
+function sortGame(id,items,cats,aw){GS[id]=GS[id]||{t:'s',items,cats,aw,a:{}};return `<div id="${id}"></div>`}
+function drawSort(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.items.map((x,i)=>`<div class="sort ${g.a[i]==null?'':(g.a[i]==x[1]?'ok':'no')}"><span><b>${x[0]}</b>${g.a[i]!=null&&g.a[i]!=x[1]?` <small>→ ${g.cats[x[1]][0]}</small>`:''}</span><span class="bb">${g.cats.map((c,j)=>`<button class="btn ${c[1]} sm" onclick="GS['${id}'].a[${i}]=${j};drawSort('${id}')">${c[0]}</button>`).join('')}</span></div>`).join('')
+ +(()=>{const n=Object.keys(g.a).length,c=Object.keys(g.a).filter(i=>g.a[i]==g.items[i][1]).length;if(n==g.items.length&&c==n)award(g.aw,'ಭೇಷ್!');return n?`<div class="msg ${c==n?'ok':'in'}">${c} / ${g.items.length} ಸರಿ ${n==g.items.length&&c==n?'🎉 ಭೇಷ್!':''}</div>`:''})()}
+/* ಕ್ರಮ ಆಟ */
+function orderGame(id,items,aw,lead){GS[id]={t:'o',items,aw,lead,done:[],sh:shuf(items.map((_,i)=>i)),err:''};return `<div id="${id}"></div>`}
+function drawOrder(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=`<div style="display:flex;gap:4px;flex-wrap:wrap;margin:6px 0;min-height:40px;align-items:center">${g.lead||''}${g.done.map(i=>`<span class="chip on">${g.items[i]}</span>`).join(' ➜ ')}</div>
+ <div class="chips">${g.sh.filter(i=>!g.done.includes(i)).map(i=>`<span class="chip" onclick="ordTap('${id}',${i})">${g.items[i]}</span>`).join('')}</div>
+ ${g.done.length==g.items.length?'<div class="msg ok">🎉 ಕ್ರಮ ಸರಿ!</div>':g.err}<button class="btn ln sm" onclick="GS['${id}'].done=[];GS['${id}'].err='';GS['${id}'].sh=shuf(GS['${id}'].items.map((_,i)=>i));drawOrder('${id}')">🔄 ಮತ್ತೆ</button>`}
+function ordTap(id,i){const g=GS[id];if(i==g.done.length){g.done.push(i);g.err='';say(g.items[i]);if(g.done.length==g.items.length)award(g.aw,'ಭೇಷ್! ಕ್ರಮ ಸರಿ.')}else g.err=`<div class="msg no">✘ "${g.items[i]}" ಈಗ ಅಲ್ಲ. ಮೊದಲು ಯಾವುದು ಬರುತ್ತದೆ?</div>`;drawOrder(id)}
+/* ಪ್ರಶ್ನೋತ್ತರ ಆಟ: qs [[ಪ್ರಶ್ನೆ,[ಆಯ್ಕೆ],ಉತ್ತರ,ವಿವರಣೆ]] */
+function pickGame(id,qs,aw){GS[id]=GS[id]||{t:'p',qs,aw,a:{}};return `<div id="${id}"></div>`}
+function drawPick(id){const g=GS[id],b=$(id);if(!b)return;
+ b.innerHTML=g.qs.map((q,i)=>`<div class="sq"><b>${i+1}) ${q[0]}</b><div class="chips">${q[1].map((o,j)=>`<span class="chip ${g.a[i]==j?'on':''}" onclick="GS['${id}'].a[${i}]=${j};drawPick('${id}')">${o}</span>`).join('')}</div>${g.a[i]!=null?`<div class="msg ${g.a[i]==q[2]?'ok':'no'}">${g.a[i]==q[2]?'✔ ಸರಿ! '+(q[3]||''):'✘ ಮತ್ತೆ ಯೋಚಿಸಿ.'}</div>`:''}</div>`).join('');
+ if(g.qs.every((q,i)=>g.a[i]==q[2]))award(g.aw,'ಭೇಷ್!')}
+function drawGames(){Object.keys(GS).forEach(id=>{if(!$(id))return;const t=GS[id].t;if(t=='s')drawSort(id);if(t=='o')drawOrder(id);if(t=='p')drawPick(id)})}
+
+/* ---------- ಜಾವಳಿಯ ಕಾಡು ---------- */
+const JW=[[18,30,'🐅','ಹುಲಿ'],[70,62,'🐺','ತೋಳಗಳು'],[42,78,'🐻','ಕರಡಿ'],[84,22,'🐆','ಚಿರತೆ'],[55,40,'🐍','ಹಾವು']];
+const JWV=new Set();
+function drawJw(){const b=$('jwBox');if(!b)return;
+ b.innerHTML=`<div style="position:relative;height:220px;border-radius:14px;overflow:hidden;background:#052e16">
+ ${[...Array(28)].map((_,i)=>`<span style="position:absolute;left:${(i*37)%96}%;top:${(i*53)%88}%;font-size:${26+(i%3)*8}px;opacity:.9">${i%3?'🌲':'🌳'}</span>`).join('')}
+ ${JW.map((a,i)=>`<button onclick="JWV.add(${i});say('${a[3]}');drawJw()" style="position:absolute;left:${a[0]}%;top:${a[1]}%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;border:${JWV.has(i)?'3px solid #fde047':'none'};background:${JWV.has(i)?'rgba(254,240,138,.85)':'rgba(0,0,0,.0)'};font-size:28px;cursor:pointer">${JWV.has(i)?a[2]:'<span style="opacity:.25">👀</span>'}</button>`).join('')}
+ <div style="position:absolute;left:6px;bottom:4px;color:#bbf7d0;font-size:12px;font-weight:700">🌑 ಹಾಡುಹಗಲಿನಲ್ಲೂ ಸೂರ್ಯಕಿರಣ ತಲುಪುವುದಿಲ್ಲ…</div></div>
+ <div class="msg ${JWV.size==JW.length?'ok':'in'}">${JWV.size==JW.length?'😱 ಮೋರೆಗಳ ಜಾವಳಿ ಎಂದರೆ ಮಾನೋ <b>ಹುಲಿಯ ಪೊದೆಯೇ!</b> ಆದ್ದರಿಂದ ಮೋರೆಗಳ ಹಾದಿಗೆ ಯಾರೂ ಹೋಗುತ್ತಿರಲಿಲ್ಲ – ಆದರೆ ಆ ಧೈರ್ಯ ಮಾಡಿದರು <b>ಶೂರ ಶಿವರಾಯರು</b>!':'👀 ದಟ್ಟ ಕಾಡಿನಲ್ಲಿ ಅಡಗಿದ ಕಾಡುಪ್ರಾಣಿಗಳನ್ನು ಹುಡುಕಿ! ('+JWV.size+' / '+JW.length+')'}</div>`;
+ if(JWV.size==JW.length)award('jw','ಜಾವಳಿಯ ಕಾಡು ನೋಡಿದೆ!')}
+
+/* ---------- ಪತ್ರಗಳ ಸಮರ ---------- */
+const PT=[['🚩 ಶಿವರಾಯ','#fff7ed','#c2410c','ನೀವು ರಾಜರೆಂದು ಕರೆಸಿಕೊಳ್ಳುತ್ತೀರಿ. ರಾಜರು ನಾವು. ನಮಗೆ ಶ್ರೀಶಂಭುವೇ ರಾಜ್ಯ ಕೊಟ್ಟಿದ್ದಾನೆ, ಹಾಗಾಗಿ ನೀವು ರಾಜರೆಂದು ಹೇಳಿಕೊಳ್ಳಬಾರದು.','(ಖಾರವಾದ ಪತ್ರ)'],
+ ['👑 ಯಶವಂತರಾವ್ ಮೋರೆ','#f1f5f9','#334155','ನೀವು ನಿನ್ನೆ ರಾಜರಾದಿರಿ. ನಿಮಗೆ ರಾಜ್ಯ ಯಾರು ಕೊಟ್ಟರು? ಬರುವಾಗ ಜಾವಳಿ, ಹೋಗುವಾಗ ಗೋವಳಿ… ನಮಗೆ ಶ್ರೀಗಳ ಕೃಪೆಯಿಂದ ಆದಿಲ್‌ಶಾಹನು ರಾಜ ಎಂಬ ಬಿರುದು, ಛತ್ರಚಾಮರ, ಸಿಂಹಾಸನ ದಯೆತೋರಿ ಕೊಟ್ಟನು. ಇಲ್ಲಿ ಉಪಾಯ ಮಾಡಿದರೆ ಅಪಾಯವಾಗುವುದು.','(ಉದ್ಧಟ ಉತ್ತರ)'],
+ ['🚩 ಶಿವರಾಯ','#fff7ed','#c2410c','ಜಾವಳಿ ಖಾಲಿ ಮಾಡಿ, ರಾಜರೆನ್ನದೆ, ಛತ್ರಚಾಮರ ದೂರ ಮಾಡಿ, ಕೈಕರವಸ್ತ್ರ ಕಟ್ಟಿ, ಭೇಟಿಗೆ ಬಂದು, ಹುಜೂರರ ಸೇವೆ ಮಾಡುವುದು. ಇಷ್ಟಾದ ಮೇಲೆ ಬಂಡಾಯ ಮಾಡಿದರೆ, ಕೊಲ್ಲಲ್ಪಡುವಿರಿ.','(ತಿರುಗೇಟು)']];
+let PTN=0;
+function drawPt(){const b=$('ptBox');if(!b)return;
+ b.innerHTML=PT.slice(0,PTN).map(p=>`<div style="background:${p[1]};border:2px solid ${p[2]};border-radius:12px;padding:8px 10px;margin:6px 0;${p[0].includes('ಮೋರೆ')?'margin-left:18px':'margin-right:18px'}"><b style="color:${p[2]}">📜 ${p[0]}</b> <small>${p[4]}</small><div style="font-style:italic;margin-top:4px">“${p[3]}”</div></div>`).join('')
+ +(PTN<PT.length?`<div style="text-align:center"><button class="btn or" onclick="say(PT[PTN][3]);PTN++;drawPt();if(PTN==3)award('pt','ಪತ್ರಗಳ ಸಮರ ಅರ್ಥವಾಯಿತು!')">✉️ ${PTN==0?'ಮೊದಲ ಪತ್ರ ತೆರೆಯಿರಿ':PTN==1?'ಮೋರೆಯ ಉತ್ತರ ತೆರೆಯಿರಿ':'ಶಿವರಾಯರ ತಿರುಗೇಟು ತೆರೆಯಿರಿ'}</button></div>`:'')
+ +`<div class="tap">💡 <b>ಖಾರವಾದ</b> = ಕಠೋರ, ತೀಕ್ಷ್ಣ. <b>ಉದ್ಧಟ</b> = ಅಹಂಕಾರಿ. <b>ಛತ್ರಚಾಮರ</b> = ರಾಜಚಿಹ್ನೆಗಳು. <b>ಕೈಕರವಸ್ತ್ರ ಕಟ್ಟಿ</b> = ಶರಣಾಗಿ ಬಂದು. <b>ಹುಜೂರ</b> = ಸ್ವಾಮಿ. <b>ತಿರುಗೇಟು ನೀಡುವುದು</b> = ಕಟ್ಟುನಿಟ್ಟಾದ ಪ್ರತ್ಯುತ್ತರ.</div>`}
+
+/* ---------- ಸ್ವರಾಜ್ಯ ದುಪ್ಪಟ್ಟು ---------- */
+let DUP=0;
+function drawDup(){const b=$('dupBox');if(!b)return;
+ b.innerHTML=`<div style="margin:6px 0"><b>ಸ್ವರಾಜ್ಯ – ಜಾವಳಿಗೆ ಮೊದಲು</b><div style="background:#e2e8f0;border-radius:8px;height:22px"><div style="width:45%;height:22px;border-radius:8px;background:#fdba74"></div></div></div>
+ <div style="margin:6px 0"><b>ಸ್ವರಾಜ್ಯ – ಜಾವಳಿಯ ನಂತರ</b><div style="background:#e2e8f0;border-radius:8px;height:22px"><div style="width:${DUP?90:45}%;height:22px;border-radius:8px;background:linear-gradient(90deg,#fdba74,#ea580c);transition:width 1.5s"></div></div></div>
+ ${DUP?'<div class="msg ok">🎉 ಜಾವಳಿಯ ವಿಜಯದಿಂದ ಸ್ವರಾಜ್ಯ <b>ಮೊದಲಿಗಿಂತ ದುಪ್ಪಟ್ಟು</b> ಆಯಿತು! ಯಶವಂತರಾವರ <b>ಸೈನ್ಯವೂ</b> ಶಿವರಾಯರನ್ನು ಬಂದು ಸೇರಿತು; ರಾಯರಿಯ ಬೃಹತ್ ಕೋಟೆ ಸ್ವರಾಜ್ಯಕ್ಕೆ ಬಂತು.</div>':'<div style="text-align:center"><button class="btn gr" onclick="DUP=1;drawDup();award(\'dup\',\'ಸ್ವರಾಜ್ಯ ದುಪ್ಪಟ್ಟಾಯಿತು!\')">⚔️ ಜಾವಳಿ ಗೆಲ್ಲಿ</button></div>'}`}
+
+/* ---------- ಸಾರಾಂಶ ---------- */
+const SUM=['ಶಿವರಾಯರ ಹೆಸರು ಎಲ್ಲೆಡೆ ಮೊಳಗಿತು; ಹನ್ನೆರಡು ಮಾವಳಗಳ ಮಾವಳರು ಅವರ ಸುತ್ತ ಸೇರಿದರು – “ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಬದುಕಬೇಕು, ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಸಾಯಬೇಕು.” ಮಾವಳರಿಗೆ ಶಿವರಾಯರು ಪ್ರಾಣಕ್ಕಿಂತ ಪ್ರಿಯರೆನಿಸುತ್ತಿದ್ದರು.',
+ 'ಕೆಲವರಿಗೆ ಶಿವರಾಯರ ಸಾಧನೆಯ ಬಗ್ಗೆ ಅಸೂಯೆ ಆಗುತ್ತಿತ್ತು; ಅಂಥವರನ್ನು ನಿಗ್ರಹಿಸುವುದು ಶಿವರಾಯರಿಗೆ ಅನಿವಾರ್ಯವಾಯಿತು.',
+ 'ಫಲಟಣದ ಬಜಾಜಿ ನಾಯಕ ನಿಂಬಾಳಕರ, ಖಂಡೋಜಿ ಮತ್ತು ಬಾಜಿ ಘೋರಪಡೆ ಈ ಸರದಾರರು ಆದಿಲ್‌ಶಾಹನ ಸೇವೆಯಲ್ಲಿದ್ದರು; ಆದಿಲ್‌ಶಾಹ ಪ್ರಚೋದಿಸಿದಾಗ ಕೊಂಢಾಣ ಪ್ರದೇಶದಲ್ಲಿ ಅವರು ದಾಂಧಲೆ ಎಬ್ಬಿಸಿದರು; ಶಿವರಾಯರು ಅವರನ್ನು ಓಡಿಸಿದರು.',
+ 'ಕರ್ತವ್ಯದ ಮುಂದೆ ಶಿವರಾಯರು ಬಂಧುತ್ವ ಪರಿಗಣಿಸುತ್ತಿರಲಿಲ್ಲ. ಸುಪೆ ಪರಗಣೆಯ ಹತ್ತಿರದ ಬಂಧು ಸಂಭಾಜಿ ಮೋಹಿತೆ ನಿರ್ಲಕ್ಷ್ಯದಿಂದ ವರ್ತಿಸತೊಡಗಿದ; ಶಿವರಾಯರು ಅವನನ್ನು ಹಿಡಿದು ಕರ್ನಾಟಕ ಪ್ರಾಂತಕ್ಕೆ ಕಳುಹಿಸಿದರು.',
+ 'ಮೋರೆ – ಜಾವಳಿಯ ಜಹಗೀರುದಾರರು (ರಾಯಗಡದಿಂದ ಕೋಯನಾ ಕಣಿವೆಯವರೆಗೆ); ಆದಿಲ್‌ಶಾಹ ಅವರಿಗೆ ‘ಚಂದ್ರರಾವ್’ ಬಿರುದು ನೀಡಿದ್ದ.',
+ 'ಜಾವಳಿಯ ಕಾಡು ಅತ್ಯಂತ ದಟ್ಟ – ಹಾಡುಹಗಲಿನಲ್ಲೂ ಸೂರ್ಯಕಿರಣ ತಲುಪುತ್ತಿರಲಿಲ್ಲ; ಹುಲಿ, ತೋಳ, ಕರಡಿ ಇತ್ಯಾದಿ ಕಾಡುಪ್ರಾಣಿಗಳು; ಮಾನೋ ಹುಲಿಯ ಪೊದೆ!',
+ 'ದೌಲತರಾವ್ ಮೋರೆ ೧೬೪೫ರಲ್ಲಿ ಮರಣ ಹೊಂದಿದ ಮೇಲೆ ಶಿವರಾಯರ ಸಹಾಯದಿಂದ ಯಶವಂತರಾವ್ ಗದ್ದಿಗೆ ಏರಿದ; ಆದರೆ ನಂತರ ಅವನು ಮಾತು ಮರೆತು ಸ್ವರಾಜ್ಯಕ್ಕೆ ತೊಂದರೆ ಕೊಡತೊಡಗಿದ.',
+ 'ಶಿವರಾಯರು ಖಾರವಾದ ಪತ್ರ ಕಳುಹಿಸಿದರು; ಮೋರೆ ಉದ್ಧಟ ಉತ್ತರ ನೀಡಿದ; ಶಿವರಾಯರು “ಬಂಡಾಯ ಮಾಡಿದರೆ ಕೊಲ್ಲಲ್ಪಡುವಿರಿ” ಎಂಬ ತಿರುಗೇಟು ನೀಡಿದರು.',
+ 'ಸಾಕಷ್ಟು ಸಿದ್ಧತೆಯೊಂದಿಗೆ ಶಿವರಾಯರು ಜಾವಳಿ ಗೆದ್ದರು; ಯಶವಂತರಾವ್ ರಾಯರಿ ಕೋಟೆಗೆ ಓಡಿಹೋದ; ಮೂರು ತಿಂಗಳ ಮುತ್ತಿಗೆಯ ನಂತರ ಅವನು ಹಿಂದೆ ಸರಿಯಬೇಕಾಯಿತು.',
+ 'ಜಾವಳಿಯ ವಿಜಯದಿಂದ ಸ್ವರಾಜ್ಯ ದುಪ್ಪಟ್ಟಾಯಿತು; ರಾಯರಿ ಕೋಟೆಗೆ ‘ರಾಯಗಡ’ ಎಂದು ಹೆಸರಿಟ್ಟರು; ಹತ್ತಿರದ ಭೋರಪ್ಯಾ ಬೆಟ್ಟದ ಮೇಲೆ ಹೊಸ ಕೋಟೆ ಕಟ್ಟಿ ‘ಪ್ರತಾಪಗಡ’ ಎಂದು ಹೆಸರಿಟ್ಟರು.'];
+
+/* ---------- ಕಲಿಯೋಣ ---------- */
+const L=[
+{h:'ಶಿವರಾಯ – ಜನರ ರಾಜ',s:'ಶಿವರಾಯರ ಕಾರ್ಯದ ಹಿರಿಮೆ ಎಲ್ಲ ಮಾವಳರಿಗೆ ಮನದಟ್ಟಾಯಿತು. ಅವರ ಹೆಸರು ಎಲ್ಲೆಡೆ ಮೊಳಗಿತು. ಶಿವರಾಯರು ಜನರ ರಾಜರಾದರು. ಹನ್ನೆರಡು ಮಾವಳಗಳ ಮಾವಳರು ಅವರ ಸುತ್ತ ಸೇರಿದರು. ಅವರು ಹೇಳಿದ ಕಾರ್ಯವನ್ನು ಮಾವಳರು ನೆರವೇರಿಸುತ್ತಿದ್ದರು. ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಬದುಕಬೇಕು ಮತ್ತು ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಸಾಯಬೇಕು ಎಂದು ಅವರು ನಂಬಿದ್ದರು. ಮುಗ್ಧ, ಮರಾಠಿ ಮಣ್ಣಿನ ಜನ ಅವರು! ಅವರಿಗೆ ಶಿವರಾಯರೆಂದರೆ ಪ್ರಾಣಕ್ಕಿಂತ ಪ್ರಿಯ; ಆದರೆ ಕೆಲವರಿಗೆ ಶಿವರಾಯರ ಸಾಧನೆಯ ಬಗ್ಗೆ ಅಸೂಯೆ ಆಗುತ್ತಿತ್ತು. ಅಂಥವರನ್ನು ನಿಗ್ರಹಿಸುವುದು ಶಿವರಾಯರಿಗೆ ಅನಿವಾರ್ಯವಾಯಿತು.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">🧔🧔🧔❤️</div><div class="tt">ಮಾವಳರು</div><div class="dd">ಮುಗ್ಧ, ಮರಾಠಿ ಮಣ್ಣಿನ ಜನ – ಶಿವರಾಯರೆಂದರೆ ಅವರಿಗೆ <b>ಪ್ರಾಣಕ್ಕಿಂತ ಪ್ರಿಯ</b>. “<b>ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಬದುಕಬೇಕು, ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಸಾಯಬೇಕು!</b>”</div></div>
+  <div class="tile op"><div class="ic">😒</div><div class="tt">ಕೆಲವರು</div><div class="dd">ಶಿವರಾಯರ <b>ಸಾಧನೆಯ ಬಗ್ಗೆ ಅಸೂಯೆ</b> ಪಡುವವರು – ಅಂಥವರನ್ನು <b>ನಿಗ್ರಹಿಸುವುದು</b> ಅನಿವಾರ್ಯವಾಯಿತು.</div></div>
+ </div>
+ <div class="key"><b>ಸ್ವಕೀಯ</b> = ತನ್ನವರೇ. <b>ಸ್ವಕೀಯ ಶತ್ರು</b> = ತನ್ನವರೇ ಆಗಿದ್ದರೂ ಸ್ವರಾಜ್ಯಕ್ಕೆ ವಿರೋಧಿಸುವವರು. <b>ನಿಗ್ರಹಿಸುವುದು</b> = ಕಡಿವಾಣ ಹಾಕುವುದು, ಹತೋಟಿಗೆ ತರುವುದು.</div>
+ <h3>🎯 ಸ್ವಕೀಯರೋ ಪರಕೀಯರೋ?</h3>${sortGame('sp',[['ಯಶವಂತರಾವ್ ಮೋರೆ (ಜಾವಳಿ)',0],['ಮೊಘಲ್ ಬಾದಶಹ (ದೆಹಲಿ)',1],['ಸಂಭಾಜಿ ಮೋಹಿತೆ (ಸುಪೆ)',0],['ಪೋರ್ಚುಗೀಸರು (ಗೋವಾ)',1],['ಖಂಡೋಜಿ ಮತ್ತು ಬಾಜಿ ಘೋರಪಡೆ',0],['ಸಿದ್ದಿ (ಜಂಜಿರಾ)',1]],[['🏠 ಸ್ವಕೀಯ','or'],['🌍 ಪರಕೀಯ','ln']],'sp')}`,a:()=>drawGames()},
+{h:'ಭಯ ಹುಟ್ಟಿಸಿದರು',s:'ಫಲಟಣದ ಬಜಾಜಿ ನಾಯಕ ನಿಂಬಾಳಕರ, ಖಂಡೋಜಿ ಮತ್ತು ಬಾಜಿ ಘೋರಪಡೆ ಈ ಸರದಾರರು ಆದಿಲ್‌ಶಾಹನ ಸೇವೆಯಲ್ಲಿದ್ದರು. ಆದಿಲ್‌ಶಾಹ ಅವರನ್ನು ಶಿವರಾಯರ ವಿರುದ್ಧ ಪ್ರಚೋದಿಸಿದ. ಕೊಂಢಾಣ ಪ್ರದೇಶದಲ್ಲಿ ಅವರು ದಾಂಧಲೆ ಎಬ್ಬಿಸಿದರು; ಆದರೆ ಶಿವರಾಯರು ಅವರ ಆಟ ನಡೆಯಲು ಬಿಡಲಿಲ್ಲ. ಶಿವರಾಯರು ಅವರನ್ನು ಓಡಿಸಿದರು. ಈ ಮನೆತನಗಳ ವ್ಯಕ್ತಿಗಳ ವಿರುದ್ಧ ಹೋಗಿಯೂ ಶಿವರಾಯರಿಗೆ ಯುದ್ಧಗಳನ್ನು ಮಾಡಬೇಕಾಯಿತು; ಆದರೂ ಮುಂದೆ ಈ ಮನೆತನಗಳ ವ್ಯಕ್ತಿಗಳು ಶಿವರಾಯರ ಜೊತೆಗೆ ಉಳಿದರು. ಕರ್ತವ್ಯದ ಮುಂದೆ ಶಿವರಾಯರು ಬಂಧುತ್ವ ಪರಿಗಣಿಸುತ್ತಿರಲಿಲ್ಲ. ಸಂಭಾಜಿ ಮೋಹಿತೆ ಶಿವರಾಯರ ಹತ್ತಿರದ ಬಂಧು. ಅವನು ಸುಪೆ ಪರಗಣೆಯಲ್ಲಿದ್ದ. ಅವನು ನಿರ್ಲಕ್ಷ್ಯದಿಂದ ವರ್ತಿಸತೊಡಗಿದ. ಶಿವರಾಯರು ಸುಪೆಗೆ ಹೋಗಿ ಅವನನ್ನು ಹಿಡಿದರು ಮತ್ತು ಅವನನ್ನು ಕರ್ನಾಟಕ ಪ್ರಾಂತಕ್ಕೆ ರವಾನಿಸಿದರು.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">⚔️🏃</div><div class="tt">ನಿಂಬಾಳಕರ ಮತ್ತು ಘೋರಪಡೆ</div><div class="dd">ಫಲಟಣದ <b>ಬಜಾಜಿ ನಾಯಕ ನಿಂಬಾಳಕರ</b>, <b>ಖಂಡೋಜಿ ಮತ್ತು ಬಾಜಿ ಘೋರಪಡೆ</b> – ಆದಿಲ್‌ಶಾಹನ ಪ್ರಚೋದನೆಯಿಂದ <b>ಕೊಂಢಾಣ ಪ್ರದೇಶದಲ್ಲಿ ದಾಂಧಲೆ</b>. ಶಿವರಾಯರು ಅವರ <b>ಆಟ ನಡೆಯಲು ಬಿಡಲಿಲ್ಲ</b> – ಓಡಿಸಿದರು. ಮುಂದೆ ಈ ಮನೆತನಗಳ ವ್ಯಕ್ತಿಗಳು ಶಿವರಾಯರ ಜೊತೆಗೆ ಉಳಿದರು.</div></div>
+  <div class="tile op"><div class="ic">👨‍👦⚖️</div><div class="tt">ಸಂಭಾಜಿ ಮೋಹಿತೆ</div><div class="dd">ಶಿವರಾಯರ <b>ಹತ್ತಿರದ ಬಂಧು</b>, <b>ಸುಪೆ ಪರಗಣೆಯಲ್ಲಿ</b>. ನಿರ್ಲಕ್ಷ್ಯದಿಂದ ವರ್ತಿಸತೊಡಗಿದ ➜ ಶಿವರಾಯರು ಸುಪೆಗೆ ಹೋಗಿ <b>ಹಿಡಿದರು</b>, <b>ಕರ್ನಾಟಕ ಪ್ರಾಂತಕ್ಕೆ</b> ರವಾನಿಸಿದರು.</div></div>
+ </div>
+ <div class="pledge" style="text-align:center">⚖️ <b>“ಕರ್ತವ್ಯದ ಮುಂದೆ ಶಿವರಾಯರು ಬಂಧುತ್ವ ಪರಿಗಣಿಸುತ್ತಿರಲಿಲ್ಲ.”</b></div>
+ <div class="tap">💡 <b>ಭಯ ಹುಟ್ಟಿಸುವುದು</b> = ಹೆದರಿಕೆ ಮೂಡಿಸುವುದು. <b>ಪ್ರಚೋದಿಸುವುದು</b> = ಕೆರಳಿಸುವುದು. <b>ದಾಂಧಲೆ</b> = ಗೊಂದಲ, ನಾಶ. <b>ಆಟ ನಡೆಯದಿರುವುದು</b> = ಯೋಜನೆ ಯಶಸ್ವಿಯಾಗದಿರುವುದು. <b>ಓಡಿಸುವುದು</b> = ಹೊರಹಾಕುವುದು. <b>ನಿರ್ಲಕ್ಷ್ಯ</b> = ಯಾರ ಪರಿವೆಯೂ ಇಲ್ಲದವನು.</div>
+ ${pickGame('jb',[['ಸಂಭಾಜಿ ಮೋಹಿತೆ ಯಾವ ಪರಗಣೆಯಲ್ಲಿದ್ದ?',['ಸುಪೆ','ಫಲಟಣ','ಜಾವಳಿ'],0],['ಸಂಭಾಜಿ ಮೋಹಿತೆಯನ್ನು ಎಲ್ಲಿಗೆ ರವಾನಿಸಲಾಯಿತು?',['ಕರ್ನಾಟಕ ಪ್ರಾಂತಕ್ಕೆ','ಗುಜರಾತ್‌ನಲ್ಲಿ','ಕೊಂಕಣಕ್ಕೆ'],0],['ಘೋರಪಡೆ ಸಹೋದರರು ಯಾವ ಪ್ರದೇಶದಲ್ಲಿ ದಾಂಧಲೆ ಎಬ್ಬಿಸಿದರು?',['ಕೊಂಢಾಣ','ಜಾವಳಿ','ರಾಯರಿ'],0]],'jb')}`,a:()=>drawGames()},
+{h:'ಜಾವಳಿಯ ಮೋರೆಯವರು',s:'ಮೋರೆಗಳು ಜಾವಳಿಯ ಜಹಗೀರುದಾರರು. ಅವರ ಜಹಗೀರು ರಾಯಗಡದಿಂದ ಕೋಯನಾ ಕಣಿವೆಯವರೆಗೆ ಇತ್ತು. ಅವರು ವಿಜಾಪುರದ ಆದಿಲ್‌ಶಾಹನ ಜಹಗೀರುದಾರರಾಗಿದ್ದರು. ಆದಿಲ್‌ಶಾಹ ಅವರಿಗೆ ಚಂದ್ರರಾವ್ ಎಂಬ ಬಿರುದು ನೀಡಿದ್ದ. ಜಾವಳಿಯ ಕಾಡು ಅತ್ಯಂತ ದಟ್ಟವಾಗಿತ್ತು. ಹಾಡುಹಗಲಿನಲ್ಲೂ ಸೂರ್ಯಕಿರಣಗಳಿಗೂ ಅಲ್ಲಿ ಪ್ರವೇಶ ಇರಲಿಲ್ಲ. ಅದರಲ್ಲಿ ಹುಲಿ, ತೋಳ, ಕರಡಿ ಇತ್ಯಾದಿ ಕಾಡುಪ್ರಾಣಿಗಳು ಸಂಚರಿಸುತ್ತಿದ್ದವು. ಮೋರೆಗಳ ಜಾವಳಿ ಎಂದರೆ ಮಾನೋ ಹುಲಿಯ ಪೊದೆಯೇ ಆಗಿತ್ತು! ಆದ್ದರಿಂದ ಮೋರೆಗಳ ಹಾದಿಗೆ ಯಾರೂ ಹೋಗುತ್ತಿರಲಿಲ್ಲ, ಆದರೆ ಆ ಧೈರ್ಯ ಮಾಡಿದರು ಶೂರ ಶಿವರಾಯರು.',b:()=>`
+ <div class="key"><b>ಮೋರೆ</b> – ಜಾವಳಿಯ ಜಹಗೀರುದಾರರು; ಜಹಗೀರು <b>ರಾಯಗಡದಿಂದ ಕೋಯನಾ ಕಣಿವೆಯವರೆಗೆ</b>; ಆದಿಲ್‌ಶಾಹನ ಜಹಗೀರುದಾರರು; ಬಿರುದು – <b>“ಚಂದ್ರರಾವ್”</b>.</div>
+ <h3>🌲 ಜಾವಳಿಯ ದಟ್ಟ ಕಾಡಿನಲ್ಲಿ ಇಣುಕಿ ನೋಡಿ</h3><div id="jwBox"></div>
+ <div class="tap">💡 <b>ಕಾಡುಪ್ರಾಣಿಗಳು</b> = ಹಿಂಸ್ರ ಕಾಡುಪ್ರಾಣಿಗಳು. <b>ಪ್ರವೇಶ</b> = ಒಳಗೆ ನುಗ್ಗುವುದು.</div>`,a:()=>drawJw()},
+{h:'ಮೋರೆಗಳು ನಿರ್ಲಕ್ಷ್ಯದಿಂದ ವರ್ತಿಸತೊಡಗಿದರು',s:'ದೌಲತರಾವ್ ಮೋರೆ ಸಾವಿರದ ಆರುನೂರ ನಲವತ್ತೈದರಲ್ಲಿ ಮರಣ ಹೊಂದಿದ. ಅವನ ವಾರಸುದಾರರಲ್ಲಿ ಜಗಳಗಳು ಆರಂಭವಾದವು. ಶಿವರಾಯರು ಯಶವಂತರಾವ್ ಮೋರೆಗೆ ಸಹಾಯ ಮಾಡಿದರು. ಅವರ ಸಹಾಯದಿಂದಲೇ ಯಶವಂತರಾವ್ ಜಾವಳಿಯ ಗದ್ದಿಗೆಯ ಮೇಲೆ ಚಂದ್ರರಾವ್ ಆಗಿ ಕುಳಿತ. ಆಗ ಯಶವಂತರಾವ್ ಶಿವರಾಯರಿಗೆ ಕಪ್ಪ ಕೊಡುವುದಾಗಿ ಒಪ್ಪಿಕೊಂಡ. ಅವರ ಕಾರ್ಯದಲ್ಲಿ ಸಹಾಯ ಮಾಡುವುದಾಗಿಯೂ ಒಪ್ಪಿಕೊಂಡ, ಆದರೆ ಗದ್ದಿಗೆ ಏರಿದ ಮೇಲೆ ಎಲ್ಲವನ್ನೂ ಮರೆತ. ಸ್ವರಾಜ್ಯದ ಪ್ರದೇಶದ ಮೇಲೆ ದಾಳಿ ಮಾಡು, ಪ್ರಜೆಗಳಿಗೆ ತೊಂದರೆ ಕೊಡು, ಇಂತಹ ಅತಿರೇಕವನ್ನು ಯಶವಂತರಾವ್ ಮಾಡತೊಡಗಿದ. ನಿಗ್ರಹಿಸದಿದ್ದರೆ ಸ್ವರಾಜ್ಯಕ್ಕೆ ಧಕ್ಕೆ ಬರುತ್ತದೆ ಎಂದು ಶಿವರಾಯರು ಗುರುತಿಸಿದರು.',b:()=>`
+ <h3>🪜 ಕ್ರಮವಾಗಿ ಜೋಡಿಸಿ</h3>${orderGame('mo',['⚰️ ದೌಲತರಾವ್ ಮೋರೆ ೧೬೪೫ರಲ್ಲಿ ಮರಣ ಹೊಂದಿದ','🤼 ವಾರಸುದಾರರಲ್ಲಿ ಜಗಳ ಆರಂಭವಾಯಿತು','🤝 ಶಿವರಾಯರ ಸಹಾಯದಿಂದ ಯಶವಂತರಾವ್ ‘ಚಂದ್ರರಾವ್’ ಆಗಿ ಗದ್ದಿಗೆಯ ಮೇಲೆ','📜 ಕಪ್ಪ ಮತ್ತು ಸಹಾಯದ ವಚನ ನೀಡಿದ','😠 ಗದ್ದಿಗೆ ಏರಿದ ಮೇಲೆ ವಚನ ಮರೆತ – ಸ್ವರಾಜ್ಯಕ್ಕೆ ತೊಂದರೆ'],'mo')}
+ <div class="msg no" style="background:#fff7ed;color:#7c2d12">😠 ಯಶವಂತರಾವರ ಅತಿರೇಕ: ಸ್ವರಾಜ್ಯದ ಪ್ರದೇಶದ ಮೇಲೆ <b>ದಾಳಿಗಳು</b>, ಪ್ರಜೆಗಳಿಗೆ <b>ತೊಂದರೆ</b>. ➜ ನಿಗ್ರಹಿಸದಿದ್ದರೆ <b>ಸ್ವರಾಜ್ಯಕ್ಕೆ ಧಕ್ಕೆ</b> ಬರುತ್ತದೆ!</div>
+ <div class="tap">💡 <b>ಕಪ್ಪ</b> = ನಿಗದಿತ ಮೊತ್ತ/ತೆರಿಗೆ ನೀಡುವುದು. <b>ವಾರಸುದಾರ</b> = ಉತ್ತರಾಧಿಕಾರದ ಹಕ್ಕು ಇರುವವರು. <b>ಜಗಳ</b> = ಕಲಹ.</div>`,a:()=>drawGames()},
+{h:'“ಬಂಡಾಯ ಮಾಡಿದರೆ ಕೊಲ್ಲಲ್ಪಡುವಿರಿ”',s:'ಶಿವರಾಯರು ಯಶವಂತರಾವ್ ಮೋರೆಗೆ ಮೊದಲು ಒಂದು ಖಾರವಾದ ಪತ್ರ ಕಳುಹಿಸಿದರು. ಯಶವಂತರಾವ್ ಮೋರೆ ಉದ್ಧಟತನದಿಂದ ಉತ್ತರ ಬರೆದ. ಶಿವರಾಯರು ತಿರುಗೇಟು ನೀಡಿದರು.',b:()=>`
+ <h3>✉️ ಪತ್ರಗಳ ಸಮರ – ಒಂದೊಂದು ಪತ್ರ ತೆರೆಯಿರಿ</h3><div id="ptBox"></div>`,a:()=>drawPt()},
+{h:'ಜಾವಳಿ ಗೆದ್ದರು – ರಾಯಗಡ, ಪ್ರತಾಪಗಡ',s:'ಜಾವಳಿಯ ಸುತ್ತ ದಟ್ಟ ಕಾಡಿತ್ತು. ರಾಯರಿಯ ಕೋಟೆ ಅಜೇಯವಾಗಿತ್ತು. ಸಾಕಷ್ಟು ಸಿದ್ಧತೆ ಮಾಡಿ ಶಿವರಾಯರು ಜಾವಳಿಯ ಮೇಲೆ ದಂಡೆತ್ತಿ ಹೋದರು. ಸುಮಾರು ಒಂದು ತಿಂಗಳು ಯಶವಂತರಾವ್ ಹೋರಾಡಿದ, ಆದರೆ ಅವನ ಬಹಳಷ್ಟು ಸೈನ್ಯ ಸತ್ತಿತು. ಕೊನೆಗೆ ತನ್ನ ಮಕ್ಕಳನ್ನು ಕರೆದುಕೊಂಡು ಯಶವಂತರಾವ್ ರಾಯರಿ ಕೋಟೆಗೆ ಓಡಿಹೋದ. ಶಿವರಾಯರು ಜಾವಳಿ ತೆಗೆದುಕೊಂಡರು. ನಂತರ ರಾಯರಿಯ ಕೋಟೆಗೆ ಭದ್ರ ಮುತ್ತಿಗೆ ಹಾಕಿದರು. ಯಶವಂತರಾವ್ ಮೂರು ತಿಂಗಳು ಛಲದಿಂದ ಹೋರಾಡಿದ, ಆದರೆ ಕೊನೆಗೆ ಅವನು ಹಿಂದೆ ಸರಿಯಬೇಕಾಯಿತು. ಜಾವಳಿಯ ವಿಜಯ ಬಹಳ ಮಹತ್ವದ್ದಾಗಿತ್ತು. ಆ ವಿಜಯದಿಂದ ಶಿವರಾಯರ ಸ್ವರಾಜ್ಯ ಮೊದಲಿಗಿಂತ ದುಪ್ಪಟ್ಟಾಯಿತು. ರಾಯರಿ ಕೋಟೆಗೆ ಅವರು ರಾಯಗಡ ಎಂದು ಹೆಸರಿಟ್ಟರು. ಅನಂತರ ಹತ್ತಿರದಲ್ಲಿದ್ದ ಭೋರಪ್ಯಾ ಬೆಟ್ಟದ ಮೇಲೆ ಒಂದು ಹೊಸ ಕೋಟೆ ಕಟ್ಟಿದರು. ಅದಕ್ಕೆ ಪ್ರತಾಪಗಡ ಎಂದು ಹೆಸರಿಟ್ಟರು.',b:()=>`
+ <div class="g2">
+  <div class="tile op"><div class="ic">🌲⚔️</div><div class="tt">ಜಾವಳಿಯ ದಂಡಯಾತ್ರೆ</div><div class="dd">ದಟ್ಟ ಕಾಡು, ಅಜೇಯ ರಾಯರಿ, ಮೋರೆ ಮಂದಿ ಅನೇಕರು ➜ <b>ಸಾಕಷ್ಟು ಸಿದ್ಧತೆ</b>. ತಿಂಗಳ ಹೋರಾಟ; ಯಶವಂತರಾವ್ ಮಕ್ಕಳೊಂದಿಗೆ <b>ರಾಯರಿ ಕೋಟೆಗೆ ಓಡಿಹೋದ</b>.</div></div>
+  <div class="tile op"><div class="ic">🏰⏳</div><div class="tt">ರಾಯರಿಯ ಮುತ್ತಿಗೆ</div><div class="dd">ಭದ್ರ ಮುತ್ತಿಗೆ; ಯಶವಂತರಾವ್ <b>ಮೂರು ತಿಂಗಳು</b> ಛಲದಿಂದ ಹೋರಾಡಿದ, ಕೊನೆಗೆ <b>ಹಿಂದೇಟು</b>.</div></div>
+ </div>
+ <h3>📈 ಜಾವಳಿ ವಿಜಯದ ಮಹತ್ವ</h3><div id="dupBox"></div>
+ <h3>🏷️ ಹೊಸ ಹೆಸರುಗಳು</h3>${pickGame('nv',[['ರಾಯರಿ ಕೋಟೆಗೆ ಯಾವ ಹೆಸರು ನೀಡಿದರು?',['ರಾಯಗಡ','ರಾಜಗಡ','ಪ್ರಚಂಡಗಡ'],0],['ಭೋರಪ್ಯಾ ಬೆಟ್ಟದ ಮೇಲಿನ ಹೊಸ ಕೋಟೆಯ ಹೆಸರೇನು?',['ಪ್ರತಾಪಗಡ','ಸಿಂಹಗಡ','ಪುರಂದರ'],0],['ರಾಯರಿಯ ಮುತ್ತಿಗೆಯಲ್ಲಿ ಯಶವಂತರಾವ್ ಎಷ್ಟು ಕಾಲ ಹೋರಾಡಿದ?',['ಮೂರು ತಿಂಗಳು','ಮೂರು ದಿನ','ಮೂರು ವರ್ಷ'],0]],'nv')}
+ <div class="tap">💡 ಮುಂದೆ <b>ರಾಯಗಡ</b> ಇದೇ ಸ್ವರಾಜ್ಯದ ರಾಜಧಾನಿಯಾಯಿತು.</div>`,a:()=>{drawDup();drawGames()}},
+{h:'ನಾವು ಇದನ್ನು ಅಧ್ಯಯನ ಮಾಡಿದೆವು',s:'ಈ ಪಾಠದಲ್ಲಿ ನಾವು ಸ್ವಕೀಯ ಶತ್ರುಗಳನ್ನು ಹೇಗೆ ನಿಗ್ರಹಿಸಲಾಯಿತು ಎಂದು ನೋಡಿದೆವು. ಬನ್ನಿ ಪುನರಾವರ್ತನೆ ಮಾಡೋಣ.',b:()=>`
+ <ul>${SUM.map(x=>`<li>${x}</li>`).join('')}</ul>
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>(ಅ) ರಾಯಗಡದ ಚಿತ್ರಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ.<br>(ಆ) ದೀಪಾವಳಿ ರಜೆಯಲ್ಲಿ ನಿಮ್ಮ ಗೆಳೆಯರೊಂದಿಗೆ ರಾಯಗಡದ ಪ್ರತಿಕೃತಿ (ಮಣ್ಣಿನ ಕೋಟೆ) ತಯಾರಿಸಿ.</div>`,a:()=>award('end','ಪಾಠ ಪೂರ್ಣ! ಅಭಿನಂದನೆಗಳು!')}
+];
+let S=0;
+function navH(){return `<div class="nav"><button class="btn ln" ${S==0?'disabled':''} onclick="go(-1)">◀ ಹಿಂದೆ</button><span class="step">${S+1} / ${L.length}</span><button class="btn" ${S==L.length-1?'disabled':''} onclick="go(1)">ಮುಂದೆ ▶</button></div>`}
+function go(d){S=Math.max(0,Math.min(L.length-1,S+d));drawStep();window.scrollTo({top:0,behavior:'smooth'})}
+function drawStep(){const x=L[S];$('stepBox').innerHTML=`<div class="card">${sx(x.s)}<div class="step">ಹಂತ ${S+1}</div><h2>${x.h}</h2>${x.b()}${navH()}</div>`;if(x.a)x.a()}
+
+/* ---------- MCQ ---------- */
+const MCQ=[
+['ಮಾವಳರಿಗೆ ಶಿವರಾಯರು ಹೇಗೆ ಅನಿಸುತ್ತಿದ್ದರು?',['ಪ್ರಾಣಕ್ಕಿಂತ ಪ್ರಿಯ','ಪರರು','ಭಯಾನಕ','ಸಾಮಾನ್ಯ'],0,'ಪ್ರಾಣಕ್ಕಿಂತ ಪ್ರಿಯ.'],
+['ಮಾವಳರು ಏನು ನಂಬಿದ್ದರು?',['ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಬದುಕಬೇಕು, ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಸಾಯಬೇಕು','ವತನಕ್ಕಾಗಿ ಜಗಳವಾಡಬೇಕು','ಸುಲ್ತಾನನ ಸೇವೆ ಮಾಡಬೇಕು','ಏನೂ ಮಾಡಬಾರದು'],0,'ಸ್ವರಾಜ್ಯಕ್ಕಾಗಿ ಬದುಕುವುದು-ಸಾಯುವುದು.'],
+['ಕೆಲವರಿಗೆ ಶಿವರಾಯರ ಬಗ್ಗೆ ಏನು ಅನಿಸುತ್ತಿತ್ತು?',['ಸಾಧನೆಯ ಬಗ್ಗೆ ಅಸೂಯೆ','ಪ್ರೀತಿ','ಗೌರವ','ಭಯ ಇಲ್ಲ'],0,'ಅಸೂಯೆ.'],
+['‘ಸ್ವಕೀಯ’ ಎಂದರೆ ಯಾರು?',['ತನ್ನವರೇ','ವಿದೇಶಿ ಜನರು','ಸುಲ್ತಾನ','ಶತ್ರು ಸೈನ್ಯ'],0,'ತನ್ನವರೇ.'],
+['‘ನಿಗ್ರಹ ಮಾಡುವುದು’ ಎಂದರೆ ಏನು?',['ಕಡಿವಾಣ ಹಾಕುವುದು, ಹತೋಟಿಗೆ ತರುವುದು','ಬಹುಮಾನ ನೀಡುವುದು','ರಜೆ ನೀಡುವುದು','ಸ್ನೇಹ ಮಾಡುವುದು'],0,'ಕಡಿವಾಣ ಹಾಕುವುದು.'],
+['ಖಂಡೋಜಿ ಮತ್ತು ಬಾಜಿ ಘೋರಪಡೆ ಯಾರ ಸೇವೆಯಲ್ಲಿದ್ದರು?',['ಆದಿಲ್‌ಶಾಹನ','ಮೊಘಲರ','ಪೋರ್ಚುಗೀಸರ','ಶಿವರಾಯರ'],0,'ಆದಿಲ್‌ಶಾಹನ.'],
+['ಘೋರಪಡೆ ಸಹೋದರರು ಯಾವ ಪ್ರದೇಶದಲ್ಲಿ ದಾಂಧಲೆ ಎಬ್ಬಿಸಿದರು?',['ಕೊಂಢಾಣ','ಜಾವಳಿ','ಸುಪೆ','ರಾಯಗಡ'],0,'ಕೊಂಢಾಣ ಪ್ರದೇಶದಲ್ಲಿ.'],
+['‘ಆಟ ನಡೆಯಲು ಬಿಡಲಿಲ್ಲ’ ಇದರ ಅರ್ಥವೇನು?',['ಯೋಜನೆ ಯಶಸ್ವಿಯಾಗಲು ಬಿಡಲಿಲ್ಲ','ಅಡುಗೆ ಮಾಡಲಿಲ್ಲ','ಅನ್ನ ನೀಡಲಿಲ್ಲ','ಸಹಾಯ ಮಾಡಿದರು'],0,'ಯೋಜನೆ ಹಾಳುಮಾಡಿದರು.'],
+['ಶಿವರಾಯರು ಘೋರಪಡೆಗಳನ್ನು ಏನು ಮಾಡಿದರು?',['ಓಡಿಸಿದರು','ಸರದಾರರನ್ನಾಗಿ ಮಾಡಿದರು','ಬಹುಮಾನ ನೀಡಿದರು','ನಿರ್ಲಕ್ಷಿಸಿದರು'],0,'ಓಡಿಸಿದರು.'],
+['ಫಲಟಣದ ಯಾವ ಸರದಾರರು ಆದಿಲ್‌ಶಾಹನ ಸೇವೆಯಲ್ಲಿದ್ದರು?',['ಬಜಾಜಿ ನಾಯಕ ನಿಂಬಾಳಕರ','ಯಶವಂತರಾವ್ ಮೋರೆ','ಸಂಭಾಜಿ ಮೋಹಿತೆ','ತಾನಾಜಿ'],0,'ಬಜಾಜಿ ನಾಯಕ ನಿಂಬಾಳಕರ.'],
+['ಮುಂದೆ ನಿಂಬಾಳಕರ, ಘೋರಪಡೆ ಮನೆತನಗಳ ವ್ಯಕ್ತಿಗಳು ಯಾರ ಜೊತೆ ಉಳಿದರು?',['ಶಿವರಾಯರ ಜೊತೆ','ಮೊಘಲರ ಜೊತೆ','ಪೋರ್ಚುಗೀಸರ ಜೊತೆ','ಸಿದ್ದಿಯ ಜೊತೆ'],0,'ಶಿವರಾಯರ ಜೊತೆಗೆ.'],
+['ಕರ್ತವ್ಯದ ಮುಂದೆ ಶಿವರಾಯರು ಏನನ್ನು ಪರಿಗಣಿಸುತ್ತಿರಲಿಲ್ಲ?',['ಬಂಧುತ್ವ','ನ್ಯಾಯ','ಸ್ವರಾಜ್ಯ','ಪ್ರಜೆಗಳ ಸುಖ'],0,'ಬಂಧುತ್ವ.'],
+['ಸಂಭಾಜಿ ಮೋಹಿತೆ ಯಾರು?',['ಶಿವರಾಯರ ಹತ್ತಿರದ ಬಂಧು','ಆದಿಲ್‌ಶಾಹನ ವಜೀರ','ಮೊಘಲ್ ಸರದಾರ','ಸಂತ'],0,'ಹತ್ತಿರದ ಬಂಧು.'],
+['ಸಂಭಾಜಿ ಮೋಹಿತೆ ಯಾವ ಪರಗಣೆಯಲ್ಲಿದ್ದ?',['ಸುಪೆ','ಪುಣೆ','ಚಾಕಣ','ಇಂದಾಪುರ'],0,'ಸುಪೆ ಪರಗಣೆಯಲ್ಲಿ.'],
+['ಸಂಭಾಜಿ ಮೋಹಿತೆಯನ್ನು ಎಲ್ಲಿಗೆ ರವಾನಿಸಲಾಯಿತು?',['ಕರ್ನಾಟಕ ಪ್ರಾಂತಕ್ಕೆ','ದೆಹಲಿಗೆ','ಗೋವೆಗೆ','ಜಂಜಿರಾಕ್ಕೆ'],0,'ಕರ್ನಾಟಕ ಪ್ರಾಂತಕ್ಕೆ.'],
+['ಜಾವಳಿಯ ಜಹಗೀರುದಾರರು ಯಾರಿದ್ದರು?',['ಮೋರೆ','ಘೋರಪಡೆ','ಜಾಧವ','ನಿಂಬಾಳಕರ'],0,'ಮೋರೆ.'],
+['ಮೋರೆಗಳ ಜಹಗೀರು ಎಲ್ಲಿಂದ ಎಲ್ಲಿಯವರೆಗೆ ಇತ್ತು?',['ರಾಯಗಡದಿಂದ ಕೋಯನಾ ಕಣಿವೆಯವರೆಗೆ','ಪುಣೆಯಿಂದ ಸುಪೆಯವರೆಗೆ','ನಾಶಿಕದಿಂದ ಜುನ್ನರ್‌ವರೆಗೆ','ಗೋವೆಯಿಂದ ಕಾರವಾರದವರೆಗೆ'],0,'ರಾಯಗಡದಿಂದ ಕೋಯನಾ ಕಣಿವೆ.'],
+['ಆದಿಲ್‌ಶಾಹ ಮೋರೆಗಳಿಗೆ ಯಾವ ಬಿರುದು ನೀಡಿದ್ದ?',['ಚಂದ್ರರಾವ್','ಸರಲಷ್ಕರ','ರಾಜ','ಪೇಶ್ವೆ'],0,'ಚಂದ್ರರಾವ್.'],
+['ಜಾವಳಿಯ ಕಾಡು ಹೇಗಿತ್ತು?',['ಅತ್ಯಂತ ದಟ್ಟ – ಹಾಡುಹಗಲಿನಲ್ಲೂ ಸೂರ್ಯಕಿರಣ ತಲುಪುತ್ತಿರಲಿಲ್ಲ','ವಿರಳ','ಮರುಭೂಮಿಯ','ಹುಲ್ಲುಗಾವಲು'],0,'ಅತ್ಯಂತ ದಟ್ಟ.'],
+['ಜಾವಳಿಯ ಕಾಡಿನಲ್ಲಿ ಯಾವ ಕಾಡುಪ್ರಾಣಿಗಳಿದ್ದವು?',['ಹುಲಿ, ತೋಳ, ಕರಡಿ','ಹಸು, ಎಮ್ಮೆ','ಒಂಟೆ, ಕುದುರೆ','ನವಿಲು, ಗಿಣಿ'],0,'ಹುಲಿ, ತೋಳ, ಕರಡಿ.'],
+['ಮೋರೆಗಳ ಜಾವಳಿಯನ್ನು ಏನೆಂದು ಕರೆಯಲಾಗಿದೆ?',['ಹುಲಿಯ ಪೊದೆ','ಚಿನ್ನದ ಗಣಿ','ಹೂವಿನ ತೋಟ','ಶಾಂತ ಗ್ರಾಮ'],0,'ಮಾನೋ ಹುಲಿಯ ಪೊದೆಯೇ.'],
+['ದೌಲತರಾವ್ ಮೋರೆ ಯಾವ ವರ್ಷ ಮರಣ ಹೊಂದಿದ?',['೧೬೪೫','೧೬೩೦','೧೬೫೬','೧೬೭೪'],0,'೧೬೪೫ ರಲ್ಲಿ.'],
+['ದೌಲತರಾವ್ ಮೋರೆಯ ನಂತರ ವಾರಸುದಾರರಲ್ಲಿ ಏನು ಆರಂಭವಾಯಿತು?',['ಜಗಳಗಳು','ಉತ್ಸವ','ವ್ಯಾಪಾರ','ಶಿಕ್ಷಣ'],0,'ಜಗಳಗಳು (ಕಲಹಗಳು).'],
+['ಶಿವರಾಯರು ಯಾರಿಗೆ ಸಹಾಯ ಮಾಡಿದರು?',['ಯಶವಂತರಾವ್ ಮೋರೆ','ದೌಲತರಾವ್ ಮೋರೆ','ಸಂಭಾಜಿ ಮೋಹಿತೆ','ಬಾಜಿ ಘೋರಪಡೆ'],0,'ಯಶವಂತರಾವ್ ಮೋರೆ.'],
+['ಯಶವಂತರಾವ್ ಶಿವರಾಯರಿಗೆ ಏನನ್ನು ಒಪ್ಪಿಕೊಂಡಿದ್ದ?',['ಕಪ್ಪ ಮತ್ತು ಕಾರ್ಯದಲ್ಲಿ ಸಹಾಯ','ಕೋಟೆಗಳನ್ನು ಕೊಡುವುದು','ಮಗಳನ್ನು ಕೊಡುವುದು','ಏನೂ ಇಲ್ಲ'],0,'ಕಪ್ಪ ಮತ್ತು ಸಹಾಯ.'],
+['ಗದ್ದಿಗೆ ಏರಿದ ಮೇಲೆ ಯಶವಂತರಾವ್ ಹೇಗೆ ವರ್ತಿಸತೊಡಗಿದ?',['ನಿರ್ಲಕ್ಷ್ಯದಿಂದ, ಸ್ವರಾಜ್ಯಕ್ಕೆ ತೊಂದರೆ ಕೊಡತೊಡಗಿದ','ಪ್ರಾಮಾಣಿಕವಾಗಿ','ಸಹಾಯ ಮಾಡತೊಡಗಿದ','ಸಂತನಾದ'],0,'ವಚನ ಮರೆತ, ಅತಿರೇಕ ಮಾಡತೊಡಗಿದ.'],
+['ಶಿವರಾಯರು ಯಶವಂತರಾವನಿಗೆ ಮೊದಲು ಹೇಗೆ ಪತ್ರ ಕಳುಹಿಸಿದರು?',['ಖಾರವಾದ','ಪ್ರೀತಿಯ','ವಿನಂತಿಯ','ಆಮಂತ್ರಣದ'],0,'ಖಾರವಾದ (ಕಠೋರ).'],
+['“ನಮಗೆ ಶ್ರೀಶಂಭುವೇ ರಾಜ್ಯ ಕೊಟ್ಟಿದ್ದಾನೆ” ಎಂದು ಯಾರು ಬರೆದರು?',['ಶಿವರಾಯರು','ಯಶವಂತರಾವ್ ಮೋರೆ','ಆದಿಲ್‌ಶಾಹ','ಶಹಾಜಿರಾಜೇ'],0,'ಶಿವರಾಯರು.'],
+['ಯಶವಂತರಾವ್ ಮೋರೆ ಉತ್ತರ ಹೇಗೆ ಬರೆದ?',['ಉದ್ಧಟತನದಿಂದ','ನಮ್ರತೆಯಿಂದ','ಹೆದರಿ','ಪ್ರೀತಿಯಿಂದ'],0,'ಉದ್ಧಟತನದಿಂದ.'],
+['“ಬರುವಾಗ ಜಾವಳಿ, ಹೋಗುವಾಗ ಗೋವಳಿ” ಎಂದು ಯಾರು ಬರೆದರು?',['ಯಶವಂತರಾವ್ ಮೋರೆ','ಶಿವರಾಯ','ಶಹಾಜಿರಾಜೇ','ಜಿಜಾಬಾಯಿ'],0,'ಯಶವಂತರಾವ್ ಮೋರೆ.'],
+['“ಬಂಡಾಯ ಮಾಡಿದರೆ ಕೊಲ್ಲಲ್ಪಡುವಿರಿ” ಈ ತಿರುಗೇಟನ್ನು ಯಾರು ನೀಡಿದರು?',['ಶಿವರಾಯರು','ಮೋರೆಗಳು','ಆದಿಲ್‌ಶಾಹ','ಘೋರಪಡೆಗಳು'],0,'ಶಿವರಾಯರು.'],
+['ಯಶವಂತರಾವ್ ಮೋರೆಗೆ ರಾಜ ಬಿರುದನ್ನು ಯಾರು ನೀಡಿದ್ದರು?',['ಆದಿಲ್‌ಶಾಹ','ಮೊಘಲರು','ಶಿವರಾಯರು','ಪೋರ್ಚುಗೀಸರು'],0,'ಆದಿಲ್‌ಶಾಹ.'],
+['ಜಾವಳಿಯ ಮೇಲೆ ದಂಡೆತ್ತಿ ಹೋಗುವ ಮೊದಲು ಶಿವರಾಯರು ಏನು ಮಾಡಿದರು?',['ಸಾಕಷ್ಟು ಸಿದ್ಧತೆ','ಯಾವುದೇ ಸಿದ್ಧತೆ ಇಲ್ಲ','ಸೈನ್ಯ ಕಡಿಮೆ ಮಾಡಿದರು','ಒಪ್ಪಂದ ಮಾಡಿದರು'],0,'ಸಾಕಷ್ಟು ಸಿದ್ಧತೆ.'],
+['ಯಶವಂತರಾವ್ ಜಾವಳಿಯಲ್ಲಿ ಸುಮಾರು ಎಷ್ಟು ಕಾಲ ಹೋರಾಡಿದ?',['ಒಂದು ತಿಂಗಳು','ಒಂದು ದಿನ','ಒಂದು ವರ್ಷ','ಐದು ವರ್ಷ'],0,'ಸುಮಾರು ಒಂದು ತಿಂಗಳು.'],
+['ಜಾವಳಿ ಸೋತ ಮೇಲೆ ಯಶವಂತರಾವ್ ಎಲ್ಲಿಗೆ ಓಡಿಹೋದ?',['ರಾಯರಿ ಕೋಟೆಗೆ','ವಿಜಾಪುರಕ್ಕೆ','ಸುಪೆಗೆ','ಪ್ರತಾಪಗಡದ ಮೇಲೆ'],0,'ರಾಯರಿ ಕೋಟೆಯ ಮೇಲೆ.'],
+['ರಾಯರಿಯ ಮುತ್ತಿಗೆಯಲ್ಲಿ ಯಶವಂತರಾವ್ ಎಷ್ಟು ಕಾಲ ಹೋರಾಡಿದ?',['ಮೂರು ತಿಂಗಳು','ಮೂರು ದಿನ','ಏಳು ವರ್ಷ','ಒಂದು ದಿನ'],0,'ಮೂರು ತಿಂಗಳು.'],
+['ಜಾವಳಿಯ ವಿಜಯದಿಂದ ಸ್ವರಾಜ್ಯ ಎಷ್ಟಾಯಿತು?',['ಮೊದಲಿಗಿಂತ ದುಪ್ಪಟ್ಟು','ಅರ್ಧ','ಹಾಗೆಯೇ','ಕಡಿಮೆ'],0,'ದುಪ್ಪಟ್ಟು.'],
+['ಜಾವಳಿ ವಿಜಯದ ನಂತರ ಯಾರ ಸೈನ್ಯ ಶಿವರಾಯರಿಗೆ ಸಿಕ್ಕಿತು?',['ಯಶವಂತರಾವರ','ಆದಿಲ್‌ಶಾಹನ','ಮೊಘಲರ','ಸಿದ್ದಿಯ'],0,'ಯಶವಂತರಾವರ ಸೈನ್ಯ.'],
+['ರಾಯರಿ ಕೋಟೆಗೆ ಶಿವರಾಯರು ಯಾವ ಹೆಸರು ನೀಡಿದರು?',['ರಾಯಗಡ','ರಾಜಗಡ','ಪ್ರತಾಪಗಡ','ಸಿಂಹಗಡ'],0,'ರಾಯಗಡ.'],
+['ಭೋರಪ್ಯಾ ಬೆಟ್ಟದ ಮೇಲೆ ಕಟ್ಟಿದ ಹೊಸ ಕೋಟೆಯ ಹೆಸರೇನು?',['ಪ್ರತಾಪಗಡ','ರಾಯಗಡ','ತೋರಣಾ','ಪುರಂದರ'],0,'ಪ್ರತಾಪಗಡ.'],
+['ತಪ್ಪಾದ ಜೋಡಿ ಗುರುತಿಸಿ.',['ಸುಪೆ – ಜಾಧವ','ಫಲಟಣ – ನಿಂಬಾಳಕರ','ಜಾವಳಿ – ಮೋರೆ','ಮುಧೋಳ – ಘೋರಪಡೆ'],0,'ಸುಪೆ – ಮೋಹಿತೆ; ಜಾಧವ ಸಿಂದಖೇಡದವರು.']
+];
+
+/* ಆಯ್ಕೆಗಳ ಮಿಶ್ರಣ (ಸ್ಥಿರ ಕ್ರಮ) */
+MCQ.forEach((q,i)=>{if(q[1].some(o=>/ಇವುಗಳಲ್ಲಿ|ಎಲ್ಲಾ/.test(o)))return;let r=(i*9301+49297)%233280;const idx=q[1].map((_,j)=>j);for(let j=idx.length-1;j>0;j--){r=(r*9301+49297)%233280;const k=r%(j+1);[idx[j],idx[k]]=[idx[k],idx[j]]}const ans=q[1][q[2]];q[1]=idx.map(j=>q[1][j]);q[2]=q[1].indexOf(ans)});
+let Q={ord:[],i:0,score:0,pick:null};
+function mcqStart(){Q={ord:shuf(MCQ.map((_,i)=>i)),i:0,score:0,pick:null};drawMCQ()}
+function drawMCQ(){const v=$('vB');
+ if(Q.i>=Q.ord.length){const p=Math.round(Q.score*100/Q.ord.length);v.innerHTML=`<div class="card"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${Q.score} / ${Q.ord.length}</div><div class="bar"><i style="width:${p}%"></i></div><div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div><button class="btn gr" onclick="mcqStart()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button><div class="tool">${tool('B')}</div></div>`;return}
+ const q=MCQ[Q.ord[Q.i]];
+ v.innerHTML=`<div class="card">${sx(q[0]+' '+q[1].map((o,j)=>'ಆಯ್ಕೆ '+(j+1)+', '+o).join('. '))}<div class="step">ಪ್ರಶ್ನೆ ${Q.i+1} / ${Q.ord.length} · ಅಂಕ ${Q.score}</div><div class="bar"><i style="width:${Q.i*100/Q.ord.length}%"></i></div>
+ <div class="qbox">${q[0]}</div>${q[1].map((o,j)=>`<button class="opt ${Q.pick==null?'':(j==q[2]?'ok':(j==Q.pick?'no':''))}" ${Q.pick!=null?'disabled':''} onclick="mcqPick(${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${Q.pick!=null?`<div class="msg ${Q.pick==q[2]?'ok':'no'}">${Q.pick==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. '}${q[3]}</div><button class="btn" onclick="Q.i++;Q.pick=null;drawMCQ()">ಮುಂದಿನ ಪ್ರಶ್ನೆ ▶</button>`:''}
+ <div class="tool">${tool('B')}</div></div>`}
+function mcqPick(j){Q.pick=j;if(j==MCQ[Q.ord[Q.i]][2])Q.score++;drawMCQ()}
+
+/* ---------- ಸ್ವಾಧ್ಯಾಯ ---------- */
+const SW={
+ cj:['(ಅ) ಫಲಟಣ – ನಿಂಬಾಳಕರ','(ಆ) ಜಾವಳಿ – ಮೋರೆ','(ಇ) ಸುಪೆ – ಜಾಧವ'],
+ aa:[['ಜಾವಳಿಯ ಮೋರೆಗಳಿಗೆ ಆದಿಲ್‌ಶಾಹ ಯಾವ ಬಿರುದು ನೀಡಿದ್ದ?','ಜಾವಳಿಯ ಮೋರೆಗಳಿಗೆ ಆದಿಲ್‌ಶಾಹ ‘ಚಂದ್ರರಾವ್’ ಎಂಬ ಬಿರುದು ನೀಡಿದ್ದ.'],
+  ['ಜಾವಳಿಯ ವಿಜಯ ಬಹಳ ಮಹತ್ವದ್ದು ಏಕೆ?','ಜಾವಳಿಯ ವಿಜಯದಿಂದ ಶಿವರಾಯರ ಸ್ವರಾಜ್ಯ ಮೊದಲಿಗಿಂತ ದುಪ್ಪಟ್ಟಾಯಿತು (ಯಶವಂತರಾವರ ಸೈನ್ಯ ಸಿಕ್ಕಿತು ಮತ್ತು ರಾಯರಿಯ ಬೃಹತ್ ಕೋಟೆ ಸ್ವರಾಜ್ಯಕ್ಕೆ ಬಂತು), ಆದ್ದರಿಂದ ಈ ವಿಜಯ ಬಹಳ ಮಹತ್ವದ್ದಾಗಿತ್ತು.']],
+ ii:[['ಜಾವಳಿಯ ಮೋರೆಗಳ ಹಾದಿಗೆ ಯಾರೂ ಏಕೆ ಹೋಗುತ್ತಿರಲಿಲ್ಲ?','ಜಾವಳಿಯ ಕಾಡು ಅತ್ಯಂತ ದಟ್ಟವಾಗಿತ್ತು; ಹಾಡುಹಗಲಿನಲ್ಲೂ ಅಲ್ಲಿ ಸೂರ್ಯಕಿರಣಗಳಿಗೆ ಪ್ರವೇಶ ಇರಲಿಲ್ಲ. ಅದರಲ್ಲಿ ಹುಲಿ, ತೋಳ, ಕರಡಿ ಇತ್ಯಾದಿ ಕಾಡುಪ್ರಾಣಿಗಳು ಸಂಚರಿಸುತ್ತಿದ್ದವು. ಮೋರೆಗಳ ಜಾವಳಿ ಎಂದರೆ ಮಾನೋ ಹುಲಿಯ ಪೊದೆಯೇ ಆಗಿತ್ತು; ಜೊತೆಗೆ ಮೋರೆ ಮಂದಿಯೂ ಅನೇಕರಿದ್ದರು. ಆದ್ದರಿಂದ ಮೋರೆಗಳ ಹಾದಿಗೆ ಯಾರೂ ಹೋಗುತ್ತಿರಲಿಲ್ಲ.'],
+  ['ಶಿವರಾಯರು ಯಶವಂತರಾವ್ ಮೋರೆಗೆ ಯಾವ ಪತ್ರ ಕಳುಹಿಸಿದರು?','ಶಿವರಾಯರು ಯಶವಂತರಾವ್ ಮೋರೆಗೆ ಮೊದಲು ಖಾರವಾದ ಪತ್ರ ಕಳುಹಿಸಿದರು – “ನೀವು ರಾಜರೆಂದು ಕರೆಸಿಕೊಳ್ಳುತ್ತೀರಿ. ರಾಜರು ನಾವು. ನಮಗೆ ಶ್ರೀಶಂಭುವೇ ರಾಜ್ಯ ಕೊಟ್ಟಿದ್ದಾನೆ, ಹಾಗಾಗಿ ನೀವು ರಾಜರೆಂದು ಹೇಳಿಕೊಳ್ಳಬಾರದು.” ಮೋರೆಯ ಉದ್ಧಟ ಉತ್ತರಕ್ಕೆ ಅವರು ತಿರುಗೇಟು ನೀಡಿದರು – “ಜಾವಳಿ ಖಾಲಿ ಮಾಡಿ, ರಾಜರೆನ್ನದೆ, ಛತ್ರಚಾಮರ ದೂರ ಮಾಡಿ, ಕೈಕರವಸ್ತ್ರ ಕಟ್ಟಿ, ಭೇಟಿಗೆ ಬಂದು, ಹುಜೂರರ ಸೇವೆ ಮಾಡುವುದು. ಇಷ್ಟಾದ ಮೇಲೆ ಬಂಡಾಯ ಮಾಡಿದರೆ, ಕೊಲ್ಲಲ್ಪಡುವಿರಿ.”']]
+};
+function sq(q,a,n){return `<div class="sq"><b>${n}) ${q}</b><textarea placeholder="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><button class="btn ln sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${a}</div></div>`}
+function drawSW(){$('vC').innerHTML=`<div class="card">${sx('ಸ್ವಾಧ್ಯಾಯ. ಪಠ್ಯಪುಸ್ತಕದ ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳನ್ನು ಬಿಡಿಸಿ.')}<h2>✍️ ಸ್ವಾಧ್ಯಾಯ</h2>
+ <h3>೧. ತಪ್ಪಾದ ಜೋಡಿ ಗುರುತಿಸಿ.</h3>${pickGame('swc',[['ಕೆಳಗಿನವುಗಳಲ್ಲಿ ತಪ್ಪಾದ ಜೋಡಿ ಯಾವುದು?',SW.cj,2,'(ಸುಪೆ – ಮೋಹಿತೆ; ಜಾಧವ ಇವರು ಸಿಂದಖೇಡದವರು)']],'swc')}
+ <h3>೨. ಪ್ರತಿಯೊಂದಕ್ಕೂ ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.aa.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <h3>೩. ಎರಡು-ಮೂರು ವಾಕ್ಯಗಳಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</h3>${SW.ii.map((x,i)=>sq(x[0],x[1],i+1)).join('')}
+ <div class="know"><b class="h">🎨 ಚಟುವಟಿಕೆ</b><br>(ಅ) ರಾಯಗಡದ ಚಿತ್ರಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ.<br>(ಆ) ದೀಪಾವಳಿ ರಜೆಯಲ್ಲಿ ನಿಮ್ಮ ಗೆಳೆಯರೊಂದಿಗೆ ರಾಯಗಡದ ಪ್ರತಿಕೃತಿ ತಯಾರಿಸಿ.</div>
+ <div class="tool">${tool('C')}</div></div>`;drawGames()}
+
+/* ---------- HOTS ---------- */
+const HOTS=[
+['ಶಿವರಾಯರು ಹತ್ತಿರದ ಬಂಧುವಾಗಿದ್ದರೂ ಸಂಭಾಜಿ ಮೋಹಿತೆಗೆ ಶಿಕ್ಷೆ ನೀಡಿದರು. ಇದರಿಂದ ಶಿವರಾಯರ ಯಾವ ಗುಣ ಕಾಣುತ್ತದೆ?','ಬಂಧುತ್ವವೋ ನ್ಯಾಯವೋ?','ನ್ಯಾಯಪ್ರಿಯತೆ ಮತ್ತು ಕರ್ತವ್ಯನಿಷ್ಠೆ. ತಪ್ಪು ಮಾಡಿದವನು ತನ್ನ ಸಂಬಂಧಿಕನಾಗಿದ್ದರೂ ಅವನಿಗೆ ವಿನಾಯಿತಿ ನೀಡಲಿಲ್ಲ; ಎಲ್ಲರಿಗೂ ಸಮಾನ ನ್ಯಾಯ ನೀಡಿದರು – ಆದ್ದರಿಂದ ಜನರಿಗೆ ಶಿವರಾಯರ ಮೇಲೆ ವಿಶ್ವಾಸ ಮೂಡಿತು.'],
+['ಯಶವಂತರಾವ್ ಮೋರೆ ನೀಡಿದ ವಚನ ಮುರಿದ. ವಚನ ಮುರಿದುದರ ಪರಿಣಾಮ ಏನಾಯಿತು?','ವಿಶ್ವಾಸ…','ಅವನ ಮೇಲಿನ ವಿಶ್ವಾಸ ಮುಗಿಯಿತು, ಶಿವರಾಯರೊಂದಿಗೆ ಶತ್ರುತ್ವ ಬಂತು, ಜಾವಳಿ ಮತ್ತು ರಾಯರಿಯನ್ನು ಕಳೆದುಕೊಳ್ಳಬೇಕಾಯಿತು ಮತ್ತು ಕೊನೆಗೆ ಹಿಂದೆ ಸರಿಯಬೇಕಾಯಿತು. ವಚನ ಪಾಲಿಸುವುದು ಮುಖ್ಯ.'],
+['ಶಿವರಾಯರು ತಕ್ಷಣ ದಾಳಿ ಮಾಡದೆ ಮೊದಲು ಪತ್ರ ಏಕೆ ಕಳುಹಿಸಿರಬಹುದು?','ಅವಕಾಶ ನೀಡುವುದು…','ಯಶವಂತರಾವನಿಗೆ ತಪ್ಪು ತಿದ್ದಿಕೊಳ್ಳುವ ಅವಕಾಶ ನೀಡಬೇಕು, ಅನಗತ್ಯ ರಕ್ತಪಾತ ತಪ್ಪಿಸಬೇಕು, ಮತ್ತು ಅವನ ನಿಜವಾದ ಉದ್ದೇಶ ತಿಳಿಯಬೇಕು ಎಂದು ಮೊದಲು ಪತ್ರ ಕಳುಹಿಸಿದರು. ಶಾಂತಿಯ ಮಾರ್ಗವನ್ನು ಮೊದಲು ಅನುಸರಿಸಿದರು.'],
+['ಜಾವಳಿಯ ದಟ್ಟ ಕಾಡು ಮೋರೆಗಳಿಗೆ ಲಾಭದಾಯಕ ಮತ್ತು ಶಿವರಾಯರಿಗೆ ಸವಾಲು ಏಕೆ ಆಗಿತ್ತು?','ಅಡಗುವುದು, ದಾರಿ…','ಸ್ಥಳೀಯ ಮೋರೆಗಳಿಗೆ ಕಾಡಿನ ದಾರಿಗಳು ತಿಳಿದಿದ್ದವು, ಅಡಗಿ ಹೋರಾಡುವುದು ಸುಲಭವಾಗಿತ್ತು; ಹೊರಗಿನ ಸೈನ್ಯಕ್ಕೆ ದಾರಿಗಳು ತಿಳಿದಿರುತ್ತಿರಲಿಲ್ಲ, ಕಾಡುಪ್ರಾಣಿಗಳ ಅಪಾಯ ಇರುತ್ತಿತ್ತು. ಆದ್ದರಿಂದ ಸಾಕಷ್ಟು ಸಿದ್ಧತೆ ಅಗತ್ಯವಾಗಿತ್ತು.'],
+['ಸ್ವರಾಜ್ಯ ದುಪ್ಪಟ್ಟಾದುದರಿಂದ ಯಾವ ಲಾಭಗಳಾಗಿರಬಹುದು?','ಆದಾಯ, ಸೈನ್ಯ, ಕೋಟೆಗಳು…','ಹೆಚ್ಚು ಪ್ರದೇಶ ಮತ್ತು ಆದಾಯ, ಯಶವಂತರಾವರ ಸೈನ್ಯ, ರಾಯಗಡದಂತಹ ಬೃಹತ್ ಕೋಟೆ, ಕೊಂಕಣದ ಕಡೆಗೆ ಹೋಗುವ ಮಾರ್ಗಗಳು – ಇದರಿಂದ ಸ್ವರಾಜ್ಯ ಬಲಿಷ್ಠವಾಯಿತು.'],
+['‘ಸ್ವಕೀಯ ಶತ್ರು’ ಪರಕೀಯ ಶತ್ರುಗಳಿಗಿಂತ ಕೆಲವೊಮ್ಮೆ ಹೆಚ್ಚು ಅಪಾಯಕಾರಿ ಏಕೆ ಆಗುತ್ತಾರೆ?','ಒಳಗಿನ ಮಾಹಿತಿ…','ಸ್ವಕೀಯರಿಗೆ ನಮ್ಮ ಒಳಗಿನ ಮಾಹಿತಿ, ದಾರಿಗಳು, ದೌರ್ಬಲ್ಯ ತಿಳಿದಿರುತ್ತವೆ; ಅವರ ಮೇಲೆ ವಿಶ್ವಾಸ ಇರುವುದರಿಂದ ಅವರ ವಿಶ್ವಾಸಘಾತದ ಅಪಾಯ ದೊಡ್ಡದಾಗಿರುತ್ತದೆ.'],
+['ನಿಮ್ಮ ತರಗತಿಯಲ್ಲಿ ಯಾರಾದರೂ ನಿಯಮ ಮುರಿಯುತ್ತಿದ್ದರೆ ಮಾನಿಟರ್ ಆಗಿ ನೀವು ಮೊದಲು ಏನು ಮಾಡುತ್ತೀರಿ?','ಹೇಳಿ ತಿಳಿಸುವುದು…','ಮೊದಲು ಅವನಿಗೆ ಹೇಳಿ ತಿಳಿಸುತ್ತೇನೆ, ನಿಯಮದ ಮಹತ್ವ ಮನದಟ್ಟು ಮಾಡುತ್ತೇನೆ; ಆದರೂ ಕೇಳದಿದ್ದರೆ ಶಿಕ್ಷಕರಿಗೆ ತಿಳಿಸುತ್ತೇನೆ – ಗೆಳೆಯನಾದರೂ ಪಕ್ಷಪಾತ ಮಾಡುವುದಿಲ್ಲ.'],
+['ಮಾವಳರಿಗೆ ಶಿವರಾಯರು ‘ಪ್ರಾಣಕ್ಕಿಂತ ಪ್ರಿಯ’ ಏಕೆ ಅನಿಸುತ್ತಿದ್ದರೋ?','ಪ್ರೀತಿ, ನ್ಯಾಯ…','ಶಿವರಾಯರು ಅವರೊಂದಿಗೆ ಬೆರೆಯುತ್ತಿದ್ದರು, ಅವರ ಸುಖದುಃಖಗಳ ಕಾಳಜಿ ವಹಿಸುತ್ತಿದ್ದರು, ನ್ಯಾಯ ನೀಡುತ್ತಿದ್ದರು, ಭೇದಭಾವ ಮಾಡುತ್ತಿರಲಿಲ್ಲ ಮತ್ತು ಅವರಿಗೆ ಸ್ವಾಭಿಮಾನದಿಂದ ಬದುಕುವ ಕನಸು ತೋರಿಸುತ್ತಿದ್ದರು – ಆದ್ದರಿಂದ ಮಾವಳರಿಗೆ ಅವರ ಮೇಲೆ ಅಪಾರ ಪ್ರೀತಿ ಇತ್ತು.'],
+['ರಾಯರಿಯಂತಹ ಕೋಟೆಗೆ ಶಿವರಾಯರು ‘ರಾಯಗಡ’ ಎಂದು ಹೆಸರಿಟ್ಟರು. ಹೊಸ ಹೆಸರಿನಿಂದ ಯಾವ ಸಂದೇಶ ಹೋಗುತ್ತದೆ?','ಹೊಸ ಆರಂಭ…','ಕೋಟೆ ಈಗ ಸ್ವರಾಜ್ಯದ್ದು, ಇದು ಹೊಸ ಗುರುತು; ಹಳೆಯ ಪರಕೀಯ/ಜಹಗೀರುದಾರಿ ಗುರುತು ಮುಗಿಯಿತು ಮತ್ತು ಸ್ವರಾಜ್ಯದ ಅಭಿಮಾನ ಹೆಚ್ಚಿತು.'],
+['ಘೋರಪಡೆ, ನಿಂಬಾಳಕರ ಮನೆತನಗಳೊಂದಿಗೆ ಮೊದಲು ಯುದ್ಧಗಳಾದರೂ ಮುಂದೆ ಅವರು ಶಿವರಾಯರ ಜೊತೆ ಉಳಿದರು. ಇದರಿಂದ ಏನು ಕಲಿಯಲು ಸಿಗುತ್ತದೆ?','ಶತ್ರುವಿನ ಮಿತ್ರರು…','ಜಾಣ್ಮೆಯಿಂದ ನಡೆದುಕೊಂಡರೆ ವಿರೋಧಿಗಳೂ ಸಹಕಾರಿಗಳಾಗಬಹುದು; ಕೋಪ ಇಟ್ಟುಕೊಳ್ಳದೆ ಎಲ್ಲರನ್ನೂ ಸ್ವರಾಜ್ಯದ ಧ್ಯೇಯದಲ್ಲಿ ಸೇರಿಸಿಕೊಳ್ಳಬೇಕು.']
+];
+function drawHOTS(){$('vD').innerHTML=`<div class="card">${sx('ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯದ ಪ್ರಶ್ನೆಗಳು. ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.')}<h2 style="color:var(--p)">🧠 HOTS – ಯೋಚಿಸಿ, ಉತ್ತರ ಹುಡುಕಿ</h2>
+ <div class="tap">ಮೊದಲು ನೀವೇ ಯೋಚಿಸಿ ಬರೆಯಿರಿ. ಅಗತ್ಯವಿದ್ದರೆ 💡 ಸುಳಿವು ನೋಡಿ, ನಂತರ ಉತ್ತರ ನೋಡಿ.</div>
+ ${HOTS.map((h,i)=>`<div class="sq"><b>${i+1}) ${h[0]}</b> <button class="say" style="float:none" onclick="say(\`${h[0]}\`)">🗣</button><textarea placeholder="ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ…"></textarea><div class="hint">💡 ಸುಳಿವು: ${h[1]}</div><button class="btn ln sm" onclick="this.parentNode.classList.toggle('hi')">💡 ಸುಳಿವು</button><button class="btn pu sm" onclick="this.parentNode.classList.toggle('op')">ಉತ್ತರ ನೋಡಿ</button><div class="ans">${h[2]}</div></div>`).join('')}
+ <div class="tool">${tool('D')}</div></div>`}
+
+
+/* ---------- A4 PDF ---------- */
+const CREATOR='ರಚನೆಕಾರರು : ಜಿ.ಎಂ.ನದಾಫ್, ಕೇಂದ್ರಪ್ರಮುಖ ಗಿರಗಾಂವ್, ತಾ. ಜತ್ · ಮೊ. 7972568986';
+const PN={N:'ಟಿಪ್ಪಣಿ',B:'MCQ',C:'ಸ್ವಾಧ್ಯಾಯ',D:'HOTS'};
+let PK='B',FROM='B';
+function tool(k){return `<b>📄 A4 PDF :</b><button class="btn gr sm" onclick="openPdf('${k}')">📄 PDF ನೋಡಿ ಮತ್ತು ಸೇವ್ ಮಾಡಿ</button>`}
+function head(t){return `<div class="sh-head"><div class="r"><b>ಶಾಲೆ : ${SCH?SCH:'<span class="ln2" style="min-width:70mm"></span>'}</b><span>ತರಗತಿ : ೪ ನೇ · ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨</span></div>
+ <div class="r"><span>ಹೆಸರು : <span class="ln2" style="min-width:60mm"></span></span><span>ದಿನಾಂಕ : <span class="ln2" style="min-width:26mm"></span></span><span>ಅಂಕ : ____</span></div></div><h3>ಪಾಠ ೮ : ಸ್ವಕೀಯ ಶತ್ರುಗಳ ನಿಗ್ರಹ — ${t}</h3>`}
+const foot='';
+const lines=n=>Array(n).fill('<div class="pl"></div>').join('');
+function mcqKey(arr){const A='ಅಆಇಈ';const rows=[];for(let i=0;i<arr.length;i+=10)rows.push(`<tr>${arr.slice(i,i+10).map((q,j)=>`<td>${i+j+1}) ${A[q[2]]}</td>`).join('')}</tr>`);return `<table class="w" style="margin-top:4px">${rows.join('')}</table>`}
+function buildSheet(k,K){let h='';const A='ಅಆಇಈ';
+ if(k=='N'){h=`<div class="sheet">${head('ಟಿಪ್ಪಣಿ')}<ol>${SUM.map(x=>`<li>${x}</li>`).join('')}</ol>
+ <p class="pq">ಪತ್ರಗಳ ಸಮರ</p>${PT.map(p=>`<div><b>${p[0].replace(/^\S+ /,'')} ${p[4]}:</b> “${p[3]}”</div>`).join('')}
+ <p class="pq">ಪದಾರ್ಥ</p><div>ಸ್ವಕೀಯ – ತನ್ನವರೇ • ನಿಗ್ರಹ – ಕಡಿವಾಣ • ಅಸೂಯೆ – ಮತ್ಸರ • ಭಯ – ಹೆದರಿಕೆ • ಪ್ರಚೋದಿಸುವುದು – ಕೆರಳಿಸುವುದು • ದಾಂಧಲೆ – ನಾಶ • ಓಡಿಸುವುದು – ಹೊರಹಾಕುವುದು • ನಿರ್ಲಕ್ಷ್ಯ – ಪರಿವೆ ಇಲ್ಲದವನು • ಕಾಡುಪ್ರಾಣಿ – ಹಿಂಸ್ರ ಪ್ರಾಣಿ • ಪ್ರವೇಶ – ಒಳಗೆ ನುಗ್ಗುವುದು • ಜಗಳ – ಕಲಹ • ಕಪ್ಪ – ನಿಗದಿತ ಮೊತ್ತ • ಖಾರವಾದ – ಕಠೋರ • ಛತ್ರಚಾಮರ – ರಾಜಚಿಹ್ನೆಗಳು • ಹುಜೂರ – ಸ್ವಾಮಿ • ಮುತ್ತಿಗೆ – ಸುತ್ತಲೂ ಸುತ್ತುವರಿಯುವುದು</div>${foot}</div>`}
+ if(k=='B'){h=`<div class="sheet">${head('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)')}<div class="tap">ಸರಿಯಾದ ಆಯ್ಕೆಗೆ ವೃತ್ತ ಹಾಕಿ. (ಪ್ರತಿಯೊಂದಕ್ಕೆ ೧ ಅಂಕ · ಒಟ್ಟು ${MCQ.length})</div>${MCQ.map((q,i)=>`<div class="avoid"><div class="pq">${i+1}) ${q[0]}</div><div class="po">${q[1].map((o,j)=>`<span>(${A[j]}) ${o}</span>`).join('')}</div></div>`).join('')}
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b>${mcqKey(MCQ)}</div>`:''}${foot}</div>`}
+ if(k=='C'){h=`<div class="sheet">${head('ಸ್ವಾಧ್ಯಾಯ')}
+ <div class="pq">೧. ತಪ್ಪಾದ ಜೋಡಿ ಗುರುತಿಸಿ.</div><div>${SW.cj.join(' &nbsp;&nbsp; ')}</div>${lines(1)}
+ <div class="pq">೨. ಪ್ರತಿಯೊಂದಕ್ಕೂ ಒಂದು ವಾಕ್ಯದಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.aa.map((x,i)=>`<div class="avoid"><div>(${'ಅಆ'[i]}) ${x[0]}</div>${lines(1)}</div>`).join('')}
+ <div class="pq">೩. ಎರಡು-ಮೂರು ವಾಕ್ಯಗಳಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ.</div>${SW.ii.map((x,i)=>`<div class="avoid"><div>(${'ಅಆ'[i]}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ <div class="avoid"><div class="pq">೪. (ಹೆಚ್ಚಿನ ಅಭ್ಯಾಸ) ಜೋಡಿಗಳನ್ನು ಹೊಂದಿಸಿ.</div><table class="w"><tr><th>‘‘ಅ’ ಗುಂಪು</th><th>‘‘ಬ’ ಗುಂಪು</th><th style="width:26mm">ಉತ್ತರ</th></tr>${[['ರಾಯರಿ','ಪ್ರತಾಪಗಡ'],['ಭೋರಪ್ಯಾ ಬೆಟ್ಟ','ಕರ್ನಾಟಕ ಪ್ರಾಂತಕ್ಕೆ ರವಾನೆ'],['ಸಂಭಾಜಿ ಮೋಹಿತೆ','ಚಂದ್ರರಾವ್'],['ಯಶವಂತರಾವ್ ಮೋರೆ','ರಾಯಗಡ']].map((r,i)=>`<tr><td>(${'ಅಆಇಈ'[i]}) ${r[0]}</td><td class="l">(${i+1}) ${r[1]}</td><td></td></tr>`).join('')}</table></div>
+ ${K?`<div class="pk"><b>ಉತ್ತರ ಸೂಚಿ (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><div><b>೧.</b> (ಇ) ಸುಪೆ – ಜಾಧವ ಈ ಜೋಡಿ ತಪ್ಪು (ಸುಪೆ – ಮೋಹಿತೆ; ಜಾಧವ ಸಿಂದಖೇಡದವರು).</div><div><b>೨.</b><ol>${SW.aa.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>೩.</b><ol>${SW.ii.map(x=>`<li>${x[1]}</li>`).join('')}</ol></div><div><b>೪.</b> (ಅ)–(೪); (ಆ)–(೧); (ಇ)–(೨); (ಈ)–(೩)</div></div>`:''}${foot}</div>`}
+ if(k=='D'){h=`<div class="sheet">${head('HOTS – ಉನ್ನತ ಚಿಂತನಾ ಕೌಶಲ್ಯ ಪ್ರಶ್ನೆಗಳು')}${HOTS.map((x,i)=>`<div class="avoid"><div class="pq">${i+1}) ${x[0]}</div>${lines(3)}</div>`).join('')}
+ ${K?`<div class="pk"><b>ಆದರ್ಶ ಉತ್ತರಗಳು (ಶಿಕ್ಷಕರಿಗಾಗಿ)</b><ol>${HOTS.map(x=>`<li>${x[2]}</li>`).join('')}</ol></div>`:''}${foot}</div>`}
+ return h}
+function openPdf(k){PK=k;FROM=k=='N'?'A':k;
+ ['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='none';
+ $('topbar').style.display='flex';$('secName').textContent='📄 '+PN[k]+' – A4 PDF';$('vP').style.display='block';
+ $('vP').innerHTML=`<div class="ptool"><button class="btn ln sm" onclick="showTab(FROM)">◀ ಹಿಂದೆ</button>
+  <label>ಶಾಲೆಯ ಹೆಸರು : <input type="text" value="${SCH}" placeholder="(ಐಚ್ಛಿಕ)" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #94a3b8;width:200px" oninput="SCH=this.value;renderPdf()"></label>
+  ${k!='N'?`<label style="font-weight:700"><input type="checkbox" id="optKey" checked onchange="renderPdf()"> ಉತ್ತರ ಸೂಚಿ ಸೇರಿಸಿ</label>`:''}
+  <br><button class="btn gr" onclick="window.print()">🖨️ PDF / ಪ್ರಿಂಟ್</button>
+  <div class="msg in">ಪ್ರಿಂಟ್ ವಿಂಡೋದಲ್ಲಿ <b>"Save as PDF"</b> ಆರಿಸಿ, ಕಾಗದ <b>A4</b>, <b>Scale 100%</b> ಇರಿಸಿ. ಮೊಬೈಲ್‌ನಲ್ಲಿ: ⋮ ಮೆನು → Share/Print → Save as PDF.</div></div>
+  <div id="shw"><div id="sheetHost"></div></div>`;
+ renderPdf();window.scrollTo({top:0})}
+function renderPdf(){const kc=$('optKey');const K=kc?kc.checked:false;
+ let h=buildSheet(PK,K);
+ h=h.replace(/^<div class="sheet">/,'').replace(/<\/div>\s*$/,'');
+ $('sheetHost').innerHTML=`<div class="sheet"><div class="wmp">ಡಿಜಿಟಲ್ ಶಿಕ್ಷಣ ವೇದಿಕೆ<br><span style="font-size:36pt">G.M.Nadaf</span></div>
+  <table class="pt"><tfoot><tr><td><div class="sp"></div></td></tr></tfoot><tbody><tr><td>${h}</td></tr></tbody></table>
+  <div class="fp"><span>${CREATOR}</span><span>೪ನೇ ತರಗತಿ ಪರಿಸರ ಅಧ್ಯಯನ ಭಾಗ ೨ · ಪಾಠ ೮</span></div></div>`;fit()}
+function fit(){const w=$('shw');if(!w)return;const k=Math.min(1,(w.clientWidth-16)/(210*3.7795));document.querySelectorAll('.sheet').forEach(s=>s.style.zoom=k)}
+window.addEventListener('resize',fit);
+/* ---------- home & sections ---------- */
+const SN={A:'📖 ಕಲಿಯೋಣ',B:'✅ MCQ',C:'✍️ ಸ್ವಾಧ್ಯಾಯ',D:'🧠 HOTS'};
+function goHome(){$('vP').style.display='none';['A','B','C','D'].forEach(t=>$('v'+t).style.display='none');$('home').style.display='block';$('topbar').style.display='none';try{speechSynthesis.cancel()}catch(e){};window.scrollTo({top:0})}
+function showTab(x){$('home').style.display='none';$('vP').style.display='none';$('topbar').style.display='flex';$('secName').textContent=SN[x];
+ ['A','B','C','D'].forEach(t=>{$('v'+t).style.display=t==x?'block':'none'});window.scrollTo({top:0});
+ try{speechSynthesis.cancel()}catch(e){}
+ if(x=='A')drawStep();if(x=='B'&&!Q.ord.length)mcqStart();else if(x=='B')drawMCQ();if(x=='C'&&!$('wsBox'))drawSW();if(x=='D'&&!$('vD').innerHTML)drawHOTS()}
+/* ========== ತಿದ್ದುಪಡಿ v2 : MCQ ಪಟ್ಟಿ · PDF ಬಟನ್ ಮೇಲೆ · ಪ್ರಗತಿ ಉಳಿಸಿ · ಪ್ರಗತಿ ವರದಿ ========== */
+const dev=n=>String(n).replace(/\d/g,d=>'೦೧೨೩೪೫೬೭೮೯'[d]);
+const escH=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LSK='gm:'+TITLE;
+let PG={a:{},mode:'L',name:'',steps:[],stars:[]};
+try{const s=JSON.parse(localStorage.getItem(LSK)||'null');if(s)PG=Object.assign(PG,s)}catch(e){}
+const GU=window.GM_USER||null;if(GU){if(GU.name)PG.name=GU.name;if(GU.school&&!SCH)SCH=GU.school}
+function pgSave(){try{localStorage.setItem(LSK,JSON.stringify(PG))}catch(e){}}
+function gmT(ev,d){try{if(typeof window.GMTrack=='function')window.GMTrack(ev,Object.assign({lesson:TITLE,name:PG.name},d||{}))}catch(e){}}
+(function(){const st=document.createElement('style');st.textContent=`
+.opt:disabled{opacity:1;color:inherit;cursor:default}
+.mscore{position:fixed;left:8px;right:8px;bottom:8px;max-width:764px;margin:0 auto;z-index:20;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;box-shadow:0 2px 10px #0003}
+#vB{padding-bottom:70px}@media print{.mscore{display:none!important}}
+.mscore .bar{margin:4px 0 0}
+.mq b{font-size:17px}.mq.dn{border-color:#cbd5e1;background:#fcfcfd}
+.say.spk{background:#fee2e2;color:#b91c1c}
+.tool.top{margin-top:4px;margin-bottom:8px;background:#ecfdf5;border-color:#22c55e}
+.mtg{flex-wrap:nowrap}.mtg .chip{font-size:14px;padding:7px 10px;white-space:nowrap;flex:1;text-align:center}
+#topbar{gap:6px}#topbar>.btn{white-space:nowrap;flex:0 0 auto}#topbar #secName{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#topbar #starBox{margin-left:0!important;white-space:nowrap}`;document.head.appendChild(st)})();
+
+/* ---- MCQ : ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು ಒಂದರ ಕೆಳಗೆ ಒಂದು ---- */
+function mcqStats(){const n=MCQ.length;let done=0,ok=0;for(const k in PG.a){if(MCQ[k]){done++;if(PG.a[k]==MCQ[k][2])ok++}}return{n,done,ok}}
+function modeHtml(){return `<div class="chips mtg"><span class="chip ${PG.mode=='L'?'on':''}" onclick="setMode('L')">📋 ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳು</span><span class="chip ${PG.mode=='O'?'on':''}" onclick="setMode('O')">🎯 ಒಂದೊಂದು ಪ್ರಶ್ನೆ</span></div>`}
+function setMode(m){PG.mode=m;pgSave();if(m=='O')mcqStart();else drawMCQ();window.scrollTo({top:0})}
+function scoreHtml(st){return `ಬಿಡಿಸಿದ: ${dev(st.done)}/${dev(st.n)} &nbsp;·&nbsp; ✔ ಸರಿ: ${dev(st.ok)} &nbsp;·&nbsp; ✘ ತಪ್ಪು: ${dev(st.done-st.ok)}<div class="bar"><i style="width:${st.n?st.done*100/st.n:0}%"></i></div>`}
+function mqHtml(i){const q=MCQ[i],p=PG.a[i];
+ return `<div class="sq mq ${p!=null?'dn':''}" id="mq${i}"><div style="display:flex;gap:6px;align-items:flex-start"><b style="flex:1">${dev(i+1)}) ${q[0]}</b><button class="say" style="float:none;padding:4px 10px" onclick="say(MCQ[${i}][0]+'. '+MCQ[${i}][1].join(', '))">🗣</button></div>
+ ${q[1].map((o,j)=>`<button class="opt ${p==null?'':(j==q[2]?'ok':(j==p?'no':''))}" ${p!=null?'disabled':''} onclick="mqPick(${i},${j})">${'ಅಆಇಈ'[j]}) ${o}</button>`).join('')}
+ ${p!=null?`<div class="msg ${p==q[2]?'ok':'no'}">${p==q[2]?'✔ ಸರಿ! ':'✘ ತಪ್ಪು. ಸರಿ ಉತ್ತರ: '+'ಅಆಇಈ'[q[2]]+') '+q[1][q[2]]+'. '}${q[3]||''}</div>`:''}</div>`}
+function resHtml(st){
+ if(st.done<st.n)return `<div class="msg in">ಉಳಿದ ಪ್ರಶ್ನೆಗಳು: ${dev(st.n-st.done)} &nbsp;<button class="btn sm" onclick="goNext()">⬇️ ಬಿಡಿಸದ ಪ್ರಶ್ನೆಗೆ ಹೋಗಿ</button></div>`;
+ const p=Math.round(st.ok*100/st.n);
+ return `<div class="card" style="background:#f0fdf4;border:2px solid #86efac"><h2>🎉 ಫಲಿತಾಂಶ</h2><div class="qbox">ನಿಮ್ಮ ಅಂಕಗಳು: ${dev(st.ok)} / ${dev(st.n)} (${dev(p)}%)</div><div class="bar"><i style="width:${p}%"></i></div>
+ <div class="msg ${p>=80?'ok':p>=50?'in':'no'}">${p>=80?'ಅತ್ಯುತ್ತಮ! ಭೇಷ್! 🌟':p>=50?'ಚೆನ್ನಾಗಿದೆ! ಇನ್ನೂ ಸ್ವಲ್ಪ ಅಭ್ಯಾಸ ಮಾಡಿ.':'ಪಾಠವನ್ನು ಮತ್ತೆ ಓದಿ ಮತ್ತು ಮರುಪ್ರಯತ್ನಿಸಿ.'}</div>
+ <button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><button class="btn ln" onclick="mqReset()">🔄 ಮತ್ತೆ ಬಿಡಿಸಿ</button></div>`}
+function drawList(){const st=mcqStats();
+ $('vB').innerHTML=`<div class="card">${sx('ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು. ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸರಿಯಾದ ಆಯ್ಕೆ ಆರಿಸಿ.')}<h2 style="color:var(--g)">✅ ಬಹು ಆಯ್ಕೆ ಪ್ರಶ್ನೆಗಳು (MCQ)</h2>${modeHtml()}
+ <div class="mscore" id="msc">${scoreHtml(st)}</div>
+ ${MCQ.map((_,i)=>mqHtml(i)).join('')}
+ <div id="mres">${resHtml(st)}</div></div>`}
+function mqUpd(){const st=mcqStats();$('msc').innerHTML=scoreHtml(st);$('mres').innerHTML=resHtml(st);return st}
+function mqPick(i,j){if(PG.a[i]!=null)return;PG.a[i]=j;pgSave();$('mq'+i).outerHTML=mqHtml(i);
+ const ok=j==MCQ[i][2];say(ok?'ಸರಿ':'ತಪ್ಪು');gmT('mcq',{q:i+1,ok});
+ const st=mqUpd();if(st.done==st.n){gmT('mcq_done',{score:st.ok,total:st.n,wrong:Object.keys(PG.a).filter(k=>PG.a[k]!=MCQ[k][2]).map(k=>+k+1).sort((a,b)=>a-b),steps:PG.steps.length,nsteps:(typeof L!='undefined'?L.length:0),stars:(typeof STARS!='undefined'?STARS.size:null)});if(typeof confetti=='function')confetti();if(typeof award=='function')award('mcqall','ಎಲ್ಲಾ MCQ ಪೂರ್ಣ!');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'center'}),300)}}
+function goNext(){for(let i=0;i<MCQ.length;i++)if(PG.a[i]==null){$('mq'+i).scrollIntoView({behavior:'smooth',block:'center'});return}}
+function mqReset(){PG.a={};pgSave();drawList();window.scrollTo({top:0,behavior:'smooth'})}
+const _drawMCQ1=drawMCQ;
+drawMCQ=function(){if(PG.mode!='O'){drawList();return}
+ _drawMCQ1();const c=$('vB').querySelector('.card');if(!c)return;const t=c.querySelectorAll('.tool');t.forEach(x=>x.remove());
+ c.insertAdjacentHTML('afterbegin',`<h2 style="color:var(--g)">✅ MCQ – ಒಂದೊಂದು ಪ್ರಶ್ನೆ (ಅಭ್ಯಾಸ)</h2>${modeHtml()}`)};
+
+/* ---- ಸ್ವಾಧ್ಯಾಯ ಮತ್ತು HOTS : PDF ಬಟನ್ ಮೇಲೆ ---- */
+function toolTop(id){const c=$(id)&&$(id).querySelector('.card');if(!c||c.querySelector('.tool.top'))return;const h=c.querySelector('h2'),t=c.querySelector('.tool');if(h&&t){const n=t.cloneNode(true);n.classList.add('top');h.after(n)}}
+/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿಯಲ್ಲಿ (ಮುಖ್ಯ ಪುಟ · ವಿಭಾಗ) PDF ಬಟನ್ */
+$('topbar').insertAdjacentHTML('beforeend','<button class="btn gr sm" id="tbPdf" style="margin:0;display:none;white-space:nowrap" onclick="openPdf(this.dataset.k)">📄 PDF</button>');
+const _showTab1=showTab;showTab=function(x){_showTab1.apply(this,arguments);LASTT='';sayMark(null);const b=$('tbPdf');if(b){if('BCD'.includes(x)){b.dataset.k=x;b.style.display='inline-block'}else b.style.display='none'}};
+const _openPdf1=openPdf;openPdf=function(){_openPdf1.apply(this,arguments);const b=$('tbPdf');if(b)b.style.display='none'};
+
+/* ---- ಕಲಿಯೋಣ : ನೋಡಿದ ಹಂತಗಳು ಉಳಿಸಿ ---- */
+const _drawStep1=drawStep;drawStep=function(){_drawStep1.apply(this,arguments);if(!PG.steps.includes(S)){PG.steps.push(S);pgSave();gmT('step',{step:S+1})}};
+if(typeof award=='function'&&typeof STARS!='undefined'){PG.stars.forEach(s=>{try{STARS.add(s)}catch(e){}});if($('starBox'))$('starBox').textContent='⭐ '+STARS.size;
+ const _aw=award;award=function(id){const had=STARS.has(id);_aw.apply(this,arguments);if(!had&&!PG.stars.includes(id)){PG.stars.push(id);pgSave()}}}
+
+
+/* ---- 🗣 ಆಲಿಸಿ : ಒಮ್ಮೆ ಒತ್ತಿ – ಓದು ಆರಂಭ, ಮತ್ತೆ ಒತ್ತಿ – ನಿಲ್ಲಿಸಿ ---- */
+let SAYB=null,LASTT='';
+document.addEventListener('click',e=>{SAYB=(e.target.closest&&e.target.closest('.say'))||null},true);
+function sayMark(b){document.querySelectorAll('.say.spk').forEach(x=>{x.classList.remove('spk');if(x.dataset.o)x.innerHTML=x.dataset.o});
+ if(b){if(!b.dataset.o)b.dataset.o=b.innerHTML;b.classList.add('spk');b.innerHTML=b.dataset.o.includes('ಆಲಿಸಿ')?'⏹ ನಿಲ್ಲಿಸಿ':'⏹'}}
+say=function(t){try{const ss=speechSynthesis;const b=SAYB;SAYB=null;
+ if(ss.speaking&&t===LASTT){ss.cancel();LASTT='';sayMark(null);return}
+ ss.cancel();LASTT=t;const u=new SpeechSynthesisUtterance(t);u.lang='kn-IN';u.rate=.9;
+ const vs=ss.getVoices();const v=vs.find(x=>/kn/i.test(x.lang))||vs.find(x=>/hi/i.test(x.lang));if(v)u.voice=v;
+ u.onend=u.onerror=()=>{if(LASTT===t){LASTT='';sayMark(null)}};sayMark(b);ss.speak(u)}catch(e){}};
+/* ---- ಪ್ರಗತಿ ವರದಿ ---- */
+function grade(p,st){if(st.done<st.n)return 'MCQ ಅಪೂರ್ಣ – ಎಲ್ಲಾ ಪ್ರಶ್ನೆ ಬಿಡಿಸಿ';return p>=90?'ಎ+ (ಅತ್ಯುತ್ತಮ)':p>=75?'ಎ (ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ)':p>=60?'ಬಿ (ಚೆನ್ನಾಗಿದೆ)':p>=40?'ಸಿ (ಹೆಚ್ಚು ಅಭ್ಯಾಸ ಮಾಡಿ)':'ಡಿ (ಪಾಠವನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ)'}
+function reportSheet(){const st=mcqStats(),p=st.n?Math.round(st.ok*100/st.n):0,ns=(typeof L!='undefined')?L.length:0,stars=(typeof STARS!='undefined')?STARS.size:null;
+ return `<div class="sheet"><h3 style="font-size:20pt;margin-top:4mm">🏅 ಪ್ರಗತಿ ವರದಿ</h3><div style="text-align:center;font-weight:700;font-size:13pt">${TITLE}</div>
+ <table class="w" style="margin-top:6mm;font-size:13pt"><tr><th style="width:48%;text-align:left">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th><td class="l" style="text-align:left">${escH(PG.name)||'&nbsp;'}</td></tr>
+ ${GU&&GU.pen?`<tr><th style="text-align:left">PEN ID</th><td style="text-align:left">${escH(GU.pen)}</td></tr>`:''}${GU&&GU.cls?`<tr><th style="text-align:left">ತರಗತಿ / ವರ್ಗ</th><td style="text-align:left">${escH(GU.cls)}</td></tr>`:''}<tr><th style="text-align:left">ಶಾಲೆ</th><td style="text-align:left">${escH(SCH)||'&nbsp;'}</td></tr>
+ <tr><th style="text-align:left">ದಿನಾಂಕ</th><td style="text-align:left">${new Date().toLocaleDateString('kn-IN')}</td></tr>
+ <tr><th style="text-align:left">ಕಲಿಯೋಣ – ನೋಡಿದ ಹಂತಗಳು</th><td style="text-align:left">${dev(PG.steps.length)} / ${dev(ns)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಬಿಡಿಸಿದ ಪ್ರಶ್ನೆಗಳು</th><td style="text-align:left">${dev(st.done)} / ${dev(st.n)}</td></tr>
+ <tr><th style="text-align:left">MCQ – ಸರಿ ಉತ್ತರಗಳು (ಅಂಕ)</th><td style="text-align:left"><b>${dev(st.ok)} / ${dev(st.n)}</b> &nbsp;(${dev(p)}%)</td></tr>
+ ${stars!=null?`<tr><th style="text-align:left">ಗಳಿಸಿದ ನಕ್ಷತ್ರಗಳು</th><td style="text-align:left">${dev(stars)}</td></tr>`:''}
+ <tr><th style="text-align:left">ಶ್ರೇಣಿ</th><td style="text-align:left"><b>${grade(p,st)}</b></td></tr></table>
+ <div style="margin-top:14mm;display:flex;justify-content:space-between;gap:10mm"><span>ಶಿಕ್ಷಕರ ಸಹಿ : ________________</span><span>ಪೋಷಕರ ಸಹಿ : ________________</span></div></div>`}
+PN.R='ಪ್ರಗತಿ ವರದಿ';
+const _buildSheet1=buildSheet;buildSheet=function(k,K){return k=='R'?reportSheet():_buildSheet1(k,K)};
+function openReport(){const fr=['B','C','D','A'].find(t=>$('v'+t).style.display=='block');openPdf('R');if(fr)FROM=fr;else{const bk=document.querySelector('#vP .ptool button');if(bk)bk.setAttribute('onclick','goHome()')}const kc=$('optKey');if(kc)kc.parentNode.remove();
+ const pt=document.querySelector('#vP .ptool');if(pt)pt.insertAdjacentHTML('afterbegin',`<div style="margin-bottom:6px"><label><b>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು :</b> <input type="text" value="${escH(PG.name)}" placeholder="ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ" style="font:inherit;padding:6px;border-radius:8px;border:2px solid #7c3aed;width:220px" oninput="PG.name=this.value;pgSave();renderPdf()"></label></div>`);
+ gmT('report',mcqStats())}
+$('home').insertAdjacentHTML('beforeend',`<div style="text-align:center;margin-top:16px"><button class="btn pu" onclick="openReport()">🏅 ನನ್ನ ಪ್ರಗತಿ ವರದಿ</button><a class="btn ln" href="#" onclick="try{parent.postMessage({type:'closeLesson'},'*')}catch(e){}return false" style="text-decoration:none">📚 ಎಲ್ಲಾ ಪಾಠಗಳು</a></div>`);
+/* ========== ತಿದ್ದುಪಡಿ v2 ಮುಕ್ತಾಯ ========== */
+
+drawStep();
+</script>
+</body>
+</html>
