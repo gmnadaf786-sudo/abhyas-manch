@@ -44,11 +44,17 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <button class="les" style="justify-content:center" onclick="doExit()">🚪 अ‍ॅप बंद करा</button>
 <button class="les" style="justify-content:center" onclick="doReset()">🚪 लॉगआउट (दुसरा विद्यार्थी)</button>
 <button class="les" style="justify-content:center" onclick="menu(0)">रद्द करा</button></div></div>
-<div id="lg" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:40;align-items:center;justify-content:center;padding:24px"><form onsubmit="return doLogin(event)" style="background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;max-width:360px;width:100%">
-<div style="text-align:center"><img src="icon-192.png" alt="Abhyas Manch" width="96" height="96"></div><h2 style="text-align:center;margin:6px 0 14px">Abhyas Manch – लॉगिन</h2>
-<button type="button" class="les" style="justify-content:center;background:#1d4ed8;color:#fff;border:0;font-size:18px;padding:16px" onclick="openRg(0)">📝 नोंदणी करा</button><button type="button" class="les" style="justify-content:center;background:#fff;color:#1d4ed8;border:2px solid #1d4ed8;margin-top:8px" onclick="openRg(1)">📱 मोबाईल नंबरने लॉगिन</button><div style="height:10px"></div><button type="button" class="les" style="justify-content:center;background:#0f766e;color:#fff;border:0;font-size:18px;padding:16px" onclick="openGuest()">🙋 पाहुणा म्हणून सुरू करा</button><p style="font-size:12px;color:var(--mut);text-align:center;margin:6px 0 14px">नोंदणी/पासवर्ड नको · सर्व पाठ मोफत</p><p style="font-size:13px;color:var(--mut);text-align:center;margin:0 0 8px">— जत भागातील विद्यार्थ्यांसाठी (PEN लॉगिन) —</p><input id="lu" inputmode="numeric" autocomplete="username" placeholder="PEN (११ अंकी)"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड (जन्मवर्ष)">
-<p id="le" style="color:#b91c1c;font-size:14px;min-height:20px;margin:0 0 8px"></p>
-<button class="les" id="lb" style="justify-content:center;background:#fff;color:#0f766e;border:2px solid #0f766e" type="submit">लॉगिन</button><button type="button" class="les" style="justify-content:center;margin-top:8px" onclick="openFp()">🔍 PEN शोधा</button></form></div>
+<div id="lg" style="display:none;position:fixed;inset:0;background:linear-gradient(160deg,#0f766e 0%,#14b8a6 55%,#fbbf24 130%);z-index:40;overflow:auto;padding:20px;align-items:center;justify-content:center"><div style="width:100%;max-width:380px;margin:auto">
+<div style="text-align:center;color:#fff;margin-bottom:16px"><img src="icon-192.png" alt="Abhyas Manch" width="84" height="84" style="border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,.25)"><h1 style="margin:10px 0 2px;font-size:28px">अभ्यास मंच</h1><div style="font-size:14px;opacity:.95">इयत्ता १ ली ते ८ वी · मराठी व कन्नड माध्यम</div></div>
+<form onsubmit="return doLogin(event)" style="background:var(--card);color:var(--ink);border-radius:22px;padding:22px;box-shadow:0 14px 40px rgba(0,0,0,.25)">
+<h2 style="margin:0 0 14px;font-size:20px;text-align:center">🔐 लॉगिन</h2>
+<input id="lu" inputmode="numeric" autocomplete="username" placeholder="मोबाईल क्रमांक" maxlength="11"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड">
+<p id="le" style="color:#b91c1c;font-size:14px;min-height:20px;margin:0 0 8px;text-align:center"></p>
+<button class="les" id="lb" style="justify-content:center;background:#0f766e;color:#fff;border:0;font-size:18px;padding:14px" type="submit">लॉगिन करा</button>
+<div style="display:flex;align-items:center;gap:10px;margin:16px 0;color:var(--mut);font-size:13px"><i style="flex:1;height:1px;background:var(--line)"></i>नवीन आहात?<i style="flex:1;height:1px;background:var(--line)"></i></div>
+<button type="button" class="les" style="justify-content:center;background:#fff7ed;color:#c2410c;border:2px solid #fb923c;font-size:18px;padding:14px;margin:0" onclick="openRg(0)">📝 नोंदणी करा (Sign up)</button>
+</form>
+<p style="text-align:center;color:#fff;font-size:12px;margin:14px 0 0;opacity:.9">विकसक: जी. एम. नदाफ · मोफत शैक्षणिक ॲप</p></div></div>
 <div id="rg" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:46;align-items:flex-start;justify-content:center;padding:14px;overflow:auto"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:400px;width:100%;margin:auto">
 <b id="rgt" style="font-size:18px">📝 नोंदणी</b>
 <div id="rgr"><p style="font-size:12px;color:var(--mut);margin:6px 0 10px">नोंदणी मोफत आहे. PEN नको. तुमचे नाव PDF वर येईल.</p>
@@ -116,7 +122,12 @@ var P={};try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
 function api(o){return fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(o)}).then(function(r){return r.json()})}
 function showLogin(m){lg.style.display='flex';le.textContent=m||''}
 function loadCat(st){return fetch('content/'+catKey(st)+'/catalog.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(c){CAT=c;D=c.subjects;BASE='content/'+catKey(st)+'/';return true})}
-function doLogin(ev){ev.preventDefault();var u=lu.value.trim(),p=lp.value.trim();if(!u||!p){le.textContent='PEN आणि पासवर्ड टाका.';return false}
+function doLogin(ev){ev.preventDefault();var u=lu.value.trim(),p=lp.value.trim();if(!u||!p){le.textContent='मोबाईल क्रमांक आणि पासवर्ड टाका.';return false}
+ if(/^[6-9]\d{9}$/.test(u)){if(!/^\d{4,6}$/.test(p)){le.textContent='पासवर्ड ४ ते ६ अंकी असतो.';return false}
+  lb.disabled=true;le.textContent='तपासत आहे…';
+  fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({mobile:u,pin:p})}).then(function(r){return r.json()}).then(function(j){
+   if(!j.ok){lb.disabled=false;le.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.':'मोबाईल किंवा पासवर्ड चुकीचा.';return}
+   le.textContent='';rgDone(j,function(m){le.textContent=m}).then(function(){lb.disabled=false})}).catch(function(){lb.disabled=false;le.textContent='इंटरनेट तपासा.'});return false}
  lb.disabled=true;le.textContent='तपासत आहे…';
  api({action:'login',username:u,password:p}).then(function(r){
   if(!r||!r.success){lb.disabled=false;le.textContent=(r&&r.message)||'लॉगिन अयशस्वी.';return}
@@ -181,12 +192,13 @@ function rgGo(){rgm.textContent='';var o={mobile:rmb.value.trim(),pin:rpn.value.
  rgb.disabled=true;
  fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(o)}).then(function(r){return r.json()}).then(function(j){rgb.disabled=false;
   if(!j.ok){rgErr(j.e);return}
-  PROF={token:j.token,p:j.profile};try{localStorage.setItem('am_prof_v1',JSON.stringify(PROF))}catch(e){}
+  rgDone(j)}).catch(function(){rgb.disabled=false;rgErr('')})}
+function rgDone(j,onErr){PROF={token:j.token,p:j.profile};try{localStorage.setItem('am_prof_v1',JSON.stringify(PROF))}catch(e){}
   var pr=j.profile;GUEST={cls:pr.cls,med:pr.med};
-  loadCat({className:String(pr.cls),medium:medName(pr.med)}).then(function(){
+  return loadCat({className:String(pr.cls),medium:medName(pr.med)}).then(function(){
    try{localStorage.setItem('am_guest_v1',JSON.stringify(GUEST))}catch(e){}
    K='am_prog_m'+pr.mobile;try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){P={}}
-   rg.style.display='none';lg.style.display='none';home()}).catch(function(){rgm.textContent='हे पाठ उपलब्ध नाहीत.'})}).catch(function(){rgb.disabled=false;rgErr('')})}
+   rg.style.display='none';lg.style.display='none';home()}).catch(function(){var m='हे पाठ उपलब्ध नाहीत.';if(onErr)onErr(m);else rgm.textContent=m})}
 function trk(ev,subj,les){if(!PROF||!PROF.token||!GUEST)return;try{fetch('/api/event',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+PROF.token},body:JSON.stringify({events:[{ev:ev,cls:GUEST.cls,med:GUEST.med,subj:subj,lesson:String(les)}]}),keepalive:true}).catch(function(){})}catch(e){}}
 var GOPT=[];
 function openGuest(){gm.textContent='';gs.innerHTML='<option value="">लोड होत आहे…</option>';gd.style.display='flex';
