@@ -80,8 +80,8 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <button class="les" id="rgb" style="justify-content:center;background:#1d4ed8;color:#fff;border:0" onclick="rgGo()">नोंदणी करा</button>
 <button class="les" style="justify-content:center" onclick="rg.style.display='none'">बंद करा</button></div></div>
 <div id="gd" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:45;align-items:center;justify-content:center;padding:20px"><div style="background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:380px;width:100%">
-<b style="font-size:18px">🙋 पाहुणा म्हणून वापरा</b>
-<p style="font-size:13px;color:var(--mut);margin:6px 0 10px">लॉगिनशिवाय पाठ वापरा. तुमची प्रगती फक्त या फोनमध्ये राहते; शिक्षकांना निकाल दिसत नाही.</p>
+<b id="gt" style="font-size:18px">🙋 पाहुणा म्हणून वापरा</b>
+<p id="gn" style="font-size:13px;color:var(--mut);margin:6px 0 10px">लॉगिनशिवाय पाठ वापरा. तुमची प्रगती फक्त या फोनमध्ये राहते; शिक्षकांना निकाल दिसत नाही.</p>
 <select id="gs" style="width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-bottom:10px"></select>
 <p id="gm" style="color:#b91c1c;min-height:20px;font-size:14px;margin:0 0 8px"></p>
 <button class="les" style="justify-content:center;background:#0f766e;color:#fff;border:0" onclick="startGuest()">सुरू करा</button>
@@ -177,7 +177,7 @@ function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb'
  var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
  h+='<div class="sub" style="--c:'+s.c+';'+subGrad(s.n,s.p,i)+'" onclick="openS('+i+')"><div class="in">'+subPic(s,i)+'<div class="lbl"><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div></div></div>'});
  var fb2=(FEE&&FEE.enabled&&!FEE.paid)?'<button class="les" style="justify-content:center;background:#b45309;color:#fff;border:0;margin-top:12px" onclick="openPay()">🔓 सर्व पाठ अनलॉक करा · ₹'+FEE.fee+'/वर्ष</button>':((FEE&&FEE.enabled&&FEE.paid&&FEE.until)?'<p style="text-align:center;color:#15803d;font-size:13px;margin-top:10px">✔ पेड · मुदत '+FEE.until+'</p>':'');
- m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+((S||PROF)?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>':'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+''}
+ m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+((S||PROF)?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>'+(isAdm()?'<button class="fe" style="background:#7c3aed" onclick="openPrev()">🔄 इयत्ता/माध्यम बदला</button>':''):'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+''}
 
 
 
@@ -214,12 +214,14 @@ function rgDone(j,onErr){PROF={token:j.token,p:j.profile};try{localStorage.setIt
    try{localStorage.setItem('am_guest_v1',JSON.stringify(GUEST))}catch(e){}
    K='am_prog_m'+pr.mobile;try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){P={}}
    rg.style.display='none';lg.style.display='none';home()}).catch(function(){var m='हे पाठ उपलब्ध नाहीत.';if(onErr)onErr(m);else rgm.textContent=m})}
-function trk(ev,subj,les){if(!PROF||!PROF.token||!GUEST)return;try{fetch('/api/event',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+PROF.token},body:JSON.stringify({events:[{ev:ev,cls:GUEST.cls,med:GUEST.med,subj:subj,lesson:String(les)}]}),keepalive:true}).catch(function(){})}catch(e){}}
+function trk(ev,subj,les){if(!PROF||!PROF.token||!GUEST||PREV||isAdm())return;try{fetch('/api/event',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+PROF.token},body:JSON.stringify({events:[{ev:ev,cls:GUEST.cls,med:GUEST.med,subj:subj,lesson:String(les)}]}),keepalive:true}).catch(function(){})}catch(e){}}
 var GOPT=[];
-function openGuest(){gm.textContent='';gs.innerHTML='<option value="">लोड होत आहे…</option>';gd.style.display='flex';
+var ADM=['7972568986'],PREV=0;function isAdm(){return !!(PROF&&PROF.p&&ADM.indexOf(PROF.p.mobile)>=0)}
+function openPrev(){openGuest();gt.textContent='🔄 इयत्ता / माध्यम बदला';gn.textContent='विकसक पाहणी: कोणतीही इयत्ता व माध्यम पाहा. वापराची नोंद होत नाही.'}
+function openGuest(){gt.textContent='🙋 पाहुणा म्हणून वापरा';gn.textContent='लॉगिनशिवाय पाठ वापरा. तुमची प्रगती फक्त या फोनमध्ये राहते; शिक्षकांना निकाल दिसत नाही.';gm.textContent='';gs.innerHTML='<option value="">लोड होत आहे…</option>';gd.style.display='flex';
  fetch('content/index.json').then(function(r){return r.json()}).then(function(a){GOPT=a;gs.innerHTML='<option value="">इयत्ता व माध्यम निवडा</option>'+a.map(function(x,i){return '<option value="'+i+'">'+x.label+'</option>'}).join('')}).catch(function(){gs.innerHTML='<option value="">इंटरनेट तपासा</option>'})}
 function startGuest(){var x=GOPT[gs.value];if(!x){gm.textContent='इयत्ता व माध्यम निवडा.';return}
- GUEST={cls:x.cls,med:x.med};loadCat({className:String(x.cls),medium:medName(x.med)}).then(function(){
+ PREV=isAdm()?1:0;GUEST={cls:x.cls,med:x.med};loadCat({className:String(x.cls),medium:medName(x.med)}).then(function(){
   try{localStorage.setItem('am_guest_v1',JSON.stringify(GUEST))}catch(e){}
   K='am_prog_guest_v1';try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){P={}}
   gd.style.display='none';lg.style.display='none';home()}).catch(function(){GUEST=null;gm.textContent='हे पाठ उपलब्ध नाहीत.'})}
