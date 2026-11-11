@@ -58,21 +58,32 @@ export default{
         if(!b.consent)return J({e:'consent'},400);
         const cls=parseInt(b.cls)||0,med=['kn','en'].includes(b.med)?b.med:'mr';
         if(cls<1||cls>8)return J({e:'cls'},400);
-        if(await env.DB.prepare('SELECT 1 FROM students WHERE mobile=?').bind(mobile).first())return J({e:'exists'},409);
-        const salt=rnd(8),h=await hashPin(pin,salt),tok=rnd(24);
+        let salt=rnd(8),h=null,key=mobile;
+        const ex=await env.DB.prepare("SELECT * FROM students WHERE mobile=? OR mobile LIKE ? ORDER BY id").bind(mobile,mobile+'-%').all();
+        if(ex.results.length){
+          const f=ex.results[0];
+          if(f.fails>=8)return J({e:'locked'},429);
+          if(await hashPin(pin,f.salt)!==f.pin_hash)return J({e:'exists'},409);
+          if(ex.results.some(x=>x.cls===cls&&x.med===med&&x.name.trim().toLowerCase()===name.toLowerCase()))return J({e:'dup'},409);
+          if(ex.results.length>=6)return J({e:'many'},409);
+          salt=f.salt;h=f.pin_hash;key=mobile+'-'+(ex.results.length+1);
+        }else h=await hashPin(pin,salt);
+        const tok=rnd(24),mobileFull=key;
         await env.DB.prepare('INSERT INTO students(mobile,name,cls,med,salt,pin_hash,district,taluka,kendra,school,school_udise,token,last_seen) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)')
-          .bind(mobile,name,cls,med,salt,h,cl(b.district,60),cl(b.taluka,60),cl(b.kendra,80),cl(b.school,100),cl(b.udise,11).replace(/\D/g,''),tok).run();
-        return J({ok:1,token:tok,profile:{name,cls,med,mobile,district:cl(b.district,60),taluka:cl(b.taluka,60),kendra:cl(b.kendra,80),school:cl(b.school,100),udise:cl(b.udise,11)}});
+          .bind(mobileFull,name,cls,med,salt,h,cl(b.district,60),cl(b.taluka,60),cl(b.kendra,80),cl(b.school,100),cl(b.udise,11).replace(/\D/g,''),tok).run();
+        return J({ok:1,token:tok,profile:{name,cls,med,mobile:mobileFull,district:cl(b.district,60),taluka:cl(b.taluka,60),kendra:cl(b.kendra,80),school:cl(b.school,100),udise:cl(b.udise,11)}});
       }
       if(p==='/api/login'){
         const b=await body(r),mobile=cl(b.mobile,10),pin=cl(b.pin,6);
-        const s=await env.DB.prepare('SELECT * FROM students WHERE mobile=?').bind(mobile).first();
+        const rs=(await env.DB.prepare("SELECT * FROM students WHERE mobile=? OR mobile LIKE ? ORDER BY id").bind(mobile,mobile+'-%').all()).results;
+        const s=rs[0];
         if(!s)return J({e:'bad'},401);
         if(s.fails>=8)return J({e:'locked'},429);
         if(await hashPin(pin,s.salt)!==s.pin_hash){await env.DB.prepare('UPDATE students SET fails=fails+1 WHERE id=?').bind(s.id).run();return J({e:'bad'},401);}
-        const tok=rnd(24);
-        await env.DB.prepare('UPDATE students SET fails=0,token=?,last_seen=CURRENT_TIMESTAMP WHERE id=?').bind(tok,s.id).run();
-        return J({ok:1,token:tok,profile:{name:s.name,cls:s.cls,med:s.med,mobile:s.mobile,district:s.district,taluka:s.taluka,kendra:s.kendra,school:s.school,udise:s.school_udise}});
+        const pf=(x,t)=>({token:t,profile:{name:x.name,cls:x.cls,med:x.med,mobile:x.mobile,district:x.district,taluka:x.taluka,kendra:x.kendra,school:x.school,udise:x.school_udise}});
+        const list=[];
+        for(const x of rs){const t=rnd(24);await env.DB.prepare('UPDATE students SET fails=0,token=?,last_seen=CURRENT_TIMESTAMP WHERE id=?').bind(t,x.id).run();list.push(pf(x,t));}
+        return J({ok:1,token:list[0].token,profile:list[0].profile,list});
       }
       if(p==='/api/event'){
         const s=await me(env,r);if(!s)return J({e:'auth'},401);

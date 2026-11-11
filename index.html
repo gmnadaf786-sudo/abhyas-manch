@@ -140,7 +140,7 @@ function doLogin(ev){ev.preventDefault();var u=lu.value.trim(),p=lp.value.trim()
   lb.disabled=true;le.textContent='तपासत आहे…';
   fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({mobile:u,pin:p})}).then(function(r){return r.json()}).then(function(j){
    if(!j.ok){lb.disabled=false;le.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.':'मोबाईल किंवा पासवर्ड चुकीचा.';return}
-   le.textContent='';rgDone(j,function(m){le.textContent=m}).then(function(){lb.disabled=false})}).catch(function(){lb.disabled=false;le.textContent='इंटरनेट तपासा.'});return false}
+   le.textContent='';pickKid(j,function(m){le.textContent=m}).then(function(){lb.disabled=false})}).catch(function(){lb.disabled=false;le.textContent='इंटरनेट तपासा.'});return false}
  lb.disabled=true;le.textContent='तपासत आहे…';
  api({action:'login',username:u,password:p}).then(function(r){
   if(!r||!r.success){lb.disabled=false;le.textContent=(r&&r.message)||'लॉगिन अयशस्वी.';return}
@@ -177,7 +177,7 @@ function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb'
  var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
  h+='<div class="sub" style="--c:'+s.c+';'+subGrad(s.n,s.p,i)+'" onclick="openS('+i+')"><div class="in">'+subPic(s,i)+'<div class="lbl"><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div></div></div>'});
  var fb2=(FEE&&FEE.enabled&&!FEE.paid)?'<button class="les" style="justify-content:center;background:#b45309;color:#fff;border:0;margin-top:12px" onclick="openPay()">🔓 सर्व पाठ अनलॉक करा · ₹'+FEE.fee+'/वर्ष</button>':((FEE&&FEE.enabled&&FEE.paid&&FEE.until)?'<p style="text-align:center;color:#15803d;font-size:13px;margin-top:10px">✔ पेड · मुदत '+FEE.until+'</p>':'');
- m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+((S||PROF)?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>'+(isAdm()?'<button class="fe" style="background:#7c3aed" onclick="openPrev()">🔄 इयत्ता/माध्यम बदला</button>':''):'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+''}
+ m.innerHTML=h+'</div>'+fb2+'<div class="acts"><a class="wa" href="'+WA+'" target="_blank" rel="noopener">🟢 WhatsApp ग्रुप</a>'+((S||PROF)?'<button class="fe" onclick="openFb()">💬 अभिप्राय</button>'+(PROF?'<button class="fe" style="background:#0d9488" onclick="addKid()">➕ दुसरा वर्ग जोडा</button><button class="fe" style="background:#475569" onclick="guestLogin()">🔄 वर्ग बदला (पुन्हा लॉगिन)</button>':'')+(isAdm()?'<button class="fe" style="background:#7c3aed" onclick="openPrev()">🔄 इयत्ता/माध्यम बदला</button>':''):'<button class="fe" onclick="guestLogin()">🔑 लॉगिन करा</button>')+'</div>'+''}
 
 
 
@@ -195,7 +195,7 @@ function rgM(){var c=+rcl.value,h='<option value="">माध्यम निव
 function rgD(){rd.innerHTML=rgo(GEO.map(function(x){return x.n}),'जिल्हा निवडा');rt.innerHTML=rgo([],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र (गाव) निवडा')}
 function rgT(){var d=GEO[rd.value];rt.innerHTML=rgo(d?d.t.map(function(x){return x.n}):[],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र (गाव) निवडा')}
 function rgK(){var d=GEO[rd.value],t=d&&d.t[rt.value];rk.innerHTML=rgo(t?t.k.map(function(x){return x[0]}):[],'केंद्र (गाव) निवडा')}
-function rgErr(e){var M={mobile:'मोबाईल क्रमांक बरोबर टाका.',name:'विद्यार्थ्याचे नाव टाका.',pin:'पासवर्ड ४ ते ६ अंकी असावा.',consent:'संमती निवडा.',cls:'इयत्ता आणि माध्यम निवडा.',exists:'हा मोबाईल आधीच नोंदलेला आहे. "मोबाईल नंबरने लॉगिन" वापरा.',bad:'मोबाईल किंवा पासवर्ड चुकीचा.',locked:'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.'};rgm.textContent=M[e]||'काहीतरी अडचण आली. पुन्हा प्रयत्न करा.'}
+function rgErr(e){var M={mobile:'मोबाईल क्रमांक बरोबर टाका.',name:'विद्यार्थ्याचे नाव टाका.',pin:'पासवर्ड ४ ते ६ अंकी असावा.',consent:'संमती निवडा.',cls:'इयत्ता आणि माध्यम निवडा.',exists:'हा मोबाईल आधीच नोंदलेला आहे. दुसरा वर्ग जोडायचा असल्यास आधीचाच पासवर्ड टाका; नाहीतर "मोबाईल नंबरने लॉगिन" वापरा.',dup:'हे नाव व वर्ग आधीच जोडलेला आहे.',many:'एका मोबाईलवर जास्तीत जास्त ६ वर्ग जोडता येतात.',bad:'मोबाईल किंवा पासवर्ड चुकीचा.',locked:'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.'};rgm.textContent=M[e]||'काहीतरी अडचण आली. पुन्हा प्रयत्न करा.'}
 function rgGo(){rgm.textContent='';var o={mobile:rmb.value.trim(),pin:rpn.value.trim()},u='/api/login';
  if(!/^[6-9]\d{9}$/.test(o.mobile)){rgErr('mobile');return}
  if(!/^\d{4,6}$/.test(o.pin)){rgErr('pin');return}
@@ -207,7 +207,14 @@ function rgGo(){rgm.textContent='';var o={mobile:rmb.value.trim(),pin:rpn.value.
  rgb.disabled=true;
  fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(o)}).then(function(r){return r.json()}).then(function(j){rgb.disabled=false;
   if(!j.ok){rgErr(j.e);return}
-  rgDone(j)}).catch(function(){rgb.disabled=false;rgErr('')})}
+  pickKid(j)}).catch(function(){rgb.disabled=false;rgErr('')})}
+function pickKid(j,onErr){var L=j.list;if(!L||L.length<2){return rgDone(j,onErr)}
+ var o=document.createElement('div');o.id='kidpick';o.style.cssText='position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px';
+ var h='<div style="background:#fff;border-radius:16px;padding:16px;max-width:380px;width:100%"><b style="font-size:17px">कोणता वर्ग उघडायचा?</b>';
+ L.forEach(function(x,i){var p=x.profile;h+='<button type="button" class="les" style="justify-content:flex-start;width:100%;margin:8px 0 0" data-i="'+i+'">👤 '+p.name+' — इयत्ता '+p.cls+' ('+medName(p.med)+')</button>'});
+ o.innerHTML=h+'</div>';document.body.appendChild(o);
+ Array.prototype.forEach.call(o.querySelectorAll('button'),function(bt){bt.onclick=function(){var x=L[+bt.getAttribute('data-i')];o.remove();rgDone({ok:1,token:x.token,profile:x.profile},onErr)}})}
+function addKid(){rg.style.display='none';openRg(0);rgm.textContent='आधीचा मोबाईल व पासवर्ड टाका, नवीन नाव व वर्ग निवडा.'}
 function rgDone(j,onErr){PROF={token:j.token,p:j.profile};try{localStorage.setItem('am_prof_v1',JSON.stringify(PROF))}catch(e){}
   var pr=j.profile;GUEST={cls:pr.cls,med:pr.med};
   return loadCat({className:String(pr.cls),medium:medName(pr.med)}).then(function(){
