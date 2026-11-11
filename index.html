@@ -183,7 +183,7 @@ function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb'
 
 var GEO=null,RGM=0,PROF=null;try{PROF=JSON.parse(localStorage.getItem('am_prof_v1')||'null')}catch(e){}
 function rgo(a,f){return '<option value="">'+f+'</option>'+a.map(function(x,i){return '<option value="'+i+'">'+x+'</option>'}).join('')}
-function openRg(mode){RGM=mode;rgm.textContent='';rg.style.display='flex';
+function openRg(mode){RGM=mode;try{kidLock(0)}catch(e){}rgm.textContent='';rg.style.display='flex';
  rgt.textContent=mode?'📱 मोबाईल लॉगिन':'📝 नोंदणी';rgb.textContent=mode?'लॉगिन':'नोंदणी करा';rgr.style.display=mode?'none':'block';rcw.style.display=mode?'none':'flex';
  if(mode)return;
   var fin=function(){var cs=[];GOPT.forEach(function(x){if(cs.indexOf(x.cls)<0)cs.push(x.cls)});cs.sort(function(a,b){return a-b});rcl.innerHTML='<option value="">इयत्ता निवडा</option>'+cs.map(function(c){return '<option value="'+c+'">इयत्ता '+c+'</option>'}).join('');rcm.innerHTML='<option value="">माध्यम निवडा</option>'};
@@ -214,7 +214,15 @@ function pickKid(j,onErr){var L=j.list;if(!L||L.length<2){return rgDone(j,onErr)
  L.forEach(function(x,i){var p=x.profile;h+='<button type="button" class="les" style="justify-content:flex-start;width:100%;margin:8px 0 0" data-i="'+i+'">👤 '+p.name+' — इयत्ता '+p.cls+' ('+medName(p.med)+')</button>'});
  o.innerHTML=h+'</div>';document.body.appendChild(o);
  Array.prototype.forEach.call(o.querySelectorAll('button'),function(bt){bt.onclick=function(){var x=L[+bt.getAttribute('data-i')];o.remove();rgDone({ok:1,token:x.token,profile:x.profile},onErr)}})}
-function addKid(){rg.style.display='none';openRg(0);rgm.textContent='आधीचा मोबाईल व पासवर्ड टाका, नवीन नाव व वर्ग निवडा.'}
+function kidLock(on){[rmb,rd,rt,rk,rsn,rsu].forEach(function(e){e.disabled=!!on;e.style.opacity=on?'.7':''})}
+function addKid(){var p=PROF&&PROF.p;rg.style.display='none';openRg(0);kidLock(0);if(!p)return;
+ rgm.textContent='आधीचा पासवर्ड टाका; विद्यार्थ्याचे नाव, इयत्ता व माध्यम भरा. बाकी माहिती आपोआप भरली आहे.';
+ rmb.value=String(p.mobile).split('-')[0];rnm.value='';rpn.value='';rsn.value=p.school||'';rsu.value=p.udise||'';
+ var n=0,t=setInterval(function(){n++;if(n>60){clearInterval(t);return}if(!GEO)return;clearInterval(t);
+  var di=-1;GEO.forEach(function(x,k){if(x.n===p.district)di=k});rd.value=di<0?'':di;rgT();
+  var d=GEO[di],ti=-1;if(d)d.t.forEach(function(x,k){if(x.n===p.taluka)ti=k});rt.value=ti<0?'':ti;rgK();
+  var ki=-1;if(d&&d.t[ti])d.t[ti].k.forEach(function(x,k){if(x[0]===p.kendra)ki=k});rk.value=ki<0?'':ki;
+  kidLock(1)},100)}
 function rgDone(j,onErr){PROF={token:j.token,p:j.profile};try{localStorage.setItem('am_prof_v1',JSON.stringify(PROF))}catch(e){}
   var pr=j.profile;GUEST={cls:pr.cls,med:pr.med};
   return loadCat({className:String(pr.cls),medium:medName(pr.med)}).then(function(){
