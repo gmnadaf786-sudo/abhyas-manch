@@ -47,7 +47,7 @@ function home(){var s0=get(0,'set',''),s1=get(CL,'set',''),dy=get(0,'days','');
  tile('🏫','शाळा व वर्गशिक्षक','मुख्याध्यापक आणि वर्गशिक्षकाचे नाव','setS()',s0&&s1)+
  tile('⚖️','भारांश','दोन्ही सत्रांचा भारांश निश्चित केल्यावरच गुण नोंदणी सुरू होते','wtS(1)',get(CL,'wtdone','1')&&get(CL,'wtdone','2'))+
  tile('📅','कामाचे दिवस','महिनावार शाळेचे कामाचे दिवस','dayS()',dy)+
- tile('✏️','गुण नोंदणी','विषयवार, साधनवार गुण भरा','mkS(1)')+tile('🙋','उपस्थिती','महिनावार उपस्थित दिवस','atS(0)',get(CL,'att','all'))+tile('⚖️','आरोग्य (वजन/उंची)','सत्र १ व सत्र २','hlS(1)',get(CL,'hlt','1')&&get(CL,'hlt','2'))+tile('📝','वर्णनात्मक नोंदी','लवकरच','')+tile('📄','निकाल व प्रगती पुस्तिका','लवकरच','')}
+ tile('✏️','गुण नोंदणी','विषयवार, साधनवार गुण भरा','mkS(1)')+tile('🙋','उपस्थिती','महिनावार उपस्थित दिवस','atS(0)',get(CL,'att','all'))+tile('⚖️','आरोग्य (वजन/उंची)','सत्र १ व सत्र २','hlS(1)',get(CL,'hlt','1')&&get(CL,'hlt','2'))+tile('📝','वर्णनात्मक नोंदी','विषयवार व गुणविशेष नोंदी निवडा','dcS(1,0)')+tile('📄','निकाल व प्रगती पुस्तिका','लवकरच','')}
 /* ---- शाळा व वर्गशिक्षक ---- */
 function setS(){var s0=get(0,'set','')||{},s1=get(CL,'set','')||{};
  d.innerHTML=back('शाळा व वर्गशिक्षक')+'<div class="card"><label>शाळेचे नाव</label><input id="sn" value="'+E(s0.school||'')+'"><label>मुख्याध्यापकाचे नाव</label><input id="hm" value="'+E(s0.hm||'')+'"><label>इयत्ता '+CL+' '+E(DV)+' — वर्गशिक्षकाचे नाव</label><input id="ct" value="'+E(s1.ct||NM)+'"><p id="e" class="er"></p><button onclick="setSave()">सेव्ह</button></div>'}
@@ -137,5 +137,29 @@ function hlI(el){var pen=el.getAttribute('data-p'),f=+el.getAttribute('data-f'),
 function hlSave(){var e=document.getElementById('e');if(document.querySelector('.st input.bad')){e.className='er';e.textContent='लाल चौकटीतील वजन (५–१५० किलो) किंवा उंची (४०–२२० सेमी) चुकीची आहे.';return}
  e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'hlt',String(HL.term),HL.data).then(function(j){if(j.ok){HL.dirty=false;e.textContent='सेव्ह झाले ✔'}else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
 function hlBack(){if(HL&&HL.dirty&&!confirm('बदल सेव्ह केलेले नाहीत. तरीही मागे जायचे?'))return;HL=null;home()}
+/* ---- वर्णनात्मक नोंदी ---- */
+var BANK=null,DC=null;
+function needBank(cb,title){if(BANK)return cb();var md=(STU.length&&STU[0].med==='kn')?'kn':'mr';
+ fetch('cce-notes/'+md+'-'+CL+'.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){BANK=j.s;cb()}).catch(function(){d.innerHTML=back(title)+'<div class="card er">नोंद-बँक मिळाली नाही. इंटरनेट तपासा.</div>'})}
+function dcKey(t,i){return t+'|'+BANK[i].n}
+function dcSec(t,i){return get(CL,'desc',dcKey(t,i))||{}}
+function dcS(term,si){d.innerHTML=back('वर्णनात्मक नोंदी')+'<div class="card">लोड होत आहे…</div>';needStu(function(){needK('desc',function(){needBank(function(){
+ if(!STU.length){d.innerHTML=back('वर्णनात्मक नोंदी')+'<div class="card">या वर्गात अजून विद्यार्थी नाहीत.</div>';return}
+ var sec=BANK[si],dt=dcSec(term,si);
+ d.innerHTML=back('वर्णनात्मक नोंदी')+'<div class="r"><button class="'+(term===1?'s':'g')+'" onclick="dcS(1,'+si+')">सत्र १</button><button class="'+(term===2?'s':'g')+'" onclick="dcS(2,'+si+')">सत्र २</button></div><div class="chips">'+
+ BANK.map(function(b,i){var d2=dcSec(term,i),n=STU.filter(function(x){return d2[x.pen]&&d2[x.pen].length}).length;return '<button class="'+(i===si?'s':'g')+'" onclick="dcS('+term+','+i+')">'+E(b.n)+(n===STU.length?' ✔':n?' ('+n+')':'')+'</button>'}).join('')+'</div>'+
+ '<div class="card"><small>विद्यार्थ्यावर दाबून नोंद निवडा. विभाग: '+E(sec.n)+'</small>'+STU.map(function(x,n){var a=dt[x.pen]||[];return '<div class="row" onclick="dcP('+term+','+si+','+n+')"><span>'+(x.roll?E(x.roll)+'. ':'')+E(x.name)+'<br><small>'+(a.length?E(a.join('; ').slice(0,60))+(a.join('; ').length>60?'…':''):'—')+'</small></span><small>'+(a.length?a.length+' ✔':'›')+'</small></div>'}).join('')+'</div>'})})},'वर्णनात्मक नोंदी')}
+function dcP(term,si,n){var x=STU[n],sec=BANK[si],dt=dcSec(term,si),cur=dt[x.pen]||[],g=x.gender==='F'?1:0,bank=sec.x.map(function(p){return p[g]||p[0]}),other=cur.filter(function(c){return bank.indexOf(c)<0});
+ DC={term:term,si:si,n:n,bank:bank};
+ d.innerHTML='<button class="g" onclick="dcS('+term+','+si+')">← यादी</button><h2 style="margin:4px 0 4px">'+E(x.name)+'</h2><small>'+E(sec.n)+' · सत्र '+term+'</small><div class="card">'+
+ bank.map(function(b,i){return '<label style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--l);font-size:15px;color:var(--i)"><input type="checkbox" style="width:auto;margin:3px 0 0" value="'+i+'"'+(cur.indexOf(b)>=0?' checked':'')+' onchange="dcC()"><span>'+E(b)+'</span></label>'}).join('')+
+ '<label style="margin-top:10px">स्वतः लिहा (हवे असल्यास)</label><textarea id="dx" rows="3" style="width:100%;box-sizing:border-box;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--i)">'+E(other.join('; '))+'</textarea></div>'+
+ '<div class="sv"><p id="e" class="er"></p><div class="r">'+(n>0?'<button class="g" onclick="dcSv(-1)">‹ मागील</button>':'')+'<button onclick="dcSv(0)">सेव्ह</button>'+(n<STU.length-1?'<button class="g" onclick="dcSv(1)">पुढील ›</button>':'')+'</div></div>'}
+function dcC(){var k=document.querySelectorAll('input[type=checkbox]:checked').length,e=document.getElementById('e');e.className=k>4?'er':'ok';e.textContent=k>4?'४ पेक्षा जास्त नोंदी प्रगती पुस्तिकेत मावणार नाहीत.':''}
+function dcSv(go){var e=document.getElementById('e'),x=STU[DC.n],a=[];document.querySelectorAll('input[type=checkbox]:checked').forEach(function(c){a.push(DC.bank[+c.value])});
+ var t=document.getElementById('dx').value.split(';').map(function(z){return z.trim()}).filter(Boolean);a=a.concat(t);
+ var kk=dcKey(DC.term,DC.si),dt=JSON.parse(JSON.stringify(get(CL,'desc',kk)||{}));if(a.length)dt[x.pen]=a;else delete dt[x.pen];
+ e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'desc',kk,dt).then(function(j){if(!j.ok){e.className='er';e.textContent=msg(j);return}
+  var nn=DC.n+go,term=DC.term,si=DC.si;if(go&&nn>=0&&nn<STU.length)dcP(term,si,nn);else dcS(term,si)}).catch(function(){e.className='er';e.textContent=msg({})})}
 load();
 </script></main></body></html>
