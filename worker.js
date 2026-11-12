@@ -230,7 +230,7 @@ async function ext(p,r,env){
         const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,''),name=cl(x.name,60),mob=cl(x.mob,10).replace(/\D/g,'').slice(-10),udise=cl(x.udise,11).replace(/\D/g,'');
         if(!/^[A-Z0-9]{6,20}$/.test(sh)||name.length<2||!okMob(mob)||udise.length!==11){sk++;continue}
         if(await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=?').bind(sh).first()){sk++;continue}
-        const salt=rnd(8),h=await hashPin(mob.slice(-6),salt);
+        const salt=rnd(8),h=await hashPin('123456',salt);
         await env.DB.prepare("INSERT OR IGNORE INTO teachers(shalarth,name,mobile,udise,salt,pw,status) VALUES(?,?,?,?,?,?,'ok')").bind(sh,name,mob,udise,salt,h).run();n++;
       }
       return J({ok:1,n:n,sk:sk});
