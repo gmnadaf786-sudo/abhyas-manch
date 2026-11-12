@@ -47,7 +47,7 @@ function home(){var s0=get(0,'set',''),s1=get(CL,'set',''),dy=get(0,'days','');
  tile('🏫','शाळा व वर्गशिक्षक','मुख्याध्यापक आणि वर्गशिक्षकाचे नाव','setS()',s0&&s1)+
  tile('⚖️','भारांश','दोन्ही सत्रांचा भारांश निश्चित केल्यावरच गुण नोंदणी सुरू होते','wtS(1)',get(CL,'wtdone','1')&&get(CL,'wtdone','2'))+
  tile('📅','कामाचे दिवस','महिनावार शाळेचे कामाचे दिवस','dayS()',dy)+
- tile('✏️','गुण नोंदणी','विषयवार, साधनवार गुण भरा','mkS(1)')+tile('🙋','उपस्थिती, आरोग्य, वर्णनात्मक नोंदी','लवकरच','')+tile('📄','निकाल व प्रगती पुस्तिका','लवकरच','')}
+ tile('✏️','गुण नोंदणी','विषयवार, साधनवार गुण भरा','mkS(1)')+tile('🙋','उपस्थिती','महिनावार उपस्थित दिवस','atS(0)',get(CL,'att','all'))+tile('⚖️','आरोग्य (वजन/उंची)','सत्र १ व सत्र २','hlS(1)',get(CL,'hlt','1')&&get(CL,'hlt','2'))+tile('📝','वर्णनात्मक नोंदी','लवकरच','')+tile('📄','निकाल व प्रगती पुस्तिका','लवकरच','')}
 /* ---- शाळा व वर्गशिक्षक ---- */
 function setS(){var s0=get(0,'set','')||{},s1=get(CL,'set','')||{};
  d.innerHTML=back('शाळा व वर्गशिक्षक')+'<div class="card"><label>शाळेचे नाव</label><input id="sn" value="'+E(s0.school||'')+'"><label>मुख्याध्यापकाचे नाव</label><input id="hm" value="'+E(s0.hm||'')+'"><label>इयत्ता '+CL+' '+E(DV)+' — वर्गशिक्षकाचे नाव</label><input id="ct" value="'+E(s1.ct||NM)+'"><p id="e" class="er"></p><button onclick="setSave()">सेव्ह</button></div>'}
@@ -105,6 +105,35 @@ function mkI(el){var pen=el.getAttribute('data-p'),x=el.value.trim(),mx=CUR.w[CU
 function mkSave(){var e=document.getElementById('e');if(document.querySelector('.st input.bad')){e.className='er';e.textContent='लाल चौकटीतील गुण कमाल गुणांपेक्षा जास्त/चुकीचे आहेत. ते दुरुस्त करा.';return}
  e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'marks',CUR.term+'|'+CUR.code,CUR.data).then(function(j){if(j.ok){CUR.dirty=false;e.className='ok';e.textContent='सेव्ह झाले ✔'}else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
 function mkBack(){if(CUR&&CUR.dirty&&!confirm('बदल सेव्ह केलेले नाहीत. तरीही मागे जायचे?'))return;var t=CUR?CUR.term:1;CUR=null;mkS(t)}
-window.addEventListener('beforeunload',function(ev){if(CUR&&CUR.dirty){ev.preventDefault();ev.returnValue=''}});
+window.addEventListener('beforeunload',function(ev){if((CUR&&CUR.dirty)||(typeof AT!=='undefined'&&AT&&AT.dirty)||(typeof HL!=='undefined'&&HL&&HL.dirty)){ev.preventDefault();ev.returnValue=''}});
+/* ---- उपस्थिती ---- */
+var LD={};
+function needK(kind,cb,title){if(LD[kind])return cb();post('/api/cce/get',{kinds:[kind]}).then(function(j){if(!j.ok){d.innerHTML=back(title)+'<div class="card er">'+msg(j)+'</div>';return}
+ j.rows.forEach(function(r){var v=null;try{v=JSON.parse(r.v)}catch(e){}DOC[key(r.cls,r.kind,r.k)]={v:v,upd:r.upd}});LD[kind]=1;cb()}).catch(function(){d.innerHTML=back(title)+'<div class="card er">इंटरनेट तपासा.</div>'})}
+var AT=null;
+function atS(mi){d.innerHTML=back('उपस्थिती')+'<div class="card">लोड होत आहे…</div>';needStu(function(){needK('att',function(){
+ var wd=get(0,'days','');if(!wd||!wd.some(function(x){return x>0})){d.innerHTML=back('उपस्थिती')+'<div class="card"><b>प्रथम कामाचे दिवस भरा.</b><br><small>उपस्थिती भरण्यासाठी महिन्याचे कामाचे दिवस आवश्यक आहेत.</small><br><br><button onclick="dayS()">📅 कामाचे दिवस</button></div>';return}
+ if(!STU.length){d.innerHTML=back('उपस्थिती')+'<div class="card">या वर्गात अजून विद्यार्थी नाहीत.</div>';return}
+ if(!AT||AT.fresh)AT={data:JSON.parse(JSON.stringify(get(CL,'att','all')||{})),dirty:false};AT.mi=mi;var mx=wd[mi]||0;
+ d.innerHTML='<button class="g" onclick="atBack()">← CCE</button><h2 style="margin:4px 0 8px">उपस्थिती ('+YR+')</h2><div class="chips">'+MON.map(function(m,i){return '<button class="'+(i===mi?'s':'g')+'" onclick="atS('+i+')">'+m+(wd[i]?' ('+wd[i]+')':'')+'</button>'}).join('')+'</div>'+
+ (mx?'<div class="card"><div class="st"><span><small>'+MON[mi]+' · कामाचे दिवस '+mx+'</small></span><button class="g" style="width:auto;margin:0;padding:6px 10px" onclick="atAll('+mx+')">सर्व पूर्ण उपस्थित</button></div>'+STU.map(function(x,n){var r=AT.data[x.pen]||[];return '<div class="st"><span>'+(x.roll?E(x.roll)+'. ':'')+E(x.name)+'</span><input type="number" inputmode="numeric" min="0" max="'+mx+'" data-p="'+E(x.pen)+'" value="'+(r[mi]==null?'':r[mi])+'" oninput="atI(this,'+mx+')"></div>'}).join('')+'</div><div class="sv"><p id="e" class="er"></p><button onclick="atSave()">सेव्ह</button></div>':'<div class="card">या महिन्याचे कामाचे दिवस भरलेले नाहीत (० आहेत). हा महिना सोडा किंवा कामाचे दिवस भरा.</div>')})})}
+function atI(el,mx){var pen=el.getAttribute('data-p'),x=el.value.trim(),v=x===''?null:Number(x),bad=v!==null&&(!isFinite(v)||v<0||v>mx||v%1!==0);el.classList.toggle('bad',bad);var r=AT.data[pen]||(AT.data[pen]=[null,null,null,null,null,null,null,null,null,null,null,null]);r[AT.mi]=bad?null:v;AT.dirty=true}
+function atAll(mx){document.querySelectorAll('.st input').forEach(function(el){el.value=mx;atI(el,mx)})}
+function atSave(){var e=document.getElementById('e');if(document.querySelector('.st input.bad')){e.className='er';e.textContent='लाल चौकटीतील संख्या कामाच्या दिवसांपेक्षा जास्त/चुकीची आहे.';return}
+ e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'att','all',AT.data).then(function(j){if(j.ok){AT.dirty=false;e.textContent='सेव्ह झाले ✔'}else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
+function atBack(){if(AT&&AT.dirty&&!confirm('बदल सेव्ह केलेले नाहीत. तरीही मागे जायचे?'))return;AT=null;home()}
+/* ---- आरोग्य ---- */
+var HL=null;
+function hlS(term){d.innerHTML=back('आरोग्य')+'<div class="card">लोड होत आहे…</div>';needStu(function(){needK('hlt',function(){
+ if(!STU.length){d.innerHTML=back('आरोग्य')+'<div class="card">या वर्गात अजून विद्यार्थी नाहीत.</div>';return}
+ if(!HL||HL.term!==term)HL={term:term,data:JSON.parse(JSON.stringify(get(CL,'hlt',String(term))||{})),dirty:false};
+ d.innerHTML='<button class="g" onclick="hlBack()">← CCE</button><h2 style="margin:4px 0 8px">आरोग्य ('+YR+')</h2><div class="r"><button class="'+(term===1?'s':'g')+'" onclick="hlGo(1)">सत्र १</button><button class="'+(term===2?'s':'g')+'" onclick="hlGo(2)">सत्र २</button></div>'+
+ '<div class="card"><div class="st"><span><small>वजन (किलो) · उंची (सेमी)</small></span></div>'+STU.map(function(x){var r=HL.data[x.pen]||[];return '<div class="st"><span>'+(x.roll?E(x.roll)+'. ':'')+E(x.name)+'</span><input type="number" inputmode="decimal" step="0.1" placeholder="किलो" data-p="'+E(x.pen)+'" data-f="0" value="'+(r[0]==null?'':r[0])+'" oninput="hlI(this)"><input type="number" inputmode="decimal" step="0.1" placeholder="सेमी" data-p="'+E(x.pen)+'" data-f="1" value="'+(r[1]==null?'':r[1])+'" oninput="hlI(this)"></div>'}).join('')+'</div><div class="sv"><p id="e" class="er"></p><button onclick="hlSave()">सेव्ह</button></div>'})})}
+function hlGo(t){if(HL&&HL.dirty&&!confirm('बदल सेव्ह केलेले नाहीत. तरीही सत्र बदलायचे?'))return;HL=null;hlS(t)}
+var HR=[[5,150],[40,220]];
+function hlI(el){var pen=el.getAttribute('data-p'),f=+el.getAttribute('data-f'),x=el.value.trim(),v=x===''?null:Number(x),bad=v!==null&&(!isFinite(v)||v<HR[f][0]||v>HR[f][1]);el.classList.toggle('bad',bad);var r=HL.data[pen]||(HL.data[pen]=[null,null]);r[f]=bad?null:v;HL.dirty=true}
+function hlSave(){var e=document.getElementById('e');if(document.querySelector('.st input.bad')){e.className='er';e.textContent='लाल चौकटीतील वजन (५–१५० किलो) किंवा उंची (४०–२२० सेमी) चुकीची आहे.';return}
+ e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'hlt',String(HL.term),HL.data).then(function(j){if(j.ok){HL.dirty=false;e.textContent='सेव्ह झाले ✔'}else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
+function hlBack(){if(HL&&HL.dirty&&!confirm('बदल सेव्ह केलेले नाहीत. तरीही मागे जायचे?'))return;HL=null;home()}
 load();
 </script></main></body></html>
