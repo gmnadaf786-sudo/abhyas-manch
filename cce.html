@@ -8,7 +8,8 @@ button{background:var(--a);color:#fff;border:0;cursor:pointer}button.g{backgroun
 .t{display:flex;align-items:center;gap:12px;cursor:pointer}.t .ic{font-size:26px}.t b{display:block}.t.off{opacity:.5;cursor:default}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.g2 input{margin:0}.sum{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid var(--l);font-weight:600}
 .chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px}.chips button{width:auto;white-space:nowrap;margin:0;padding:8px 12px}.st{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--l)}.st span{flex:1;min-width:0}.st input{width:76px;margin:0;text-align:center}.st input.bad{border-color:#b91c1c;background:#fee2e2;color:#111}.st small{width:52px;text-align:right}.sv{position:sticky;bottom:0;background:var(--bg);padding:8px 0}
-.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--l);cursor:pointer}</style></head><body><main>
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--l);cursor:pointer}@media print{button,.chips,.noprint,h1,.r{display:none!important}body{background:#fff;color:#000}main{max-width:none;padding:0}.card{border:0;padding:0;margin:0}table.rp{font-size:10px}}
+table.rp{border-collapse:collapse;width:100%;font-size:12px}table.rp th,table.rp td{border:1px solid #94a3b8;padding:4px 5px;text-align:center;color:inherit}table.rp td.n{text-align:left;white-space:nowrap}table.rp th{background:#f1f5f9;color:#111}.wx{overflow-x:auto}.ph{font-size:13px;margin-bottom:8px;color:inherit}.sg{display:flex;justify-content:space-between;margin-top:40px;font-size:13px}.inc{color:#b91c1c}</style></head><body><main>
 <h1 id="hd">📘 CCE</h1><div id="d"><div class="card">लोड होत आहे…</div></div>
 <script>
 var E=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
@@ -47,7 +48,7 @@ function home(){var s0=get(0,'set',''),s1=get(CL,'set',''),dy=get(0,'days','');
  tile('🏫','शाळा व वर्गशिक्षक','मुख्याध्यापक आणि वर्गशिक्षकाचे नाव','setS()',s0&&s1)+
  tile('⚖️','भारांश','दोन्ही सत्रांचा भारांश निश्चित केल्यावरच गुण नोंदणी सुरू होते','wtS(1)',get(CL,'wtdone','1')&&get(CL,'wtdone','2'))+
  tile('📅','कामाचे दिवस','महिनावार शाळेचे कामाचे दिवस','dayS()',dy)+
- tile('✏️','गुण नोंदणी','विषयवार, साधनवार गुण भरा','mkS(1)')+tile('🙋','उपस्थिती','महिनावार उपस्थित दिवस','atS(0)',get(CL,'att','all'))+tile('⚖️','आरोग्य (वजन/उंची)','सत्र १ व सत्र २','hlS(1)',get(CL,'hlt','1')&&get(CL,'hlt','2'))+tile('📝','वर्णनात्मक नोंदी','विषयवार व गुणविशेष नोंदी निवडा','dcS(1,0)')+tile('📄','निकाल व प्रगती पुस्तिका','लवकरच','')}
+ tile('✏️','गुण नोंदणी','विषयवार, साधनवार गुण भरा','mkS(1)')+tile('🙋','उपस्थिती','महिनावार उपस्थित दिवस','atS(0)',get(CL,'att','all'))+tile('⚖️','आरोग्य (वजन/उंची)','सत्र १ व सत्र २','hlS(1)',get(CL,'hlt','1')&&get(CL,'hlt','2'))+tile('📝','वर्णनात्मक नोंदी','विषयवार व गुणविशेष नोंदी निवडा','dcS(1,0)')+tile('📊','निकाल व अहवाल','निकाल पत्रक, श्रेणी तक्ता, नोंदवही (प्रिंट/Excel)','rsS(1)')}
 /* ---- शाळा व वर्गशिक्षक ---- */
 function setS(){var s0=get(0,'set','')||{},s1=get(CL,'set','')||{};
  d.innerHTML=back('शाळा व वर्गशिक्षक')+'<div class="card"><label>शाळेचे नाव</label><input id="sn" value="'+E(s0.school||'')+'"><label>मुख्याध्यापकाचे नाव</label><input id="hm" value="'+E(s0.hm||'')+'"><label>इयत्ता '+CL+' '+E(DV)+' — वर्गशिक्षकाचे नाव</label><input id="ct" value="'+E(s1.ct||NM)+'"><p id="e" class="er"></p><button onclick="setSave()">सेव्ह</button></div>'}
@@ -161,5 +162,45 @@ function dcSv(go){var e=document.getElementById('e'),x=STU[DC.n],a=[];document.q
  var kk=dcKey(DC.term,DC.si),dt=JSON.parse(JSON.stringify(get(CL,'desc',kk)||{}));if(a.length)dt[x.pen]=a;else delete dt[x.pen];
  e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'desc',kk,dt).then(function(j){if(!j.ok){e.className='er';e.textContent=msg(j);return}
   var nn=DC.n+go,term=DC.term,si=DC.si;if(go&&nn>=0&&nn<STU.length)dcP(term,si,nn);else dcS(term,si)}).catch(function(){e.className='er';e.textContent=msg({})})}
+/* ---- निकाल व अहवाल ---- */
+var GB=[[91,'अ-१'],[81,'अ-२'],[71,'ब-१'],[61,'ब-२'],[51,'क-१'],[41,'क-२'],[33,'ड'],[21,'इ-१'],[0,'इ-२']];
+function gradeOf(t,mx){if(t==null||!(mx>0))return '—';var p=t/mx*100;for(var i=0;i<GB.length;i++)if(p>=GB[i][0])return GB[i][1];return 'इ-२'}
+function r2(x){return Math.round(x*100)/100}
+function sm(term,code,pen){var w=wOf(term,code),cs=comps(w);if(!cs.length)return null;var m=get(CL,'marks',term+'|'+code),r=m&&m[pen],f=0,su=0,inc=false,mx=0,any=false;
+ cs.forEach(function(i){mx+=w[i];var v=r?r[i]:null;if(v==null)inc=true;else if(any=true,i<8)f+=Number(v);else su+=Number(v)});
+ return {f:f,s:su,t:f+su,mx:mx,inc:inc,any:any}}
+function sv(term,code,pen){if(term===3){var a=sm(1,code,pen),b=sm(2,code,pen);if(!a||!b)return a||b;return {f:a.f+b.f,s:a.s+b.s,t:a.t+b.t,mx:a.mx+b.mx,inc:a.inc||b.inc,any:a.any||b.any}}return sm(term,code,pen)}
+function tnm(t){return t===3?'वार्षिक':'सत्र '+t}
+function rsS(term){d.innerHTML=back('निकाल व अहवाल')+'<div class="card">लोड होत आहे…</div>';needStu(function(){needMk(function(){
+ if(!STU.length){d.innerHTML=back('निकाल व अहवाल')+'<div class="card">या वर्गात अजून विद्यार्थी नाहीत.</div>';return}
+ d.innerHTML=back('निकाल व अहवाल')+'<div class="chips">'+[1,2,3].map(function(t){return '<button class="'+(t===term?'s':'g')+'" onclick="rsS('+t+')">'+tnm(t)+'</button>'}).join('')+'</div>'+
+ '<div class="card t" onclick="rsR('+term+',\'res\')"><span class="ic">📋</span><span><b>निकाल पत्रक</b><small>विषयवार गुण व श्रेणी, एकूण, टक्केवारी</small></span></div>'+
+ '<div class="card t" onclick="rsR('+term+',\'grd\')"><span class="ic">📈</span><span><b>श्रेणी तक्ता</b><small>विषयनिहाय किती विद्यार्थ्यांना कोणती श्रेणी</small></span></div>'+
+ '<div class="card"><b>नोंदवही (साधनवार गुण)</b><small> — विषय निवडा</small>'+W[CL].map(function(x){return '<div class="row" onclick="rsR('+term+',\'reg\',\''+x[0]+'\')"><b>'+E(x[1])+'</b><small>›</small></div>'}).join('')+'</div>'})})}
+function hdr(term,extra){var a=get(0,'set','')||{};return '<div class="ph"><b>'+E(a.school||'')+'</b><br>इयत्ता '+CL+' '+E(DV)+' · '+YR+' · '+tnm(term)+(extra?' · '+extra:'')+'</div>'}
+function ftr(){var a=get(0,'set','')||{},b=get(CL,'set','')||{};return '<div class="sg"><span>वर्गशिक्षक: '+E(b.ct||'')+'</span><span>मुख्याध्यापक: '+E(a.hm||'')+'</span></div>'}
+var RP=null;
+function rsR(term,kind,code){var S=STU,subs=W[CL],h='',rows=[];
+ if(kind==='res'){
+  h='<tr><th>क्र.</th><th>नाव</th>'+subs.map(function(x){return '<th>'+E(x[1])+'</th>'}).join('')+'<th>एकूण</th><th>%</th><th>श्रेणी</th></tr>';rows.push(['क्र.','नाव'].concat(subs.map(function(x){return x[1]}),['एकूण','टक्के','श्रेणी']));
+  S.forEach(function(x,n){var T=0,M=0,inc=false,cells=[],csv=[(x.roll||n+1),x.name];subs.forEach(function(sb){var r=sv(term,sb[0],x.pen);if(!r){cells.push('<td>—</td>');csv.push('');return}
+    T+=r.t;M+=r.mx;if(r.inc)inc=true;cells.push(r.any?'<td'+(r.inc?' class="inc"':'')+'>'+r2(r.t)+'<br><small>'+(r.inc?'अपूर्ण':gradeOf(r.t,r.mx))+'</small></td>':'<td class="inc">—</td>');csv.push(r2(r.t)+' ('+(r.inc?'अपूर्ण':gradeOf(r.t,r.mx))+')')});
+   var p=M?r2(T/M*100):0,g=inc?'अपूर्ण':gradeOf(T,M);h+='<tr><td>'+(x.roll||n+1)+'</td><td class="n">'+E(x.name)+'</td>'+cells.join('')+'<td>'+r2(T)+'/'+M+'</td><td>'+p+'</td><td><b>'+g+'</b></td></tr>';rows.push(csv.concat([r2(T)+'/'+M,p,g]))});
+  show('निकाल पत्रक',term,h,rows,'landscape')}
+ else if(kind==='grd'){
+  var cols=GB.map(function(g){return g[1]});h='<tr><th>विषय</th>'+cols.map(function(c){return '<th>'+c+'</th>'}).join('')+'<th>अपूर्ण</th><th>एकूण</th></tr>';rows.push(['विषय'].concat(cols,['अपूर्ण','एकूण']));
+  subs.forEach(function(sb){var cnt={},inc=0;cols.forEach(function(c){cnt[c]=0});S.forEach(function(x){var r=sv(term,sb[0],x.pen);if(!r||r.inc){inc++;return}cnt[gradeOf(r.t,r.mx)]++});
+   h+='<tr><td class="n">'+E(sb[1])+'</td>'+cols.map(function(c){return '<td>'+(cnt[c]||'')+'</td>'}).join('')+'<td>'+(inc||'')+'</td><td>'+S.length+'</td></tr>';rows.push([sb[1]].concat(cols.map(function(c){return cnt[c]||''}),[inc||'',S.length]))});
+  show('श्रेणी तक्ता',term,h,rows,'portrait')}
+ else{
+  var sb=subs.filter(function(x){return x[0]===code})[0],terms=term===3?[1,2]:[term];h='';rows=[];
+  terms.forEach(function(t){var w=wOf(t,code),cs=comps(w);var hd=['क्र.','नाव'].concat(cs.map(function(i){return CP[i]+(i>=8?' (सं.)':'')+' /'+w[i]}),['आकारिक','संकलित','एकूण','श्रेणी']);
+   h+='<tr><th colspan="'+hd.length+'" style="text-align:left">सत्र '+t+'</th></tr><tr>'+hd.map(function(x){return '<th>'+E(x)+'</th>'}).join('')+'</tr>';rows.push(['सत्र '+t]);rows.push(hd);
+   var m=get(CL,'marks',t+'|'+code)||{};S.forEach(function(x,n){var r=m[x.pen]||[],q=sm(t,code,x.pen),vals=cs.map(function(i){return r[i]==null?'':r[i]});
+    h+='<tr><td>'+(x.roll||n+1)+'</td><td class="n">'+E(x.name)+'</td>'+vals.map(function(v){return '<td>'+v+'</td>'}).join('')+'<td>'+r2(q.f)+'</td><td>'+r2(q.s)+'</td><td>'+r2(q.t)+'</td><td>'+(q.inc?'<span class="inc">अपूर्ण</span>':gradeOf(q.t,q.mx))+'</td></tr>';rows.push([x.roll||n+1,x.name].concat(vals,[r2(q.f),r2(q.s),r2(q.t),q.inc?'अपूर्ण':gradeOf(q.t,q.mx)]))})});
+  show('नोंदवही — '+sb[1],term,h,rows,'portrait')}}
+function show(title,term,h,rows,orient){RP={title:title,rows:rows,term:term};var st=document.getElementById('pgs');if(!st){st=document.createElement('style');st.id='pgs';document.head.appendChild(st)}st.textContent='@page{size:A4 '+orient+';margin:10mm}';
+ d.innerHTML='<div class="noprint"><button class="g" onclick="rsS('+term+')">← अहवाल</button></div><h2 class="noprint" style="margin:4px 0 8px">'+E(title)+'</h2><div class="r noprint"><button onclick="window.print()">🖨 प्रिंट / PDF</button><button class="g" onclick="rsCsv()">⬇ Excel (CSV)</button></div><div class="card">'+hdr(term,title)+'<div class="wx"><table class="rp">'+h+'</table></div>'+ftr()+'</div>'}
+function rsCsv(){var q=function(v){v=String(v==null?'':v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v},t='﻿'+RP.rows.map(function(r){return r.map(q).join(',')}).join('\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/csv;charset=utf-8'}));a.download='CCE_'+CL+DV+'_'+RP.title.replace(/\s+/g,'_')+'.csv';a.click()}
 load();
 </script></main></body></html>
