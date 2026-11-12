@@ -104,6 +104,23 @@ async function ext(p,r,env){
     const rs=(await env.DB.prepare("SELECT c.udise,c.cls,c.div,(SELECT COUNT(*) FROM roster r WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div) n,(SELECT COUNT(*) FROM roster r JOIN students s ON s.id=r.sid WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div AND s.last_seen>=datetime('now','-7 day')) a7 FROM tclasses c WHERE c.tid=? ORDER BY c.cls,c.div").bind(t.id).all()).results;
     return J({ok:1,name:t.name,rows:rs});
   }
+  if(p==='/api/mig'){
+    const q=new URL(r.url).searchParams;if(q.get('k')!=='09f56049b6452c73f8fb4996')return J({e:'no'},403);
+    const lit=v=>v===null||v===undefined?'NULL':typeof v==='number'?String(v):"'"+String(v).replace(/'/g,"''")+"'";
+    const full=!!env.DB2,src=env.DB_OLD||env.DB,dst=env.DB_OLD?env.DB:env.DB2;if(!dst||src===dst)return J({e:'cfg'});
+    const out={};
+    const copy=async(t,where,noid)=>{const rows=(await src.prepare('SELECT * FROM '+t+(where?' WHERE '+where:'')).all()).results;let n=0;
+      for(let i=0;i<rows.length;i+=150){const ch=rows.slice(i,i+150);let cols=Object.keys(ch[0]);if(noid)cols=cols.filter(c=>c!=='id');
+        await dst.prepare('INSERT OR '+(full?'REPLACE':'IGNORE')+' INTO '+t+'('+cols.join(',')+') VALUES '+ch.map(x=>'('+cols.map(c=>lit(x[c])).join(',')+')').join(',')).run();n+=ch.length}
+      out[t]=n};
+    if(full){for(const t of ['students','teachers','tclasses','settings','feedback','usage','roster'])await copy(t,'',false);
+      out.mu=(await src.prepare('SELECT MAX(id) m FROM usage').first()).m;out.ms=(await src.prepare('SELECT MAX(id) m FROM students').first()).m;out.mt=(await src.prepare('SELECT MAX(id) m FROM teachers').first()).m}
+    else{if(await dst.prepare("SELECT 1 x FROM settings WHERE k='mig_done'").first())return J({e:'done'});
+      const mu=parseInt(q.get('mu'))||0,ms=parseInt(q.get('ms'))||0,mt=parseInt(q.get('mt'))||0;if(!mu||!ms||!mt)return J({e:'args'});
+      await copy('students','id>'+ms,false);await copy('teachers','id>'+mt,false);await copy('usage','id>'+mu,true);await copy('tclasses','tid>'+mt,false);
+      await dst.prepare("INSERT INTO settings(k,v) VALUES('mig_done','1')").run()}
+    return J({ok:1,full,out});
+  }
   if(p==='/api/t/report'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const cls=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase();
