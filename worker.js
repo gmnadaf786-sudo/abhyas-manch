@@ -15,6 +15,124 @@ async function me(env,r){
   if(!t)return null;
   return await env.DB.prepare('SELECT id,mobile,name,cls,med,district,taluka,kendra,school,school_udise FROM students WHERE token=?').bind(t).first();
 }
+// ---- Roster (PEN) students + teacher portal ----
+const sha=async s=>hex(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)));
+async function adminKey(env,b){
+  const a=await env.DB.prepare("SELECT * FROM settings WHERE k='admin'").first().catch(()=>null);
+  if(!a)return J({e:'noadmin'},503);
+  const [salt,hh,fails,last]=a.v.split('|');
+  if(+fails>=10&&Date.now()-(+last)<900000)return J({e:'locked'},429);
+  if(await hashPin(String(b.key||''),salt)!==hh){await env.DB.prepare("UPDATE settings SET v=? WHERE k='admin'").bind([salt,hh,(+fails)+1,Date.now()].join('|')).run();return J({e:'bad'},401);}
+  if(+fails)await env.DB.prepare("UPDATE settings SET v=? WHERE k='admin'").bind([salt,hh,0,0].join('|')).run();
+  return null;
+}
+async function pwOk(pw,salt,stored){return stored&&stored.startsWith('p:')?(await hashPin(pw,salt))===stored.slice(2):(await sha(salt+pw))===stored}
+async function teacher(env,b,needOk){
+  const t=cl(b.token,64);if(!t)return null;
+  const x=await env.DB.prepare('SELECT * FROM teachers WHERE token=?').bind(t).first();
+  if(!x||(needOk&&x.status!=='ok'))return null;return x;
+}
+async function ext(p,r,env){
+  if(p==='/api/s/login'){
+    const b=await body(r),pen=cl(b.pen,11).replace(/\D/g,''),pw=cl(b.pw,40);
+    if(pen.length!==11||!pw)return J({e:'bad'},401);
+    const x=await env.DB.prepare('SELECT * FROM roster WHERE pen=?').bind(pen).first();
+    if(!x)return J({e:'bad'},401);
+    if(x.fails>=8&&Date.now()-(x.lf||0)<900000)return J({e:'locked'},429);
+    if(!(await pwOk(pw,x.salt,x.pw))){await env.DB.prepare('UPDATE roster SET fails=CASE WHEN fails>=8 AND ?-lf>=900000 THEN 1 ELSE fails+1 END,lf=? WHERE pen=?').bind(Date.now(),Date.now(),pen).run();return J({e:'bad'},401);}
+    const tok=rnd(24),key='P'+pen;let sid=x.sid;
+    if(sid){await env.DB.prepare('UPDATE students SET token=?,name=?,cls=?,med=?,school_udise=?,last_seen=CURRENT_TIMESTAMP WHERE id=?').bind(tok,x.name,x.cls,x.med,x.udise,sid).run();}
+    else{
+      const ins=await env.DB.prepare('INSERT INTO students(mobile,name,cls,med,salt,pin_hash,district,taluka,kendra,school,school_udise,token,last_seen) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)').bind(key,x.name,x.cls,x.med,'-','-','सांगली','जत','','',x.udise,tok).run();
+      sid=ins.meta.last_row_id;await env.DB.prepare('UPDATE roster SET sid=? WHERE pen=?').bind(sid,pen).run();
+    }
+    await env.DB.prepare('UPDATE roster SET fails=0 WHERE pen=?').bind(pen).run();
+    return J({ok:1,token:tok,changed:x.changed?1:0,profile:{name:x.name,cls:x.cls,med:x.med,mobile:key,district:'सांगली',taluka:'जत',kendra:'',school:'',udise:x.udise}});
+  }
+  if(p==='/api/s/chpw'){
+    const b=await body(r),s=await me(env,r),pw=cl(b.pw,40);
+    if(!s||!/^P\d{11}$/.test(s.mobile))return J({e:'auth'},401);
+    if(pw.length<4)return J({e:'short'},400);
+    const salt=rnd(8);
+    await env.DB.prepare('UPDATE roster SET salt=?,pw=?,changed=1 WHERE pen=?').bind(salt,'p:'+await hashPin(pw,salt),s.mobile.slice(1)).run();
+    return J({ok:1});
+  }
+  if(p==='/api/t/register'){
+    const b=await body(r),sh=cl(b.shalarth,20).toUpperCase(),name=cl(b.name,60),mob=cl(b.mobile,10),udise=cl(b.udise,11).replace(/\D/g,''),pw=cl(b.pw,40);
+    if(!/^[A-Z0-9]{6,20}$/.test(sh))return J({e:'sh'},400);
+    if(name.length<2)return J({e:'name'},400);
+    if(!okMob(mob))return J({e:'mobile'},400);
+    if(udise.length!==11)return J({e:'udise'},400);
+    if(pw.length<6)return J({e:'pw'},400);
+    if(!b.consent)return J({e:'consent'},400);
+    const cs=(Array.isArray(b.classes)?b.classes:[]).slice(0,12).map(c=>({cls:parseInt(c.cls)||0,div:cl(c.div,2).toUpperCase()||'A'})).filter(c=>c.cls>=1&&c.cls<=8);
+    if(!cs.length)return J({e:'cls'},400);
+    if(await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=?').bind(sh).first())return J({e:'exists'},409);
+    const salt=rnd(8),h=await hashPin(pw,salt);
+    const ins=await env.DB.prepare('INSERT INTO teachers(shalarth,name,mobile,udise,salt,pw) VALUES(?,?,?,?,?,?)').bind(sh,name,mob,udise,salt,h).run();
+    const id=ins.meta.last_row_id;
+    await env.DB.batch(cs.map(c=>env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(id,udise,c.cls,c.div)));
+    return J({ok:1});
+  }
+  if(p==='/api/t/login'){
+    const b=await body(r),sh=cl(b.shalarth,20).toUpperCase(),pw=cl(b.pw,40);
+    const x=await env.DB.prepare('SELECT * FROM teachers WHERE shalarth=?').bind(sh).first();
+    if(!x)return J({e:'bad'},401);
+    if(x.fails>=8)return J({e:'locked'},429);
+    if((await hashPin(pw,x.salt))!==x.pw){await env.DB.prepare('UPDATE teachers SET fails=fails+1 WHERE id=?').bind(x.id).run();return J({e:'bad'},401);}
+    const tok=rnd(24);await env.DB.prepare('UPDATE teachers SET fails=0,token=? WHERE id=?').bind(tok,x.id).run();
+    return J({ok:1,token:tok,status:x.status,name:x.name,udise:x.udise});
+  }
+  if(p==='/api/t/classes'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const rs=(await env.DB.prepare("SELECT c.udise,c.cls,c.div,(SELECT COUNT(*) FROM roster r WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div) n,(SELECT COUNT(*) FROM roster r JOIN students s ON s.id=r.sid WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div AND s.last_seen>=datetime('now','-7 day')) a7 FROM tclasses c WHERE c.tid=? ORDER BY c.cls,c.div").bind(t.id).all()).results;
+    return J({ok:1,name:t.name,rows:rs});
+  }
+  if(p==='/api/t/report'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const cls=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase();
+    if(!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,cl(b.udise,11),cls,dv).first())return J({e:'auth'},403);
+    const ud=cl(b.udise,11);
+    const rows=(await env.DB.prepare("SELECT r.pen,r.name,r.changed,s.last_seen,(SELECT COUNT(*) FROM usage u WHERE u.sid=r.sid) n,(SELECT COUNT(DISTINCT u.subj||'|'||u.lesson) FROM usage u WHERE u.sid=r.sid) dl FROM roster r LEFT JOIN students s ON s.id=r.sid WHERE r.udise=? AND r.cls=? AND r.div=? ORDER BY r.name").bind(ud,cls,dv).all()).results;
+    const subj=(await env.DB.prepare("SELECT u.subj s,COUNT(*) n,COUNT(DISTINCT u.sid) p,COUNT(DISTINCT u.lesson) l FROM usage u WHERE u.sid IN (SELECT sid FROM roster WHERE udise=? AND cls=? AND div=? AND sid IS NOT NULL) GROUP BY u.subj ORDER BY n DESC").bind(ud,cls,dv).all()).results;
+    return J({ok:1,rows,subj});
+  }
+  if(p==='/api/t/resetpw'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const pen=cl(b.pen,11);
+    const x=await env.DB.prepare('SELECT r.pen FROM roster r JOIN tclasses c ON c.udise=r.udise AND c.cls=r.cls AND c.div=r.div WHERE r.pen=? AND c.tid=?').bind(pen,t.id).first();
+    if(!x)return J({e:'auth'},403);
+    await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
+    return J({ok:1});
+  }
+  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'){
+    const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
+    if(p==='/api/admin/tlist'){
+      const ts=(await env.DB.prepare('SELECT id,shalarth,name,mobile,udise,status,created FROM teachers ORDER BY id DESC LIMIT 500').all()).results;
+      const cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses').all()).results;
+      ts.forEach(x=>x.cl=cs.filter(c=>c.tid===x.id).map(c=>c.cls+c.div).join(', '));
+      const n=await env.DB.prepare('SELECT COUNT(*) n FROM roster').first();
+      return J({ok:1,rows:ts,roster:n.n});
+    }
+    if(p==='/api/admin/tset'){
+      const st=b.status==='ok'?'ok':b.status==='del'?'del':'pending',id=parseInt(b.id)||0;
+      if(st==='del'){await env.DB.batch([env.DB.prepare('DELETE FROM tclasses WHERE tid=?').bind(id),env.DB.prepare('DELETE FROM teachers WHERE id=?').bind(id)]);}
+      else await env.DB.prepare('UPDATE teachers SET status=?,fails=0 WHERE id=?').bind(st,id).run();
+      return J({ok:1});
+    }
+    const rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,150);let n=0;const st=[];
+    for(const x of rows){
+      const pen=cl(x.pen,11).replace(/\D/g,''),ud=cl(x.udise,11).replace(/\D/g,''),cls=parseInt(x.cls)||0,by=cl(x.by,4).replace(/\D/g,''),name=cl(x.name,60);
+      if(pen.length!==11||ud.length!==11||cls<1||cls>8||by.length!==4||name.length<2)continue;
+      const salt=rnd(6),h=await sha(salt+by),med=x.med==='kn'?'kn':'mr',dv=(cl(x.div,2).toUpperCase())||'A';
+      st.push(env.DB.prepare("INSERT INTO roster(pen,udise,cls,div,name,med,salt,pw,pw0,salt0) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET udise=excluded.udise,cls=excluded.cls,div=excluded.div,name=excluded.name,med=excluded.med").bind(pen,ud,cls,dv,name,med,salt,h,h,salt));n++;
+    }
+    if(st.length)await env.DB.batch(st);
+    return J({ok:1,n,skipped:rows.length-n});
+  }
+  return null;
+}
+
 export default{
   async fetch(r,env){
     const u=new URL(r.url);
@@ -23,6 +141,7 @@ export default{
       const p=u.pathname;
       if(p==='/api/ping')return J({ok:true});
       if(r.method!=='POST')return J({e:'method'},405);
+      const xr=await ext(p,r,env);if(xr)return xr;
       if(p==='/api/admin/stats'||p==='/api/admin/list'){
         const b=await body(r),ip=r.headers.get('cf-connecting-ip')||'';
         const a=await env.DB.prepare("SELECT * FROM settings WHERE k='admin'").first().catch(()=>null);
