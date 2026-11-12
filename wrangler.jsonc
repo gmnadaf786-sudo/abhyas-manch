@@ -8,7 +8,6 @@
     "run_worker_first": ["/api/*"]
   },
   "d1_databases": [
-    { "binding": "DB", "database_name": "am-users", "database_id": "0edf2a92-5175-47fc-ac91-0c5bac6aef19" },
-    { "binding": "DB2", "database_name": "am-users-in", "database_id": "32eb0036-1575-4df7-9901-bb6a4ebdd961" }
+    { "binding": "DB", "database_name": "am-users-in", "database_id": "32eb0036-1575-4df7-9901-bb6a4ebdd961" }
   ]
 }
