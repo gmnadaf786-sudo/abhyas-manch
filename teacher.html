@@ -1,0 +1,42 @@
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>अभ्यास मंच – शिक्षक</title>
+<style>:root{--bg:#f7f7f4;--c:#fff;--i:#1f2933;--m:#64748b;--l:#e2e8f0;--a:#0f766e}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--c:#1e293b;--i:#e2e8f0;--m:#94a3b8;--l:#334155}}
+body{margin:0;background:var(--bg);color:var(--i);font:15px/1.5 system-ui,sans-serif}main{max-width:720px;margin:0 auto;padding:16px}
+.card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:14px;margin-bottom:14px}h1{font-size:20px;margin:6px 0 12px}h2{font-size:16px;margin:0 0 8px}
+input,select,button,textarea{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--i);width:100%;box-sizing:border-box;margin-bottom:8px}
+button{background:var(--a);color:#fff;border:0;cursor:pointer}button.g{background:var(--c);color:var(--a);border:1px solid var(--a)}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;border-bottom:1px solid var(--l);text-align:left}th{color:var(--m);font-weight:600}.w{overflow-x:auto}
+.er{color:#b91c1c;min-height:18px}.ok{color:#15803d}.r{display:flex;gap:8px}.r>*{flex:1}label{font-size:13px;color:var(--m)}small{color:var(--m)}</style></head><body><main>
+<h1>🧑‍🏫 अभ्यास मंच – शिक्षक</h1>
+<div id="lg" class="card"><h2>लॉगिन</h2><input id="u" placeholder="शालार्थ आयडी" autocapitalize="characters"><input id="p" type="password" placeholder="पासवर्ड"><p id="e" class="er"></p><button onclick="login()">लॉगिन करा</button><br><br><button class="g" onclick="show('rg')">नवीन शिक्षक नोंदणी</button></div>
+<div id="rg" class="card" style="display:none"><h2>शिक्षक नोंदणी</h2>
+<input id="rs" placeholder="शालार्थ आयडी (हाच तुमचा युजरनेम)" autocapitalize="characters"><input id="rn" placeholder="पूर्ण नाव"><input id="rm" inputmode="numeric" maxlength="10" placeholder="मोबाईल क्रमांक"><input id="ru" inputmode="numeric" maxlength="11" placeholder="शाळेचा UDISE कोड (११ अंकी)">
+<label>वर्ग / तुकडी (जसे: 4A, 5A, 5B — स्वल्पविरामाने)</label><input id="rc" placeholder="4A, 5B"><input id="rp" type="password" placeholder="स्वतःचा पासवर्ड (किमान ६ अक्षरे)">
+<label><input type="checkbox" id="rk" style="width:auto;margin:0 6px 0 0">मी माझ्या वर्गातील विद्यार्थ्यांचे नाव, PEN व वापर-अहवाल पाहण्यास मान्यता देतो/देते.</label><p id="re" class="er"></p>
+<button onclick="reg()">नोंदणी करा</button><br><br><button class="g" onclick="show('lg')">← लॉगिन</button></div>
+<div id="d" style="display:none"></div>
+<script>
+var T='',U='',E=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+function post(u,b){b.token=T;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.$s=r.status;return j})})}
+function show(x){['lg','rg','d'].forEach(function(i){document.getElementById(i).style.display=i===x?'block':'none'})}
+function login(){e.textContent='';post('/api/t/login',{shalarth:u.value.trim(),pw:p.value}).then(function(j){
+ if(!j.ok){e.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. प्रशासकाशी संपर्क करा.':'शालार्थ आयडी किंवा पासवर्ड चुकीचा.';return}
+ T=j.token;U=j.udise;if(j.status!=='ok'){show('d');d.innerHTML='<div class="card"><h2>मंजुरी बाकी</h2><p>नमस्कार '+E(j.name)+', तुमची नोंदणी प्रशासकाच्या मंजुरीसाठी प्रलंबित आहे. मंजुरी मिळाल्यावर पुन्हा लॉगिन करा.</p></div>';return}
+ home()}).catch(function(){e.textContent='इंटरनेट तपासा.'})}
+function reg(){re.textContent='';var cs=rc.value.split(',').map(function(x){var m=x.trim().toUpperCase().match(/^(\d)\s*([A-Z]?)$/);return m?{cls:+m[1],div:m[2]||'A'}:null}).filter(Boolean);
+ post('/api/t/register',{shalarth:rs.value.trim(),name:rn.value.trim(),mobile:rm.value.trim(),udise:ru.value.trim(),pw:rp.value,consent:rk.checked?1:0,classes:cs}).then(function(j){
+ if(j.ok){show('lg');u.value=rs.value;e.className='er ok';e.textContent='नोंदणी झाली. प्रशासकाच्या मंजुरीनंतर लॉगिन करा.';return}
+ re.textContent={sh:'शालार्थ आयडी चुकीचा.',name:'नाव टाका.',mobile:'मोबाईल चुकीचा.',udise:'UDISE ११ अंकी हवा.',pw:'पासवर्ड किमान ६ अक्षरे.',consent:'मान्यता आवश्यक.',cls:'वर्ग/तुकडी टाका (उदा. 4A).',exists:'हा शालार्थ आयडी आधीच नोंदलेला आहे.'}[j.e]||'अडचण.'})}
+function home(){show('d');post('/api/t/classes',{}).then(function(j){if(!j.ok){d.innerHTML='<p class="er">सत्र संपले. पुन्हा लॉगिन करा.</p>';return}
+ d.innerHTML='<div class="card"><h2>नमस्कार, '+E(j.name)+'</h2><small>वर्ग निवडा:</small></div>'+j.rows.map(function(c){return '<div class="card"><b>इयत्ता '+c.cls+' '+E(c.div)+'</b> <small>· UDISE '+E(c.udise)+'</small><br>विद्यार्थी: '+c.n+' · ७ दिवसांत सक्रिय: '+c.a7+'<div class="r" style="margin-top:8px"><button onclick="rep('+c.cls+',\''+E(c.div)+'\',\''+E(c.udise)+'\')">📊 अहवाल</button><button class="g" onclick="addf('+c.cls+',\''+E(c.div)+'\',\''+E(c.udise)+'\')">➕ विद्यार्थी जोडा</button></div></div>'}).join('')})}
+function rep(c,dv,ud){window.CUR=[c,dv,ud];post('/api/t/report',{cls:c,div:dv,udise:ud}).then(function(j){if(!j.ok){alert('अहवाल मिळाला नाही');return}
+ d.innerHTML='<button class="g" onclick="home()">← वर्ग</button><div class="card"><h2>इयत्ता '+c+' '+E(dv)+' – अहवाल</h2><div class="w"><table><tr><th>नाव</th><th>PEN</th><th>पाठ</th><th>शेवटचा वापर</th><th></th></tr>'+j.rows.map(function(r){return '<tr><td>'+E(r.name)+'</td><td>'+E(r.pen)+'</td><td>'+(r.dl||0)+'</td><td>'+E((r.last_seen||'—').slice(0,10))+'</td><td><button class="g" style="padding:4px 8px;margin:0;width:auto" onclick="rs_(\''+E(r.pen)+'\')">पासवर्ड रीसेट</button></td></tr>'}).join('')+'</table></div><small>"पाठ" = वेगळे उघडलेले पाठ. रीसेट केल्यावर पासवर्ड जन्मवर्ष होतो.</small></div>'+
+ '<div class="card"><h2>विषयनिहाय</h2><div class="w"><table><tr><th>विषय</th><th>वेळा उघडले</th><th>विद्यार्थी</th><th>पाठ</th></tr>'+j.subj.map(function(s){return '<tr><td>'+E(s.s)+'</td><td>'+s.n+'</td><td>'+s.p+'</td><td>'+s.l+'</td></tr>'}).join('')+'</table></div></div>'+
+ '<button onclick="csv()">⬇ CSV डाउनलोड</button>';window.RP=j.rows})}
+function rs_(pen){if(!confirm('हा विद्यार्थी पासवर्ड जन्मवर्षावर रीसेट करायचा?'))return;post('/api/t/resetpw',{pen:pen}).then(function(j){alert(j.ok?'रीसेट झाला.':'अयशस्वी')})}
+function csv(){var s='﻿नाव,PEN,पाठ,शेवटचा वापर\n'+RP.map(function(r){return [r.name,r.pen,r.dl,r.last_seen].map(function(x){return '"'+String(x==null?'':x).replace(/"/g,'""')+'"'}).join(',')}).join('\n');var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'text/csv;charset=utf-8'}));a.download='report.csv';a.click()}
+function addf(c,dv,ud){d.innerHTML='<button class="g" onclick="home()">← वर्ग</button><div class="card"><h2>इयत्ता '+c+' '+E(dv)+' – विद्यार्थी जोडा</h2><label>माध्यम</label><select id="am"><option value="mr">मराठी</option><option value="kn">कन्नड</option></select>'+
+ '<label>प्रत्येक ओळीत: PEN, नाव, जन्मवर्ष (उदा. 23500664049, अर्चना के, 2016) — Excel/Sheet मधून थेट पेस्ट करता येते</label><textarea id="at" rows="8"></textarea><p id="ae" class="er"></p><button onclick="addgo('+c+',\''+E(dv)+'\',\''+E(ud)+'\')">जोडा</button></div>'}
+function addgo(c,dv,ud){var rows=[];at.value.split('\n').forEach(function(l){var a=l.split(/[\t,;]/).map(function(x){return x.trim()});if(a.length<3)return;var by=(a[2].match(/(19|20)\d\d/)||[])[0];if(/^\d{11}$/.test(a[0])&&by)rows.push({pen:a[0],name:a[1],by:by,udise:ud,cls:c,div:dv,med:am.value})});
+ if(!rows.length){ae.textContent='वैध ओळी सापडल्या नाहीत.';return}ae.textContent='जोडत आहे…';var n=0,i=0;(function nx(){if(i>=rows.length){ae.className='ok';ae.textContent=n+' विद्यार्थी जोडले/अद्ययावत केले.';return}
+ var ch=rows.slice(i,i+100);i+=100;post('/api/t/add',{rows:ch}).then(function(j){n+=j.n||0;nx()})})()}
+</script></main></body></html>

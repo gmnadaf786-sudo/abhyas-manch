@@ -32,6 +32,18 @@ async function teacher(env,b,needOk){
   const x=await env.DB.prepare('SELECT * FROM teachers WHERE token=?').bind(t).first();
   if(!x||(needOk&&x.status!=='ok'))return null;return x;
 }
+async function imp(env,rw,tid){
+    const rows=(Array.isArray(rw)?rw:[]).slice(0,150);let n=0;const st=[];
+    for(const x of rows){
+      if(tid&&!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(tid,cl(x.udise,11),parseInt(x.cls)||0,(cl(x.div,2).toUpperCase())||'A').first())continue;
+      const pen=cl(x.pen,11).replace(/\D/g,''),ud=cl(x.udise,11).replace(/\D/g,''),cls=parseInt(x.cls)||0,by=cl(x.by,4).replace(/\D/g,''),name=cl(x.name,60);
+      if(pen.length!==11||ud.length!==11||cls<1||cls>8||by.length!==4||name.length<2)continue;
+      const salt=rnd(6),h=await sha(salt+by),med=x.med==='kn'?'kn':'mr',dv=(cl(x.div,2).toUpperCase())||'A';
+      st.push(env.DB.prepare("INSERT INTO roster(pen,udise,cls,div,name,med,salt,pw,pw0,salt0) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET udise=excluded.udise,cls=excluded.cls,div=excluded.div,name=excluded.name,med=excluded.med").bind(pen,ud,cls,dv,name,med,salt,h,h,salt));n++;
+    }
+    if(st.length)await env.DB.batch(st);
+    return J({ok:1,n,skipped:rows.length-n});
+}
 async function ext(p,r,env){
   if(p==='/api/s/login'){
     const b=await body(r),pen=cl(b.pen,11).replace(/\D/g,''),pw=cl(b.pw,40);
@@ -97,6 +109,10 @@ async function ext(p,r,env){
     const subj=(await env.DB.prepare("SELECT u.subj s,COUNT(*) n,COUNT(DISTINCT u.sid) p,COUNT(DISTINCT u.lesson) l FROM usage u WHERE u.sid IN (SELECT sid FROM roster WHERE udise=? AND cls=? AND div=? AND sid IS NOT NULL) GROUP BY u.subj ORDER BY n DESC").bind(ud,cls,dv).all()).results;
     return J({ok:1,rows,subj});
   }
+  if(p==='/api/t/add'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    return imp(env,b.rows,t.id);
+  }
   if(p==='/api/t/resetpw'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const pen=cl(b.pen,11);
@@ -120,15 +136,7 @@ async function ext(p,r,env){
       else await env.DB.prepare('UPDATE teachers SET status=?,fails=0 WHERE id=?').bind(st,id).run();
       return J({ok:1});
     }
-    const rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,150);let n=0;const st=[];
-    for(const x of rows){
-      const pen=cl(x.pen,11).replace(/\D/g,''),ud=cl(x.udise,11).replace(/\D/g,''),cls=parseInt(x.cls)||0,by=cl(x.by,4).replace(/\D/g,''),name=cl(x.name,60);
-      if(pen.length!==11||ud.length!==11||cls<1||cls>8||by.length!==4||name.length<2)continue;
-      const salt=rnd(6),h=await sha(salt+by),med=x.med==='kn'?'kn':'mr',dv=(cl(x.div,2).toUpperCase())||'A';
-      st.push(env.DB.prepare("INSERT INTO roster(pen,udise,cls,div,name,med,salt,pw,pw0,salt0) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET udise=excluded.udise,cls=excluded.cls,div=excluded.div,name=excluded.name,med=excluded.med").bind(pen,ud,cls,dv,name,med,salt,h,h,salt));n++;
-    }
-    if(st.length)await env.DB.batch(st);
-    return J({ok:1,n,skipped:rows.length-n});
+    return imp(env,b.rows,null);
   }
   return null;
 }

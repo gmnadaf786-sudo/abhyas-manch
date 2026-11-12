@@ -48,13 +48,13 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <div style="text-align:center;color:#fff;margin-bottom:10px"><img src="icon-512.png" alt="अभ्यास मंच" style="width:min(176px,23vh);height:min(176px,23vh);border-radius:32px;box-shadow:0 10px 30px rgba(0,0,0,.3)"><div style="font-size:14px;opacity:.95;margin-top:8px;font-weight:600">इयत्ता १ ली ते ८ वी · मराठी व कन्नड माध्यम</div></div>
 <form onsubmit="return doLogin(event)" style="background:var(--card);color:var(--ink);border-radius:22px;padding:16px 18px;box-shadow:0 14px 40px rgba(0,0,0,.25)">
 <h2 style="margin:0 0 10px;font-size:19px;text-align:center">🔐 लॉगिन</h2>
-<input id="lu" inputmode="numeric" autocomplete="username" placeholder="मोबाईल क्रमांक" maxlength="11"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड">
+<input id="lu" inputmode="numeric" autocomplete="username" placeholder="मोबाईल क्रमांक / PEN" maxlength="11"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड">
 <p id="le" style="color:#b91c1c;font-size:13px;min-height:18px;margin:0 0 6px;text-align:center"></p>
 <button class="les" id="lb" style="justify-content:center;background:#0f766e;color:#fff;border:0;font-size:18px;padding:14px" type="submit">लॉगिन करा</button>
 <div style="display:flex;align-items:center;gap:10px;margin:10px 0;color:var(--mut);font-size:13px"><i style="flex:1;height:1px;background:var(--line)"></i>नवीन आहात?<i style="flex:1;height:1px;background:var(--line)"></i></div>
 <button type="button" class="les" style="justify-content:center;background:#fff7ed;color:#c2410c;border:2px solid #fb923c;font-size:18px;padding:14px;margin:0" onclick="openRg(0)">📝 नोंदणी करा (Sign up)</button>
 </form>
-<p style="text-align:center;margin:12px 0 0"><a href="#" onclick="ab.style.display='flex';return false" style="color:#fff;font-size:14px;font-weight:700;text-decoration:underline">👨‍💻 विकसकाबद्दल (About Developer)</a></p></div></div>
+<p style="text-align:center;margin:12px 0 0"><a href="/teacher.html" style="color:#fff;font-size:14px;font-weight:700">🧑‍🏫 शिक्षक लॉगिन / नोंदणी</a></p><p style="text-align:center;margin:12px 0 0"><a href="#" onclick="ab.style.display='flex';return false" style="color:#fff;font-size:14px;font-weight:700;text-decoration:underline">👨‍💻 विकसकाबद्दल (About Developer)</a></p></div></div>
 <div id="ab" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:60;align-items:center;justify-content:center;padding:16px;overflow:auto" onclick="if(event.target===this)this.style.display='none'"><div style="width:100%;max-width:380px;background:#fff;color:#0f172a;border-radius:24px;overflow:hidden;border:2.5px solid #d4af37;box-shadow:0 20px 40px rgba(0,0,0,.3);position:relative;margin:auto">
 <button onclick="ab.style.display='none'" style="position:absolute;right:12px;top:12px;width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.85);font-weight:900;color:#b91c1c;cursor:pointer;z-index:2" type="button">✕</button>
 <div style="background:linear-gradient(135deg,#0f2b66 0%,#1e3a8a 70%,#172554 100%);color:#fff;text-align:center;padding:18px 12px 14px;border-bottom:3px solid #d4af37"><div style="font-size:12px;font-weight:800;letter-spacing:.6px;color:#fde047">पंचायत समिती ( शिक्षण विभाग ) जत</div><div style="font-size:11px;color:#cbd5e1;margin-top:4px">अभ्यास मंच · मोफत शैक्षणिक ॲप</div></div>
@@ -136,6 +136,11 @@ function api(o){return fetch(API,{method:'POST',headers:{'Content-Type':'text/pl
 function showLogin(m){lg.style.display='flex';le.textContent=m||''}
 function loadCat(st){return fetch('content/'+catKey(st)+'/catalog.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(c){CAT=c;D=c.subjects;BASE='content/'+catKey(st)+'/';return true})}
 function doLogin(ev){ev.preventDefault();var u=lu.value.trim(),p=lp.value.trim();if(!u||!p){le.textContent='मोबाईल क्रमांक आणि पासवर्ड टाका.';return false}
+ if(/^\d{11}$/.test(u)){lb.disabled=true;le.textContent='तपासत आहे…';
+  fetch('/api/s/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({pen:u,pw:p})}).then(function(r){return r.json()}).then(function(j){
+   if(!j.ok){lb.disabled=false;le.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. १५ मिनिटांनी पुन्हा प्रयत्न करा.':'PEN किंवा पासवर्ड चुकीचा.';return}
+   le.textContent='';rgDone(j,function(m){le.textContent=m}).then(function(){lb.disabled=false;
+    if(j.changed===0)setTimeout(function(){var n=prompt('सुरक्षेसाठी नवीन पासवर्ड ठेवा (किमान ४ अक्षरे). आता नको असल्यास रद्द करा.');if(n&&n.length>=4)fetch('/api/s/chpw',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+j.token},body:JSON.stringify({pw:n})}).then(function(r){return r.json()}).then(function(x){alert(x.ok?'पासवर्ड बदलला.':'बदल झाला नाही.')})},800)})}).catch(function(){lb.disabled=false;le.textContent='इंटरनेट तपासा.'});return false}
  if(/^[6-9]\d{9}$/.test(u)){if(!/^\d{4,6}$/.test(p)){le.textContent='पासवर्ड ४ ते ६ अंकी असतो.';return false}
   lb.disabled=true;le.textContent='तपासत आहे…';
   fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({mobile:u,pin:p})}).then(function(r){return r.json()}).then(function(j){
