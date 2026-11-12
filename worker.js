@@ -163,6 +163,27 @@ async function ext(p,r,env){
     const subj=(await env.DB.prepare("SELECT u.subj s,COUNT(*) n,COUNT(DISTINCT u.sid) p,COUNT(DISTINCT u.lesson) l FROM usage u WHERE u.sid IN (SELECT sid FROM roster WHERE udise=? AND cls=? AND div=? AND sid IS NOT NULL) GROUP BY u.subj ORDER BY n DESC").bind(ud,cls,dv).all()).results;
     return J({ok:1,rows,subj});
   }
+  if(p==='/api/t/uimport'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);
+    if(cl(b.udise,11)!==t.udise)return J({e:'udise'},403);
+    const med=b.med==='kn'?'kn':'mr',CT=['GEN','SC','ST','VJA','NTB','NTC','NTD','OBC','SBC'];
+    const rs=[],si=[],tc=new Set();let n=0,sk=0;
+    for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,120)){
+      const pen=cl(x.pen,11).replace(/\D/g,''),cls=parseInt(x.cls)||0,dv=cl(x.div,2).toUpperCase()||'A',name=cl(x.name,60);
+      if(pen.length!==11||cls<1||cls>8||name.length<2||!/^[A-Z]{1,2}$/.test(dv)){sk++;continue}
+      const ex=await env.DB.prepare('SELECT udise FROM roster WHERE pen=?').bind(pen).first();
+      if(ex&&ex.udise!==t.udise){sk++;continue}
+      const salt=rnd(6),h=await sha(salt+'123456');
+      rs.push(env.DB.prepare("INSERT INTO roster(pen,udise,cls,div,name,med,salt,pw,pw0,salt0) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET cls=excluded.cls,div=excluded.div,name=excluded.name").bind(pen,t.udise,cls,dv,name,med,salt,h,h,salt));
+      const g=['M','F','O'].includes(x.gender)?x.gender:'',ct=CT.includes(x.cat)?x.cat:'';
+      si.push(env.DB.prepare("INSERT INTO sinfo(pen,gender,cat,father,mother) VALUES(?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET gender=CASE WHEN COALESCE(sinfo.gender,'')='' THEN excluded.gender ELSE sinfo.gender END,cat=CASE WHEN COALESCE(sinfo.cat,'')='' THEN excluded.cat ELSE sinfo.cat END,father=CASE WHEN COALESCE(sinfo.father,'')='' THEN excluded.father ELSE sinfo.father END,mother=CASE WHEN COALESCE(sinfo.mother,'')='' THEN excluded.mother ELSE sinfo.mother END").bind(pen,g,ct,cl(x.father,60),cl(x.mother,60)));
+      tc.add(cls+'|'+dv);n++;
+    }
+    if(rs.length)await env.DB.batch(rs);
+    if(si.length)await env.DB.batch(si);
+    if(tc.size)await env.DB.batch([...tc].map(k=>{const [c,d]=k.split('|');return env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,t.udise,parseInt(c),d)}));
+    return J({ok:1,n:n,sk:sk});
+  }
   if(p==='/api/t/add'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     return imp(env,b.rows,t.id);
