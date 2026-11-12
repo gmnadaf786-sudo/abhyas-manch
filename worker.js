@@ -189,6 +189,7 @@ export default{
     try{
       const p=u.pathname;
       if(p==='/api/ping')return J({ok:true});
+      if(p==='/api/mig')return await ext(p,r,env);
       if(r.method!=='POST')return J({e:'method'},405);
       const xr=await ext(p,r,env);if(xr)return xr;
       if(p==='/api/admin/stats'||p==='/api/admin/list'){
