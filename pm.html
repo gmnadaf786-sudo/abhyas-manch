@@ -43,10 +43,14 @@ function init(){try{T=sessionStorage.getItem('am_t')||''}catch(e){}
 function load(){var fy=fyOf(MON);X.innerHTML='<p class="m">लोड होत आहे…</p>';post('/api/pm/year',{fy:fy}).then(function(j){
  if(!j.ok){X.innerHTML='<div class="card"><p class="er">'+(j.$s===401?'सत्र संपले किंवा शाळेची पुष्टी बाकी आहे. शिक्षक पानावर जाऊन लॉगिन/शाळा पुष्टी करा.':'लोड झाले नाही. पुन्हा प्रयत्न करा.')+'</p><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
  Y=j;SD={};j.daily.forEach(function(r){SD[r.date]=r});E={};document.getElementById('sch').textContent=(j.school||'')+' · UDISE '+j.udise;draw()})}
-function draw(){var t=[['d','📅 दैनिक नोंद'],['s','📦 साठा'],['r','🧾 पावती'],['p','⚖️ प्रमाण/मेनू']];
+function draw(){var t=[['d','📅 दैनिक नोंद'],['s','📦 साठा'],['r','🧾 पावती'],['p','⚖️ प्रमाण/मेनू'],['a','🖨️ अहवाल']];
  X.innerHTML='<div class="tabs">'+t.map(function(x){return '<button class="'+(TAB===x[0]?'on':'')+'" onclick="TAB=\''+x[0]+'\';draw()">'+x[1]+'</button>'}).join('')+'</div>'+
  (TAB==='p'?'':'<div class="card"><input type="month" id="mo" value="'+MON+'" onchange="chm(this.value)" style="width:100%"></div>')+'<div id="b"></div>';
- ({d:dTab,s:sTab,r:rTab,p:pTab})[TAB]()}
+ ({d:dTab,s:sTab,r:rTab,p:pTab,a:aTab})[TAB]()}
+var RG='15';
+function aTab(){var b=document.getElementById('b'),bt=function(k,l){return '<button onclick="rp(\''+k+'\')" style="margin:4px 0;width:100%">'+l+'</button>'};
+ b.innerHTML='<div class="card"><b>गट</b><select id="rg" onchange="RG=this.value" style="width:100%"><option value="15"'+(RG==='15'?' selected':'')+'>इ. १ ली ते ५ वी</option><option value="68"'+(RG==='68'?' selected':'')+'>इ. ६ वी ते ८ वी</option></select>'+bt('p1','नोंदवही भाग १ (तांदूळ)')+bt('p2','नोंदवही भाग २ (मान्यादी माल)')+bt('b','प्रपत्र ब')+bt('taste','चव नोंदवही')+bt('annual','वार्षिक उपयोगिता (शै. वर्ष)')+bt('all','सर्व मासिक रिपोर्ट एकत्र (दोन्ही गट)')+'<p class="m">प्रिंट विंडोतून PDF म्हणून सेव्ह करता येईल. वरील महिना निवडा.</p></div>'}
+function rp(k){if(!window.PMREP){alert('अहवाल लोड होत आहे…');return}try{PMREP.print(k,MON,RG,Y)}catch(e){alert('त्रुटी: '+e.message)}}
 function chm(v){if(!v)return;var o=fyOf(MON);MON=v;if(fyOf(v)!==o)load();else draw()}
 /* ---------- दैनिक ---------- */
 function ent(date){var s=SD[date],e=E[date];if(e)return e;var rc=recFor(date);
@@ -113,4 +117,5 @@ function pTab(){var rows=[['तांदूळ','१०० ग्रॅम','१
  var wk='';for(var i=0;i<6;i++){var d=new Date(mon);d.setUTCDate(mon.getUTCDate()+i);var ds=d.toISOString().slice(0,10),r=recFor(ds);wk+='<tr><td>'+WK[d.getUTCDay()]+' '+pn(d.getUTCDate())+'</td><td style="text-align:left">'+esc(r[0])+'</td></tr>'}
  document.getElementById('b').innerHTML='<div class="card"><h2>🍛 या आठवड्याचा मेनू</h2><div class="w"><table>'+wk+'</table></div></div><div class="card"><h2>🌾 धान्य व कडधान्यांचे प्रमाण (प्रति विद्यार्थी)</h2><div class="w"><table><tr><th>पदार्थ</th><th>१–५</th><th>६–८</th></tr>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('')+'</table></div></div><div class="card"><h2>🧂 मसाले व तेल</h2><div class="w"><table><tr><th>पदार्थ</th><th>१–५</th><th>६–८</th></tr>'+SPICES.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('')+'<tr><td>तेल (लि.)</td><td>०.००५४९५</td><td>०.००८२४२</td></tr></table></div><small>जिल्हा परिषद, सांगली – PM पोषण शक्ती निर्माण योजना २०२६-२७ च्या परिपत्रकानुसार.</small></div>'}
 init();
-</script></body></html>
+</script><script src="pmrep.js"></script>
+</body></html>
