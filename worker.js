@@ -108,6 +108,21 @@ async function ext(p,r,env){
     const tok=rnd(24);await env.DB.prepare('UPDATE teachers SET fails=0,token=? WHERE id=?').bind(tok,x.id).run();
     return J({ok:1,token:tok,status:x.status,name:x.name,udise:x.udise});
   }
+  if(p==='/api/t/school'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const u=cl(b.udise,11).replace(/\D/g,'');
+    const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
+    return J({ok:1,udise:u,school:sc?sc.name:''});
+  }
+  if(p==='/api/t/setschool'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const u=cl(b.udise,11).replace(/\D/g,'');
+    if(!await env.DB.prepare('SELECT 1 x FROM schools WHERE udise=?').bind(u).first())return J({e:'nf'},404);
+    const ops=[env.DB.prepare('UPDATE teachers SET udise=?,conf=1 WHERE id=?').bind(u,t.id)];
+    if(u!==t.udise)ops.push(env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise<>?').bind(t.id,u));
+    await env.DB.batch(ops);
+    return J({ok:1});
+  }
   if(p==='/api/t/avail'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
@@ -115,7 +130,7 @@ async function ext(p,r,env){
     return J({ok:1,udise:u,rows:rs});
   }
   if(p==='/api/t/addcls'){
-    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);
     const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
     const cs=(Array.isArray(b.rows)?b.rows:[]).slice(0,16);let n=0;
     for(const c of cs){const k=parseInt(c.cls)||0,dv=cl(c.div,2).toUpperCase();
@@ -135,7 +150,8 @@ async function ext(p,r,env){
   if(p==='/api/t/classes'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const rs=(await env.DB.prepare("SELECT c.udise,c.cls,c.div,(SELECT COUNT(*) FROM roster r WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div) n,(SELECT COUNT(*) FROM roster r JOIN students s ON s.id=r.sid WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div AND s.last_seen>=datetime('now','-7 day')) a7 FROM tclasses c WHERE c.tid=? ORDER BY c.cls,c.div").bind(t.id).all()).results;
-    return J({ok:1,name:t.name,rows:rs});
+    const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();
+    return J({ok:1,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0});
   }
   if(p==='/api/t/report'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
@@ -209,7 +225,7 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'){
+  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
     if(p==='/api/admin/tlist'){
       const ts=(await env.DB.prepare('SELECT id,shalarth,name,mobile,udise,status,created FROM teachers ORDER BY id DESC LIMIT 500').all()).results;
@@ -223,6 +239,12 @@ async function ext(p,r,env){
       if(st==='del'){await env.DB.batch([env.DB.prepare('DELETE FROM tclasses WHERE tid=?').bind(id),env.DB.prepare('DELETE FROM teachers WHERE id=?').bind(id)]);}
       else await env.DB.prepare('UPDATE teachers SET status=?,fails=0 WHERE id=?').bind(st,id).run();
       return J({ok:1});
+    }
+    if(p==='/api/admin/simport'){
+      const st=[];
+      for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,100)){const u=cl(x.u,11).replace(/\D/g,''),n=cl(x.n,120);if(u.length===11&&n)st.push(env.DB.prepare('INSERT OR REPLACE INTO schools(udise,name) VALUES(?,?)').bind(u,n));}
+      if(st.length)await env.DB.batch(st);
+      return J({ok:1,n:st.length});
     }
     if(p==='/api/admin/timport'){
       const salt=rnd(8),h=await hashPin('123456',salt),st=[];let sk=0;
