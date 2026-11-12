@@ -135,7 +135,8 @@ async function ext(p,r,env){
     const cs=(Array.isArray(b.rows)?b.rows:[]).slice(0,16);let n=0;
     for(const c of cs){const k=parseInt(c.cls)||0,dv=cl(c.div,2).toUpperCase();
       if(k<1||k>8)continue;
-      if(!await env.DB.prepare('SELECT 1 x FROM roster WHERE udise=? AND cls=? AND div=? LIMIT 1').bind(u,k,dv).first())continue;
+      if(!/^[A-Z]{1,2}$/.test(dv))continue;
+      if(!b.fresh&&!await env.DB.prepare('SELECT 1 x FROM roster WHERE udise=? AND cls=? AND div=? LIMIT 1').bind(u,k,dv).first())continue;
       await env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,u,k,dv).run();n++;}
     return J({ok:1,n:n});
   }
