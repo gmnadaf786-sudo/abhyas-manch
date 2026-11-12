@@ -108,6 +108,30 @@ async function ext(p,r,env){
     const tok=rnd(24);await env.DB.prepare('UPDATE teachers SET fails=0,token=? WHERE id=?').bind(tok,x.id).run();
     return J({ok:1,token:tok,status:x.status,name:x.name,udise:x.udise});
   }
+  if(p==='/api/t/avail'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
+    const rs=(await env.DB.prepare("SELECT r.cls,r.div,COUNT(*) n FROM roster r WHERE r.udise=? AND NOT EXISTS(SELECT 1 FROM tclasses c WHERE c.tid=? AND c.udise=r.udise AND c.cls=r.cls AND c.div=r.div) GROUP BY r.cls,r.div ORDER BY r.cls,r.div").bind(u,t.id).all()).results;
+    return J({ok:1,udise:u,rows:rs});
+  }
+  if(p==='/api/t/addcls'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
+    const cs=(Array.isArray(b.rows)?b.rows:[]).slice(0,16);let n=0;
+    for(const c of cs){const k=parseInt(c.cls)||0,dv=cl(c.div,2).toUpperCase();
+      if(k<1||k>8)continue;
+      if(!await env.DB.prepare('SELECT 1 x FROM roster WHERE udise=? AND cls=? AND div=? LIMIT 1').bind(u,k,dv).first())continue;
+      await env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,u,k,dv).run();n++;}
+    return J({ok:1,n:n});
+  }
+  if(p==='/api/t/chpw'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const o=cl(b.old,40),pw=cl(b.pw,40);if(pw.length<6)return J({e:'pw'},400);
+    const x=await env.DB.prepare('SELECT salt,pw FROM teachers WHERE id=?').bind(t.id).first();
+    if(!x||(await hashPin(o,x.salt))!==x.pw)return J({e:'bad'},401);
+    const salt=rnd(8);await env.DB.prepare('UPDATE teachers SET salt=?,pw=? WHERE id=?').bind(salt,await hashPin(pw,salt),t.id).run();
+    return J({ok:1});
+  }
   if(p==='/api/t/classes'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const rs=(await env.DB.prepare("SELECT c.udise,c.cls,c.div,(SELECT COUNT(*) FROM roster r WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div) n,(SELECT COUNT(*) FROM roster r JOIN students s ON s.id=r.sid WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div AND s.last_seen>=datetime('now','-7 day')) a7 FROM tclasses c WHERE c.tid=? ORDER BY c.cls,c.div").bind(t.id).all()).results;
@@ -185,7 +209,7 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'){
+  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
     if(p==='/api/admin/tlist'){
       const ts=(await env.DB.prepare('SELECT id,shalarth,name,mobile,udise,status,created FROM teachers ORDER BY id DESC LIMIT 500').all()).results;
@@ -199,6 +223,17 @@ async function ext(p,r,env){
       if(st==='del'){await env.DB.batch([env.DB.prepare('DELETE FROM tclasses WHERE tid=?').bind(id),env.DB.prepare('DELETE FROM teachers WHERE id=?').bind(id)]);}
       else await env.DB.prepare('UPDATE teachers SET status=?,fails=0 WHERE id=?').bind(st,id).run();
       return J({ok:1});
+    }
+    if(p==='/api/admin/timport'){
+      let n=0,sk=0;
+      for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,12)){
+        const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,''),name=cl(x.name,60),mob=cl(x.mob,10).replace(/\D/g,'').slice(-10),udise=cl(x.udise,11).replace(/\D/g,'');
+        if(!/^[A-Z0-9]{6,20}$/.test(sh)||name.length<2||!okMob(mob)||udise.length!==11){sk++;continue}
+        if(await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=?').bind(sh).first()){sk++;continue}
+        const salt=rnd(8),h=await hashPin(mob.slice(-6),salt);
+        await env.DB.prepare("INSERT OR IGNORE INTO teachers(shalarth,name,mobile,udise,salt,pw,status) VALUES(?,?,?,?,?,?,'ok')").bind(sh,name,mob,udise,salt,h).run();n++;
+      }
+      return J({ok:1,n:n,sk:sk});
     }
     return imp(env,b.rows,null);
   }
