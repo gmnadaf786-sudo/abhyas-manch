@@ -39,13 +39,13 @@ function msg(j){return j.ok?'':j.e==='conflict'?'दुसऱ्या कोण
 function back(t){return '<button class="g" onclick="home()">← CCE</button><h2 style="margin:4px 0 12px">'+t+'</h2>'}
 function load(){if(!T||!/^\d{11}$/.test(UD)||!CL){d.innerHTML='<div class="card">कृपया शिक्षक पानावरून लॉगिन करून वर्ग निवडा.<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
  document.getElementById('hd').textContent='📘 CCE — इयत्ता '+CL+' '+DV+' ('+YR+')';
- post('/api/cce/get',{school:1,kinds:['set','wt','days']}).then(function(j){if(!j.ok){d.innerHTML='<div class="card er">'+msg(j)+'<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
+ post('/api/cce/get',{school:1,kinds:['set','wt','wtdone','days']}).then(function(j){if(!j.ok){d.innerHTML='<div class="card er">'+msg(j)+'<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
   j.rows.forEach(function(r){var v=null;try{v=JSON.parse(r.v)}catch(e){}DOC[key(r.cls,r.kind,r.k)]={v:v,upd:r.upd}});home()}).catch(function(){d.innerHTML='<div class="card er">इंटरनेट तपासा.</div>'})}
 function tile(ic,t,s,fn,done){return '<div class="card t'+(fn?'':' off')+'"'+(fn?' onclick="'+fn+'"':'')+'><span class="ic">'+ic+'</span><span><b>'+t+(done?' ✔':'')+'</b><small>'+s+'</small></span></div>'}
 function home(){var s0=get(0,'set',''),s1=get(CL,'set',''),dy=get(0,'days','');
  d.innerHTML='<button class="g" onclick="location.href=\'teacher.html\'">← वर्ग</button>'+
  tile('🏫','शाळा व वर्गशिक्षक','मुख्याध्यापक आणि वर्गशिक्षकाचे नाव','setS()',s0&&s1)+
- tile('⚖️','भारांश','विषयवार साधनांचे गुण (सत्र १ व २)','wtS(1)',get(CL,'wt','1')||get(CL,'wt','2'))+
+ tile('⚖️','भारांश','दोन्ही सत्रांचा भारांश निश्चित केल्यावरच गुण नोंदणी सुरू होते','wtS(1)',get(CL,'wtdone','1')&&get(CL,'wtdone','2'))+
  tile('📅','कामाचे दिवस','महिनावार शाळेचे कामाचे दिवस','dayS()',dy)+
  tile('✏️','गुण नोंदणी','विषयवार, साधनवार गुण भरा','mkS(1)')+tile('🙋','उपस्थिती, आरोग्य, वर्णनात्मक नोंदी','लवकरच','')+tile('📄','निकाल व प्रगती पुस्तिका','लवकरच','')}
 /* ---- शाळा व वर्गशिक्षक ---- */
@@ -56,10 +56,13 @@ function setSave(){var e=document.getElementById('e');if(!hm.value.trim()||!ct.v
 /* ---- भारांश ---- */
 function wOf(term,code){var o=get(CL,'wt',String(term))||{};if(o[code])return o[code];var s=W[CL].filter(function(x){return x[0]===code})[0];return s?s[2]:[]}
 function tot(w,a,b){var t=0;for(var i=a;i<b;i++)t+=Number(w[i])||0;return t}
-function wtS(term){var o=get(CL,'wt',String(term))||{};
+function wtS(term){needMk(function(){wtS2(term)})}
+function wtS2(term){var o=get(CL,'wt',String(term))||{},dn=get(CL,'wtdone',String(term));
  d.innerHTML=back('भारांश')+'<div class="r"><button class="'+(term===1?'s':'g')+'" onclick="wtS(1)">सत्र १</button><button class="'+(term===2?'s':'g')+'" onclick="wtS(2)">सत्र २</button></div><div class="card"><small>विषयावर दाबून गुण बदला. बदल न केल्यास शासनाचा डिफॉल्ट भारांश लागू राहतो.</small>'+
- W[CL].map(function(s){var w=wOf(term,s[0]);return '<div class="row" onclick="wtE('+term+',\''+s[0]+'\')"><span><b>'+E(s[1])+'</b>'+(o[s[0]]?' <small>(बदललेला)</small>':'')+'</span><small>आकारिक '+tot(w,0,8)+' + संकलित '+tot(w,8,11)+' = '+tot(w,0,11)+' ›</small></div>'}).join('')+'</div>'}
-function wtE(term,code){var s=W[CL].filter(function(x){return x[0]===code})[0],w=wOf(term,code);
+ W[CL].map(function(s){var w=wOf(term,s[0]);return '<div class="row" onclick="wtE('+term+',\''+s[0]+'\')"><span><b>'+E(s[1])+'</b>'+(o[s[0]]?' <small>(बदललेला)</small>':'')+'</span><small>आकारिक '+tot(w,0,8)+' + संकलित '+tot(w,8,11)+' = '+tot(w,0,11)+' ›</small></div>'}).join('')+'</div>'+(dn?'<div class="card"><b class="ok">✔ सत्र '+term+' भारांश निश्चित आहे.</b><br><small>आता गुण नोंदणी करता येते. गुण भरलेल्या विषयाचा भारांश बदलता येत नाही.</small></div>':'<div class="card"><small>सर्व विषयांचा भारांश तपासा (हवा तो बदला). तो बरोबर असेल तेव्हा खालील बटन दाबा. त्यानंतरच या सत्राची गुण नोंदणी सुरू होईल.</small><p id="e" class="er"></p><button onclick="wtDone('+term+')">✔ सत्र '+term+' भारांश निश्चित करा</button></div>')}
+function wtDone(term){var e=document.getElementById('e');e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'wtdone',String(term),1).then(function(j){if(j.ok)wtS(term);else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
+function wtE(term,code){var s=W[CL].filter(function(x){return x[0]===code})[0],w=wOf(term,code),mm=get(CL,'marks',term+'|'+code),has=false;if(mm)for(var p in mm)if(mm[p]&&mm[p].some(function(x){return x!=null}))has=true;
+ if(has){alert('या विषयाचे गुण आधीच भरलेले आहेत, म्हणून भारांश बदलता येत नाही.');return}
  function inp(i){return '<div><label>'+CP[i]+'</label><input type="number" inputmode="numeric" min="0" max="100" id="w'+i+'" value="'+(w[i]==null?'':w[i])+'" oninput="wtT()"></div>'}
  d.innerHTML='<button class="g" onclick="wtS('+term+')">← भारांश</button><h2 style="margin:4px 0 12px">'+E(s[1])+' — सत्र '+term+'</h2><div class="card"><h2>आकारिक</h2><div class="g2">'+[0,1,2,3,4,5,6,7].map(inp).join('')+'</div><h2 style="margin-top:12px">संकलित</h2><div class="g2">'+[8,9,10].map(inp).join('')+'</div>'+
  '<div class="sum"><span>आकारिक <span id="tf"></span> + संकलित <span id="ts"></span></span><span>एकूण <span id="tt"></span></span></div><small>रिकामे = ते साधन लागू नाही.</small><p id="e" class="er"></p><button onclick="wtSave('+term+',\''+code+'\')">सेव्ह</button><button class="g" onclick="wtDef('+term+',\''+code+'\')">डिफॉल्ट भारांश वापरा</button></div>';wtT()}
@@ -83,7 +86,8 @@ function needMk(cb){if(MK)return cb();post('/api/cce/get',{kinds:['marks']}).the
  j.rows.forEach(function(r){var v=null;try{v=JSON.parse(r.v)}catch(e){}DOC[key(r.cls,r.kind,r.k)]={v:v,upd:r.upd}});MK=true;cb()}).catch(function(){d.innerHTML=back('गुण नोंदणी')+'<div class="card er">इंटरनेट तपासा.</div>'})}
 function comps(w){var a=[];for(var i=0;i<11;i++)if(w[i]>0)a.push(i);return a}
 function filled(m,pen,cs){var r=m&&m[pen];if(!r)return 0;var n=0;cs.forEach(function(i){if(r[i]!=null)n++});return n}
-function mkS(term){d.innerHTML=back('गुण नोंदणी')+'<div class="card">लोड होत आहे…</div>';needStu(function(){needMk(function(){
+function mkS(term){if(!get(CL,'wtdone',String(term))){d.innerHTML=back('गुण नोंदणी')+'<div class="r"><button class="'+(term===1?'s':'g')+'" onclick="mkS(1)">सत्र १</button><button class="'+(term===2?'s':'g')+'" onclick="mkS(2)">सत्र २</button></div><div class="card"><b>प्रथम सत्र '+term+' चा भारांश निश्चित करा.</b><br><small>भारांश पूर्ण झाल्यानंतरच गुण नोंदणी करता येते.</small><br><br><button onclick="wtS('+term+')">⚖️ भारांशाकडे जा</button></div>';return}
+ d.innerHTML=back('गुण नोंदणी')+'<div class="card">लोड होत आहे…</div>';needStu(function(){needMk(function(){
  if(!STU.length){d.innerHTML=back('गुण नोंदणी')+'<div class="card">या वर्गात अजून विद्यार्थी नाहीत. शिक्षक पानावर "➕ विद्यार्थी जोडा" मधून आधी विद्यार्थी जोडा.</div>';return}
  d.innerHTML=back('गुण नोंदणी')+'<div class="r"><button class="'+(term===1?'s':'g')+'" onclick="mkS(1)">सत्र १</button><button class="'+(term===2?'s':'g')+'" onclick="mkS(2)">सत्र २</button></div><div class="card"><small>विषय निवडा. विद्यार्थी: '+STU.length+'</small>'+
  W[CL].map(function(s){var cs=comps(wOf(term,s[0])),m=get(CL,'marks',term+'|'+s[0]),full=0,part=0;STU.forEach(function(x){var f=filled(m,x.pen,cs);if(f===cs.length)full++;else if(f)part++});
