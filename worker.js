@@ -32,6 +32,8 @@ async function teacher(env,b,needOk){
   const x=await env.DB.prepare('SELECT * FROM teachers WHERE token=?').bind(t).first();
   if(!x||(needOk&&x.status!=='ok'))return null;return x;
 }
+async function ensS(env){await env.DB.prepare('CREATE TABLE IF NOT EXISTS sinfo(pen TEXT PRIMARY KEY,gender TEXT,cat TEXT,addr TEXT,mother TEXT,mobile TEXT,tid INTEGER,upd TEXT,dob TEXT)').run();try{await env.DB.prepare('ALTER TABLE sinfo ADD COLUMN dob TEXT').run()}catch(e){}}
+const okDob=s=>/^(19|20)\d\d-\d\d-\d\d$/.test(s)&&!isNaN(Date.parse(s))?s:'';
 async function imp(env,rw,tid){
     const rows=(Array.isArray(rw)?rw:[]).slice(0,150);let n=0;const st=[];
     for(const x of rows){
@@ -41,7 +43,9 @@ async function imp(env,rw,tid){
       const salt=rnd(6),h=await sha(salt+by),med=x.med==='kn'?'kn':'mr',dv=(cl(x.div,2).toUpperCase())||'A';
       st.push(env.DB.prepare("INSERT INTO roster(pen,udise,cls,div,name,med,salt,pw,pw0,salt0) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET udise=excluded.udise,cls=excluded.cls,div=excluded.div,name=excluded.name,med=excluded.med").bind(pen,ud,cls,dv,name,med,salt,h,h,salt));n++;
     }
+    const dq=[];for(const x of rows){const dd=okDob(cl(x.dob,10)),pn=cl(x.pen,11).replace(/\D/g,'');if(dd&&pn.length===11)dq.push([pn,dd])}
     if(st.length)await env.DB.batch(st);
+    if(dq.length){await ensS(env);await env.DB.batch(dq.map(a=>env.DB.prepare("INSERT INTO sinfo(pen,dob) SELECT ?,? WHERE EXISTS(SELECT 1 FROM roster WHERE pen=?) ON CONFLICT(pen) DO UPDATE SET dob=excluded.dob").bind(a[0],a[1],a[0])))}
     return J({ok:1,n,skipped:rows.length-n});
 }
 async function ext(p,r,env){
@@ -117,8 +121,8 @@ async function ext(p,r,env){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const cls=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase(),ud=cl(b.udise,11);
     if(!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,ud,cls,dv).first())return J({e:'auth'},403);
-    await env.DB.prepare('CREATE TABLE IF NOT EXISTS sinfo(pen TEXT PRIMARY KEY,gender TEXT,cat TEXT,addr TEXT,mother TEXT,mobile TEXT,tid INTEGER,upd TEXT)').run();
-    const rows=(await env.DB.prepare('SELECT r.pen,r.name,i.gender,i.cat,i.addr,i.mother,i.mobile FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? AND r.cls=? AND r.div=? ORDER BY r.name').bind(ud,cls,dv).all()).results;
+    await ensS(env);
+    const rows=(await env.DB.prepare('SELECT r.pen,r.name,i.dob,i.gender,i.cat,i.addr,i.mother,i.mobile FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? AND r.cls=? AND r.div=? ORDER BY r.name').bind(ud,cls,dv).all()).results;
     return J({ok:1,rows});
   }
   if(p==='/api/t/sset'){
@@ -129,8 +133,8 @@ async function ext(p,r,env){
     if(!x)return J({e:'auth'},403);
     const g=['M','F','O'].includes(b.gender)?b.gender:'',mob=cl(b.mobile,15).replace(/\D/g,'');
     if(mob&&mob.length!==10)return J({e:'mobile'});
-    await env.DB.prepare('CREATE TABLE IF NOT EXISTS sinfo(pen TEXT PRIMARY KEY,gender TEXT,cat TEXT,addr TEXT,mother TEXT,mobile TEXT,tid INTEGER,upd TEXT)').run();
-    await env.DB.prepare("INSERT INTO sinfo(pen,gender,cat,addr,mother,mobile,tid,upd) VALUES(?,?,?,?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET gender=excluded.gender,cat=excluded.cat,addr=excluded.addr,mother=excluded.mother,mobile=excluded.mobile,tid=excluded.tid,upd=excluded.upd").bind(pen,g,cl(b.cat,40),cl(b.addr,200),cl(b.mother,60),mob,t.id,new Date().toISOString()).run();
+    await ensS(env);
+    await env.DB.prepare("INSERT INTO sinfo(pen,gender,cat,addr,mother,mobile,tid,upd,dob) VALUES(?,?,?,?,?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET dob=CASE WHEN excluded.dob<>'' THEN excluded.dob ELSE sinfo.dob END,gender=excluded.gender,cat=excluded.cat,addr=excluded.addr,mother=excluded.mother,mobile=excluded.mobile,tid=excluded.tid,upd=excluded.upd").bind(pen,g,cl(b.cat,40),cl(b.addr,200),cl(b.mother,60),mob,t.id,new Date().toISOString(),okDob(cl(b.dob,10))).run();
     return J({ok:1});
   }
   if(p==='/api/t/resetpw'){
