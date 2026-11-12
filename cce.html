@@ -74,7 +74,9 @@ function wtSave(term,code){var w=wtV();if(tot(w,0,11)!==100){e.className='er';e.
 function wtDef(term,code){wtPut(term,code,null)}
 /* ---- कामाचे दिवस ---- */
 function dayS(){var v=get(0,'days','')||[];
- d.innerHTML=back('कामाचे दिवस ('+YR+')')+'<div class="card"><small>ही माहिती पूर्ण शाळेसाठी एकदाच भरायची आहे.</small><div class="g2" style="margin-top:8px">'+MON.map(function(m,i){return '<div><label>'+m+'</label><input type="number" inputmode="numeric" min="0" max="31" id="m'+i+'" value="'+(v[i]==null?'':v[i])+'" oninput="dayT()"></div>'}).join('')+'</div><div class="sum"><span>एकूण दिवस</span><span id="dt"></span></div><p id="e" class="er"></p><button onclick="daySave()">सेव्ह</button></div>';dayT()}
+ d.innerHTML=back('कामाचे दिवस ('+YR+')')+'<div class="card"><small>ही माहिती पूर्ण शाळेसाठी एकदाच भरायची आहे.</small>'+(DEFD[YR]?'<button class="g" style="margin-top:8px" onclick="dayDef()">📋 डिफॉल्ट दिवस भरा</button><small>'+MON.filter(function(m,i){return DEFD[YR][i]==null}).join(', ')+' यांचे डिफॉल्ट उपलब्ध नाहीत, ते स्वतः भरा.</small>':'')+'<div class="g2" style="margin-top:8px">'+MON.map(function(m,i){return '<div><label>'+m+'</label><input type="number" inputmode="numeric" min="0" max="31" id="m'+i+'" value="'+(v[i]==null?'':v[i])+'" oninput="dayT()"></div>'}).join('')+'</div><div class="sum"><span>एकूण दिवस</span><span id="dt"></span></div><p id="e" class="er"></p><button onclick="daySave()">सेव्ह</button></div>';dayT()}
+var DEFD={'2026-27':[12,26,23,24,25,12,26,null,null,null,null,null]};
+function dayDef(){var a=DEFD[YR];for(var i=0;i<12;i++)if(a[i]!=null)document.getElementById('m'+i).value=a[i];dayT()}
 function dayV(){var a=[];for(var i=0;i<12;i++){var x=document.getElementById('m'+i).value.trim();a.push(x===''?null:Math.min(31,Math.max(0,parseInt(x)||0)))}return a}
 function dayT(){dt.textContent=dayV().reduce(function(s,x){return s+(x||0)},0)}
 function daySave(){var e=document.getElementById('e');e.className='ok';e.textContent='सेव्ह होत आहे…';put(0,'days','',dayV()).then(function(j){if(j.ok)home();else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
