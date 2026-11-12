@@ -49,7 +49,90 @@ async function imp(env,rw,tid){
     if(dq.length){await env.DB.batch(dq.map(a=>env.DB.prepare("INSERT INTO sinfo(pen,dob,gender,cat,gr,roll) SELECT ?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM roster WHERE pen=?) ON CONFLICT(pen) DO UPDATE SET dob=CASE WHEN excluded.dob<>'' THEN excluded.dob ELSE sinfo.dob END,gender=CASE WHEN COALESCE(sinfo.gender,'')='' THEN excluded.gender ELSE sinfo.gender END,cat=CASE WHEN COALESCE(sinfo.cat,'')='' THEN excluded.cat ELSE sinfo.cat END,gr=CASE WHEN COALESCE(sinfo.gr,'')='' THEN excluded.gr ELSE sinfo.gr END,roll=CASE WHEN COALESCE(sinfo.roll,'')='' THEN excluded.roll ELSE sinfo.roll END").bind(a[0],a[1],a[2],a[3],a[4],a[5],a[0])))}
     return J({ok:1,n,skipped:rows.length-n});
 }
+
+// ---- PM POSHAN (school-level; any confirmed teacher of the school) ----
+let PMOK=false;
+async function pmEnsure(env){
+  if(PMOK)return;
+  await env.DB.batch([
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_daily(udise TEXT, date TEXT, menu TEXT, p15 INTEGER, p68 INTEGER, pulse15 TEXT, pulse68 TEXT, cooked TEXT, supp TEXT, taste TEXT, dist TEXT, taster TEXT, remark TEXT, sample TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,date))"),
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_stock(udise TEXT, month TEXT, grp TEXT, data TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,month,grp))"),
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_rcpt(udise TEXT, id TEXT, date TEXT, supplier TEXT, challan TEXT, items TEXT, remark TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,id))")]);
+  PMOK=true;
+}
+const PM_ITEMS=['तांदूळ','हिरवा वाटाणा','मुगडाळ','चवळी','हरभरा','सोयाबडी','मसूरडाळ','मटकी','मूग','तूरडाळ','हळद','मीठ','कांदा लसूण मसाला','जिरे','मोहरी','मिरची पावडर','गरम मसाला','तेल'];
+const istDay=()=>new Date(Date.now()+19800000).toISOString().slice(0,10);
+const dOk=s=>/^\d{4}-\d{2}-\d{2}$/.test(s)&&!isNaN(Date.parse(s));
+async function pmApi(p,r,env){
+  if(!p.startsWith('/api/pm/'))return null;
+  const b=await body(r),t=await teacher(env,b,true);
+  if(!t||!t.conf)return J({e:'auth'},401);
+  await pmEnsure(env);
+  const u=t.udise,by=t.shalarth;
+  if(p==='/api/pm/year'){
+    const fy=parseInt(b.fy)||0;if(fy<2020||fy>2100)return J({e:'fy'},400);
+    const d=(await env.DB.prepare('SELECT * FROM pm_daily WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
+    const st=(await env.DB.prepare('SELECT month,grp,data FROM pm_stock WHERE udise=? AND month>=? AND month<=?').bind(u,fy+'-04',(fy+1)+'-03').all()).results;
+    const rc=(await env.DB.prepare('SELECT id,date,supplier,challan,items,remark FROM pm_rcpt WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
+    const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
+    return J({ok:1,fy,udise:u,school:sc?sc.name:'',teacher:t.name,daily:d,stock:st,rcpt:rc});
+  }
+  if(p==='/api/pm/savemonth'){
+    const month=cl(b.month,7);if(!/^\d{4}-\d{2}$/.test(month))return J({e:'month'},400);
+    const es=Array.isArray(b.entries)?b.entries.slice(0,31):[];if(!es.length)return J({e:'empty'},400);
+    const today=istDay(),tre=/^\d{2}:\d{2}$/,st=[],now=new Date().toISOString();
+    for(const e of es){
+      const date=cl(e.date,10);
+      if(!dOk(date)||date.slice(0,7)!==month)return J({e:'date',m:date},400);
+      if(date>today)return J({e:'future',m:date},400);
+      const cooked=cl(e.cooked,4)==='नाही'?'नाही':'होय';
+      let p15=Math.floor(Number(e.p15)||0),p68=Math.floor(Number(e.p68)||0);
+      if(p15<0||p68<0||p15>2000||p68>2000)return J({e:'num',m:date},400);
+      if(cooked==='होय'&&!p15&&!p68)return J({e:'pres',m:date},400);
+      if(cooked==='नाही'){p15=0;p68=0}
+      const menu=cl(e.menu,80);if(cooked==='होय'&&!menu)return J({e:'menu',m:date},400);
+      st.push(env.DB.prepare("INSERT INTO pm_daily(udise,date,menu,p15,p68,pulse15,pulse68,cooked,supp,taste,dist,taster,remark,sample,by,upd) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(udise,date) DO UPDATE SET menu=excluded.menu,p15=excluded.p15,p68=excluded.p68,pulse15=excluded.pulse15,pulse68=excluded.pulse68,cooked=excluded.cooked,supp=excluded.supp,taste=excluded.taste,dist=excluded.dist,taster=excluded.taster,remark=excluded.remark,sample=excluded.sample,by=excluded.by,upd=excluded.upd")
+        .bind(u,date,menu,p15,p68,cl(e.pulse15,40),cl(e.pulse68,40),cooked,cl(e.supplement,80),tre.test(e.tasteTime||'')?e.tasteTime:'',tre.test(e.distTime||'')?e.distTime:'',cl(e.taster,60),cl(e.remark,200),e.sample==='होय'?'होय':'',by,now));
+    }
+    await env.DB.batch(st);return J({ok:1,n:st.length});
+  }
+  if(p==='/api/pm/ddel'){
+    const date=cl(b.date,10);if(!dOk(date))return J({e:'date'},400);
+    await env.DB.prepare('DELETE FROM pm_daily WHERE udise=? AND date=?').bind(u,date).run();return J({ok:1});
+  }
+  if(p==='/api/pm/stocksave'){
+    const month=cl(b.month,7),grp=cl(b.grp,2);
+    if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)||(grp!=='15'&&grp!=='68'))return J({e:'arg'},400);
+    const d=b.data&&typeof b.data==='object'?b.data:{},clean={};
+    for(const it of PM_ITEMS){const e=d[it];if(!e||typeof e!=='object')continue;const o={};let any=false;
+      for(const k of ['o','r','p']){if(e[k]===null||e[k]===undefined||e[k]==='')continue;const n=Number(e[k]);
+        if(!isFinite(n)||n>1000000||n<(k==='o'?-1000000:0))return J({e:'num',m:it},400);o[k]=Math.round(n*1e6)/1e6;any=true}
+      if(any)clean[it]=o}
+    if(d._pat&&d._pat.o!==undefined&&d._pat.o!==''&&d._pat.o!==null){const pn=Math.floor(Number(d._pat.o));if(!isFinite(pn)||pn<0||pn>5000)return J({e:'pat'},400);clean._pat={o:pn}}
+    if(!Object.keys(clean).length)await env.DB.prepare('DELETE FROM pm_stock WHERE udise=? AND month=? AND grp=?').bind(u,month,grp).run();
+    else await env.DB.prepare('INSERT INTO pm_stock(udise,month,grp,data,by,upd) VALUES(?,?,?,?,?,?) ON CONFLICT(udise,month,grp) DO UPDATE SET data=excluded.data,by=excluded.by,upd=excluded.upd').bind(u,month,grp,JSON.stringify(clean),by,new Date().toISOString()).run();
+    return J({ok:1});
+  }
+  if(p==='/api/pm/rsave'){
+    const date=cl(b.date,10);if(!dOk(date)||date>istDay())return J({e:'date'},400);
+    const sup=cl(b.supplier,120);if(!sup)return J({e:'supplier'},400);
+    const seen={},items=[];for(const x of (Array.isArray(b.items)?b.items:[])){const nm=cl(x&&x.name,40),q=Math.round((Number(x&&x.qty)||0)*1e4)/1e4;
+      if(!nm||q<=0)continue;if(!PM_ITEMS.includes(nm)||q>100000)return J({e:'item',m:nm},400);
+      if(seen[nm])seen[nm].qty=Math.round((seen[nm].qty+q)*1e4)/1e4;else{seen[nm]={name:nm,qty:q};items.push(seen[nm])}}
+    if(!items.length)return J({e:'items'},400);
+    let id=cl(b.id,40);
+    if(id){if(!await env.DB.prepare('SELECT 1 x FROM pm_rcpt WHERE udise=? AND id=?').bind(u,id).first())return J({e:'nf'},404)}
+    else id='R'+Date.now().toString(36).toUpperCase();
+    await env.DB.prepare('INSERT INTO pm_rcpt(udise,id,date,supplier,challan,items,remark,by,upd) VALUES(?,?,?,?,?,?,?,?,?) ON CONFLICT(udise,id) DO UPDATE SET date=excluded.date,supplier=excluded.supplier,challan=excluded.challan,items=excluded.items,remark=excluded.remark,by=excluded.by,upd=excluded.upd').bind(u,id,date,sup,cl(b.challan,60),JSON.stringify(items),cl(b.remark,200),by,new Date().toISOString()).run();
+    return J({ok:1,id});
+  }
+  if(p==='/api/pm/rdel'){
+    await env.DB.prepare('DELETE FROM pm_rcpt WHERE udise=? AND id=?').bind(u,cl(b.id,40)).run();return J({ok:1});
+  }
+  return J({e:'nf'},404);
+}
 async function ext(p,r,env){
+  {const pr=await pmApi(p,r,env);if(pr)return pr}
   if(p==='/api/s/login'){
     const b=await body(r),pen=cl(b.pen,11).replace(/\D/g,''),pw=cl(b.pw,40);
     if(pen.length!==11||!pw)return J({e:'bad'},401);

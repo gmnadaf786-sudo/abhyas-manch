@@ -1,0 +1,116 @@
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>अभ्यास मंच – PM पोषण</title>
+<style>:root{--bg:#f7f7f4;--c:#fff;--i:#1f2933;--m:#64748b;--l:#e2e8f0;--a:#0f766e;--ab:#e6f4f2}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--c:#1e293b;--i:#e2e8f0;--m:#94a3b8;--l:#334155;--ab:#12353a}}
+body{margin:0;background:var(--bg);color:var(--i);font:15px/1.5 system-ui,sans-serif}main{max-width:760px;margin:0 auto;padding:14px}
+.card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:12px;margin-bottom:12px}h1{font-size:19px;margin:4px 0 2px}h2{font-size:16px;margin:0 0 8px}
+input,select,button,textarea{font:inherit;padding:9px 10px;border-radius:10px;border:1.5px solid #94a3b8;background:var(--c);color:var(--i);box-sizing:border-box;margin:0}
+input:focus,select:focus{outline:0;border-color:var(--a);box-shadow:0 0 0 3px rgba(15,118,110,.2)}
+button{background:var(--a);color:#fff;border:0;cursor:pointer;font-weight:600}button.g{background:var(--c);color:var(--a);border:1.5px solid var(--a)}button.d{background:#fff;color:#b91c1c;border:1.5px solid #b91c1c}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:10px 0}.tabs button{white-space:nowrap;background:var(--c);color:var(--a);border:1.5px solid var(--a)}.tabs button.on{background:var(--a);color:#fff}
+.r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.r>*{flex:1;min-width:0}small,.m{color:var(--m)}.er{color:#b91c1c}.ok{color:#15803d}
+.day{border-bottom:1px solid var(--l);padding:10px 0}.day:last-child{border:0}.dh{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}.dh b{font-size:15px}
+.n{width:100%}.lab{font-size:12px;color:var(--m);margin:6px 0 2px;display:block}.chip{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--ab);color:var(--a);font-size:12px;font-weight:700}
+.sv{position:sticky;bottom:0;background:var(--bg);padding:8px 0}.sv button{width:100%;padding:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:5px 3px;border-bottom:1px solid var(--l);text-align:right;white-space:nowrap}td:first-child,th:first-child{text-align:left;white-space:normal}th{color:var(--m)}.w{overflow-x:auto}
+.st input{width:66px;padding:6px 4px;text-align:right}.neg{color:#b91c1c;font-weight:700}
+.dim{opacity:.45;pointer-events:none}
+</style></head><body><main>
+<div style="display:flex;justify-content:space-between;align-items:center"><h1>🍲 PM पोषण</h1><button class="g" onclick="location.href='teacher.html'">← शिक्षक पान</button></div>
+<small id="sch"></small>
+<div id="x"></div>
+</main>
+<script>
+var T='',Y=null,TAB='d',MON='',GRP='15',E={},SD={};
+var X=document.getElementById('x');
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function post(u,b){b=b||{};b.token=T;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.$s=r.status;return j})}).catch(function(){return{e:'net'}})}
+var RECIPES=[['व्हेजिटेबल पुलाव','हिरवा वाटाणा'],['मूग शेवगा वरण भात','तूरडाळ'],['मटर पुलाव','हिरवा वाटाणा'],['मुगडाळ खिचडी','मुगडाळ'],['चवळी खिचडी','चवळी'],['चणा पुलाव','हरभरा'],['सोयाबीन पुलाव','सोयाबडी'],['मसुरी पुलाव','मसूरडाळ'],['मसाले भात','हिरवा वाटाणा'],['मोड आलेल्या मटकीची उसळ','मटकी'],['व्हेजिटेबल पुलाव','हिरवा वाटाणा'],['मुगडाळ खिचडी','मुगडाळ']];
+var MENUS=[];RECIPES.forEach(function(r){if(MENUS.indexOf(r[0])<0)MENUS.push(r[0])});
+var PULSES=['मुगडाळ','तूरडाळ','मटकी','मसूरडाळ','चवळी','हरभरा','हिरवा वाटाणा','सोयाबडी','मूग'];
+var ITEMS=['तांदूळ','हिरवा वाटाणा','मुगडाळ','चवळी','हरभरा','सोयाबडी','मसूरडाळ','मटकी','मूग','तूरडाळ','हळद','मीठ','कांदा लसूण मसाला','जिरे','मोहरी','मिरची पावडर','गरम मसाला','तेल'];
+var SPICES=[['हळद',0.0003,0.0005],['मीठ',0.003,0.005],['कांदा लसूण मसाला',0.0004,0.0006],['जिरे',0.0003,0.0005],['मोहरी',0.0003,0.0005],['मिरची पावडर',0.0004,0.0005],['गरम मसाला',0.0004,0.0006]];
+var WK=['रवि','सोम','मंगळ','बुध','गुरु','शुक्र','शनि'],MN=['जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे','जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर'];
+function pn(n){return String(n).replace(/\d/g,function(d){return '०१२३४५६७८९'[d]})}
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function today(){var n=new Date(Date.now()+19800000);return n.toISOString().slice(0,10)}
+function recFor(date){var p=date.split('-'),d=new Date(+p[0],+p[1]-1,+p[2],12),A=new Date(2026,5,15,12);var diff=Math.floor((new Date(d.getFullYear(),d.getMonth(),d.getDate())-new Date(2026,5,15))/86400000),w=Math.floor(diff/7);if(w<0)w=0;return RECIPES[(w%2===0?0:6)+d.getDay()-1]||RECIPES[0]}
+function fyOf(m){var y=+m.slice(0,4),mo=+m.slice(5,7);return mo>=4?y:y-1}
+function fyMonths(fy){var a=[];for(var i=0;i<12;i++){var mo=4+i,y=fy;if(mo>12){mo-=12;y=fy+1}a.push(y+'-'+String(mo).padStart(2,'0'))}return a}
+function pulseNorm(x){x=String(x||'').split('/')[0].trim();if(x==='वाटाणा')x='हिरवा वाटाणा';if(x==='आख्खा मूग')x='मूग';return x}
+function fmt(v){if(v==null||isNaN(v))return '–';return String(Math.round(v*1000)/1000)}
+function init(){try{T=sessionStorage.getItem('am_t')||''}catch(e){}
+ if(!T){X.innerHTML='<div class="card"><p>प्रथम शिक्षक म्हणून लॉगिन करा.</p><button onclick="location.href=\'teacher.html\'">लॉगिन</button></div>';return}
+ var n=new Date(Date.now()+19800000);MON=n.toISOString().slice(0,7);load()}
+function load(){var fy=fyOf(MON);X.innerHTML='<p class="m">लोड होत आहे…</p>';post('/api/pm/year',{fy:fy}).then(function(j){
+ if(!j.ok){X.innerHTML='<div class="card"><p class="er">'+(j.$s===401?'सत्र संपले किंवा शाळेची पुष्टी बाकी आहे. शिक्षक पानावर जाऊन लॉगिन/शाळा पुष्टी करा.':'लोड झाले नाही. पुन्हा प्रयत्न करा.')+'</p><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
+ Y=j;SD={};j.daily.forEach(function(r){SD[r.date]=r});E={};document.getElementById('sch').textContent=(j.school||'')+' · UDISE '+j.udise;draw()})}
+function draw(){var t=[['d','📅 दैनिक नोंद'],['s','📦 साठा'],['r','🧾 पावती'],['p','⚖️ प्रमाण/मेनू']];
+ X.innerHTML='<div class="tabs">'+t.map(function(x){return '<button class="'+(TAB===x[0]?'on':'')+'" onclick="TAB=\''+x[0]+'\';draw()">'+x[1]+'</button>'}).join('')+'</div>'+
+ (TAB==='p'?'':'<div class="card"><input type="month" id="mo" value="'+MON+'" onchange="chm(this.value)" style="width:100%"></div>')+'<div id="b"></div>';
+ ({d:dTab,s:sTab,r:rTab,p:pTab})[TAB]()}
+function chm(v){if(!v)return;var o=fyOf(MON);MON=v;if(fyOf(v)!==o)load();else draw()}
+/* ---------- दैनिक ---------- */
+function ent(date){var s=SD[date],e=E[date];if(e)return e;var rc=recFor(date);
+ if(s)return {date:date,cooked:s.cooked||'होय',menu:s.menu,p15:s.p15||'',p68:s.p68||'',pulse15:s.pulse15,pulse68:s.pulse68,tasteTime:s.taste||'',distTime:s.dist||'',taster:s.taster||'',remark:s.remark||'',sample:s.sample||'',supplement:s.supp||'',saved:1};
+ return {date:date,cooked:'होय',menu:rc[0],p15:'',p68:'',pulse15:pulseNorm(rc[1]),pulse68:pulseNorm(rc[1]),tasteTime:'12:30',distTime:'13:00',taster:'',remark:'',sample:'',supplement:'',saved:0}}
+function dTab(){var p=MON.split('-'),y=+p[0],m=+p[1]-1,last=new Date(y,m+1,0).getDate(),td=today(),h='';
+ for(var d=1;d<=last;d++){var dt=new Date(y,m,d,12);if(dt.getDay()===0)continue;var date=ymd(dt),fut=date>td,e=ent(date),dirty=!!E[date];
+  h+='<div class="day'+(fut?' dim':'')+'" id="d'+date+'"><div class="dh"><b>'+pn(d)+' '+MN[m]+' · '+WK[dt.getDay()]+'</b><span>'+(SD[date]&&!dirty?'<span class="chip">जतन</span>':'')+(dirty?'<span class="chip" style="background:#fef3c7;color:#92400e">बदल</span>':'')+'</span></div>'+
+  '<div class="r"><select onchange="dset(\''+date+'\',\'cooked\',this.value,1)"><option value="होय"'+(e.cooked==='होय'?' selected':'')+'>आहार शिजवला</option><option value="नाही"'+(e.cooked==='नाही'?' selected':'')+'>शिजवला नाही / सुट्टी</option></select></div>';
+  if(e.cooked==='होय'){h+='<span class="lab">मेनू</span><select class="n" onchange="dmenu(\''+date+'\',this.value)">'+(MENUS.indexOf(e.menu)<0&&e.menu?'<option selected>'+esc(e.menu)+'</option>':'')+MENUS.map(function(x){return '<option'+(x===e.menu?' selected':'')+'>'+esc(x)+'</option>'}).join('')+'</select>'+
+   '<div class="r"><div><span class="lab">इ. १–५ उपस्थिती</span><input class="n" type="number" inputmode="numeric" min="0" value="'+esc(e.p15)+'" oninput="dset(\''+date+'\',\'p15\',this.value)"></div><div><span class="lab">इ. ६–८ उपस्थिती</span><input class="n" type="number" inputmode="numeric" min="0" value="'+esc(e.p68)+'" oninput="dset(\''+date+'\',\'p68\',this.value)"></div></div>'+
+   '<div class="r"><div><span class="lab">डाळ/कडधान्य (१–५)</span><select class="n" onchange="dset(\''+date+'\',\'pulse15\',this.value,1)">'+popt(e.pulse15)+'</select></div><div><span class="lab">डाळ/कडधान्य (६–८)</span><select class="n" onchange="dset(\''+date+'\',\'pulse68\',this.value,1)">'+popt(e.pulse68)+'</select></div></div>'+
+   '<details style="margin-top:6px"><summary class="m">चव / वाटप / शेरा</summary><div class="r"><div><span class="lab">चव घेतल्याची वेळ</span><input class="n" type="time" value="'+esc(e.tasteTime)+'" onchange="dset(\''+date+'\',\'tasteTime\',this.value)"></div><div><span class="lab">वाटप वेळ</span><input class="n" type="time" value="'+esc(e.distTime)+'" onchange="dset(\''+date+'\',\'distTime\',this.value)"></div></div><span class="lab">चव घेणारे</span><input class="n" value="'+esc(e.taster)+'" oninput="dset(\''+date+'\',\'taster\',this.value)"><span class="lab">शेरा</span><input class="n" value="'+esc(e.remark)+'" oninput="dset(\''+date+'\',\'remark\',this.value)"><span class="lab">पूरक आहार</span><input class="n" value="'+esc(e.supplement)+'" oninput="dset(\''+date+'\',\'supplement\',this.value)"><label style="display:block;margin-top:6px"><input type="checkbox"'+(e.sample==='होय'?' checked':'')+' onchange="dset(\''+date+'\',\'sample\',this.checked?\'होय\':\'\')"> नमुना ठेवला</label></details>'}
+  if(SD[date])h+='<div style="margin-top:6px"><button class="d" style="padding:5px 10px" onclick="ddel(\''+date+'\')">नोंद रद्द</button></div>';
+  h+='</div>'}
+ document.getElementById('b').innerHTML='<div class="card">'+h+'</div><div class="sv"><p id="e" class="er"></p><button onclick="dsave()">💾 सर्व बदल जतन करा</button></div>'}
+function popt(sel){return '<option value="">—</option>'+PULSES.map(function(x){return '<option'+(x===sel?' selected':'')+'>'+esc(x)+'</option>'}).join('')}
+function dset(date,k,v,redraw){var e=E[date]||(E[date]=ent(date));e[k]=v;if(!e.d){e.d=1}if(redraw){var y=window.scrollY;dTab();window.scrollTo(0,y)}else{var c=document.querySelector('#d'+date+' .chip');}}
+function dmenu(date,v){var e=E[date]||(E[date]=ent(date));e.menu=v;var r=RECIPES.filter(function(x){return x[0]===v})[0];if(r){e.pulse15=pulseNorm(r[1]);e.pulse68=pulseNorm(r[1])}var y=window.scrollY;dTab();window.scrollTo(0,y)}
+function dsave(){var es=[];for(var k in E){es.push(E[k])}var er=document.getElementById('e');if(!es.length){er.textContent='जतन करण्यासाठी बदल नाही.';return}er.className='m';er.textContent='जतन होत आहे…';
+ post('/api/pm/savemonth',{month:MON,entries:es}).then(function(j){if(j.ok){load()}else{er.className='er';er.textContent=({future:'पुढील तारखेची नोंद करता येत नाही.',pres:'किमान एका गटाची उपस्थिती भरा.',menu:'मेनू निवडा.',num:'उपस्थिती संख्या चुकीची.',net:'इंटरनेट अडचण.'})[j.e]?({future:'पुढील तारखेची नोंद करता येत नाही.',pres:'किमान एका गटाची उपस्थिती भरा.',menu:'मेनू निवडा.',num:'उपस्थिती संख्या चुकीची.',net:'इंटरनेट अडचण.'})[j.e]+(j.m?' ('+j.m+')':''):'जतन झाले नाही. पुन्हा प्रयत्न करा.'}})}
+function ddel(date){if(!confirm('ही नोंद रद्द करायची?'))return;post('/api/pm/ddel',{date:date}).then(function(j){if(j.ok)load();else alert('अयशस्वी')})}
+/* ---------- साठा ---------- */
+var NORM={'15':{rice:0.1,pulse:0.02,oil:0.005495,sp:1},'68':{rice:0.15,pulse:0.03,oil:0.008242,sp:2}};
+function usedFor(month,g){var u={};ITEMS.forEach(function(i){u[i]=0});var N=NORM[g];
+ Y.daily.concat(Object.keys(E).map(function(k){return null})).forEach(function(r){if(!r||r.date.slice(0,7)!==month||r.cooked==='नाही')return;var n=g==='15'?r.p15:r.p68;if(!n)return;
+  u['तांदूळ']+=n*N.rice;var pl=pulseNorm(g==='15'?r.pulse15:r.pulse68);if(u[pl]!=null&&pl!=='तांदूळ')u[pl]+=n*N.pulse;SPICES.forEach(function(s){u[s[0]]+=n*s[N.sp]});u['तेल']+=n*N.oil});return u}
+function stk(month,g){for(var i=0;i<Y.stock.length;i++){var s=Y.stock[i];if(s.month===month&&s.grp===g){try{return JSON.parse(s.data)}catch(e){}}}return {}}
+function stockOf(month,g){var k=month+'|'+g;return SD2[k]||stk(month,g)}
+var SD2={};
+function closing(month,g){var ms=fyMonths(fyOf(month)),idx=ms.indexOf(month),d=stockOf(month,g),u=usedFor(month,g),prev=idx>0?closing(ms[idx-1],g):null,c={};
+ ITEMS.forEach(function(it){var e=d[it]||{},o=e.o!=null?e.o:(prev?prev[it]:0);c[it]=(o||0)+(e.r||0)+(e.p||0)-u[it]});return c}
+function sTab(){var d=stockOf(MON,GRP),u=usedFor(MON,GRP),ms=fyMonths(fyOf(MON)),idx=ms.indexOf(MON),prev=idx>0?closing(ms[idx-1],GRP):null,rc=rcptTotals(MON);
+ var h='<div class="r" style="margin-bottom:8px"><button class="'+(GRP==='15'?'':'g')+'" onclick="GRP=\'15\';draw()">इ. १–५</button><button class="'+(GRP==='68'?'':'g')+'" onclick="GRP=\'68\';draw()">इ. ६–८</button></div>'+
+ '<div class="card"><span class="lab">'+(GRP==='15'?'१–५':'६–८')+' – महिन्याची पटसंख्या</span><input id="pat" type="number" class="n" value="'+(d._pat?d._pat.o:'')+'" style="width:140px">'+
+ '<p class="m" style="font-size:12px;margin:6px 0 0">मागील शिल्लक रिकामी सोडल्यास मागील महिन्याची अखेरची शिल्लक आपोआप येते. वापर = दैनिक नोंदीतील उपस्थिती × प्रमाण. लोकसहभाग = गावकऱ्यांकडून मिळालेला माल.</p></div>'+
+ '<div class="card st w"><table><tr><th>जिन्नस (किग्रॅ/लि.)</th><th>मागील</th><th>प्राप्त</th><th>लोक.</th><th>वापर</th><th>शिल्लक</th></tr>'+
+ ITEMS.map(function(it,i){var e=d[it]||{},auto=prev?prev[it]:0,o=e.o!=null?e.o:auto,cl=(o||0)+(e.r||0)+(e.p||0)-u[it];
+  return '<tr><td>'+esc(it)+(rc[it]?' <small>(पावती '+fmt(rc[it])+')</small>':'')+'</td><td><input type="number" step="any" data-k="o" data-i="'+i+'" placeholder="'+fmt(auto)+'" value="'+(e.o!=null?e.o:'')+'" oninput="srecalc()"></td><td><input type="number" step="any" min="0" data-k="r" data-i="'+i+'" value="'+(e.r!=null?e.r:'')+'" oninput="srecalc()"></td><td><input type="number" step="any" min="0" data-k="p" data-i="'+i+'" value="'+(e.p!=null?e.p:'')+'" oninput="srecalc()"></td><td id="su'+i+'">'+fmt(u[it])+'</td><td id="sc'+i+'" class="'+(cl<-0.0005?'neg':'')+'"><b>'+fmt(cl)+'</b></td></tr>'}).join('')+'</table></div>'+
+ '<div class="r"><button class="g" onclick="sfill()">🧾 पावत्यांवरून प्राप्त भरा</button></div><div class="sv"><p id="e" class="er"></p><button onclick="ssave()">💾 साठा जतन करा</button></div>';
+ document.getElementById('b').innerHTML=h}
+function sread(){var d={};document.querySelectorAll('#b .st input').forEach(function(el){var v=el.value.trim();if(v==='')return;var it=ITEMS[+el.dataset.i];(d[it]=d[it]||{})[el.dataset.k]=Number(v)});var pt=document.getElementById('pat').value.trim();if(pt!=='')d._pat={o:Number(pt)};return d}
+function srecalc(){var d=sread(),u=usedFor(MON,GRP),ms=fyMonths(fyOf(MON)),idx=ms.indexOf(MON),prev=idx>0?closing(ms[idx-1],GRP):null;ITEMS.forEach(function(it,i){var e=d[it]||{},o=e.o!=null?e.o:(prev?prev[it]:0),cl=(o||0)+(e.r||0)+(e.p||0)-u[it],c=document.getElementById('sc'+i);c.innerHTML='<b>'+fmt(cl)+'</b>';c.className=cl<-0.0005?'neg':''})}
+function sfill(){var rc=rcptTotals(MON);document.querySelectorAll('#b .st input[data-k="r"]').forEach(function(el){var it=ITEMS[+el.dataset.i];if(rc[it])el.value=rc[it]});srecalc()}
+function ssave(){var d=sread(),er=document.getElementById('e');er.className='m';er.textContent='जतन होत आहे…';post('/api/pm/stocksave',{month:MON,grp:GRP,data:d}).then(function(j){if(j.ok){SD2[MON+'|'+GRP]=d;load()}else{er.className='er';er.textContent='जतन झाले नाही ('+(j.m||j.e||'')+')'}})}
+/* ---------- पावती ---------- */
+function rcptTotals(m){var t={};(Y.rcpt||[]).forEach(function(r){if(r.date.slice(0,7)!==m)return;var it=[];try{it=JSON.parse(r.items)}catch(e){}it.forEach(function(x){t[x.name]=Math.round(((t[x.name]||0)+x.qty)*1e4)/1e4})});return t}
+var RE=null;
+function rTab(){var list=(Y.rcpt||[]).filter(function(r){return r.date.slice(0,7)===MON}),tot=rcptTotals(MON);
+ var h='<div class="card"><h2>🧾 धान्य आवक (पावत्या) – '+MN[+MON.slice(5,7)-1]+'</h2>'+(list.length?list.map(function(r){var it=[];try{it=JSON.parse(r.items)}catch(e){}return '<div class="day"><div class="dh"><b>'+esc(r.date)+' · '+esc(r.supplier)+'</b><span><button class="g" style="padding:4px 9px" onclick="redit(\''+r.id+'\')">बदला</button> <button class="d" style="padding:4px 9px" onclick="rdel(\''+r.id+'\')">काढा</button></span></div><small>चलन: '+esc(r.challan||'—')+'</small><div>'+it.map(function(x){return esc(x.name)+' '+fmt(x.qty)}).join(' · ')+'</div></div>'}).join(''):'<p class="m">या महिन्यात पावती नाही.</p>')+'</div>'+
+ (Object.keys(tot).length?'<div class="card"><h2>महिन्याची एकूण आवक</h2>'+Object.keys(tot).map(function(k){return esc(k)+' <b>'+fmt(tot[k])+'</b>'}).join(' · ')+'</div>':'')+
+ '<div id="rf"></div><div class="sv"><button onclick="radd()">➕ नवीन पावती</button></div>';document.getElementById('b').innerHTML=h}
+function radd(){RE={id:'',date:today(),supplier:'',challan:'',remark:'',items:[{name:'तांदूळ',qty:''}]};rform()}
+function redit(id){var r=Y.rcpt.filter(function(x){return x.id===id})[0],it=[];try{it=JSON.parse(r.items)}catch(e){}RE={id:id,date:r.date,supplier:r.supplier,challan:r.challan,remark:r.remark,items:it.map(function(x){return{name:x.name,qty:x.qty}})};rform()}
+function rform(){var h='<div class="card"><h2>'+(RE.id?'पावती बदला':'नवीन पावती')+'</h2><span class="lab">तारीख</span><input class="n" type="date" max="'+today()+'" value="'+RE.date+'" onchange="RE.date=this.value"><span class="lab">कोणाकडून (पुरवठादार)</span><input class="n" value="'+esc(RE.supplier)+'" oninput="RE.supplier=this.value"><span class="lab">चलन क्रमांक</span><input class="n" value="'+esc(RE.challan)+'" oninput="RE.challan=this.value"><span class="lab">जिन्नस (किग्रॅ / लि.)</span>'+
+ RE.items.map(function(x,i){return '<div class="r" style="margin-bottom:6px"><select style="flex:2" onchange="RE.items['+i+'].name=this.value">'+ITEMS.map(function(n){return '<option'+(n===x.name?' selected':'')+'>'+esc(n)+'</option>'}).join('')+'</select><input type="number" step="any" min="0" placeholder="प्रमाण" value="'+esc(x.qty)+'" oninput="RE.items['+i+'].qty=this.value"><button class="d" style="flex:0 0 40px;padding:8px 0" onclick="RE.items.splice('+i+',1);rform()">✕</button></div>'}).join('')+
+ '<button class="g" onclick="RE.items.push({name:\'तांदूळ\',qty:\'\'});rform()">+ जिन्नस</button><span class="lab">शेरा</span><input class="n" value="'+esc(RE.remark)+'" oninput="RE.remark=this.value"><p id="re" class="er"></p><div class="r"><button onclick="rsave()">💾 जतन करा</button><button class="g" onclick="RE=null;document.getElementById(\'rf\').innerHTML=\'\'">रद्द</button></div></div>';
+ document.getElementById('rf').innerHTML=h;document.getElementById('rf').scrollIntoView()}
+function rsave(){post('/api/pm/rsave',{id:RE.id,date:RE.date,supplier:RE.supplier,challan:RE.challan,remark:RE.remark,items:RE.items.map(function(x){return{name:x.name,qty:Number(x.qty)}})}).then(function(j){var e=document.getElementById('re');if(j.ok){RE=null;load()}else e.textContent=({date:'तारीख चुकीची.',supplier:'पुरवठादार भरा.',items:'किमान एक जिन्नस व प्रमाण भरा.'})[j.e]||'जतन झाले नाही.'})}
+function rdel(id){if(!confirm('ही पावती काढायची?'))return;post('/api/pm/rdel',{id:id}).then(function(j){if(j.ok)load();else alert('अयशस्वी')})}
+/* ---------- प्रमाण / मेनू ---------- */
+function pTab(){var rows=[['तांदूळ','१०० ग्रॅम','१५० ग्रॅम']].concat(['हिरवा वाटाणा','मुगडाळ','चवळी','हरभरा','सोयाबडी','मसूरडाळ','मटकी','मूग','तूरडाळ'].map(function(x){return[x,'०.०२','०.०३']}));
+ var t=new Date(Date.now()+19800000),td=t.toISOString().slice(0,10),mon=new Date(t);mon.setUTCDate(mon.getUTCDate()-((mon.getUTCDay()+6)%7));
+ var wk='';for(var i=0;i<6;i++){var d=new Date(mon);d.setUTCDate(mon.getUTCDate()+i);var ds=d.toISOString().slice(0,10),r=recFor(ds);wk+='<tr><td>'+WK[d.getUTCDay()]+' '+pn(d.getUTCDate())+'</td><td style="text-align:left">'+esc(r[0])+'</td></tr>'}
+ document.getElementById('b').innerHTML='<div class="card"><h2>🍛 या आठवड्याचा मेनू</h2><div class="w"><table>'+wk+'</table></div></div><div class="card"><h2>🌾 धान्य व कडधान्यांचे प्रमाण (प्रति विद्यार्थी)</h2><div class="w"><table><tr><th>पदार्थ</th><th>१–५</th><th>६–८</th></tr>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('')+'</table></div></div><div class="card"><h2>🧂 मसाले व तेल</h2><div class="w"><table><tr><th>पदार्थ</th><th>१–५</th><th>६–८</th></tr>'+SPICES.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('')+'<tr><td>तेल (लि.)</td><td>०.००५४९५</td><td>०.००८२४२</td></tr></table></div><small>जिल्हा परिषद, सांगली – PM पोषण शक्ती निर्माण योजना २०२६-२७ च्या परिपत्रकानुसार.</small></div>'}
+init();
+</script></body></html>
