@@ -225,15 +225,14 @@ async function ext(p,r,env){
       return J({ok:1});
     }
     if(p==='/api/admin/timport'){
-      let n=0,sk=0;
-      for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,12)){
+      const salt=rnd(8),h=await hashPin('123456',salt),st=[];let sk=0;
+      for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,25)){
         const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,''),name=cl(x.name,60),mob=cl(x.mob,10).replace(/\D/g,'').slice(-10),udise=cl(x.udise,11).replace(/\D/g,'');
         if(!/^[A-Z0-9]{6,20}$/.test(sh)||name.length<2||!okMob(mob)||udise.length!==11){sk++;continue}
-        if(await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=?').bind(sh).first()){sk++;continue}
-        const salt=rnd(8),h=await hashPin('123456',salt);
-        await env.DB.prepare("INSERT OR IGNORE INTO teachers(shalarth,name,mobile,udise,salt,pw,status) VALUES(?,?,?,?,?,?,'ok')").bind(sh,name,mob,udise,salt,h).run();n++;
+        st.push(env.DB.prepare("INSERT OR IGNORE INTO teachers(shalarth,name,mobile,udise,salt,pw,status) VALUES(?,?,?,?,?,?,'ok')").bind(sh,name,mob,udise,salt,h));
       }
-      return J({ok:1,n:n,sk:sk});
+      let n=0;if(st.length){const rs=await env.DB.batch(st);rs.forEach(x=>{n+=x.meta.changes||0})}
+      return J({ok:1,n:n,sk:sk+st.length-n});
     }
     return imp(env,b.rows,null);
   }
