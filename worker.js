@@ -113,6 +113,26 @@ async function ext(p,r,env){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     return imp(env,b.rows,t.id);
   }
+  if(p==='/api/t/sget'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const cls=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase(),ud=cl(b.udise,11);
+    if(!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,ud,cls,dv).first())return J({e:'auth'},403);
+    await env.DB.prepare('CREATE TABLE IF NOT EXISTS sinfo(pen TEXT PRIMARY KEY,gender TEXT,cat TEXT,addr TEXT,mother TEXT,mobile TEXT,tid INTEGER,upd TEXT)').run();
+    const rows=(await env.DB.prepare('SELECT r.pen,r.name,i.gender,i.cat,i.addr,i.mother,i.mobile FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? AND r.cls=? AND r.div=? ORDER BY r.name').bind(ud,cls,dv).all()).results;
+    return J({ok:1,rows});
+  }
+  if(p==='/api/t/sset'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const pen=cl(b.pen,11);
+    if(!b.consent)return J({e:'consent'});
+    const x=await env.DB.prepare('SELECT r.pen FROM roster r JOIN tclasses c ON c.udise=r.udise AND c.cls=r.cls AND c.div=r.div WHERE r.pen=? AND c.tid=?').bind(pen,t.id).first();
+    if(!x)return J({e:'auth'},403);
+    const g=['M','F','O'].includes(b.gender)?b.gender:'',mob=cl(b.mobile,15).replace(/\D/g,'');
+    if(mob&&mob.length!==10)return J({e:'mobile'});
+    await env.DB.prepare('CREATE TABLE IF NOT EXISTS sinfo(pen TEXT PRIMARY KEY,gender TEXT,cat TEXT,addr TEXT,mother TEXT,mobile TEXT,tid INTEGER,upd TEXT)').run();
+    await env.DB.prepare("INSERT INTO sinfo(pen,gender,cat,addr,mother,mobile,tid,upd) VALUES(?,?,?,?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET gender=excluded.gender,cat=excluded.cat,addr=excluded.addr,mother=excluded.mother,mobile=excluded.mobile,tid=excluded.tid,upd=excluded.upd").bind(pen,g,cl(b.cat,40),cl(b.addr,200),cl(b.mother,60),mob,t.id,new Date().toISOString()).run();
+    return J({ok:1});
+  }
   if(p==='/api/t/resetpw'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const pen=cl(b.pen,11);
