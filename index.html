@@ -115,7 +115,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <button class="les" id="pyb" style="justify-content:center;background:#0f766e;color:#fff;border:0" onclick="payNow()">✔ पैसे भरले, पाठवा</button>
 <button class="les" style="justify-content:center" onclick="pay.style.display='none'">नंतर</button></div></div>
 <div id="ks" style="display:none;position:fixed;inset:0;background:var(--bg);color:var(--ink);z-index:99;align-items:center;justify-content:center;padding:28px;text-align:center"><div><div style="font-size:48px">🛠️</div><h2>सेवा तात्पुरती बंद आहे</h2><p id="ksm" style="font-size:16px"></p></div></div>
-<div id="view"><div class="tb"><button onclick="closeV()">← मागे</button><span id="vt"></span><button onclick="nextL()">पुढचा →</button></div><div id="vx"><button id="vxb" onclick="vxPdf()">📖 पाठ वाचा</button><button id="vxo" onclick="vxLO()">🎯 निष्पत्ती पाहा</button></div><iframe id="fr" title="पाठ"></iframe></div>
+<div id="view"><div class="tb"><button onclick="closeV()">← मागे</button><span id="vt"></span><button id="audb" onclick="audTog()" style="display:none">🔇 ऑडिओ</button><button onclick="nextL()">पुढचा →</button></div><div id="vx"><button id="vxb" onclick="vxPdf()">📖 पाठ वाचा</button><button id="vxo" onclick="vxLO()">🎯 निष्पत्ती पाहा</button></div><iframe id="fr" title="पाठ"></iframe></div>
 <div id="lov" onclick="if(event.target===this)this.style.display='none'"><div><div class="hd"><b id="lot"></b><button id="lovc" onclick="lov.style.display='none'">✕ बंद</button></div><div id="lovb"></div></div></div>
 <div id="pv"><div class="tb"><button id="pvbk" onclick="closePdf()">← मागे</button><span id="pvt"></span><button onclick="pdfZoom(-1)" aria-label="लहान">−</button><button onclick="pdfZoom(1)" aria-label="मोठे">+</button></div><div id="pvb"><div id="pvm"></div></div></div>
 <script>
@@ -272,8 +272,8 @@ function openS(i,q){cur=D[i];document.getElementById('hb').innerHTML='<button cl
   var lk=isLocked(cur,x);h+='<button class="les" style="--c:'+cur.c+(lk?';opacity:.6':'')+'" onclick="openL('+x[0]+')"><div class="n">'+(lk?'🔒':x[0])+'</div><span class="t">'+x[1]+'</span>'+(lk?'':chip(P[key(cur,x[0])]))+'</button>'});
  m.innerHTML=h;if(q!==undefined){var e=document.getElementById('q');e.focus();e.setSelectionRange(e.value.length,e.value.length)}}
 function openL(n){if(!S&&!GUEST){showLogin('');return}var l=cur.l.filter(function(x){return x[0]==n})[0];if(isLocked(cur,l)){view.style.display='none';openPay();return}curL=n;vt.textContent=cur.n+' – '+n+'. '+l[1];fr.src=BASE+cur.p+'_l'+n+'.html';view.style.display='flex';updVx();trk('lesson',cur.n,n)}
-function closeV(){lov.style.display='none';view.style.display='none';fr.src='about:blank';if(cur)openS(D.indexOf(cur))}
-function nextL(){var ix=cur.l.map(function(x){return x[0]});var j=ix.indexOf(curL);if(j+1<ix.length)openL(ix[j+1]);else closeV()}
+function closeV(){audStop();lov.style.display='none';view.style.display='none';fr.src='about:blank';if(cur)openS(D.indexOf(cur))}
+function nextL(){audStop();var ix=cur.l.map(function(x){return x[0]});var j=ix.indexOf(curL);if(j+1<ix.length)openL(ix[j+1]);else closeV()}
 window.addEventListener('message',function(e){var d=e.data;if(d&&d.type==='closeLesson'){closeV();return}if(!d||d.type!=='ssResult'||!cur)return;
  var k=key(cur,curL),o=P[k];if(!o||d.score/d.total>=o.s/o.t)P[k]={s:d.score,t:d.total};save();if(S){var o={sub:cur.n,no:curL,les:cur.l.filter(function(x){return x[0]==curL})[0][1],sc:d.score,t:d.total};sendRes(o).then(function(ok){if(!ok){var a=getQ();a.push(o);putQ(a)}}).catch(function(){var a=getQ();a.push(o);putQ(a)})}});
 var dp;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;inst.style.display='block'});
@@ -341,5 +341,21 @@ function injCards(){clearInterval(INJT);var n=0,p=cur&&cur.p,l=curL;INJT=setInte
 if(VXE.f)h+='<div class="hc am-x" style="background:linear-gradient(145deg,#38bdf8,#1d4ed8);color:#fff" onclick="parent.vxPdf()"><div class="hi">📄</div><div class="ht">'+(kn?'ಪಾಠ ಓದಿರಿ':'पाठ वाचा')+'</div><div class="hs">'+(kn?'ಮೂಲ ಪಠ್ಯಪುಸ್ತಕದ ಪಾಠ':'मूळ पुस्तकातील पाठ')+'</div></div>';
 if(VXE.o)h+='<div class="hc am-x" style="background:linear-gradient(145deg,#f472b6,#7c3aed);color:#fff" onclick="parent.vxLO()"><div class="hi">🎯</div><div class="ht">'+(kn?'ಕಲಿಕಾ ನಿಷ್ಪತ್ತಿ':'अध्ययन निष्पत्ती')+'</div><div class="hs">'+(kn?'ಈ ಪಾಠದ ನಿಷ್ಪತ್ತಿಗಳು ('+VXE.o.length+')':'या पाठाच्या निष्पत्ती ('+VXE.o.length+')')+'</div></div>';
 if(!h)return;g.insertAdjacentHTML('beforeend',h);vx.style.display='none'},250)}
-fr.addEventListener('load',function(){if(view.style.display==='flex'){injUser();injCards()}});
+
+var AUDON=0,AUDL='',AUDT=null,AUDM=0;try{AUDON=localStorage.getItem('am_aud')==='1'?1:0}catch(e){}
+function audStop(){try{speechSynthesis.cancel()}catch(e){}AUDM=0}
+function audBtn(){var b=document.getElementById('audb');if(b)b.textContent=AUDON?'🔊 ऑडिओ':'🔇 ऑडिओ'}
+function audKids(d){var r=[];try{d.querySelectorAll('iframe').forEach(function(f){try{if(f.contentDocument&&f.contentDocument.body)r.push(f)}catch(e){}})}catch(e){}return r}
+function audActive(){var d;try{d=fr.contentDocument}catch(e){return null}for(var k=0;k<4&&d;k++){var nx=null;audKids(d).forEach(function(f){if(f.offsetParent!==null&&f.clientHeight>100)nx=f.contentDocument});if(!nx)break;d=nx}return d}
+function audHas(d){var f=false;try{if(d.defaultView.addAud)f=true;audKids(d).forEach(function(x){if(audHas(x.contentDocument))f=true})}catch(e){}return f}
+function audText(d){var sel=['#stage .card','#stepBox','.swb','.card','#app','main','body'];for(var i=0;i<sel.length;i++){var els=d.querySelectorAll(sel[i]);for(var j=0;j<els.length;j++){var e=els[j];if(!e.getClientRects().length)continue;var c=e.cloneNode(true);c.querySelectorAll('button,svg,img,script,style,select,input,iframe,canvas,nav').forEach(function(x){x.remove()});var t=(c.textContent||'').replace(/\s+/g,' ').trim();if(t.length>8)return t.slice(0,900)}}return ''}
+function audLang(d){var l=((d.documentElement&&d.documentElement.lang)||'').toLowerCase();if(/^kn/.test(l))return 'kn-IN';if(/^en/.test(l))return 'en-IN';if(/^mr/.test(l))return 'mr-IN';return KN()?'kn-IN':'mr-IN'}
+function audSpeak(force){var d=audActive();if(!d||!AUDON)return;var t=audText(d);if(!t||(!force&&t===AUDL))return;AUDL=t;var S=speechSynthesis;if(S.speaking&&!AUDM&&!force)return;try{S.cancel();var w=d.defaultView,u=new (w.SpeechSynthesisUtterance||SpeechSynthesisUtterance)(t),lg=audLang(d);u.lang=lg;u.rate=.9;var vs=S.getVoices(),p=lg.slice(0,2),v=vs.find(function(x){return x.lang.slice(0,2).toLowerCase()===p})||(p==='mr'||p==='kn'?vs.find(function(x){return /^hi/i.test(x.lang)}):null);if(v)u.voice=v;AUDM=1;u.onend=u.onerror=function(){AUDM=0};S.speak(u)}catch(e){}}
+function audTog(){AUDON=AUDON?0:1;try{localStorage.setItem('am_aud',AUDON?'1':'0')}catch(e){}audBtn();AUDL='';if(AUDON)audSpeak(true);else audStop()}
+function audWin(w){var d;try{d=w.document;if(!d||!d.body||w.__amA)return;w.__amA=1}catch(e){return}
+ d.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('button,.say,[onclick]');if(!b)return;var oc=b.getAttribute('onclick')||'';if(!(/🗣|🔊/.test(b.textContent)||b.classList.contains('say')||/\bsay\(|speak/.test(oc)))return;if(speechSynthesis.speaking&&w.__amL===b){e.preventDefault();e.stopImmediatePropagation();audStop();w.__amL=null;return}w.__amL=b;AUDM=0},true);
+ var tm=null;try{new MutationObserver(function(){clearTimeout(tm);tm=setTimeout(function(){if(AUDON&&audActive()===d)audSpeak(false)},800)}).observe(d.body,{childList:true,subtree:true,characterData:true})}catch(e){}}
+function audScan(d,n){if(n>4||!d)return;audWin(d.defaultView);audKids(d).forEach(function(f){audScan(f.contentDocument,n+1)})}
+function audInit(){clearInterval(AUDT);var k=0,p=cur&&cur.p,l=curL;AUDL='';AUDT=setInterval(function(){if(view.style.display!=='flex'||++k>600){clearInterval(AUDT);return}var d;try{d=fr.contentDocument}catch(e){return}if(!d||!d.body)return;audScan(d,0);var h=audHas(d),b=document.getElementById('audb');if(b){b.style.display=h?'none':'';audBtn()}},1000);}
+fr.addEventListener('load',function(){if(view.style.display==='flex'){injUser();injCards();audInit();if(AUDON)setTimeout(function(){audSpeak(true)},900)}});
 </script></body></html>
