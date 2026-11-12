@@ -192,7 +192,7 @@ function rsS(term){d.innerHTML=back('निकाल व अहवाल')+'<div
  d.innerHTML=back('निकाल व अहवाल')+'<div class="chips">'+[1,2,3].map(function(t){return '<button class="'+(t===term?'s':'g')+'" onclick="rsS('+t+')">'+tnm(t)+'</button>'}).join('')+'</div>'+
  '<div class="card t" onclick="nkR(NK.mode)"><span class="ic">📋</span><span><b>निकाल पत्रक</b><small>सत्र / वार्षिक संक्षिप्त / प्रथम-द्वितीय / तपशील / गुणानुक्रम</small></span></div><div class="card t" onclick="ndR('+term+')"><span class="ic">📒</span><span><b>नोंदवही (पूर्ण)</b><small>मुखपृष्ठ, अनुक्रमणिका, उपस्थिती, आरोग्य, विद्यार्थीवार मूल्यमापन पत्रक व वर्णनात्मक वही</small></span></div>'+
  '<div class="card t" onclick="gcR('+term+')"><span class="ic">📈</span><span><b>श्रेणी तक्ता</b><small>विषयनिहाय किती विद्यार्थ्यांना कोणती श्रेणी</small></span></div>'+
- '<div class="card t" onclick="csR('+term+')"><span class="ic">🧮</span><span><b>जातनिहाय श्रेणी तक्ता</b><small>संवर्ग × श्रेणी × विषय (मुले / मुली)</small></span></div><div class="card"><b>नोंदवही (साधनवार गुण)</b><small> — विषय निवडा</small>'+W[CL].map(function(x){return '<div class="row" onclick="rsR('+term+',\'reg\',\''+x[0]+'\')"><b>'+E(x[1])+'</b><small>›</small></div>'}).join('')+'</div>'})})}
+ '<div class="card t" onclick="csR('+term+')"><span class="ic">🧮</span><span><b>जातनिहाय श्रेणी तक्ता</b><small>संवर्ग × श्रेणी × विषय (मुले / मुली)</small></span></div><div class="card t" onclick="SCH=null;schR('+term+')"><span class="ic">🏫</span><span><b>शाळा श्रेणी तक्ता (सर्व इयत्ता)</b><small>इयत्ता × श्रेणी × विषय — संपूर्ण शाळा</small></span></div><div class="card"><b>नोंदवही (साधनवार गुण)</b><small> — विषय निवडा</small>'+W[CL].map(function(x){return '<div class="row" onclick="rsR('+term+',\'reg\',\''+x[0]+'\')"><b>'+E(x[1])+'</b><small>›</small></div>'}).join('')+'</div>'})})}
 function hdr(term,extra){var a=get(0,'set','')||{};return '<div class="ph"><b>'+E(a.school||'')+'</b><br>इयत्ता '+CL+' '+E(DV)+' · '+YR+' · '+tnm(term)+(extra?' · '+extra:'')+'</div>'}
 function ftr(){var a=get(0,'set','')||{},b=get(CL,'set','')||{};return '<div class="sg"><span>वर्गशिक्षक: '+E(b.ct||'')+'</span><span>मुख्याध्यापक: '+E(a.hm||'')+'</span></div>'}
 var RP=null;
@@ -327,7 +327,7 @@ function pubGo(t){var pm=document.getElementById('pm'+t);pm.className='ok';pm.te
 function grOf(t,pen,code){if(t===3){var A=bkAn(pen,code);return A?gradeOf(A.t,A.m):null}var q=bkTg(t,pen,code);return q?gradeOf(q.t,q.m):null}
 var GN9=['अ-१','अ-२','ब-१','ब-२','क-१','क-२','ड','इ-१','इ-२'];
 function gOut(title,termTxt,pages,label,rows,term){RP={title:title,rows:rows};var st=document.getElementById('pgs');if(!st){st=document.createElement('style');st.id='pgs';document.head.appendChild(st)}st.textContent='@page{size:A4 landscape;margin:8mm}';
- d.innerHTML='<div class="noprint"><button class="g" onclick="rsS('+term+')">← अहवाल</button><h2 style="margin:4px 0 8px">'+title+'</h2><div class="chips">'+[1,2,3].map(function(t){return '<button class="'+(t===term?'s':'g')+'" onclick="'+(label==='c'?'csR':'gcR')+'('+t+')">'+tnm(t)+'</button>'}).join('')+'</div><div class="r"><button onclick="window.print()">🖨 प्रिंट / PDF</button><button class="g" onclick="rsCsv()">⬇ Excel (CSV)</button></div></div>'+nkFrame(title,termTxt,pages,title)}
+ d.innerHTML='<div class="noprint"><button class="g" onclick="rsS('+term+')">← अहवाल</button><h2 style="margin:4px 0 8px">'+title+'</h2><div class="chips">'+[1,2,3].map(function(t){return '<button class="'+(t===term?'s':'g')+'" onclick="'+(label==='c'?'csR':label==='s'?'schR':'gcR')+'('+t+')">'+tnm(t)+'</button>'}).join('')+'</div><div class="r"><button onclick="window.print()">🖨 प्रिंट / PDF</button><button class="g" onclick="rsCsv()">⬇ Excel (CSV)</button></div></div>'+nkFrame(title,termTxt,pages,title,label==='s')}
 function gcR(term){needStu(function(){needMk(function(){var S=STU,subs=W[CL],rows=[],B=S.filter(function(x){return x.gender!=='F'}).length,G=S.filter(function(x){return x.gender==='F'}).length;
  var head='<thead><tr><th rowspan="2">अ.<br>नं.</th><th rowspan="2" class="n">श्रेणी /<br>विषय</th>'+GN9.map(function(g){return '<th colspan="2">'+g+'</th>'}).join('')+'<th colspan="2">एकूण</th></tr><tr>'+GN9.map(function(){return '<th>मुले</th><th>मुली</th>'}).join('')+'<th>मुले</th><th>मुली</th></tr></thead>';
  rows.push(['विषय'].concat([].concat.apply([],GN9.map(function(g){return [g+' मुले',g+' मुली']})),['एकूण मुले','एकूण मुली']));
@@ -336,6 +336,22 @@ function gcR(term){needStu(function(){needMk(function(){var S=STU,subs=W[CL],row
   return '<tr><td>'+(i+1)+'</td><td class="n">'+E(sb[1])+'</td>'+GN9.map(function(g){return '<td>'+c[g][0]+'</td><td>'+c[g][1]+'</td>'}).join('')+'<td class="b">'+tb+'</td><td class="b">'+tg+'</td></tr>'});
  var small='<table class="nk" style="width:260px;margin-top:10px"><thead><tr><th>तपशील</th><th>मुले</th><th>मुली</th><th>एकूण</th></tr></thead><tbody><tr><th>पट</th><td class="b">'+B+'</td><td class="b">'+G+'</td><td class="b">'+(B+G)+'</td></tr></tbody></table>';
  gOut('विषयनिहाय श्रेणी तक्ता','सत्र : '+(term===3?'वार्षिक':term),['<table class="nk">'+head+'<tbody>'+trs.join('')+'</tbody></table>'+small],'g',rows,term)},'श्रेणी तक्ता')},'श्रेणी तक्ता')}
+/* ---- संपूर्ण शाळा श्रेणी तक्ता (सर्व इयत्ता) ---- */
+var SCH=null;
+function schR(term){d.innerHTML=back('शाळा श्रेणी तक्ता')+'<div class="card">सर्व वर्गांची माहिती आणत आहे…</div>';
+ var go=function(){var BK6=[['अ-१',['अ-१']],['अ-२',['अ-२']],['ब-१',['ब-१']],['ब-२',['ब-२']],['क-१',['क-१']],['क-२',['क-२']],['पेक्षा कमी',['ड','इ-१','इ-२']]],
+  oD=DOC,oC=CL,oS=STU,groups={},stu={};
+  SCH.stu.forEach(function(r){(stu[r.cls+'|'+r.div]=stu[r.cls+'|'+r.div]||[]).push({pen:r.pen})});
+  SCH.rows.forEach(function(r){var g=groups[r.cls+'|'+r.div]=groups[r.cls+'|'+r.div]||{};var v=null;try{v=JSON.parse(r.v)}catch(e){}g[key(r.cls,r.kind,r.k)]={v:v}});
+  var keys=Object.keys(stu).sort(function(a,b){return parseInt(a)-parseInt(b)||(a>b?1:-1)}),res=[],names=[];
+  try{keys.forEach(function(k){var c=parseInt(k);if(!W[c])return;DOC=groups[k]||{};CL=c;STU=stu[k];var o={};W[c].forEach(function(sb){var cn={};STU.forEach(function(x){var g=grOf(term,x.pen,sb[0]);if(g)cn[g]=(cn[g]||0)+1});o[sb[1]]=cn;if(names.indexOf(sb[1])<0)names.push(sb[1])});res.push({k:k,c:c,dv:k.split('|')[1],n:STU.length,o:o})})}finally{DOC=oD;CL=oC;STU=oS}
+  var rows=[['इयत्ता','श्रेणी'].concat(names)];
+  var head='<thead><tr><th>अ.<br>नं.</th><th>इयत्ता</th><th>श्रेणी</th>'+names.map(function(n){return '<th>'+E(n)+'</th>'}).join('')+'</tr></thead>';
+  var blocks=res.map(function(R,ci){var nm='इयत्ता '+R.c+' '+R.dv+' (पट '+R.n+')';return '<tbody>'+BK6.map(function(bk,bi){var cells=names.map(function(n){var o=R.o[n];if(!o)return null;var c=0;bk[1].forEach(function(g){c+=o[g]||0});return c});rows.push([nm,bk[0]].concat(cells.map(function(x){return x==null?'':x})));
+   return '<tr>'+(bi===0?'<td rowspan="7">'+(ci+1)+'</td><td rowspan="7" class="n">'+E(nm)+'</td>':'')+'<td>'+bk[0]+'</td>'+cells.map(function(x){return x==null?'<td style="color:#aaa">-</td>':'<td>'+x+'</td>'}).join('')+'</tr>'}).join('')+'</tbody>'});
+  if(!blocks.length){d.innerHTML=back('शाळा श्रेणी तक्ता')+'<div class="card">शाळेत विद्यार्थी/गुण आढळले नाहीत.</div>';return}
+  gOut('श्रेणीचा विषयवार गोषवारा (शाळा)','सत्र : '+(term===3?'वार्षिक':term),chunk(blocks,3).map(function(ch){return '<table class="nk">'+head+ch.join('')+'</table>'}),'s',rows,term)};
+ if(SCH)return go();needStu(function(){post('/api/cce/school',{}).then(function(j){if(!j.ok){d.innerHTML=back('शाळा श्रेणी तक्ता')+'<div class="card er">'+msg(j)+'</div>';return}SCH=j;go()}).catch(function(){d.innerHTML=back('शाळा श्रेणी तक्ता')+'<div class="card er">इंटरनेट तपासा.</div>'})})}
 var CCAT=[['SC','अनुसूचित जाती'],['ST','अनुसूचित जमाती'],['VJ','विमुक्त जाती'],['NT','भटक्या जमाती'],['SBC','विशेष मागास प्रवर्ग'],['OBC','इतर मागास प्रवर्ग'],['GEN','खुला प्रवर्ग']];
 function ckey(v){v=String(v||'');return v==='VJA'?'VJ':/^NT/.test(v)?'NT':v==='GEN'||v===''?'GEN':CCAT.some(function(c){return c[0]===v})?v:'GEN'}
 function csR(term){needStu(function(){needMk(function(){var S=STU,subs=W[CL],rows=[],cnt={};
@@ -365,8 +381,8 @@ function nkHead(subs,colsOf,mid,lab){
  var r3='<tr><th class="n mx">'+lab+'</th>'+colsOf.map(function(cs){return cs.map(function(c){return '<th class="mx">'+c[2]+'</th>'}).join('')}).join('')+'</tr>';
  return '<thead>'+r1+r2+r3+'</thead>'}
 function chunk(a,n){var o=[];for(var i=0;i<a.length;i+=n)o.push(a.slice(i,i+n));return o.length?o:[[]]}
-function nkFrame(title,termTxt,pages,label){var a=get(0,'set','')||{},c=get(CL,'set','')||{},N=pages.length;
- return pages.map(function(rows,i){return '<div class="pg nkp"><div class="nkh"><div><b>'+E(a.school||'')+'</b><br>UDISE : '+E(UD)+'</div><div class="nkc"><b>'+title+'</b><br>'+termTxt+' | सन : <b>'+YR+'</b></div><div>वर्गशिक्षक : <b>'+E(c.ct||'')+'</b><br>इयत्ता : <b>'+CL+'</b> &nbsp; तुकडी : <b>'+E(DV)+'</b></div></div><div class="wx">'+rows+'</div><div class="nkf">पृष्ठ : '+(i+1)+' / '+N+' &nbsp; इयत्ता : '+CL+' | '+label+'</div></div>'}).join('')}
+function nkFrame(title,termTxt,pages,label,nocls){var a=get(0,'set','')||{},c=get(CL,'set','')||{},N=pages.length;
+ return pages.map(function(rows,i){return '<div class="pg nkp"><div class="nkh"><div><b>'+E(a.school||'')+'</b><br>UDISE : '+E(UD)+'</div><div class="nkc"><b>'+title+'</b><br>'+termTxt+' | सन : <b>'+YR+'</b></div>'+(nocls?'<div>मुख्याध्यापक : <b>'+E(a.hm||'')+'</b></div>':'<div>वर्गशिक्षक : <b>'+E(c.ct||'')+'</b><br>इयत्ता : <b>'+CL+'</b> &nbsp; तुकडी : <b>'+E(DV)+'</b></div>')+'</div><div class="wx">'+rows+'</div><div class="nkf">पृष्ठ : '+(i+1)+' / '+N+' &nbsp; इयत्ता : '+CL+' | '+label+'</div></div>'}).join('')}
 function nkPart(t,x,sb){var q=sm(t,sb[0],x.pen);return q&&q.any&&!q.inc&&q.mx>0?{t:q.t,m:q.mx}:null}
 function nkAnn(p1,p2,rule){if(rule==='sum')return p1&&p2?{t:p1.t+p2.t,m:p1.m+p2.m}:null;if(rule==='avg')return p1&&p2?{t:Math.round((p1.t/p1.m+p2.t/p2.m)/2*1000)/10,m:100}:null;return p2?{t:p2.t,m:p2.m}:null}
 function nkMenu(){var h='<div class="chips">'+[['1','सत्र १ (तपशील)'],['2','सत्र २ (तपशील)'],['annS','वार्षिक संक्षिप्त'],['annP','वार्षिक प्रथम/द्वितीय'],['annD','वार्षिक तपशील'],['merit','गुणानुक्रम']].map(function(m){return '<button class="'+(NK.mode===m[0]?'s':'g')+'" onclick="nkR(\''+m[0]+'\')">'+m[1]+'</button>'}).join('')+'</div>';
