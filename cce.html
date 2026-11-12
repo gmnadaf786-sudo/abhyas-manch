@@ -190,8 +190,8 @@ function rsS(term){d.innerHTML=back('निकाल व अहवाल')+'<div
  if(!STU.length){d.innerHTML=back('निकाल व अहवाल')+'<div class="card">या वर्गात अजून विद्यार्थी नाहीत.</div>';return}
  d.innerHTML=back('निकाल व अहवाल')+'<div class="chips">'+[1,2,3].map(function(t){return '<button class="'+(t===term?'s':'g')+'" onclick="rsS('+t+')">'+tnm(t)+'</button>'}).join('')+'</div>'+
  '<div class="card t" onclick="nkR(NK.mode)"><span class="ic">📋</span><span><b>निकाल पत्रक</b><small>सत्र / वार्षिक संक्षिप्त / प्रथम-द्वितीय / तपशील / गुणानुक्रम</small></span></div><div class="card t" onclick="ndR('+term+')"><span class="ic">📒</span><span><b>नोंदवही (पूर्ण)</b><small>मुखपृष्ठ, अनुक्रमणिका, उपस्थिती, आरोग्य, विद्यार्थीवार मूल्यमापन पत्रक व वर्णनात्मक वही</small></span></div>'+
- '<div class="card t" onclick="rsR('+term+',\'grd\')"><span class="ic">📈</span><span><b>श्रेणी तक्ता</b><small>विषयनिहाय किती विद्यार्थ्यांना कोणती श्रेणी</small></span></div>'+
- '<div class="card"><b>नोंदवही (साधनवार गुण)</b><small> — विषय निवडा</small>'+W[CL].map(function(x){return '<div class="row" onclick="rsR('+term+',\'reg\',\''+x[0]+'\')"><b>'+E(x[1])+'</b><small>›</small></div>'}).join('')+'</div>'})})}
+ '<div class="card t" onclick="gcR('+term+')"><span class="ic">📈</span><span><b>श्रेणी तक्ता</b><small>विषयनिहाय किती विद्यार्थ्यांना कोणती श्रेणी</small></span></div>'+
+ '<div class="card t" onclick="csR('+term+')"><span class="ic">🧮</span><span><b>जातनिहाय श्रेणी तक्ता</b><small>संवर्ग × श्रेणी × विषय (मुले / मुली)</small></span></div><div class="card"><b>नोंदवही (साधनवार गुण)</b><small> — विषय निवडा</small>'+W[CL].map(function(x){return '<div class="row" onclick="rsR('+term+',\'reg\',\''+x[0]+'\')"><b>'+E(x[1])+'</b><small>›</small></div>'}).join('')+'</div>'})})}
 function hdr(term,extra){var a=get(0,'set','')||{};return '<div class="ph"><b>'+E(a.school||'')+'</b><br>इयत्ता '+CL+' '+E(DV)+' · '+YR+' · '+tnm(term)+(extra?' · '+extra:'')+'</div>'}
 function ftr(){var a=get(0,'set','')||{},b=get(CL,'set','')||{};return '<div class="sg"><span>वर्गशिक्षक: '+E(b.ct||'')+'</span><span>मुख्याध्यापक: '+E(a.hm||'')+'</span></div>'}
 var RP=null;
@@ -283,6 +283,31 @@ function pubGo(t){var pm=document.getElementById('pm'+t);pm.className='ok';pm.te
   if(!ok)inc++;dd[x.pen]={n:x.name,s:ss,o:ok&&M?gradeOf(T,M):'—',aw:a.w,ap:a.miss?null:a.p,nt:nt}});
  if(inc&&!confirm(inc+' विद्यार्थ्यांचे गुण अपूर्ण आहेत (त्यांच्या श्रेणीत "—" दिसेल). तरीही जाहीर करायचे?')){pm.textContent='';return}
  var o={on:1,at:new Date().toISOString(),d:dd};put(CL,'res',String(t),o).then(function(j){if(j.ok)pubS();else{pm.className='er';pm.textContent=msg(j)}}).catch(function(){pm.className='er';pm.textContent=msg({})})},'निकाल जाहीर')},'निकाल जाहीर')},'निकाल जाहीर')},'निकाल जाहीर')})}
+/* ---- श्रेणी तक्ता (मुले/मुली) व जातनिहाय श्रेणी तक्ता ---- */
+function grOf(t,pen,code){if(t===3){var A=bkAn(pen,code);return A?gradeOf(A.t,A.m):null}var q=bkTg(t,pen,code);return q?gradeOf(q.t,q.m):null}
+var GN9=['अ-१','अ-२','ब-१','ब-२','क-१','क-२','ड','इ-१','इ-२'];
+function gOut(title,termTxt,pages,label,rows,term){RP={title:title,rows:rows};var st=document.getElementById('pgs');if(!st){st=document.createElement('style');st.id='pgs';document.head.appendChild(st)}st.textContent='@page{size:A4 landscape;margin:8mm}';
+ d.innerHTML='<div class="noprint"><button class="g" onclick="rsS('+term+')">← अहवाल</button><h2 style="margin:4px 0 8px">'+title+'</h2><div class="chips">'+[1,2,3].map(function(t){return '<button class="'+(t===term?'s':'g')+'" onclick="'+(label==='c'?'csR':'gcR')+'('+t+')">'+tnm(t)+'</button>'}).join('')+'</div><div class="r"><button onclick="window.print()">🖨 प्रिंट / PDF</button><button class="g" onclick="rsCsv()">⬇ Excel (CSV)</button></div></div>'+nkFrame(title,termTxt,pages,title)}
+function gcR(term){needStu(function(){needMk(function(){var S=STU,subs=W[CL],rows=[],B=S.filter(function(x){return x.gender!=='F'}).length,G=S.filter(function(x){return x.gender==='F'}).length;
+ var head='<thead><tr><th rowspan="2">अ.<br>नं.</th><th rowspan="2" class="n">श्रेणी /<br>विषय</th>'+GN9.map(function(g){return '<th colspan="2">'+g+'</th>'}).join('')+'<th colspan="2">एकूण</th></tr><tr>'+GN9.map(function(){return '<th>मुले</th><th>मुली</th>'}).join('')+'<th>मुले</th><th>मुली</th></tr></thead>';
+ rows.push(['विषय'].concat([].concat.apply([],GN9.map(function(g){return [g+' मुले',g+' मुली']})),['एकूण मुले','एकूण मुली']));
+ var trs=subs.map(function(sb,i){var c={},tb=0,tg=0;GN9.forEach(function(g){c[g]=[0,0]});S.forEach(function(x){var g=grOf(term,x.pen,sb[0]);if(!g||!c[g])return;if(x.gender==='F'){c[g][1]++;tg++}else{c[g][0]++;tb++}});
+  rows.push([sb[1]].concat([].concat.apply([],GN9.map(function(g){return c[g]})),[tb,tg]));
+  return '<tr><td>'+(i+1)+'</td><td class="n">'+E(sb[1])+'</td>'+GN9.map(function(g){return '<td>'+c[g][0]+'</td><td>'+c[g][1]+'</td>'}).join('')+'<td class="b">'+tb+'</td><td class="b">'+tg+'</td></tr>'});
+ var small='<table class="nk" style="width:260px;margin-top:10px"><thead><tr><th>तपशील</th><th>मुले</th><th>मुली</th><th>एकूण</th></tr></thead><tbody><tr><th>पट</th><td class="b">'+B+'</td><td class="b">'+G+'</td><td class="b">'+(B+G)+'</td></tr></tbody></table>';
+ gOut('विषयनिहाय श्रेणी तक्ता','सत्र : '+(term===3?'वार्षिक':term),['<table class="nk">'+head+'<tbody>'+trs.join('')+'</tbody></table>'+small],'g',rows,term)},'श्रेणी तक्ता')},'श्रेणी तक्ता')}
+var CCAT=[['SC','अनुसूचित जाती'],['ST','अनुसूचित जमाती'],['VJ','विमुक्त जाती'],['NT','भटक्या जमाती'],['SBC','विशेष मागास प्रवर्ग'],['OBC','इतर मागास प्रवर्ग'],['GEN','खुला प्रवर्ग']];
+function ckey(v){v=String(v||'');return v==='VJA'?'VJ':/^NT/.test(v)?'NT':v==='GEN'||v===''?'GEN':CCAT.some(function(c){return c[0]===v})?v:'GEN'}
+function csR(term){needStu(function(){needMk(function(){var S=STU,subs=W[CL],rows=[],cnt={};
+ S.forEach(function(x){var k=ckey(x.cat),g2=x.gender==='F'?1:0;subs.forEach(function(sb){var g=grOf(term,x.pen,sb[0]);if(!g)return;var o=((cnt[k]=cnt[k]||{})[sb[0]]=cnt[k][sb[0]]||{});(o[g]=o[g]||[0,0])[g2]++})});
+ var head='<thead><tr><th rowspan="2">अ.<br>नं.</th><th rowspan="2" class="n">जात संवर्ग</th><th rowspan="2">श्रेणी</th>'+subs.map(function(sb){return '<th colspan="2">'+E(sb[1])+'</th>'}).join('')+'</tr><tr>'+subs.map(function(){return '<th>मुले</th><th>मुली</th>'}).join('')+'</tr></thead>';
+ rows.push(['संवर्ग','श्रेणी'].concat([].concat.apply([],subs.map(function(sb){return [sb[1]+' मुले',sb[1]+' मुली']}))));
+ var blocks=CCAT.map(function(c,ci){var t=subs.map(function(){return [0,0]});
+  var rs=GN9.map(function(g,gi){var cells=subs.map(function(sb,si){var e=((cnt[c[0]]||{})[sb[0]]||{})[g]||[0,0];t[si][0]+=e[0];t[si][1]+=e[1];return e});rows.push([c[1],g].concat([].concat.apply([],cells)));
+   return '<tr>'+(gi===0?'<td rowspan="10">'+(ci+1)+'</td><td rowspan="10" class="n">'+c[1]+'</td>':'')+'<td>'+g+'</td>'+cells.map(function(e){return '<td>'+e[0]+'</td><td>'+e[1]+'</td>'}).join('')+'</tr>'}).join('');
+  rows.push([c[1],'एकूण'].concat([].concat.apply([],t)));
+  return '<tbody>'+rs+'<tr class="sec"><td>एकूण</td>'+t.map(function(e){return '<td>'+e[0]+'</td><td>'+e[1]+'</td>'}).join('')+'</tr></tbody>'});
+ gOut('श्रेणीचा जातवार गोषवारा','सत्र : '+(term===3?'वार्षिक':term),chunk(blocks,2).map(function(ch){return '<table class="nk">'+head+ch.join('')+'</table>'}),'c',rows,term)},'जातनिहाय तक्ता')},'जातनिहाय तक्ता')}
 /* ---- निकाल पत्रक (जुन्या CCE नमुन्याप्रमाणे) व नोंदवही ---- */
 var NK={rule:'term2',paper:'A4',mode:'1'};
 try{var _nk=JSON.parse(localStorage.getItem('am_nk')||'{}');NK.rule=_nk.rule||NK.rule;NK.paper=_nk.paper||NK.paper}catch(e){}
