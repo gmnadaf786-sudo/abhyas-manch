@@ -1,0 +1,78 @@
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>अभ्यास मंच – CCE</title>
+<style>:root{--bg:#f7f7f4;--c:#fff;--i:#1f2933;--m:#64748b;--l:#e2e8f0;--a:#0f766e}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--c:#1e293b;--i:#e2e8f0;--m:#94a3b8;--l:#334155}}
+body{margin:0;background:var(--bg);color:var(--i);font:15px/1.5 system-ui,sans-serif}main{max-width:720px;margin:0 auto;padding:16px}
+.card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:14px;margin-bottom:14px}h1{font-size:19px;margin:6px 0 12px}h2{font-size:16px;margin:0 0 8px}
+input,select,button{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--i);width:100%;box-sizing:border-box;margin-bottom:8px}
+button{background:var(--a);color:#fff;border:0;cursor:pointer}button.g{background:var(--c);color:var(--a);border:1px solid var(--a)}button.s{background:var(--a);color:#fff}
+.er{color:#b91c1c;min-height:18px}.ok{color:#15803d}.r{display:flex;gap:8px}.r>*{flex:1}label{font-size:13px;color:var(--m);display:block}small{color:var(--m)}
+.t{display:flex;align-items:center;gap:12px;cursor:pointer}.t .ic{font-size:26px}.t b{display:block}.t.off{opacity:.5;cursor:default}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.g2 input{margin:0}.sum{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid var(--l);font-weight:600}
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--l);cursor:pointer}</style></head><body><main>
+<h1 id="hd">📘 CCE</h1><div id="d"><div class="card">लोड होत आहे…</div></div>
+<script>
+var E=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var T='',NM='';try{T=sessionStorage.getItem('am_t')||'';NM=sessionStorage.getItem('am_tn')||''}catch(e){}
+var H=decodeURIComponent(location.hash.slice(1)).split(','),UD=H[0]||'',CL=parseInt(H[1])||0,DV=H[2]||'A';
+var now=new Date(),y0=now.getMonth()>=5?now.getFullYear():now.getFullYear()-1,YR=y0+'-'+String((y0+1)%100).padStart(2,'0');
+var d=document.getElementById('d'),DOC={};
+/* साधने: ८ आकारिक + ३ संकलित */
+var CP=['निरीक्षण','तोंडी काम','प्रात्यक्षिक','उपक्रम','प्रकल्प','चाचणी','स्वाध्याय','इतर साधने','तोंडी','प्रात्यक्षिक','लेखी'];
+/* डिफॉल्ट भारांश (दोन्ही सत्रांसाठी समान). _ = लागू नाही */
+var _=null,WK=[_,_,20,60,_,_,20,_,_,_,_],A1=[_,20,60,20,_,_,_,_,_,_,_],A2=[10,10,40,20,_,20,_,_,_,_,_];
+function sb(l,w,names){return names.map(function(n){return [n[0],n[1],n[0]==='LANG'?l:w]})}
+var M12=[_,10,10,20,_,20,10,_,10,_,20],M34=[_,10,10,10,_,20,10,_,10,_,30],M56=[_,5,10,10,_,20,5,_,10,_,40],M78=[_,5,5,5,_,20,5,_,10,_,50];
+var L12=[_,10,10,10,10,20,10,_,10,_,20],L34=[_,10,10,5,5,20,10,_,10,_,30],L56=[_,5,10,0,5,20,10,_,10,_,40],L78=[_,5,10,_,5,20,_,_,10,_,50];
+var B=[['LANG','भाषा'],['MATH','गणित'],['ENG','इंग्रजी']],PE=['PE','शारीरिक शिक्षण',WK],WO=['WORK','कार्यशिक्षण',WK];
+var W={1:sb(L12,M12,B).concat([['ART','कला',A1],WO,PE])};W[2]=W[1];
+W[3]=sb(L34,M34,B.concat([['EVS1','आपल्या सभोवतालचे जग भाग 1'],['EVS2','आपल्या सभोवतालचे जग भाग 2']])).concat([['ART','कला',A2],WO,PE]);W[4]=W[3];
+W[5]=sb(L56,M56,B.concat([['EVS1','परिसर अभ्यास भाग 1'],['EVS2','परिसर अभ्यास भाग 2'],['HINDI','हिंदी / हिंदी-मराठी']])).concat([['ART','कला',A1],WO,PE]);
+W[6]=sb(L56,M56,B.concat([['HINDI','हिंदी / हिंदी-मराठी'],['SOC','सामाजिक शास्त्र'],['SCI','सामान्य विज्ञान']])).concat([['ART','कला',A2],['VOC','व्यावसायिक शिक्षण',[_,_,10,15,30,25,_,20,_,_,_]],PE]);
+W[7]=sb(L78,M78,B.concat([['HINDI','हिंदी / हिंदी-मराठी'],['SOC','समाजशास्त्र'],['SCI','विज्ञान']])).concat([['ART','कला',A1],['WORK','कार्यअनुभव',WK],PE]);W[8]=W[7];
+var MON=['जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर','जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे'];
+function post(u,b){b.token=T;b.udise=UD;b.yr=YR;if(b.cls===undefined){b.cls=CL;b.div=DV}return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()})}
+function key(c,kind,k){return c+'|'+kind+'|'+k}
+function get(c,kind,k){var x=DOC[key(c,kind,k)];return x?x.v:null}
+function put(c,kind,k,v){var kk=key(c,kind,k),b={kind:kind,k:k,v:v};if(c===0){b.cls=0;b.div=''}if(DOC[kk])b.upd=DOC[kk].upd;
+ return post('/api/cce/put',b).then(function(j){if(j.ok)DOC[kk]={v:v,upd:j.upd};return j})}
+function msg(j){return j.ok?'':j.e==='conflict'?'दुसऱ्या कोणीतरी ही माहिती बदलली आहे. पान रिफ्रेश करून पुन्हा भरा.':j.e==='auth'?'सत्र संपले. शिक्षक पानावरून पुन्हा लॉगिन करा.':'सेव्ह झाले नाही. इंटरनेट तपासा.'}
+function back(t){return '<button class="g" onclick="home()">← CCE</button><h2 style="margin:4px 0 12px">'+t+'</h2>'}
+function load(){if(!T||!/^\d{11}$/.test(UD)||!CL){d.innerHTML='<div class="card">कृपया शिक्षक पानावरून लॉगिन करून वर्ग निवडा.<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
+ document.getElementById('hd').textContent='📘 CCE — इयत्ता '+CL+' '+DV+' ('+YR+')';
+ post('/api/cce/get',{school:1,kinds:['set','wt','days']}).then(function(j){if(!j.ok){d.innerHTML='<div class="card er">'+msg(j)+'<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
+  j.rows.forEach(function(r){var v=null;try{v=JSON.parse(r.v)}catch(e){}DOC[key(r.cls,r.kind,r.k)]={v:v,upd:r.upd}});home()}).catch(function(){d.innerHTML='<div class="card er">इंटरनेट तपासा.</div>'})}
+function tile(ic,t,s,fn,done){return '<div class="card t'+(fn?'':' off')+'"'+(fn?' onclick="'+fn+'"':'')+'><span class="ic">'+ic+'</span><span><b>'+t+(done?' ✔':'')+'</b><small>'+s+'</small></span></div>'}
+function home(){var s0=get(0,'set',''),s1=get(CL,'set',''),dy=get(0,'days','');
+ d.innerHTML='<button class="g" onclick="location.href=\'teacher.html\'">← वर्ग</button>'+
+ tile('🏫','शाळा व वर्गशिक्षक','मुख्याध्यापक आणि वर्गशिक्षकाचे नाव','setS()',s0&&s1)+
+ tile('⚖️','भारांश','विषयवार साधनांचे गुण (सत्र १ व २)','wtS(1)',get(CL,'wt','1')||get(CL,'wt','2'))+
+ tile('📅','कामाचे दिवस','महिनावार शाळेचे कामाचे दिवस','dayS()',dy)+
+ tile('✏️','गुण नोंदणी','लवकरच','')+tile('🙋','उपस्थिती, आरोग्य, वर्णनात्मक नोंदी','लवकरच','')+tile('📄','निकाल व प्रगती पुस्तिका','लवकरच','')}
+/* ---- शाळा व वर्गशिक्षक ---- */
+function setS(){var s0=get(0,'set','')||{},s1=get(CL,'set','')||{};
+ d.innerHTML=back('शाळा व वर्गशिक्षक')+'<div class="card"><label>शाळेचे नाव</label><input id="sn" value="'+E(s0.school||'')+'"><label>मुख्याध्यापकाचे नाव</label><input id="hm" value="'+E(s0.hm||'')+'"><label>इयत्ता '+CL+' '+E(DV)+' — वर्गशिक्षकाचे नाव</label><input id="ct" value="'+E(s1.ct||NM)+'"><p id="e" class="er"></p><button onclick="setSave()">सेव्ह</button></div>'}
+function setSave(){var e=document.getElementById('e');if(!hm.value.trim()||!ct.value.trim()){e.textContent='दोन्ही नावे भरा.';return}e.className='ok';e.textContent='सेव्ह होत आहे…';
+ put(0,'set','',{school:sn.value.trim(),hm:hm.value.trim()}).then(function(j){if(!j.ok)throw j;return put(CL,'set','',{ct:ct.value.trim()})}).then(function(j){if(!j.ok)throw j;home()}).catch(function(j){e.className='er';e.textContent=msg(j||{})})}
+/* ---- भारांश ---- */
+function wOf(term,code){var o=get(CL,'wt',String(term))||{};if(o[code])return o[code];var s=W[CL].filter(function(x){return x[0]===code})[0];return s?s[2]:[]}
+function tot(w,a,b){var t=0;for(var i=a;i<b;i++)t+=Number(w[i])||0;return t}
+function wtS(term){var o=get(CL,'wt',String(term))||{};
+ d.innerHTML=back('भारांश')+'<div class="r"><button class="'+(term===1?'s':'g')+'" onclick="wtS(1)">सत्र १</button><button class="'+(term===2?'s':'g')+'" onclick="wtS(2)">सत्र २</button></div><div class="card"><small>विषयावर दाबून गुण बदला. बदल न केल्यास शासनाचा डिफॉल्ट भारांश लागू राहतो.</small>'+
+ W[CL].map(function(s){var w=wOf(term,s[0]);return '<div class="row" onclick="wtE('+term+',\''+s[0]+'\')"><span><b>'+E(s[1])+'</b>'+(o[s[0]]?' <small>(बदललेला)</small>':'')+'</span><small>आकारिक '+tot(w,0,8)+' + संकलित '+tot(w,8,11)+' = '+tot(w,0,11)+' ›</small></div>'}).join('')+'</div>'}
+function wtE(term,code){var s=W[CL].filter(function(x){return x[0]===code})[0],w=wOf(term,code);
+ function inp(i){return '<div><label>'+CP[i]+'</label><input type="number" inputmode="numeric" min="0" max="100" id="w'+i+'" value="'+(w[i]==null?'':w[i])+'" oninput="wtT()"></div>'}
+ d.innerHTML='<button class="g" onclick="wtS('+term+')">← भारांश</button><h2 style="margin:4px 0 12px">'+E(s[1])+' — सत्र '+term+'</h2><div class="card"><h2>आकारिक</h2><div class="g2">'+[0,1,2,3,4,5,6,7].map(inp).join('')+'</div><h2 style="margin-top:12px">संकलित</h2><div class="g2">'+[8,9,10].map(inp).join('')+'</div>'+
+ '<div class="sum"><span>आकारिक <span id="tf"></span> + संकलित <span id="ts"></span></span><span>एकूण <span id="tt"></span></span></div><small>रिकामे = ते साधन लागू नाही.</small><p id="e" class="er"></p><button onclick="wtSave('+term+',\''+code+'\')">सेव्ह</button><button class="g" onclick="wtDef('+term+',\''+code+'\')">डिफॉल्ट भारांश वापरा</button></div>';wtT()}
+function wtV(){var w=[];for(var i=0;i<11;i++){var x=document.getElementById('w'+i).value.trim();w.push(x===''?null:Math.max(0,Number(x)||0))}return w}
+function wtT(){var w=wtV();tf.textContent=tot(w,0,8);ts.textContent=tot(w,8,11);tt.textContent=tot(w,0,11);tt.style.color=tot(w,0,11)===100?'':'#b91c1c'}
+function wtPut(term,code,w){var o=JSON.parse(JSON.stringify(get(CL,'wt',String(term))||{}));if(w)o[code]=w;else delete o[code];var e=document.getElementById('e');e.className='ok';e.textContent='सेव्ह होत आहे…';
+ put(CL,'wt',String(term),o).then(function(j){if(j.ok)wtS(term);else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
+function wtSave(term,code){var w=wtV();if(tot(w,0,11)!==100){e.className='er';e.textContent='एकूण गुण १०० हवेत (आता '+tot(w,0,11)+').';return}wtPut(term,code,w)}
+function wtDef(term,code){wtPut(term,code,null)}
+/* ---- कामाचे दिवस ---- */
+function dayS(){var v=get(0,'days','')||[];
+ d.innerHTML=back('कामाचे दिवस ('+YR+')')+'<div class="card"><small>ही माहिती पूर्ण शाळेसाठी एकदाच भरायची आहे.</small><div class="g2" style="margin-top:8px">'+MON.map(function(m,i){return '<div><label>'+m+'</label><input type="number" inputmode="numeric" min="0" max="31" id="m'+i+'" value="'+(v[i]==null?'':v[i])+'" oninput="dayT()"></div>'}).join('')+'</div><div class="sum"><span>एकूण दिवस</span><span id="dt"></span></div><p id="e" class="er"></p><button onclick="daySave()">सेव्ह</button></div>';dayT()}
+function dayV(){var a=[];for(var i=0;i<12;i++){var x=document.getElementById('m'+i).value.trim();a.push(x===''?null:Math.min(31,Math.max(0,parseInt(x)||0)))}return a}
+function dayT(){dt.textContent=dayV().reduce(function(s,x){return s+(x||0)},0)}
+function daySave(){var e=document.getElementById('e');e.className='ok';e.textContent='सेव्ह होत आहे…';put(0,'days','',dayV()).then(function(j){if(j.ok)home();else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
+load();
+</script></main></body></html>
