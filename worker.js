@@ -65,6 +65,14 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET fails=0 WHERE pen=?').bind(pen).run();
     return J({ok:1,token:tok,changed:x.changed?1:0,profile:{name:x.name,cls:x.cls,med:x.med,mobile:key,district:'सांगली',taluka:'जत',kendra:'',school:'',udise:x.udise}});
   }
+  if(p==='/api/s/result'){
+    const s=await me(env,r);if(!s||!/^P\d{11}$/.test(s.mobile))return J({e:'auth'},401);
+    const pen=s.mobile.slice(1),x=await env.DB.prepare('SELECT udise,cls,div,name FROM roster WHERE pen=?').bind(pen).first();if(!x)return J({e:'auth'},401);
+    const n=new Date(Date.now()+19800000),y=n.getUTCMonth()>=5?n.getUTCFullYear():n.getUTCFullYear()-1,yr=y+'-'+String((y+1)%100).padStart(2,'0');
+    const rows=(await env.DB.prepare("SELECT k,v FROM cce_doc WHERE udise=? AND yr=? AND cls=? AND div=? AND kind='res'").bind(x.udise,yr,x.cls,x.div).all()).results;
+    const out={};for(const q of rows){try{const o=JSON.parse(q.v);if(o&&o.on&&o.d&&o.d[pen])out[q.k]={at:o.at,r:o.d[pen]}}catch(e){}}
+    return J({ok:1,yr,name:x.name,cls:x.cls,res:out});
+  }
   if(p==='/api/s/chpw'){
     const b=await body(r),s=await me(env,r),pw=cl(b.pw,40);
     if(!s||!/^P\d{11}$/.test(s.mobile))return J({e:'auth'},401);
