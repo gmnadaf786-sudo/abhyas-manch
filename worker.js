@@ -558,11 +558,11 @@ async function ext(p,r,env){
     const cf={};for(const x of (await env.DB.prepare("SELECT k,v FROM cfg WHERE k IN('pay_url','pay_key')").all()).results)cf[x.k]=x.v;
     if(!cf.pay_url||!cf.pay_key)return J({ok:1,none:1,msg:'वेतन पावती सुविधा अजून सुरू केलेली नाही.'});
     const ti=await env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(t.shalarth).first();let pan='';try{pan=String(JSON.parse(ti&&ti.data||'{}')['PAN क्रमांक']||'').trim().toUpperCase()}catch(e){}
-    if(!/^[A-Z]{5}\d{4}[A-Z]$/.test(pan))return J({ok:1,none:1,msg:'तुमचा PAN क्रमांक माहितीत उपलब्ध नाही.'});
+    if(!/^[A-Z]{5}\d{4}[A-Z]$/.test(pan))pan='';
     const m=cl(b.month,12).replace(/[^A-Za-z0-9_]/g,'');
-    let j;try{const rs=await fetch(cf.pay_url+'?key='+encodeURIComponent(cf.pay_key)+'&pan='+pan+(m?'&month='+m:''),{redirect:'follow'});j=await rs.json()}catch(e){return J({ok:1,none:1,msg:'वेतन माहिती सध्या मिळाली नाही. नंतर प्रयत्न करा.'})}
+    let j;try{const rs=await fetch(cf.pay_url+'?key='+encodeURIComponent(cf.pay_key)+'&sh='+encodeURIComponent(t.shalarth)+'&pan='+pan+(m?'&month='+m:''),{redirect:'follow'});j=await rs.json()}catch(e){return J({ok:1,none:1,msg:'वेतन माहिती सध्या मिळाली नाही. नंतर प्रयत्न करा.'})}
     if(!j||!j.ok)return J({ok:1,none:1,msg:(j&&j.msg)||'वेतन माहिती मिळाली नाही.'});
-    return J({ok:1,months:j.months||[],month:j.month||'',v:j.v||null,name:t.name});
+    return J({ok:1,months:j.months||[],month:j.month||'',p:j.p||null,nm:j.nm||t.name,ds:j.ds||'',nw:j.nw?1:0});
   }
   if(p==='/api/t/chpw'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
