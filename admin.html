@@ -43,9 +43,9 @@ function ckNorm(x){return String(x||'').toUpperCase().replace(/ZILLA\s*PARISHAD|
 function ckMed(x){x=String(x||'').toUpperCase();return /KANNAD/.test(x)?'K':/URDU/.test(x)?'U':/MARATHI/.test(x)?'M':''}
 function ckMatch(nm){var k=ckNorm(nm),m=ckMed(nm),c=CS.filter(function(s){return s.k===k});if(c.length>1&&m){var d=c.filter(function(s){return s.m===m});if(d.length)c=d}if(c.length===1)return c[0].u;if(!c.length&&k.length>4){c=CS.filter(function(s){return s.k.length>4&&(s.k.indexOf(k)>=0||k.indexOf(s.k)>=0)});if(c.length>1&&m){var d2=c.filter(function(s){return s.m===m});if(d2.length)c=d2}if(c.length===1)return c[0].u}return''}
 function ckRead(){ck.textContent='वाचत आहे…';rd(f5).then(function(t){if(!t){ck.textContent='CSV निवडा.';return}return fetch('/data/schen.json').then(function(r){return r.json()}).then(function(L){CS=L.map(function(a){return{u:a[0],n:a[1],k:ckNorm(a[1]),m:ckMed(a[1])}});
-var R=csvp(t),H=R[0].map(function(x){return x.trim().toLowerCase()}),ix=function(re){for(var i=0;i<H.length;i++)if(re.test(H[i]))return i;return -1},
-c={s:ix(/school/),n:ix(/english/),n2:ix(/aadhaar|aadhar/),g:ix(/gender/),b:ix(/^bank name/),f:ix(/ifsc/),a:ix(/account/),d:ix(/aadhaar number|aadhar number|^aadhaar$|^aadhar$/),p:ix(/pin/),a1:ix(/address.*1/),a2:ix(/address.*2/),a3:ix(/address.*3/)};
-if(c.s<0||c.n<0){ck.textContent='स्तंभ सापडले नाहीत.';return}
+var R=csvp(t),hr=0;for(var q=0;q<Math.min(R.length,15);q++){var jn=R[q].join('|').toLowerCase();if(/school/.test(jn)&&/name/.test(jn)&&/ifsc|account/.test(jn)){hr=q;break}}R=R.slice(hr);var H=R[0].map(function(x){return x.trim().toLowerCase()}),ix=function(re){for(var i=0;i<H.length;i++)if(re.test(H[i]))return i;return -1},
+c={s:ix(/school/),n:ix(/english|full name/),n2:ix(/aadhaar|aadhar/),g:ix(/gender/),b:ix(/^bank name/),f:ix(/ifsc/),a:ix(/account/),d:ix(/aadhaar number|aadhar number|^aadhaar$|^aadhar$/),p:ix(/pin/),a1:ix(/address.*1/),a2:ix(/address.*2/),a3:ix(/address.*3/)};
+if(c.s<0||c.n<0){ck.textContent='स्तंभ सापडले नाहीत. मिळालेले: '+H.join(' | ').slice(0,300);return}
 var cur='',G={},o=[];for(var i=1;i<R.length;i++){var r=R[i],nm=(r[c.n]||'').trim();if(!nm)continue;if((r[c.s]||'').trim())cur=r[c.s].trim();if(!cur)continue;
 var x={name:nm,g:/^f/i.test(r[c.g]||'')?'F':/^m/i.test(r[c.g]||'')?'M':'',bank:(r[c.b]||'').trim(),ifsc:(r[c.f]||'').trim(),acct:(r[c.a]||'').replace(/\D/g,''),aad:(r[c.d]||'').replace(/\D/g,''),pin:(r[c.p]||'').trim(),addr:[c.a1,c.a2,c.a3].map(function(j){return j>=0?(r[j]||'').trim():''}).filter(Boolean).join(', ')};
 (G[cur]=G[cur]||[]).push(x)}
