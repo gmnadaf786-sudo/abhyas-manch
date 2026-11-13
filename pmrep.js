@@ -6,7 +6,7 @@ var MONTH_NAMES=['जानेवारी','फेब्रुवारी','�
 var WEEK_NAMES=['रविवार','सोमवार','मंगळवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
 window.PM_POSHAN_SPICES=[['हळद',0.0003,0.0005],['मीठ',0.003,0.005],['कांदा लसूण मसाला',0.0004,0.0006],['जिरे',0.0003,0.0005],['मोहरी',0.0003,0.0005],['मिरची पावडर',0.0004,0.0005],['गरम मसाला',0.0004,0.0006]];
 var state={year:{},month:''},regGroup='15',ALLOWED=['15','68'];
-function holidayOf(){return null}
+function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');for(var i=0;i<a.length;i++){if(iso>=a[i].d1&&iso<=(a[i].d2||a[i].d1))return a[i]}return null}
   function esc(v){ return (typeof escapeHtml_==='function') ? escapeHtml_(v) : String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
   function pad(n){ return String(n).padStart(2,'0'); }
   function isoOf(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
