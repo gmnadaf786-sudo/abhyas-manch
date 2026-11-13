@@ -57,6 +57,7 @@ async function pmEnsure(env){
   await env.DB.batch([
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_daily(udise TEXT, date TEXT, menu TEXT, p15 INTEGER, p68 INTEGER, pulse15 TEXT, pulse68 TEXT, cooked TEXT, supp TEXT, taste TEXT, dist TEXT, taster TEXT, remark TEXT, sample TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,date))"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_stock(udise TEXT, month TEXT, grp TEXT, data TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,month,grp))"),
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_bmi(udise TEXT, pen TEXT, h REAL, w REAL, upd TEXT, PRIMARY KEY(udise,pen))"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_rcpt(udise TEXT, id TEXT, date TEXT, supplier TEXT, challan TEXT, items TEXT, remark TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,id))")]);
   PMOK=true;
 }
@@ -70,8 +71,19 @@ async function pmApi(p,r,env){
   await pmEnsure(env);
   const u=t.udise,by=t.shalarth;
   if(p==='/api/pm/students'){
-    const rows=(await env.DB.prepare('SELECT r.cls,r.div,r.name,i.dob,i.gender FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name LIMIT 800').bind(u).all()).results;
+    const rows=(await env.DB.prepare('SELECT r.pen,r.cls,r.div,r.name,m.h,m.w FROM roster r LEFT JOIN pm_bmi m ON m.pen=r.pen AND m.udise=r.udise WHERE r.udise=? ORDER BY r.cls,r.div,r.name LIMIT 800').bind(u).all()).results;
     return J({ok:1,rows});
+  }
+  if(p==='/api/pm/bmisave'){
+    const rs=[],now=istDay();
+    for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,120)){
+      const pen=cl(x.pen,11).replace(/\D/g,''),h=parseFloat(x.h),wt=parseFloat(x.w);
+      if(pen.length!==11)continue;
+      if(!(h>50&&h<220&&wt>5&&wt<150)){rs.push(env.DB.prepare('DELETE FROM pm_bmi WHERE udise=? AND pen=?').bind(u,pen));continue}
+      rs.push(env.DB.prepare('INSERT INTO pm_bmi(udise,pen,h,w,upd) SELECT ?,?,?,?,? WHERE EXISTS(SELECT 1 FROM roster WHERE pen=? AND udise=?) ON CONFLICT(udise,pen) DO UPDATE SET h=excluded.h,w=excluded.w,upd=excluded.upd').bind(u,pen,h,wt,now,pen,u));
+    }
+    if(rs.length)await env.DB.batch(rs);
+    return J({ok:1,n:rs.length});
   }
   if(p==='/api/pm/year'){
     const fy=parseInt(b.fy)||0;if(fy<2020||fy>2100)return J({e:'fy'},400);
