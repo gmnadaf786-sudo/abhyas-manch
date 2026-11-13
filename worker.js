@@ -471,7 +471,7 @@ async function ext(p,r,env){
   if(p==='/api/t/info'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
     const [i,e]=await Promise.all([env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(t.shalarth).first(),env.DB.prepare('SELECT data,status,remark,upd,sub FROM tch_edit WHERE shalarth=?').bind(t.shalarth).first()]);
-    return J({ok:1,base:i?i.data:'{}',ed:e||{data:'{}',status:'',remark:''}});
+    return J({ok:1,sc:await scn(env,t),base:i?i.data:'{}',ed:e||{data:'{}',status:'',remark:''}});
   }
   if(p==='/api/t/infosave'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
