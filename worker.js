@@ -629,6 +629,38 @@ async function ext(p,r,env){
     if(!Array.isArray(q)||!q.length)return J({e:'parse'},502);
     return J({ok:1,title:les,total:tot,marks:mk,q:q.slice(0,n).map(z=>({q:cl(z.question,600),o:(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,200)),a:cl(z.answer,400),e:cl(z.explanation,500)}))});
   }
+  if(p==='/api/t/lptype'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
+    const mc=cl(b.medium,4)==='kn'?'kn':'mr',med=mc==='kn'?'कन्नड':'मराठी',cls=cl(b.cls,4),sub=cl(b.subject,80),ty=cl(b.type,20);
+    if(!cls||!sub||!/^(संकलित|आकारिक) [12]$/.test(ty))return J({e:'bad'},400);
+    const nz=s=>String(s||'').replace(/[\s\-–.()]/g,'').toLowerCase();
+    const pr=((await env.DB.prepare('SELECT DISTINCT subject s,topic t,tname n FROM syl WHERE medium=? AND cls=? AND (sank=? OR akar=?)').bind(med,cls,ty,ty).all()).results||[]);
+    if(!pr.length)return J({e:'noplan'},404);
+    const bj=await (await env.ASSETS.fetch(new Request(new URL('/content/'+cls+'-'+mc+'/books.json',r.url)))).json();
+    const bs=(bj.s||[]).find(s=>s.n===sub);if(!bs)return J({e:'nosub'},404);
+    const ps=pr.filter(x=>nz(x.s)===nz(sub)||nz(x.s).includes(nz(sub))||nz(sub).includes(nz(x.s)));
+    if(!ps.length)return J({e:'nomatch',subs:[...new Set(pr.map(x=>x.s))]},404);
+    const used=new Set(),parts=[],names=[],miss=[];let size=0;
+    for(const x of ps){
+      const l=bs.l.find(z=>!used.has(z[2])&&((x.t&&String(+x.t)===String(+z[0]))||(x.n&&(nz(z[1]).includes(nz(x.n))||nz(x.n).includes(nz(z[1]))))));
+      if(!l){miss.push(x.n||x.t);continue}
+      used.add(l[2]);const pdf=await lessonPdf(env,l[2]);if(!pdf){miss.push(l[1]);continue}
+      if(size+pdf.length>19e6){miss.push(l[1]+' (आकार)');continue}
+      size+=pdf.length;parts.push({inlineData:{mimeType:'application/pdf',data:pdf}});names.push(l[1]);
+    }
+    if(!parts.length)return J({e:'nopdf',miss},404);
+    const lang=cl(b.lang,30)||'मराठी',total=Math.max(10,Math.min(100,parseInt(b.total)||(ty[0]==='स'?40:20))),oral=Math.max(0,Math.min(total-5,parseInt(b.oral)||0)),wr=total-oral;
+    const ob=Math.round(wr*0.3),vs=Math.round(wr*0.2),sh=Math.round(wr*0.3),lg=wr-ob-vs-sh;
+    const cn=parseInt(cls)||0,vis=cn<=2?'इयत्ता 1-2 असल्यामुळे आवश्यक तिथे साधे emoji वापरू शकतो.':'चित्र/emoji वापरू नकोस.';
+    const si='तू महाराष्ट्रातील प्राथमिक शाळेच्या शिक्षकांसाठी प्रश्नपत्रिका बनवणारा सहाय्यक आहेस. एकाच '+ty+' चाचणीसाठी जोडलेल्या सर्व पाठांच्या PDF चा एकत्रित अभ्यास करून एकच संपूर्ण प्रश्नपत्रिका तयार कर.\nमाध्यम: '+med+', इयत्ता: '+cls+', विषय: '+sub+', चाचणी: '+ty+', भाषा: '+lang+'\nसमाविष्ट पाठ: '+names.join(', ')+'\n'+
+    'एकूण गुण: '+total+' (लेखी '+wr+', तोंडी '+oral+').\nलेखी गुणांची विभागणी: वस्तुनिष्ठ '+ob+', अतिलघुत्तरी '+vs+', लघुत्तरी '+sh+', दीर्घोत्तरी/कृती '+lg+'.\n'+
+    'सूचना: 1. सर्व पाठांच्या आशयाचा वापर कर, फक्त एका पाठावर आधारित प्रश्न नकोत. 2. PDF बाहेरील आशय वापरू नकोस. 3. प्रत्येक वर्गवारीच्या गुणांची बेरीज वरील आकड्याशी अचूक जुळली पाहिजे; लेखी गुणांची एकूण बेरीज '+wr+' असावी. 4. तोंडी गुणांसाठी प्रश्न देऊ नकोस. 5. बहुपर्यायी प्रश्नाला नेमके 4 पर्याय दे. 6. सर्व प्रश्नपत्रिका फक्त '+lang+' भाषेत. 7. '+vis+' 8. उत्तर फक्त STRICT JSON, ``` नको: {"questions":[{"category":"वस्तुनिष्ठ","question":"...","options":[],"answer":"...","marks":1,"explanation":""}]}';
+    const g=await gemAsk(env,si,[{role:'user',parts:parts.concat([{text:'वरील पाठांवर आधारित '+ty+' प्रश्नपत्रिका तयार कर.'}])}]);
+    if(!g.t)return J({e:g.e||'fail'},g.e==='nokey'?503:502);
+    let q=null;try{const s=g.t.replace(/^```(?:json)?/i,'').replace(/```$/,'').trim(),i=s.indexOf('{'),k=s.lastIndexOf('}');q=JSON.parse(s.slice(i,k+1)).questions}catch(e){}
+    if(!Array.isArray(q)||!q.length)return J({e:'parse'},502);
+    return J({ok:1,total,oral,written:wr,names,miss,q:q.slice(0,60).map(z=>({c:cl(z.category,30),q:cl(z.question,700),o:(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,200)),a:cl(z.answer,500),m:Math.max(0,Math.min(20,Number(z.marks)||0)),e:cl(z.explanation,500)}))});
+  }
   if(p==='/api/t/ai'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     await slEnsure(env);const gq=await env.DB.prepare("SELECT v FROM cfg WHERE k='gemini_key'").first(),GK=env.GEMINI_API_KEY||(gq&&gq.v)||'';
