@@ -582,6 +582,24 @@ async function ext(p,r,env){
     const m=cl(b.msg,1000).trim();if(!m)return J({e:'empty'},400);
     await env.DB.prepare('INSERT INTO fb(shalarth,name,school,rating,typ,msg,ts) VALUES(?,?,?,?,?,?,?)').bind(cl(t.shalarth,20),cl(t.name,80),cl(t.udise,20),cl(b.rating,40),cl(b.typ,60),m,new Date(Date.now()+19800000).toISOString().slice(0,16).replace('T',' ')).run();return J({ok:1});
   }
+  if(p==='/api/t/ai'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    if(!env.GEMINI_API_KEY)return J({e:'nokey'},503);
+    const lang=cl(b.lang,30)||'मराठी',ms=(Array.isArray(b.m)?b.m:[]).slice(-12).map(x=>({role:x&&x.r==='a'?'model':'user',parts:[{text:cl(x&&x.t,3000)}]})).filter(x=>x.parts[0].text);
+    if(!ms.length||ms[ms.length-1].role!=='user')return J({e:'empty'},400);
+    const si='तू "Smart Teacher" आहेस, महाराष्ट्रातील जिल्हा परिषद शाळांच्या शिक्षकांचा सहाय्यक. पाठयोजना, अध्यापन पद्धती, प्रश्न, उपक्रम, शैक्षणिक प्रशासन याबाबत सोपी, नेमकी व उपयुक्त उत्तरे दे. उत्तर '+lang+' भाषेत दे.';
+    let last='';
+    for(const mo of ['gemini-3.5-flash-lite','gemini-3.5-flash','gemini-3.1-flash-lite']){
+      for(let a=0;a<2;a++){
+        try{
+          const x=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+mo+':generateContent',{method:'POST',headers:{'content-type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},body:JSON.stringify({systemInstruction:{parts:[{text:si}]},contents:ms})});
+          if(x.ok){const j=await x.json(),tx=((((j.candidates||[])[0]||{}).content||{}).parts||[]).map(q=>q.text||'').join('').trim();if(tx)return J({ok:1,t:tx})}
+          else{last=x.status+'';if(![429,500,502,503].includes(x.status))break}
+        }catch(e){last='net'}
+      }
+    }
+    return J({e:'fail',c:last},502);
+  }
   if(p==='/api/t/contacts'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
     const q=await env.DB.prepare('SELECT desig,name,area,mobile FROM dir ORDER BY id').all();return J({ok:1,rows:q.results||[]});
