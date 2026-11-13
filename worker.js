@@ -101,10 +101,11 @@ async function pmApi(p,r,env){
   if(p==='/api/pm/sbank'){const x=await env.DB.prepare('SELECT tan,acct FROM school_bank WHERE udise=?').bind(u).first();return J({ok:1,tan:x?x.tan:'',acct:x?x.acct:''})}
   if(p==='/api/pm/cooks'){
     const rows=(await env.DB.prepare('SELECT id,name,role,gender,bank,ifsc,acct,aadhaar,addr,pin FROM pm_cook WHERE udise=? ORDER BY name').bind(u).all()).results;
-    const mk=s=>s?'XXXX'+String(s).slice(-4):'';
-    return J({ok:1,rows:rows.map(x=>({id:x.id,name:x.name,role:x.role,gender:x.gender,bank:x.bank,ifsc:x.ifsc,acct:mk(x.acct),aadhaar:mk(x.aadhaar),addr:x.addr,pin:x.pin}))});
+    const mk=s=>s?'XXXX'+String(s).slice(-4):'',ma=s=>s?'XXXX XXXX '+String(s).slice(-4):'';
+    return J({ok:1,rows:rows.map(x=>({id:x.id,name:x.name,role:x.role,gender:x.gender,bank:x.bank,ifsc:x.ifsc,acct:mk(x.acct),aadhaar:ma(x.aadhaar),addr:x.addr,pin:x.pin}))});
   }
-  if(p==='/api/pm/cookget'){
+  if(p==='/api/pm/cookget'||p==='/api/pm/cooksave'||p==='/api/pm/cookdel')return J({e:'off'},403);
+  if(false&&p==='/api/pm/cookget'){
     const x=await env.DB.prepare('SELECT id,name,role,gender,bank,ifsc,acct,aadhaar,addr,pin FROM pm_cook WHERE udise=? AND id=?').bind(u,cl(b.id,60)).first();
     return x?J({ok:1,row:x}):J({e:'nf'},404);
   }

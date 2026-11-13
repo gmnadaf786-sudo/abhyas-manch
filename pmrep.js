@@ -140,7 +140,7 @@ function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt
       '<div class="gv-n">मागणी नोंदवताना शाळेकडे वीस दिवसांचा साठा शिल्लक राहील याची दक्षता घेऊन मागणी नोंदवावी, आवश्यकतेपेक्षा जास्त साठा करून धान्य खराब होणार नाही याची दक्षता घ्यावी.</div>'+
       '<div class="gv-f">४) महिन्यातील एकूण ताटांची संख्या - <b>'+D.tot.ben+'</b></div>'+
       '<div class="gv-f">५) इंधन व भाजीपाल्यासाठी खर्च केलेले अनुदान रु. = <b>'+vegTot(D,g).toFixed(2)+'</b> (ताटांची संख्या × दर — दर रु. '+rateFor(month+'-28',g)+') (शासनस्तरावरुन निश्चित केल्यानुसार)</div>'+
-      '<div class="gv-f">६) स्वयंपाकी तथा मदतनीस मानधन रु. = '+((window.PMCOOKN|0)?'<b>'+(1500*(window.PMCOOKN|0))+'</b>':'<span class="gv-ln"></span>')+' (रु. १५०० × नेमलेले स्वयंपाकी तथा मदतनीस संख्या)</div>'+
+      '<div class="gv-f">६) स्वयंपाकी तथा मदतनीस मानधन रु. = '+((window.PMCOOKN|0)?'<b>'+(2500*(window.PMCOOKN|0))+'</b>':'<span class="gv-ln"></span>')+' (रु. २५०० × नेमलेले स्वयंपाकी तथा मदतनीस संख्या)</div>'+
       '<div class="gv-f">प्रमाणित करण्यात येते की, वर नमूद केलेली माहिती दैनंदिन नोंदवहीवरून घेतलेली आहे. ती तपासली आहे व बरोबर आहे.</div>'+
       '<div class="gv-sg"><span>दिनांक - <span class="gv-ln"></span></span><span>मुख्याध्यापक</span><span>केंद्रप्रमुख<br>केंद्र - <span class="gv-ln" style="min-width:80px"></span></span></div>';
   }
