@@ -76,7 +76,7 @@ async function schoolApi(p,r,env){
   }
   if(p==='/api/s/dist'){
     const k=cl(b.kind,10);if(!SCH_DIST.includes(k))return J({e:'bad'},400);
-    const rows=(await env.DB.prepare('SELECT r.pen,r.cls,r.div,r.name,s.gender,d.got,d.date,d.sz1,d.sz2 FROM roster r LEFT JOIN sinfo s ON s.pen=r.pen LEFT JOIN sch_dist d ON d.pen=r.pen AND d.udise=r.udise AND d.kind=? WHERE r.udise=? ORDER BY r.cls,r.div,r.name LIMIT 1000').bind(k,t.udise).all()).results;
+    const rows=(await env.DB.prepare('SELECT r.pen,r.cls,r.div,r.name,r.med,s.gender,d.got,d.date,d.sz1,d.sz2 FROM roster r LEFT JOIN sinfo s ON s.pen=r.pen LEFT JOIN sch_dist d ON d.pen=r.pen AND d.udise=r.udise AND d.kind=? WHERE r.udise=? ORDER BY r.cls,r.div,r.name LIMIT 1000').bind(k,t.udise).all()).results;
     return J({ok:1,rows});
   }
   if(p==='/api/s/distsave'){
