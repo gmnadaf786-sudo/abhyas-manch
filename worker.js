@@ -40,6 +40,7 @@ async function gemAsk(env,si,contents){const GK=await gemKey(env);if(!GK)return{
   }catch(e){last='net'}}}
   return{e:'fail',c:last}}
 async function lessonPdf(env,path){if(!env.BOOKS||!/^[a-z]{2}-lessons\/[^\0]+\.pdf$/i.test(path)||path.includes('..'))return null;const o=await env.BOOKS.get(path);if(!o||o.size>14e6)return null;const u=new Uint8Array(await o.arrayBuffer());let s='';for(let i=0;i<u.length;i+=32768)s+=String.fromCharCode.apply(null,u.subarray(i,i+32768));return btoa(s)}
+async function scn(env,t){try{const q=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();return q?q.name:''}catch(e){return ''}}
 async function ensS(env){}
 // ---- School login (UDISE + password) ----
 const SCH_COMM=[['C001','शाळा व्यवस्थापन समिती (SMC)'],['C002','सखी सावित्री समिती'],['C003','महिला तक्रार निवारण समिती'],['C004','विद्यार्थी सुरक्षा समिती'],['C005','माजी विद्यार्थी संघ']];
@@ -627,7 +628,7 @@ async function ext(p,r,env){
     if(!g.t)return J({e:g.e||'fail'},g.e==='nokey'?503:502);
     let q=null;try{const s=g.t.replace(/^```(?:json)?/i,'').replace(/```$/,'').trim(),i=s.indexOf('{'),k=s.lastIndexOf('}');q=JSON.parse(s.slice(i,k+1)).questions}catch(e){}
     if(!Array.isArray(q)||!q.length)return J({e:'parse'},502);
-    return J({ok:1,title:les,total:tot,marks:mk,q:q.slice(0,n).map(z=>({q:cl(z.question,600),o:(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,200)),a:cl(z.answer,400),e:cl(z.explanation,500)}))});
+    return J({ok:1,sc:await scn(env,t),title:les,total:tot,marks:mk,q:q.slice(0,n).map(z=>({q:cl(z.question,600),o:(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,200)),a:cl(z.answer,400),e:cl(z.explanation,500)}))});
   }
   if(p==='/api/t/lptype'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
@@ -659,7 +660,7 @@ async function ext(p,r,env){
     if(!g.t)return J({e:g.e||'fail'},g.e==='nokey'?503:502);
     let q=null;try{const s=g.t.replace(/^```(?:json)?/i,'').replace(/```$/,'').trim(),i=s.indexOf('{'),k=s.lastIndexOf('}');q=JSON.parse(s.slice(i,k+1)).questions}catch(e){}
     if(!Array.isArray(q)||!q.length)return J({e:'parse'},502);
-    return J({ok:1,total,oral,written:wr,names,miss,q:q.slice(0,60).map(z=>({c:cl(z.category,30),q:cl(z.question,700),o:(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,200)),a:cl(z.answer,500),m:Math.max(0,Math.min(20,Number(z.marks)||0)),e:cl(z.explanation,500)}))});
+    return J({ok:1,sc:await scn(env,t),total,oral,written:wr,names,miss,q:q.slice(0,60).map(z=>({c:cl(z.category,30),q:cl(z.question,700),o:(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,200)),a:cl(z.answer,500),m:Math.max(0,Math.min(20,Number(z.marks)||0)),e:cl(z.explanation,500)}))});
   }
   if(p==='/api/t/ai'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
