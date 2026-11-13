@@ -61,7 +61,8 @@ async function pmEnsure(env){
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_rcpt(udise TEXT, id TEXT, date TEXT, supplier TEXT, challan TEXT, items TEXT, remark TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,id))"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS hol(id TEXT PRIMARY KEY, d1 TEXT, d2 TEXT, name TEXT, type TEXT)"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_rate(d TEXT PRIMARY KEY, r15 REAL, r68 REAL)"),
-    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_cook(udise TEXT, id TEXT, name TEXT, role TEXT, gender TEXT, bank TEXT, ifsc TEXT, acct TEXT, aadhaar TEXT, addr TEXT, pin TEXT, upd TEXT, PRIMARY KEY(udise,id))")]);
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_cook(udise TEXT, id TEXT, name TEXT, role TEXT, gender TEXT, bank TEXT, ifsc TEXT, acct TEXT, aadhaar TEXT, addr TEXT, pin TEXT, upd TEXT, sname TEXT, PRIMARY KEY(udise,id))")]);
+  try{await env.DB.prepare('ALTER TABLE pm_cook ADD COLUMN sname TEXT').run()}catch(e){}
   const rc0=await env.DB.prepare('SELECT COUNT(*) c FROM pm_rate').first();
   if(!rc0||!rc0.c)await env.DB.prepare("INSERT OR IGNORE INTO pm_rate(d,r15,r68) VALUES('2026-04-01',2.59,3.88)").run();
   const hc=await env.DB.prepare('SELECT COUNT(*) c FROM hol').first();
@@ -377,15 +378,16 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'){
+  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
+    if(p==='/api/admin/cookmap'){await pmEnsure(env);const f=cl(b.from,40),t2=cl(b.to,11).replace(/\D/g,'');if(!f||t2.length!==11)return J({e:'bad'},400);await env.DB.prepare('UPDATE OR REPLACE pm_cook SET udise=? WHERE udise=?').bind(t2,f).run();return J({ok:1})}
     if(p==='/api/admin/cookimport'){
       await pmEnsure(env);const st=[],dg=(s,n)=>cl(s,n).replace(/\D/g,'');
       for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,50)){
-        const ud=dg(x.u,11),nm=cl(x.name,80);if(ud.length!==11||nm.length<2)continue;
+        const sn=cl(x.sn,120);let ud=dg(x.u,11);if(ud.length!==11)ud=sn?'N'+sn.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,30):'';const nm=cl(x.name,80);if(!ud||nm.length<2)continue;
         const id='i'+nm.toUpperCase().replace(/[^A-Z0-9\u0900-\u097F]/g,'').slice(0,40);
-        st.push(env.DB.prepare('INSERT INTO pm_cook(udise,id,name,role,gender,bank,ifsc,acct,aadhaar,addr,pin,upd) VALUES(?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(udise,id) DO UPDATE SET name=excluded.name,gender=excluded.gender,bank=excluded.bank,ifsc=excluded.ifsc,acct=excluded.acct,aadhaar=excluded.aadhaar,addr=excluded.addr,pin=excluded.pin,upd=excluded.upd')
-          .bind(ud,id,nm,'cook',['F','M'].includes(x.g)?x.g:'',cl(x.bank,60),cl(x.ifsc,15).toUpperCase(),dg(x.acct,20),dg(x.aad,12),cl(x.addr,200),dg(x.pin,6),istDay()));
+        st.push(env.DB.prepare('INSERT INTO pm_cook(udise,id,name,role,gender,bank,ifsc,acct,aadhaar,addr,pin,upd,sname) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(udise,id) DO UPDATE SET name=excluded.name,gender=excluded.gender,bank=excluded.bank,ifsc=excluded.ifsc,acct=excluded.acct,aadhaar=excluded.aadhaar,addr=excluded.addr,pin=excluded.pin,upd=excluded.upd,sname=excluded.sname')
+          .bind(ud,id,nm,'cook',['F','M'].includes(x.g)?x.g:'',cl(x.bank,60),cl(x.ifsc,15).toUpperCase(),dg(x.acct,20),dg(x.aad,12),cl(x.addr,200),dg(x.pin,6),istDay(),sn));
       }
       if(st.length)await env.DB.batch(st);
       return J({ok:1,n:st.length});
