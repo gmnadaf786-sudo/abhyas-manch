@@ -32,6 +32,13 @@ async function teacher(env,b,needOk){
   const x=await env.DB.prepare('SELECT * FROM teachers WHERE token=?').bind(t).first();
   if(!x||(needOk&&x.status!=='ok'))return null;return x;
 }
+async function gemKey(env){if(env.GEMINI_API_KEY)return env.GEMINI_API_KEY;await slEnsure(env);const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='gemini_key'").first();return(q&&q.v)||''}
+async function gemAsk(env,si,contents){const GK=await gemKey(env);if(!GK)return{e:'nokey'};let last='';
+  for(const mo of ['gemini-3.5-flash-lite','gemini-3.5-flash','gemini-3.1-flash-lite']){for(let a=0;a<2;a++){try{
+    const x=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+mo+':generateContent',{method:'POST',headers:{'content-type':'application/json','x-goog-api-key':GK},body:JSON.stringify({systemInstruction:{parts:[{text:si}]},contents})});
+    if(x.ok){const j=await x.json(),tx=((((j.candidates||[])[0]||{}).content||{}).parts||[]).map(q=>q.text||'').join('').trim();if(tx)return{t:tx}}else{last=x.status+'';if(![429,500,502,503].includes(x.status))break}
+  }catch(e){last='net'}}}
+  return{e:'fail',c:last}}
 async function ensS(env){}
 // ---- School login (UDISE + password) ----
 const SCH_COMM=[['C001','शाळा व्यवस्थापन समिती (SMC)'],['C002','सखी सावित्री समिती'],['C003','महिला तक्रार निवारण समिती'],['C004','विद्यार्थी सुरक्षा समिती'],['C005','माजी विद्यार्थी संघ']];
@@ -581,6 +588,25 @@ async function ext(p,r,env){
     if(p==='/api/t/wa'){const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='wa_link'").first();return J({ok:1,u:(q&&q.v)||'https://chat.whatsapp.com/G0r9BnDy4Dr2SRWf5K6EnD?s=sh&p=a&iam=2'})}
     const m=cl(b.msg,1000).trim();if(!m)return J({e:'empty'},400);
     await env.DB.prepare('INSERT INTO fb(shalarth,name,school,rating,typ,msg,ts) VALUES(?,?,?,?,?,?,?)').bind(cl(t.shalarth,20),cl(t.name,80),cl(t.udise,20),cl(b.rating,40),cl(b.typ,60),m,new Date(Date.now()+19800000).toISOString().slice(0,16).replace('T',' ')).run();return J({ok:1});
+  }
+  if(p==='/api/t/lpmeta'||p==='/api/t/lplan'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
+    const med=cl(b.medium,20),cls=cl(b.cls,4),sub=cl(b.subject,80),les=cl(b.lesson,200);
+    if(p==='/api/t/lpmeta'){
+      const L=async(sql,...a)=>((await env.DB.prepare(sql).bind(...a).all()).results||[]).map(x=>x.v);
+      if(!med)return J({ok:1,l:await L('SELECT DISTINCT medium v FROM tach ORDER BY v')});
+      if(!cls)return J({ok:1,l:await L('SELECT DISTINCT cls v FROM tach WHERE medium=? ORDER BY CAST(cls AS INTEGER)',med)});
+      if(!sub)return J({ok:1,l:await L('SELECT DISTINCT subject v FROM tach WHERE medium=? AND cls=? ORDER BY subject',med,cls)});
+      return J({ok:1,l:await L('SELECT lesson v FROM tach WHERE medium=? AND cls=? AND subject=? GROUP BY lesson ORDER BY MIN(rowid)',med,cls,sub)});
+    }
+    if(!med||!cls||!sub||!les)return J({e:'bad'},400);
+    const x=await env.DB.prepare('SELECT points,exp,assess,material,locode,lodesc,activity,notes FROM tach WHERE medium=? AND cls=? AND subject=? AND lesson=? LIMIT 1').bind(med,cls,sub,les).first();
+    if(!x)return J({e:'nodata'},404);
+    const lang=cl(b.lang,30)||'मराठी',mins=Math.max(20,Math.min(90,parseInt(b.mins)||35));
+    const ctx=['माध्यम: '+med,'इयत्ता: '+cls,'विषय: '+sub,'पाठ: '+les,'अध्ययन निष्पत्ती कोड: '+(x.locode||''),'अध्ययन निष्पत्ती: '+(x.lodesc||''),'मुख्य मुद्दे: '+(x.points||''),'स्पष्टीकरण: '+(x.exp||''),'साहित्य: '+(x.material||''),'उपक्रम: '+(x.activity||''),'मूल्यमापन: '+(x.assess||''),'टीप: '+(x.notes||'')].join('\n');
+    const si='तू महाराष्ट्रातील जिल्हा परिषद शाळेच्या शिक्षकांसाठी पाठयोजना बनवणारा अनुभवी सहाय्यक आहेस. दिलेल्या पाठ-माहितीवर आधारित, '+mins+' मिनिटांच्या तासिकेसाठी व्यावहारिक पाठयोजना '+lang+' भाषेत तयार कर. रचना: १) पाठाचे नाव व वर्ग २) अध्ययन निष्पत्ती ३) शैक्षणिक साहित्य ४) प्रस्तावना/पूर्वज्ञान (वेळेसह) ५) सादरीकरण (टप्प्याटप्प्याने, वेळेसह) ६) विद्यार्थी कृती/उपक्रम ७) मूल्यमापन (२-३ प्रश्न) ८) स्वाध्याय/गृहपाठ. साधी भाषा, छोटे मुद्दे, मार्कडाउन चिन्हे (#, *) वापरू नकोस.';
+    const g=await gemAsk(env,si,[{role:'user',parts:[{text:ctx}]}]);
+    if(g.t)return J({ok:1,t:g.t});return J({e:g.e||'fail'},g.e==='nokey'?503:502);
   }
   if(p==='/api/t/ai'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
