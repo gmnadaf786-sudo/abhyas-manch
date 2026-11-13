@@ -603,10 +603,30 @@ async function ext(p,r,env){
     const x=await env.DB.prepare('SELECT points,exp,assess,material,locode,lodesc,activity,notes FROM tach WHERE medium=? AND cls=? AND subject=? AND lesson=? LIMIT 1').bind(med,cls,sub,les).first();
     if(!x)return J({e:'nodata'},404);
     const lang=cl(b.lang,30)||'मराठी',mins=Math.max(20,Math.min(90,parseInt(b.mins)||35));
-    const ctx=['माध्यम: '+med,'इयत्ता: '+cls,'विषय: '+sub,'पाठ: '+les,'अध्ययन निष्पत्ती कोड: '+(x.locode||''),'अध्ययन निष्पत्ती: '+(x.lodesc||''),'मुख्य मुद्दे: '+(x.points||''),'स्पष्टीकरण: '+(x.exp||''),'साहित्य: '+(x.material||''),'उपक्रम: '+(x.activity||''),'मूल्यमापन: '+(x.assess||''),'टीप: '+(x.notes||'')].join('\n');
-    const si='तू महाराष्ट्रातील जिल्हा परिषद शाळेच्या शिक्षकांसाठी पाठयोजना बनवणारा अनुभवी सहाय्यक आहेस. दिलेल्या पाठ-माहितीवर आधारित, '+mins+' मिनिटांच्या तासिकेसाठी व्यावहारिक पाठयोजना '+lang+' भाषेत तयार कर. रचना: १) पाठाचे नाव व वर्ग २) अध्ययन निष्पत्ती ३) शैक्षणिक साहित्य ४) प्रस्तावना/पूर्वज्ञान (वेळेसह) ५) सादरीकरण (टप्प्याटप्प्याने, वेळेसह) ६) विद्यार्थी कृती/उपक्रम ७) मूल्यमापन (२-३ प्रश्न) ८) स्वाध्याय/गृहपाठ. साधी भाषा, छोटे मुद्दे, मार्कडाउन चिन्हे (#, *) वापरू नकोस.';
+    let ctx=['माध्यम: '+med,'इयत्ता: '+cls,'विषय: '+sub,'पाठ: '+les,'अध्ययन निष्पत्ती कोड: '+(x.locode||''),'अध्ययन निष्पत्ती: '+(x.lodesc||''),'मुख्य मुद्दे: '+(x.points||''),'स्पष्टीकरण: '+(x.exp||''),'साहित्य: '+(x.material||''),'उपक्रम: '+(x.activity||''),'मूल्यमापन: '+(x.assess||''),'टीप: '+(x.notes||'')].join('\n');
+    const nt=cl(b.notes,500).trim();
+    const si='तू महाराष्ट्रातील प्राथमिक शाळेच्या अनुभवी शिक्षकांसाठी पाठयोजना तयार करणारा AI Teacher आहेस.\n'+
+    'दिलेल्या पाठ-माहितीवर आधारित '+mins+' मिनिटांच्या तासिकेसाठी पाठयोजना तयार कर.\n'+
+    'महत्त्वाच्या सूचना:\n1. दिलेल्या पाठ-माहितीला प्राथमिक आधार दे; त्यात नसलेली तथ्यात्मक माहिती स्वतःहून जोडू नकोस.\n2. पाठयोजना दिलेल्या अध्ययन निष्पत्तीशी जोड.\n3. '+mins+' मिनिटांत वास्तववादी वेळेचे नियोजन कर (प्रत्येक टप्प्यापुढे मिनिटे लिही).\n4. विद्यार्थीकेंद्रित, प्रत्यक्ष वर्गात वापरता येईल अशी, साधी योजना दे.\n5. उत्तर फक्त '+lang+' भाषेत दे.\n6. #, *, ** अशी मार्कडाउन चिन्हे वापरू नकोस; प्रत्येक घटकाचे शीर्षक क्रमांकासह स्वतंत्र ओळीत लिही.\n'+
+    'पाठयोजनेचे घटक: 1. पाठाचे शीर्षक 2. अध्ययन निष्पत्ती / उद्दिष्टे 3. पूर्वज्ञान 4. आवश्यक शैक्षणिक साहित्य 5. प्रस्तावना / पूर्वतयारी 6. शिक्षकाची कृती 7. विद्यार्थ्यांची कृती 8. मुख्य संकल्पना 9. उदाहरणे / कृती 10. सराव 11. मूल्यमापन प्रश्न 12. उपचारात्मक कृती 13. प्रगत विद्यार्थ्यांसाठी कृती 14. गृहपाठ 15. शिक्षकासाठी आवश्यक नोंद.';
+    if(nt)ctx+='\nशिक्षकाच्या विशेष सूचना: '+nt;
     const g=await gemAsk(env,si,[{role:'user',parts:[{text:ctx}]}]);
     if(g.t)return J({ok:1,t:g.t});return J({e:g.e||'fail'},g.e==='nokey'?503:502);
+  }
+  if(p==='/api/t/lptest'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
+    const med=cl(b.medium,20),cls=cl(b.cls,4),sub=cl(b.subject,80),les=cl(b.lesson,200);
+    if(!med||!cls||!sub||!les)return J({e:'bad'},400);
+    const x=await env.DB.prepare('SELECT points,exp,assess,locode,lodesc,activity FROM tach WHERE medium=? AND cls=? AND subject=? AND lesson=? LIMIT 1').bind(med,cls,sub,les).first();
+    if(!x)return J({e:'nodata'},404);
+    const lang=cl(b.lang,30)||'मराठी',n=Math.max(3,Math.min(20,parseInt(b.n)||10)),mk=Math.max(1,Math.min(10,parseInt(b.marks)||1)),qt=cl(b.qtype,40)||'मिश्र प्रश्न',df=cl(b.diff,20)||'मध्यम',tot=n*mk;
+    const ctx=['माध्यम: '+med,'इयत्ता: '+cls,'विषय: '+sub,'पाठ: '+les,'अध्ययन निष्पत्ती: '+(x.locode||'')+' '+(x.lodesc||''),'मुख्य मुद्दे: '+(x.points||''),'स्पष्टीकरण: '+(x.exp||''),'उपक्रम: '+(x.activity||''),'मूल्यमापन: '+(x.assess||'')].join('\n');
+    const si='तू महाराष्ट्रातील प्राथमिक शाळेच्या शिक्षकांसाठी प्रश्नपत्रिका बनवणारा सहाय्यक आहेस. फक्त दिलेल्या पाठ-माहितीवर आधारित प्रश्न तयार कर. संपूर्ण प्रश्नपत्रिका फक्त '+lang+' भाषेत दे. नेमके '+n+' प्रश्न दे. प्रत्येक प्रश्नाला '+mk+' गुण (एकूण '+tot+'). प्रश्नप्रकार: '+qt+'. अवघडपणा: '+df+'. बहुपर्यायी प्रश्नाला नेमके 4 पर्याय दे, इतर प्रश्नांना options रिकामे ठेव. इयत्तेला साजेशी साधी भाषा वापर. उत्तर फक्त STRICT JSON मध्ये दे, कोणतेही अतिरिक्त शब्द किंवा ``` नको: {"questions":[{"question":"...","options":[],"answer":"...","explanation":""}]}';
+    const g=await gemAsk(env,si,[{role:'user',parts:[{text:ctx}]}]);
+    if(!g.t)return J({e:g.e||'fail'},g.e==='nokey'?503:502);
+    let q=null;try{const s=g.t.replace(/^```(?:json)?/i,'').replace(/```$/,'').trim(),i=s.indexOf('{'),k=s.lastIndexOf('}');q=JSON.parse(s.slice(i,k+1)).questions}catch(e){}
+    if(!Array.isArray(q)||!q.length)return J({e:'parse'},502);
+    return J({ok:1,title:les,total:tot,marks:mk,q:q.slice(0,n).map(z=>({q:cl(z.question,600),o:(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,200)),a:cl(z.answer,400),e:cl(z.explanation,500)}))});
   }
   if(p==='/api/t/ai'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
@@ -614,7 +634,7 @@ async function ext(p,r,env){
     if(!GK)return J({e:'nokey'},503);
     const lang=cl(b.lang,30)||'मराठी',ms=(Array.isArray(b.m)?b.m:[]).slice(-12).map(x=>({role:x&&x.r==='a'?'model':'user',parts:[{text:cl(x&&x.t,3000)}]})).filter(x=>x.parts[0].text);
     if(!ms.length||ms[ms.length-1].role!=='user')return J({e:'empty'},400);
-    const si='तू "Smart Teacher" आहेस, महाराष्ट्रातील जिल्हा परिषद शाळांच्या शिक्षकांचा सहाय्यक. पाठयोजना, अध्यापन पद्धती, प्रश्न, उपक्रम, शैक्षणिक प्रशासन याबाबत सोपी, नेमकी व उपयुक्त उत्तरे दे. उत्तर '+lang+' भाषेत दे.';
+    const si='तू महाराष्ट्रातील शाळेतील शिक्षकांसाठी AI Teacher Assistant आहेस. पाठयोजना, प्रश्नपत्रिका, worksheet, अध्ययन निष्पत्ती, उपक्रम, मूल्यमापन, सराव प्रश्न आणि पालक संदेश तयार करण्यात मदत कर. प्रश्न कोणत्याही भाषेत असला तरी संपूर्ण उत्तर फक्त '+lang+' भाषेत (त्या भाषेची योग्य लिपी वापरून) दे. स्पष्ट, अचूक आणि शिक्षकाला प्रत्यक्ष कामात वापरता येईल असे उत्तर दे. #, ** अशी मार्कडाउन चिन्हे वापरू नकोस.';
     let last='';
     for(const mo of ['gemini-3.5-flash-lite','gemini-3.5-flash','gemini-3.1-flash-lite']){
       for(let a=0;a<2;a++){
