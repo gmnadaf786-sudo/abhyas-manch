@@ -36,6 +36,10 @@ var d=document.getElementById('d'),DOC={};
 /* साधने: ८ आकारिक + ३ संकलित */
 var CP=['निरीक्षण','तोंडी काम','प्रात्यक्षिक','उपक्रम','प्रकल्प','चाचणी','स्वाध्याय','इतर साधने','तोंडी','प्रात्यक्षिक','लेखी'];
 /* डिफॉल्ट भारांश (दोन्ही सत्रांसाठी समान). _ = लागू नाही */
+/* साधन नावे विषयानुसार (२०२६-२७ परिपत्रक): कला इ.३/४/६ = सादरीकरण + लेखी चाचणी; इ.६ व्यावसायिक शिक्षण */
+function cpn(code,i){if(code==='ART'&&(CL===3||CL===4||CL===6)){if(i===2)return 'सादरीकरण';if(i===5)return 'लेखी चाचणी'}
+ if(code==='VOC'&&CL===6){return{1:'सत्र सादरीकरण / पोर्टफोलिओ',2:'प्रात्यक्षिक परीक्षा',3:'उपक्रम पुस्तिका',4:'प्रकल्प',5:'लेखी चाचणी',7:'क्षेत्रभेट / मुलाखत (एक)'}[i]||CP[i]}
+ return CP[i]}
 var _=null,WK=[_,_,20,60,_,_,20,_,_,_,_],A1=[_,20,60,20,_,_,_,_,_,_,_],A2=[10,10,40,20,_,20,_,_,_,_,_];
 function sb(l,w,names){return names.map(function(n){return [n[0],n[1],n[0]==='LANG'?l:w]})}
 var M12=[_,10,10,20,_,20,10,_,10,_,20],M34=[_,10,10,10,_,20,10,_,10,_,30],M56=[_,5,10,10,_,20,5,_,10,_,40],M78=[_,5,5,5,_,20,5,_,10,_,50];
@@ -44,7 +48,7 @@ var B=[['LANG','भाषा'],['MATH','गणित'],['ENG','इंग्र�
 var W={1:sb(L12,M12,B).concat([['ART','कला',A1],WO,PE])};W[2]=W[1];
 W[3]=sb(L34,M34,B.concat([['EVS1','आपल्या सभोवतालचे जग भाग 1'],['EVS2','आपल्या सभोवतालचे जग भाग 2']])).concat([['ART','कला',A2],WO,PE]);W[4]=W[3];
 W[5]=sb(L56,M56,B.concat([['EVS1','परिसर अभ्यास भाग 1'],['EVS2','परिसर अभ्यास भाग 2'],['HINDI','हिंदी / हिंदी-मराठी']])).concat([['ART','कला',A1],WO,PE]);
-W[6]=sb(L56,M56,B.concat([['HINDI','हिंदी / हिंदी-मराठी'],['SOC','सामाजिक शास्त्र'],['SCI','सामान्य विज्ञान']])).concat([['ART','कला',A2],['VOC','व्यावसायिक शिक्षण',[_,_,10,15,30,25,_,20,_,_,_]],PE]);
+W[6]=sb(L56,M56,B.concat([['HINDI','हिंदी / हिंदी-मराठी'],['SOC','सामाजिक शास्त्र'],['SCI','सामान्य विज्ञान']])).concat([['ART','कला',A2],['VOC','व्यावसायिक शिक्षण',[_,10,10,15,30,25,_,10,_,_,_]],PE]);
 W[7]=sb(L78,M78,B.concat([['HINDI','हिंदी / हिंदी-मराठी'],['SOC','समाजशास्त्र'],['SCI','विज्ञान']])).concat([['ART','कला',A1],['WORK','कार्यअनुभव',WK],PE]);W[8]=W[7];
 var MON=['जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर','जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे'];
 function post(u,b){b.token=T;b.udise=UD;b.yr=YR;if(b.cls===undefined){b.cls=CL;b.div=DV}return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()})}
@@ -80,7 +84,7 @@ function wtS2(term){var o=get(CL,'wt',String(term))||{},dn=get(CL,'wtdone',Strin
 function wtDone(term){var e=document.getElementById('e');e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'wtdone',String(term),1).then(function(j){if(j.ok)wtS(term);else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
 function wtE(term,code){var s=W[CL].filter(function(x){return x[0]===code})[0],w=wOf(term,code),mm=get(CL,'marks',term+'|'+code),has=false;if(mm)for(var p in mm)if(mm[p]&&mm[p].some(function(x){return x!=null}))has=true;
  if(has){alert('या विषयाचे गुण आधीच भरलेले आहेत, म्हणून भारांश बदलता येत नाही.');return}
- function inp(i){return '<div><label>'+CP[i]+'</label><input type="number" inputmode="numeric" min="0" max="100" id="w'+i+'" value="'+(w[i]==null?'':w[i])+'" oninput="wtT()"></div>'}
+ function inp(i){return '<div><label>'+cpn(code,i)+'</label><input type="number" inputmode="numeric" min="0" max="100" id="w'+i+'" value="'+(w[i]==null?'':w[i])+'" oninput="wtT()"></div>'}
  d.innerHTML='<button class="g" onclick="wtS('+term+')">← भारांश</button><h2 style="margin:4px 0 12px">'+E(s[1])+' — सत्र '+term+'</h2><div class="card"><h2>आकारिक</h2><div class="g2">'+[0,1,2,3,4,5,6,7].map(inp).join('')+'</div><h2 style="margin-top:12px">संकलित</h2><div class="g2">'+[8,9,10].map(inp).join('')+'</div>'+
  '<div class="sum"><span>आकारिक <span id="tf"></span> + संकलित <span id="ts"></span></span><span>एकूण <span id="tt"></span></span></div><small>रिकामे = ते साधन लागू नाही.</small><p id="e" class="er"></p><button onclick="wtSave('+term+',\''+code+'\')">सेव्ह</button><button class="g" onclick="wtDef('+term+',\''+code+'\')">डिफॉल्ट भारांश वापरा</button></div>';wtT()}
 function wtV(){var w=[];for(var i=0;i<11;i++){var x=document.getElementById('w'+i).value.trim();w.push(x===''?null:Math.max(0,Number(x)||0))}return w}
@@ -114,8 +118,8 @@ function mkS(term){if(!get(CL,'wtdone',String(term))){d.innerHTML=back('गु�
 function mkE(term,code,ci){var s=W[CL].filter(function(x){return x[0]===code})[0],w=wOf(term,code),cs=comps(w);
  if(!CUR||CUR.term!==term||CUR.code!==code)CUR={term:term,code:code,data:JSON.parse(JSON.stringify(get(CL,'marks',term+'|'+code)||{})),dirty:false};
  if(ci===undefined)ci=cs[0];CUR.ci=ci;CUR.w=w;CUR.cs=cs;
- d.innerHTML='<button class="g" onclick="mkBack()">← विषय</button><h2 style="margin:4px 0 8px">'+E(s[1])+' — सत्र '+term+'</h2><div class="chips">'+cs.map(function(i){return '<button class="'+(i===ci?'s':'g')+'" onclick="mkE('+term+',\''+code+'\','+i+')">'+(i>=8?'सं. ':'')+CP[i]+' ('+w[i]+')</button>'}).join('')+'</div>'+
- '<div class="card"><div class="st"><span><small>'+(ci>=8?'संकलित':'आकारिक')+' · '+CP[ci]+' · कमाल गुण '+w[ci]+'</small></span><small>एकूण</small></div>'+STU.map(function(x,n){var r=CUR.data[x.pen]||[];return '<div class="st"><span>'+(x.roll?E(x.roll)+'. ':'')+E(x.name)+'</span><input type="number" inputmode="decimal" step="0.5" min="0" max="'+w[ci]+'" data-p="'+E(x.pen)+'" value="'+(r[ci]==null?'':r[ci])+'" oninput="mkI(this)" enterkeyhint="next" onkeydown="if(event.key===\'Enter\'){var q=document.querySelectorAll(\'.st input\')['+(n+1)+'];if(q)q.focus()}"><small id="t'+n+'">'+mkTot(x.pen)+'</small></div>'}).join('')+'</div>'+
+ d.innerHTML='<button class="g" onclick="mkBack()">← विषय</button><h2 style="margin:4px 0 8px">'+E(s[1])+' — सत्र '+term+'</h2><div class="chips">'+cs.map(function(i){return '<button class="'+(i===ci?'s':'g')+'" onclick="mkE('+term+',\''+code+'\','+i+')">'+(i>=8?'सं. ':'')+cpn(code,i)+' ('+w[i]+')</button>'}).join('')+'</div>'+
+ '<div class="card"><div class="st"><span><small>'+(ci>=8?'संकलित':'आकारिक')+' · '+cpn(code,ci)+' · कमाल गुण '+w[ci]+'</small></span><small>एकूण</small></div>'+STU.map(function(x,n){var r=CUR.data[x.pen]||[];return '<div class="st"><span>'+(x.roll?E(x.roll)+'. ':'')+E(x.name)+'</span><input type="number" inputmode="decimal" step="0.5" min="0" max="'+w[ci]+'" data-p="'+E(x.pen)+'" value="'+(r[ci]==null?'':r[ci])+'" oninput="mkI(this)" enterkeyhint="next" onkeydown="if(event.key===\'Enter\'){var q=document.querySelectorAll(\'.st input\')['+(n+1)+'];if(q)q.focus()}"><small id="t'+n+'">'+mkTot(x.pen)+'</small></div>'}).join('')+'</div>'+
  '<div class="sv"><p id="e" class="er"></p><button onclick="mkSave()">सेव्ह</button></div>'}
 function mkTot(pen){var r=CUR.data[pen];if(!r)return '—';var t=0,any=false;CUR.cs.forEach(function(i){if(r[i]!=null){t+=Number(r[i]);any=true}});return any?String(Math.round(t*100)/100):'—'}
 function mkI(el){var pen=el.getAttribute('data-p'),x=el.value.trim(),mx=CUR.w[CUR.ci],r=CUR.data[pen]||(CUR.data[pen]=[null,null,null,null,null,null,null,null,null,null,null]);
@@ -210,7 +214,7 @@ function rsR(term,kind,code){var S=STU,subs=W[CL],h='',rows=[];
   show('श्रेणी तक्ता',term,h,rows,'portrait')}
  else{
   var sb=subs.filter(function(x){return x[0]===code})[0],terms=term===3?[1,2]:[term];h='';rows=[];
-  terms.forEach(function(t){var w=wOf(t,code),cs=comps(w);var hd=['क्र.','नाव'].concat(cs.map(function(i){return CP[i]+(i>=8?' (सं.)':'')+' /'+w[i]}),['आकारिक','संकलित','एकूण','श्रेणी']);
+  terms.forEach(function(t){var w=wOf(t,code),cs=comps(w);var hd=['क्र.','नाव'].concat(cs.map(function(i){return cpn(code,i)+(i>=8?' (सं.)':'')+' /'+w[i]}),['आकारिक','संकलित','एकूण','श्रेणी']);
    h+='<tr><th colspan="'+hd.length+'" style="text-align:left">सत्र '+t+'</th></tr><tr>'+hd.map(function(x){return '<th>'+E(x)+'</th>'}).join('')+'</tr>';rows.push(['सत्र '+t]);rows.push(hd);
    var m=get(CL,'marks',t+'|'+code)||{};S.forEach(function(x,n){var r=m[x.pen]||[],q=sm(t,code,x.pen),vals=cs.map(function(i){return r[i]==null?'':r[i]});
     h+='<tr><td>'+(x.roll||n+1)+'</td><td class="n">'+E(x.name)+'</td>'+vals.map(function(v){return '<td>'+v+'</td>'}).join('')+'<td>'+r2(q.f)+'</td><td>'+r2(q.s)+'</td><td>'+r2(q.t)+'</td><td>'+(q.inc?'<span class="inc">अपूर्ण</span>':gradeOf(q.t,q.mx))+'</td></tr>';rows.push([x.roll||n+1,x.name].concat(vals,[r2(q.f),r2(q.s),r2(q.t),q.inc?'अपूर्ण':gradeOf(q.t,q.mx)]))})});
