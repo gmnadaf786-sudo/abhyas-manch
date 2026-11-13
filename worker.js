@@ -578,7 +578,7 @@ async function ext(p,r,env){
   }
   if(p==='/api/t/feedback'||p==='/api/t/wa'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
-    if(p==='/api/t/wa'){const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='wa_link'").first();return J({ok:1,u:q?q.v:''})}
+    if(p==='/api/t/wa'){const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='wa_link'").first();return J({ok:1,u:(q&&q.v)||'https://chat.whatsapp.com/G0r9BnDy4Dr2SRWf5K6EnD?s=sh&p=a&iam=2'})}
     const m=cl(b.msg,1000).trim();if(!m)return J({e:'empty'},400);
     await env.DB.prepare('INSERT INTO fb(shalarth,name,school,rating,typ,msg,ts) VALUES(?,?,?,?,?,?,?)').bind(cl(t.shalarth,20),cl(t.name,80),cl(t.udise,20),cl(b.rating,40),cl(b.typ,60),m,new Date(Date.now()+19800000).toISOString().slice(0,16).replace('T',' ')).run();return J({ok:1});
   }
