@@ -19,7 +19,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:5px 3px;b
 <div id="x"></div>
 </main>
 <script>
-var T='',Y=null,TAB='d',MON='',GRP='15',E={},SD={};
+var T='',Y=null,TAB='d',MON='',GRP='15',E={},SD={},QF={a:'',b:'',o:0};
 var X=document.getElementById('x');
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function post(u,b){b=b||{};b.token=T;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.$s=r.status;return j})}).catch(function(){return{e:'net'}})}
@@ -57,6 +57,7 @@ function ent(date){var s=SD[date],e=E[date];if(e)return e;var rc=recFor(date);
  if(s)return {date:date,cooked:s.cooked||'होय',menu:s.menu,p15:s.p15||'',p68:s.p68||'',pulse15:s.pulse15,pulse68:s.pulse68,tasteTime:s.taste||'',distTime:s.dist||'',taster:s.taster||'',remark:s.remark||'',sample:s.sample||'',supplement:s.supp||'',saved:1};
  return {date:date,cooked:'होय',menu:rc[0],p15:'',p68:'',pulse15:pulseNorm(rc[1]),pulse68:pulseNorm(rc[1]),tasteTime:'12:30',distTime:'13:00',taster:'',remark:'',sample:'',supplement:'',saved:0}}
 function dTab(){var p=MON.split('-'),y=+p[0],m=+p[1]-1,last=new Date(y,m+1,0).getDate(),td=today(),h='';
+ h+='<div style="background:#eef6ff;border:1px solid #bfdbfe;border-radius:12px;padding:10px;margin-bottom:12px"><b>⚡ झटपट: सर्व दिवस सारखी उपस्थिती</b><p class="m" style="font-size:12px;margin:4px 0 8px">रोज सारखी उपस्थिती असेल तर एकदा टाका आणि खालील बटण दाबा. रविवार, पुढील तारखा आणि "शिजवला नाही" दिवस सोडून रिकाम्या दिवसांत भरेल. नंतर फरक असलेले दिवस बदला.</p><div class="r"><div><span class="lab">इ. १–५ उपस्थिती</span><input class="n" id="qa" type="number" inputmode="numeric" min="0" value="'+esc(QF.a)+'" oninput="QF.a=this.value"></div><div><span class="lab">इ. ६–८ उपस्थिती</span><input class="n" id="qb" type="number" inputmode="numeric" min="0" value="'+esc(QF.b)+'" oninput="QF.b=this.value"></div></div><label style="display:block;margin:8px 0"><input type="checkbox" id="qo"'+(QF.o?' checked':'')+' onchange="QF.o=this.checked?1:0"> आधी भरलेले दिवसही बदला</label><button onclick="qfill()" style="padding:9px 14px">⬇️ रिकाम्या दिवसांत भरा</button><p id="qm" class="m" style="margin:6px 0 0"></p></div>';
  for(var d=1;d<=last;d++){var dt=new Date(y,m,d,12);if(dt.getDay()===0)continue;var date=ymd(dt),fut=date>td,e=ent(date),dirty=!!E[date];
   h+='<div class="day'+(fut?' dim':'')+'" id="d'+date+'"><div class="dh"><b>'+pn(d)+' '+MN[m]+' · '+WK[dt.getDay()]+'</b><span>'+(SD[date]&&!dirty?'<span class="chip">जतन</span>':'')+(dirty?'<span class="chip" style="background:#fef3c7;color:#92400e">बदल</span>':'')+'</span></div>'+
   '<div class="r"><select onchange="dset(\''+date+'\',\'cooked\',this.value,1)"><option value="होय"'+(e.cooked==='होय'?' selected':'')+'>आहार शिजवला</option><option value="नाही"'+(e.cooked==='नाही'?' selected':'')+'>शिजवला नाही / सुट्टी</option></select></div>';
@@ -67,6 +68,13 @@ function dTab(){var p=MON.split('-'),y=+p[0],m=+p[1]-1,last=new Date(y,m+1,0).ge
   if(SD[date])h+='<div style="margin-top:6px"><button class="d" style="padding:5px 10px" onclick="ddel(\''+date+'\')">नोंद रद्द</button></div>';
   h+='</div>'}
  document.getElementById('b').innerHTML='<div class="card">'+h+'</div><div class="sv"><p id="e" class="er"></p><button onclick="dsave()">💾 सर्व बदल जतन करा</button></div>'}
+function qfill(){var a=QF.a,b=QF.b,qm=document.getElementById('qm');if(a===''&&b===''){qm.className='er';qm.textContent='वर उपस्थितीची संख्या टाका.';return}
+ if((a!==''&&!(+a>=0))||(b!==''&&!(+b>=0))){qm.className='er';qm.textContent='उपस्थिती संख्या चुकीची.';return}
+ var p=MON.split('-'),y=+p[0],m=+p[1]-1,last=new Date(y,m+1,0).getDate(),td=today(),n=0,e0=function(v){return v===''||v==null||v===0||v==='0'};
+ for(var d=1;d<=last;d++){var dt=new Date(y,m,d,12);if(dt.getDay()===0)continue;var date=ymd(dt);if(date>td)continue;var e=ent(date);if(e.cooked!=='होय')continue;var ch=0;
+  if(a!==''&&(QF.o||e0(e.p15))){e.p15=a;ch=1}if(b!==''&&(QF.o||e0(e.p68))){e.p68=b;ch=1}
+  if(ch){e.d=1;E[date]=e;n++}}
+ var yy=window.scrollY;dTab();window.scrollTo(0,yy);var q2=document.getElementById('qm');q2.className=n?'ok':'m';q2.textContent=n?n+' दिवसांत भरले. तपासून खाली "💾 सर्व बदल जतन करा" दाबा.':'भरण्यासारखा रिकामा दिवस आढळला नाही.'}
 function popt(sel){return '<option value="">—</option>'+PULSES.map(function(x){return '<option'+(x===sel?' selected':'')+'>'+esc(x)+'</option>'}).join('')}
 function dset(date,k,v,redraw){var e=E[date]||(E[date]=ent(date));e[k]=v;if(!e.d){e.d=1}if(redraw){var y=window.scrollY;dTab();window.scrollTo(0,y)}else{var c=document.querySelector('#d'+date+' .chip');}}
 function dmenu(date,v){var e=E[date]||(E[date]=ent(date));e.menu=v;var r=RECIPES.filter(function(x){return x[0]===v})[0];if(r){e.pulse15=pulseNorm(r[1]);e.pulse68=pulseNorm(r[1])}var y=window.scrollY;dTab();window.scrollTo(0,y)}
