@@ -59,7 +59,10 @@ async function pmEnsure(env){
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_stock(udise TEXT, month TEXT, grp TEXT, data TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,month,grp))"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_bmi(udise TEXT, pen TEXT, h REAL, w REAL, upd TEXT, PRIMARY KEY(udise,pen))"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_rcpt(udise TEXT, id TEXT, date TEXT, supplier TEXT, challan TEXT, items TEXT, remark TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,id))"),
-    env.DB.prepare("CREATE TABLE IF NOT EXISTS hol(id TEXT PRIMARY KEY, d1 TEXT, d2 TEXT, name TEXT, type TEXT)")]);
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS hol(id TEXT PRIMARY KEY, d1 TEXT, d2 TEXT, name TEXT, type TEXT)"),
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_rate(d TEXT PRIMARY KEY, r15 REAL, r68 REAL)")]);
+  const rc0=await env.DB.prepare('SELECT COUNT(*) c FROM pm_rate').first();
+  if(!rc0||!rc0.c)await env.DB.prepare("INSERT OR IGNORE INTO pm_rate(d,r15,r68) VALUES('2026-04-01',2.59,3.88)").run();
   const hc=await env.DB.prepare('SELECT COUNT(*) c FROM hol').first();
   if(!hc||!hc.c){
     const H=[[1,14,0,'मकर संक्रांत','general'],[1,26,0,'प्रजासत्ताक दिन','general'],[2,19,0,'छत्रपती शिवाजी महाराज जयंती','general'],[3,3,0,'होळी (दुसरा दिवस)','general'],[3,19,0,'गुढी पाडवा','general'],[3,21,0,'रमजान ईद (ईद-उल-फितर)','general'],[3,26,0,'रामनवमी','general'],[3,31,0,'महावीर जन्म कल्याणक','general'],[4,3,0,'गुड फ्रायडे','general'],[4,14,0,'डॉ. बाबासाहेब आंबेडकर जयंती','general'],[5,1,0,'महाराष्ट्र दिन, बुद्ध पौर्णिमा','general'],[5,2,14,'उन्हाळी सुट्टी','vacation'],[6,26,0,'मोहरम','general'],[6,29,0,'वट पौर्णिमा','general'],[7,27,0,'महाराष्ट्र बेंदूर','general'],[8,15,0,'स्वातंत्र्य दिन, पारशी नूतन वर्ष दिन','general'],[8,17,0,'नाग पंचमी','general'],[8,26,0,'ईद-ए-मिलाद','general'],[9,14,0,'गणेश चतुर्थी','general'],[9,18,0,'गौरी पूजन','general'],[9,25,0,'अनंत चतुर्दशी','local'],[10,2,0,'महात्मा गांधी जयंती','general'],[10,20,0,'दसरा','general'],[11,5,18,'दिवाळी सुट्टी','vacation'],[11,24,0,'गुरुनानक जयंती','general'],[12,25,0,'ख्रिसमस','general'],[8,28,0,'रक्षाबंधन','local']];
@@ -99,7 +102,7 @@ async function pmApi(p,r,env){
     const rc=(await env.DB.prepare('SELECT id,date,supplier,challan,items,remark FROM pm_rcpt WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
     const hol=(await env.DB.prepare('SELECT id,d1,d2,name,type FROM hol ORDER BY d1').all()).results;
-    return J({ok:1,fy,udise:u,school:sc?sc.name:'',teacher:t.name,daily:d,stock:st,rcpt:rc,hol});
+    return J({ok:1,fy,udise:u,school:sc?sc.name:'',teacher:t.name,daily:d,stock:st,rcpt:rc,hol,rate:(await env.DB.prepare('SELECT d,r15,r68 FROM pm_rate ORDER BY d').all()).results});
   }
   if(p==='/api/pm/savemonth'){
     const month=cl(b.month,7);if(!/^\d{4}-\d{2}$/.test(month))return J({e:'month'},400);
@@ -355,8 +358,15 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'){
+  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
+    if(p==='/api/admin/ratesave'||p==='/api/admin/ratedel'){
+      await pmEnsure(env);const d=cl(b.d,10);if(!dOk(d))return J({e:'bad'},400);
+      if(p==='/api/admin/ratedel'){await env.DB.prepare('DELETE FROM pm_rate WHERE d=? AND (SELECT COUNT(*) FROM pm_rate)>1').bind(d).run();return J({ok:1})}
+      const a=Math.round(parseFloat(b.r15)*100)/100,c=Math.round(parseFloat(b.r68)*100)/100;
+      if(!(a>0&&a<1000&&c>0&&c<1000))return J({e:'bad'},400);
+      await env.DB.prepare('INSERT INTO pm_rate(d,r15,r68) VALUES(?,?,?) ON CONFLICT(d) DO UPDATE SET r15=excluded.r15,r68=excluded.r68').bind(d,a,c).run();return J({ok:1});
+    }
     if(p==='/api/admin/hsave'||p==='/api/admin/hdel'){
       await pmEnsure(env);
       if(p==='/api/admin/hdel'){await env.DB.prepare('DELETE FROM hol WHERE id=?').bind(cl(b.id,40)).run();return J({ok:1})}

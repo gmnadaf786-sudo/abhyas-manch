@@ -6,6 +6,9 @@ var MONTH_NAMES=['जानेवारी','फेब्रुवारी','�
 var WEEK_NAMES=['रविवार','सोमवार','मंगळवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
 window.PM_POSHAN_SPICES=[['हळद',0.0003,0.0005],['मीठ',0.003,0.005],['कांदा लसूण मसाला',0.0004,0.0006],['जिरे',0.0003,0.0005],['मोहरी',0.0003,0.0005],['मिरची पावडर',0.0004,0.0005],['गरम मसाला',0.0004,0.0006]];
 var state={year:{},month:''},regGroup='15',ALLOWED=['15','68'];
+function rateFor(iso,g){var a=(window.PMRATE||[]).slice().sort(function(x,y){return x.d<y.d?-1:1}),r=a[0];a.forEach(function(x){if(x.d<=iso)r=x});return r?Number(g==='15'?r.r15:r.r68)||0:0}
+function vegDay(x,g){return x.n?Math.round(x.n*rateFor(x.iso,g)*100)/100:0}
+function vegTot(D,g){var t=0;D.days.forEach(function(x){t+=vegDay(x,g)});return Math.round(t*100)/100}
 function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');for(var i=0;i<a.length;i++){if(iso>=a[i].d1&&iso<=(a[i].d2||a[i].d1))return a[i]}return null}
   function esc(v){ return (typeof escapeHtml_==='function') ? escapeHtml_(v) : String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
   function pad(n){ return String(n).padStart(2,'0'); }
@@ -136,7 +139,7 @@ function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt
       '<table class="gv">'+cg+'<thead>'+th+'</thead><tbody>'+rows+'</tbody></table>'+
       '<div class="gv-n">मागणी नोंदवताना शाळेकडे वीस दिवसांचा साठा शिल्लक राहील याची दक्षता घेऊन मागणी नोंदवावी, आवश्यकतेपेक्षा जास्त साठा करून धान्य खराब होणार नाही याची दक्षता घ्यावी.</div>'+
       '<div class="gv-f">४) महिन्यातील एकूण ताटांची संख्या - <b>'+D.tot.ben+'</b></div>'+
-      '<div class="gv-f">५) इंधन व भाजीपाल्यासाठी खर्च केलेले अनुदान रु. = <span class="gv-ln"></span> (ताटांची संख्या × दर) (शासनस्तरावरुन निश्चित केल्यानुसार)</div>'+
+      '<div class="gv-f">५) इंधन व भाजीपाल्यासाठी खर्च केलेले अनुदान रु. = <b>'+vegTot(D,g).toFixed(2)+'</b> (ताटांची संख्या × दर — दर रु. '+rateFor(month+'-28',g)+') (शासनस्तरावरुन निश्चित केल्यानुसार)</div>'+
       '<div class="gv-f">६) स्वयंपाकी तथा मदतनीस मानधन रु. = <span class="gv-ln"></span> (रु. १५०० × नेमलेले स्वयंपाकी तथा मदतनीस संख्या)</div>'+
       '<div class="gv-f">प्रमाणित करण्यात येते की, वर नमूद केलेली माहिती दैनंदिन नोंदवहीवरून घेतलेली आहे. ती तपासली आहे व बरोबर आहे.</div>'+
       '<div class="gv-sg"><span>दिनांक - <span class="gv-ln"></span></span><span>मुख्याध्यापक</span><span>केंद्रप्रमुख<br>केंद्र - <span class="gv-ln" style="min-width:80px"></span></span></div>';
@@ -255,9 +258,9 @@ function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt
     var body='';
     D.days.forEach(function(x){
       body+='<tr><td>'+dd(x).slice(0,5)+'</td><td>'+WEEK_NAMES[x.dt.getDay()].slice(0,3)+'</td><td>'+(x.n&&D.pat.v!==''?D.pat.v:'')+'</td><td>'+(x.n?x.n:(x.hol?'<span class="hl">'+(x.hol==='रविवार'?'रवि':'सु.')+'</span>':''))+'</td>'+
-        it.map(function(n){ return '<td>'+(x.used[n]?f(x.used[n],n):'')+'</td>'; }).join('')+blank3+'</tr>';
+        it.map(function(n){ return '<td>'+(x.used[n]?f(x.used[n],n):'')+'</td>'; }).join('')+'<td>'+(vegDay(x,g)?vegDay(x,g).toFixed(2):'')+'</td><td></td><td></td></tr>';
     });
-    var rt='<tr class="tt"><td colspan="3">एकूण खर्च</td><td>'+D.tot.ben+'</td>'+it.map(function(n){ return '<td>'+f(D.tot.used[n],n)+'</td>'; }).join('')+blank3+'</tr>';
+    var rt='<tr class="tt"><td colspan="3">एकूण खर्च</td><td>'+D.tot.ben+'</td>'+it.map(function(n){ return '<td>'+f(D.tot.used[n],n)+'</td>'; }).join('')+'<td>'+vegTot(D,g).toFixed(2)+'</td><td></td><td></td></tr>';
     var rs='<tr class="tt"><td colspan="4">शिल्लक साठा</td>'+it.map(function(n){ return '<td>'+f(D.comp.o[n]+D.tot.recv[n]-D.tot.used[n],n)+'</td>'; }).join('')+blank3+'</tr>';
     return headBlock(Y,month,g,2)+'<table class="prt p2">'+cg+'<thead>'+th+'</thead><tbody>'+r1+r2+r3+r4+r5+r6+body+rt+rs+'</tbody></table>';
   }
