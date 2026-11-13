@@ -34,8 +34,9 @@ async function teacher(env,b,needOk){
 }
 async function ensS(env){}
 // ---- School login (UDISE + password) ----
+const SCH_COMM=[['C001','शाळा व्यवस्थापन समिती (SMC)'],['C002','सखी सावित्री समिती'],['C003','महिला तक्रार निवारण समिती'],['C004','विद्यार्थी सुरक्षा समिती']];
 let SLOK=false;
-async function slEnsure(env){if(SLOK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS pw_req(udise TEXT PRIMARY KEY, name TEXT, mobile TEXT, ts TEXT)")]);SLOK=true}
+async function slEnsure(env){if(SLOK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_cmember(udise TEXT, cid TEXT, id INTEGER, name TEXT, desig TEXT, mtype TEXT, mobile TEXT, joined TEXT, active INTEGER, PRIMARY KEY(udise,cid,id))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS pw_req(udise TEXT PRIMARY KEY, name TEXT, mobile TEXT, ts TEXT)")]);SLOK=true}
 async function schoolAuth(env,b){
   const t=cl(b.token,64);if(!t)return null;await slEnsure(env);
   return await env.DB.prepare('SELECT * FROM school_login WHERE token=?').bind(t).first();
@@ -70,6 +71,17 @@ async function schoolApi(p,r,env){
     if((await hashPin(old,t.salt))!==t.pw)return J({e:'bad'},401);
     const salt=rnd(8);await env.DB.prepare('UPDATE school_login SET salt=?,pw=?,changed=1 WHERE udise=?').bind(salt,await hashPin(nw,salt),t.udise).run();
     return J({ok:1});
+  }
+  if(p==='/api/s/comm'){
+    const rows=(await env.DB.prepare('SELECT cid,id,name,desig,mtype,mobile,joined,active FROM sch_cmember WHERE udise=? ORDER BY cid,id').bind(t.udise).all()).results;
+    return J({ok:1,committees:SCH_COMM.map(c=>({id:c[0],name:c[1],members:rows.filter(x=>x.cid===c[0]).map(x=>({name:x.name,desig:x.desig,type:x.mtype,mobile:x.mobile,joined:x.joined,active:x.active?'Yes':'No'}))}))});
+  }
+  if(p==='/api/s/commsave'){
+    const cid=cl(b.id,8);if(!SCH_COMM.some(c=>c[0]===cid))return J({e:'bad'},400);
+    const ms=(Array.isArray(b.members)?b.members:[]).slice(0,40),st=[env.DB.prepare('DELETE FROM sch_cmember WHERE udise=? AND cid=?').bind(t.udise,cid)];let i=0;
+    for(const m of ms){const nm=cl(m.name,80),mo=cl(m.mobile,10).replace(/\D/g,'');if(nm.length<2)continue;
+      st.push(env.DB.prepare('INSERT INTO sch_cmember(udise,cid,id,name,desig,mtype,mobile,joined,active) VALUES(?,?,?,?,?,?,?,?,?)').bind(t.udise,cid,++i,nm,cl(m.desig,30),cl(m.type,40),mo,/^\d{4}-\d\d-\d\d$/.test(m.joined||'')?m.joined:'',m.active==='No'?0:1))}
+    await env.DB.batch(st);return J({ok:1,n:i});
   }
   if(p==='/api/s/me'){const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,udise:t.udise,school:sc?sc.name:'',changed:t.changed?1:0})}
   return J({e:'nf'},404);
