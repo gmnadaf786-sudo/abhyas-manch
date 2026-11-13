@@ -5,6 +5,7 @@ body{margin:0;background:var(--bg);color:var(--i);font:15px/1.5 system-ui,sans-s
 input,select,button,textarea{font:inherit;padding:9px 10px;border-radius:10px;border:1.5px solid #94a3b8;background:var(--c);color:var(--i);box-sizing:border-box;margin:0}
 input:focus,select:focus{outline:0;border-color:var(--a);box-shadow:0 0 0 3px rgba(15,118,110,.2)}
 button{background:var(--a);color:#fff;border:0;cursor:pointer;font-weight:600}button.g{background:var(--c);color:var(--a);border:1.5px solid var(--a)}button.d{background:#fff;color:#b91c1c;border:1.5px solid #b91c1c}
+.seg{display:flex;width:max-content;max-width:100%;margin:6px auto 10px;border:2px solid var(--a);border-radius:16px;overflow:hidden}.seg button{border:0;border-radius:0;background:#fff;color:var(--a);font-weight:700;padding:10px 18px;font-size:16px}.seg button.on{background:var(--a);color:#fff}
 .tabs{display:flex;gap:6px;overflow-x:auto;margin:10px 0}.tabs button{white-space:nowrap;background:var(--c);color:var(--a);border:1.5px solid var(--a)}.tabs button.on{background:var(--a);color:#fff}
 .r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.r>*{flex:1;min-width:0}small,.m{color:var(--m)}.er{color:#b91c1c}.ok{color:#15803d}
 .day{border-bottom:1px solid var(--l);padding:10px 0}.day:last-child{border:0}.dh{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}.dh b{font-size:15px}
@@ -49,7 +50,7 @@ function draw(){var t=[['d','📅 दैनिक नोंद'],['s','📦 स�
  ({d:dTab,s:sTab,r:rTab,p:pTab,a:aTab,c:calcTab,b:bmiTab})[TAB]();var on=document.querySelector('.tabs button.on');if(on&&on.scrollIntoView)try{on.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}}
 var RG='15';
 function aTab(){var b=document.getElementById('b'),bt=function(k,l){return '<button onclick="rp(\''+k+'\')" style="margin:4px 0;width:100%">'+l+'</button>'};
- b.innerHTML='<div class="card"><b>गट</b><select id="rg" onchange="RG=this.value" style="width:100%"><option value="15"'+(RG==='15'?' selected':'')+'>इ. १ ली ते ५ वी</option><option value="68"'+(RG==='68'?' selected':'')+'>इ. ६ वी ते ८ वी</option></select>'+bt('p1','नोंदवही भाग १ (तांदूळ)')+bt('p2','नोंदवही भाग २ (मान्यादी माल)')+bt('b','प्रपत्र ब')+bt('taste','चव नोंदवही')+bt('annual','वार्षिक उपयोगिता (शै. वर्ष)')+bt('all','सर्व मासिक रिपोर्ट एकत्र (दोन्ही गट)')+'<p class="m">प्रिंट विंडोतून PDF म्हणून सेव्ह करता येईल. वरील महिना निवडा.</p></div>'}
+ b.innerHTML='<div class="card"><b>गट</b>'+seg(RG,"RG='@';aTab()")+''+bt('p1','नोंदवही भाग १ (तांदूळ)')+bt('p2','नोंदवही भाग २ (मान्यादी माल)')+bt('b','प्रपत्र ब')+bt('taste','चव नोंदवही')+bt('annual','वार्षिक उपयोगिता (शै. वर्ष)')+bt('all','सर्व मासिक रिपोर्ट एकत्र (दोन्ही गट)')+'<p class="m">प्रिंट विंडोतून PDF म्हणून सेव्ह करता येईल. वरील महिना निवडा.</p></div>'}
 function rp(k){if(!window.PMREP){alert('अहवाल लोड होत आहे…');return}try{PMREP.print(k,MON,RG,Y)}catch(e){alert('त्रुटी: '+e.message)}}
 function chm(v){if(!v)return;var o=fyOf(MON);MON=v;if(fyOf(v)!==o)load();else draw()}
 
@@ -133,7 +134,7 @@ var SD2={};
 function closing(month,g){var ms=fyMonths(fyOf(month)),idx=ms.indexOf(month),d=stockOf(month,g),u=usedFor(month,g),prev=idx>0?closing(ms[idx-1],g):null,c={};
  ITEMS.forEach(function(it){var e=d[it]||{},o=e.o!=null?e.o:(prev?prev[it]:0);c[it]=(o||0)+(e.r||0)+(e.p||0)-u[it]});return c}
 function sTab(){var d=stockOf(MON,GRP),u=usedFor(MON,GRP),ms=fyMonths(fyOf(MON)),idx=ms.indexOf(MON),prev=idx>0?closing(ms[idx-1],GRP):null,rc=rcptTotals(MON,GRP);
- var h='<div class="r" style="margin-bottom:8px"><button class="'+(GRP==='15'?'':'g')+'" onclick="GRP=\'15\';draw()">इ. १–५</button><button class="'+(GRP==='68'?'':'g')+'" onclick="GRP=\'68\';draw()">इ. ६–८</button></div>'+
+ var h=seg(GRP,"GRP='@';draw()")+
  '<div class="card"><span class="lab">'+(GRP==='15'?'१–५':'६–८')+' – महिन्याची पटसंख्या</span><input id="pat" type="number" class="n" value="'+(d._pat?d._pat.o:'')+'" style="width:140px">'+
  '<p class="m" style="font-size:12px;margin:6px 0 0">मागील शिल्लक रिकामी सोडल्यास मागील महिन्याची अखेरची शिल्लक आपोआप येते. वापर = दैनिक नोंदीतील उपस्थिती × प्रमाण. लोकसहभाग = गावकऱ्यांकडून मिळालेला माल.</p></div>'+
  '<div class="card st w"><table><tr><th>जिन्नस (किग्रॅ/लि.)</th><th>मागील</th><th>प्राप्त</th><th>लोक.</th><th>वापर</th><th>शिल्लक</th></tr>'+
@@ -148,6 +149,7 @@ function ssave(){var d=sread(),er=document.getElementById('e');er.className='m';
 /* ---------- पावती ---------- */
 function rcptTotals(m,g){var t={};(Y.rcpt||[]).forEach(function(r){if(r.date.slice(0,7)!==m)return;var it=[];try{it=JSON.parse(r.items)}catch(e){}it.forEach(function(x){var q=(g&&x.q15!=null)?Number(g==='15'?x.q15:x.q68)||0:Number(x.qty)||0;t[x.name]=Math.round(((t[x.name]||0)+q)*1e4)/1e4})});return t}
 var RE=null;
+function seg(cur,js){return '<div class="seg"><button class="'+(cur==='15'?'on':'')+'" onclick="'+js.replace('@','15')+'">इ. १ ते ५</button><button class="'+(cur==='68'?'on':'')+'" onclick="'+js.replace('@','68')+'">इ. ६ ते ८</button></div>'}
 function rgrp(it){var a=0,b=0,l=0;it.forEach(function(x){if(x.q15==null)l=1;else{if(Number(x.q15)>0)a=1;if(Number(x.q68)>0)b=1}});return l?'':(a&&b?'both':(b?'68':'15'))}
 function rgl(g){return g==='15'?'इ. १–५':g==='68'?'इ. ६–८':g==='both'?'इ. १–८ (दोन्ही)':'जुनी (गट नाही)'}
 function rtot(g){var t=rcptTotals(MON,g);return Object.keys(t).length?'<div style="margin-bottom:6px"><b>'+rgl(g)+':</b> '+Object.keys(t).map(function(k){return esc(k)+' <b>'+fmt(t[k])+'</b>'}).join(' · ')+'</div>':''}
@@ -158,7 +160,7 @@ function rTab(){var list=(Y.rcpt||[]).filter(function(r){return r.date.slice(0,7
 function radd(){RE={id:'',grp:GRP,date:today(),supplier:'',challan:'',remark:'',q:{}};rform()}
 function redit(id){var r=Y.rcpt.filter(function(x){return x.id===id})[0],it=[];try{it=JSON.parse(r.items)}catch(e){}var g=rgrp(it);if(g===''||g==='both')g=GRP;RE={id:id,grp:g,date:r.date,supplier:r.supplier,challan:r.challan,remark:r.remark,q:(function(){var o={};it.forEach(function(x){o[x.name]=x.q15!=null?(g==='68'?x.q68:x.q15):x.qty});return o})()};rform()}
 function rnames(){var a=ITEMS.slice();Object.keys(RE.q).forEach(function(k){if(a.indexOf(k)<0)a.push(k)});return a}
-function rform(){var h='<div class="card"><h2>'+(RE.id?'पावती बदला':'नवीन पावती')+'</h2><span class="lab">पावती कोणत्या गटाची?</span><select style="width:100%" onchange="RE.grp=this.value;rform()"><option value="15"'+(RE.grp==='15'?' selected':'')+'>इ. १ ली ते ५ वी</option><option value="68"'+(RE.grp==='68'?' selected':'')+'>इ. ६ वी ते ८ वी</option></select><span class="lab">तारीख</span><input class="n" type="date" max="'+today()+'" value="'+RE.date+'" onchange="RE.date=this.value"><span class="lab">कोणाकडून (पुरवठादार)</span><input class="n" value="'+esc(RE.supplier)+'" oninput="RE.supplier=this.value"><span class="lab">चलन क्रमांक</span><input class="n" value="'+esc(RE.challan)+'" oninput="RE.challan=this.value"><span class="lab">जिन्नस — मिळालेल्यांचे प्रमाण भरा (किग्रॅ / लि.); बाकी रिकामे ठेवा</span>'+
+function rform(){var h='<div class="card"><h2>'+(RE.id?'पावती बदला':'नवीन पावती')+'</h2><span class="lab" style="text-align:center">पावती कोणत्या गटाची?</span>'+seg(RE.grp,"RE.grp='@';rform()")+'<span class="lab">तारीख</span><input class="n" type="date" max="'+today()+'" value="'+RE.date+'" onchange="RE.date=this.value"><span class="lab">कोणाकडून (पुरवठादार)</span><input class="n" value="'+esc(RE.supplier)+'" oninput="RE.supplier=this.value"><span class="lab">चलन क्रमांक</span><input class="n" value="'+esc(RE.challan)+'" oninput="RE.challan=this.value"><span class="lab">जिन्नस — मिळालेल्यांचे प्रमाण भरा (किग्रॅ / लि.); बाकी रिकामे ठेवा</span>'+
  rnames().map(function(n){var k=n.replace(/'/g,"\\'");return '<div class="r" style="margin-bottom:6px;align-items:center"><div style="flex:2">'+esc(n)+'</div><input type="number" step="any" min="0" inputmode="decimal" placeholder="०" value="'+esc(RE.q[n]==null?'':RE.q[n])+'" oninput="RE.q[\''+k+'\']=this.value"></div>'}).join('')+
  '<span class="lab">शेरा</span><input class="n" value="'+esc(RE.remark)+'" oninput="RE.remark=this.value"><p id="re" class="er"></p><div class="r"><button onclick="rsave()">💾 जतन करा</button><button class="g" onclick="RE=null;document.getElementById(\'rf\').innerHTML=\'\'">रद्द</button></div></div>';
  document.getElementById('rf').innerHTML=h;document.getElementById('rf').scrollIntoView()}
