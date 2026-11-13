@@ -681,6 +681,10 @@ async function ext(p,r,env){
     }
     return J({e:'fail',c:last},502);
   }
+  if(p==='/api/t/hols'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await pmEnsure(env);
+    return J({ok:1,rows:(await env.DB.prepare('SELECT d1,d2,name,type FROM hol ORDER BY d1').all()).results||[],today:new Date(Date.now()+19800000).toISOString().slice(0,10)});
+  }
   if(p==='/api/t/contacts'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
     const q=await env.DB.prepare('SELECT desig,name,area,mobile FROM dir ORDER BY id').all();return J({ok:1,rows:q.results||[]});
