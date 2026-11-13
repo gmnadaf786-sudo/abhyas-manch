@@ -37,7 +37,7 @@ async function ensS(env){}
 const SCH_COMM=[['C001','शाळा व्यवस्थापन समिती (SMC)'],['C002','सखी सावित्री समिती'],['C003','महिला तक्रार निवारण समिती'],['C004','विद्यार्थी सुरक्षा समिती'],['C005','माजी विद्यार्थी संघ']];
 const SCH_DIST=['uni','book'];
 let SLOK=false;
-async function slEnsure(env){if(SLOK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_cmember(udise TEXT, cid TEXT, id INTEGER, name TEXT, desig TEXT, mtype TEXT, mobile TEXT, joined TEXT, active INTEGER, PRIMARY KEY(udise,cid,id))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_dist(udise TEXT, kind TEXT, pen TEXT, got INTEGER, date TEXT, upd TEXT, PRIMARY KEY(udise,kind,pen))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS pw_req(udise TEXT PRIMARY KEY, name TEXT, mobile TEXT, ts TEXT)")]);for(const c of ['sz1','sz2'])try{await env.DB.prepare('ALTER TABLE sch_dist ADD COLUMN '+c+' TEXT').run()}catch(e){}
+async function slEnsure(env){if(SLOK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_cmember(udise TEXT, cid TEXT, id INTEGER, name TEXT, desig TEXT, mtype TEXT, mobile TEXT, joined TEXT, active INTEGER, PRIMARY KEY(udise,cid,id))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_dist(udise TEXT, kind TEXT, pen TEXT, got INTEGER, date TEXT, upd TEXT, PRIMARY KEY(udise,kind,pen))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_books(udise TEXT, cls TEXT, names TEXT, PRIMARY KEY(udise,cls))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS pw_req(udise TEXT PRIMARY KEY, name TEXT, mobile TEXT, ts TEXT)")]);for(const c of ['sz1','sz2'])try{await env.DB.prepare('ALTER TABLE sch_dist ADD COLUMN '+c+' TEXT').run()}catch(e){}
   SLOK=true}
 async function schoolAuth(env,b){
   const t=cl(b.token,64);if(!t)return null;await slEnsure(env);
@@ -90,6 +90,17 @@ async function schoolApi(p,r,env){
       st.push(env.DB.prepare('INSERT INTO sch_dist(udise,kind,pen,got,date,upd,sz1,sz2) SELECT ?,?,?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM roster WHERE pen=? AND udise=?) ON CONFLICT(udise,kind,pen) DO UPDATE SET got=excluded.got,date=excluded.date,upd=excluded.upd,sz1=excluded.sz1,sz2=excluded.sz2').bind(t.udise,k,pen,x.got?1:0,d,now,s1,s2,pen,t.udise));
     }
     if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length});
+  }
+  if(p==='/api/s/books'){
+    const rs=(await env.DB.prepare('SELECT cls,names FROM sch_books WHERE udise=?').bind(t.udise).all()).results;
+    return J({ok:1,rows:rs});
+  }
+  if(p==='/api/s/bookssave'){
+    const c=cl(b.cls,3).replace(/\D/g,'');if(!c)return J({e:'bad'},400);
+    const nm=(Array.isArray(b.names)?b.names:[]).map(x=>cl(x,40)).filter(Boolean).slice(0,15);
+    if(!nm.length)await env.DB.prepare('DELETE FROM sch_books WHERE udise=? AND cls=?').bind(t.udise,c).run();
+    else await env.DB.prepare('INSERT INTO sch_books(udise,cls,names) VALUES(?,?,?) ON CONFLICT(udise,cls) DO UPDATE SET names=excluded.names').bind(t.udise,c,JSON.stringify(nm)).run();
+    return J({ok:1});
   }
   if(p==='/api/s/comm'){
     const rows=(await env.DB.prepare('SELECT cid,id,name,desig,mtype,mobile,joined,active FROM sch_cmember WHERE udise=? ORDER BY cid,id').bind(t.udise).all()).results;
