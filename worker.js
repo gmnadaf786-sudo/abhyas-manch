@@ -35,10 +35,11 @@ async function teacher(env,b,needOk){
 async function ensS(env){}
 // ---- School login (UDISE + password) ----
 const SCH_COMM=[['C001','शाळा व्यवस्थापन समिती (SMC)'],['C002','सखी सावित्री समिती'],['C003','महिला तक्रार निवारण समिती'],['C004','विद्यार्थी सुरक्षा समिती'],['C005','माजी विद्यार्थी संघ']];
+const TNE=["अनुक्रमांक", "लिंग", "संबोधन", "नाव", "मधले नाव", "आडनाव", "Shalarth ID", "जन्मतारीख", "प्रथम नियुक्ती दिनांक", "जिल्ह्यात रुजू दिनांक", "सेवानिवृत्ती दिनांक", "PAN क्रमांक", "केंद्राचे नाव"];
 const SCH_DIST=['uni','book','shoe','bag'];
 const CEN={"CLU3603574": "ACHANKAN HALLI", "CLU3603586": "ASANGI TURK", "CLU3603584": "AWANDI", "CLU3603592": "BAJ", "CLU3603590": "BANALI", "CLU3603593": "BILUR", "CLU3603576": "BORGI", "CLU3603580": "DAFALAPUR", "CLU3603598": "DARIBADACHI", "CLU3603591": "GIRAGAON", "CLU3603597": "GUDDAPUR", "CLU3603594": "JADRABOBALAD", "CLU3603573": "JAT KANYA", "CLU3603596": "JIRGYAL", "CLU3603577": "KHOJANWADI", "CLU3603595": "KO. BOBALAD", "CLU3603575": "KUMBHARI", "CLU3603589": "MUCHANDI", "CLU3603587": "NIGADI KD", "CLU3603579": "SANKH", "CLU3603582": "SANMADI", "CLU3603578": "SHEGAON", "CLU3603581": "SINDUR", "CLU3603583": "TIKONDI", "CLU3603588": "UMADI", "CLU3603600": "UTAGI", "CLU3603599": "WALEKHINDI", "CLU3603585": "WALSANG"};
 let SLOK=false;
-async function slEnsure(env){if(SLOK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_cmember(udise TEXT, cid TEXT, id INTEGER, name TEXT, desig TEXT, mtype TEXT, mobile TEXT, joined TEXT, active INTEGER, PRIMARY KEY(udise,cid,id))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_dist(udise TEXT, kind TEXT, pen TEXT, got INTEGER, date TEXT, upd TEXT, PRIMARY KEY(udise,kind,pen))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_books(udise TEXT, cls TEXT, names TEXT, PRIMARY KEY(udise,cls))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_form(udise TEXT PRIMARY KEY, data TEXT, upd TEXT, by TEXT, submitted TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_center(udise TEXT PRIMARY KEY, code TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS off_login(uname TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS tch_info(shalarth TEXT PRIMARY KEY, data TEXT, upd TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS pw_req(udise TEXT PRIMARY KEY, name TEXT, mobile TEXT, ts TEXT)")]);for(const c of ['sz1','sz2'])try{await env.DB.prepare('ALTER TABLE sch_dist ADD COLUMN '+c+' TEXT').run()}catch(e){}
+async function slEnsure(env){if(SLOK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_cmember(udise TEXT, cid TEXT, id INTEGER, name TEXT, desig TEXT, mtype TEXT, mobile TEXT, joined TEXT, active INTEGER, PRIMARY KEY(udise,cid,id))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_dist(udise TEXT, kind TEXT, pen TEXT, got INTEGER, date TEXT, upd TEXT, PRIMARY KEY(udise,kind,pen))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_books(udise TEXT, cls TEXT, names TEXT, PRIMARY KEY(udise,cls))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_form(udise TEXT PRIMARY KEY, data TEXT, upd TEXT, by TEXT, submitted TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_center(udise TEXT PRIMARY KEY, code TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS off_login(uname TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS tch_edit(shalarth TEXT PRIMARY KEY, data TEXT, status TEXT, remark TEXT, upd TEXT, sub TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS tch_info(shalarth TEXT PRIMARY KEY, data TEXT, upd TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS pw_req(udise TEXT PRIMARY KEY, name TEXT, mobile TEXT, ts TEXT)")]);for(const c of ['sz1','sz2'])try{await env.DB.prepare('ALTER TABLE sch_dist ADD COLUMN '+c+' TEXT').run()}catch(e){}
   SLOK=true}
 async function schoolAuth(env,b){
   const t=cl(b.token,64);if(!t)return null;await slEnsure(env);
@@ -80,15 +81,29 @@ async function offApi(p,r,env){
     return J({ok:1,role:kp?'KP':'BEO',cen:CEN,rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})});
   }
   if(p==='/api/o/teachers'){
-    const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,s.name sc FROM teachers t LEFT JOIN schools s ON s.udise=t.udise ORDER BY t.udise,t.name').all()).results;
+    await slEnsure(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise ORDER BY t.udise,t.name').all()).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
-    return J({ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,sh:x.shalarth,n:x.name,m:x.mobile,u:x.udise,sc:x.sc||'',c:cm[x.udise],st:x.status,cf:x.conf?1:0}))});
+    return J({ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,sh:x.shalarth,n:x.name,m:x.mobile,u:x.udise,sc:x.sc||'',c:cm[x.udise],st:x.status,cf:x.conf?1:0,es:x.es||''}))});
   }
   if(p==='/api/o/tinfo'){
     const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),t=await env.DB.prepare('SELECT t.name,t.mobile,t.udise,s.name sc FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.shalarth=?').bind(sh).first();
     if(!t||!ok.has(t.udise))return J({e:'na'},403);
-    const q=await env.DB.prepare('SELECT data,upd FROM tch_info WHERE shalarth=?').bind(sh).first();
-    return J({ok:1,name:t.name,mobile:t.mobile,udise:t.udise,sc:t.sc||'',data:q?q.data:'',upd:q?q.upd:''});
+    const q=await env.DB.prepare('SELECT data,upd FROM tch_info WHERE shalarth=?').bind(sh).first(),e=await env.DB.prepare('SELECT data,status,remark,upd,sub FROM tch_edit WHERE shalarth=?').bind(sh).first();
+    return J({ok:1,name:t.name,mobile:t.mobile,udise:t.udise,sc:t.sc||'',data:q?q.data:'',upd:q?q.upd:'',ed:e||null});
+  }
+  if(p==='/api/o/tdecide'){
+    const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),t=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();
+    if(!t||!ok.has(t.udise))return J({e:'na'},403);
+    const e=await env.DB.prepare('SELECT data,status FROM tch_edit WHERE shalarth=?').bind(sh).first();
+    if(!e||e.status!=='Forwarded')return J({e:'state'},409);
+    if(b.act==='ok'){
+      const q=await env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(sh).first();let base={},ch={};try{base=JSON.parse(q&&q.data||'{}');ch=JSON.parse(e.data||'{}')}catch(x){}
+      Object.assign(base,ch);
+      await env.DB.batch([env.DB.prepare('INSERT INTO tch_info(shalarth,data,upd) VALUES(?,?,?) ON CONFLICT(shalarth) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(sh,JSON.stringify(base),istDay()),env.DB.prepare("UPDATE tch_edit SET status='Approved',remark='',data='{}',upd=? WHERE shalarth=?").bind(istDay(),sh)]);
+      return J({ok:1,status:'Approved'});
+    }
+    if(b.act==='ret'){const rm=cl(b.remark,300);if(rm.length<3)return J({e:'remark'},400);await env.DB.prepare("UPDATE tch_edit SET status='Returned',remark=?,upd=? WHERE shalarth=?").bind(rm,istDay(),sh).run();return J({ok:1,status:'Returned'});}
+    return J({e:'bad'},400);
   }
   if(p==='/api/o/form'){
     const us=(Array.isArray(b.udise)?b.udise:[b.udise]).map(u=>cl(u,11).replace(/\D/g,'')).filter(u=>ok.has(u)).slice(0,40);
@@ -436,6 +451,23 @@ async function ext(p,r,env){
       if(!b.fresh&&!await env.DB.prepare('SELECT 1 x FROM roster WHERE udise=? AND cls=? AND div=? LIMIT 1').bind(u,k,dv).first())continue;
       await env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,u,k,dv).run();n++;}
     return J({ok:1,n:n});
+  }
+  if(p==='/api/t/info'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
+    const [i,e]=await Promise.all([env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(t.shalarth).first(),env.DB.prepare('SELECT data,status,remark,upd,sub FROM tch_edit WHERE shalarth=?').bind(t.shalarth).first()]);
+    return J({ok:1,base:i?i.data:'{}',ed:e||{data:'{}',status:'',remark:''}});
+  }
+  if(p==='/api/t/infosave'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
+    const e=await env.DB.prepare('SELECT data,status FROM tch_edit WHERE shalarth=?').bind(t.shalarth).first();
+    if(e&&e.status==='Forwarded')return J({e:'locked'},409);
+    let d={};try{d=JSON.parse(e&&e.data||'{}')}catch(x){}
+    const NE=new Set(TNE);let n=0;
+    if(b.d&&typeof b.d==='object')for(const k of Object.keys(b.d)){if(n++>150)break;const kk=cl(k,80);if(!kk||NE.has(kk))continue;const v=cl(b.d[k],600);if(v==='')delete d[kk];else d[kk]=v}
+    const js=JSON.stringify(d);if(js.length>60000)return J({e:'big'},400);
+    const sub=b.submit?1:0,st=sub?'Forwarded':'Draft';
+    await env.DB.prepare("INSERT INTO tch_edit(shalarth,data,status,remark,upd,sub) VALUES(?,?,?,?,?,?) ON CONFLICT(shalarth) DO UPDATE SET data=excluded.data,status=excluded.status,remark=CASE WHEN excluded.status='Forwarded' THEN '' ELSE tch_edit.remark END,upd=excluded.upd,sub=CASE WHEN excluded.status='Forwarded' THEN excluded.sub ELSE tch_edit.sub END").bind(t.shalarth,js,st,'',istDay(),sub?istDay():'').run();
+    return J({ok:1,status:st});
   }
   if(p==='/api/t/chpw'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
