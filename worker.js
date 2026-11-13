@@ -45,7 +45,7 @@ async function schoolAuth(env,b){
   return await env.DB.prepare('SELECT * FROM school_login WHERE token=?').bind(t).first();
 }
 
-async function offAuth(env,b){const u=cl(b.u,12).toUpperCase(),t=cl(b.token,40);if(!u||t.length<20)return null;const x=await env.DB.prepare('SELECT * FROM off_login WHERE uname=? AND token=?').bind(u,t).first();return x||null}
+async function offAuth(env,b){const u=cl(b.u,12).toUpperCase(),t=cl(b.token,64);if(!u||t.length<20)return null;const x=await env.DB.prepare('SELECT * FROM off_login WHERE uname=? AND token=?').bind(u,t).first();return x||null}
 async function offApi(p,r,env){
   if(!p.startsWith('/api/o/'))return null;
   await slEnsure(env);const b=await body(r);
