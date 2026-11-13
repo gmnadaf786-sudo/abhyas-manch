@@ -69,6 +69,10 @@ async function pmApi(p,r,env){
   if(!t||!t.conf)return J({e:'auth'},401);
   await pmEnsure(env);
   const u=t.udise,by=t.shalarth;
+  if(p==='/api/pm/students'){
+    const rows=(await env.DB.prepare('SELECT r.cls,r.div,r.name,i.dob,i.gender FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name LIMIT 800').bind(u).all()).results;
+    return J({ok:1,rows});
+  }
   if(p==='/api/pm/year'){
     const fy=parseInt(b.fy)||0;if(fy<2020||fy>2100)return J({e:'fy'},400);
     const d=(await env.DB.prepare('SELECT * FROM pm_daily WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
