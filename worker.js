@@ -132,9 +132,10 @@ async function pmApi(p,r,env){
   if(p==='/api/pm/rsave'){
     const date=cl(b.date,10);if(!dOk(date)||date>istDay())return J({e:'date'},400);
     const sup=cl(b.supplier,120);if(!sup)return J({e:'supplier'},400);
-    const seen={},items=[];for(const x of (Array.isArray(b.items)?b.items:[])){const nm=cl(x&&x.name,40),q=Math.round((Number(x&&x.qty)||0)*1e4)/1e4;
-      if(!nm||q<=0)continue;if(!PM_ITEMS.includes(nm)||q>100000)return J({e:'item',m:nm},400);
-      if(seen[nm])seen[nm].qty=Math.round((seen[nm].qty+q)*1e4)/1e4;else{seen[nm]={name:nm,qty:q};items.push(seen[nm])}}
+    const seen={},items=[],r4=v=>Math.round((Number(v)||0)*1e4)/1e4;for(const x of (Array.isArray(b.items)?b.items:[])){const nm=cl(x&&x.name,40);
+      const sp=x&&x.q15!=null,a=sp?r4(x.q15):0,c=sp?r4(x.q68):0,q=sp?r4(a+c):r4(x&&x.qty);
+      if(!nm||q<=0||a<0||c<0)continue;if(!PM_ITEMS.includes(nm)||q>100000)return J({e:'item',m:nm},400);
+      if(seen[nm]){seen[nm].qty=r4(seen[nm].qty+q);if(sp&&seen[nm].q15!=null){seen[nm].q15=r4(seen[nm].q15+a);seen[nm].q68=r4(seen[nm].q68+c)}}else{seen[nm]=sp?{name:nm,qty:q,q15:a,q68:c}:{name:nm,qty:q};items.push(seen[nm])}}
     if(!items.length)return J({e:'items'},400);
     let id=cl(b.id,40);
     if(id){if(!await env.DB.prepare('SELECT 1 x FROM pm_rcpt WHERE udise=? AND id=?').bind(u,id).first())return J({e:'nf'},404)}

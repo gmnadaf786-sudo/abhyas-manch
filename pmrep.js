@@ -183,7 +183,7 @@ function holidayOf(){return null}
     var days=[], recvDay={}, recvDates={}, derived={}, hasReceipts=(PRT.recv||[]).length>0;
     items.forEach(function(it){ recvDay[it]={}; recvDates[it]=[]; derived[it]=0; });
     if(hasReceipts) PRT.recv.forEach(function(r){ r.items.forEach(function(x){
-      if(items.indexOf(x.name)<0) return; var q=Number(x.qty||0)*sh[x.name];
+      if(items.indexOf(x.name)<0) return; var q=(x.q15!=null)?Number(g==='15'?x.q15:x.q68)||0:Number(x.qty||0)*sh[x.name];
       recvDay[x.name][r.date]=(recvDay[x.name][r.date]||0)+q; derived[x.name]+=q;
       var d=Number(r.date.slice(8)); if(recvDates[x.name].indexOf(d)<0) recvDates[x.name].push(d);
     }); });
