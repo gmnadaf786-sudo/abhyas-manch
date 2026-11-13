@@ -43,15 +43,43 @@ function init(){try{T=sessionStorage.getItem('am_t')||''}catch(e){}
 function load(){var fy=fyOf(MON);X.innerHTML='<p class="m">लोड होत आहे…</p>';post('/api/pm/year',{fy:fy}).then(function(j){
  if(!j.ok){X.innerHTML='<div class="card"><p class="er">'+(j.$s===401?'सत्र संपले किंवा शाळेची पुष्टी बाकी आहे. शिक्षक पानावर जाऊन लॉगिन/शाळा पुष्टी करा.':'लोड झाले नाही. पुन्हा प्रयत्न करा.')+'</p><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
  Y=j;SD={};j.daily.forEach(function(r){SD[r.date]=r});E={};document.getElementById('sch').textContent=(j.school||'')+' · UDISE '+j.udise;draw()})}
-function draw(){var t=[['d','📅 दैनिक नोंद'],['s','📦 साठा'],['r','🧾 पावती'],['p','⚖️ प्रमाण/मेनू'],['a','🖨️ अहवाल']];
+function draw(){var t=[['d','📅 दैनिक नोंद'],['s','📦 साठा'],['r','🧾 पावती'],['p','⚖️ प्रमाण/मेनू'],['a','🖨️ अहवाल'],['m','📱 SMS'],['c','🧮 धान्य हिशेब'],['b','📏 BMI']];
  X.innerHTML='<div class="tabs">'+t.map(function(x){return '<button class="'+(TAB===x[0]?'on':'')+'" onclick="TAB=\''+x[0]+'\';draw()">'+x[1]+'</button>'}).join('')+'</div>'+
- (TAB==='p'?'':'<div class="card"><input type="month" id="mo" value="'+MON+'" onchange="chm(this.value)" style="width:100%"></div>')+'<div id="b"></div>';
- ({d:dTab,s:sTab,r:rTab,p:pTab,a:aTab})[TAB]()}
+ (TAB==='p'||TAB==='m'||TAB==='c'||TAB==='b'?'':'<div class="card"><input type="month" id="mo" value="'+MON+'" onchange="chm(this.value)" style="width:100%"></div>')+'<div id="b"></div>';
+ ({d:dTab,s:sTab,r:rTab,p:pTab,a:aTab,m:smsTab,c:calcTab,b:bmiTab})[TAB]()}
 var RG='15';
 function aTab(){var b=document.getElementById('b'),bt=function(k,l){return '<button onclick="rp(\''+k+'\')" style="margin:4px 0;width:100%">'+l+'</button>'};
  b.innerHTML='<div class="card"><b>गट</b><select id="rg" onchange="RG=this.value" style="width:100%"><option value="15"'+(RG==='15'?' selected':'')+'>इ. १ ली ते ५ वी</option><option value="68"'+(RG==='68'?' selected':'')+'>इ. ६ वी ते ८ वी</option></select>'+bt('p1','नोंदवही भाग १ (तांदूळ)')+bt('p2','नोंदवही भाग २ (मान्यादी माल)')+bt('b','प्रपत्र ब')+bt('taste','चव नोंदवही')+bt('annual','वार्षिक उपयोगिता (शै. वर्ष)')+bt('all','सर्व मासिक रिपोर्ट एकत्र (दोन्ही गट)')+'<p class="m">प्रिंट विंडोतून PDF म्हणून सेव्ह करता येईल. वरील महिना निवडा.</p></div>'}
 function rp(k){if(!window.PMREP){alert('अहवाल लोड होत आहे…');return}try{PMREP.print(k,MON,RG,Y)}catch(e){alert('त्रुटी: '+e.message)}}
 function chm(v){if(!v)return;var o=fyOf(MON);MON=v;if(fyOf(v)!==o)load();else draw()}
+
+/* ---------- SMS / धान्य हिशेब / BMI ---------- */
+var SMSR='9223166166',SMSC={'मुगडाळ':'MD','तूरडाळ':'TD','आख्खा मूग':'MD','मूग':'MD','मटकी':'MT','मसूरडाळ':'MSD','चवळी':'CH','हरभरा':'HB','वाटाणा':'VT','हिरवा वाटाणा':'VT','सोयाबडी':'SB'};
+function popts(v){return PULSES.map(function(x){return '<option'+(x===v?' selected':'')+'>'+x+'</option>'}).join('')}
+function smsDate(){var d=(document.getElementById('sd')||{}).value||today();return d}
+function smsFill(){var d=smsDate(),e=ent(d),g=function(i,v){var el=document.getElementById(i);if(el)el.value=v==null?'':v};
+ g('sa',e.p15);g('sb',e.p68);var r=recFor(d);g('sc',pulseNorm(e.pulse15||r[1]));g('sdl',pulseNorm(e.pulse68||r[1]))}
+function smsTab(){var b=document.getElementById('b');
+ b.innerHTML='<div class="card"><b>आजची माहिती SMS ने पाठवा</b><p class="m" style="font-size:12px">UDISE: <b>'+esc((Y&&Y.udise)||'')+'</b></p><label class="lab">दिनांक</label><input type="date" id="sd" value="'+today()+'" onchange="smsFill()" style="width:100%"><div class="r"><div><span class="lab">इ. १–५ उपस्थिती</span><input class="n" id="sa" type="number" inputmode="numeric" min="0"></div><div><span class="lab">इ. ६–८ उपस्थिती</span><input class="n" id="sb" type="number" inputmode="numeric" min="0"></div></div><div class="r"><div><span class="lab">इ. १–५ डाळ</span><select id="sc">'+popts('')+'</select></div><div><span class="lab">इ. ६–८ डाळ</span><select id="sdl">'+popts('')+'</select></div></div><div style="display:flex;gap:6px;margin-top:10px"><button onclick="smsShow()" style="flex:1">📄 तयार करा</button><button onclick="smsCopy()" style="flex:1">▢ कॉपी</button><button onclick="smsSend()" style="flex:1">➤ पाठवा</button></div><p id="smp" class="m" style="word-break:break-all;margin-top:8px"></p><p class="m" style="font-size:12px">प्राप्तकर्ता: '+SMSR+'. "पाठवा" दाबल्यावर फोनचे मेसेज ॲप उघडेल; तेथून पाठवावे लागेल.</p></div>';smsFill()}
+function smsBuild(){var ud=(Y&&Y.udise)||'',a=document.getElementById('sa').value.trim(),b=document.getElementById('sb').value.trim(),c=SMSC[document.getElementById('sc').value]||'',d=SMSC[document.getElementById('sdl').value]||'',p=['MH MDMM sc '+ud];
+ if(!ud)return{e:'UDISE कोड मिळाला नाही.'};if(!a&&!b)return{e:'किमान एका गटाची उपस्थिती भरा.'};
+ if(a){if(!c)return{e:'इ. १–५ डाळ निवडा.'};p.push('p1-5 '+a,'mc1-5 0','pu1-5 '+c)}
+ if(b){if(!d)return{e:'इ. ६–८ डाळ निवडा.'};p.push('p6-8 '+b,'mc6-8 0','pu6-8 '+d)}
+ return{m:p.join(', ')}}
+function smsShow(){var r=smsBuild(),o=document.getElementById('smp');if(r.e){o.className='er';o.textContent=r.e;return null}o.className='m';o.textContent=r.m;return r}
+function smsCopy(){var r=smsShow();if(!r)return;var o=document.getElementById('smp'),ok=function(){o.textContent=r.m+'  ✅ कॉपी झाला'};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(r.m).then(ok,ok);else{var t=document.createElement('textarea');t.value=r.m;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);ok()}}
+function smsSend(){var r=smsShow();if(!r)return;location.href='sms:'+SMSR+'?body='+encodeURIComponent(r.m)}
+function calcTab(){document.getElementById('b').innerHTML='<div class="card"><b>धान्य हिशेब (आजच्या मेनूसाठी)</b><div class="r"><div><span class="lab">इ. १–५ विद्यार्थी</span><input class="n" id="ca" type="number" inputmode="numeric" min="0"></div><div><span class="lab">इ. ६–८ विद्यार्थी</span><input class="n" id="cb" type="number" inputmode="numeric" min="0"></div></div><label class="lab">दिनांक (मेनूसाठी)</label><input type="date" id="cd" value="'+today()+'" style="width:100%"><button onclick="calcRun()" style="margin-top:10px;width:100%">🧮 हिशेब करा</button><div id="cr" style="margin-top:10px"></div></div>'}
+function calcRun(){var a=+document.getElementById('ca').value||0,b=+document.getElementById('cb').value||0,d=document.getElementById('cd').value||today(),o=document.getElementById('cr');if(!a&&!b){o.innerHTML='<p class="er">किमान एका गटाची संख्या भरा.</p>';return}
+ var rc=recFor(d),pu=pulseNorm(rc[1]),kg=function(v){return v>=1?fmt(v)+' किग्रॅ':fmt(v*1000)+' ग्रॅम'},rows=[['तांदूळ',a*.1,b*.15],[pu,a*.02,b*.03]];SPICES.forEach(function(x){rows.push([x[0],a*x[1],b*x[2]])});
+ var h='<p><b>🍛 '+esc(rc[0])+'</b></p><table style="width:100%;border-collapse:collapse"><tr><th align=left>साहित्य</th>'+(a?'<th>१–५ ('+pn(a)+')</th>':'')+(b?'<th>६–८ ('+pn(b)+')</th>':'')+(a&&b?'<th>एकूण</th>':'')+'</tr>';
+ rows.forEach(function(r){h+='<tr style="border-top:1px solid #ddd"><td>'+esc(r[0])+'</td>'+(a?'<td align=center>'+kg(r[1])+'</td>':'')+(b?'<td align=center>'+kg(r[2])+'</td>':'')+(a&&b?'<td align=center>'+kg(r[1]+r[2])+'</td>':'')+'</tr>'});
+ var l=function(v){return fmt(v)+' लि.'};h+='<tr style="border-top:1px solid #ddd"><td>तेल</td>'+(a?'<td align=center>'+l(a*.005495)+'</td>':'')+(b?'<td align=center>'+l(b*.008242)+'</td>':'')+(a&&b?'<td align=center>'+l(a*.005495+b*.008242)+'</td>':'')+'</tr></table>';o.innerHTML=h}
+function bmiTab(){var ag='';for(var i=5;i<=16;i++)ag+='<option value="'+i+'">'+i+' वर्षे</option>';
+ document.getElementById('b').innerHTML='<div class="card"><b>📏 विद्यार्थी BMI</b><div class="r"><div><span class="lab">वय</span><select id="ba">'+ag+'</select></div><div><span class="lab">लिंग</span><select id="bg"><option>मुलगा</option><option>मुलगी</option></select></div></div><div class="r"><div><span class="lab">उंची (सेमी)</span><input class="n" id="bh" type="number" step="0.1" inputmode="decimal" placeholder="135"></div><div><span class="lab">वजन (किलो)</span><input class="n" id="bw" type="number" step="0.1" inputmode="decimal" placeholder="30"></div></div><button onclick="bmiRun()" style="margin-top:10px;width:100%">🧮 BMI काढा</button><div id="br" style="margin-top:10px"></div></div>'}
+function bmiRun(){var h=+document.getElementById('bh').value,w=+document.getElementById('bw').value,o=document.getElementById('br');if(!(h>50)||!(w>0)){o.innerHTML='<p class="er">उंची (सेमी) व वजन (किलो) बरोबर भरा.</p>';return}
+ var m=h/100,v=Math.round(w/(m*m)*100)/100;o.innerHTML='<div style="font-size:32px;font-weight:700;text-align:center">'+v+'</div><p class="m" style="text-align:center">BMI (किग्रॅ/मी²)</p><p class="m" style="font-size:12px">मूल्यांकन वय व लिंगानुसार Growth Chart/Percentile वर करावे. हा कॅल्क्युलेटर फक्त BMI मूल्य काढतो.</p>'}
 /* ---------- दैनिक ---------- */
 function ent(date){var s=SD[date],e=E[date];if(e)return e;var rc=recFor(date);
  if(s)return {date:date,cooked:s.cooked||'होय',menu:s.menu,p15:s.p15||'',p68:s.p68||'',pulse15:s.pulse15,pulse68:s.pulse68,tasteTime:s.taste||'',distTime:s.dist||'',taster:s.taster||'',remark:s.remark||'',sample:s.sample||'',supplement:s.supp||'',saved:1};
