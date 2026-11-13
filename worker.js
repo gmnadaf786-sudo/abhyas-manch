@@ -34,7 +34,7 @@ async function teacher(env,b,needOk){
 }
 async function ensS(env){}
 // ---- School login (UDISE + password) ----
-const SCH_COMM=[['C001','शाळा व्यवस्थापन समिती (SMC)'],['C002','सखी सावित्री समिती'],['C003','महिला तक्रार निवारण समिती'],['C004','विद्यार्थी सुरक्षा समिती']];
+const SCH_COMM=[['C001','शाळा व्यवस्थापन समिती (SMC)'],['C002','सखी सावित्री समिती'],['C003','महिला तक्रार निवारण समिती'],['C004','विद्यार्थी सुरक्षा समिती'],['C005','माजी विद्यार्थी संघ']];
 let SLOK=false;
 async function slEnsure(env){if(SLOK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_cmember(udise TEXT, cid TEXT, id INTEGER, name TEXT, desig TEXT, mtype TEXT, mobile TEXT, joined TEXT, active INTEGER, PRIMARY KEY(udise,cid,id))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS pw_req(udise TEXT PRIMARY KEY, name TEXT, mobile TEXT, ts TEXT)")]);SLOK=true}
 async function schoolAuth(env,b){
