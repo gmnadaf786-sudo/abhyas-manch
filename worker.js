@@ -62,6 +62,7 @@ async function pmEnsure(env){
     env.DB.prepare("CREATE TABLE IF NOT EXISTS hol(id TEXT PRIMARY KEY, d1 TEXT, d2 TEXT, name TEXT, type TEXT)"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_rate(d TEXT PRIMARY KEY, r15 REAL, r68 REAL)"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_cook(udise TEXT, id TEXT, name TEXT, role TEXT, gender TEXT, bank TEXT, ifsc TEXT, acct TEXT, aadhaar TEXT, addr TEXT, pin TEXT, upd TEXT, sname TEXT, PRIMARY KEY(udise,id))"),
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_cfg(udise TEXT PRIMARY KEY, grp TEXT)"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS school_bank(udise TEXT PRIMARY KEY, tan TEXT, acct TEXT)")]);
   try{await env.DB.prepare('ALTER TABLE pm_cook ADD COLUMN sname TEXT').run()}catch(e){}
   const rc0=await env.DB.prepare('SELECT COUNT(*) c FROM pm_rate').first();
@@ -74,6 +75,7 @@ async function pmEnsure(env){
   }
   PMOK=true;
 }
+async function pmSg(env,u){const c=await env.DB.prepare('SELECT grp FROM pm_cfg WHERE udise=?').bind(u).first();if(c&&c.grp)return c.grp;const r=await env.DB.prepare('SELECT MIN(cls) a,MAX(cls) z FROM roster WHERE udise=?').bind(u).first();if(r&&r.a){if(r.z<=5)return '15';if(r.a>=6)return '68'}return 'both'}
 const PM_ITEMS=['तांदूळ','हिरवा वाटाणा','मुगडाळ','चवळी','हरभरा','सोयाबडी','मसूरडाळ','मटकी','मूग','तूरडाळ','हळद','मीठ','कांदा लसूण मसाला','जिरे','मोहरी','मिरची पावडर','गरम मसाला','तेल'];
 const istDay=()=>new Date(Date.now()+19800000).toISOString().slice(0,10);
 const dOk=s=>/^\d{4}-\d{2}-\d{2}$/.test(s)&&!isNaN(Date.parse(s));
@@ -98,6 +100,7 @@ async function pmApi(p,r,env){
     if(rs.length)await env.DB.batch(rs);
     return J({ok:1,n:rs.length});
   }
+  if(p==='/api/pm/cfgsave'){const g=['15','68','both'].includes(b.grp)?b.grp:'both';await env.DB.prepare('INSERT INTO pm_cfg(udise,grp) VALUES(?,?) ON CONFLICT(udise) DO UPDATE SET grp=excluded.grp').bind(u,g).run();return J({ok:1})}
   if(p==='/api/pm/sbank'){const x=await env.DB.prepare('SELECT tan,acct FROM school_bank WHERE udise=?').bind(u).first();return J({ok:1,tan:x?x.tan:'',acct:x?x.acct:''})}
   if(p==='/api/pm/cooks'){
     const rows=(await env.DB.prepare('SELECT id,name,role,gender,bank,ifsc,acct,aadhaar,addr,pin FROM pm_cook WHERE udise=? ORDER BY name').bind(u).all()).results;
@@ -125,7 +128,7 @@ async function pmApi(p,r,env){
     const rc=(await env.DB.prepare('SELECT id,date,supplier,challan,items,remark FROM pm_rcpt WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
     const hol=(await env.DB.prepare('SELECT id,d1,d2,name,type FROM hol ORDER BY d1').all()).results;
-    return J({ok:1,fy,udise:u,school:sc?sc.name:'',teacher:t.name,daily:d,stock:st,rcpt:rc,hol,rate:(await env.DB.prepare('SELECT d,r15,r68 FROM pm_rate ORDER BY d').all()).results,cookn:((await env.DB.prepare('SELECT COUNT(*) c FROM pm_cook WHERE udise=?').bind(u).first())||{}).c||0});
+    return J({ok:1,fy,udise:u,school:sc?sc.name:'',teacher:t.name,daily:d,stock:st,rcpt:rc,hol,rate:(await env.DB.prepare('SELECT d,r15,r68 FROM pm_rate ORDER BY d').all()).results,sg:await pmSg(env,u),cookn:((await env.DB.prepare('SELECT COUNT(*) c FROM pm_cook WHERE udise=?').bind(u).first())||{}).c||0});
   }
   if(p==='/api/pm/savemonth'){
     const month=cl(b.month,7);if(!/^\d{4}-\d{2}$/.test(month))return J({e:'month'},400);

@@ -290,10 +290,10 @@ function build(raw,month){
   PRT.month=month;PRT.recv=(raw.rcpt||[]).filter(function(r){return r.date.slice(0,7)===month}).map(function(r){var it=[];try{it=JSON.parse(r.items)}catch(e){}return{date:r.date,challan:r.challan||'',items:it}});
   return Y;
 }
-function groupsOf(raw,g){return g==='15'||g==='68'?[g]:['15','68']}
+function groupsOf(raw,g){var s=window.PMSG;return g==='15'||g==='68'?[g]:(s==='15'||s==='68'?[s]:['15','68'])}
 window.PMREP={
   print:function(kind,month,g,raw){
-    var Y=build(raw,month),fy=fyOf(month);regGroup=g==='68'?'68':'15';ALLOWED=['15','68'];
+    var Y=build(raw,month),fy=fyOf(month);regGroup=g==='68'?'68':'15';if(window.PMSG==='15'||window.PMSG==='68')regGroup=window.PMSG;ALLOWED=(window.PMSG==='15'||window.PMSG==='68')?[window.PMSG]:['15','68'];
     var p=month.split('-'),mname=MONTH_NAMES[Number(p[1])-1]+' '+p[0];
     if(kind==='p1'||kind==='p2'){var D=partsData(month,regGroup);printWindow('PM Poshan नोंदवही भाग '+(kind==='p1'?1:2)+' — '+month+' — '+grpTitle(regGroup),PRT_CSS+(kind==='p1'?part1Html(Y,month,regGroup,D):part2Html(Y,month,regGroup,D)),kind==='p2',true);return}
     if(kind==='b'){var D2=partsData(month,regGroup);printWindow('प्रपत्र ब — '+month,govB_(Y,month,regGroup,D2,govVals_(D2.comp)),false,true,true);return}
