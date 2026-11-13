@@ -584,7 +584,8 @@ async function ext(p,r,env){
   }
   if(p==='/api/t/ai'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
-    if(!env.GEMINI_API_KEY)return J({e:'nokey'},503);
+    await slEnsure(env);const gq=await env.DB.prepare("SELECT v FROM cfg WHERE k='gemini_key'").first(),GK=env.GEMINI_API_KEY||(gq&&gq.v)||'';
+    if(!GK)return J({e:'nokey'},503);
     const lang=cl(b.lang,30)||'मराठी',ms=(Array.isArray(b.m)?b.m:[]).slice(-12).map(x=>({role:x&&x.r==='a'?'model':'user',parts:[{text:cl(x&&x.t,3000)}]})).filter(x=>x.parts[0].text);
     if(!ms.length||ms[ms.length-1].role!=='user')return J({e:'empty'},400);
     const si='तू "Smart Teacher" आहेस, महाराष्ट्रातील जिल्हा परिषद शाळांच्या शिक्षकांचा सहाय्यक. पाठयोजना, अध्यापन पद्धती, प्रश्न, उपक्रम, शैक्षणिक प्रशासन याबाबत सोपी, नेमकी व उपयुक्त उत्तरे दे. उत्तर '+lang+' भाषेत दे.';
@@ -592,7 +593,7 @@ async function ext(p,r,env){
     for(const mo of ['gemini-3.5-flash-lite','gemini-3.5-flash','gemini-3.1-flash-lite']){
       for(let a=0;a<2;a++){
         try{
-          const x=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+mo+':generateContent',{method:'POST',headers:{'content-type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},body:JSON.stringify({systemInstruction:{parts:[{text:si}]},contents:ms})});
+          const x=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+mo+':generateContent',{method:'POST',headers:{'content-type':'application/json','x-goog-api-key':GK},body:JSON.stringify({systemInstruction:{parts:[{text:si}]},contents:ms})});
           if(x.ok){const j=await x.json(),tx=((((j.candidates||[])[0]||{}).content||{}).parts||[]).map(q=>q.text||'').join('').trim();if(tx)return J({ok:1,t:tx})}
           else{last=x.status+'';if(![429,500,502,503].includes(x.status))break}
         }catch(e){last='net'}
@@ -735,7 +736,7 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
+  if(p==='/api/admin/gkcfg'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
     if(p==='/api/admin/spwreset'){await slEnsure(env);const u=cl(b.udise,11).replace(/\D/g,'');if(u.length!==11)return J({e:'bad'},400);await env.DB.batch([env.DB.prepare('DELETE FROM school_login WHERE udise=?').bind(u),env.DB.prepare('DELETE FROM pw_req WHERE udise=?').bind(u)]);return J({ok:1})}
     if(p==='/api/admin/opwreset'){await slEnsure(env);const u=cl(b.u,12).toUpperCase();if(u!=='BEO'&&!CEN[u])return J({e:'bad'},400);await env.DB.prepare('DELETE FROM off_login WHERE uname=?').bind(u).run();return J({ok:1})}
@@ -744,6 +745,7 @@ async function ext(p,r,env){
     if(p==='/api/admin/ttimport'){await slEnsure(env);const st=[];if(b.reset)st.push(env.DB.prepare('DELETE FROM tt'));for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,60)){const c=cl(x.c,4),pe=cl(x.p,40);if(!c||!pe||!Array.isArray(x.d)||!Array.isArray(x.t))continue;const d=[0,1,2,3,4,5].map(i=>cl(x.d[i],120)),t=[0,1,2,3,4,5].map(i=>cl(x.t[i],30));st.push(env.DB.prepare('INSERT INTO tt(cls,period,d1,d2,d3,d4,d5,d6,t1,t2,t3,t4,t5,t6,rtype) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(c,pe,...d,...t,cl(x.r,20)))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
     if(p==='/api/admin/panchimport'){await slEnsure(env);const st=[];if(b.reset)st.push(env.DB.prepare('DELETE FROM panch'));for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,100)){const d=cl(x.d,10);if(!/^\d{4}-\d{2}-\d{2}$/.test(d))continue;const o={};for(const k of ['वार','शक','संवत्सर','मास','पक्ष','तिथी','नक्षत्र','सूर्योदय','सूर्यास्त'])o[k]=cl(x[k],60);st.push(env.DB.prepare('INSERT OR REPLACE INTO panch(d,data) VALUES(?,?)').bind(d,JSON.stringify(o)))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
     if(p==='/api/admin/fblist'){await slEnsure(env);const q=await env.DB.prepare('SELECT name,school,rating,typ,msg,ts FROM fb ORDER BY id DESC LIMIT 100').all(),w=await env.DB.prepare("SELECT v FROM cfg WHERE k='wa_link'").first();return J({ok:1,rows:q.results||[],wa:w?w.v:''})}
+    if(p==='/api/admin/gkcfg'){await slEnsure(env);const k=cl(b.v,200).trim();if(k&&!/^[\w.-]{20,200}$/.test(k))return J({e:'bad'},400);await env.DB.prepare("INSERT INTO cfg(k,v) VALUES('gemini_key',?) ON CONFLICT(k) DO UPDATE SET v=excluded.v").bind(k).run();return J({ok:1})}
     if(p==='/api/admin/wacfg'){await slEnsure(env);const u=cl(b.v,300).trim();if(u&&!/^https:\/\/(chat\.whatsapp\.com|whatsapp\.com\/channel|wa\.me)\/\S+$/i.test(u))return J({e:'bad'},400);await env.DB.prepare("INSERT INTO cfg(k,v) VALUES('wa_link',?) ON CONFLICT(k) DO UPDATE SET v=excluded.v").bind(u).run();return J({ok:1})}
     if(p==='/api/admin/newsget'){await slEnsure(env);const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='news_feeds'").first();return J({ok:1,v:q?q.v:''})}
     if(p==='/api/admin/newscfg'){await slEnsure(env);const L=String(b.v||'').split('\n').map(x=>x.trim()).filter(Boolean).slice(0,8),ok=[];for(const l of L){const a=l.split('|').map(x=>x.trim());if(a.length<2||!/^https:\/\/[\w.-]+\.[a-z]{2,}\/\S*$/i.test(a[1]))return J({e:'bad',l},400);ok.push(cl(a[0],60)+' | '+cl(a[1],300))}await env.DB.batch([env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('news_feeds',?)").bind(ok.join('\n')),env.DB.prepare("DELETE FROM cfg WHERE k='news_cache'")]);return J({ok:1,n:ok.length})}
