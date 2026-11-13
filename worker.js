@@ -498,7 +498,14 @@ async function ext(p,r,env){
   }
   if(p==='/api/t/plopts'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
-    return J({ok:1,rows:(await env.DB.prepare('SELECT DISTINCT medium m,cls c FROM syl').all()).results});
+    const have=(await env.DB.prepare('SELECT DISTINCT medium m,cls c FROM syl').all()).results,HS=new Set(have.map(x=>x.m+'|'+x.c));
+    const ti=await env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(t.shalarth).first();let tm='';try{tm=JSON.parse(ti&&ti.data||'{}')['अध्यापनाचे माध्यम']||''}catch(e){}
+    const fb=tm==='कन्नड'?'कन्नड':'मराठी',MP={kn:'कन्नड',mr:'मराठी'};
+    const tc=(await env.DB.prepare('SELECT DISTINCT udise,cls,div FROM tclasses WHERE tid=?').bind(t.id).all()).results,out=[],seen=new Set();
+    for(const x of tc){const q=await env.DB.prepare('SELECT med,COUNT(*) n FROM roster WHERE udise=? AND cls=? AND div=? GROUP BY med ORDER BY n DESC LIMIT 1').bind(x.udise,x.cls,x.div).first();const m=(q&&MP[q.med])||fb,k=m+'|'+x.cls;if(!seen.has(k)&&HS.has(k)){seen.add(k);out.push({m:m,c:String(x.cls)})}}
+    if(!out.length)have.filter(x=>x.m===fb).forEach(x=>out.push({m:x.m,c:x.c}));
+    out.sort((a,b)=>(parseInt(a.c)||0)-(parseInt(b.c)||0));
+    return J({ok:1,rows:out,mine:tc.length>0});
   }
   if(p==='/api/t/plan'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
