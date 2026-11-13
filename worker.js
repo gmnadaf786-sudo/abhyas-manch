@@ -39,6 +39,7 @@ async function gemAsk(env,si,contents){const GK=await gemKey(env);if(!GK)return{
     if(x.ok){const j=await x.json(),tx=((((j.candidates||[])[0]||{}).content||{}).parts||[]).map(q=>q.text||'').join('').trim();if(tx)return{t:tx}}else{last=x.status+'';if(![429,500,502,503].includes(x.status))break}
   }catch(e){last='net'}}}
   return{e:'fail',c:last}}
+async function lessonPdf(env,path){if(!env.BOOKS||!/^[a-z]{2}-lessons\/[^\0]+\.pdf$/i.test(path)||path.includes('..'))return null;const o=await env.BOOKS.get(path);if(!o||o.size>14e6)return null;const u=new Uint8Array(await o.arrayBuffer());let s='';for(let i=0;i<u.length;i+=32768)s+=String.fromCharCode.apply(null,u.subarray(i,i+32768));return btoa(s)}
 async function ensS(env){}
 // ---- School login (UDISE + password) ----
 const SCH_COMM=[['C001','शाळा व्यवस्थापन समिती (SMC)'],['C002','सखी सावित्री समिती'],['C003','महिला तक्रार निवारण समिती'],['C004','विद्यार्थी सुरक्षा समिती'],['C005','माजी विद्यार्थी संघ']];
@@ -600,29 +601,29 @@ async function ext(p,r,env){
       return J({ok:1,l:await L('SELECT lesson v FROM tach WHERE medium=? AND cls=? AND subject=? GROUP BY lesson ORDER BY MIN(rowid)',med,cls,sub)});
     }
     if(!med||!cls||!sub||!les)return J({e:'bad'},400);
-    const x=await env.DB.prepare('SELECT points,exp,assess,material,locode,lodesc,activity,notes FROM tach WHERE medium=? AND cls=? AND subject=? AND lesson=? LIMIT 1').bind(med,cls,sub,les).first();
-    if(!x)return J({e:'nodata'},404);
+    const pdf=await lessonPdf(env,cl(b.path,300));if(!pdf)return J({e:'nopdf'},404);
+    const x={};
     const lang=cl(b.lang,30)||'मराठी',mins=Math.max(20,Math.min(90,parseInt(b.mins)||35));
     let ctx=['माध्यम: '+med,'इयत्ता: '+cls,'विषय: '+sub,'पाठ: '+les,'अध्ययन निष्पत्ती कोड: '+(x.locode||''),'अध्ययन निष्पत्ती: '+(x.lodesc||''),'मुख्य मुद्दे: '+(x.points||''),'स्पष्टीकरण: '+(x.exp||''),'साहित्य: '+(x.material||''),'उपक्रम: '+(x.activity||''),'मूल्यमापन: '+(x.assess||''),'टीप: '+(x.notes||'')].join('\n');
     const nt=cl(b.notes,500).trim();
     const si='तू महाराष्ट्रातील प्राथमिक शाळेच्या अनुभवी शिक्षकांसाठी पाठयोजना तयार करणारा AI Teacher आहेस.\n'+
-    'दिलेल्या पाठ-माहितीवर आधारित '+mins+' मिनिटांच्या तासिकेसाठी पाठयोजना तयार कर.\n'+
-    'महत्त्वाच्या सूचना:\n1. दिलेल्या पाठ-माहितीला प्राथमिक आधार दे; त्यात नसलेली तथ्यात्मक माहिती स्वतःहून जोडू नकोस.\n2. पाठयोजना दिलेल्या अध्ययन निष्पत्तीशी जोड.\n3. '+mins+' मिनिटांत वास्तववादी वेळेचे नियोजन कर (प्रत्येक टप्प्यापुढे मिनिटे लिही).\n4. विद्यार्थीकेंद्रित, प्रत्यक्ष वर्गात वापरता येईल अशी, साधी योजना दे.\n5. उत्तर फक्त '+lang+' भाषेत दे.\n6. #, *, ** अशी मार्कडाउन चिन्हे वापरू नकोस; प्रत्येक घटकाचे शीर्षक क्रमांकासह स्वतंत्र ओळीत लिही.\n'+
+    'जोडलेल्या पाठाच्या PDF वर आधारित '+mins+' मिनिटांच्या तासिकेसाठी पाठयोजना तयार कर.\n'+
+    'महत्त्वाच्या सूचना:\n1. जोडलेल्या पाठ्यपुस्तकाच्या PDF मधील याच पाठाच्या आशयाला प्राथमिक आधार दे; त्यात नसलेली तथ्यात्मक माहिती स्वतःहून जोडू नकोस.\n2. पाठयोजना दिलेल्या अध्ययन निष्पत्तीशी जोड.\n3. '+mins+' मिनिटांत वास्तववादी वेळेचे नियोजन कर (प्रत्येक टप्प्यापुढे मिनिटे लिही).\n4. विद्यार्थीकेंद्रित, प्रत्यक्ष वर्गात वापरता येईल अशी, साधी योजना दे.\n5. उत्तर फक्त '+lang+' भाषेत दे.\n6. #, *, ** अशी मार्कडाउन चिन्हे वापरू नकोस; प्रत्येक घटकाचे शीर्षक क्रमांकासह स्वतंत्र ओळीत लिही.\n'+
     'पाठयोजनेचे घटक: 1. पाठाचे शीर्षक 2. अध्ययन निष्पत्ती / उद्दिष्टे 3. पूर्वज्ञान 4. आवश्यक शैक्षणिक साहित्य 5. प्रस्तावना / पूर्वतयारी 6. शिक्षकाची कृती 7. विद्यार्थ्यांची कृती 8. मुख्य संकल्पना 9. उदाहरणे / कृती 10. सराव 11. मूल्यमापन प्रश्न 12. उपचारात्मक कृती 13. प्रगत विद्यार्थ्यांसाठी कृती 14. गृहपाठ 15. शिक्षकासाठी आवश्यक नोंद.';
     if(nt)ctx+='\nशिक्षकाच्या विशेष सूचना: '+nt;
-    const g=await gemAsk(env,si,[{role:'user',parts:[{text:ctx}]}]);
+    const g=await gemAsk(env,si,[{role:'user',parts:[{inlineData:{mimeType:'application/pdf',data:pdf}},{text:ctx}]}]);
     if(g.t)return J({ok:1,t:g.t});return J({e:g.e||'fail'},g.e==='nokey'?503:502);
   }
   if(p==='/api/t/lptest'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
     const med=cl(b.medium,20),cls=cl(b.cls,4),sub=cl(b.subject,80),les=cl(b.lesson,200);
     if(!med||!cls||!sub||!les)return J({e:'bad'},400);
-    const x=await env.DB.prepare('SELECT points,exp,assess,locode,lodesc,activity FROM tach WHERE medium=? AND cls=? AND subject=? AND lesson=? LIMIT 1').bind(med,cls,sub,les).first();
-    if(!x)return J({e:'nodata'},404);
+    const pdf=await lessonPdf(env,cl(b.path,300));if(!pdf)return J({e:'nopdf'},404);
+    const x={};
     const lang=cl(b.lang,30)||'मराठी',n=Math.max(3,Math.min(20,parseInt(b.n)||10)),mk=Math.max(1,Math.min(10,parseInt(b.marks)||1)),qt=cl(b.qtype,40)||'मिश्र प्रश्न',df=cl(b.diff,20)||'मध्यम',tot=n*mk;
     const ctx=['माध्यम: '+med,'इयत्ता: '+cls,'विषय: '+sub,'पाठ: '+les,'अध्ययन निष्पत्ती: '+(x.locode||'')+' '+(x.lodesc||''),'मुख्य मुद्दे: '+(x.points||''),'स्पष्टीकरण: '+(x.exp||''),'उपक्रम: '+(x.activity||''),'मूल्यमापन: '+(x.assess||'')].join('\n');
-    const si='तू महाराष्ट्रातील प्राथमिक शाळेच्या शिक्षकांसाठी प्रश्नपत्रिका बनवणारा सहाय्यक आहेस. फक्त दिलेल्या पाठ-माहितीवर आधारित प्रश्न तयार कर. संपूर्ण प्रश्नपत्रिका फक्त '+lang+' भाषेत दे. नेमके '+n+' प्रश्न दे. प्रत्येक प्रश्नाला '+mk+' गुण (एकूण '+tot+'). प्रश्नप्रकार: '+qt+'. अवघडपणा: '+df+'. बहुपर्यायी प्रश्नाला नेमके 4 पर्याय दे, इतर प्रश्नांना options रिकामे ठेव. इयत्तेला साजेशी साधी भाषा वापर. उत्तर फक्त STRICT JSON मध्ये दे, कोणतेही अतिरिक्त शब्द किंवा ``` नको: {"questions":[{"question":"...","options":[],"answer":"...","explanation":""}]}';
-    const g=await gemAsk(env,si,[{role:'user',parts:[{text:ctx}]}]);
+    const si='तू महाराष्ट्रातील प्राथमिक शाळेच्या शिक्षकांसाठी प्रश्नपत्रिका बनवणारा सहाय्यक आहेस. फक्त जोडलेल्या पाठ्यपुस्तकाच्या PDF मधील याच पाठाच्या आशयावर आधारित प्रश्न तयार कर. संपूर्ण प्रश्नपत्रिका फक्त '+lang+' भाषेत दे. नेमके '+n+' प्रश्न दे. प्रत्येक प्रश्नाला '+mk+' गुण (एकूण '+tot+'). प्रश्नप्रकार: '+qt+'. अवघडपणा: '+df+'. बहुपर्यायी प्रश्नाला नेमके 4 पर्याय दे, इतर प्रश्नांना options रिकामे ठेव. इयत्तेला साजेशी साधी भाषा वापर. उत्तर फक्त STRICT JSON मध्ये दे, कोणतेही अतिरिक्त शब्द किंवा ``` नको: {"questions":[{"question":"...","options":[],"answer":"...","explanation":""}]}';
+    const g=await gemAsk(env,si,[{role:'user',parts:[{inlineData:{mimeType:'application/pdf',data:pdf}},{text:ctx}]}]);
     if(!g.t)return J({e:g.e||'fail'},g.e==='nokey'?503:502);
     let q=null;try{const s=g.t.replace(/^```(?:json)?/i,'').replace(/```$/,'').trim(),i=s.indexOf('{'),k=s.lastIndexOf('}');q=JSON.parse(s.slice(i,k+1)).questions}catch(e){}
     if(!Array.isArray(q)||!q.length)return J({e:'parse'},502);
