@@ -37,7 +37,8 @@ async function ensS(env){}
 const SCH_COMM=[['C001','शाळा व्यवस्थापन समिती (SMC)'],['C002','सखी सावित्री समिती'],['C003','महिला तक्रार निवारण समिती'],['C004','विद्यार्थी सुरक्षा समिती'],['C005','माजी विद्यार्थी संघ']];
 const SCH_DIST=['uni'];
 let SLOK=false;
-async function slEnsure(env){if(SLOK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_cmember(udise TEXT, cid TEXT, id INTEGER, name TEXT, desig TEXT, mtype TEXT, mobile TEXT, joined TEXT, active INTEGER, PRIMARY KEY(udise,cid,id))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_dist(udise TEXT, kind TEXT, pen TEXT, got INTEGER, date TEXT, upd TEXT, PRIMARY KEY(udise,kind,pen))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS pw_req(udise TEXT PRIMARY KEY, name TEXT, mobile TEXT, ts TEXT)")]);SLOK=true}
+async function slEnsure(env){if(SLOK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_cmember(udise TEXT, cid TEXT, id INTEGER, name TEXT, desig TEXT, mtype TEXT, mobile TEXT, joined TEXT, active INTEGER, PRIMARY KEY(udise,cid,id))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_dist(udise TEXT, kind TEXT, pen TEXT, got INTEGER, date TEXT, upd TEXT, PRIMARY KEY(udise,kind,pen))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS pw_req(udise TEXT PRIMARY KEY, name TEXT, mobile TEXT, ts TEXT)")]);for(const c of ['sz1','sz2'])try{await env.DB.prepare('ALTER TABLE sch_dist ADD COLUMN '+c+' TEXT').run()}catch(e){}
+  SLOK=true}
 async function schoolAuth(env,b){
   const t=cl(b.token,64);if(!t)return null;await slEnsure(env);
   return await env.DB.prepare('SELECT * FROM school_login WHERE token=?').bind(t).first();
@@ -75,7 +76,7 @@ async function schoolApi(p,r,env){
   }
   if(p==='/api/s/dist'){
     const k=cl(b.kind,10);if(!SCH_DIST.includes(k))return J({e:'bad'},400);
-    const rows=(await env.DB.prepare('SELECT r.pen,r.cls,r.div,r.name,d.got,d.date FROM roster r LEFT JOIN sch_dist d ON d.pen=r.pen AND d.udise=r.udise AND d.kind=? WHERE r.udise=? ORDER BY r.cls,r.div,r.name LIMIT 1000').bind(k,t.udise).all()).results;
+    const rows=(await env.DB.prepare('SELECT r.pen,r.cls,r.div,r.name,s.gender,d.got,d.date,d.sz1,d.sz2 FROM roster r LEFT JOIN sinfo s ON s.pen=r.pen LEFT JOIN sch_dist d ON d.pen=r.pen AND d.udise=r.udise AND d.kind=? WHERE r.udise=? ORDER BY r.cls,r.div,r.name LIMIT 1000').bind(k,t.udise).all()).results;
     return J({ok:1,rows});
   }
   if(p==='/api/s/distsave'){
@@ -83,9 +84,10 @@ async function schoolApi(p,r,env){
     const now=istDay(),st=[];
     for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,200)){
       const pen=cl(x.pen,11).replace(/\D/g,'');if(pen.length!==11)continue;
-      if(!x.got){st.push(env.DB.prepare('DELETE FROM sch_dist WHERE udise=? AND kind=? AND pen=?').bind(t.udise,k,pen));continue}
-      const d=/^\d{4}-\d\d-\d\d$/.test(x.date||'')?x.date:'';
-      st.push(env.DB.prepare('INSERT INTO sch_dist(udise,kind,pen,got,date,upd) SELECT ?,?,?,1,?,? WHERE EXISTS(SELECT 1 FROM roster WHERE pen=? AND udise=?) ON CONFLICT(udise,kind,pen) DO UPDATE SET got=1,date=excluded.date,upd=excluded.upd').bind(t.udise,k,pen,d,now,pen,t.udise));
+      const s1=cl(x.s1,10),s2=cl(x.s2,10);
+      if(!x.got&&!s1&&!s2){st.push(env.DB.prepare('DELETE FROM sch_dist WHERE udise=? AND kind=? AND pen=?').bind(t.udise,k,pen));continue}
+      const d=x.got&&/^\d{4}-\d\d-\d\d$/.test(x.date||'')?x.date:'';
+      st.push(env.DB.prepare('INSERT INTO sch_dist(udise,kind,pen,got,date,upd,sz1,sz2) SELECT ?,?,?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM roster WHERE pen=? AND udise=?) ON CONFLICT(udise,kind,pen) DO UPDATE SET got=excluded.got,date=excluded.date,upd=excluded.upd,sz1=excluded.sz1,sz2=excluded.sz2').bind(t.udise,k,pen,x.got?1:0,d,now,s1,s2,pen,t.udise));
     }
     if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length});
   }
