@@ -562,7 +562,7 @@ async function ext(p,r,env){
     const m=cl(b.month,12).replace(/[^A-Za-z0-9_]/g,'');
     let j;try{const rs=await fetch(cf.pay_url+'?key='+encodeURIComponent(cf.pay_key)+'&sh='+encodeURIComponent(t.shalarth)+'&pan='+pan+(m?'&month='+m:''),{redirect:'follow'});j=await rs.json()}catch(e){return J({ok:1,none:1,msg:'वेतन माहिती सध्या मिळाली नाही. नंतर प्रयत्न करा.'})}
     if(!j||!j.ok)return J({ok:1,none:1,msg:(j&&j.msg)||'वेतन माहिती मिळाली नाही.'});
-    const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,months:j.months||[],month:j.month||'',p:j.p||null,nm:j.nm||t.name,ds:j.ds||'',nw:j.nw?1:0,sc:sc?sc.name:'',sh:t.shalarth});
+    const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,months:j.months||[],month:j.month||'',p:j.p||null,nm:j.nm||t.name,ds:j.ds||'',nw:j.nw?1:0,sc:sc?sc.name:'',sh:t.shalarth,pn:pan});
   }
   if(p==='/api/t/chpw'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
