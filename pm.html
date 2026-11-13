@@ -15,7 +15,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:5px 3px;b
 .st input{width:66px;padding:6px 4px;text-align:right}.neg{color:#b91c1c;font-weight:700}
 .dim{opacity:.45;pointer-events:none}
 </style></head><body><main>
-<div style="display:flex;justify-content:space-between;align-items:center"><h1>🍲 PM पोषण</h1><button class="g" onclick="location.href='teacher.html'">← शिक्षक पान</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><h1>🍲 PM पोषण</h1><button class="g" onclick="location.href='school.html'">← शाळा पान</button></div>
 <small id="sch"></small>
 <div id="x"></div>
 </main>
@@ -23,7 +23,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:5px 3px;b
 var T='',Y=null,TAB='d',MON='',GRP='15',E={},SD={},QF={a:'',b:'',o:0},OP={};
 var X=document.getElementById('x');
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function post(u,b){b=b||{};b.token=T;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.$s=r.status;return j})}).catch(function(){return{e:'net'}})}
+function post(u,b){b=b||{};b.token=T;b.by=BYN;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.$s=r.status;return j})}).catch(function(){return{e:'net'}})}
 var RECIPES=[['व्हेजिटेबल पुलाव','हिरवा वाटाणा'],['मूग शेवगा वरण भात','तूरडाळ'],['मटर पुलाव','हिरवा वाटाणा'],['मुगडाळ खिचडी','मुगडाळ'],['चवळी खिचडी','चवळी'],['चणा पुलाव','हरभरा'],['सोयाबीन पुलाव','सोयाबडी'],['मसुरी पुलाव','मसूरडाळ'],['मसाले भात','हिरवा वाटाणा'],['मोड आलेल्या मटकीची उसळ','मटकी'],['व्हेजिटेबल पुलाव','हिरवा वाटाणा'],['मुगडाळ खिचडी','मुगडाळ']];
 var MENUS=[];RECIPES.forEach(function(r){if(MENUS.indexOf(r[0])<0)MENUS.push(r[0])});
 var PULSES=['मुगडाळ','तूरडाळ','मटकी','मसूरडाळ','चवळी','हरभरा','हिरवा वाटाणा','सोयाबडी','मूग'];
@@ -38,11 +38,11 @@ function fyOf(m){var y=+m.slice(0,4),mo=+m.slice(5,7);return mo>=4?y:y-1}
 function fyMonths(fy){var a=[];for(var i=0;i<12;i++){var mo=4+i,y=fy;if(mo>12){mo-=12;y=fy+1}a.push(y+'-'+String(mo).padStart(2,'0'))}return a}
 function pulseNorm(x){x=String(x||'').split('/')[0].trim();if(x==='वाटाणा')x='हिरवा वाटाणा';if(x==='आख्खा मूग')x='मूग';return x}
 function fmt(v){if(v==null||isNaN(v))return '–';return String(Math.round(v*1000)/1000)}
-function init(){try{T=sessionStorage.getItem('am_t')||''}catch(e){}
- if(!T){X.innerHTML='<div class="card"><p>प्रथम शिक्षक म्हणून लॉगिन करा.</p><button onclick="location.href=\'teacher.html\'">लॉगिन</button></div>';return}
+var BYN='';function init(){try{T=sessionStorage.getItem('am_s')||'';BYN=sessionStorage.getItem('am_sn')||''}catch(e){}
+ if(!T){X.innerHTML='<div class="card"><p>प्रथम शाळा म्हणून लॉगिन करा.</p><button onclick="location.href=\'school.html\'">लॉगिन</button></div>';return}
  var n=new Date(Date.now()+19800000);MON=n.toISOString().slice(0,7);load()}
 function load(){var fy=fyOf(MON);X.innerHTML='<p class="m">लोड होत आहे…</p>';post('/api/pm/year',{fy:fy}).then(function(j){
- if(!j.ok){X.innerHTML='<div class="card"><p class="er">'+(j.$s===401?'सत्र संपले किंवा शाळेची पुष्टी बाकी आहे. शिक्षक पानावर जाऊन लॉगिन/शाळा पुष्टी करा.':'लोड झाले नाही. पुन्हा प्रयत्न करा.')+'</p><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
+ if(!j.ok){X.innerHTML='<div class="card"><p class="er">'+(j.$s===401||j.$s===403?'सत्र संपले. शाळा पानावर जाऊन पुन्हा लॉगिन करा.':'लोड झाले नाही. पुन्हा प्रयत्न करा.')+'</p><button onclick="location.href=\'school.html\'">शाळा पान</button></div>';return}
  Y=j;window.PMHOL=j.hol||[];window.PMRATE=j.rate||[];window.PMCOOKN=j.cookn||0;window.PMSG=j.sg||'both';if(sg()!=='both'){GRP=sg();RG=sg()}SD={};j.daily.forEach(function(r){SD[r.date]=r});E={};document.getElementById('sch').textContent=(j.school||'')+' · UDISE '+j.udise;draw()})}
 function draw(){var t=[['d','📅 दैनिक नोंद'],['s','📦 साठा'],['r','🧾 पावती'],['p','⚖️ प्रमाण/मेनू'],['a','🖨️ अहवाल'],['c','🧮 धान्य हिशेब'],['b','📏 BMI'],['k','👩‍🍳 स्वयंपाकी'],['cal','🗓️ दिनदर्शिका']];
  X.innerHTML='<div class="tabs">'+t.map(function(x){return '<button class="'+(TAB===x[0]?'on':'')+'" onclick="'+(x[0]==='cal'?'calOpen()':'TAB=\''+x[0]+'\';draw()')+'">'+x[1]+'</button>'}).join('')+'</div>'+

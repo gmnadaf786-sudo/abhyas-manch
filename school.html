@@ -1,0 +1,28 @@
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>अभ्यास मंच – शाळा</title>
+<style>:root{--bg:#f7f7f4;--c:#fff;--i:#1f2933;--m:#64748b;--l:#e2e8f0;--a:#0f766e}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--c:#1e293b;--i:#e2e8f0;--m:#94a3b8;--l:#334155}}
+body{margin:0;background:var(--bg);color:var(--i);font:15px/1.5 system-ui,sans-serif}main{max-width:720px;margin:0 auto;padding:16px}
+.card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:14px;margin-bottom:14px}h1{font-size:20px;margin:6px 0 12px}h2{font-size:16px;margin:0 0 8px}
+input,button{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--i);width:100%;box-sizing:border-box;margin-bottom:8px}
+button{background:var(--a);color:#fff;border:0;cursor:pointer}button.g{background:var(--c);color:var(--a);border:1px solid var(--a)}button:disabled{opacity:.5}
+.er{color:#b91c1c;min-height:18px}small,.m{color:var(--m)}.mod{display:flex;align-items:center;gap:12px;text-align:left;padding:14px;margin-bottom:10px}.mod span{font-size:26px}</style></head><body><main>
+<h1>🏫 अभ्यास मंच – शाळा लॉगिन</h1>
+<div id="x"></div></main>
+<script>
+var X=document.getElementById('x'),T='',SC='';
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function api(u,b){b=b||{};b.token=T;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.$s=r.status;return j})}).catch(function(){return{e:'net'}})}
+function ss(k,v){try{if(v==null)sessionStorage.removeItem(k);else sessionStorage.setItem(k,v)}catch(e){}}
+function sg(k){try{return sessionStorage.getItem(k)||''}catch(e){return ''}}
+function loginUi(){X.innerHTML='<div class="card"><h2>लॉगिन</h2><input id="u" inputmode="numeric" maxlength="11" placeholder="शाळेचा UDISE कोड (११ अंकी)"><input id="p" type="password" placeholder="पासवर्ड"><input id="n" placeholder="आपले नाव (नोंद करणारे)"><p id="e" class="er"></p><button onclick="login()">लॉगिन करा</button><p class="m" style="font-size:13px">पहिल्यांदा पासवर्ड: 123456 (लगेच बदलावा लागेल). पासवर्ड हरवल्यास केंद्रप्रमुख/प्रशासकाशी संपर्क करा.</p></div>'}
+function login(){var e=document.getElementById('e');e.textContent='';var nm=document.getElementById('n').value.trim();if(nm.length<2){e.textContent='आपले नाव लिहा.';return}
+ api('/api/s/login',{udise:document.getElementById('u').value,pw:document.getElementById('p').value}).then(function(j){
+  if(!j.ok){e.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. प्रशासकाशी संपर्क करा.':j.e==='net'?'इंटरनेट तपासा.':'UDISE किंवा पासवर्ड चुकीचा.';return}
+  T=j.token;SC=j.school;ss('am_s',T);ss('am_sn',nm);ss('am_ss',SC);if(!j.changed)chpwUi(true,document.getElementById('p').value);else home()})}
+function chpwUi(force,old){X.innerHTML='<div class="card"><h2>'+(force?'नवीन पासवर्ड ठेवा':'पासवर्ड बदला')+'</h2>'+(force?'':'<input id="o" type="password" placeholder="सध्याचा पासवर्ड">')+'<input id="n1" type="password" placeholder="नवीन पासवर्ड (किमान ६ अक्षरे)"><input id="n2" type="password" placeholder="नवीन पासवर्ड पुन्हा"><p id="e" class="er"></p><button onclick="chpw('+(force?'1':'0')+')">जतन करा</button>'+(force?'':'<button class="g" onclick="home()">मागे</button>')+'</div>';window.OLD=old||''}
+function chpw(force){var e=document.getElementById('e'),a=document.getElementById('n1').value,b=document.getElementById('n2').value,o=force?window.OLD:document.getElementById('o').value;
+ if(a.length<6||a==='123456'){e.textContent='पासवर्ड किमान ६ अक्षरे व 123456 नसावा.';return}if(a!==b){e.textContent='दोन्ही पासवर्ड जुळत नाहीत.';return}
+ api('/api/s/chpw',{old:o,nw:a}).then(function(j){if(j.ok)home();else e.textContent=j.e==='bad'?'सध्याचा पासवर्ड चुकीचा.':'जतन झाले नाही.'})}
+function home(){X.innerHTML='<div class="card"><h2>'+esc(sg('am_ss')||SC)+'</h2><small>नमस्कार, '+esc(sg('am_sn'))+'</small></div><button class="g mod" onclick="location.href=\'pm.html\'"><span>🍲</span><b>PM पोषण आहार</b></button><div class="card"><small>गणवेश वाटप, पुस्तक वाटप, समित्या व इतर शाळा-स्तरीय माहिती लवकरच येथे जोडली जाईल.</small></div><button class="g" onclick="chpwUi(false)">🔑 पासवर्ड बदला</button><button class="g" onclick="out()">बाहेर पडा</button>'}
+function out(){ss('am_s',null);ss('am_sn',null);ss('am_ss',null);T='';loginUi()}
+T=sg('am_s');if(T){api('/api/s/me',{}).then(function(j){if(j.ok&&j.changed){SC=j.school;ss('am_ss',SC);home()}else{T='';loginUi()}})}else loginUi();
+</script></body></html>

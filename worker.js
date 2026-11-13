@@ -33,6 +33,39 @@ async function teacher(env,b,needOk){
   if(!x||(needOk&&x.status!=='ok'))return null;return x;
 }
 async function ensS(env){}
+// ---- School login (UDISE + password) ----
+let SLOK=false;
+async function slEnsure(env){if(SLOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_login(udise TEXT PRIMARY KEY, salt TEXT, pw TEXT, changed INTEGER DEFAULT 0, fails INTEGER DEFAULT 0, token TEXT)").run();SLOK=true}
+async function schoolAuth(env,b){
+  const t=cl(b.token,64);if(!t)return null;await slEnsure(env);
+  return await env.DB.prepare('SELECT * FROM school_login WHERE token=?').bind(t).first();
+}
+async function schoolApi(p,r,env){
+  if(!p.startsWith('/api/s/'))return null;
+  await slEnsure(env);const b=await body(r);
+  if(p==='/api/s/login'){
+    const u=cl(b.udise,11).replace(/\D/g,''),pw=cl(b.pw,40);
+    if(u.length!==11)return J({e:'bad'},401);
+    let sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
+    if(!sc){const sb=await env.DB.prepare('SELECT 1 x FROM school_bank WHERE udise=?').bind(u).first().catch(()=>null);if(!sb)return J({e:'bad'},401);sc={name:'UDISE '+u}}
+    let x=await env.DB.prepare('SELECT * FROM school_login WHERE udise=?').bind(u).first();
+    if(!x){const salt=rnd(8);await env.DB.prepare('INSERT OR IGNORE INTO school_login(udise,salt,pw,changed,fails) VALUES(?,?,?,0,0)').bind(u,salt,await hashPin('123456',salt)).run();x=await env.DB.prepare('SELECT * FROM school_login WHERE udise=?').bind(u).first()}
+    if(x.fails>=8)return J({e:'locked'},429);
+    if((await hashPin(pw,x.salt))!==x.pw){await env.DB.prepare('UPDATE school_login SET fails=fails+1 WHERE udise=?').bind(u).run();return J({e:'bad'},401)}
+    const tok=rnd(24);await env.DB.prepare('UPDATE school_login SET fails=0,token=? WHERE udise=?').bind(tok,u).run();
+    return J({ok:1,token:tok,udise:u,school:sc.name,changed:x.changed?1:0});
+  }
+  const t=await schoolAuth(env,b);if(!t)return J({e:'auth'},401);
+  if(p==='/api/s/chpw'){
+    const old=cl(b.old,40),nw=cl(b.nw,40);
+    if(nw.length<6||nw==='123456')return J({e:'weak'},400);
+    if((await hashPin(old,t.salt))!==t.pw)return J({e:'bad'},401);
+    const salt=rnd(8);await env.DB.prepare('UPDATE school_login SET salt=?,pw=?,changed=1 WHERE udise=?').bind(salt,await hashPin(nw,salt),t.udise).run();
+    return J({ok:1});
+  }
+  if(p==='/api/s/me'){const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,udise:t.udise,school:sc?sc.name:'',changed:t.changed?1:0})}
+  return J({e:'nf'},404);
+}
 const okDob=s=>/^(19|20)\d\d-\d\d-\d\d$/.test(s)&&!isNaN(Date.parse(s))?s:'';
 async function imp(env,rw,tid){
     const rows=(Array.isArray(rw)?rw:[]).slice(0,150);let n=0;const st=[];
@@ -81,10 +114,11 @@ const istDay=()=>new Date(Date.now()+19800000).toISOString().slice(0,10);
 const dOk=s=>/^\d{4}-\d{2}-\d{2}$/.test(s)&&!isNaN(Date.parse(s));
 async function pmApi(p,r,env){
   if(!p.startsWith('/api/pm/'))return null;
-  const b=await body(r),t=await teacher(env,b,true);
-  if(!t||!t.conf)return J({e:'auth'},401);
+  const b=await body(r),t=await schoolAuth(env,b);
+  if(!t)return J({e:'auth'},401);
+  if(!t.changed)return J({e:'chpw'},403);
   await pmEnsure(env);
-  const u=t.udise,by=t.shalarth;
+  const u=t.udise,by=cl(b.by,40)||'शाळा';
   if(p==='/api/pm/students'){
     const rows=(await env.DB.prepare('SELECT r.pen,r.cls,r.div,r.name,m.h,m.w FROM roster r LEFT JOIN pm_bmi m ON m.pen=r.pen AND m.udise=r.udise WHERE r.udise=? ORDER BY r.cls,r.div,r.name LIMIT 800').bind(u).all()).results;
     return J({ok:1,rows});
@@ -128,7 +162,7 @@ async function pmApi(p,r,env){
     const rc=(await env.DB.prepare('SELECT id,date,supplier,challan,items,remark FROM pm_rcpt WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
     const hol=(await env.DB.prepare('SELECT id,d1,d2,name,type FROM hol ORDER BY d1').all()).results;
-    return J({ok:1,fy,udise:u,school:sc?sc.name:'',teacher:t.name,daily:d,stock:st,rcpt:rc,hol,rate:(await env.DB.prepare('SELECT d,r15,r68 FROM pm_rate ORDER BY d').all()).results,sg:await pmSg(env,u),cookn:((await env.DB.prepare('SELECT COUNT(*) c FROM pm_cook WHERE udise=?').bind(u).first())||{}).c||0});
+    return J({ok:1,fy,udise:u,school:sc?sc.name:'',teacher:by,daily:d,stock:st,rcpt:rc,hol,rate:(await env.DB.prepare('SELECT d,r15,r68 FROM pm_rate ORDER BY d').all()).results,sg:await pmSg(env,u),cookn:((await env.DB.prepare('SELECT COUNT(*) c FROM pm_cook WHERE udise=?').bind(u).first())||{}).c||0});
   }
   if(p==='/api/pm/savemonth'){
     const month=cl(b.month,7);if(!/^\d{4}-\d{2}$/.test(month))return J({e:'month'},400);
@@ -186,6 +220,7 @@ async function pmApi(p,r,env){
   return J({e:'nf'},404);
 }
 async function ext(p,r,env){
+  {const sr=await schoolApi(p,r,env);if(sr)return sr}
   {const pr=await pmApi(p,r,env);if(pr)return pr}
   if(p==='/api/s/login'){
     const b=await body(r),pen=cl(b.pen,11).replace(/\D/g,''),pw=cl(b.pw,40);
@@ -384,8 +419,9 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'){
+  if(p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
+    if(p==='/api/admin/spwreset'){await slEnsure(env);const u=cl(b.udise,11).replace(/\D/g,'');if(u.length!==11)return J({e:'bad'},400);await env.DB.prepare('DELETE FROM school_login WHERE udise=?').bind(u).run();return J({ok:1})}
     if(p==='/api/admin/cooknlist'){await pmEnsure(env);return J({ok:1,rows:(await env.DB.prepare("SELECT udise,MIN(sname) sname,COUNT(*) n FROM pm_cook WHERE udise LIKE 'N%' GROUP BY udise ORDER BY sname").all()).results})}
     if(p==='/api/admin/cookmap'){await pmEnsure(env);const f=cl(b.from,40),t2=cl(b.to,11).replace(/\D/g,'');if(!f||t2.length!==11)return J({e:'bad'},400);await env.DB.prepare('UPDATE OR REPLACE pm_cook SET udise=? WHERE udise=?').bind(t2,f).run();return J({ok:1})}
     if(p==='/api/admin/cookimport'){
