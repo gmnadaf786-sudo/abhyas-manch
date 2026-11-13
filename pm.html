@@ -74,10 +74,10 @@ function calcRun(){var a=+document.getElementById('ca').value||0,b=+document.get
  rows.forEach(function(r){h+='<tr style="border-top:1px solid #ddd"><td>'+esc(r[0])+'</td>'+(a?'<td align=center>'+kg(r[1])+'</td>':'')+(b?'<td align=center>'+kg(r[2])+'</td>':'')+(a&&b?'<td align=center>'+kg(r[1]+r[2])+'</td>':'')+'</tr>'});
  var l=function(v){return fmt(v)+' लि.'};h+='<tr style="border-top:1px solid #ddd"><td>तेल</td>'+(a?'<td align=center>'+l(a*.005495)+'</td>':'')+(b?'<td align=center>'+l(b*.008242)+'</td>':'')+(a&&b?'<td align=center>'+l(a*.005495+b*.008242)+'</td>':'')+'</tr></table>';o.innerHTML=h}
 var ST=null,BC='';
-var CKL=[],CKE=null;
+var CKL=[],CKE=null,SB={};
 function cookTab(){var b=document.getElementById('b');b.innerHTML='<div class="card"><p class="m">लोड होत आहे…</p></div>';
- post('/api/pm/cooks',{}).then(function(j){if(!j.ok){b.innerHTML='<div class="card"><p class="er">अडचण, पुन्हा प्रयत्न करा.</p></div>';return}CKL=j.rows;Y.cookn=CKL.length;window.PMCOOKN=CKL.length;cookDraw()})}
-function cookDraw(){var b=document.getElementById('b');if(!b)return;var h='<div class="card"><b>स्वयंपाकी / मदतनीस ('+CKL.length+')</b><p class="m">मानधन = रु. १५०० × '+CKL.length+' = रु. '+(1500*CKL.length)+' (प्रपत्र ब मध्ये आपोआप येते)</p>';
+ post('/api/pm/sbank',{}).then(function(q){SB=q&&q.ok?q:{};return post('/api/pm/cooks',{})}).then(function(j){if(!j.ok){b.innerHTML='<div class="card"><p class="er">अडचण, पुन्हा प्रयत्न करा.</p></div>';return}CKL=j.rows;Y.cookn=CKL.length;window.PMCOOKN=CKL.length;cookDraw()})}
+function cookDraw(){var b=document.getElementById('b');if(!b)return;var h='<div class="card"><b>🏫 शाळा तपशील</b><p class="m">TAN: <b>'+esc(SB.tan||'—')+'</b><br>मुख्याध्यापक खाते क्रमांक: <b>'+esc(SB.acct||'—')+'</b></p></div><div class="card"><b>स्वयंपाकी / मदतनीस ('+CKL.length+')</b><p class="m">मानधन = रु. १५०० × '+CKL.length+' = रु. '+(1500*CKL.length)+' (प्रपत्र ब मध्ये आपोआप येते)</p>';
  h+=CKL.map(function(x){return '<div style="border-top:1px solid #e2e8f0;padding:8px 0"><b>'+esc(x.name)+'</b> <span class="m">'+(x.role==='madatnis'?'मदतनीस':'स्वयंपाकी')+'</span><br><span class="m">'+esc(x.bank||'—')+' · खाते '+esc(x.acct||'—')+' · आधार '+esc(x.aadhaar||'—')+'</span><br><button class="g" onclick="cookEdit(\''+esc(x.id)+'\')" style="padding:4px 10px">✏️ बदला</button> <button class="g" onclick="cookDel(\''+esc(x.id)+'\')" style="padding:4px 10px">🗑️</button></div>'}).join('');
  h+='</div><div id="cf"></div><div class="sv"><button onclick="cookForm({})">➕ नवीन स्वयंपाकी</button></div>';b.innerHTML=h}
 function cookEdit(id){post('/api/pm/cookget',{id:id}).then(function(j){if(j.ok)cookForm(j.row)})}

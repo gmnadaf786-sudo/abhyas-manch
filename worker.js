@@ -61,7 +61,8 @@ async function pmEnsure(env){
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_rcpt(udise TEXT, id TEXT, date TEXT, supplier TEXT, challan TEXT, items TEXT, remark TEXT, by TEXT, upd TEXT, PRIMARY KEY(udise,id))"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS hol(id TEXT PRIMARY KEY, d1 TEXT, d2 TEXT, name TEXT, type TEXT)"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_rate(d TEXT PRIMARY KEY, r15 REAL, r68 REAL)"),
-    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_cook(udise TEXT, id TEXT, name TEXT, role TEXT, gender TEXT, bank TEXT, ifsc TEXT, acct TEXT, aadhaar TEXT, addr TEXT, pin TEXT, upd TEXT, sname TEXT, PRIMARY KEY(udise,id))")]);
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_cook(udise TEXT, id TEXT, name TEXT, role TEXT, gender TEXT, bank TEXT, ifsc TEXT, acct TEXT, aadhaar TEXT, addr TEXT, pin TEXT, upd TEXT, sname TEXT, PRIMARY KEY(udise,id))"),
+    env.DB.prepare("CREATE TABLE IF NOT EXISTS school_bank(udise TEXT PRIMARY KEY, tan TEXT, acct TEXT)")]);
   try{await env.DB.prepare('ALTER TABLE pm_cook ADD COLUMN sname TEXT').run()}catch(e){}
   const rc0=await env.DB.prepare('SELECT COUNT(*) c FROM pm_rate').first();
   if(!rc0||!rc0.c)await env.DB.prepare("INSERT OR IGNORE INTO pm_rate(d,r15,r68) VALUES('2026-04-01',2.59,3.88)").run();
@@ -97,6 +98,7 @@ async function pmApi(p,r,env){
     if(rs.length)await env.DB.batch(rs);
     return J({ok:1,n:rs.length});
   }
+  if(p==='/api/pm/sbank'){const x=await env.DB.prepare('SELECT tan,acct FROM school_bank WHERE udise=?').bind(u).first();return J({ok:1,tan:x?x.tan:'',acct:x?x.acct:''})}
   if(p==='/api/pm/cooks'){
     const rows=(await env.DB.prepare('SELECT id,name,role,gender,bank,ifsc,acct,aadhaar,addr,pin FROM pm_cook WHERE udise=? ORDER BY name').bind(u).all()).results;
     const mk=s=>s?'XXXX'+String(s).slice(-4):'';
