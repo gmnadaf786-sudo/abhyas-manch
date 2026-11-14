@@ -493,7 +493,8 @@ async function ext(p,r,env){
     if(!cs.length)return J({e:'cls'},400);
     if(await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=?').bind(sh).first())return J({e:'exists'},409);
     const salt=rnd(8),h=await hashPin(pw,salt);
-    const ins=await env.DB.prepare('INSERT INTO teachers(shalarth,name,mobile,udise,salt,pw) VALUES(?,?,?,?,?,?)').bind(sh,name,mob,udise,salt,h).run();
+    const known=await env.DB.prepare('SELECT 1 x FROM schools WHERE udise=?').bind(udise).first()||await env.DB.prepare('SELECT 1 x FROM roster WHERE udise=? LIMIT 1').bind(udise).first();
+    const ins=known?await env.DB.prepare('INSERT INTO teachers(shalarth,name,mobile,udise,salt,pw) VALUES(?,?,?,?,?,?)').bind(sh,name,mob,udise,salt,h).run():await env.DB.prepare("INSERT INTO teachers(shalarth,name,mobile,udise,salt,pw,status) VALUES(?,?,?,?,?,?,'ok')").bind(sh,name,mob,udise,salt,h).run();
     const id=ins.meta.last_row_id;
     await env.DB.batch(cs.map(c=>env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(id,udise,c.cls,c.div)));
     return J({ok:1});
@@ -826,7 +827,7 @@ async function ext(p,r,env){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const rs=(await env.DB.prepare("SELECT c.udise,c.cls,c.div,(SELECT COUNT(*) FROM roster r WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div) n,(SELECT COUNT(*) FROM roster r JOIN students s ON s.id=r.sid WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div AND s.last_seen>=datetime('now','-7 day')) a7 FROM tclasses c WHERE c.tid=? ORDER BY c.cls,c.div").bind(t.id).all()).results;
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();
-    return J({ok:1,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0});
+    return J({ok:1,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1});
   }
   if(p==='/api/t/bday'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
