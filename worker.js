@@ -583,18 +583,21 @@ async function ext(p,r,env){
     if(!okMob(mo))return J({e:'mobile'},400);
     if(pw.length<6)return J({e:'pw'},400);
     if(!b.consent)return J({e:'consent'},400);
+    const med=cl(b.med,12),c1=parseInt(b.cmin),c2=parseInt(b.cmax);
+    if(!['मराठी','कन्नड','उर्दू','इंग्रजी','हिंदी','इतर'].includes(med))return J({e:'med'},400);
+    if(!(c1>=1&&c2<=12&&c1<=c2))return J({e:'cls'},400);
     await slEnsure(env);
-    await env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_reg(udise TEXT PRIMARY KEY, sname TEXT, rname TEXT, post TEXT, mobile TEXT, salt TEXT, pw TEXT, status TEXT, ts TEXT)").run();
+    await env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_reg(udise TEXT PRIMARY KEY, sname TEXT, rname TEXT, post TEXT, mobile TEXT, salt TEXT, pw TEXT, status TEXT, ts TEXT, med TEXT, cmin INTEGER, cmax INTEGER)").run();
     if(await env.DB.prepare('SELECT 1 x FROM schools WHERE udise=?').bind(u).first()||await env.DB.prepare('SELECT 1 x FROM school_bank WHERE udise=?').bind(u).first().catch(()=>null)||await env.DB.prepare('SELECT 1 x FROM school_login WHERE udise=?').bind(u).first())return J({e:'exists'},409);
     if(await env.DB.prepare("SELECT 1 x FROM sch_reg WHERE udise=? AND status='pending'").bind(u).first())return J({e:'pending'},409);
     const salt=rnd(8);
-    await env.DB.prepare("INSERT INTO sch_reg(udise,sname,rname,post,mobile,salt,pw,status,ts) VALUES(?,?,?,?,?,?,?,'pending',?) ON CONFLICT(udise) DO UPDATE SET sname=excluded.sname,rname=excluded.rname,post=excluded.post,mobile=excluded.mobile,salt=excluded.salt,pw=excluded.pw,status='pending',ts=excluded.ts").bind(u,sn,rn,po,mo,salt,await hashPin(pw,salt),istDay()).run();
+    await env.DB.prepare("INSERT INTO sch_reg(udise,sname,rname,post,mobile,salt,pw,status,ts,med,cmin,cmax) VALUES(?,?,?,?,?,?,?,'pending',?,?,?,?) ON CONFLICT(udise) DO UPDATE SET sname=excluded.sname,rname=excluded.rname,post=excluded.post,mobile=excluded.mobile,salt=excluded.salt,pw=excluded.pw,status='pending',ts=excluded.ts,med=excluded.med,cmin=excluded.cmin,cmax=excluded.cmax").bind(u,sn,rn,po,mo,salt,await hashPin(pw,salt),istDay(),med,c1,c2).run();
     return J({ok:1});
   }
   if(p==='/api/admin/sreglist'||p==='/api/admin/sregset'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
-    await slEnsure(env);await env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_reg(udise TEXT PRIMARY KEY, sname TEXT, rname TEXT, post TEXT, mobile TEXT, salt TEXT, pw TEXT, status TEXT, ts TEXT)").run();
-    if(p==='/api/admin/sreglist')return J({ok:1,rows:(await env.DB.prepare('SELECT udise,sname,rname,post,mobile,status,ts FROM sch_reg ORDER BY status,ts DESC LIMIT 300').all()).results});
+    await slEnsure(env);await env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_reg(udise TEXT PRIMARY KEY, sname TEXT, rname TEXT, post TEXT, mobile TEXT, salt TEXT, pw TEXT, status TEXT, ts TEXT, med TEXT, cmin INTEGER, cmax INTEGER)").run();
+    if(p==='/api/admin/sreglist')return J({ok:1,rows:(await env.DB.prepare('SELECT udise,sname,rname,post,mobile,status,ts,med,cmin,cmax FROM sch_reg ORDER BY status,ts DESC LIMIT 300').all()).results});
     const u=cl(b.udise,11).replace(/\D/g,''),x=await env.DB.prepare('SELECT * FROM sch_reg WHERE udise=?').bind(u).first();if(!x)return J({e:'nf'},404);
     if(b.act==='ok'){await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,x.sname),env.DB.prepare('INSERT OR REPLACE INTO school_login(udise,salt,pw,changed,fails) VALUES(?,?,?,1,0)').bind(u,x.salt,x.pw),env.DB.prepare("UPDATE sch_reg SET status='ok' WHERE udise=?").bind(u)]);return J({ok:1})}
     await env.DB.prepare('DELETE FROM sch_reg WHERE udise=?').bind(u).run();return J({ok:1});
