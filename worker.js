@@ -167,6 +167,12 @@ async function offApi(p,r,env){
     const q=(await env.DB.prepare('SELECT r.pen,r.name,r.udise u,r.cls,r.div,r.med,i.gender,i.cat,i.tongue,i.status,i.dob,i.father,i.mother,i.mobile,i.addr,i.roll,i.gr,i.saral FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise IN ('+uq.map(()=>'?').join(',')+') ORDER BY r.udise,r.cls,r.div,r.name LIMIT 20000').bind(...uq).all()).results;
     return J({ok:1,rows:q});
   }
+  if(p==='/api/o/bday'){
+    const td=istDay(),mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(td.slice(5,7))-1],dd=parseInt(td.slice(8,10));
+    const rs=(await env.DB.prepare("SELECT t.shalarth sh,t.name n,t.udise u,s.name sc,json_extract(i.data,'$.\"जन्मतारीख\"') dob FROM teachers t JOIN tch_info i ON i.shalarth=t.shalarth LEFT JOIN schools s ON s.udise=t.udise WHERE t.status='ok' AND json_extract(i.data,'$.\"जन्मतारीख\"') LIKE ?").bind(mo+' '+dd+', %').all().catch(()=>({results:[]}))).results;
+    const cm={};ss.forEach(x=>cm[x.udise]=x.code);
+    return J({ok:1,today:td,rows:rs.filter(x=>ok.has(x.u)).map(x=>({n:x.n,sh:x.sh,u:x.u,sc:x.sc||'',c:cm[x.u],y:parseInt(String(x.dob).slice(-4))||0}))});
+  }
   if(p==='/api/o/tdecide'){
     const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),t=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();
     if(!t||!ok.has(t.udise))return J({e:'na'},403);
@@ -821,6 +827,12 @@ async function ext(p,r,env){
     const rs=(await env.DB.prepare("SELECT c.udise,c.cls,c.div,(SELECT COUNT(*) FROM roster r WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div) n,(SELECT COUNT(*) FROM roster r JOIN students s ON s.id=r.sid WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div AND s.last_seen>=datetime('now','-7 day')) a7 FROM tclasses c WHERE c.tid=? ORDER BY c.cls,c.div").bind(t.id).all()).results;
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();
     return J({ok:1,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0});
+  }
+  if(p==='/api/t/bday'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const md=istDay().slice(5);
+    const rs=(await env.DB.prepare("SELECT r.name,r.cls,r.div,i.dob FROM tclasses c JOIN roster r ON r.udise=c.udise AND r.cls=c.cls AND r.div=c.div JOIN sinfo i ON i.pen=r.pen WHERE c.tid=? AND substr(i.dob,6,5)=? ORDER BY r.cls,r.div,r.name").bind(t.id,md).all()).results;
+    return J({ok:1,rows:rs,today:istDay()});
   }
   if(p==='/api/t/report'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
