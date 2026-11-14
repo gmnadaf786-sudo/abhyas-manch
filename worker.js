@@ -487,43 +487,77 @@ async function ext(p,r,env){
     const s=await me(env,r);if(!s)return J({e:'auth'},401);
     const b=await body(r),kn=/kn|कन्नड|kannada/i.test(String(s.med||'')),mc=kn?'kn':'mr',path=cl(b.path,300);
     if(!path.startsWith(mc+'-lessons/'))return J({e:'bad'},400);
-    const mode=b.mode==='sum'?'sum':'quiz',les=cl(b.les,200),sub=cl(b.sub,80),cls=String(s.cls||'');
+    const mode=['sum','quiz','ask','words','qa'].includes(b.mode)?b.mode:'quiz',les=cl(b.les,200),sub=cl(b.sub,80),cls=String(s.cls||'');
     const lang=kn?'Kannada (ಕನ್ನಡ script)':'Marathi (Devanagari script)';
-    await env.DB.prepare("CREATE TABLE IF NOT EXISTS ai_use(sid INTEGER, day TEXT, n INTEGER, PRIMARY KEY(sid,day))").run();
     await env.DB.prepare("CREATE TABLE IF NOT EXISTS ai_sum(path TEXT PRIMARY KEY, t TEXT, upd TEXT)").run();
-    if(mode==='sum'){const c=await env.DB.prepare('SELECT t FROM ai_sum WHERE path=?').bind(path).first();if(c&&c.t)return J({ok:1,t:c.t,cached:1})}
-    const day=istDay(),LIM=12,u0=await env.DB.prepare('SELECT n FROM ai_use WHERE sid=? AND day=?').bind(s.id,day).first(),used=u0?u0.n:0;
-    if(used>=LIM)return J({e:'limit',left:0},429);
+    const ck=mode==='sum'?path:mode==='words'?path+'#w':mode==='qa'?path+'#qa':'';
+    if(ck){const c=await env.DB.prepare('SELECT t FROM ai_sum WHERE path=?').bind(ck).first();if(c&&c.t){if(mode==='sum')return J({ok:1,t:c.t,cached:1});try{return J({ok:1,l:JSON.parse(c.t),cached:1})}catch(e){}}}
     const pdf=await lessonPdf(env,path);if(!pdf)return J({e:'nopdf'},404);
-    let g,si,ctx='Class: '+cls+'\nSubject: '+sub+'\nLesson: '+les;
+    const day=istDay(),ctx='Class: '+cls+'\nSubject: '+sub+'\nLesson: '+les,PD={inlineData:{mimeType:'application/pdf',data:pdf}};
+    const parseJ=(tx,k)=>{try{const s2=tx.replace(/^```(?:json)?/i,'').replace(/```$/,'').trim(),a=s2.search(/[\[{]/),z=Math.max(s2.lastIndexOf('}'),s2.lastIndexOf(']'));const o=JSON.parse(s2.slice(a,z+1));return k?o[k]:o}catch(e){return null}};
+    let g;
     if(mode==='sum'){
-      si='You are a friendly Maharashtra State Board primary-school teacher. Using ONLY the attached textbook lesson PDF, write a summary for a class '+cls+' child. Write everything in '+lang+'. Format (plain text, use ** for bold, • for bullets): 1) one line: what this lesson is about; 2) 5 to 8 key points as • bullets; 3) "important words" with simple meanings (up to 6); 4) one thinking question at the end. Maximum 250 words. Do not add facts that are not in the lesson.';
-      g=await gemAsk(env,si,[{role:'user',parts:[{inlineData:{mimeType:'application/pdf',data:pdf}},{text:ctx}]}]);
+      const si='You are a friendly Maharashtra State Board primary-school teacher. Using ONLY the attached textbook lesson PDF, write a summary for a class '+cls+' child. Write everything in '+lang+'. Format (plain text, use ** for bold, • for bullets): 1) one line: what this lesson is about; 2) 5 to 8 key points as • bullets; 3) "important words" with simple meanings (up to 6); 4) one thinking question at the end. Maximum 250 words. Do not add facts that are not in the lesson.';
+      g=await gemAsk(env,si,[{role:'user',parts:[PD,{text:ctx}]}]);
       if(!g.t)return J({e:g.e==='nokey'?'nokey':'fail'},503);
       await env.DB.prepare('INSERT INTO ai_sum(path,t,upd) VALUES(?,?,?) ON CONFLICT(path) DO UPDATE SET t=excluded.t,upd=excluded.upd').bind(path,g.t,day).run();
-    }else{
-      const ty=['fill','tf','mcq','match','mix'].includes(b.type)?b.type:'mix',lv={easy:'EASY: direct recall of facts from the lesson',med:'MEDIUM: understanding, reasons and simple inference',hard:'HARD: application, reasoning and tricky distractors'}[b.level]||'MEDIUM: understanding, reasons and simple inference';
-      const tfo=kn?'["ಸರಿ","ತಪ್ಪು"]':'["बरोबर","चूक"]';
-      const dist={fill:'Make exactly 20 questions, all type "fill".',tf:'Make exactly 20 questions, all type "tf".',mcq:'Make exactly 20 questions, all type "mcq".',match:'Make exactly 5 questions, all type "match" (each with 4 pairs, so 20 pairs in total).',mix:'Make exactly 20 questions: 6 "fill", 5 "tf", 6 "mcq", 3 "match", in shuffled order.'}[ty];
-      const avoid=(Array.isArray(b.avoid)?b.avoid:[]).slice(0,40).map(x=>cl(x,90)).filter(Boolean);
-      si='You are a Maharashtra State Board primary-school teacher making a self-practice quiz for a class '+cls+' child. Use ONLY the attached textbook lesson PDF as the source; never add facts that are not in the lesson. Write ALL text (questions, options, explanations) in '+lang+'. Keep language simple and child-friendly. Difficulty: '+lv+'. '+dist+' Cover different parts of the lesson; no two questions may test the same fact.'
-       +' Output ONLY JSON: {"questions":[...]}. Schemas: fill: {"type":"fill","q":"sentence with ____ blank","options":[4 strings],"answer":index_of_correct_option,"explanation":"one short line"}; tf: {"type":"tf","q":"statement","options":'+tfo+',"answer":0_or_1_index_of_correct_option,"explanation":"..."}; mcq: {"type":"mcq","q":"question","options":[4 strings],"answer":index,"explanation":"..."}; match: {"type":"match","q":"'+(kn?'ಜೋಡಿಸಿ':'जोड्या लावा')+'","pairs":[[left,right],[left,right],[left,right],[left,right]],"explanation":""}. Spread the correct answer position randomly across questions.'
-       +(avoid.length?' The child already practised the questions below. Do NOT repeat or paraphrase them; ask about other facts:\n- '+avoid.join('\n- '):'')+'\nVariation token (make this set different from any other): '+Math.random().toString(36).slice(2,8);
-      g=await gemAsk(env,si,[{role:'user',parts:[{inlineData:{mimeType:'application/pdf',data:pdf}},{text:ctx}]}],{temperature:1.1,responseMimeType:'application/json'});
-      if(!g.t)return J({e:g.e==='nokey'?'nokey':'fail'},503);
-      let q=null;try{const s2=g.t.replace(/^```(?:json)?/i,'').replace(/```$/,'').trim(),i0=s2.indexOf('{'),k0=s2.lastIndexOf('}');q=JSON.parse(s2.slice(i0,k0+1)).questions}catch(e){}
-      const out=[];for(const z of (Array.isArray(q)?q:[])){
-        const t0=['fill','tf','mcq','match'].includes(z.type)?z.type:'';if(!t0)continue;const e0=cl(z.explanation,300);
-        if(t0==='match'){const pr=(Array.isArray(z.pairs)?z.pairs:[]).filter(a=>Array.isArray(a)&&a.length>=2).slice(0,5).map(a=>[cl(a[0],80),cl(a[1],80)]).filter(a=>a[0]&&a[1]);if(pr.length>=3)out.push({type:t0,q:cl(z.q,100),pairs:pr,e:e0});continue}
-        const op=(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,150)),an=parseInt(z.answer);
-        if(op.length<2||!(an>=0&&an<op.length)||!cl(z.q,400))continue;out.push({type:t0,q:cl(z.q,400),options:op,answer:an,e:e0});
-      }
-      if(out.length<5)return J({e:'parse'},502);
-      await env.DB.prepare('INSERT INTO ai_use(sid,day,n) VALUES(?,?,1) ON CONFLICT(sid,day) DO UPDATE SET n=n+1').bind(s.id,day).run();
-      return J({ok:1,q:out.slice(0,20),left:LIM-used-1});
+      return J({ok:1,t:g.t});
     }
-    await env.DB.prepare('INSERT INTO ai_use(sid,day,n) VALUES(?,?,1) ON CONFLICT(sid,day) DO UPDATE SET n=n+1').bind(s.id,day).run();
-    return J({ok:1,t:g.t,left:LIM-used-1});
+    if(mode==='words'||mode==='qa'){
+      const si=mode==='words'
+        ?'You are a primary-school teacher. From the attached textbook lesson PDF (class '+cls+') pick 10 to 14 important or difficult words a child should learn. Write in '+lang+'. Output ONLY JSON: {"items":[{"w":"word as in the lesson","m":"simple meaning or short explanation in one line"}]}. Use only words from the lesson.'
+        :'You are a primary-school teacher. From the attached textbook lesson PDF (class '+cls+') write 8 to 10 important exam-style questions with short model answers (1-3 sentences) that a child can learn. Write in '+lang+'. Output ONLY JSON: {"items":[{"q":"question","a":"short model answer"}]}. Use only facts from the lesson.';
+      g=await gemAsk(env,si,[{role:'user',parts:[PD,{text:ctx}]}],{temperature:.4,responseMimeType:'application/json'});
+      if(!g.t)return J({e:g.e==='nokey'?'nokey':'fail'},503);
+      const it=parseJ(g.t,'items'),out=(Array.isArray(it)?it:[]).slice(0,14).map(x=>mode==='words'?{w:cl(x&&x.w,80),m:cl(x&&x.m,300)}:{q:cl(x&&x.q,300),a:cl(x&&x.a,600)}).filter(x=>mode==='words'?x.w&&x.m:x.q&&x.a);
+      if(out.length<3)return J({e:'parse'},502);
+      await env.DB.prepare('INSERT INTO ai_sum(path,t,upd) VALUES(?,?,?) ON CONFLICT(path) DO UPDATE SET t=excluded.t,upd=excluded.upd').bind(ck,JSON.stringify(out),day).run();
+      return J({ok:1,l:out});
+    }
+    if(mode==='ask'){
+      const hs=[];for(const x of (Array.isArray(b.m)?b.m:[]).slice(-8)){const role=x&&x.r==='a'?'model':'user',tx=cl(x&&x.t,600);if(!tx)continue;if(hs.length&&hs[hs.length-1].role===role)hs.pop();hs.push({role,parts:[{text:tx}]})}
+      while(hs.length&&hs[0].role!=='user')hs.shift();
+      if(!hs.length||hs[hs.length-1].role!=='user')return J({e:'empty'},400);
+      const si='You are a kind AI teacher for a class '+cls+' child (Maharashtra State Board). The attached PDF is the textbook lesson the child is studying. Answer ONLY about this lesson and its subject, using the lesson as your main source. Write in '+lang+', in very simple short sentences (max 120 words). Explain step by step; for maths show steps. If asked to explain simply, use an everyday example. If the question is unrelated to studies or unsafe, politely refuse and bring the child back to the lesson. Never ask for personal information. If the lesson does not contain the answer, say so and suggest asking the teacher. End with one tiny practice question when it fits.';
+      g=await gemAsk(env,si,[{role:'user',parts:[PD,{text:ctx}]},{role:'model',parts:[{text:'OK'}]}].concat(hs));
+      if(!g.t)return J({e:g.e==='nokey'?'nokey':'fail'},503);
+      return J({ok:1,t:g.t});
+    }
+    const N=b.n===5?5:20,ty=['fill','tf','mcq','match','mix'].includes(b.type)?b.type:'mix',lv={easy:'EASY: direct recall of facts from the lesson',med:'MEDIUM: understanding, reasons and simple inference',hard:'HARD: application, reasoning and tricky distractors'}[b.level]||'MEDIUM: understanding, reasons and simple inference';
+    const tfo=kn?'["ಸರಿ","ತಪ್ಪು"]':'["बरोबर","चूक"]',ms=N===5?2:5;
+    const dist={fill:'Make exactly '+N+' questions, all type "fill".',tf:'Make exactly '+N+' questions, all type "tf".',mcq:'Make exactly '+N+' questions, all type "mcq".',match:'Make exactly '+ms+' questions, all type "match" (each with 4 pairs).',mix:N===5?'Make exactly 5 questions: 1 "fill", 1 "tf", 2 "mcq", 1 "match", in shuffled order.':'Make exactly 20 questions: 6 "fill", 5 "tf", 6 "mcq", 3 "match", in shuffled order.'}[ty];
+    const avoid=(Array.isArray(b.avoid)?b.avoid:[]).slice(0,40).map(x=>cl(x,90)).filter(Boolean);
+    const si='You are a Maharashtra State Board primary-school teacher making a self-practice quiz for a class '+cls+' child. Use ONLY the attached textbook lesson PDF as the source; never add facts that are not in the lesson. Write ALL text (questions, options, explanations) in '+lang+'. Keep language simple and child-friendly. Difficulty: '+lv+'. '+dist+' Cover different parts of the lesson; no two questions may test the same fact.'
+     +' Output ONLY JSON: {"questions":[...]}. Schemas: fill: {"type":"fill","q":"sentence with ____ blank","options":[4 strings],"answer":index_of_correct_option,"explanation":"one short line"}; tf: {"type":"tf","q":"statement","options":'+tfo+',"answer":0_or_1_index_of_correct_option,"explanation":"..."}; mcq: {"type":"mcq","q":"question","options":[4 strings],"answer":index,"explanation":"..."}; match: {"type":"match","q":"'+(kn?'ಜೋಡಿಸಿ':'जोड्या लावा')+'","pairs":[[left,right],[left,right],[left,right],[left,right]],"explanation":""}. Spread the correct answer position randomly across questions.'
+     +(avoid.length?' The child already practised the questions below. Do NOT repeat or paraphrase them; ask about other facts:\n- '+avoid.join('\n- '):'')+'\nVariation token (make this set different from any other): '+Math.random().toString(36).slice(2,8);
+    g=await gemAsk(env,si,[{role:'user',parts:[PD,{text:ctx}]}],{temperature:1.1,responseMimeType:'application/json'});
+    if(!g.t)return J({e:g.e==='nokey'?'nokey':'fail'},503);
+    const q=parseJ(g.t,'questions'),out=[];
+    for(const z of (Array.isArray(q)?q:[])){
+      const t0=['fill','tf','mcq','match'].includes(z.type)?z.type:'';if(!t0)continue;const e0=cl(z.explanation,300);
+      if(t0==='match'){const pr=(Array.isArray(z.pairs)?z.pairs:[]).filter(a=>Array.isArray(a)&&a.length>=2).slice(0,5).map(a=>[cl(a[0],80),cl(a[1],80)]).filter(a=>a[0]&&a[1]);if(pr.length>=3)out.push({type:t0,q:cl(z.q,100),pairs:pr,e:e0});continue}
+      const op=(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,150)),an=parseInt(z.answer);
+      if(op.length<2||!(an>=0&&an<op.length)||!cl(z.q,400))continue;out.push({type:t0,q:cl(z.q,400),options:op,answer:an,e:e0});
+    }
+    if(out.length<Math.min(5,N))return J({e:'parse'},502);
+    return J({ok:1,q:out.slice(0,20)});
+  }
+  if(p==='/api/ai/score'){
+    const s=await me(env,r);if(!s)return J({e:'auth'},401);const b=await body(r);
+    await env.DB.prepare("CREATE TABLE IF NOT EXISTS ai_score(id INTEGER PRIMARY KEY AUTOINCREMENT, sid INTEGER, ts TEXT, sub TEXT, les TEXT, ty TEXT, lv TEXT, score INTEGER, total INTEGER, kind TEXT)").run();
+    const sc=parseInt(b.score),tt=parseInt(b.total);if(!(tt>=1&&tt<=20&&sc>=0&&sc<=tt))return J({e:'bad'},400);
+    await env.DB.prepare('INSERT INTO ai_score(sid,ts,sub,les,ty,lv,score,total,kind) VALUES(?,?,?,?,?,?,?,?,?)').bind(s.id,istDay(),cl(b.sub,60),cl(b.les,120),cl(b.type,10),cl(b.level,6),sc,tt,b.kind==='daily'?'daily':'quiz').run();
+    return J({ok:1});
+  }
+  if(p==='/api/t/aiscores'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const cls=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase(),ud=cl(b.udise,11);
+    if(!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,ud,cls,dv).first())return J({e:'nf'},404);
+    await env.DB.prepare("CREATE TABLE IF NOT EXISTS ai_score(id INTEGER PRIMARY KEY AUTOINCREMENT, sid INTEGER, ts TEXT, sub TEXT, les TEXT, ty TEXT, lv TEXT, score INTEGER, total INTEGER, kind TEXT)").run();
+    const rows=(await env.DB.prepare("SELECT r.pen,r.name,COUNT(a.id) n,ROUND(AVG(100.0*a.score/a.total)) avg,MAX(a.ts) last FROM roster r LEFT JOIN students s ON s.mobile='P'||r.pen LEFT JOIN ai_score a ON a.sid=s.id WHERE r.udise=? AND r.cls=? AND r.div=? GROUP BY r.pen ORDER BY r.name").bind(ud,cls,dv).all()).results;
+    let det=[];const pen=cl(b.pen,11).replace(/\D/g,'');
+    if(pen.length===11)det=(await env.DB.prepare("SELECT a.ts,a.sub,a.les,a.score,a.total,a.lv,a.kind FROM ai_score a JOIN students s ON s.id=a.sid JOIN roster r ON 'P'||r.pen=s.mobile WHERE r.pen=? AND r.udise=? ORDER BY a.id DESC LIMIT 20").bind(pen,ud).all()).results;
+    return J({ok:1,rows,det});
   }
   if(p==='/api/s/result'){
     const s=await me(env,r);if(!s||!/^P\d{11}$/.test(s.mobile))return J({e:'auth'},401);
