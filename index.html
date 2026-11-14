@@ -312,7 +312,10 @@ window.addEventListener('message',function(e){var d=e.data;if(d&&d.type==='close
 var dp;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;inst.style.display='block'});
 ib.onclick=function(){if(dp){dp.prompt();dp=null;inst.style.display='none'}};
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
-function menu(o){mn.style.display=o?'flex':'none';mm.textContent='';who.textContent=S&&S.st?(S.st.name||S.st.pen):(PROF&&PROF.p?('👤 '+PROF.p.name+' · इयत्ता '+PROF.p.cls):(GUEST?'पाहुणा':''))}
+function shareApp(k,n){n=String(n||'').trim();var h={s:n?'🌟 *'+n+'* अभ्यास मंचवर शिकत आहे. तुम्हीही पाहा!':'🌟 अभ्यास मंच – तुमच्यासाठी काहीतरी खास!',t:n?'🌟 शिक्षक *'+n+'* यांनी तुमच्यासाठी काहीतरी खास पाठवले आहे!':'🌟 तुमच्यासाठी काहीतरी खास!',c:n?'🌟 *'+n+'* कडून तुमच्यासाठी काहीतरी खास!':'🌟 तुमच्यासाठी काहीतरी खास!'}[k]||'🌟 तुमच्यासाठी काहीतरी खास!';
+ var x=h+'\n\n🤖 पाठ वाचून तुमच्याशी बोलणारा *AI शिक्षक*\n📝 रोज नवीन प्रश्नांची स्वाध्याय चाचणी आणि गुण\n📖 इयत्ता १ ते ८ चे सर्व पाठ – मराठी व कन्नड माध्यम\n🎂 वाढदिवस शुभेच्छा, शिक्षकांसाठी नियोजन, CCE आणि बरेच काही\n\nफुकट आहे, एका क्लिकमध्ये उघडा 👇\nhttps://abhyasmanch.in\n\n📲 "Home screen ला जोडा" केल्यास ॲपसारखे वापरता येईल.';
+ if(navigator.share)navigator.share({text:x}).catch(function(){});else window.open('https://wa.me/?text='+encodeURIComponent(x),'_blank')}
+function menu(o){mn.style.display=o?'flex':'none';try{var sb=document.getElementById('shb');if(!sb){sb=document.createElement('button');sb.id='shb';sb.className='back';sb.style.cssText='display:block;width:100%;margin:10px 0 0;padding:12px';sb.textContent='📤 ॲप शेअर करा';sb.onclick=function(){shareApp('s',(S&&S.st?(S.st.name||''):(PROF&&PROF.p?PROF.p.name:'')))};who.parentNode.appendChild(sb)}}catch(e){}mm.textContent='';who.textContent=S&&S.st?(S.st.name||S.st.pen):(PROF&&PROF.p?('👤 '+PROF.p.name+' · इयत्ता '+PROF.p.cls):(GUEST?'पाहुणा':''))}
 function doExit(){menu(0);try{fr.src='about:blank';view.style.display='none'}catch(e){}
  try{window.close()}catch(e){}
  setTimeout(function(){var b=document.getElementById('bye');if(b)b.style.display='flex'},250)}
