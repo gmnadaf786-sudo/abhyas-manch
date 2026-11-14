@@ -33,9 +33,9 @@ async function teacher(env,b,needOk){
   if(!x||(needOk&&x.status!=='ok'))return null;return x;
 }
 async function gemKey(env){if(env.GEMINI_API_KEY)return env.GEMINI_API_KEY;await slEnsure(env);const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='gemini_key'").first();return(q&&q.v)||''}
-async function gemAsk(env,si,contents){const GK=await gemKey(env);if(!GK)return{e:'nokey'};let last='';
+async function gemAsk(env,si,contents,gc){const GK=await gemKey(env);if(!GK)return{e:'nokey'};let last='';
   for(const mo of ['gemini-3.5-flash-lite','gemini-3.5-flash','gemini-3.1-flash-lite']){for(let a=0;a<2;a++){try{
-    const x=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+mo+':generateContent',{method:'POST',headers:{'content-type':'application/json','x-goog-api-key':GK},body:JSON.stringify({systemInstruction:{parts:[{text:si}]},contents})});
+    const x=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+mo+':generateContent',{method:'POST',headers:{'content-type':'application/json','x-goog-api-key':GK},body:JSON.stringify({systemInstruction:{parts:[{text:si}]},contents,...(gc?{generationConfig:gc}:{})})});
     if(x.ok){const j=await x.json(),tx=((((j.candidates||[])[0]||{}).content||{}).parts||[]).map(q=>q.text||'').join('').trim();if(tx)return{t:tx}}else{last=x.status+'';if(![429,500,502,503].includes(x.status))break}
   }catch(e){last='net'}}}
   return{e:'fail',c:last}}
@@ -483,21 +483,47 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET fails=0 WHERE pen=?').bind(pen).run();
     return J({ok:1,token:tok,changed:x.changed?1:0,profile:{name:x.name,cls:x.cls,med:x.med,mobile:key,district:'सांगली',taluka:'जत',kendra:'',school:'',udise:x.udise}});
   }
-  if(p==='/api/ai/ask'){
+  if(p==='/api/ai/lesson'){
     const s=await me(env,r);if(!s)return J({e:'auth'},401);
-    const b=await body(r);
+    const b=await body(r),kn=/kn|कन्नड|kannada/i.test(String(s.med||'')),mc=kn?'kn':'mr',path=cl(b.path,300);
+    if(!path.startsWith(mc+'-lessons/'))return J({e:'bad'},400);
+    const mode=b.mode==='sum'?'sum':'quiz',les=cl(b.les,200),sub=cl(b.sub,80),cls=String(s.cls||'');
+    const lang=kn?'Kannada (ಕನ್ನಡ script)':'Marathi (Devanagari script)';
     await env.DB.prepare("CREATE TABLE IF NOT EXISTS ai_use(sid INTEGER, day TEXT, n INTEGER, PRIMARY KEY(sid,day))").run();
-    const day=istDay(),LIM=20,u0=await env.DB.prepare('SELECT n FROM ai_use WHERE sid=? AND day=?').bind(s.id,day).first(),used=u0?u0.n:0;
+    await env.DB.prepare("CREATE TABLE IF NOT EXISTS ai_sum(path TEXT PRIMARY KEY, t TEXT, upd TEXT)").run();
+    if(mode==='sum'){const c=await env.DB.prepare('SELECT t FROM ai_sum WHERE path=?').bind(path).first();if(c&&c.t)return J({ok:1,t:c.t,cached:1})}
+    const day=istDay(),LIM=12,u0=await env.DB.prepare('SELECT n FROM ai_use WHERE sid=? AND day=?').bind(s.id,day).first(),used=u0?u0.n:0;
     if(used>=LIM)return J({e:'limit',left:0},429);
-    const ms=(Array.isArray(b.m)?b.m:[]).slice(-8).map(x=>({role:x&&x.r==='a'?'model':'user',parts:[{text:cl(x&&x.t,600)}]})).filter(x=>x.parts[0].text);
-    if(!ms.length||ms[ms.length-1].role!=='user')return J({e:'empty'},400);
-    const kn=/kn|कन्नड|kannada/i.test(String(s.med||'')),lang=kn?'ಕನ್ನಡ':'मराठी',sub=cl(b.sub,40);
-    const si='तू "अभ्यास मंच" ॲपमधील इयत्ता '+(s.cls||'')+' च्या विद्यार्थ्याचा मित्रवत AI अभ्यास-सहाय्यक आहेस. विद्यार्थी लहान मुल आहे.'+(sub?' सध्याचा विषय: '+sub+'.':'')
-      +' नियम: १) संपूर्ण उत्तर फक्त '+lang+' भाषेत द्यायचे (गणित/विज्ञान संज्ञा आवश्यक तिथे इंग्रजी चालेल). २) महाराष्ट्र राज्य मंडळाच्या या इयत्तेच्या पातळीचे, सोपे, लहान वाक्यांचे आणि छोटे उत्तर (जास्तीत जास्त १२० शब्द). ३) थेट गृहपाठाचे उत्तर न देता आधी समजावून सांग, गणितात पायऱ्या दाखव, शेवटी एक छोटा प्रश्न विचारून सराव दे. ४) फक्त शालेय अभ्यासाशी संबंधित प्रश्नांना उत्तर दे. इतर विषय (खेळ, चित्रपट, गप्पा, वैयक्तिक माहिती, धोकादायक किंवा अयोग्य गोष्टी) नम्रपणे नाकार आणि अभ्यासाकडे वळव. ५) वैयक्तिक माहिती (फोन, पत्ता, पासवर्ड) कधीही मागू नको. ६) खात्री नसेल तर "शिक्षकांना विचारा" असे सांग; अंदाजाने चुकीचे सांगू नको.';
-    const a=await gemAsk(env,si,ms);
-    if(!a.t)return J({e:a.e==='nokey'?'nokey':'fail'},503);
+    const pdf=await lessonPdf(env,path);if(!pdf)return J({e:'nopdf'},404);
+    let g,si,ctx='Class: '+cls+'\nSubject: '+sub+'\nLesson: '+les;
+    if(mode==='sum'){
+      si='You are a friendly Maharashtra State Board primary-school teacher. Using ONLY the attached textbook lesson PDF, write a summary for a class '+cls+' child. Write everything in '+lang+'. Format (plain text, use ** for bold, • for bullets): 1) one line: what this lesson is about; 2) 5 to 8 key points as • bullets; 3) "important words" with simple meanings (up to 6); 4) one thinking question at the end. Maximum 250 words. Do not add facts that are not in the lesson.';
+      g=await gemAsk(env,si,[{role:'user',parts:[{inlineData:{mimeType:'application/pdf',data:pdf}},{text:ctx}]}]);
+      if(!g.t)return J({e:g.e==='nokey'?'nokey':'fail'},503);
+      await env.DB.prepare('INSERT INTO ai_sum(path,t,upd) VALUES(?,?,?) ON CONFLICT(path) DO UPDATE SET t=excluded.t,upd=excluded.upd').bind(path,g.t,day).run();
+    }else{
+      const ty=['fill','tf','mcq','match','mix'].includes(b.type)?b.type:'mix',lv={easy:'EASY: direct recall of facts from the lesson',med:'MEDIUM: understanding, reasons and simple inference',hard:'HARD: application, reasoning and tricky distractors'}[b.level]||'MEDIUM: understanding, reasons and simple inference';
+      const tfo=kn?'["ಸರಿ","ತಪ್ಪು"]':'["बरोबर","चूक"]';
+      const dist={fill:'Make exactly 20 questions, all type "fill".',tf:'Make exactly 20 questions, all type "tf".',mcq:'Make exactly 20 questions, all type "mcq".',match:'Make exactly 5 questions, all type "match" (each with 4 pairs, so 20 pairs in total).',mix:'Make exactly 20 questions: 6 "fill", 5 "tf", 6 "mcq", 3 "match", in shuffled order.'}[ty];
+      const avoid=(Array.isArray(b.avoid)?b.avoid:[]).slice(0,40).map(x=>cl(x,90)).filter(Boolean);
+      si='You are a Maharashtra State Board primary-school teacher making a self-practice quiz for a class '+cls+' child. Use ONLY the attached textbook lesson PDF as the source; never add facts that are not in the lesson. Write ALL text (questions, options, explanations) in '+lang+'. Keep language simple and child-friendly. Difficulty: '+lv+'. '+dist+' Cover different parts of the lesson; no two questions may test the same fact.'
+       +' Output ONLY JSON: {"questions":[...]}. Schemas: fill: {"type":"fill","q":"sentence with ____ blank","options":[4 strings],"answer":index_of_correct_option,"explanation":"one short line"}; tf: {"type":"tf","q":"statement","options":'+tfo+',"answer":0_or_1_index_of_correct_option,"explanation":"..."}; mcq: {"type":"mcq","q":"question","options":[4 strings],"answer":index,"explanation":"..."}; match: {"type":"match","q":"'+(kn?'ಜೋಡಿಸಿ':'जोड्या लावा')+'","pairs":[[left,right],[left,right],[left,right],[left,right]],"explanation":""}. Spread the correct answer position randomly across questions.'
+       +(avoid.length?' The child already practised the questions below. Do NOT repeat or paraphrase them; ask about other facts:\n- '+avoid.join('\n- '):'')+'\nVariation token (make this set different from any other): '+Math.random().toString(36).slice(2,8);
+      g=await gemAsk(env,si,[{role:'user',parts:[{inlineData:{mimeType:'application/pdf',data:pdf}},{text:ctx}]}],{temperature:1.1,responseMimeType:'application/json'});
+      if(!g.t)return J({e:g.e==='nokey'?'nokey':'fail'},503);
+      let q=null;try{const s2=g.t.replace(/^```(?:json)?/i,'').replace(/```$/,'').trim(),i0=s2.indexOf('{'),k0=s2.lastIndexOf('}');q=JSON.parse(s2.slice(i0,k0+1)).questions}catch(e){}
+      const out=[];for(const z of (Array.isArray(q)?q:[])){
+        const t0=['fill','tf','mcq','match'].includes(z.type)?z.type:'';if(!t0)continue;const e0=cl(z.explanation,300);
+        if(t0==='match'){const pr=(Array.isArray(z.pairs)?z.pairs:[]).filter(a=>Array.isArray(a)&&a.length>=2).slice(0,5).map(a=>[cl(a[0],80),cl(a[1],80)]).filter(a=>a[0]&&a[1]);if(pr.length>=3)out.push({type:t0,q:cl(z.q,100),pairs:pr,e:e0});continue}
+        const op=(Array.isArray(z.options)?z.options:[]).slice(0,4).map(o=>cl(o,150)),an=parseInt(z.answer);
+        if(op.length<2||!(an>=0&&an<op.length)||!cl(z.q,400))continue;out.push({type:t0,q:cl(z.q,400),options:op,answer:an,e:e0});
+      }
+      if(out.length<5)return J({e:'parse'},502);
+      await env.DB.prepare('INSERT INTO ai_use(sid,day,n) VALUES(?,?,1) ON CONFLICT(sid,day) DO UPDATE SET n=n+1').bind(s.id,day).run();
+      return J({ok:1,q:out.slice(0,20),left:LIM-used-1});
+    }
     await env.DB.prepare('INSERT INTO ai_use(sid,day,n) VALUES(?,?,1) ON CONFLICT(sid,day) DO UPDATE SET n=n+1').bind(s.id,day).run();
-    return J({ok:1,t:a.t,left:LIM-used-1});
+    return J({ok:1,t:g.t,left:LIM-used-1});
   }
   if(p==='/api/s/result'){
     const s=await me(env,r);if(!s||!/^P\d{11}$/.test(s.mobile))return J({e:'auth'},401);
