@@ -46,7 +46,7 @@ function goR(){TAB='R';if(TF){draw();return}X.innerHTML=hdr()+tabs()+'<div class
 var RC={};
 function rfetch(fs,cb){var us=TS?[TS]:(FL?DATA.filter(function(r){return r.c===FL}).map(function(r){return r.u}):[]);if(us.length>90)us=[];var k=fs.join('|')+'#'+us.join(',');if(RC[k]){RD=RC[k];RF=k;cb(RD);return}var b=document.getElementById('rb');if(b)b.innerHTML='<p class="m">⏳ लोड होत आहे… (पहिल्यांदा थोडा वेळ लागतो; केंद्र/शाळा निवडल्यास लवकर येते)</p>';api('/api/o/treport',{f:fs,us:us}).then(function(j){if(!j.ok){if(b)b.innerHTML='<p class="er">लोड झाले नाही.</p>';return}RC[k]=j.rows;RD=j.rows;RF=k;cb(RD)})}
 function rscope(R){return R.filter(function(r){return (!FL||r.c===FL)&&(!TS||r.u===TS)})}
-function drawR(){var kp=ROLE==='KP',sl={};DATA.forEach(function(r){if(!FL||r.c===FL)sl[r.u]=r.nm});
+function drawR(msg){var kp=ROLE==='KP',sl={};DATA.forEach(function(r){if(!FL||r.c===FL)sl[r.u]=r.nm});
  var h=hdr(msg)+tabs();
  if(!kp)h+='<select onchange="FL=this.value;TS=\'\';drawR()"><option value="">सर्व केंद्रे</option>'+Object.keys(CEN).filter(function(c){return DATA.some(function(r){return r.c===c})}).map(function(c){return '<option value="'+c+'"'+(c===FL?' selected':'')+'>'+esc(CEN[c])+'</option>'}).join('')+'</select>';
  h+='<select onchange="TS=this.value;drawR()"><option value="">सर्व शाळा</option>'+Object.keys(sl).map(function(u){return '<option value="'+u+'"'+(u===TS?' selected':'')+'>'+esc(sl[u]||u)+'</option>'}).join('')+'</select>';
@@ -72,7 +72,7 @@ function draw(msg){if(TAB==='R'){drawR();return}if(TAB==='V'&&VD){drawV();return
  X.innerHTML=h}
 var VSEL='';
 function goV(){TAB='V';if(VD){draw();return}X.innerHTML='<div class="card"><p class="m">⏳ विद्यार्थ्यांची माहिती येत आहे… (पहिल्यांदा थोडा वेळ लागतो)</p></div>';fv();(VP||Promise.resolve()).then(function(){if(VD)draw();else X.innerHTML='<div class="card"><p class="er">लोड झाले नाही.</p><button onclick="goV()">पुन्हा प्रयत्न</button> <button class="g" onclick="TAB=\'S\';draw()">मागे</button></div>'})}
-function drawV(){var kp=ROLE==='KP',sl={},G={};DATA.forEach(function(r){if(!FL||r.c===FL)sl[r.u]=r});VD.forEach(function(x){if(!sl[x.u])return;if(TS&&x.u!==TS)return;var g=G[x.u]=G[x.u]||{n:0,m:0,f:0,c:{}};g.n+=x.n;g.m+=x.m||0;g.f+=x.f||0;g.c[x.cls]=x.n});
+function drawV(msg){var kp=ROLE==='KP',sl={},G={};DATA.forEach(function(r){if(!FL||r.c===FL)sl[r.u]=r});VD.forEach(function(x){if(!sl[x.u])return;if(TS&&x.u!==TS)return;var g=G[x.u]=G[x.u]||{n:0,m:0,f:0,c:{}};g.n+=x.n;g.m+=x.m||0;g.f+=x.f||0;g.c[x.cls]=x.n});
  var us=Object.keys(G).sort(function(a,b){return (sl[a].nm||'').localeCompare(sl[b].nm||'')}),tn=0,tm=0,tf=0;us.forEach(function(u){tn+=G[u].n;tm+=G[u].m;tf+=G[u].f});
  var h=hdr(msg)+tabs();
  if(!kp)h+='<select onchange="FL=this.value;TS=\'\';VSEL=\'\';draw()"><option value="">सर्व केंद्रे</option>'+Object.keys(CEN).filter(function(c){return DATA.some(function(r){return r.c===c})}).map(function(c){return '<option value="'+c+'"'+(c===FL?' selected':'')+'>'+esc(CEN[c])+'</option>'}).join('')+'</select>';
