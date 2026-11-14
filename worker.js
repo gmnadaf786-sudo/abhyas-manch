@@ -1022,6 +1022,7 @@ async function ext(p,r,env){
 export default{
   async fetch(r,env){
     const u=new URL(r.url);
+    if(/\.workers\.dev$/.test(u.hostname)&&u.pathname.startsWith('/api/'))return J({e:'moved',url:'https://abhyasmanch.in'},410);
     if(!u.pathname.startsWith('/api/'))return env.ASSETS.fetch(r);
     try{
       const p=u.pathname;
