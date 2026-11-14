@@ -74,7 +74,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <b id="rgt" style="font-size:18px">📝 नोंदणी</b>
 <div id="rgr"><p style="font-size:12px;color:var(--mut);margin:6px 0 10px">नोंदणी मोफत आहे. PEN नको. तुमचे नाव PDF वर येईल.</p>
 <select id="rd" onchange="rgT()" class="rgs"></select><select id="rt" onchange="rgK()" class="rgs"></select><select id="rk" class="rgs"></select>
-<input id="rsn" placeholder="शाळेचे नाव" autocomplete="off"><input id="rsu" inputmode="numeric" maxlength="11" placeholder="शाळेचा UDISE कोड (माहीत असल्यास)">
+<input id="rsn" placeholder="शाळेचे नाव" autocomplete="off" oninput="this.dataset.auto=''"><input id="rsu" inputmode="numeric" maxlength="11" placeholder="शाळेचा UDISE कोड (माहीत असल्यास)" oninput="udFill()"><small id="rsh" style="display:block;margin:-4px 0 8px"></small>
 <input id="rnm" placeholder="विद्यार्थ्याचे नाव" autocomplete="name"><select id="rcl" onchange="rgM()" class="rgs"></select><select id="rcm" class="rgs"></select></div>
 <input id="rmb" inputmode="numeric" maxlength="10" placeholder="मोबाईल क्रमांक (१० अंकी)" autocomplete="username"><input id="rpn" type="password" inputmode="numeric" maxlength="6" placeholder="पासवर्ड (४ ते ६ अंक)" autocomplete="current-password">
 <label id="rcw" style="display:flex;gap:8px;font-size:13px;color:var(--mut);margin-bottom:10px"><input id="rcc" type="checkbox" style="width:auto;margin:3px 0 0">माझे नाव, शाळा व मोबाईल क्रमांक अभ्यास मंचच्या वापराच्या आकडेवारीसाठी साठवण्यास माझी/पालकांची संमती आहे.</label>
@@ -121,6 +121,9 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <div id="lov" onclick="if(event.target===this)this.style.display='none'"><div><div class="hd"><b id="lot"></b><button id="lovc" onclick="lov.style.display='none'">✕ बंद</button></div><div id="lovb"></div></div></div>
 <div id="pv"><div class="tb"><button id="pvbk" onclick="closePdf()">← मागे</button><span id="pvt"></span><button onclick="pdfZoom(-1)" aria-label="लहान">−</button><button onclick="pdfZoom(1)" aria-label="मोठे">+</button></div><div id="pvb"><div id="pvm"></div></div></div>
 <script>
+function udLook(u,cb){if(!/^27\d{9}$/.test(u)){cb(null);return}fetch('data/udise/'+u.slice(0,6)+'.json').then(function(r){return r.ok?r.json():{}}).then(function(j){cb(j[u.slice(6)]||null)}).catch(function(){cb(null)})}
+function udFill(){var u=rsu.value.replace(/\D/g,''),h=document.getElementById('rsh');if(u.length!==11){h.textContent='';return}h.textContent='शाळा शोधत आहे…';udLook(u,function(s){if(rsu.value.replace(/\D/g,'')!==u)return;if(s){h.style.color='#15803d';h.textContent='✓ '+s[0]+' ('+s[1]+')';if(!rsn.value.trim()||rsn.dataset.auto==='1'){rsn.value=s[0];rsn.dataset.auto='1'}}else{h.style.color='#b91c1c';h.textContent='या कोडची शाळा सापडली नाही. कोड तपासा.'}})}
+
 
 var API='https://script.google.com/macros/s/AKfycbySme1rFcvWN-9xS_BmE2dMiHqOL8P3gvhs2-BGN6aZxi2d-4xHZJOOuH5kHroLTU4x/exec',WA='https://chat.whatsapp.com/G0r9BnDy4Dr2SRWf5K6EnD',SK='am_sess_v1',QK='am_queue_v1',K='am_prog_v1',S=null,D=[],CAT=null,BASE='',GUEST=null;try{GUEST=JSON.parse(localStorage.getItem('am_guest_v1')||'null')}catch(e){}
 if(GUEST&&!(GUEST.cls&&GUEST.med))GUEST=null;
