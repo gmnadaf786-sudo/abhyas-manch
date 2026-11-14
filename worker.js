@@ -536,7 +536,7 @@ async function ext(p,r,env){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const u=cl(b.udise,11).replace(/\D/g,'');
     if(u.length!==11)return J({e:'nf'},404);
-    if(!await env.DB.prepare('SELECT 1 x FROM schools WHERE udise=?').bind(u).first()){if(!b.nolist||await env.DB.prepare('SELECT 1 x FROM roster WHERE udise=? LIMIT 1').bind(u).first())return J({e:'nf'},404)}
+    if(!await env.DB.prepare('SELECT 1 x FROM schools WHERE udise=?').bind(u).first()){if(!b.nolist)return J({e:'nf'},404)}
     const ops=[env.DB.prepare('UPDATE teachers SET udise=?,conf=1 WHERE id=?').bind(u,t.id)];
     if(u!==t.udise)ops.push(env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise<>?').bind(t.id,u));
     await env.DB.batch(ops);
