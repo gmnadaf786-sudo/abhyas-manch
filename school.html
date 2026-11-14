@@ -113,6 +113,6 @@ function formSave(sub){var ch={},k;Object.keys(FD).forEach(function(k){if(JSON.s
  if(!Object.keys(ch).length&&!sub){formSec(FM.cur,'बदल नाही.');return}
  var ks=Object.keys(ch),i=0,fail=0;(function nx(){var part={};ks.slice(i,i+120).forEach(function(k){part[k]=ch[k]});var last=i+120>=ks.length;api('/api/s/formsave',{data:part,by:sg('am_sn'),submit:(sub&&last)?1:0}).then(function(j){if(!j.ok){formSec(FM.cur,'जतन झाले नाही. पुन्हा दाबा.');return}i+=120;if(i<ks.length)nx();else{FO=JSON.parse(JSON.stringify(FD));if(sub)FM.sub=today();FM.upd=today();formSec(FM.cur,'✓ जतन झाले'+(sub?' – अंतिम सादर':''))}})})()}
 
-function out(){ss('am_su',null);ss('am_s',null);ss('am_sn',null);ss('am_ss',null);T='';loginUi()}
+function out(){ss('am_su',null);ss('am_s',null);ss('am_sn',null);ss('am_ss',null);T='';location.href='index.html#login'}
 T=sg('am_s');if(T){api('/api/s/me',{}).then(function(j){if(j.ok){SC=j.school;ss('am_ss',SC);ss('am_su',j.udise||'');if(!sg('am_sn')){var n0=(prompt('आपले नाव लिहा (नोंद करणारे):')||'').trim();ss('am_sn',n0.length>=2?n0:'शाळा')}home()}else{T='';loginUi()}})}else loginUi();
 </script></body></html>
