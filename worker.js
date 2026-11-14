@@ -105,6 +105,25 @@ async function offApi(p,r,env){
     const F={},D={},R={},P={};f.results.forEach(x=>F[x.udise]=x);d.results.forEach(x=>{(D[x.udise]=D[x.udise]||{})[x.kind]=x.g});ro.results.forEach(x=>R[x.udise]=x.n);pm.results.forEach(x=>P[x.udise]=x);
     return J({ok:1,role:kp?'KP':'BEO',cen:CEN,rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})});
   }
+  if(p==='/api/o/sna'){
+    await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_sna(udise TEXT PRIMARY KEY, mhsn TEXT, bank TEXT, acct TEXT, ifsc TEXT, branch TEXT, hm TEXT, hm_mob TEXT, upd TEXT)").run();
+    const q=(await env.DB.prepare('SELECT udise,mhsn,bank,acct,ifsc,branch FROM school_sna').all()).results;
+    return J({ok:1,rows:q.filter(x=>ok.has(x.udise))});
+  }
+  if(p==='/api/o/timg'){
+    const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),t=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();
+    if(!t||!ok.has(t.udise))return J({e:'na'},403);
+    const q=await env.DB.prepare('SELECT photo,sign,hami FROM tch_img WHERE shalarth=?').bind(sh).first().catch(()=>null);
+    return J({ok:1,photo:q?q.photo:'',sign:q?q.sign:'',hami:q?q.hami:''});
+  }
+  if(p==='/api/o/stu'){
+    const u=cl(b.udise,11).replace(/\D/g,'');
+    if(u){if(!ok.has(u))return J({e:'na'},403);
+      const q=(await env.DB.prepare('SELECT r.pen,r.name,r.cls,r.div,i.gender,i.dob,i.roll FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name').bind(u).all()).results;
+      return J({ok:1,rows:q});}
+    const q=(await env.DB.prepare('SELECT r.udise u,r.cls,COUNT(*) n,SUM(i.gender=\'M\') m,SUM(i.gender=\'F\') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen GROUP BY r.udise,r.cls').all()).results;
+    return J({ok:1,rows:q.filter(x=>ok.has(x.u))});
+  }
   if(p==='/api/o/teachers'){
     await slEnsure(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise ORDER BY t.udise,t.name').all()).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
