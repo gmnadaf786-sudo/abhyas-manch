@@ -588,6 +588,17 @@ async function ext(p,r,env){
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();
     return J({ok:1,rows:out,day:wd,cls:c,medium:med,month:mo,week:wk,teacher:t.name,school:sc?sc.name:'',udise:t.udise});
   }
+  if(p==='/api/t/f16'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
+    const cf={};for(const x of (await env.DB.prepare("SELECT k,v FROM cfg WHERE k IN('pay_url','pay_key')").all()).results)cf[x.k]=x.v;
+    if(!cf.pay_url||!cf.pay_key)return J({ok:1,none:1,msg:'Form 16 सुविधा अजून सुरू केलेली नाही.'});
+    const ti=await env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(t.shalarth).first();let pan='';try{pan=String(JSON.parse(ti&&ti.data||'{}')['PAN क्रमांक']||'').trim().toUpperCase()}catch(e){}
+    if(!/^[A-Z]{5}\d{4}[A-Z]$/.test(pan))return J({ok:1,none:1,msg:'आधी "माझी माहिती" मध्ये PAN क्रमांक भरा.'});
+    const y=cl(b.year,20).replace(/[^A-Za-z0-9 -]/g,'');if(!y)return J({e:'args'},400);
+    let j;try{const rs=await fetch(cf.pay_url+'?key='+encodeURIComponent(cf.pay_key)+'&sh='+encodeURIComponent(t.shalarth)+'&pan='+pan+'&f16='+encodeURIComponent(y),{redirect:'follow'});j=await rs.json()}catch(e){return J({ok:1,none:1,msg:'Form 16 सध्या मिळाला नाही. नंतर प्रयत्न करा.'})}
+    if(!j||!j.ok||!Array.isArray(j.parts)||!j.parts.length)return J({ok:1,none:1,msg:(j&&j.msg)||'या वर्षाचा Form 16 उपलब्ध नाही.'});
+    return J({ok:1,parts:j.parts.slice(0,2).map(x=>({part:cl(x.part,2),name:cl(x.name,100),data:String(x.data||'')}))});
+  }
   if(p==='/api/t/pay'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
     const cf={};for(const x of (await env.DB.prepare("SELECT k,v FROM cfg WHERE k IN('pay_url','pay_key')").all()).results)cf[x.k]=x.v;
