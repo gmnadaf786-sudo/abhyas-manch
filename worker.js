@@ -478,6 +478,11 @@ async function ext(p,r,env){
     const rs=(await env.DB.prepare("SELECT r.cls,r.div,COUNT(*) n FROM roster r WHERE r.udise=? AND NOT EXISTS(SELECT 1 FROM tclasses c WHERE c.tid=? AND c.udise=r.udise AND c.cls=r.cls AND c.div=r.div) GROUP BY r.cls,r.div ORDER BY r.cls,r.div").bind(u,t.id).all()).results;
     return J({ok:1,udise:u,rows:rs});
   }
+  if(p==='/api/t/delcls'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const k=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase();if(k<1||k>8||!/^[A-Z]{1,2}$/.test(dv))return J({e:'args'});
+    await env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND cls=? AND div=?').bind(t.id,k,dv).run();return J({ok:1});
+  }
   if(p==='/api/t/addcls'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);
     const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
