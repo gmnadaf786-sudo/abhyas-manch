@@ -48,7 +48,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <div style="text-align:center;color:#fff;margin-bottom:10px"><img src="icon-512.png" alt="अभ्यास मंच" style="width:min(176px,23vh);height:min(176px,23vh);border-radius:32px;box-shadow:0 10px 30px rgba(0,0,0,.3)"><div style="font-size:14px;opacity:.95;margin-top:8px;font-weight:600">इयत्ता १ ली ते ८ वी · मराठी व कन्नड माध्यम</div></div>
 <form onsubmit="return doLogin(event)" style="background:var(--card);color:var(--ink);border-radius:22px;padding:16px 18px;box-shadow:0 14px 40px rgba(0,0,0,.25)">
 <h2 style="margin:0 0 10px;font-size:19px;text-align:center">🔐 लॉगिन</h2>
-<input id="lu" inputmode="numeric" autocomplete="username" placeholder="मोबाईल क्रमांक / PEN" maxlength="11"><input id="lp" type="password" inputmode="numeric" autocomplete="current-password" placeholder="पासवर्ड">
+<input id="lu" autocomplete="username" autocapitalize="characters" placeholder="PEN / मोबाईल / UDISE / शालार्थ ID / केंद्र कोड" maxlength="20"><input id="lp" type="password" autocomplete="current-password" placeholder="पासवर्ड">
 <p id="le" style="color:#b91c1c;font-size:13px;min-height:18px;margin:0 0 6px;text-align:center"></p>
 <button class="les" id="lb" style="justify-content:center;background:#0f766e;color:#fff;border:0;font-size:18px;padding:14px" type="submit">लॉगिन करा</button>
 <div style="display:flex;align-items:center;gap:10px;margin:10px 0;color:var(--mut);font-size:13px"><i style="flex:1;height:1px;background:var(--line)"></i>नवीन आहात?<i style="flex:1;height:1px;background:var(--line)"></i></div>
@@ -135,7 +135,17 @@ var P={};try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
 function api(o){return fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(o)}).then(function(r){return r.json()})}
 function showLogin(m){lg.style.display='flex';le.textContent=m||''}
 function loadCat(st){return fetch('content/'+catKey(st)+'/catalog.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(c){CAT=c;D=c.subjects;BASE='content/'+catKey(st)+'/';return true})}
-function doLogin(ev){ev.preventDefault();var u=lu.value.trim(),p=lp.value.trim();if(!u||!p){le.textContent='मोबाईल क्रमांक आणि पासवर्ड टाका.';return false}
+function ssSet(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}
+function roleLogin(u,p){var done=function(){lb.disabled=false},bad=function(m){lb.disabled=false;le.textContent=m},net=function(){bad('इंटरनेट तपासा.')};
+ var pj=function(url,b){return fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()})};
+ lb.disabled=true;le.textContent='तपासत आहे…';
+ if(/^(CLU\d+|BEO)$/i.test(u)){pj('/api/o/login',{u:u.toUpperCase(),pw:p}).then(function(j){if(!j.ok)return bad(j.e==='locked'?'खाते लॉक झाले; प्रशासकाशी संपर्क करा.':'कोड किंवा पासवर्ड चुकीचा.');ssSet('o_t',j.token);ssSet('o_u',j.u);ssSet('o_l',j.label);ssSet('o_r',j.role);location.href='office.html'}).catch(net);return true}
+ if(/^27\d{9}$/.test(u)){pj('/api/s/login',{udise:u,pw:p}).then(function(j){if(j&&j.ok){ssSet('am_s',j.token);ssSet('am_su',j.udise||u);ssSet('am_ss',j.school||'');ssSet('am_sn','');location.href='school.html';return}if(j&&j.e==='locked')return bad('खूप चुकीचे प्रयत्न. प्रशासकाशी संपर्क करा.');lb.disabled=false;studLogin(u,p)}).catch(net);return true}
+ if(/^\d{2}[A-Za-z]+\d+$/.test(u)&&u.length>=10){pj('/api/t/login',{shalarth:u.toUpperCase(),pw:p}).then(function(j){if(!j.ok)return bad(j.e==='locked'?'खूप चुकीचे प्रयत्न. प्रशासकाशी संपर्क करा.':'शालार्थ आयडी किंवा पासवर्ड चुकीचा.');if(j.status!=='ok')return bad('तुमची नोंदणी प्रशासकाच्या मंजुरीसाठी प्रलंबित आहे.');ssSet('am_t',j.token);ssSet('am_tn',j.name||'');location.href='teacher.html'}).catch(net);return true}
+ return false}
+function doLogin(ev){ev.preventDefault();var u=lu.value.trim(),p=lp.value.trim();if(!u||!p){le.textContent='आयडी आणि पासवर्ड टाका.';return false}
+ if(roleLogin(u,p))return false;return studLogin(u,p)}
+function studLogin(u,p){
  if(/^\d{11}$/.test(u)){lb.disabled=true;le.textContent='तपासत आहे…';
   fetch('/api/s/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({pen:u,pw:p})}).then(function(r){return r.json()}).then(function(j){
    if(!j.ok){lb.disabled=false;le.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. १५ मिनिटांनी पुन्हा प्रयत्न करा.':'PEN किंवा पासवर्ड चुकीचा.';return}

@@ -4,7 +4,7 @@ body{margin:0;background:var(--bg);color:var(--i);font:15px/1.5 system-ui,sans-s
 .card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:14px;margin-bottom:14px}h1{font-size:20px;margin:6px 0 12px}h2{font-size:16px;margin:0 0 8px}
 input,button{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--i);width:100%;box-sizing:border-box;margin-bottom:8px}
 button{background:var(--a);color:#fff;border:0;cursor:pointer}button.g{background:var(--c);color:var(--a);border:1px solid var(--a)}button:disabled{opacity:.5}
-.er{color:#b91c1c;min-height:18px}small,.m{color:var(--m)}.mod{display:flex;align-items:center;gap:12px;text-align:left;padding:14px;margin-bottom:10px}.mod span{font-size:26px}</style><link rel="manifest" href="manifest-school.json"><meta name="theme-color" content="#115e59"><script src="inst.js"></script></head><body><main>
+.er{color:#b91c1c;min-height:18px}small,.m{color:var(--m)}.mod{display:flex;align-items:center;gap:12px;text-align:left;padding:14px;margin-bottom:10px}.mod span{font-size:26px}</style><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#115e59"><script src="inst.js"></script></head><body><main>
 <h1>🏫 अभ्यास मंच – शाळा लॉगिन</h1>
 <div id="x"></div></main>
 <script>
@@ -114,5 +114,5 @@ function formSave(sub){var ch={},k;Object.keys(FD).forEach(function(k){if(JSON.s
  var ks=Object.keys(ch),i=0,fail=0;(function nx(){var part={};ks.slice(i,i+120).forEach(function(k){part[k]=ch[k]});var last=i+120>=ks.length;api('/api/s/formsave',{data:part,by:sg('am_sn'),submit:(sub&&last)?1:0}).then(function(j){if(!j.ok){formSec(FM.cur,'जतन झाले नाही. पुन्हा दाबा.');return}i+=120;if(i<ks.length)nx();else{FO=JSON.parse(JSON.stringify(FD));if(sub)FM.sub=today();FM.upd=today();formSec(FM.cur,'✓ जतन झाले'+(sub?' – अंतिम सादर':''))}})})()}
 
 function out(){ss('am_su',null);ss('am_s',null);ss('am_sn',null);ss('am_ss',null);T='';loginUi()}
-T=sg('am_s');if(T){api('/api/s/me',{}).then(function(j){if(j.ok){SC=j.school;ss('am_ss',SC);ss('am_su',j.udise||'');home()}else{T='';loginUi()}})}else loginUi();
+T=sg('am_s');if(T){api('/api/s/me',{}).then(function(j){if(j.ok){SC=j.school;ss('am_ss',SC);ss('am_su',j.udise||'');if(!sg('am_sn')){var n0=(prompt('आपले नाव लिहा (नोंद करणारे):')||'').trim();ss('am_sn',n0.length>=2?n0:'शाळा')}home()}else{T='';loginUi()}})}else loginUi();
 </script></body></html>
