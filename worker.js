@@ -483,6 +483,22 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET fails=0 WHERE pen=?').bind(pen).run();
     return J({ok:1,token:tok,changed:x.changed?1:0,profile:{name:x.name,cls:x.cls,med:x.med,mobile:key,district:'सांगली',taluka:'जत',kendra:'',school:'',udise:x.udise}});
   }
+  if(p==='/api/ai/ask'){
+    const s=await me(env,r);if(!s)return J({e:'auth'},401);
+    const b=await body(r);
+    await env.DB.prepare("CREATE TABLE IF NOT EXISTS ai_use(sid INTEGER, day TEXT, n INTEGER, PRIMARY KEY(sid,day))").run();
+    const day=istDay(),LIM=20,u0=await env.DB.prepare('SELECT n FROM ai_use WHERE sid=? AND day=?').bind(s.id,day).first(),used=u0?u0.n:0;
+    if(used>=LIM)return J({e:'limit',left:0},429);
+    const ms=(Array.isArray(b.m)?b.m:[]).slice(-8).map(x=>({role:x&&x.r==='a'?'model':'user',parts:[{text:cl(x&&x.t,600)}]})).filter(x=>x.parts[0].text);
+    if(!ms.length||ms[ms.length-1].role!=='user')return J({e:'empty'},400);
+    const kn=/kn|कन्नड|kannada/i.test(String(s.med||'')),lang=kn?'ಕನ್ನಡ':'मराठी',sub=cl(b.sub,40);
+    const si='तू "अभ्यास मंच" ॲपमधील इयत्ता '+(s.cls||'')+' च्या विद्यार्थ्याचा मित्रवत AI अभ्यास-सहाय्यक आहेस. विद्यार्थी लहान मुल आहे.'+(sub?' सध्याचा विषय: '+sub+'.':'')
+      +' नियम: १) संपूर्ण उत्तर फक्त '+lang+' भाषेत द्यायचे (गणित/विज्ञान संज्ञा आवश्यक तिथे इंग्रजी चालेल). २) महाराष्ट्र राज्य मंडळाच्या या इयत्तेच्या पातळीचे, सोपे, लहान वाक्यांचे आणि छोटे उत्तर (जास्तीत जास्त १२० शब्द). ३) थेट गृहपाठाचे उत्तर न देता आधी समजावून सांग, गणितात पायऱ्या दाखव, शेवटी एक छोटा प्रश्न विचारून सराव दे. ४) फक्त शालेय अभ्यासाशी संबंधित प्रश्नांना उत्तर दे. इतर विषय (खेळ, चित्रपट, गप्पा, वैयक्तिक माहिती, धोकादायक किंवा अयोग्य गोष्टी) नम्रपणे नाकार आणि अभ्यासाकडे वळव. ५) वैयक्तिक माहिती (फोन, पत्ता, पासवर्ड) कधीही मागू नको. ६) खात्री नसेल तर "शिक्षकांना विचारा" असे सांग; अंदाजाने चुकीचे सांगू नको.';
+    const a=await gemAsk(env,si,ms);
+    if(!a.t)return J({e:a.e==='nokey'?'nokey':'fail'},503);
+    await env.DB.prepare('INSERT INTO ai_use(sid,day,n) VALUES(?,?,1) ON CONFLICT(sid,day) DO UPDATE SET n=n+1').bind(s.id,day).run();
+    return J({ok:1,t:a.t,left:LIM-used-1});
+  }
   if(p==='/api/s/result'){
     const s=await me(env,r);if(!s||!/^P\d{11}$/.test(s.mobile))return J({e:'auth'},401);
     const pen=s.mobile.slice(1),x=await env.DB.prepare('SELECT udise,cls,div,name FROM roster WHERE pen=?').bind(pen).first();if(!x)return J({e:'auth'},401);
