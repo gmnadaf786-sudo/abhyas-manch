@@ -62,8 +62,11 @@ function load(){if(!T||!/^\d{11}$/.test(UD)||!CL){d.innerHTML='<div class="card"
  document.getElementById('hd').textContent='📘 CCE — इयत्ता '+CL+' '+DV+' ('+YR+')';
  post('/api/cce/get',{school:1,kinds:['set','wt','wtdone','days']}).then(function(j){if(!j.ok){d.innerHTML='<div class="card er">'+msg(j)+'<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
   j.rows.forEach(function(r){var v=null;try{v=JSON.parse(r.v)}catch(e){}DOC[key(r.cls,r.kind,r.k)]={v:v,upd:r.upd}});home()}).catch(function(){d.innerHTML='<div class="card er">इंटरनेट तपासा.</div>'})}
-function tile(ic,t,s,fn,done){return '<div class="card t'+(fn?'':' off')+'"'+(fn?' onclick="'+fn+'"':'')+'><span class="ic">'+ic+'</span><span><b>'+t+(done?' ✔':'')+'</b><small>'+s+'</small></span></div>'}
-function home(){var s0=get(0,'set',''),s1=get(CL,'set',''),dy=get(0,'days','');
+var CURM=-1,TI=0,NXT=['setS()','wtS(1)','dayS()','mkS(1)','atS(0)','hlS(1)','dcS(1,0)','phS()','loS(1)','pubS()','bkS(1,\'\')','rsS(1)'],NXN=['शाळा व वर्गशिक्षक','भारांश','कामाचे दिवस','गुण नोंदणी','उपस्थिती','आरोग्य','वर्णनात्मक नोंदी','फोटो','अध्ययन निष्पत्ती','निकाल जाहीर','प्रगती पुस्तिका','निकाल व अहवाल'];
+function nxGo(){if((CUR&&CUR.dirty)||(AT&&AT.dirty)||(HL&&HL.dirty)){if(!confirm('बदल सेव्ह केलेले नाहीत. तरीही पुढे जायचे?'))return}CUR=null;AT=null;HL=null;var i=CURM+1;if(i>=NXT.length){home();return}CURM=i;eval(NXT[i])}
+new MutationObserver(function(){if(CURM<0||document.getElementById('nxb'))return;var last=CURM+1>=NXT.length;var e=document.createElement('div');e.id='nxb';e.className='noprint';e.style.cssText='text-align:right;margin:18px 0 28px';e.innerHTML='<button onclick="nxGo()" style="width:auto;padding:12px 22px">'+(last?'✔ CCE मुख्य पान':'पुढे: '+NXN[CURM+1]+' →')+'</button>';d.appendChild(e)}).observe(document.getElementById('d'),{childList:true});
+function tile(ic,t,s,fn,done){return '<div class="card t'+(fn?'':' off')+'"'+(fn?' onclick="CURM='+(TI++)+';'+fn+'"':'')+'><span class="ic">'+ic+'</span><span><b>'+t+(done?' ✔':'')+'</b><small>'+s+'</small></span></div>'}
+function home(){CURM=-1;TI=0;var s0=get(0,'set',''),s1=get(CL,'set',''),dy=get(0,'days','');
  d.innerHTML='<button class="g" onclick="location.href=\'teacher.html\'">← वर्ग</button>'+
  tile('🏫','शाळा व वर्गशिक्षक','मुख्याध्यापक आणि वर्गशिक्षकाचे नाव','setS()',s0&&s1)+
  tile('⚖️','भारांश','दोन्ही सत्रांचा भारांश निश्चित केल्यावरच गुण नोंदणी सुरू होते','wtS(1)',get(CL,'wtdone','1')&&get(CL,'wtdone','2'))+
