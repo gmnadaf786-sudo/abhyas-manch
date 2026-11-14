@@ -11,7 +11,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:6px 4px;b
 <script>
 var X=document.getElementById('x'),T='',U='',LB='',ROLE='',DATA=null,SF=null,CEN={},FL='',TAB='S',TD=null,TQ='',TS='',SNA={},VD=null,VQ='';
 function shareApp(k,n){n=String(n||'').trim();var h={s:n?'🌟 *'+n+'* अभ्यास मंचवर शिकत आहे. तुम्हीही पाहा!':'🌟 अभ्यास मंच – तुमच्यासाठी काहीतरी खास!',t:n?'🌟 शिक्षक *'+n+'* यांनी तुमच्यासाठी काहीतरी खास पाठवले आहे!':'🌟 तुमच्यासाठी काहीतरी खास!',c:n?'🌟 *'+n+'* कडून तुमच्यासाठी काहीतरी खास!':'🌟 तुमच्यासाठी काहीतरी खास!'}[k]||'🌟 तुमच्यासाठी काहीतरी खास!';
- var x=h+'\n\n🤖 पाठ वाचून तुमच्याशी बोलणारा *AI शिक्षक*\n📝 रोज नवीन प्रश्नांची स्वाध्याय चाचणी आणि गुण\n📖 इयत्ता १ ते ८ चे सर्व पाठ – मराठी व कन्नड माध्यम\n🎂 वाढदिवस शुभेच्छा, शिक्षकांसाठी नियोजन, CCE आणि बरेच काही\n\nफुकट आहे, एका क्लिकमध्ये उघडा 👇\nhttps://abhyasmanch.in\n\n📲 "Home screen ला जोडा" केल्यास ॲपसारखे वापरता येईल.';
+ var x=h+'\n\n🤖 पाठ वाचून तुमच्याशी बोलणारा *AI शिक्षक*\n📝 रोज नवीन प्रश्नांची स्वाध्याय चाचणी आणि गुण\n📖 इयत्ता १ ते ८ चे सर्व पाठ – मराठी व कन्नड माध्यम\n🎂 वाढदिवस शुभेच्छा, शिक्षकांसाठी नियोजन, CCE आणि बरेच काही\n\nएका क्लिकमध्ये उघडा 👇\nhttps://abhyasmanch.in\n\n📲 "Home screen ला जोडा" केल्यास ॲपसारखे वापरता येईल.';
  if(navigator.share)navigator.share({text:x}).catch(function(){});else window.open('https://wa.me/?text='+encodeURIComponent(x),'_blank')}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function sg(k){try{return sessionStorage.getItem(k)||''}catch(e){return ''}}function ss(k,v){try{v==null?sessionStorage.removeItem(k):sessionStorage.setItem(k,v)}catch(e){}}
