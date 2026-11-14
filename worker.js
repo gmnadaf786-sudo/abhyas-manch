@@ -138,7 +138,7 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/treport'){
     await slEnsure(env);const fs=(Array.isArray(b.f)?b.f:[]).map(x=>cl(x,80)).filter(Boolean).slice(0,40);
-    const rs=(await env.DB.prepare('SELECT t.shalarth,t.name,t.udise,s.name sc,i.data FROM teachers t LEFT JOIN schools s ON s.udise=t.udise LEFT JOIN tch_info i ON i.shalarth=t.shalarth WHERE t.status=\'ok\' ORDER BY t.udise,t.name').all()).results;
+    const uq=(Array.isArray(b.us)?b.us:[]).map(u=>cl(u,11).replace(/\D/g,'')).filter(u=>ok.has(u)).slice(0,90);const rs=(await env.DB.prepare('SELECT t.shalarth,t.name,t.udise,s.name sc,i.data FROM teachers t LEFT JOIN schools s ON s.udise=t.udise LEFT JOIN tch_info i ON i.shalarth=t.shalarth WHERE t.status=\'ok\''+(uq.length?' AND t.udise IN ('+uq.map(()=>'?').join(',')+')':'')+' ORDER BY t.udise,t.name').bind(...uq).all()).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
     return J({ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>{let d={};try{d=JSON.parse(x.data||'{}')}catch(e){}const o={};fs.forEach(f=>{if(d[f]!=null)o[f]=d[f]});return{sh:x.shalarth,n:x.name,u:x.udise,sc:x.sc||'',c:cm[x.udise],d:o,h:x.data?1:0}})});
   }
