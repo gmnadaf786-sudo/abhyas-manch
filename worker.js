@@ -142,6 +142,17 @@ async function offApi(p,r,env){
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
     return J({ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>{let d={};try{d=JSON.parse(x.data||'{}')}catch(e){}const o={};fs.forEach(f=>{if(d[f]!=null)o[f]=d[f]});return{sh:x.shalarth,n:x.name,u:x.udise,sc:x.sc||'',c:cm[x.udise],d:o,h:x.data?1:0}})});
   }
+  if(p==='/api/o/sreport'){
+    await slEnsure(env);const ks=(Array.isArray(b.f)?b.f:[]).map(x=>cl(x,80)).filter(Boolean).slice(0,200),uq=(Array.isArray(b.us)?b.us:[]).map(u=>cl(u,11).replace(/\D/g,'')).filter(u=>ok.has(u));
+    const q=(await env.DB.prepare('SELECT udise,data FROM sch_form').all()).results,F={};q.forEach(x=>F[x.udise]=x.data);
+    return J({ok:1,rows:ss.filter(x=>!uq.length||uq.includes(x.udise)).map(x=>{let o={};try{o=JSON.parse(F[x.udise]||'{}')}catch(e){}const d={};ks.forEach(k=>{if(o[k]!=null&&o[k]!=='')d[k]=o[k]});return{u:x.udise,sc:x.name||'',c:x.code,d}})});
+  }
+  if(p==='/api/o/vreport'){
+    const uq=(Array.isArray(b.us)?b.us:[]).map(u=>cl(u,11).replace(/\D/g,'')).filter(u=>ok.has(u)).slice(0,90);
+    if(!uq.length)return J({e:'scope'},400);
+    const q=(await env.DB.prepare('SELECT r.pen,r.name,r.udise u,r.cls,r.div,r.med,i.gender,i.cat,i.tongue,i.status,i.dob,i.father,i.mother,i.mobile,i.addr,i.roll,i.gr,i.saral FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise IN ('+uq.map(()=>'?').join(',')+') ORDER BY r.udise,r.cls,r.div,r.name LIMIT 20000').bind(...uq).all()).results;
+    return J({ok:1,rows:q});
+  }
   if(p==='/api/o/tdecide'){
     const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),t=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();
     if(!t||!ok.has(t.udise))return J({e:'na'},403);
