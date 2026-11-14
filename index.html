@@ -201,8 +201,9 @@ function payNow(){var t=pyt.value.trim();if(!t){pym.textContent='व्यवह
 function save(){try{localStorage.setItem(K,JSON.stringify(P))}catch(e){}}
 var cur=null,curL=null;
 function key(s,n){return s.p+'_'+n}
-function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb').innerHTML='';ht.textContent="Abhyas Manch";
- hp.textContent=S&&S.st?((S.st.name||S.st.pen)+' · इयत्ता '+(CAT?CAT.title:'')+' · '+medName(medCode(S.st))+' माध्यम'):(GUEST&&CAT?((PROF&&PROF.p&&PROF.p.name?'👤 '+PROF.p.name:'पाहुणा')+' · इयत्ता '+CAT.title+' · '+medName(GUEST.med)+' माध्यम'):'विषय निवडा');
+function home(){if(!FEEF){FEEF=1;loadFee()}cur=null;document.getElementById('hb').innerHTML=(typeof TV!=='undefined'&&TV)?'<button class="back" onclick="location.href=\'teacher.html\'">← शिक्षक पान</button>':'';ht.textContent="Abhyas Manch";
+ if(typeof TV!=='undefined'&&TV){document.getElementById('ex').style.display='none'}
+ hp.textContent=(typeof TV!=='undefined'&&TV)?'🧒 विद्यार्थी दृश्य · इयत्ता '+TV[1]+' · '+medName(TV[2])+' माध्यम':S&&S.st?((S.st.name||S.st.pen)+' · इयत्ता '+(CAT?CAT.title:'')+' · '+medName(medCode(S.st))+' माध्यम'):(GUEST&&CAT?((PROF&&PROF.p&&PROF.p.name?'👤 '+PROF.p.name:'पाहुणा')+' · इयत्ता '+CAT.title+' · '+medName(GUEST.med)+' माध्यम'):'विषय निवडा');
  var h='<div class="grid">'+aiCard();D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
  h+='<div class="sub" style="--c:'+s.c+';'+subGrad(s.n,s.p,i)+'" onclick="openS('+i+')"><div class="in">'+subPic(s,i)+'<div class="lbl"><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div></div></div>'});
  var fb2=(FEE&&FEE.enabled&&!FEE.paid)?'<button class="les" style="justify-content:center;background:#b45309;color:#fff;border:0;margin-top:12px" onclick="openPay()">🔓 सर्व पाठ अनलॉक करा · ₹'+FEE.fee+'/वर्ष</button>':((FEE&&FEE.enabled&&FEE.paid&&FEE.until)?'<p style="text-align:center;color:#15803d;font-size:13px;margin-top:10px">✔ पेड · मुदत '+FEE.until+'</p>':'');
@@ -319,7 +320,9 @@ function again(){document.getElementById('bye').style.display='none';home()}
 function doReset(){menu(0);var fin=function(){S=null;GUEST=null;PROF=null;P={};try{localStorage.removeItem(SK);localStorage.removeItem(K);localStorage.removeItem('am_guest_v1');localStorage.removeItem('am_prof_v1')}catch(e){}K='am_prog_v1';D=[];CAT=null;view.style.display='none';try{fr.src='about:blank'}catch(e){}cur=null;m.innerHTML='';showLogin('')};
  if(S&&getQ().length){flushQ();setTimeout(fin,1200)}else fin()}
 fetch('status.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.open===false){ksm.textContent=j.msg||'थोड्या वेळाने पुन्हा प्रयत्न करा.';ks.style.display='flex'}}).catch(function(){});
-if(S){loadCat(S.st).then(function(){home();loadMine();flushQ()}).catch(function(){S=null;try{localStorage.removeItem(SK)}catch(e){}home();showLogin('तुमच्या इयत्तेचे पाठ उपलब्ध नाहीत.')})}else if(GUEST){loadCat({className:String(GUEST.cls),medium:medName(GUEST.med)}).then(function(){home()}).catch(function(){GUEST=null;home();showLogin('')})}else{home();showLogin('')}
+var TV=(location.hash.match(/^#view=(\d)-(mr|kn)$/)||0);
+if(TV){PROF=null;S=null;PREV=1;FEEF=1;K='am_prog_tv';P={};GUEST={cls:TV[1],med:TV[2]};loadCat({className:TV[1],medium:medName(TV[2])}).then(function(){home()}).catch(function(){document.getElementById('m').innerHTML='<p style="text-align:center">या इयत्तेचे पाठ उपलब्ध नाहीत.</p><p style="text-align:center"><a href="teacher.html">← शिक्षक पान</a></p>'})}
+else if(S){loadCat(S.st).then(function(){home();loadMine();flushQ()}).catch(function(){S=null;try{localStorage.removeItem(SK)}catch(e){}home();showLogin('तुमच्या इयत्तेचे पाठ उपलब्ध नाहीत.')})}else if(GUEST){loadCat({className:String(GUEST.cls),medium:medName(GUEST.med)}).then(function(){home()}).catch(function(){GUEST=null;home();showLogin('')})}else{home();showLogin('')}
 
 var BK=null,LOD=null,BKK='',LOK='',PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/',PCDN='https://books-cdn.gmnadaf786.workers.dev/';
 function getJ(n){return fetch(BASE+n,{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r.json()})}
