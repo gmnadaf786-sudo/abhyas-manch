@@ -32,6 +32,8 @@ async function teacher(env,b,needOk){
   const x=await env.DB.prepare('SELECT * FROM teachers WHERE token=?').bind(t).first();
   if(!x||(needOk&&x.status!=='ok'))return null;return x;
 }
+let SCOK=false;
+async function schCols(env){if(SCOK)return;for(const c of ['med TEXT','cmin INTEGER','cmax INTEGER']){try{await env.DB.prepare('ALTER TABLE schools ADD COLUMN '+c).run()}catch(e){}}SCOK=true}
 async function gemKey(env){if(env.GEMINI_API_KEY)return env.GEMINI_API_KEY;await slEnsure(env);const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='gemini_key'").first();return(q&&q.v)||''}
 async function gemAsk(env,si,contents,gc){const GK=await gemKey(env);if(!GK)return{e:'nokey'};let last='';
   for(const mo of ['gemini-3.5-flash-lite','gemini-3.5-flash','gemini-3.1-flash-lite']){for(let a=0;a<2;a++){try{
@@ -308,7 +310,7 @@ async function schoolApi(p,r,env){
       st.push(env.DB.prepare('INSERT INTO sch_cmember(udise,cid,id,name,desig,mtype,mobile,joined,active) VALUES(?,?,?,?,?,?,?,?,?)').bind(t.udise,cid,++i,nm,cl(m.desig,30),cl(m.type,40),mo,/^\d{4}-\d\d-\d\d$/.test(m.joined||'')?m.joined:'',m.active==='No'?0:1))}
     await env.DB.batch(st);return J({ok:1,n:i});
   }
-  if(p==='/api/s/me'){const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,udise:t.udise,school:sc?sc.name:'',changed:t.changed?1:0})}
+  if(p==='/api/s/me'){await schCols(env);const sc=await env.DB.prepare('SELECT name,med,cmin,cmax FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,udise:t.udise,school:sc?sc.name:'',med:sc&&sc.med||'',cmin:sc&&sc.cmin||0,cmax:sc&&sc.cmax||0,changed:t.changed?1:0})}
   return J({e:'nf'},404);
 }
 const okDob=s=>/^(19|20)\d\d-\d\d-\d\d$/.test(s)&&!isNaN(Date.parse(s))?s:'';
@@ -599,7 +601,7 @@ async function ext(p,r,env){
     await slEnsure(env);await env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_reg(udise TEXT PRIMARY KEY, sname TEXT, rname TEXT, post TEXT, mobile TEXT, salt TEXT, pw TEXT, status TEXT, ts TEXT, med TEXT, cmin INTEGER, cmax INTEGER)").run();
     if(p==='/api/admin/sreglist')return J({ok:1,rows:(await env.DB.prepare('SELECT udise,sname,rname,post,mobile,status,ts,med,cmin,cmax FROM sch_reg ORDER BY status,ts DESC LIMIT 300').all()).results});
     const u=cl(b.udise,11).replace(/\D/g,''),x=await env.DB.prepare('SELECT * FROM sch_reg WHERE udise=?').bind(u).first();if(!x)return J({e:'nf'},404);
-    if(b.act==='ok'){await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,x.sname),env.DB.prepare('INSERT OR REPLACE INTO school_login(udise,salt,pw,changed,fails) VALUES(?,?,?,1,0)').bind(u,x.salt,x.pw),env.DB.prepare("UPDATE sch_reg SET status='ok' WHERE udise=?").bind(u)]);return J({ok:1})}
+    if(b.act==='ok'){await schCols(env);await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,x.sname),env.DB.prepare('UPDATE schools SET med=?,cmin=?,cmax=? WHERE udise=?').bind(x.med||'',x.cmin||null,x.cmax||null,u),env.DB.prepare('INSERT OR REPLACE INTO school_login(udise,salt,pw,changed,fails) VALUES(?,?,?,1,0)').bind(u,x.salt,x.pw),env.DB.prepare("UPDATE sch_reg SET status='ok' WHERE udise=?").bind(u)]);return J({ok:1})}
     await env.DB.prepare('DELETE FROM sch_reg WHERE udise=?').bind(u).run();return J({ok:1});
   }
   if(p==='/api/t/register'){
