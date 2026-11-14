@@ -145,7 +145,21 @@ async function offApi(p,r,env){
   if(p==='/api/o/sreport'){
     await slEnsure(env);const ks=(Array.isArray(b.f)?b.f:[]).map(x=>cl(x,80)).filter(Boolean).slice(0,200),uq=(Array.isArray(b.us)?b.us:[]).map(u=>cl(u,11).replace(/\D/g,'')).filter(u=>ok.has(u));
     const q=(await env.DB.prepare('SELECT udise,data FROM sch_form').all()).results,F={};q.forEach(x=>F[x.udise]=x.data);
-    return J({ok:1,rows:ss.filter(x=>!uq.length||uq.includes(x.udise)).map(x=>{let o={};try{o=JSON.parse(F[x.udise]||'{}')}catch(e){}const d={};ks.forEach(k=>{if(o[k]!=null&&o[k]!=='')d[k]=o[k]});return{u:x.udise,sc:x.name||'',c:x.code,d}})});
+    const ex=ks.some(k=>k[0]==='@'),SN={},SB={},CK={};
+    if(ex){
+      (await env.DB.prepare('SELECT udise,mhsn,bank,acct,ifsc,branch FROM school_sna').all().catch(()=>({results:[]}))).results.forEach(x=>SN[x.udise]=x);
+      (await env.DB.prepare('SELECT udise,tan,acct FROM school_bank').all().catch(()=>({results:[]}))).results.forEach(x=>SB[x.udise]=x);
+      (await env.DB.prepare('SELECT udise,name,role,gender,bank,ifsc,acct,aadhaar,addr,pin FROM pm_cook ORDER BY udise,name').all().catch(()=>({results:[]}))).results.forEach(x=>(CK[x.udise]=CK[x.udise]||[]).push(x));
+    }
+    const J2=(a,f)=>a.map(f).join('; '),lg=g=>g==='F'?'महिला':g==='M'?'पुरुष':'';
+    return J({ok:1,rows:ss.filter(x=>!uq.length||uq.includes(x.udise)).map(x=>{let o={};try{o=JSON.parse(F[x.udise]||'{}')}catch(e){}const d={};ks.forEach(k=>{if(k[0]!=='@'&&o[k]!=null&&o[k]!=='')d[k]=o[k]});
+      if(ex){const n=SN[x.udise]||{},t=SB[x.udise]||{},c=CK[x.udise]||[],set=(k,v)=>{if(v!=null&&v!==''&&ks.includes(k))d[k]=v};
+        set('@mhsn',n.mhsn);set('@sbank',n.bank);set('@sbranch',n.branch);set('@sacct',n.acct);set('@sifsc',n.ifsc);set('@tan',t.tan);set('@tacct',t.acct);
+        if(ks.includes('@cn'))d['@cn']=String(c.length);
+        set('@cnames',J2(c,y=>y.name));set('@crole',J2(c,y=>(y.role==='madatnis'?'मदतनीस':'स्वयंपाकी')+(lg(y.gender)?' ('+lg(y.gender)+')':'')));
+        set('@cbank',J2(c,y=>[y.bank,y.acct,y.ifsc].filter(Boolean).join(', ')));set('@caddr',J2(c,y=>[y.addr,y.pin].filter(Boolean).join(' ')));
+        set('@cadh',J2(c,y=>y.aadhaar?'XXXX-XXXX-'+String(y.aadhaar).slice(-4):''));}
+      return{u:x.udise,sc:x.name||'',c:x.code,d}})});
   }
   if(p==='/api/o/vreport'){
     const uq=(Array.isArray(b.us)?b.us:[]).map(u=>cl(u,11).replace(/\D/g,'')).filter(u=>ok.has(u)).slice(0,90);
