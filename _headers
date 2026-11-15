@@ -1,0 +1,4 @@
+# Lessons may only be shown inside Abhyas Manch itself, not embedded by other websites.
+/content/*
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN
