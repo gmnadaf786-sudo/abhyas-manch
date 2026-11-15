@@ -468,4 +468,7 @@ function ndR(p){d.innerHTML=back('नोंदवही')+'<div class="card">ल
  d.innerHTML='<div class="noprint"><button class="g" onclick="rsS(1)">← अहवाल</button><h2 style="margin:4px 0 8px">नोंदवही — '+ndTn(p)+'</h2><div class="chips">'+[1,2,3].map(function(t){return '<button class="'+(t===p?'s':'g')+'" onclick="ndR('+t+')">'+tnm(t)+'</button>'}).join('')+'</div><button onclick="window.print()">🖨 प्रिंट / PDF ('+tot_+' पाने)</button><small>मुखपृष्ठ · अनुक्रमणिका · उपस्थिती · आरोग्य · प्रत्येक विद्यार्थ्याचे मूल्यमापन पत्रक व वर्णनात्मक वही.</small></div>'+cover+idxAll+attPages+hPages+stu
  },'नोंदवही')},'नोंदवही')},'नोंदवही')},'नोंदवही')})})}
 load();
-</script><script src="hpc.js?v=363"></script></main></body></html>
+
+(function(){function fx(){document.querySelectorAll('.chips').forEach(function(c){var b=c.querySelector('button.s');if(b&&c.scrollWidth>c.clientWidth)c.scrollLeft=b.offsetLeft-(c.clientWidth-b.offsetWidth)/2})}
+new MutationObserver(function(){setTimeout(fx,0)}).observe(d,{childList:true});fx()})();
+</script><script src="hpc.js?v=364"></script></main></body></html>
