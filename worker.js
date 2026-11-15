@@ -437,7 +437,10 @@ async function pmApi(p,r,env){
     const rc=(await env.DB.prepare('SELECT id,date,supplier,challan,items,remark,img FROM pm_rcpt WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
     const hol=(await env.DB.prepare('SELECT id,d1,d2,name,type FROM hol ORDER BY d1').all()).results;
-    return J({ok:1,fy,udise:u,school:sc?sc.name:'',teacher:by,daily:d,stock:st,rcpt:rc,hol,rate:(await env.DB.prepare('SELECT d,r15,r68 FROM pm_rate ORDER BY d').all()).results,sg:await pmSg(env,u),cookn:((await env.DB.prepare('SELECT COUNT(*) c FROM pm_cook WHERE udise=?').bind(u).first())||{}).c||0});
+    const kc=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(u).first().catch(()=>null);
+    const pd=(await env.DB.prepare("SELECT date,p15,p68,pulse15,pulse68,cooked FROM pm_daily WHERE udise=? AND date<? AND date>='2020-04-01' ORDER BY date").bind(u,fy+'-04-01').all()).results;
+    const ps=(await env.DB.prepare("SELECT month,grp,data FROM pm_stock WHERE udise=? AND month<? AND month>='2020-04'").bind(u,fy+'-04').all()).results;
+    return J({ok:1,fy,udise:u,school:sc?sc.name:'',kendra:kc&&CEN[kc.code]?CEN[kc.code]:'',prev:{daily:pd,stock:ps},teacher:by,daily:d,stock:st,rcpt:rc,hol,rate:(await env.DB.prepare('SELECT d,r15,r68 FROM pm_rate ORDER BY d').all()).results,sg:await pmSg(env,u),cookn:((await env.DB.prepare('SELECT COUNT(*) c FROM pm_cook WHERE udise=?').bind(u).first())||{}).c||0});
   }
   if(p==='/api/pm/savemonth'){
     const month=cl(b.month,7);if(!/^\d{4}-\d{2}$/.test(month))return J({e:'month'},400);

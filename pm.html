@@ -43,7 +43,11 @@ var BYN='';function init(){try{T=sessionStorage.getItem('am_s')||'';BYN=sessionS
  var n=new Date(Date.now()+19800000);MON=n.toISOString().slice(0,7);load()}
 function load(){var fy=fyOf(MON);X.innerHTML='<p class="m">लोड होत आहे…</p>';post('/api/pm/year',{fy:fy}).then(function(j){
  if(!j.ok){X.innerHTML='<div class="card"><p class="er">'+(j.$s===401||j.$s===403?'सत्र संपले. शाळा पानावर जाऊन पुन्हा लॉगिन करा.':'लोड झाले नाही. पुन्हा प्रयत्न करा.')+'</p><button onclick="location.href=\'school.html\'">शाळा पान</button></div>';return}
- Y=j;window.PMHOL=j.hol||[];window.PMRATE=j.rate||[];window.PMCOOKN=j.cookn||0;window.PMSG=j.sg||'both';if(sg()!=='both'){GRP=sg();RG=sg()}SD={};j.daily.forEach(function(r){SD[r.date]=r});E={};document.getElementById('sch').textContent=(j.school||'')+' · UDISE '+j.udise;draw()})}
+ Y=j;Y.carry=carryCalc(j.prev||{},j.fy);geoSet();window.PMHOL=j.hol||[];window.PMRATE=j.rate||[];window.PMCOOKN=j.cookn||0;window.PMSG=j.sg||'both';if(sg()!=='both'){GRP=sg();RG=sg()}SD={};j.daily.forEach(function(r){SD[r.date]=r});E={};document.getElementById('sch').textContent=(j.school||'')+' · UDISE '+j.udise;draw()})}
+var GEO=null;
+function geoSet(){var u=String((Y&&Y.udise)||'');if(!u)return;var apply=function(){if(!GEO||!Y)return;var hit=[],ex=null;GEO.forEach(function(d){(d.t||[]).forEach(function(t){(t.k||[]).forEach(function(k){if(k[1]===u)ex=[d.n,t.n];if(String(k[1]).slice(0,6)===u.slice(0,6)&&!hit.some(function(h){return h[0]===d.n&&h[1]===t.n}))hit.push([d.n,t.n])})})});
+  var r=ex||(hit.length===1?hit[0]:null);if(r){Y.district=r[0];Y.taluka=r[1]}};
+ if(GEO)return apply();fetch('geo.json').then(function(r){return r.json()}).then(function(g){GEO=g;apply()}).catch(function(){})}
 function draw(){var t=[['d','📅 दैनिक नोंद'],['s','📦 साठा'],['r','🧾 पावती'],['p','⚖️ प्रमाण/मेनू'],['a','🖨️ अहवाल'],['c','🧮 धान्य हिशेब'],['b','📏 BMI'],['k','👩‍🍳 स्वयंपाकी'],['cal','🗓️ दिनदर्शिका']];
  X.innerHTML='<div class="tabs">'+t.map(function(x){return '<button class="'+(TAB===x[0]?'on':'')+'" onclick="'+(x[0]==='cal'?'calOpen()':'TAB=\''+x[0]+'\';draw()')+'">'+x[1]+'</button>'}).join('')+'</div>'+
  (TAB==='p'||TAB==='c'||TAB==='b'||TAB==='k'?'':'<div class="card"><input type="month" id="mo" value="'+MON+'" onchange="chm(this.value)" style="width:100%"></div>')+'<div id="b"></div>';
@@ -186,25 +190,32 @@ function dsave(){var es=[];for(var k in E){es.push(E[k])}var er=document.getElem
 function ddel(date){if(!confirm('ही नोंद रद्द करायची?'))return;post('/api/pm/ddel',{date:date}).then(function(j){if(j.ok)load();else alert('अयशस्वी')})}
 /* ---------- साठा ---------- */
 var NORM={'15':{rice:0.1,pulse:0.02,oil:0.005495,sp:1},'68':{rice:0.15,pulse:0.03,oil:0.008242,sp:2}};
-function usedFor(month,g){var u={};ITEMS.forEach(function(i){u[i]=0});var N=NORM[g];
- Y.daily.concat(Object.keys(E).map(function(k){return null})).forEach(function(r){if(!r||r.date.slice(0,7)!==month||r.cooked==='नाही')return;var n=g==='15'?r.p15:r.p68;if(!n)return;
+function usedFor(month,g,rows){var u={};ITEMS.forEach(function(i){u[i]=0});var N=NORM[g];
+ (rows||Y.daily).forEach(function(r){if(!r||r.date.slice(0,7)!==month||r.cooked==='नाही')return;var n=g==='15'?r.p15:r.p68;if(!n)return;
   u['तांदूळ']+=n*N.rice;var pl=pulseNorm(g==='15'?r.pulse15:r.pulse68);if(u[pl]!=null&&pl!=='तांदूळ')u[pl]+=n*N.pulse;SPICES.forEach(function(s){u[s[0]]+=n*s[N.sp]});u['तेल']+=n*N.oil});return u}
-function stk(month,g){for(var i=0;i<Y.stock.length;i++){var s=Y.stock[i];if(s.month===month&&s.grp===g){try{return JSON.parse(s.data)}catch(e){}}}return {}}
+function stkIn(list,month,g){for(var i=0;i<list.length;i++){var s=list[i];if(s.month===month&&s.grp===g){try{return JSON.parse(s.data)}catch(e){}}}return {}}
+function stk(month,g){return stkIn(Y.stock,month,g)}
+/* मागील शैक्षणिक वर्षांची मार्च अखेर शिल्लक → चालू वर्षाच्या एप्रिलची मागील शिल्लक */
+function carryCalc(prev,fy){var out={},ms=[],f0=fy;(prev.daily||[]).forEach(function(r){f0=Math.min(f0,fyOf(r.date.slice(0,7)))});(prev.stock||[]).forEach(function(s){f0=Math.min(f0,fyOf(s.month))});
+ for(var f=f0;f<fy;f++)ms=ms.concat(fyMonths(f));
+ ['15','68'].forEach(function(g){var c=null;ms.forEach(function(m){var d=stkIn(prev.stock||[],m,g),u=usedFor(m,g,prev.daily||[]),n={};ITEMS.forEach(function(it){var e=d[it]||{},o=e.o!=null?e.o:(c?c[it]:0);n[it]=(o||0)+(e.r||0)+(e.p||0)-u[it]});c=n});
+  if(c){ITEMS.forEach(function(it){c[it]=Math.round(c[it]*1e6)/1e6});out[g]=c}});return out}
+function prevClose(month,g){var ms=fyMonths(fyOf(month)),idx=ms.indexOf(month);return idx>0?closing(ms[idx-1],g):((Y.carry||{})[g]||null)}
 function stockOf(month,g){var k=month+'|'+g;return SD2[k]||stk(month,g)}
 var SD2={};
-function closing(month,g){var ms=fyMonths(fyOf(month)),idx=ms.indexOf(month),d=stockOf(month,g),u=usedFor(month,g),prev=idx>0?closing(ms[idx-1],g):null,c={};
+function closing(month,g){var d=stockOf(month,g),u=usedFor(month,g),prev=prevClose(month,g),c={};
  ITEMS.forEach(function(it){var e=d[it]||{},o=e.o!=null?e.o:(prev?prev[it]:0);c[it]=(o||0)+(e.r||0)+(e.p||0)-u[it]});return c}
-function sTab(){var d=stockOf(MON,GRP),u=usedFor(MON,GRP),ms=fyMonths(fyOf(MON)),idx=ms.indexOf(MON),prev=idx>0?closing(ms[idx-1],GRP):null,rc=rcptTotals(MON,GRP);
+function sTab(){var d=stockOf(MON,GRP),u=usedFor(MON,GRP),prev=prevClose(MON,GRP),rc=rcptTotals(MON,GRP);
  var h=seg(GRP,"GRP='@';draw()")+
  '<div class="card"><span class="lab">'+(GRP==='15'?'१–५':'६–८')+' – महिन्याची पटसंख्या</span><input id="pat" type="number" class="n" value="'+(d._pat?d._pat.o:'')+'" style="width:140px">'+
- '<p class="m" style="font-size:12px;margin:6px 0 0">मागील शिल्लक रिकामी सोडल्यास मागील महिन्याची अखेरची शिल्लक आपोआप येते. वापर = दैनिक नोंदीतील उपस्थिती × प्रमाण. लोकसहभाग = गावकऱ्यांकडून मिळालेला माल.</p></div>'+
+ '<p class="m" style="font-size:12px;margin:6px 0 0">मागील शिल्लक रिकामी सोडल्यास मागील महिन्याची अखेरची शिल्लक आपोआप येते (एप्रिलमध्ये मागील वर्षाची मार्च अखेर शिल्लक). वापर = दैनिक नोंदीतील उपस्थिती × प्रमाण. लोकसहभाग = गावकऱ्यांकडून मिळालेला माल.</p></div>'+
  '<div class="card st w"><table><tr><th>जिन्नस (किग्रॅ/लि.)</th><th>मागील</th><th>प्राप्त</th><th>लोक.</th><th>वापर</th><th>शिल्लक</th></tr>'+
  ITEMS.map(function(it,i){var e=d[it]||{},auto=prev?prev[it]:0,o=e.o!=null?e.o:auto,cl=(o||0)+(e.r||0)+(e.p||0)-u[it];
   return '<tr><td>'+esc(it)+(rc[it]?' <small>(पावती '+fmt(rc[it])+')</small>':'')+'</td><td><input type="number" step="any" data-k="o" data-i="'+i+'" placeholder="'+fmt(auto)+'" value="'+(e.o!=null?e.o:'')+'" oninput="srecalc()"></td><td><input type="number" step="any" min="0" data-k="r" data-i="'+i+'" value="'+(e.r!=null?e.r:'')+'" oninput="srecalc()"></td><td><input type="number" step="any" min="0" data-k="p" data-i="'+i+'" value="'+(e.p!=null?e.p:'')+'" oninput="srecalc()"></td><td id="su'+i+'">'+fmt(u[it])+'</td><td id="sc'+i+'" class="'+(cl<-0.0005?'neg':'')+'"><b>'+fmt(cl)+'</b></td></tr>'}).join('')+'</table></div>'+
  '<div class="r"><button class="g" onclick="sfill()">🧾 पावत्यांवरून प्राप्त भरा</button></div><div class="sv"><p id="e" class="er"></p><button onclick="ssave()">💾 साठा जतन करा</button></div>';
  document.getElementById('b').innerHTML=h}
 function sread(){var d={};document.querySelectorAll('#b .st input').forEach(function(el){var v=el.value.trim();if(v==='')return;var it=ITEMS[+el.dataset.i];(d[it]=d[it]||{})[el.dataset.k]=Number(v)});var pt=document.getElementById('pat').value.trim();if(pt!=='')d._pat={o:Number(pt)};return d}
-function srecalc(){var d=sread(),u=usedFor(MON,GRP),ms=fyMonths(fyOf(MON)),idx=ms.indexOf(MON),prev=idx>0?closing(ms[idx-1],GRP):null;ITEMS.forEach(function(it,i){var e=d[it]||{},o=e.o!=null?e.o:(prev?prev[it]:0),cl=(o||0)+(e.r||0)+(e.p||0)-u[it],c=document.getElementById('sc'+i);c.innerHTML='<b>'+fmt(cl)+'</b>';c.className=cl<-0.0005?'neg':''})}
+function srecalc(){var d=sread(),u=usedFor(MON,GRP),prev=prevClose(MON,GRP);ITEMS.forEach(function(it,i){var e=d[it]||{},o=e.o!=null?e.o:(prev?prev[it]:0),cl=(o||0)+(e.r||0)+(e.p||0)-u[it],c=document.getElementById('sc'+i);c.innerHTML='<b>'+fmt(cl)+'</b>';c.className=cl<-0.0005?'neg':''})}
 function sfill(){var rc=rcptTotals(MON,GRP);document.querySelectorAll('#b .st input[data-k="r"]').forEach(function(el){var it=ITEMS[+el.dataset.i];if(rc[it])el.value=rc[it]});srecalc()}
 function ssave(){var d=sread(),er=document.getElementById('e');er.className='m';er.textContent='जतन होत आहे…';post('/api/pm/stocksave',{month:MON,grp:GRP,data:d}).then(function(j){if(j.ok){SD2[MON+'|'+GRP]=d;load()}else{er.className='er';er.textContent='जतन झाले नाही ('+(j.m||j.e||'')+')'}})}
 /* ---------- पावती ---------- */

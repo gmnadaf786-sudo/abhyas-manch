@@ -55,7 +55,7 @@ function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt
 
   /* वर्षारंभापासून (एप्रिल) प्रत्येक महिन्याची शिल्लक साखळी. */
   function compute(fy, group){
-    var Y=state.year[fy], out={}, prev=null;
+    var Y=state.year[fy], out={}, prev=(Y.carry&&Y.carry[group])||null;
     fyMonths(fy).forEach(function(m){
       var st=((Y.stockBy[m]||{})[group])||{}, used=consumption(Y.dailyBy[m]||[],group);
       var o={},ov={},r={},p={},c={},carry={};
@@ -283,7 +283,7 @@ function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt
     }catch(e){}
   }
 function build(raw,month){
-  var fy=fyOf(month),Y={school:{name:raw.school||'',udise:raw.udise||'',kendra:raw.kendra||'',taluka:'जत',district:'सांगली'},teacher:raw.teacher||'',dailyBy:{},stockBy:{}};
+  var fy=fyOf(month),Y={school:{name:raw.school||'',udise:raw.udise||'',kendra:raw.kendra||'',taluka:raw.taluka||'',district:raw.district||''},teacher:raw.teacher||'',dailyBy:{},stockBy:{},carry:raw.carry||{}};
   (raw.daily||[]).forEach(function(d){var o={date:d.date,menu:d.menu||'',p15:Number(d.p15)||0,p68:Number(d.p68)||0,pulse15:d.pulse15||'',pulse68:d.pulse68||'',cooked:d.cooked||'होय',supplement:d.supp||'',tasteTime:d.taste||'',distTime:d.dist||'',taster:d.taster||'',remark:d.remark||'',sample:d.sample||''};(Y.dailyBy[monthOf(d.date)]=Y.dailyBy[monthOf(d.date)]||[]).push(o)});
   (raw.stock||[]).forEach(function(x){var dd={};try{dd=JSON.parse(x.data)}catch(e){}(Y.stockBy[x.month]=Y.stockBy[x.month]||{})[x.grp]=dd});
   state.year={};state.year[fy]=Y;state.month=month;
