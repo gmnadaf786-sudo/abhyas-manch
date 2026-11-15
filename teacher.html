@@ -454,4 +454,7 @@ function addgo(c,dv,ud){var rows=[];at.value.split('\n').forEach(function(l){var
 try{var t0=sessionStorage.getItem('am_t');if(t0){T=t0;document.getElementById('lg').style.display='none';d.style.display='block';d.innerHTML='<p style="padding:20px">⏳ लोड होत आहे…</p>';post('/api/t/classes',{}).then(function(j){if(j.ok)home();else{T='';show('lg')}}).catch(function(){T='';show('lg')})}}catch(x){}
 (function(){var tm;function fx(){document.querySelectorAll('.chips,.tabs').forEach(function(c){var b=c.querySelector('button.s,button.on,.chip.on');if(b&&c.scrollWidth>c.clientWidth)c.scrollLeft=b.offsetLeft-(c.clientWidth-b.offsetWidth)/2})}
 new MutationObserver(function(){clearTimeout(tm);tm=setTimeout(fx,0)}).observe(document.body,{childList:true,subtree:true})})();
-</script></main></body></html>
+
+window.pdfAuto=function(){var c=document.querySelector('#prt,#pv'),h=c&&c.querySelector('h1,h2,h3,h4,b'),t=h?h.textContent:(document.querySelector('#d h2,#d h3')||{}).textContent||'';
+ var tn='';try{tn=sessionStorage.getItem('am_tn')||''}catch(e){}var sc=(window.HJ&&HJ.school)||'';return [t||'अभ्यास मंच',tn,sc,new Date().toISOString().slice(0,10)].filter(Boolean).join(' - ')};
+</script><script src="pdf.js?v=1"></script></main></body></html>

@@ -120,4 +120,6 @@ function csvSum(){var R=cur();save('shala_sthiti.csv',[['UDISE','शाळा','
 function csvInfo(){var R=cur().filter(function(r){return r.fn}),us=R.map(function(r){return r.u});if(!us.length){alert('कोणत्याही शाळेने माहिती भरलेली नाही.');return}var all=[],i=0;sch().then(function(fs){(function nx(){if(i>=us.length){fin(fs,all);return}api('/api/o/form',{udise:us.slice(i,i+40)}).then(function(j){all=all.concat(j.rows||[]);i+=40;nx()})})()})}
 function fin(fs,all){var seen={},items=all.map(function(r){var o={};try{o=JSON.parse(r.data)}catch(e){}return{r:r,L:rowsOf(o,fs)}}),nm=[];items.forEach(function(it){it.L.forEach(function(x){seen[x[0]]=1})});fs.forEach(function(f){if(f.t==='photo'||f.t==='file')return;if(f.c.indexOf('{n}')>=0){for(var n=1;n<=10;n++)nm.push(f.c.replace('{n}',n)+' – '+f.h)}else nm.push(f.c+' – '+f.h)});var cols=nm.filter(function(c){return seen[c]}),rows=[['UDISE','शाळा','स्थिती','जतन दिनांक','भरणारे'].concat(cols)];items.forEach(function(it){var m={};it.L.forEach(function(x){m[x[0]]=x[1]});rows.push([it.r.udise,it.r.sc||'',it.r.submitted?'सादर':'अपूर्ण',it.r.upd,it.r.by||''].concat(cols.map(function(c){return m[c]})))});save('shala_mahiti.csv',rows)}
 T=sg('o_t');U=sg('o_u');LB=sg('o_l');ROLE=sg('o_r');if(T&&U)load();else loginUi();
-</script></body></html>
+
+window.pdfAuto=function(){var c=document.querySelector('#pv'),h=c&&c.querySelector('h1,h2,h3,h4'),t=h?h.textContent:'';return [t||'अहवाल','अभ्यास मंच',new Date().toISOString().slice(0,10)].join(' - ')};
+</script><script src="pdf.js?v=1"></script></body></html>

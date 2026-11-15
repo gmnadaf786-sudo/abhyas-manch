@@ -505,4 +505,10 @@ load();
 
 (function(){function fx(){document.querySelectorAll('.chips').forEach(function(c){var b=c.querySelector('button.s');if(b&&c.scrollWidth>c.clientWidth)c.scrollLeft=b.offsetLeft-(c.clientWidth-b.offsetWidth)/2})}
 new MutationObserver(function(){setTimeout(fx,0)}).observe(d,{childList:true});fx()})();
-</script><script src="hpc.js?v=364"></script></main></body></html>
+
+window.pdfAuto=function(){var h=document.querySelector('#d h2'),t=h?h.textContent:'',nm='';
+ [].forEach.call(document.querySelectorAll('#d select'),function(sl){var o0=sl.options[0];if(!nm&&o0&&/^सर्व/.test(o0.text)&&sl.value&&sl.selectedOptions[0])nm=sl.selectedOptions[0].text.replace(/\s*\(\d+\)\s*$/,'').replace(/^\d+\.\s*/,'')});
+ if(!t&&document.querySelector('#d .hp,#d .hpc'))t='HPC';var sc=(get(0,'set','')||{}).school||'',tm='';
+ [].forEach.call(document.querySelectorAll('#d button.s'),function(b){if(!tm&&/सत्र|वार्षिक/.test(b.textContent))tm=b.textContent.trim()});
+ return [t||'CCE',tm&&t.indexOf(tm)<0?tm:'',nm,'इ. '+CL+' '+DV,sc,YR].filter(Boolean).join(' - ')};
+</script><script src="pdf.js?v=1"></script><script src="hpc.js?v=365"></script></main></body></html>
