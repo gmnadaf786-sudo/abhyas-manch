@@ -6,11 +6,20 @@ input,select,button,textarea{font:inherit;padding:9px 10px;border-radius:10px;bo
 input:focus,select:focus{outline:0;border-color:var(--a);box-shadow:0 0 0 3px rgba(15,118,110,.2)}
 button{background:var(--a);color:#fff;border:0;cursor:pointer;font-weight:600}button.g{background:var(--c);color:var(--a);border:1.5px solid var(--a)}button.d{background:#fff;color:#b91c1c;border:1.5px solid #b91c1c}
 .seg{display:flex;width:max-content;max-width:100%;margin:6px auto 10px;border:2px solid var(--a);border-radius:16px;overflow:hidden}.seg button{border:0;border-radius:0;background:#fff;color:var(--a);font-weight:700;padding:10px 18px;font-size:16px}.seg button.on{background:var(--a);color:#fff}
-.tabs{display:flex;gap:6px;overflow-x:auto;margin:10px 0}.tabs button{white-space:nowrap;background:var(--c);color:var(--a);border:1.5px solid var(--a)}.tabs button.on{background:var(--a);color:#fff}
 .r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.r>*{flex:1;min-width:0}small,.m{color:var(--m)}.er{color:#b91c1c}.ok{color:#15803d}
 .day{border-bottom:1px solid var(--l);padding:10px 0}.day:last-child{border:0}.dh{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}.dh b{font-size:15px}
 .n{width:100%}.lab{font-size:12px;color:var(--m);margin:6px 0 2px;display:block}.chip{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--ab);color:var(--a);font-size:12px;font-weight:700}
-.sv{position:sticky;bottom:0;background:var(--bg);padding:8px 0}.sv button{width:100%;padding:12px}
+.sv{position:sticky;bottom:calc(64px + env(safe-area-inset-bottom));background:var(--bg);padding:8px 0;z-index:5}.sv button{width:100%;padding:12px}
+main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.bn{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--c);border-top:1px solid var(--l);display:flex;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 10px rgba(0,0,0,.08)}
+.bn button{flex:1;min-width:0;background:none;color:var(--m);border:0;border-top:3px solid transparent;border-radius:0;padding:6px 2px 7px;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;font-weight:700;position:relative}
+.bn button i{font-style:normal;font-size:22px;line-height:1.1}.bn button.on{color:var(--a);border-top-color:var(--a);background:var(--ab)}
+.bn .dot{position:absolute;top:6px;left:calc(50% + 8px);width:10px;height:10px;border-radius:50%;background:#f97316;border:2px solid var(--c)}
+.mb{display:flex;align-items:center;gap:8px;margin:10px 0}.mb>button{width:48px;height:44px;padding:0;font-size:22px;flex:none}
+.mb .ml{flex:1;position:relative;text-align:center;font-weight:700;font-size:17px;padding:9px 6px;border:1.5px solid var(--l);border-radius:10px;background:var(--c)}.mb .ml input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+.shb{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:45}.shp{position:fixed;left:0;right:0;bottom:0;z-index:46;background:var(--c);border-radius:18px 18px 0 0;padding:8px 12px calc(14px + env(safe-area-inset-bottom));max-width:760px;margin:0 auto}
+.shp .hd{width:40px;height:5px;border-radius:3px;background:var(--l);margin:4px auto 10px}.shp button{width:100%;display:flex;align-items:center;gap:14px;background:none;color:var(--i);border:0;border-bottom:1px solid var(--l);border-radius:0;padding:14px 8px;font-size:16px;text-align:left}.shp button i{font-style:normal;font-size:24px}.shp button.on{color:var(--a);background:var(--ab)}
+@media(min-width:700px){.bn{position:sticky;top:0;bottom:auto;border:1px solid var(--l);border-radius:12px;margin:10px 0;box-shadow:none}.bn button{flex-direction:row;gap:6px;font-size:14px;min-height:46px;border-top:0;border-bottom:3px solid transparent}.bn button.on{border-bottom-color:var(--a)}.bn .dot{top:8px;left:auto;right:8px}.sv{bottom:0}main{padding-bottom:14px}}
 table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:5px 3px;border-bottom:1px solid var(--l);text-align:right;white-space:nowrap}td:first-child,th:first-child{text-align:left;white-space:normal}th{color:var(--m)}.w{overflow-x:auto}
 .st input{width:66px;padding:6px 4px;text-align:right}.neg{color:#b91c1c;font-weight:700}
 .dim{opacity:.45;pointer-events:none}
@@ -48,15 +57,27 @@ var GEO=null;
 function geoSet(){var u=String((Y&&Y.udise)||'');if(!u)return;var apply=function(){if(!GEO||!Y)return;var hit=[],ex=null;GEO.forEach(function(d){(d.t||[]).forEach(function(t){(t.k||[]).forEach(function(k){if(k[1]===u)ex=[d.n,t.n];if(String(k[1]).slice(0,6)===u.slice(0,6)&&!hit.some(function(h){return h[0]===d.n&&h[1]===t.n}))hit.push([d.n,t.n])})})});
   var r=ex||(hit.length===1?hit[0]:null);if(r){Y.district=r[0];Y.taluka=r[1]}};
  if(GEO)return apply();fetch('geo.json').then(function(r){return r.json()}).then(function(g){GEO=g;apply()}).catch(function(){})}
-function draw(){var t=[['d','📅 दैनिक नोंद'],['s','📦 साठा'],['r','🧾 पावती'],['p','⚖️ प्रमाण/मेनू'],['a','🖨️ अहवाल'],['c','🧮 धान्य हिशेब'],['b','📏 BMI'],['k','👩‍🍳 स्वयंपाकी'],['cal','🗓️ दिनदर्शिका']];
- X.innerHTML='<div class="tabs">'+t.map(function(x){return '<button class="'+(TAB===x[0]?'on':'')+'" onclick="'+(x[0]==='cal'?'calOpen()':'TAB=\''+x[0]+'\';draw()')+'">'+x[1]+'</button>'}).join('')+'</div>'+
- (TAB==='p'||TAB==='c'||TAB==='b'||TAB==='k'?'':'<div class="card"><input type="month" id="mo" value="'+MON+'" onchange="chm(this.value)" style="width:100%"></div>')+'<div id="b"></div>';
- ({d:dTab,s:sTab,r:rTab,p:pTab,a:aTab,c:calcTab,b:bmiTab,k:cookTab})[TAB]();var on=document.querySelector('.tabs button.on');if(on&&on.scrollIntoView)try{on.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}}
+/* ---------- खालचा मेनू ---------- */
+var NAV=[['d','📅','दैनिक'],['s','📦','साठा'],['r','🧾','पावती'],['a','🖨️','अहवाल']],MORE=[['c','🧮','धान्य हिशेब'],['p','⚖️','प्रमाण / मेनू'],['b','📏','BMI'],['k','👩‍🍳','स्वयंपाकी व शाळा तपशील'],['cal','🗓️','दिनदर्शिका']];
+function navH(){var m=MORE.filter(function(x){return x[0]===TAB})[0];
+ return '<nav class="bn">'+NAV.map(function(x){return '<button class="'+(TAB===x[0]?'on':'')+'" onclick="tabGo(\''+x[0]+'\')"><i>'+x[1]+'</i>'+x[2]+(x[0]==='d'?'<span class="dot" id="ndot" style="display:none"></span>':'')+'</button>'}).join('')+
+ '<button class="'+(m?'on':'')+'" onclick="moreOpen()"><i>'+(m?m[1]:'⋯')+'</i>'+(m?esc(m[2].split(' ')[0]):'अधिक')+'</button></nav>'}
+function navDot(){var x=document.getElementById('ndot');if(x)x.style.display=Object.keys(E).length?'':'none'}
+function tabGo(t){moreClose();if(t==='cal'){calOpen();return}if(t===TAB)return;
+ if(TAB==='d'&&Object.keys(E).length&&!confirm('दैनिक नोंदीतील बदल अजून जतन केलेले नाहीत. दुसऱ्या विभागात काही जतन केल्यास ते बदल जातील.\n\nतरीही पुढे जायचे?'))return;
+ TAB=t;draw();window.scrollTo(0,0)}
+function moreOpen(){moreClose();var w=document.createElement('div');w.id='more';w.innerHTML='<div class="shb" onclick="moreClose()"></div><div class="shp"><div class="hd"></div>'+MORE.map(function(x){return '<button class="'+(TAB===x[0]?'on':'')+'" onclick="tabGo(\''+x[0]+'\')"><i>'+x[1]+'</i>'+x[2]+'</button>'}).join('')+'</div>';document.body.appendChild(w)}
+function moreClose(){var w=document.getElementById('more');if(w)w.remove()}
+function mLabel(m){return MN[+m.slice(5,7)-1]+' '+pn(m.slice(0,4))}
+function mShift(n){var p=MON.split('-'),d=new Date(+p[0],+p[1]-1+n,1);chm(ymd(d).slice(0,7))}
+function draw(){var mb=TAB==='d'||TAB==='s'||TAB==='r'||TAB==='a';
+ X.innerHTML=navH()+(mb?'<div class="mb"><button class="g" onclick="mShift(-1)" aria-label="मागील महिना">‹</button><label class="ml">📆 '+mLabel(MON)+'<input type="month" id="mo" value="'+MON+'" onchange="chm(this.value)"></label><button class="g" onclick="mShift(1)" aria-label="पुढील महिना"'+(MON>=today().slice(0,7)?' disabled style="opacity:.4"':'')+'>›</button></div>':'')+'<div id="b"></div>';
+ ({d:dTab,s:sTab,r:rTab,p:pTab,a:aTab,c:calcTab,b:bmiTab,k:cookTab})[TAB]();navDot()}
 var RG='15';
 function aTab(){var b=document.getElementById('b'),bt=function(k,l){return '<button onclick="rp(\''+k+'\')" style="margin:4px 0;width:100%">'+l+'</button>'};
  b.innerHTML='<div class="card"><b>गट</b>'+seg(RG,"RG='@';aTab()")+''+bt('p1','नोंदवही भाग १ (तांदूळ)')+bt('p2','नोंदवही भाग २ (मान्यादी माल)')+bt('b','प्रपत्र ब')+bt('taste','चव नोंदवही')+bt('annual','वार्षिक उपयोगिता (शै. वर्ष)')+bt('all','सर्व मासिक रिपोर्ट एकत्र (दोन्ही गट)')+'<p class="m">प्रिंट विंडोतून PDF म्हणून सेव्ह करता येईल. वरील महिना निवडा.</p></div>'}
 function rp(k){if(!window.PMREP){alert('अहवाल लोड होत आहे…');return}try{PMREP.print(k,MON,RG,Y)}catch(e){alert('त्रुटी: '+e.message)}}
-function chm(v){if(!v)return;var o=fyOf(MON);if(fyOf(v)!==o&&Object.keys(E).length&&!confirm('दैनिक नोंदीतील बदल अजून जतन केलेले नाहीत. दुसऱ्या वर्षात गेल्यास ते जातील. पुढे जायचे?')){document.getElementById('mo').value=MON;return}MON=v;if(fyOf(v)!==o)load();else draw()}
+function chm(v){if(!v||v===MON)return;if(v>today().slice(0,7))v=today().slice(0,7);var o=fyOf(MON);if(fyOf(v)!==o&&Object.keys(E).length&&!confirm('दैनिक नोंदीतील बदल अजून जतन केलेले नाहीत. दुसऱ्या वर्षात गेल्यास ते जातील. पुढे जायचे?')){document.getElementById('mo').value=MON;return}MON=v;if(fyOf(v)!==o)load();else draw()}
 
 /* ---------- SMS / धान्य हिशेब / BMI ---------- */
 var SMSR='9223166166',SMSC={'मुगडाळ':'MD','तूरडाळ':'TD','आख्खा मूग':'MD','मूग':'MD','मटकी':'MT','मसूरडाळ':'MSD','चवळी':'CH','हरभरा':'HB','वाटाणा':'VT','हिरवा वाटाणा':'VT','सोयाबडी':'SB'};
@@ -170,7 +191,7 @@ function dTab(){var p=MON.split('-'),y=+p[0],m=+p[1]-1,last=new Date(y,m+1,0).ge
    '<details style="margin-top:6px"><summary class="m">चव / वाटप / शेरा</summary><div class="r"><div><span class="lab">चव घेतल्याची वेळ</span><input class="n" type="time" value="'+esc(e.tasteTime)+'" onchange="dset(\''+date+'\',\'tasteTime\',this.value)"></div><div><span class="lab">वाटप वेळ</span><input class="n" type="time" value="'+esc(e.distTime)+'" onchange="dset(\''+date+'\',\'distTime\',this.value)"></div></div><span class="lab">चव घेणारे</span><input class="n" value="'+esc(e.taster)+'" oninput="dset(\''+date+'\',\'taster\',this.value)"><span class="lab">शेरा</span><input class="n" value="'+esc(e.remark)+'" oninput="dset(\''+date+'\',\'remark\',this.value)"><span class="lab">पूरक आहार</span><input class="n" value="'+esc(e.supplement)+'" oninput="dset(\''+date+'\',\'supplement\',this.value)"><label style="display:block;margin-top:6px"><input type="checkbox"'+(e.sample==='होय'?' checked':'')+' onchange="dset(\''+date+'\',\'sample\',this.checked?\'होय\':\'\')"> नमुना ठेवला</label></details>'}
   if(SD[date])h+='<div style="margin-top:6px"><button class="d" style="padding:5px 10px" onclick="ddel(\''+date+'\')">नोंद रद्द</button></div>';
   h+='</div>'}
- document.getElementById('b').innerHTML='<div class="card">'+h+'</div><div class="sv"><p id="e" class="er"></p><button onclick="dsave()">💾 सर्व बदल जतन करा</button></div>'}
+ document.getElementById('b').innerHTML='<div class="card">'+h+'</div><div class="sv"><p id="e" class="er"></p><button onclick="dsave()">💾 सर्व बदल जतन करा</button></div>';navDot()}
 function qfill(){var a=QF.a,b=QF.b,qm=document.getElementById('qm');if(a===''&&b===''){qm.className='er';qm.textContent='वर उपस्थितीची संख्या टाका.';return}
  if((a!==''&&!(+a>=0))||(b!==''&&!(+b>=0))){qm.className='er';qm.textContent='उपस्थिती संख्या चुकीची.';return}
  var p=MON.split('-'),y=+p[0],m=+p[1]-1,last=new Date(y,m+1,0).getDate(),td=today(),n=0,e0=function(v){return v===''||v==null||v===0||v==='0'};
@@ -182,7 +203,7 @@ function popt(sel){return '<option value="">—</option>'+PULSES.map(function(x)
 function dayFilled(e){return e.cooked==='नाही'||Number(e.p15)>0||Number(e.p68)>0}
 function dayRow(date,d,m,dt,e,dirty,isTd){var hh=holOf(date),sm=e.cooked==='नाही'?(hh?'🚫 '+esc(hh.name):'शिजवला नाही'):(sg()!=='68'?'१–५: '+pn(e.p15||0)+' · ':'')+(sg()!=='15'?'६–८: '+pn(e.p68||0)+' · ':'')+esc(e.menu||'');
  return '<div class="day" id="d'+date+'" style="padding:8px 10px"><div style="display:flex;align-items:center;gap:8px"><b style="white-space:nowrap">'+pn(d)+' '+MN[m].slice(0,3)+' · '+WK[dt.getDay()]+'</b><span class="m" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px">'+sm+'</span>'+(dirty?'<span class="chip" style="background:#fef3c7;color:#92400e">बदल</span>':SD[date]?'<span class="chip">✓</span>':'')+(isTd&&smsOk()&&e.cooked==='होय'?'<button onclick="smsFor(\''+date+'\')" style="padding:4px 8px;font-size:13px" title="SMS पाठवा">📱</button>':'')+'<button class="g" onclick="OP[\''+date+'\']=1;dTab()" style="padding:4px 9px;font-size:15px" title="बदला">✏️</button></div></div>'}
-function dset(date,k,v,redraw){OP[date]=1;var e=E[date]||(E[date]=ent(date));e[k]=v;if(!e.d){e.d=1}if(redraw){var y=window.scrollY;dTab();window.scrollTo(0,y)}else{var c=document.querySelector('#d'+date+' .chip');}}
+function dset(date,k,v,redraw){OP[date]=1;var e=E[date]||(E[date]=ent(date));e[k]=v;if(!e.d){e.d=1}navDot();if(redraw){var y=window.scrollY;dTab();window.scrollTo(0,y)}else{var c=document.querySelector('#d'+date+' .chip');}}
 function dmenu(date,v){var e=E[date]||(E[date]=ent(date));e.menu=v;var r=RECIPES.filter(function(x){return x[0]===v})[0];if(r){e.pulse15=pulseNorm(r[1]);e.pulse68=pulseNorm(r[1])}var y=window.scrollY;dTab();window.scrollTo(0,y)}
 function dsave(){var es=[];for(var k in E){es.push(E[k])}var er=document.getElementById('e');if(!es.length){er.textContent='जतन करण्यासाठी बदल नाही.';return}er.className='m';er.textContent='जतन होत आहे…';
  var bm={};es.forEach(function(x){(bm[x.date.slice(0,7)]=bm[x.date.slice(0,7)]||[]).push(x)});var ks=Object.keys(bm).sort();
