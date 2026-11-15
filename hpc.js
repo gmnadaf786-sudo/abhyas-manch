@@ -64,7 +64,7 @@ function hpcTg(n,f,i){var q=hpcQ(n),a=q[f]||(q[f]=[]),p=a.indexOf(i);if(p>=0)a.s
 function hpcTx(n,f,v){hpcQ(n)[f]=v;HR.dirty=true}
 function hpcRS(){var e=document.getElementById('e');e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'hpc','res|'+HR.id,HR.r).then(function(j){if(j.ok){HR.dirty=false;hpcL()}else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
 /* ---- भाग C : वर्षअखेर सारांश ---- */
-function hAvg(pen,subj,i){var s=0,n=0;hActs().forEach(function(a){if(a.subj!==subj)return;var q=hRes(a.id)[pen];if(!q)return;[hLv((q.sa||[])[i]),hLv((q.pe||[])[i]),((q.te||[])[i])||0].forEach(function(v){if(v>0){s+=v*(v===q.te[i]?2:1);n+=(v===q.te[i]?2:1)}})});return n?Math.max(1,Math.min(3,Math.round(s/n))):0}
+function hAvg(pen,subj,i){var s=0,n=0;hActs().forEach(function(a){if(a.subj!==subj)return;var q=hRes(a.id)[pen];if(!q)return;[[hLv((q.sa||[])[i]),1],[hLv((q.pe||[])[i]),1],[((q.te||[])[i])||0,2]].forEach(function(z){if(z[0]>0){s+=z[0]*z[1];n+=z[1]}})});return n?Math.max(1,Math.min(3,Math.round(s/n))):0}
 function hSum(pen){return get(CL,'hpc','sum|'+pen)||{}}
 function hLevel(pen,subj,i){var s=hSum(pen),o=s[subj]&&s[subj].lv?s[subj].lv[i]:null;return o||hAvg(pen,subj,i)}
 function hpcCs(pen){d.innerHTML=hBack('📋 वर्षअखेर सारांश (भाग C)')+'<select onchange="hpcCs(this.value)"><option value="">विद्यार्थी निवडा…</option>'+STU.map(function(x){return '<option value="'+E(x.pen)+'"'+(x.pen===pen?' selected':'')+'>'+(x.roll?E(x.roll)+'. ':'')+E(x.name)+'</option>'}).join('')+'</select>'+(pen?hpcCf(pen):'<small>पातळी कृतींच्या नोंदींवरून आपोआप सुचवली जाते; तुम्ही बदलू शकता.</small>')}
