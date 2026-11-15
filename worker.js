@@ -336,11 +336,15 @@ async function schoolApi(p,r,env){
   if(p==='/api/s/me'){await schCols(env);const sc=await env.DB.prepare('SELECT name,med,cmin,cmax FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,udise:t.udise,school:sc?sc.name:'',med:sc&&sc.med||'',cmin:sc&&sc.cmin||0,cmax:sc&&sc.cmax||0,changed:t.changed?1:0})}
   return J({e:'nf'},404);
 }
+let TCK=false;
+async function tcEns(env){if(TCK)return;try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN ct INTEGER DEFAULT 0').run()}catch(e){}TCK=true}
+async function ctBlock(env,tid,ud,cls,dv){await tcEns(env);const o=await env.DB.prepare('SELECT c.tid,t.name FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=? AND c.cls=? AND c.div=? AND c.ct=1 LIMIT 1').bind(ud,cls,dv).first();return o&&o.tid!==tid?o.name:''}
 const okDob=s=>/^(19|20)\d\d-\d\d-\d\d$/.test(s)&&!isNaN(Date.parse(s))?s:'';
 async function imp(env,rw,tid){
     const rows=(Array.isArray(rw)?rw:[]).slice(0,150);let n=0;const st=[];
     for(const x of rows){
       if(tid&&!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(tid,cl(x.udise,11),parseInt(x.cls)||0,(cl(x.div,2).toUpperCase())||'A').first())continue;
+      if(tid&&await ctBlock(env,tid,cl(x.udise,11),parseInt(x.cls)||0,(cl(x.div,2).toUpperCase())||'A'))continue;
       const pen=cl(x.pen,11).replace(/\D/g,''),ud=cl(x.udise,11).replace(/\D/g,''),cls=parseInt(x.cls)||0,by=cl(x.by,4).replace(/\D/g,''),name=cl(x.name,60);
       if(pen.length!==11||ud.length!==11||cls<1||cls>8||by.length!==4||name.length<2)continue;
       const salt=rnd(6),h=await sha(salt+by),med=x.med==='kn'?'kn':'mr',dv=(cl(x.div,2).toUpperCase())||'A';
@@ -1015,8 +1019,24 @@ async function ext(p,r,env){
     await schCols(env);
     const sc=await env.DB.prepare('SELECT name,cmin,cmax FROM schools WHERE udise=?').bind(t.udise).first();
     const sd=(await env.DB.prepare("SELECT r.cls,COUNT(*) n,SUM(i.gender='M') m,SUM(i.gender='F') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? GROUP BY r.cls ORDER BY r.cls").bind(t.udise).all()).results.map(x=>({cls:x.cls,n:x.n,m:x.m||0,f:x.f||0}));
+    let cm={};try{await tcEns(env);const th=(await env.DB.prepare('SELECT c.cls,c.div,c.tid,c.ct,t.name nm FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=?').bind(t.udise).all()).results,rd=(await env.DB.prepare('SELECT cls,div FROM roster WHERE udise=? GROUP BY cls,div').bind(t.udise).all()).results;
+      const dvs={};rd.forEach(x=>{(dvs[x.cls]=dvs[x.cls]||new Set()).add(x.div)});th.forEach(x=>{(dvs[x.cls]=dvs[x.cls]||new Set()).add(x.div)});
+      for(const k in dvs){const dv=[...dvs[k]].sort()[0],hs=th.filter(x=>x.cls==k&&x.div===dv);cm[k]={div:dv,mine:hs.some(x=>x.tid===t.id)?1:0,ct:hs.some(x=>x.tid===t.id&&x.ct)?1:0,ctn:(hs.find(x=>x.ct)||{}).nm||'',oth:hs.filter(x=>x.tid!==t.id).map(x=>x.nm)}}}catch(e){}
     let hm='';try{const h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hm:'+t.udise).first();hm=h&&h.v||'';if(!hm){const h2=await env.DB.prepare('SELECT hm FROM school_sna WHERE udise=?').bind(t.udise).first();hm=h2&&h2.hm||''}}catch(e){}
-    return J({ok:1,hm,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1,sd,cmin:(sc&&sc.cmin)||0,cmax:(sc&&sc.cmax)||0});
+    return J({ok:1,cm,hm,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1,sd,cmin:(sc&&sc.cmin)||0,cmax:(sc&&sc.cmax)||0});
+  }
+  if(p==='/api/t/ctset'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);await tcEns(env);
+    const k=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase();if(k<1||k>8||!/^[A-Z]{1,2}$/.test(dv))return J({e:'args'});
+    if(b.what==='mine'){
+      if(b.on)await env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,t.udise,k,dv).run();
+      else await env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,t.udise,k,dv).run();
+      return J({ok:1});
+    }
+    if(!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,t.udise,k,dv).first())return J({e:'auth'},403);
+    if(b.on){const nm=await ctBlock(env,t.id,t.udise,k,dv);if(nm)return J({e:'ct',n:nm});await env.DB.prepare('UPDATE tclasses SET ct=1 WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,t.udise,k,dv).run()}
+    else await env.DB.prepare('UPDATE tclasses SET ct=0 WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,t.udise,k,dv).run();
+    return J({ok:1});
   }
   if(p==='/api/t/hmset'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
@@ -1051,6 +1071,7 @@ async function ext(p,r,env){
     for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,120)){
       let pen=cl(x.pen,20).replace(/\D/g,''),cls=parseInt(x.cls)||0,dv=cl(x.div,2).toUpperCase()||'A',name=cl(x.name,60);
       if((pen&&pen.length!==11)||cls<1||cls>8||name.length<2||!/^[A-Z]{1,2}$/.test(dv)){sk++;continue}
+      if(await ctBlock(env,t.id,t.udise,cls,dv)){sk++;continue}
       const g=['M','F','O'].includes(x.gender)?x.gender:'',ct=CT.includes(x.cat)?x.cat:'';
       let core={gender:g,cat:ct,father:cl(x.father,60),mother:cl(x.mother,60),addr:cl(x.addr,200),mobile:/^\d{10}$/.test(String(x.mobile||''))?x.mobile:'',dob:/^\d{4}-\d\d-\d\d$/.test(String(x.dob||''))?x.dob:'',gr:cl(x.gr,20),tongue:cl(x.tongue,40)};
       let ex={};if(x.x&&typeof x.x==='object')for(const k of XK){const v=cl(x.x[k],80);if(v)ex[k]=v}
@@ -1101,6 +1122,7 @@ async function ext(p,r,env){
     if(!b.consent)return J({e:'consent'});
     const x=await env.DB.prepare('SELECT r.pen FROM roster r JOIN tclasses c ON c.udise=r.udise AND c.cls=r.cls AND c.div=r.div WHERE r.pen=? AND c.tid=?').bind(pen,t.id).first();
     if(!x)return J({e:'auth'},403);
+    {const rr=await env.DB.prepare('SELECT udise,cls,div FROM roster WHERE pen=? LIMIT 1').bind(pen).first();if(rr){const nm=await ctBlock(env,t.id,rr.udise,rr.cls,rr.div);if(nm)return J({e:'ct',n:nm},403)}}
     const g=['M','F','O'].includes(b.gender)?b.gender:'',mob=cl(b.mobile,15).replace(/\D/g,'');
     if(mob&&mob.length!==10)return J({e:'mobile'});
     await ensS(env);
