@@ -1085,7 +1085,8 @@ async function ext(p,r,env){
     if(!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,ud,cls,dv).first())return J({e:'auth'},403);
     await ensS(env);
     const rows=(await env.DB.prepare('SELECT r.pen,r.name,r.med,i.dob,i.gender,i.cat,i.addr,i.mother,i.mobile,i.father,i.roll,i.gr,i.saral,i.tongue,i.status FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? AND r.cls=? AND r.div=? ORDER BY r.name').bind(ud,cls,dv).all()).results;
-    return J({ok:1,rows});
+    let sm='';try{await schCols(env);const sc=await env.DB.prepare('SELECT med FROM schools WHERE udise=?').bind(ud).first();sm=sc&&sc.med||''}catch(e){}
+    return J({ok:1,rows,sm});
   }
   if(p==='/api/t/sset'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);

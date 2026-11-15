@@ -107,7 +107,7 @@ function daySave(){var e=document.getElementById('e');e.className='ok';e.textCon
 /* ---- गुण नोंदणी ---- */
 var STU=null,MK=false,CUR=null;
 function needStu(cb){if(STU)return cb();post('/api/t/sget',{}).then(function(j){if(!j.ok){d.innerHTML=back('गुण नोंदणी')+'<div class="card er">'+msg(j)+'</div>';return}
- STU=j.rows.sort(function(a,b){var x=parseInt(a.roll)||9999,y=parseInt(b.roll)||9999;return x-y||String(a.name).localeCompare(String(b.name))});cb()}).catch(function(){d.innerHTML=back('गुण नोंदणी')+'<div class="card er">इंटरनेट तपासा.</div>'})}
+ SMED=j.sm||'';STU=j.rows.sort(function(a,b){var x=parseInt(a.roll)||9999,y=parseInt(b.roll)||9999;return x-y||String(a.name).localeCompare(String(b.name))});cb()}).catch(function(){d.innerHTML=back('गुण नोंदणी')+'<div class="card er">इंटरनेट तपासा.</div>'})}
 function needMk(cb){if(MK)return cb();post('/api/cce/get',{kinds:['marks']}).then(function(j){if(!j.ok){d.innerHTML=back('गुण नोंदणी')+'<div class="card er">'+msg(j)+'</div>';return}
  j.rows.forEach(function(r){var v=null;try{v=JSON.parse(r.v)}catch(e){}DOC[key(r.cls,r.kind,r.k)]={v:v,upd:r.upd}});MK=true;cb()}).catch(function(){d.innerHTML=back('गुण नोंदणी')+'<div class="card er">इंटरनेट तपासा.</div>'})}
 function comps(w){var a=[];for(var i=0;i<11;i++)if(w[i]>0)a.push(i);return a}
@@ -162,8 +162,8 @@ function hlSave(){var e=document.getElementById('e');if(document.querySelector('
  e.className='ok';e.textContent='सेव्ह होत आहे…';put(CL,'hlt',String(HL.term),HL.data).then(function(j){if(j.ok){HL.dirty=false;e.textContent='सेव्ह झाले ✔'}else{e.className='er';e.textContent=msg(j)}}).catch(function(){e.className='er';e.textContent=msg({})})}
 function hlBack(){if(HL&&HL.dirty&&!confirm('बदल सेव्ह केलेले नाहीत. तरीही मागे जायचे?'))return;HL=null;home()}
 /* ---- वर्णनात्मक नोंदी ---- */
-var BANK=null,DC=null;
-function needBank(cb,title){if(BANK)return cb();var md=(STU.length&&STU[0].med==='kn')?'kn':'mr';
+var BANK=null,DC=null,SMED='';
+function needBank(cb,title){if(BANK)return cb();var nk=STU.filter(function(x){return x.med==='kn'||/कन्नड|ಕನ್ನಡ|kannada/i.test(String(x.tongue||''))}).length,md=(/kn|कन्नड|kannada/i.test(String(SMED))||(STU.length&&nk*2>=STU.length))?'kn':'mr';
  fetch('cce-notes/'+md+'-'+CL+'.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){BANK=j.s;cb()}).catch(function(){d.innerHTML=back(title)+'<div class="card er">नोंद-बँक मिळाली नाही. इंटरनेट तपासा.</div>'})}
 function dcKey(t,i){return t+'|'+BANK[i].n}
 function dcSec(t,i){return get(CL,'desc',dcKey(t,i))||{}}
