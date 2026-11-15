@@ -1157,7 +1157,10 @@ async function ext(p,r,env){
       if(kinds.length){q+=' AND kind IN ('+kinds.map(()=>'?').join(',')+')';pr=pr.concat(kinds)}
       const rows=(await env.DB.prepare(q).bind(...pr).all()).results;
       let my={ct:0,subs:[]};if(cls){try{await tcEns(env);const m=await env.DB.prepare('SELECT ct,subs FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,ud,cls,dv).first();if(m)my={ct:m.ct?1:0,subs:String(m.subs||'').split(',').filter(Boolean)}}catch(e){}}
-      return J({ok:1,rows,my});
+      let info={};if(cls){try{await schCols(env);const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(ud).first();info.school=sc&&sc.name||'';
+        let hm='';const h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hm:'+ud).first();hm=h&&h.v||'';if(!hm){try{const h2=await env.DB.prepare('SELECT hm FROM school_sna WHERE udise=?').bind(ud).first();hm=h2&&h2.hm||''}catch(e){}}info.hm=hm;
+        const ct=await env.DB.prepare('SELECT t.name FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=? AND c.cls=? AND c.div=? AND c.ct=1 LIMIT 1').bind(ud,cls,dv).first();info.ctn=ct&&ct.name||''}catch(e){}}
+      return J({ok:1,rows,my,info});
     }
     const kind=cl(b.kind,10),k=cl(b.k,40),v=typeof b.v==='string'?b.v:JSON.stringify(b.v==null?null:b.v);
     if(!/^[a-z]+$/.test(kind)||v.length>600000)return J({e:'args'});
