@@ -337,7 +337,7 @@ async function schoolApi(p,r,env){
   return J({e:'nf'},404);
 }
 let TCK=false;
-async function tcEns(env){if(TCK)return;try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN ct INTEGER DEFAULT 0').run()}catch(e){}TCK=true}
+async function tcEns(env){if(TCK)return;try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN ct INTEGER DEFAULT 0').run()}catch(e){}try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN subs TEXT').run()}catch(e){}TCK=true}
 async function ctBlock(env,tid,ud,cls,dv){await tcEns(env);const o=await env.DB.prepare('SELECT c.tid,t.name FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=? AND c.cls=? AND c.div=? AND c.ct=1 LIMIT 1').bind(ud,cls,dv).first();return o&&o.tid!==tid?o.name:''}
 const okDob=s=>/^(19|20)\d\d-\d\d-\d\d$/.test(s)&&!isNaN(Date.parse(s))?s:'';
 async function imp(env,rw,tid){
@@ -1025,6 +1025,13 @@ async function ext(p,r,env){
     let hm='';try{const h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hm:'+t.udise).first();hm=h&&h.v||'';if(!hm){const h2=await env.DB.prepare('SELECT hm FROM school_sna WHERE udise=?').bind(t.udise).first();hm=h2&&h2.hm||''}}catch(e){}
     return J({ok:1,cm,hm,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1,sd,cmin:(sc&&sc.cmin)||0,cmax:(sc&&sc.cmax)||0});
   }
+  if(p==='/api/t/subset'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await tcEns(env);
+    const k=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase(),ud=cl(b.udise,11);if(k<1||k>8)return J({e:'args'});
+    const sb=(Array.isArray(b.subs)?b.subs:[]).map(x=>cl(x,16)).filter(x=>/^[A-Za-z0-9_]{1,16}$/.test(x)).slice(0,20);
+    const r2=await env.DB.prepare('UPDATE tclasses SET subs=? WHERE tid=? AND udise=? AND cls=? AND div=?').bind(sb.join(','),t.id,ud,k,dv).run();
+    return J({ok:1,subs:sb});
+  }
   if(p==='/api/t/ctset'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);await tcEns(env);
     const k=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase();if(k<1||k>8||!/^[A-Z]{1,2}$/.test(dv))return J({e:'args'});
@@ -1150,10 +1157,12 @@ async function ext(p,r,env){
       let q='SELECT cls,kind,k,v,upd FROM cce_doc WHERE udise=? AND yr=? AND ((cls=? AND div=?)'+(b.school?' OR cls=0':'')+')',pr=[ud,yr,cls,dv];
       if(kinds.length){q+=' AND kind IN ('+kinds.map(()=>'?').join(',')+')';pr=pr.concat(kinds)}
       const rows=(await env.DB.prepare(q).bind(...pr).all()).results;
-      return J({ok:1,rows});
+      let my={ct:0,subs:[]};if(cls){try{await tcEns(env);const m=await env.DB.prepare('SELECT ct,subs FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,ud,cls,dv).first();if(m)my={ct:m.ct?1:0,subs:String(m.subs||'').split(',').filter(Boolean)}}catch(e){}}
+      return J({ok:1,rows,my});
     }
     const kind=cl(b.kind,10),k=cl(b.k,40),v=typeof b.v==='string'?b.v:JSON.stringify(b.v==null?null:b.v);
     if(!/^[a-z]+$/.test(kind)||v.length>600000)return J({e:'args'});
+    if(cls&&kind==='marks'){try{await tcEns(env);const m=await env.DB.prepare('SELECT ct,subs FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,ud,cls,dv).first(),sb=String(m&&m.subs||'').split(',').filter(Boolean),code=k.split('|')[1]||'';if(m&&!m.ct&&sb.length&&!sb.includes(code))return J({e:'subj'},403)}catch(e){}}
     const now=new Date().toISOString();
     if(b.upd!==undefined){const cur=await env.DB.prepare('SELECT upd FROM cce_doc WHERE udise=? AND yr=? AND cls=? AND div=? AND kind=? AND k=?').bind(ud,yr,cls,dv,kind,k).first();
       if(cur&&cur.upd!==b.upd)return J({e:'conflict',upd:cur.upd})}

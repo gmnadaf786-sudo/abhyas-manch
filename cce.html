@@ -51,12 +51,16 @@ W[5]=sb(L56,M56,B.concat([['EVS1','परिसर अभ्यास भाग 
 W[6]=sb(L56,M56,B.concat([['HINDI','हिंदी / हिंदी-मराठी'],['SOC','सामाजिक शास्त्र'],['SCI','सामान्य विज्ञान']])).concat([['ART','कला',A2],['VOC','व्यावसायिक शिक्षण',[_,10,10,15,30,25,_,10,_,_,_]],PE]);
 W[7]=sb(L78,M78,B.concat([['HINDI','हिंदी / हिंदी-मराठी'],['SOC','समाजशास्त्र'],['SCI','विज्ञान']])).concat([['ART','कला',A1],['WORK','कार्यअनुभव',WK],PE]);W[8]=W[7];
 var MON=['जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर','जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे'];
-function post(u,b){b.token=T;b.udise=UD;b.yr=YR;if(b.cls===undefined){b.cls=CL;b.div=DV}return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()})}
+function post(u,b){b.token=T;b.udise=UD;b.yr=YR;if(b.cls===undefined){b.cls=CL;b.div=DV}return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()}).then(function(j){if(j&&j.my)MY=j.my;return j})}
+var MY={ct:0,subs:[]};
+function mySub(){return MY&&!MY.ct&&MY.subs&&MY.subs.length?W[CL].filter(function(s){return MY.subs.indexOf(s[0])>=0}):W[CL]}
+function mySel(term){var sel=MY.subs||[];d.innerHTML=back('गुण नोंदणी')+'<div class="card"><b>मी शिकवत असलेले विषय</b><br><small>निवडलेल्या विषयांचेच गुण तुम्ही भरू शकाल. काहीही निवडले नाही तर सर्व विषय दिसतील. वर्ग शिक्षकाला नेहमी सर्व विषय दिसतात.</small>'+W[CL].map(function(s){return '<label style="display:block;margin:8px 0"><input type="checkbox" class="msb" value="'+s[0]+'"'+(sel.indexOf(s[0])>=0?' checked':'')+' style="width:auto"> '+E(s[1])+'</label>'}).join('')+'<p id="e" class="er"></p><button onclick="mySv('+term+')">सेव्ह</button></div>'}
+function mySv(term){var a=[].slice.call(document.querySelectorAll('.msb:checked')).map(function(x){return x.value}),e=document.getElementById('e');post('/api/t/subset',{subs:a}).then(function(j){if(j.ok){MY.subs=j.subs;mkS(term)}else{e.textContent='सेव्ह झाले नाही.'}}).catch(function(){e.textContent='इंटरनेट तपासा.'})}
 function key(c,kind,k){return c+'|'+kind+'|'+k}
 function get(c,kind,k){var x=DOC[key(c,kind,k)];return x?x.v:null}
 function put(c,kind,k,v){var kk=key(c,kind,k),b={kind:kind,k:k,v:v};if(c===0){b.cls=0;b.div=''}if(DOC[kk])b.upd=DOC[kk].upd;
  return post('/api/cce/put',b).then(function(j){if(j.ok)DOC[kk]={v:v,upd:j.upd};return j})}
-function msg(j){return j.ok?'':j.e==='conflict'?'दुसऱ्या कोणीतरी ही माहिती बदलली आहे. पान रिफ्रेश करून पुन्हा भरा.':j.e==='auth'?'सत्र संपले. शिक्षक पानावरून पुन्हा लॉगिन करा.':'सेव्ह झाले नाही. इंटरनेट तपासा.'}
+function msg(j){return j.ok?'':j.e==='conflict'?'दुसऱ्या कोणीतरी ही माहिती बदलली आहे. पान रिफ्रेश करून पुन्हा भरा.':j.e==='subj'?'हा विषय तुमच्यासाठी नाही. फक्त वर्ग शिक्षक किंवा त्या विषयाचे शिक्षक गुण भरू शकतात.':j.e==='auth'?'सत्र संपले. शिक्षक पानावरून पुन्हा लॉगिन करा.':'सेव्ह झाले नाही. इंटरनेट तपासा.'}
 function back(t){return '<button class="g" onclick="home()">← CCE</button><h2 style="margin:4px 0 12px">'+t+'</h2>'}
 function load(){if(!T||!/^\d{11}$/.test(UD)||!CL){d.innerHTML='<div class="card">कृपया शिक्षक पानावरून लॉगिन करून वर्ग निवडा.<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
  document.getElementById('hd').textContent='📘 CCE — इयत्ता '+CL+' '+DV+' ('+YR+')';
@@ -115,8 +119,8 @@ function filled(m,pen,cs){var r=m&&m[pen];if(!r)return 0;var n=0;cs.forEach(func
 function mkS(term){if(!get(CL,'wtdone',String(term))){d.innerHTML=back('गुण नोंदणी')+'<div class="r"><button class="'+(term===1?'s':'g')+'" onclick="mkS(1)">सत्र १</button><button class="'+(term===2?'s':'g')+'" onclick="mkS(2)">सत्र २</button></div><div class="card"><b>प्रथम सत्र '+term+' चा भारांश निश्चित करा.</b><br><small>भारांश पूर्ण झाल्यानंतरच गुण नोंदणी करता येते.</small><br><br><button onclick="wtS('+term+')">⚖️ भारांशाकडे जा</button></div>';return}
  d.innerHTML=back('गुण नोंदणी')+'<div class="card">लोड होत आहे…</div>';needStu(function(){needMk(function(){
  if(!STU.length){d.innerHTML=back('गुण नोंदणी')+'<div class="card">या वर्गात अजून विद्यार्थी नाहीत. शिक्षक पानावर "➕ विद्यार्थी जोडा" मधून आधी विद्यार्थी जोडा.</div>';return}
- d.innerHTML=back('गुण नोंदणी')+'<div class="r"><button class="'+(term===1?'s':'g')+'" onclick="mkS(1)">सत्र १</button><button class="'+(term===2?'s':'g')+'" onclick="mkS(2)">सत्र २</button></div><div class="card"><small>विषय निवडा. विद्यार्थी: '+STU.length+'</small>'+
- W[CL].map(function(s){var cs=comps(wOf(term,s[0])),m=get(CL,'marks',term+'|'+s[0]),full=0,part=0;STU.forEach(function(x){var f=filled(m,x.pen,cs);if(f===cs.length)full++;else if(f)part++});
+ d.innerHTML=back('गुण नोंदणी')+'<div class="r"><button class="'+(term===1?'s':'g')+'" onclick="mkS(1)">सत्र १</button><button class="'+(term===2?'s':'g')+'" onclick="mkS(2)">सत्र २</button></div><div class="card"><small>विषय निवडा. विद्यार्थी: '+STU.length+'</small>'+(MY.ct?'<div><small style="color:#0f766e">✔ तुम्ही वर्ग शिक्षक आहात — सर्व विषय</small></div>':'<div style="margin:6px 0"><button class="g" style="width:auto;margin:0;padding:6px 12px" onclick="mySel('+term+')">⚙️ माझे विषय'+(MY.subs.length?' ('+MY.subs.length+')':' निवडा')+'</button></div>')+
+ mySub().map(function(s){var cs=comps(wOf(term,s[0])),m=get(CL,'marks',term+'|'+s[0]),full=0,part=0;STU.forEach(function(x){var f=filled(m,x.pen,cs);if(f===cs.length)full++;else if(f)part++});
   return '<div class="row" onclick="mkE('+term+',\''+s[0]+'\')"><b>'+E(s[1])+'</b><small>'+(full===STU.length?'✔ पूर्ण':full||part?(full+' पूर्ण'+(part?', '+part+' अपूर्ण':'')):'—')+' ›</small></div>'}).join('')+'</div>'})})}
 function mkE(term,code,ci){var s=W[CL].filter(function(x){return x[0]===code})[0],w=wOf(term,code),cs=comps(w);
  if(!CUR||CUR.term!==term||CUR.code!==code)CUR={term:term,code:code,data:JSON.parse(JSON.stringify(get(CL,'marks',term+'|'+code)||{})),dirty:false};
