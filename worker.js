@@ -560,7 +560,7 @@ async function ext(p,r,env){
     const s=await me(env,r);if(!s)return J({e:'auth'},401);const b=await body(r);
     await env.DB.prepare("CREATE TABLE IF NOT EXISTS ai_score(id INTEGER PRIMARY KEY AUTOINCREMENT, sid INTEGER, ts TEXT, sub TEXT, les TEXT, ty TEXT, lv TEXT, score INTEGER, total INTEGER, kind TEXT)").run();
     const sc=parseInt(b.score),tt=parseInt(b.total);if(!(tt>=1&&tt<=20&&sc>=0&&sc<=tt))return J({e:'bad'},400);
-    await env.DB.prepare('INSERT INTO ai_score(sid,ts,sub,les,ty,lv,score,total,kind) VALUES(?,?,?,?,?,?,?,?,?)').bind(s.id,istDay(),cl(b.sub,60),cl(b.les,120),cl(b.type,10),cl(b.level,6),sc,tt,b.kind==='daily'?'daily':'quiz').run();
+    await env.DB.prepare('INSERT INTO ai_score(sid,ts,sub,les,ty,lv,score,total,kind) VALUES(?,?,?,?,?,?,?,?,?)').bind(s.id,istDay(),cl(b.sub,60),cl(b.les,120),cl(b.type,10),cl(b.level,6),sc,tt,b.kind==='daily'?'daily':b.kind==='sch'?'sch':'quiz').run();
     return J({ok:1});
   }
   if(p==='/api/t/aiscores'){
