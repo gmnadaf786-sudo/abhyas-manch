@@ -357,6 +357,8 @@ async function pmEnsure(env){
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pm_cfg(udise TEXT PRIMARY KEY, grp TEXT)"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS school_bank(udise TEXT PRIMARY KEY, tan TEXT, acct TEXT)")]);
   try{await env.DB.prepare('ALTER TABLE pm_cook ADD COLUMN sname TEXT').run()}catch(e){}
+  try{await env.DB.prepare('ALTER TABLE pm_rcpt ADD COLUMN img TEXT').run()}catch(e){}
+  await env.DB.prepare('CREATE TABLE IF NOT EXISTS pm_scan(udise TEXT, day TEXT, n INTEGER, PRIMARY KEY(udise,day))').run();
   const rc0=await env.DB.prepare('SELECT COUNT(*) c FROM pm_rate').first();
   if(!rc0||!rc0.c)await env.DB.prepare("INSERT OR IGNORE INTO pm_rate(d,r15,r68) VALUES('2026-04-01',2.59,3.88)").run();
   const hc=await env.DB.prepare('SELECT COUNT(*) c FROM hol').first();
@@ -417,7 +419,7 @@ async function pmApi(p,r,env){
     const fy=parseInt(b.fy)||0;if(fy<2020||fy>2100)return J({e:'fy'},400);
     const d=(await env.DB.prepare('SELECT * FROM pm_daily WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
     const st=(await env.DB.prepare('SELECT month,grp,data FROM pm_stock WHERE udise=? AND month>=? AND month<=?').bind(u,fy+'-04',(fy+1)+'-03').all()).results;
-    const rc=(await env.DB.prepare('SELECT id,date,supplier,challan,items,remark FROM pm_rcpt WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
+    const rc=(await env.DB.prepare('SELECT id,date,supplier,challan,items,remark,img FROM pm_rcpt WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
     const hol=(await env.DB.prepare('SELECT id,d1,d2,name,type FROM hol ORDER BY d1').all()).results;
     return J({ok:1,fy,udise:u,school:sc?sc.name:'',teacher:by,daily:d,stock:st,rcpt:rc,hol,rate:(await env.DB.prepare('SELECT d,r15,r68 FROM pm_rate ORDER BY d').all()).results,sg:await pmSg(env,u),cookn:((await env.DB.prepare('SELECT COUNT(*) c FROM pm_cook WHERE udise=?').bind(u).first())||{}).c||0});
@@ -466,14 +468,47 @@ async function pmApi(p,r,env){
       if(!nm||q<=0||a<0||c<0)continue;if(!PM_ITEMS.includes(nm)||q>100000)return J({e:'item',m:nm},400);
       if(seen[nm]){seen[nm].qty=r4(seen[nm].qty+q);if(sp&&seen[nm].q15!=null){seen[nm].q15=r4(seen[nm].q15+a);seen[nm].q68=r4(seen[nm].q68+c)}}else{seen[nm]=sp?{name:nm,qty:q,q15:a,q68:c}:{name:nm,qty:q};items.push(seen[nm])}}
     if(!items.length)return J({e:'items'},400);
-    let id=cl(b.id,40);
-    if(id){if(!await env.DB.prepare('SELECT 1 x FROM pm_rcpt WHERE udise=? AND id=?').bind(u,id).first())return J({e:'nf'},404)}
+    let id=cl(b.id,40),keys=[];
+    if(id){const ex=await env.DB.prepare('SELECT img FROM pm_rcpt WHERE udise=? AND id=?').bind(u,id).first();if(!ex)return J({e:'nf'},404);try{keys=JSON.parse(ex.img||'[]')}catch(e){keys=[]}}
     else id='R'+Date.now().toString(36).toUpperCase();
-    await env.DB.prepare('INSERT INTO pm_rcpt(udise,id,date,supplier,challan,items,remark,by,upd) VALUES(?,?,?,?,?,?,?,?,?) ON CONFLICT(udise,id) DO UPDATE SET date=excluded.date,supplier=excluded.supplier,challan=excluded.challan,items=excluded.items,remark=excluded.remark,by=excluded.by,upd=excluded.upd').bind(u,id,date,sup,cl(b.challan,60),JSON.stringify(items),cl(b.remark,200),by,new Date().toISOString()).run();
-    return J({ok:1,id});
+    const imgs=Array.isArray(b.imgs)?b.imgs.slice(0,2):[];
+    if(imgs.length){
+      if(!env.BOOKS)return J({e:'noimg'},400);
+      const bin=[];for(const d of imgs){const m=/^data:image\/jpeg;base64,([A-Za-z0-9+\/=]+)$/.exec(String(d||''));if(!m||m[1].length>1000000)return J({e:'img'},400);const raw=atob(m[1]),u8=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)u8[i]=raw.charCodeAt(i);bin.push(u8)}
+      const nk=[];for(const u8 of bin){const k='pm-rcpt/'+u+'/'+id+'-'+crypto.randomUUID().replace(/-/g,'').slice(0,16)+'.jpg';await env.BOOKS.put(k,u8,{httpMetadata:{contentType:'image/jpeg'}});nk.push(k)}
+      for(const k of keys){try{await env.BOOKS.delete(k)}catch(e){}}
+      keys=nk;
+    }
+    await env.DB.prepare('INSERT INTO pm_rcpt(udise,id,date,supplier,challan,items,remark,by,upd,img) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(udise,id) DO UPDATE SET date=excluded.date,supplier=excluded.supplier,challan=excluded.challan,items=excluded.items,remark=excluded.remark,by=excluded.by,upd=excluded.upd,img=excluded.img').bind(u,id,date,sup,cl(b.challan,60),JSON.stringify(items),cl(b.remark,200),by,new Date().toISOString(),JSON.stringify(keys)).run();
+    return J({ok:1,id,img:keys.length});
   }
   if(p==='/api/pm/rdel'){
-    await env.DB.prepare('DELETE FROM pm_rcpt WHERE udise=? AND id=?').bind(u,cl(b.id,40)).run();return J({ok:1});
+    const rid=cl(b.id,40),ex=await env.DB.prepare('SELECT img FROM pm_rcpt WHERE udise=? AND id=?').bind(u,rid).first();
+    if(ex&&ex.img&&env.BOOKS){try{for(const k of JSON.parse(ex.img))if(k.startsWith('pm-rcpt/'+u+'/'))await env.BOOKS.delete(k)}catch(e){}}
+    await env.DB.prepare('DELETE FROM pm_rcpt WHERE udise=? AND id=?').bind(u,rid).run();return J({ok:1});
+  }
+  if(p==='/api/pm/rimg'){
+    const ex=await env.DB.prepare('SELECT img FROM pm_rcpt WHERE udise=? AND id=?').bind(u,cl(b.id,40)).first();let ks=[];try{ks=JSON.parse((ex&&ex.img)||'[]')}catch(e){}
+    const k=ks[Math.max(0,parseInt(b.n)||0)];if(!k||!k.startsWith('pm-rcpt/'+u+'/')||!env.BOOKS)return J({e:'nf'},404);
+    const o=await env.BOOKS.get(k);if(!o)return J({e:'nf'},404);
+    return new Response(o.body,{headers:{'content-type':'image/jpeg','cache-control':'private, max-age=300'}});
+  }
+  if(p==='/api/pm/rscan'){
+    const imgs=(Array.isArray(b.imgs)?b.imgs:[]).slice(0,2).map(d=>/^data:image\/jpeg;base64,([A-Za-z0-9+\/=]+)$/.exec(String(d||''))).filter(Boolean);
+    if(!imgs.length||imgs.some(m=>m[1].length>1000000))return J({e:'img'},400);
+    const day=istDay(),q=await env.DB.prepare('SELECT n FROM pm_scan WHERE udise=? AND day=?').bind(u,day).first();
+    if(q&&q.n>=30)return J({e:'limit'},429);
+    await env.DB.prepare('INSERT INTO pm_scan(udise,day,n) VALUES(?,?,1) ON CONFLICT(udise,day) DO UPDATE SET n=n+1').bind(u,day).run();
+    const si='तू शालेय पोषण आहार योजनेतील धान्यादी माल पावतीचे (चलन / delivery challan / bill) वाचन करणारा सहाय्यक आहेस. दिलेल्या १-२ फोटोंतील पावती(त्या) वाचून फक्त JSON दे. कल्पनेने काहीही भरू नकोस; न दिसणारे / न वाचता येणारे रिकामे ठेव. मराठी अंक (०-९) असल्यास इंग्रजी अंकात बदल.';
+    const names=PM_ITEMS.join(', ');
+    const tx='JSON रचना: {"date":"YYYY-MM-DD किंवा रिकामे","supplier":"पुरवठादाराचे नाव","challan":"पावती/चलन क्रमांक","items":[{"name":"खालील यादीतील नेमके नाव","qty":संख्या}],"other":["यादीत न बसणारे जिन्नस नावासह"]}\nजिन्नस यादी (name यापैकीच हवे): '+names+'.\nqty किलो (किग्रॅ) किंवा तेलासाठी लिटरमध्ये हवे: क्विंटल ×100, ग्रॅम ÷1000, मिली ÷1000. एकाच जिन्नसाच्या अनेक ओळी असतील तर बेरीज कर. दोन फोटो असतील तर दोन्ही मिळून एकच यादी दे. तूर/तुरीची डाळ = तूरडाळ, मसूर = मसूरडाळ, मुग = मूग (साबुत), मुगाची डाळ = मुगडाळ, वाटाणा = हिरवा वाटाणा, हरभरा/चणे = हरभरा, मीठ = मीठ, खाद्यतेल = तेल.';
+    const g=await gemAsk(env,si,[{role:'user',parts:[...imgs.map(m=>({inlineData:{mimeType:'image/jpeg',data:m[1]}})),{text:tx}]}],{temperature:0,responseMimeType:'application/json'});
+    if(!g.t)return J({e:g.e==='nokey'?'nokey':'fail'},502);
+    let j={};try{j=JSON.parse(g.t.replace(/^```json|```$/g,''))}catch(e){return J({e:'parse'},502)}
+    const r4=v=>Math.round((Number(v)||0)*1e4)/1e4,agg={};
+    for(const x of (Array.isArray(j.items)?j.items:[])){const nm=String(x&&x.name||'').trim(),q=r4(x&&x.qty);if(PM_ITEMS.includes(nm)&&q>0&&q<100000)agg[nm]=r4((agg[nm]||0)+q)}
+    const dt=/^\d{4}-\d{2}-\d{2}$/.test(String(j.date||''))&&dOk(j.date)&&j.date<=istDay()?j.date:'';
+    return J({ok:1,date:dt,supplier:cl(j.supplier,120),challan:cl(j.challan,60),items:Object.keys(agg).map(k=>({name:k,qty:agg[k]})),other:(Array.isArray(j.other)?j.other:[]).map(x=>cl(x,40)).filter(Boolean).slice(0,10)});
   }
   return J({e:'nf'},404);
 }
