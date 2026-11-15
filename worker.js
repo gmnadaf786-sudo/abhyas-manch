@@ -535,6 +535,7 @@ async function pmApi(p,r,env){
   }
   return J({e:'nf'},404);
 }
+let STLF=false;async function stLf(env){if(STLF)return;try{await env.DB.prepare('ALTER TABLE students ADD COLUMN lf INTEGER DEFAULT 0').run()}catch(e){}STLF=true}
 async function stuCall(p,r){
   if(p==='/api/s/result')return true;
   if(p!=='/api/s/login'&&p!=='/api/s/chpw')return false;
@@ -649,9 +650,12 @@ async function ext(p,r,env){
     return J({ok:1,yr,name:x.name,cls:x.cls,res:out});
   }
   if(p==='/api/s/chpw'){
-    const b=await body(r),s=await me(env,r),pw=cl(b.pw,40);
+    const b=await body(r),s=await me(env,r),pw=cl(b.pw,40),old=cl(b.old,40);
     if(!s||!/^P\d{11}$/.test(s.mobile))return J({e:'auth'},401);
     if(pw.length<4)return J({e:'short'},400);
+    const x=await env.DB.prepare('SELECT salt,pw,salt0,pw0 FROM roster WHERE pen=?').bind(s.mobile.slice(1)).first();if(!x)return J({e:'auth'},401);
+    if(!old||!(await pwOk(old,x.salt,x.pw)))return J({e:'bad'},401);
+    if(pw===old||(x.pw0&&await pwOk(pw,x.salt0,x.pw0)))return J({e:'same'},400);
     const salt=rnd(8);
     await env.DB.prepare('UPDATE roster SET salt=?,pw=?,changed=1 WHERE pen=?').bind(salt,'p:'+await hashPin(pw,salt),s.mobile.slice(1)).run();
     return J({ok:1});
@@ -1372,8 +1376,9 @@ export default{
         const rs=(await env.DB.prepare("SELECT * FROM students WHERE mobile=? OR mobile LIKE ? ORDER BY id").bind(mobile,mobile+'-%').all()).results;
         const s=rs[0];
         if(!s)return J({e:'bad'},401);
-        if(s.fails>=8)return J({e:'locked'},429);
-        if(await hashPin(pin,s.salt)!==s.pin_hash){await env.DB.prepare('UPDATE students SET fails=fails+1 WHERE id=?').bind(s.id).run();return J({e:'bad'},401);}
+        await stLf(env);const now=Date.now();
+        if(s.fails>=8&&now-(s.lf||0)<900000)return J({e:'locked'},429);
+        if(await hashPin(pin,s.salt)!==s.pin_hash){await env.DB.prepare('UPDATE students SET fails=CASE WHEN fails>=8 AND ?-lf>=900000 THEN 1 ELSE fails+1 END,lf=? WHERE id=?').bind(now,now,s.id).run();return J({e:'bad'},401);}
         const pf=(x,t)=>({token:t,profile:{name:x.name,cls:x.cls,med:x.med,mobile:x.mobile,district:x.district,taluka:x.taluka,kendra:x.kendra,school:x.school,udise:x.school_udise}});
         const list=[];
         for(const x of rs){const t=rnd(24);await env.DB.prepare('UPDATE students SET fails=0,token=?,last_seen=CURRENT_TIMESTAMP WHERE id=?').bind(t,x.id).run();list.push(pf(x,t));}

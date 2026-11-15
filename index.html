@@ -164,11 +164,11 @@ function studLogin(u,p){
   fetch('/api/s/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({pen:u,pw:p})}).then(function(r){return r.json()}).then(function(j){
    if(!j.ok){lb.disabled=false;le.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. १५ मिनिटांनी पुन्हा प्रयत्न करा.':'PEN किंवा पासवर्ड चुकीचा.';return}
    le.textContent='';rgDone(j,function(m){le.textContent=m}).then(function(){lb.disabled=false;
-    if(j.changed===0)setTimeout(function(){var n=prompt('सुरक्षेसाठी नवीन पासवर्ड ठेवा (किमान ४ अक्षरे). आता नको असल्यास रद्द करा.');if(n&&n.length>=4)fetch('/api/s/chpw',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+j.token},body:JSON.stringify({pw:n})}).then(function(r){return r.json()}).then(function(x){alert(x.ok?'पासवर्ड बदलला.':'बदल झाला नाही.')})},800)})}).catch(function(){lb.disabled=false;le.textContent='इंटरनेट तपासा.'});return false}
+    if(j.changed===0)setTimeout(function(){var n=prompt('सुरक्षेसाठी नवीन पासवर्ड ठेवा (किमान ४ अक्षरे, जन्मवर्ष नको). आता नको असल्यास रद्द करा.');if(n&&n.length>=4)fetch('/api/s/chpw',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+j.token},body:JSON.stringify({old:p,pw:n})}).then(function(r){return r.json()}).then(function(x){alert(x.ok?'पासवर्ड बदलला.':x.e==='same'?'नवीन पासवर्ड जुन्या/सुरुवातीच्या पासवर्डसारखा नसावा. पुढील लॉगिनला पुन्हा प्रयत्न करा.':'बदल झाला नाही.')})},800)})}).catch(function(){lb.disabled=false;le.textContent='इंटरनेट तपासा.'});return false}
  if(/^[6-9]\d{9}$/.test(u)){if(!/^\d{4,6}$/.test(p)){le.textContent='पासवर्ड ४ ते ६ अंकी असतो.';return false}
   lb.disabled=true;le.textContent='तपासत आहे…';
   fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({mobile:u,pin:p})}).then(function(r){return r.json()}).then(function(j){
-   if(!j.ok){lb.disabled=false;le.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.':'मोबाईल किंवा पासवर्ड चुकीचा.';return}
+   if(!j.ok){lb.disabled=false;le.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. १५ मिनिटांनी पुन्हा प्रयत्न करा.':'मोबाईल किंवा पासवर्ड चुकीचा.';return}
    le.textContent='';pickKid(j,function(m){le.textContent=m}).then(function(){lb.disabled=false})}).catch(function(){lb.disabled=false;le.textContent='इंटरनेट तपासा.'});return false}
  lb.disabled=true;le.textContent='तपासत आहे…';
  api({action:'login',username:u,password:p}).then(function(r){
