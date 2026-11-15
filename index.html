@@ -323,8 +323,8 @@ function again(){document.getElementById('bye').style.display='none';home()}
 function doReset(){menu(0);var fin=function(){S=null;GUEST=null;PROF=null;P={};try{localStorage.removeItem(SK);localStorage.removeItem(K);localStorage.removeItem('am_guest_v1');localStorage.removeItem('am_prof_v1')}catch(e){}K='am_prog_v1';D=[];CAT=null;view.style.display='none';try{fr.src='about:blank'}catch(e){}cur=null;m.innerHTML='';showLogin('')};
  if(S&&getQ().length){flushQ();setTimeout(fin,1200)}else fin()}
 fetch('status.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.open===false){ksm.textContent=j.msg||'थोड्या वेळाने पुन्हा प्रयत्न करा.';ks.style.display='flex'}}).catch(function(){});
-var TV=(location.hash.match(/^#view=(\d)-(mr|kn)$/)||0);
-if(TV){PROF=null;S=null;PREV=1;FEEF=1;K='am_prog_tv';P={};GUEST={cls:TV[1],med:TV[2]};loadCat({className:TV[1],medium:medName(TV[2])}).then(function(){home()}).catch(function(){document.getElementById('m').innerHTML='<p style="text-align:center">या इयत्तेचे पाठ उपलब्ध नाहीत.</p><p style="text-align:center"><a href="teacher.html">← शिक्षक पान</a></p>'})}
+var TV=(location.hash.match(/^#view=(\d)-(mr|kn)(&sch)?$/)||0);
+if(TV){PROF=null;S=null;PREV=1;FEEF=1;K='am_prog_tv';P={};GUEST={cls:TV[1],med:TV[2]};loadCat({className:TV[1],medium:medName(TV[2])}).then(function(){home();if(TV[3])try{schOpen()}catch(e){}}).catch(function(){document.getElementById('m').innerHTML='<p style="text-align:center">या इयत्तेचे पाठ उपलब्ध नाहीत.</p><p style="text-align:center"><a href="teacher.html">← शिक्षक पान</a></p>'})}
 else if(S){loadCat(S.st).then(function(){home();loadMine();flushQ()}).catch(function(){S=null;try{localStorage.removeItem(SK)}catch(e){}home();showLogin('तुमच्या इयत्तेचे पाठ उपलब्ध नाहीत.')})}else if(GUEST){loadCat({className:String(GUEST.cls),medium:medName(GUEST.med)}).then(function(){home()}).catch(function(){GUEST=null;home();showLogin('')})}else{home();showLogin('')}
 
 var BK=null,LOD=null,BKK='',LOK='',PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/',PCDN='https://books-cdn.gmnadaf786.workers.dev/';
