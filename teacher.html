@@ -382,7 +382,7 @@ var HJ=null,HT='c',SCI=0;
 function nv(t){if(HJ)ht(t);else{HT=t;home()}}
 function cceGo(){var R=HJ?HJ.rows:[];if(!R.length){alert('आधी "माझा वर्ग" मध्ये वर्ग जोडा.');ht('c');return}var go=function(c){location.href='cce.html#'+encodeURIComponent(c.udise+','+c.cls+','+c.div)};if(R.length===1){go(R[0]);return}window.CCR=R;d.innerHTML='<button class="g" onclick="ht(\'k\')">← मागे</button><div class="card"><h2>📝 CCE – कोणता वर्ग?</h2>'+R.map(function(c,k){return '<button style="margin-top:8px" onclick="go2('+k+')">इयत्ता '+c.cls+' '+E(c.div)+' <small style="color:inherit">· '+E(c.udise)+'</small></button>'}).join('')+'</div>'}
 function go2(k){var c=window.CCR[k];location.href='cce.html#'+encodeURIComponent(c.udise+','+c.cls+','+c.div)}
-function home(){bel();show('d');post('/api/t/classes',{}).then(function(j){if(!j.ok){d.innerHTML='<p class="er">सत्र संपले. पुन्हा लॉगिन करा.</p>';return}if(!j.conf){schc(j);return}HJ=j;ht(HT)})}
+function home(){bel();show('d');post('/api/t/classes',{}).then(function(j){if(!j.ok){d.innerHTML='<p class="er">सत्र संपले. पुन्हा लॉगिन करा.</p>';return}if(!j.conf){schc(j);return}HJ=j;try{var gh=(location.hash||'').split(',');if(gh[0]==='#stu'){HT='s';var gi=-1;j.rows.forEach(function(c,k){if(gi<0&&String(c.cls)===gh[1]&&c.div===decodeURIComponent(gh[2]||''))gi=k});if(gi>=0)SCI=gi;history.replaceState(null,'',location.pathname)}}catch(e){}ht(HT)})}
 function sdash(j){var m={},tot=j.sd.reduce(function(a,x){return a+x.n},0),lo=1e9,hi=0;j.sd.forEach(function(x){m[x.cls]=x;lo=Math.min(lo,x.cls);hi=Math.max(hi,x.cls)});
  if(!j.sd.length){lo=j.cmin||0;hi=j.cmax||0;if(!lo||!hi){j.rows.forEach(function(c){lo=lo&&lo<c.cls?lo:c.cls;hi=Math.max(hi||0,c.cls)})}}
  var rows='',tm=0,tf=0,tn=0;
