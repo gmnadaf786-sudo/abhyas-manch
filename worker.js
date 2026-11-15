@@ -1001,8 +1001,10 @@ async function ext(p,r,env){
   if(p==='/api/t/classes'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const rs=(await env.DB.prepare("SELECT c.udise,c.cls,c.div,(SELECT COUNT(*) FROM roster r WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div) n,(SELECT COUNT(*) FROM roster r JOIN students s ON s.id=r.sid WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div AND s.last_seen>=datetime('now','-7 day')) a7 FROM tclasses c WHERE c.tid=? ORDER BY c.cls,c.div").bind(t.id).all()).results;
-    const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();
-    return J({ok:1,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1});
+    await schCols(env);
+    const sc=await env.DB.prepare('SELECT name,cmin,cmax FROM schools WHERE udise=?').bind(t.udise).first();
+    const sd=(await env.DB.prepare("SELECT r.cls,COUNT(*) n,SUM(i.gender='M') m,SUM(i.gender='F') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? GROUP BY r.cls ORDER BY r.cls").bind(t.udise).all()).results.map(x=>({cls:x.cls,n:x.n,m:x.m||0,f:x.f||0}));
+    return J({ok:1,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1,sd,cmin:(sc&&sc.cmin)||0,cmax:(sc&&sc.cmax)||0});
   }
   if(p==='/api/t/bday'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
