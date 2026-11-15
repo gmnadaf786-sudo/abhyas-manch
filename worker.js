@@ -1015,8 +1015,14 @@ async function ext(p,r,env){
     await schCols(env);
     const sc=await env.DB.prepare('SELECT name,cmin,cmax FROM schools WHERE udise=?').bind(t.udise).first();
     const sd=(await env.DB.prepare("SELECT r.cls,COUNT(*) n,SUM(i.gender='M') m,SUM(i.gender='F') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? GROUP BY r.cls ORDER BY r.cls").bind(t.udise).all()).results.map(x=>({cls:x.cls,n:x.n,m:x.m||0,f:x.f||0}));
-    let hm='';try{const h=await env.DB.prepare('SELECT hm FROM school_sna WHERE udise=?').bind(t.udise).first();hm=h&&h.hm||''}catch(e){}
+    let hm='';try{const h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hm:'+t.udise).first();hm=h&&h.v||'';if(!hm){const h2=await env.DB.prepare('SELECT hm FROM school_sna WHERE udise=?').bind(t.udise).first();hm=h2&&h2.hm||''}}catch(e){}
     return J({ok:1,hm,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1,sd,cmin:(sc&&sc.cmin)||0,cmax:(sc&&sc.cmax)||0});
+  }
+  if(p==='/api/t/hmset'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const nm=cl(b.hm,80).replace(/[<>]/g,'').trim();
+    await env.DB.prepare("INSERT INTO cfg(k,v) VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v").bind('hm:'+t.udise,nm).run();
+    return J({ok:1,hm:nm});
   }
   if(p==='/api/t/bday'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
