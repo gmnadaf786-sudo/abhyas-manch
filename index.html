@@ -294,9 +294,9 @@ function sendFb(){var t=fx.value.trim();if(t.length<3){fm.style.color='#b91c1c';
  if(!S&&PROF){fs.disabled=true;fm.style.color='';fm.textContent='पाठवत आहे…';fetch('/api/feedback',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+PROF.token},body:JSON.stringify({type:ft.value,text:t,lesson:(cur&&curL?cur.n+' – '+curL:'')})}).then(function(r){return r.json()}).then(function(j){if(j.ok){fm.style.color='#15803d';fm.textContent='✅ धन्यवाद! अभिप्राय मिळाला.';setTimeout(function(){fb.style.display='none'},1200)}else{fs.disabled=false;fm.style.color='#b91c1c';fm.textContent=j.e==='many'?'आज खूप अभिप्राय पाठवले. उद्या प्रयत्न करा.':'पाठवता आले नाही. पुन्हा प्रयत्न करा.'}}).catch(function(){fs.disabled=false;fm.style.color='#b91c1c';fm.textContent='इंटरनेट तपासा.'});return}
  if(!S){fm.textContent='आधी लॉगिन करा.';return}
  fs.disabled=true;fm.style.color='';fm.textContent='पाठवत आहे…';
- api({action:'feedback',token:S.token,type:ft.value,text:t,cls:String(clsNum(S.st)),lesson:(cur&&curL?cur.n+' – '+curL:'')}).then(function(r){
-  if(r&&r.success){fm.style.color='#15803d';fm.textContent='✅ धन्यवाद! अभिप्राय मिळाला.';setTimeout(function(){fb.style.display='none'},1200)}
-  else{fs.disabled=false;fm.style.color='#b91c1c';fm.textContent=(r&&r.message)||'पाठवता आले नाही.'}
+ fetch('/api/feedback/old',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({type:ft.value,text:t,name:(S.st&&S.st.name)||'',cls:String(clsNum(S.st)),lesson:(cur&&curL?cur.n+' – '+curL:'')})}).then(function(r){return r.json()}).then(function(r){
+  if(r&&r.ok){fm.style.color='#15803d';fm.textContent='✅ धन्यवाद! अभिप्राय मिळाला.';setTimeout(function(){fb.style.display='none'},1200)}
+  else{fs.disabled=false;fm.style.color='#b91c1c';fm.textContent=r&&r.e==='many'?'आज खूप अभिप्राय आले. उद्या प्रयत्न करा.':'पाठवता आले नाही.'}
  }).catch(function(){fs.disabled=false;fm.style.color='#b91c1c';fm.textContent='इंटरनेट तपासा आणि पुन्हा प्रयत्न करा.'})}
 function chip(r){if(!r)return '';var p=Math.round(r.s*100/r.t);return '<span class="chip '+(p>=75?'':p>=50?'m':'l')+'">'+r.s+'/'+r.t+'</span>'}
 function openS(i,q){cur=D[i];document.getElementById('hb').innerHTML='<button class="back" onclick="home()">← विषय</button>';ht.textContent=cur.n;hp.textContent=cur.l.length+' पाठ';

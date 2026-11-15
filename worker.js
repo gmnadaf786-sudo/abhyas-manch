@@ -1274,6 +1274,13 @@ export default{
         await env.DB.batch(st);
         return J({ok:1});
       }
+      if(p==='/api/feedback/old'){
+        const b=await body(r),t=cl(b.text,800);if(t.length<3)return J({e:'text'},400);
+        const n=await env.DB.prepare("SELECT COUNT(*) c FROM feedback WHERE sid=0 AND ts>=datetime('now','-1 day')").first();
+        if(n&&n.c>=100)return J({e:'many'},429);
+        await env.DB.prepare('INSERT INTO feedback(sid,type,text,cls,lesson) VALUES(0,?,?,?,?)').bind(cl(b.type,20),'['+cl(b.name,40)+'] '+t,cl(b.cls,3),cl(b.lesson,80)).run();
+        return J({ok:1});
+      }
       if(p==='/api/feedback'){
         const s=await me(env,r);if(!s)return J({e:'auth'},401);
         const b=await body(r),t=cl(b.text,800);if(t.length<3)return J({e:'text'},400);
