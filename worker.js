@@ -535,8 +535,17 @@ async function pmApi(p,r,env){
   }
   return J({e:'nf'},404);
 }
+async function stuCall(p,r){
+  if(p==='/api/s/result')return true;
+  if(p!=='/api/s/login'&&p!=='/api/s/chpw')return false;
+  let b={};try{b=await r.clone().json()||{}}catch(e){}
+  if(p==='/api/s/login')return !!b.pen&&!b.udise;
+  return /^Bearer \S+/.test(r.headers.get('authorization')||'')&&!b.token;
+}
 async function ext(p,r,env){
-  {const sr=await schoolApi(p,r,env);if(sr)return sr}
+  // /api/s/login, /api/s/chpw and /api/s/result are shared by the school portal and PEN students:
+  // student calls (PEN in body / Bearer token) must skip schoolApi, which would reject them.
+  if(!(await stuCall(p,r))){const sr=await schoolApi(p,r,env);if(sr)return sr}
   {const orr=await offApi(p,r,env);if(orr)return orr}
   {const pr=await pmApi(p,r,env);if(pr)return pr}
   if(p==='/api/s/login'){
