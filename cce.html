@@ -69,8 +69,8 @@ function msg(j){return j.ok?'':j.e==='conflict'?'दुसऱ्या कोण
 function back(t){return '<button class="g" onclick="home()">← CCE</button><h2 style="margin:4px 0 12px">'+t+'</h2>'}
 function load(){if(!T||!/^\d{11}$/.test(UD)||!CL){d.innerHTML='<div class="card">कृपया शिक्षक पानावरून लॉगिन करून वर्ग निवडा.<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
  document.getElementById('hd').textContent='📘 CCE — इयत्ता '+CL+' '+DV+' ('+YR+')';
- post('/api/cce/get',{school:1,kinds:['set','wt','wtdone','days']}).then(function(j){if(!j.ok){d.innerHTML='<div class="card er">'+msg(j)+'<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
-  j.rows.forEach(function(r){var v=null;try{v=JSON.parse(r.v)}catch(e){}DOC[key(r.cls,r.kind,r.k)]={v:v,upd:r.upd}});home()}).catch(function(){d.innerHTML='<div class="card er">इंटरनेट तपासा.</div>'})}
+ post('/api/cce/get',{school:1,kinds:['set','wt','wtdone','days','cfg','att','hlt','res']}).then(function(j){if(!j.ok){d.innerHTML='<div class="card er">'+msg(j)+'<br><br><button onclick="location.href=\'teacher.html\'">शिक्षक पान</button></div>';return}
+  j.rows.forEach(function(r){var v=null;try{v=JSON.parse(r.v)}catch(e){}DOC[key(r.cls,r.kind,r.k)]={v:v,upd:r.upd}});LD.att=LD.hlt=LD.res=1;var rr=get(CL,'cfg','rule');if(['term2','avg','sum'].indexOf(rr)>=0)NK.rule=rr;home()}).catch(function(){d.innerHTML='<div class="card er">इंटरनेट तपासा.</div>'})}
 var CURM=-1,TI=0,NXT=['setS()','wtS(1)','dayS()','mkS(1)','atS(0)','hlS(1)','dcS(1,0)','phS()','loS(1)','pubS()','bkS(1,\'\')','rsS(1)','hpcS()'],NXN=['शाळा व वर्गशिक्षक','भारांश','कामाचे दिवस','गुण नोंदणी','उपस्थिती','आरोग्य','वर्णनात्मक नोंदी','फोटो','अध्ययन निष्पत्ती','निकाल जाहीर','प्रगती पुस्तिका','निकाल व अहवाल','समग्र प्रगती पत्रक'];
 function nxGo(){if((CUR&&CUR.dirty)||(AT&&AT.dirty)||(HL&&HL.dirty)){if(!confirm('बदल सेव्ह केलेले नाहीत. तरीही पुढे जायचे?'))return}CUR=null;AT=null;HL=null;var i=CURM+1;if(i>=NXT.length){home();return}CURM=i;eval(NXT[i])}
 new MutationObserver(function(){if(CURM<0||document.getElementById('nxb'))return;var last=CURM+1>=NXT.length;var e=document.createElement('div');e.id='nxb';e.className='noprint';e.style.cssText='text-align:right;margin:18px 0 28px';e.innerHTML='<button onclick="nxGo()" style="width:auto;padding:12px 22px">'+(last?'✔ CCE मुख्य पान':'पुढे: '+NXN[CURM+1]+' →')+'</button>';d.appendChild(e)}).observe(document.getElementById('d'),{childList:true});
@@ -409,7 +409,7 @@ function csR(term){needStu(function(){needMk(function(){var S=STU,subs=W[CL],row
 /* ---- निकाल पत्रक (जुन्या CCE नमुन्याप्रमाणे) व नोंदवही ---- */
 var NK={rule:'term2',paper:'A4',mode:'1'};
 try{var _nk=JSON.parse(localStorage.getItem('am_nk')||'{}');NK.rule=_nk.rule||NK.rule;NK.paper=_nk.paper||NK.paper}catch(e){}
-function nkSet(k,v){NK[k]=v;try{localStorage.setItem('am_nk',JSON.stringify({rule:NK.rule,paper:NK.paper}))}catch(e){}}
+function nkSet(k,v){NK[k]=v;try{localStorage.setItem('am_nk',JSON.stringify({rule:NK.rule,paper:NK.paper}))}catch(e){}if(k==='rule'&&get(CL,'cfg','rule')!==v)put(CL,'cfg','rule',v).catch(function(){})}
 function gcode(x){return x.gender==='F'?'मुली':x.gender==='M'?'मु':''}
 function fm(v){return v==null||v===''?'-':String(Math.round(v*100)/100)}
 function sd(term,sb,x){var q=sv(term,sb[0],x.pen);return q}
@@ -511,4 +511,4 @@ window.pdfAuto=function(){var h=document.querySelector('#d h2'),t=h?h.textConten
  if(!t&&document.querySelector('#d .hp,#d .hpc'))t='HPC';var sc=(get(0,'set','')||{}).school||'',tm='';
  [].forEach.call(document.querySelectorAll('#d button.s'),function(b){if(!tm&&/सत्र|वार्षिक/.test(b.textContent))tm=b.textContent.trim()});
  return [t||'CCE',tm&&t.indexOf(tm)<0?tm:'',nm,'इ. '+CL+' '+DV,sc,YR].filter(Boolean).join(' - ')};
-</script><script src="pdf.js?v=1"></script><script src="hpc.js?v=365"></script></main></body></html>
+</script><script src="pdf.js?v=1"></script><script src="hpc.js?v=366"></script></main></body></html>

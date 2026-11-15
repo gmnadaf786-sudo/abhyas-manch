@@ -55,7 +55,7 @@ function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt
 
   /* वर्षारंभापासून (एप्रिल) प्रत्येक महिन्याची शिल्लक साखळी. */
   function compute(fy, group){
-    var Y=state.year[fy], out={}, prev=null;
+    var Y=state.year[fy], out={}, prev=(Y.carry&&Y.carry[group])||null;
     fyMonths(fy).forEach(function(m){
       var st=((Y.stockBy[m]||{})[group])||{}, used=consumption(Y.dailyBy[m]||[],group);
       var o={},ov={},r={},p={},c={},carry={};
@@ -283,7 +283,7 @@ function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt
     }catch(e){}
   }
 function build(raw,month){
-  var fy=fyOf(month),Y={school:{name:raw.school||'',udise:raw.udise||'',kendra:raw.kendra||'',taluka:'जत',district:'सांगली'},teacher:raw.teacher||'',dailyBy:{},stockBy:{}};
+  var fy=fyOf(month),Y={school:{name:raw.school||'',udise:raw.udise||'',kendra:raw.kendra||'',taluka:raw.taluka||'',district:raw.district||''},teacher:raw.teacher||'',dailyBy:{},stockBy:{},carry:raw.carry||{}};
   (raw.daily||[]).forEach(function(d){var o={date:d.date,menu:d.menu||'',p15:Number(d.p15)||0,p68:Number(d.p68)||0,pulse15:d.pulse15||'',pulse68:d.pulse68||'',cooked:d.cooked||'होय',supplement:d.supp||'',tasteTime:d.taste||'',distTime:d.dist||'',taster:d.taster||'',remark:d.remark||'',sample:d.sample||''};(Y.dailyBy[monthOf(d.date)]=Y.dailyBy[monthOf(d.date)]||[]).push(o)});
   (raw.stock||[]).forEach(function(x){var dd={};try{dd=JSON.parse(x.data)}catch(e){}(Y.stockBy[x.month]=Y.stockBy[x.month]||{})[x.grp]=dd});
   state.year={};state.year[fy]=Y;state.month=month;
@@ -293,8 +293,9 @@ function build(raw,month){
 function groupsOf(raw,g){var s=window.PMSG;return g==='15'||g==='68'?[g]:(s==='15'||s==='68'?[s]:['15','68'])}
 window.PMREP={
   print:function(kind,month,g,raw){
-    var Y=build(raw,month),fy=fyOf(month);regGroup=g==='68'?'68':'15';if(window.PMSG==='15'||window.PMSG==='68')regGroup=window.PMSG;ALLOWED=(window.PMSG==='15'||window.PMSG==='68')?[window.PMSG]:['15','68'];
+    var Y=build(raw,month),fy=fyOf(month),warn=function(gs){var m=[];gs.forEach(function(gg){var D=partsData(month,gg);if(D.hasReceipts&&D.mism.length)m.push(grpTitle(gg)+': '+D.mism.join(', '))});return !m.length||confirm('पावत्यांतील आवक आणि साठा टॅबमधील "प्राप्त" जुळत नाही:\n'+m.join('\n')+'\n\nत्यामुळे नोंदवही भाग १/२ आणि प्रपत्र ब/पुढील महिन्याची शिल्लक वेगळी येईल. साठा टॅबमध्ये "पावत्यांवरून प्राप्त भरा" दाबून जतन करा.\n\nतरीही प्रिंट करायचे?')};regGroup=g==='68'?'68':'15';if(window.PMSG==='15'||window.PMSG==='68')regGroup=window.PMSG;ALLOWED=(window.PMSG==='15'||window.PMSG==='68')?[window.PMSG]:['15','68'];
     var p=month.split('-'),mname=MONTH_NAMES[Number(p[1])-1]+' '+p[0];
+    if((kind==='p1'||kind==='p2'||kind==='b'||kind==='all')&&!warn(kind==='all'?ALLOWED:[regGroup]))return;
     if(kind==='p1'||kind==='p2'){var D=partsData(month,regGroup);printWindow('PM Poshan नोंदवही भाग '+(kind==='p1'?1:2)+' — '+month+' — '+grpTitle(regGroup),PRT_CSS+(kind==='p1'?part1Html(Y,month,regGroup,D):part2Html(Y,month,regGroup,D)),kind==='p2',true);return}
     if(kind==='b'){var D2=partsData(month,regGroup);printWindow('प्रपत्र ब — '+month,govB_(Y,month,regGroup,D2,govVals_(D2.comp)),false,true,true);return}
     if(kind==='taste'){var t=tasteTable(month);if(!t){alert('या महिन्यात प्रिंट करण्यासाठी नोंदी नाहीत.');return}printWindow('चव नोंदवही',reportHeader(Y,'📅 <b>'+mname+'</b>')+'<h4>दैनिक भोजन चव नोंदवही</h4>'+t,true,true);return}
