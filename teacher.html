@@ -451,7 +451,7 @@ function chk(){var ok=0,bad=[];at.value.split('\n').forEach(function(l,i){if(!l.
 function addgo(c,dv,ud){var rows=[];at.value.split('\n').forEach(function(l){var a=l.split(/[\t,;]/).map(function(x){return x.trim()});if(a.length<3)return;var q=pd(a[2]),by=q.y;if(/^\d{11}$/.test(a[0])&&by)rows.push({pen:a[0],name:a[1],by:by,dob:q.iso,udise:ud,cls:c,div:dv,med:am.value})});
  if(!rows.length){ae.textContent='वैध ओळी सापडल्या नाहीत.';return}ae.textContent='जोडत आहे…';var n=0,i=0;(function nx(){if(i>=rows.length){ae.className='ok';ae.textContent=n+' विद्यार्थी जोडले/अद्ययावत केले.';return}
  var ch=rows.slice(i,i+100);i+=100;post('/api/t/add',{rows:ch}).then(function(j){n+=j.n||0;nx()})})()}
-try{var t0=sessionStorage.getItem('am_t');if(t0){T=t0;post('/api/t/classes',{}).then(function(j){if(j.ok)home();else T=''})}}catch(x){}
+try{var t0=sessionStorage.getItem('am_t');if(t0){T=t0;document.getElementById('lg').style.display='none';d.style.display='block';d.innerHTML='<p style="padding:20px">⏳ लोड होत आहे…</p>';post('/api/t/classes',{}).then(function(j){if(j.ok)home();else{T='';show('lg')}}).catch(function(){T='';show('lg')})}}catch(x){}
 (function(){var tm;function fx(){document.querySelectorAll('.chips,.tabs').forEach(function(c){var b=c.querySelector('button.s,button.on,.chip.on');if(b&&c.scrollWidth>c.clientWidth)c.scrollLeft=b.offsetLeft-(c.clientWidth-b.offsetWidth)/2})}
 new MutationObserver(function(){clearTimeout(tm);tm=setTimeout(fx,0)}).observe(document.body,{childList:true,subtree:true})})();
 </script></main></body></html>
