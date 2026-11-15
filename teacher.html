@@ -362,7 +362,7 @@ function mif(){var F=MI.f,lock=MI.st==='Forwarded',S={},h='<button class="g" onc
  var sm={'':'अजून सादर नाही','Draft':'मसुदा (जतन केलेला)','Forwarded':'केंद्रप्रमुखाकडे पाठवले – मंजुरीची प्रतीक्षा','Approved':'मंजूर','Returned':'परत आले – दुरुस्ती करा'};
  h+='<p><b>स्थिती:</b> '+E(sm[MI.st]||MI.st)+'</p>';if(MI.st==='Returned'&&MI.rm)h+='<p class="er">शेरा: '+E(MI.rm)+'</p>';
  if(lock)h+='<p><small>मंजुरी/परत येईपर्यंत बदल करता येणार नाहीत.</small></p>';
- h+='<small>धूसर (लॉक) माहिती बदलता येत नाही; बदल हवा असल्यास केंद्रप्रमुखाशी संपर्क करा.</small></div>';h+='<div class="card" id="mimg">'+imgh()+'</div>';
+ h+='<small>धूसर (लॉक) माहिती बदलता येत नाही; बदल हवा असल्यास केंद्रप्रमुखाशी संपर्क करा.</small></div>';
  F.forEach(function(f,i){(S[f.s]=S[f.s]||{});(S[f.s][f.b]=S[f.s][f.b]||[]).push([f,i])});
  Object.keys(S).sort().forEach(function(s,si){h+='<details class="card"'+(si===0?' open':'')+'><summary><b>'+E(s)+'</b></summary>';Object.keys(S[s]).forEach(function(b){h+='<h2 style="margin-top:12px">'+E(b)+'</h2>';S[s][b].forEach(function(x){var f=x[0],i=x[1],v=MI.e[f.h]!=null?MI.e[f.h]:(MI.b[f.h]||''),v=f.t==='D'?dm(v):v,ro=!f.e||lock,id='mf'+i;h+='<label>'+E(f.h)+(MI.e[f.h]!=null?' ✎':'')+'</label>';
   if(ro){h+='<input value="'+E(v)+'" disabled>';return}
@@ -372,6 +372,7 @@ function mif(){var F=MI.f,lock=MI.st==='Forwarded',S={},h='<button class="g" onc
   else h+='<input id="'+id+'" value="'+E(v)+'"'+(f.t==='n'?' inputmode="decimal"':'')+(f.t==='D'?' placeholder="dd-mm-yyyy"':'')+'>'})});h+='</details>'});
 h+=recUi('L')+recUi('S');
  if(!lock)h+='<p id="mm" class="er"></p><div class="r"><button class="g" onclick="mis(0)">💾 जतन करा</button><button onclick="mis(1)">📤 केंद्रप्रमुखाकडे पाठवा</button></div>';
+ h+='<div class="card" id="mimg" style="margin-top:12px">'+imgh()+'</div>';
  d.innerHTML=h}
 function mis(sub){if(sub&&!confirm('पाठवल्यानंतर मंजुरीपर्यंत बदल करता येणार नाहीत. पाठवायचे?'))return;var o={};MI.f.forEach(function(f,i){if(!f.e)return;var el=document.getElementById('mf'+i);if(!el)return;var v;if(f.t==='c')v=[].slice.call(el.querySelectorAll('input:checked')).map(function(c){return c.value}).join(', ');else v=el.value.trim();var bv=(MI.b[f.h]||'').trim();o[f.h]=(v===bv&&f.t!=='c')||(f.t==='c'&&v.split(', ').sort().join()===bv.split(',').map(function(q){return q.trim()}).filter(Boolean).sort().join())?'':v});
  post('/api/t/infosave',{d:o,submit:sub}).then(function(j){if(j.ok){mm.textContent='';alert(sub?'पाठवले.':'जतन झाले.');mi()}else mm.textContent=j.e==='locked'?'आधीच पाठवले आहे.':'अडचण, पुन्हा प्रयत्न करा.'}).catch(function(){mm.textContent='अडचण, पुन्हा प्रयत्न करा.'})}

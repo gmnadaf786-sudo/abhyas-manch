@@ -44,6 +44,12 @@ async function tMed(env,t){
 }
 let SCOK=false;
 async function schCols(env){if(SCOK)return;for(const c of ['med TEXT','cmin INTEGER','cmax INTEGER']){try{await env.DB.prepare('ALTER TABLE schools ADD COLUMN '+c).run()}catch(e){}}SCOK=true}
+async function mailSend(env,to,sub,html){try{if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(to||'')))return 0;await slEnsure(env);
+  const q=await env.DB.prepare("SELECT k,v FROM cfg WHERE k IN ('brevo_key','mail_from','mail_name')").all(),c={};q.results.forEach(x=>c[x.k]=x.v);
+  const key=env.BREVO_API_KEY||c.brevo_key,fr=c.mail_from;if(!key||!fr)return 0;
+  const x=await fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'content-type':'application/json','api-key':key,accept:'application/json'},body:JSON.stringify({sender:{name:c.mail_name||'अभ्यास मंच',email:fr},to:[{email:to}],subject:sub,htmlContent:html})});
+  return x.ok?1:0}catch(e){return 0}}
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[m]);
 async function gemKey(env){if(env.GEMINI_API_KEY)return env.GEMINI_API_KEY;await slEnsure(env);const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='gemini_key'").first();return(q&&q.v)||''}
 async function gemAsk(env,si,contents,gc){const GK=await gemKey(env);if(!GK)return{e:'nokey'};let last='';
   for(const mo of ['gemini-3.5-flash-lite','gemini-3.5-flash','gemini-3.1-flash-lite']){for(let a=0;a<2;a++){try{
@@ -198,7 +204,12 @@ async function offApi(p,r,env){
       await env.DB.batch([env.DB.prepare('INSERT INTO tch_info(shalarth,data,upd) VALUES(?,?,?) ON CONFLICT(shalarth) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(sh,JSON.stringify(base),istDay()),env.DB.prepare("UPDATE tch_edit SET status='Approved',remark='',data='{}',upd=? WHERE shalarth=?").bind(istDay(),sh),env.DB.prepare("UPDATE tch_rec SET status='Approved' WHERE shalarth=? AND status='Forwarded'").bind(sh)]);
       return J({ok:1,status:'Approved'});
     }
-    if(b.act==='ret'){const rm=cl(b.remark,300);if(rm.length<3)return J({e:'remark'},400);await env.DB.batch([env.DB.prepare("UPDATE tch_edit SET status='Returned',remark=?,upd=? WHERE shalarth=?").bind(rm,istDay(),sh),env.DB.prepare("UPDATE tch_rec SET status='Returned' WHERE shalarth=? AND status='Forwarded'").bind(sh)]);return J({ok:1,status:'Returned'});}
+    if(b.act==='ret'){const rm=cl(b.remark,300);if(rm.length<3)return J({e:'remark'},400);await env.DB.batch([env.DB.prepare("UPDATE tch_edit SET status='Returned',remark=?,upd=? WHERE shalarth=?").bind(rm,istDay(),sh),env.DB.prepare("UPDATE tch_rec SET status='Returned' WHERE shalarth=? AND status='Forwarded'").bind(sh)]);
+      let mail=0;try{let em='';try{em=(JSON.parse(e.data||'{}')['ई-मेल आयडी']||'').trim()}catch(x){}
+        if(!em){const q=await env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(sh).first();try{em=(JSON.parse(q&&q.data||'{}')['ई-मेल आयडी']||'').trim()}catch(x){}}
+        const tn=await env.DB.prepare('SELECT name FROM teachers WHERE shalarth=?').bind(sh).first();
+        if(em)mail=await mailSend(env,em,'आपली माहिती परत पाठवली आहे – अभ्यास मंच','<div style="font-family:sans-serif;font-size:16px;line-height:1.6"><p>नमस्कार '+esc(tn&&tn.name)+',</p><p>आपण पाठवलेली <b>"माझी माहिती"</b> केंद्रप्रमुख / गटशिक्षणाधिकारी कार्यालयाने <b>परत पाठवली</b> आहे.</p><p><b>कारण / शेरा:</b><br>'+esc(rm)+'</p><p>कृपया अभ्यास मंच (<a href="https://abhyasmanch.in">abhyasmanch.in</a>) → शिक्षक लॉगिन → माझी माहिती मध्ये जाऊन दुरुस्ती करा व पुन्हा पाठवा.</p><p>— अभ्यास मंच</p></div>')}catch(x){}
+      return J({ok:1,status:'Returned',mail});}
     return J({e:'bad'},400);
   }
   if(p==='/api/o/form'){
@@ -1127,7 +1138,7 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
+  if(p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
     if(p==='/api/admin/spwreset'){await slEnsure(env);const u=cl(b.udise,11).replace(/\D/g,'');if(u.length!==11)return J({e:'bad'},400);await env.DB.batch([env.DB.prepare('DELETE FROM school_login WHERE udise=?').bind(u),env.DB.prepare('DELETE FROM pw_req WHERE udise=?').bind(u)]);return J({ok:1})}
     if(p==='/api/admin/opwreset'){await slEnsure(env);const u=cl(b.u,12).toUpperCase();if(u!=='BEO'&&!CEN[u])return J({e:'bad'},400);await env.DB.prepare('DELETE FROM off_login WHERE uname=?').bind(u).run();return J({ok:1})}
@@ -1137,6 +1148,13 @@ async function ext(p,r,env){
     if(p==='/api/admin/panchimport'){await slEnsure(env);const st=[];if(b.reset)st.push(env.DB.prepare('DELETE FROM panch'));for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,100)){const d=cl(x.d,10);if(!/^\d{4}-\d{2}-\d{2}$/.test(d))continue;const o={};for(const k of ['वार','शक','संवत्सर','मास','पक्ष','तिथी','नक्षत्र','सूर्योदय','सूर्यास्त'])o[k]=cl(x[k],60);st.push(env.DB.prepare('INSERT OR REPLACE INTO panch(d,data) VALUES(?,?)').bind(d,JSON.stringify(o)))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
     if(p==='/api/admin/fblist'){await slEnsure(env);const q=await env.DB.prepare('SELECT name,school,rating,typ,msg,ts FROM fb ORDER BY id DESC LIMIT 100').all(),w=await env.DB.prepare("SELECT v FROM cfg WHERE k='wa_link'").first();return J({ok:1,rows:q.results||[],wa:w?w.v:''})}
     if(p==='/api/admin/snaimp'){await slEnsure(env);await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_sna(udise TEXT PRIMARY KEY, mhsn TEXT, bank TEXT, acct TEXT, ifsc TEXT, branch TEXT, hm TEXT, hm_mob TEXT, upd TEXT)").run();const st=[];for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,60)){const u=cl(x.u,11),m=cl(x.m,20).toUpperCase(),ac=cl(x.acct,25),fs=cl(x.ifsc,15).toUpperCase();if(!/^\d{11}$/.test(u)||!/^MHSN\d{3,10}$/.test(m)||!/^\d{6,20}$/.test(ac)||!/^[A-Z]{4}0[A-Z0-9]{6}$/.test(fs))continue;st.push(env.DB.prepare('INSERT OR REPLACE INTO school_sna(udise,mhsn,bank,acct,ifsc,branch,hm,hm_mob,upd) VALUES(?,?,?,?,?,?,?,?,?)').bind(u,m,cl(x.bank,60),ac,fs,cl(x.br,60),cl(x.hm,80),cl(x.mob,10),new Date().toISOString()))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
+    if(p==='/api/admin/mailcfg'){await slEnsure(env);const k=cl(b.key,300).trim(),fr=cl(b.from,120).trim().toLowerCase(),nm=cl(b.name,60).trim(),up=async(a,v)=>env.DB.prepare("INSERT INTO cfg(k,v) VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v").bind(a,v).run();
+      if(k){if(!/^[\w.\-]{20,300}$/.test(k))return J({e:'key'},400);await up('brevo_key',k)}
+      if(fr){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fr))return J({e:'from'},400);await up('mail_from',fr)}
+      if(nm)await up('mail_name',nm);
+      const cf=await env.DB.prepare("SELECT k FROM cfg WHERE k IN ('brevo_key','mail_from')").all();let sent=-1;
+      if(b.test){sent=await mailSend(env,cl(b.test,120).trim(),'अभ्यास मंच – चाचणी ईमेल','<p>ही चाचणी ईमेल आहे. ईमेल सुविधा चालू आहे. ✔</p>')}
+      return J({ok:1,set:cf.results.length,sent})}
     if(p==='/api/admin/gkcfg'){await slEnsure(env);const k=cl(b.v,200).trim();if(k&&!/^[\w.-]{20,200}$/.test(k))return J({e:'bad'},400);await env.DB.prepare("INSERT INTO cfg(k,v) VALUES('gemini_key',?) ON CONFLICT(k) DO UPDATE SET v=excluded.v").bind(k).run();return J({ok:1})}
     if(p==='/api/admin/wacfg'){await slEnsure(env);const u=cl(b.v,300).trim();if(u&&!/^https:\/\/(chat\.whatsapp\.com|whatsapp\.com\/channel|wa\.me)\/\S+$/i.test(u))return J({e:'bad'},400);await env.DB.prepare("INSERT INTO cfg(k,v) VALUES('wa_link',?) ON CONFLICT(k) DO UPDATE SET v=excluded.v").bind(u).run();return J({ok:1})}
     if(p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'){
