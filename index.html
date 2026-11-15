@@ -340,7 +340,7 @@ function aL(a,b){return KN()?b:a}
 function aiFmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>')}
 var SCHD=null,SQ=null;
 function sx(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function schCls(){return PROF&&PROF.p?Number(PROF.p.cls)||0:0}
+function schCls(){return PROF&&PROF.p?clsNum({className:PROF.p.cls}):0}
 function schCard(){var c=schCls();return (c===4||c===7)?'<div class="les" style="cursor:pointer;grid-column:1/-1;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;border:0" onclick="schOpen()"><span><b>🎓 शिष्यवृत्ती सराव</b><br><small>इयत्ता '+c+' · MSCE नमुना प्रश्न</small></span></div>':''}
 function schOpen(){var c=schCls();toolHead('🎓 शिष्यवृत्ती सराव','इयत्ता '+c);m.innerHTML='<p style="text-align:center;color:var(--mut)">लोड होत आहे…</p>';
  (SCHD?Promise.resolve(SCHD):fetch('data/sch.json').then(function(r){return r.json()})).then(function(d){SCHD=d;var e=d['SCH'+c]||{},ks=Object.keys(e),n=ks.reduce(function(a,k){return a+e[k].length},0);
