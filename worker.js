@@ -30,8 +30,11 @@ async function pwOk(pw,salt,stored){return stored&&stored.startsWith('p:')?(awai
 async function teacher(env,b,needOk){
   const t=cl(b.token,64);if(!t)return null;
   const x=await env.DB.prepare('SELECT * FROM teachers WHERE token=?').bind(t).first();
-  if(!x||(needOk&&x.status!=='ok'))return null;return x;
+  if(!x||(needOk&&x.status!=='ok'))return null;
+  if(!x.tt||Date.now()-x.tt>TTTL)return null;return x;
 }
+const TTTL=30*864e5;
+let TCOK=false;async function tCols(env){if(TCOK)return;for(const c of ['lf INTEGER DEFAULT 0','tt INTEGER DEFAULT 0'])try{await env.DB.prepare('ALTER TABLE teachers ADD COLUMN '+c).run()}catch(e){}TCOK=true}
 async function tMed(env,t){
   const m={};let d='mr',tm='';
   try{const ti=await env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(t.shalarth).first();tm=JSON.parse(ti&&ti.data||'{}')['अध्यापनाचे माध्यम']||''}catch(e){}
@@ -346,17 +349,19 @@ async function tcEns(env){if(TCK)return;try{await env.DB.prepare('ALTER TABLE tc
 async function ctBlock(env,tid,ud,cls,dv){await tcEns(env);const o=await env.DB.prepare('SELECT c.tid,t.name FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=? AND c.cls=? AND c.div=? AND c.ct=1 LIMIT 1').bind(ud,cls,dv).first();return o&&o.tid!==tid?o.name:''}
 const okDob=s=>/^(19|20)\d\d-\d\d-\d\d$/.test(s)&&!isNaN(Date.parse(s))?s:'';
 async function imp(env,rw,tid){
-    const rows=(Array.isArray(rw)?rw:[]).slice(0,150);let n=0;const st=[];
+    const rows=(Array.isArray(rw)?rw:[]).slice(0,150);let n=0;const st=[],okp=new Set();
     for(const x of rows){
       if(tid&&!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(tid,cl(x.udise,11),parseInt(x.cls)||0,(cl(x.div,2).toUpperCase())||'A').first())continue;
       if(tid&&await ctBlock(env,tid,cl(x.udise,11),parseInt(x.cls)||0,(cl(x.div,2).toUpperCase())||'A'))continue;
       const pen=cl(x.pen,11).replace(/\D/g,''),ud=cl(x.udise,11).replace(/\D/g,''),cls=parseInt(x.cls)||0,by=cl(x.by,4).replace(/\D/g,''),name=cl(x.name,60);
       if(pen.length!==11||ud.length!==11||cls<1||cls>8||by.length!==4||name.length<2)continue;
+      if(tid){const o=await env.DB.prepare('SELECT udise FROM roster WHERE pen=?').bind(pen).first();if(o&&o.udise!==ud)continue}
+      okp.add(pen);
       const salt=rnd(6),h=await sha(salt+by),med=x.med==='kn'?'kn':'mr',dv=(cl(x.div,2).toUpperCase())||'A';
       st.push(env.DB.prepare("INSERT INTO roster(pen,udise,cls,div,name,med,salt,pw,pw0,salt0) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(pen) DO UPDATE SET udise=excluded.udise,cls=excluded.cls,div=excluded.div,name=excluded.name,med=excluded.med").bind(pen,ud,cls,dv,name,med,salt,h,h,salt));n++;
     }
     const dq=[],CT=['GEN','SC','ST','VJA','NTB','NTC','NTD','OBC','SBC'];
-    for(const x of rows){const pn=cl(x.pen,11).replace(/\D/g,'');if(pn.length!==11)continue;const dd=okDob(cl(x.dob,10)),g=['M','F','O'].includes(x.gender)?x.gender:'',ct=CT.includes(x.cat)?x.cat:'',gr=cl(x.gr,15),ro=cl(x.roll,6);if(dd||g||ct||gr||ro)dq.push([pn,dd,g,ct,gr,ro])}
+    for(const x of rows){const pn=cl(x.pen,11).replace(/\D/g,'');if(pn.length!==11||!okp.has(pn))continue;const dd=okDob(cl(x.dob,10)),g=['M','F','O'].includes(x.gender)?x.gender:'',ct=CT.includes(x.cat)?x.cat:'',gr=cl(x.gr,15),ro=cl(x.roll,6);if(dd||g||ct||gr||ro)dq.push([pn,dd,g,ct,gr,ro])}
     if(st.length)await env.DB.batch(st);
     if(dq.length){await env.DB.batch(dq.map(a=>env.DB.prepare("INSERT INTO sinfo(pen,dob,gender,cat,gr,roll) SELECT ?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM roster WHERE pen=?) ON CONFLICT(pen) DO UPDATE SET dob=CASE WHEN excluded.dob<>'' THEN excluded.dob ELSE sinfo.dob END,gender=CASE WHEN COALESCE(sinfo.gender,'')='' THEN excluded.gender ELSE sinfo.gender END,cat=CASE WHEN COALESCE(sinfo.cat,'')='' THEN excluded.cat ELSE sinfo.cat END,gr=CASE WHEN COALESCE(sinfo.gr,'')='' THEN excluded.gr ELSE sinfo.gr END,roll=CASE WHEN COALESCE(sinfo.roll,'')='' THEN excluded.roll ELSE sinfo.roll END").bind(a[0],a[1],a[2],a[3],a[4],a[5],a[0])))}
     return J({ok:1,n,skipped:rows.length-n});
@@ -699,7 +704,9 @@ async function ext(p,r,env){
     if(!cs.length)return J({e:'cls'},400);
     if(await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=?').bind(sh).first())return J({e:'exists'},409);
     const salt=rnd(8),h=await hashPin(pw,salt);
-    const known=await env.DB.prepare('SELECT 1 x FROM schools WHERE udise=?').bind(udise).first()||await env.DB.prepare('SELECT 1 x FROM roster WHERE udise=? LIMIT 1').bind(udise).first();
+    // auto-approve only a brand-new school AND a shalarth the admin has no data for (else someone could claim a real teacher's ID)
+    await slEnsure(env);
+    const known=await env.DB.prepare('SELECT 1 x FROM schools WHERE udise=?').bind(udise).first()||await env.DB.prepare('SELECT 1 x FROM roster WHERE udise=? LIMIT 1').bind(udise).first()||await env.DB.prepare('SELECT 1 x FROM tch_info WHERE shalarth=?').bind(sh).first();
     const ins=known?await env.DB.prepare('INSERT INTO teachers(shalarth,name,mobile,udise,salt,pw) VALUES(?,?,?,?,?,?)').bind(sh,name,mob,udise,salt,h).run():await env.DB.prepare("INSERT INTO teachers(shalarth,name,mobile,udise,salt,pw,status) VALUES(?,?,?,?,?,?,'ok')").bind(sh,name,mob,udise,salt,h).run();
     const id=ins.meta.last_row_id;
     await env.DB.batch(cs.map(c=>env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(id,udise,c.cls,c.div)));
@@ -709,9 +716,11 @@ async function ext(p,r,env){
     const b=await body(r),sh=cl(b.shalarth,20).toUpperCase(),pw=cl(b.pw,40);
     const x=await env.DB.prepare('SELECT * FROM teachers WHERE shalarth=?').bind(sh).first();
     if(!x)return J({e:'bad'},401);
-    if(x.fails>=8)return J({e:'locked'},429);
-    if((await hashPin(pw,x.salt))!==x.pw){await env.DB.prepare('UPDATE teachers SET fails=fails+1 WHERE id=?').bind(x.id).run();return J({e:'bad'},401);}
-    const tok=rnd(24);await env.DB.prepare('UPDATE teachers SET fails=0,token=? WHERE id=?').bind(tok,x.id).run();
+    await tCols(env);const now=Date.now();
+    if(x.fails>=8&&now-(x.lf||0)<900000)return J({e:'locked'},429);
+    if((await hashPin(pw,x.salt))!==x.pw){await env.DB.prepare('UPDATE teachers SET fails=CASE WHEN fails>=8 AND ?-lf>=900000 THEN 1 ELSE fails+1 END,lf=? WHERE id=?').bind(now,now,x.id).run();return J({e:'bad'},401);}
+    // reuse a still-valid token so a second device does not log out the first
+    const keep=x.token&&x.tt&&now-x.tt<TTTL,tok=keep?x.token:rnd(24);await env.DB.prepare('UPDATE teachers SET fails=0,token=?,tt=? WHERE id=?').bind(tok,keep?x.tt:now,x.id).run();
     return J({ok:1,token:tok,status:x.status,name:x.name,udise:x.udise});
   }
   if(p==='/api/t/school'){
@@ -725,10 +734,11 @@ async function ext(p,r,env){
     const u=cl(b.udise,11).replace(/\D/g,'');
     if(u.length!==11)return J({e:'nf'},404);
     if(!await env.DB.prepare('SELECT 1 x FROM schools WHERE udise=?').bind(u).first()){if(!b.nolist)return J({e:'nf'},404)}
-    const ops=[env.DB.prepare('UPDATE teachers SET udise=?,conf=1 WHERE id=?').bind(u,t.id)];
-    if(u!==t.udise)ops.push(env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise<>?').bind(t.id,u));
+    const mv=u!==t.udise;
+    const ops=[mv?env.DB.prepare("UPDATE teachers SET udise=?,conf=1,status='pending' WHERE id=?").bind(u,t.id):env.DB.prepare('UPDATE teachers SET udise=?,conf=1 WHERE id=?').bind(u,t.id)];
+    if(mv)ops.push(env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise<>?').bind(t.id,u));
     await env.DB.batch(ops);
-    return J({ok:1});
+    return J({ok:1,pending:mv?1:0});
   }
   if(p==='/api/t/avail'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
@@ -898,7 +908,7 @@ async function ext(p,r,env){
     }
     if(!med||!cls||!sub||!les)return J({e:'bad'},400);
     const pdf=await lessonPdf(env,cl(b.path,300));if(!pdf)return J({e:'nopdf'},404);
-    const x={};
+    const x=(await env.DB.prepare('SELECT points,exp,assess,material,locode,lodesc,activity,notes FROM tach WHERE medium=? AND cls=? AND subject=? AND lesson=? LIMIT 1').bind(med,cls,sub,les).first())||{};
     const lang=cl(b.lang,30)||'मराठी',mins=Math.max(20,Math.min(90,parseInt(b.mins)||35));
     let ctx=['माध्यम: '+med,'इयत्ता: '+cls,'विषय: '+sub,'पाठ: '+les,'अध्ययन निष्पत्ती कोड: '+(x.locode||''),'अध्ययन निष्पत्ती: '+(x.lodesc||''),'मुख्य मुद्दे: '+(x.points||''),'स्पष्टीकरण: '+(x.exp||''),'साहित्य: '+(x.material||''),'उपक्रम: '+(x.activity||''),'मूल्यमापन: '+(x.assess||''),'टीप: '+(x.notes||'')].join('\n');
     const nt=cl(b.notes,500).trim();
@@ -915,7 +925,7 @@ async function ext(p,r,env){
     const med=cl(b.medium,20),cls=cl(b.cls,4),sub=cl(b.subject,80),les=cl(b.lesson,200);
     if(!med||!cls||!sub||!les)return J({e:'bad'},400);
     const pdf=await lessonPdf(env,cl(b.path,300));if(!pdf)return J({e:'nopdf'},404);
-    const x={};
+    const x=(await env.DB.prepare('SELECT points,exp,assess,material,locode,lodesc,activity,notes FROM tach WHERE medium=? AND cls=? AND subject=? AND lesson=? LIMIT 1').bind(med,cls,sub,les).first())||{};
     const lang=cl(b.lang,30)||'मराठी',n=Math.max(3,Math.min(20,parseInt(b.n)||10)),mk=Math.max(1,Math.min(10,parseInt(b.marks)||1)),qt=cl(b.qtype,40)||'मिश्र प्रश्न',df=cl(b.diff,20)||'मध्यम',tot=n*mk;
     const ctx=['माध्यम: '+med,'इयत्ता: '+cls,'विषय: '+sub,'पाठ: '+les,'अध्ययन निष्पत्ती: '+(x.locode||'')+' '+(x.lodesc||''),'मुख्य मुद्दे: '+(x.points||''),'स्पष्टीकरण: '+(x.exp||''),'उपक्रम: '+(x.activity||''),'मूल्यमापन: '+(x.assess||'')].join('\n');
     const si='तू महाराष्ट्रातील प्राथमिक शाळेच्या शिक्षकांसाठी प्रश्नपत्रिका बनवणारा सहाय्यक आहेस. फक्त जोडलेल्या पाठ्यपुस्तकाच्या PDF मधील याच पाठाच्या आशयावर आधारित प्रश्न तयार कर. संपूर्ण प्रश्नपत्रिका फक्त '+lang+' भाषेत दे. नेमके '+n+' प्रश्न दे. प्रत्येक प्रश्नाला '+mk+' गुण (एकूण '+tot+'). प्रश्नप्रकार: '+qt+'. अवघडपणा: '+df+'. बहुपर्यायी प्रश्नाला नेमके 4 पर्याय दे, इतर प्रश्नांना options रिकामे ठेव. इयत्तेला साजेशी साधी भाषा वापर. उत्तर फक्त STRICT JSON मध्ये दे, कोणतेही अतिरिक्त शब्द किंवा ``` नको: {"questions":[{"question":"...","options":[],"answer":"...","explanation":""}]}';
@@ -936,8 +946,8 @@ async function ext(p,r,env){
     const nz=s=>String(s||'').replace(/[\s\-–.()]/g,'').toLowerCase();
     const pr=((await env.DB.prepare('SELECT DISTINCT subject s,topic t,tname n FROM syl WHERE medium=? AND cls=? AND (sank=? OR akar=?)').bind(med,cls,ty,ty).all()).results||[]);
     if(!pr.length)return J({e:'noplan'},404);
-    const bj=await (await env.ASSETS.fetch(new Request(new URL('/content/'+cls+'-'+mc+'/books.json',r.url)))).json();
-    const bs=(bj.s||[]).find(s=>s.n===sub);if(!bs)return J({e:'nosub'},404);
+    let bj={};try{const br=await env.ASSETS.fetch(new Request(new URL('/content/'+cls+'-'+mc+'/books.json',r.url)));if(br.ok)bj=await br.json()}catch(e){}
+    const bs=(bj.s||[]).find(s=>s.n===sub);if(!bs||!Array.isArray(bs.l))return J({e:'nosub'},404);
     const ps=pr.filter(x=>nz(x.s)===nz(sub)||nz(x.s).includes(nz(sub))||nz(sub).includes(nz(x.s)));
     if(!ps.length)return J({e:'nomatch',subs:[...new Set(pr.map(x=>x.s))]},404);
     const used=new Set(),parts=[],names=[],miss=[];let size=0;
@@ -1067,7 +1077,7 @@ async function ext(p,r,env){
     return J({ok:1});
   }
   if(p==='/api/t/hmset'){
-    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);
     const nm=cl(b.hm,80).replace(/[<>]/g,'').trim();
     await env.DB.prepare("INSERT INTO cfg(k,v) VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v").bind('hm:'+t.udise,nm).run();
     return J({ok:1,hm:nm});
