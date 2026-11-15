@@ -1078,7 +1078,6 @@ async function ext(p,r,env){
     for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,120)){
       let pen=cl(x.pen,20).replace(/\D/g,''),cls=parseInt(x.cls)||0,dv=cl(x.div,2).toUpperCase()||'A',name=cl(x.name,60);
       if((pen&&pen.length!==11)||cls<1||cls>8||name.length<2||!/^[A-Z]{1,2}$/.test(dv)){sk++;continue}
-      if(await ctBlock(env,t.id,t.udise,cls,dv)){sk++;continue}
       const g=['M','F','O'].includes(x.gender)?x.gender:'',ct=CT.includes(x.cat)?x.cat:'';
       let core={gender:g,cat:ct,father:cl(x.father,60),mother:cl(x.mother,60),addr:cl(x.addr,200),mobile:/^\d{10}$/.test(String(x.mobile||''))?x.mobile:'',dob:/^\d{4}-\d\d-\d\d$/.test(String(x.dob||''))?x.dob:'',gr:cl(x.gr,20),tongue:cl(x.tongue,40)};
       let ex={};if(x.x&&typeof x.x==='object')for(const k of XK){const v=cl(x.x[k],80);if(v)ex[k]=v}
@@ -1107,7 +1106,7 @@ async function ext(p,r,env){
     if(rs.length)await env.DB.batch(rs);
     if(si.length)await env.DB.batch(si);
     if(pd.length)await env.DB.batch(pd);
-    if(tc.size)await env.DB.batch([...tc].map(k=>{const [c,d]=k.split('|');return env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,t.udise,parseInt(c),d)}));
+    if(tc.size===1)await env.DB.batch([...tc].map(k=>{const [c,d]=k.split('|');return env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,t.udise,parseInt(c),d)}));
     return J({ok:1,n:n,pn:pn,sk:sk});
   }
   if(p==='/api/t/add'){
