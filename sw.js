@@ -1,4 +1,4 @@
-var C='am-v364';
+var C='am-v365';
 var PP=['paripath/','paripath/index.html','paripath/rashtrageet.mp3','paripath/maharashtra-geet.mp3','paripath/songs.json'];
 self.addEventListener('install',function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(['./','index.html','manifest.json','icon-192.png']).then(function(){return Promise.all(PP.map(function(u){return c.add(u).catch(function(){})}))})}));self.skipWaiting()});
 self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==C}).map(function(x){return caches.delete(x)}))}));self.clients.claim()});
