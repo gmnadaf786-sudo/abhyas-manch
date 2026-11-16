@@ -155,6 +155,34 @@ async function offApi(p,r,env){
   }
   const ss=(kp?await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code=? ORDER BY c.udise').bind(t.uname).all():await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise ORDER BY c.code,c.udise').all()).results;
   const ok=new Set(ss.map(x=>x.udise));
+  if(p==='/api/o/mdm'||p==='/api/o/mdmsave'||p==='/api/o/mdmsub'){
+    await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS mdm(mon TEXT, udise TEXT, d TEXT, up TEXT, PRIMARY KEY(mon,udise))"),env.DB.prepare("CREATE TABLE IF NOT EXISTS mdm_sub(mon TEXT, code TEXT, ts TEXT, PRIMARY KEY(mon,code))")]);
+    const mon=cl(b.mon,7);if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(mon))return J({e:'mon'},400);
+    if(p==='/api/o/mdmsave'){
+      if(!kp)return J({e:'kp'},403);const st=[],now=new Date().toISOString();
+      for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,80)){
+        const u=cl(x&&x.u,11);if(!ok.has(u)||!Array.isArray(x.d))continue;
+        const d=[];for(let i=0;i<18;i++){let v=parseFloat(x.d[i]);const sg=i===4||i===11;if(!isFinite(v)||(v<0&&!sg))v=0;if([1,2,8,9].includes(i)&&v>31)v=31;v=Math.round(Math.max(Math.min(v,1e6),sg?-1e6:0)*100)/100;d.push(v)}
+        st.push(env.DB.prepare('INSERT INTO mdm(mon,udise,d,up) VALUES(?,?,?,?) ON CONFLICT(mon,udise) DO UPDATE SET d=excluded.d,up=excluded.up').bind(mon,u,JSON.stringify(d),now));
+      }
+      if(st.length){st.push(env.DB.prepare('DELETE FROM mdm_sub WHERE mon=? AND code=?').bind(mon,t.uname));await env.DB.batch(st)}
+      return J({ok:1,n:st.length?st.length-1:0});
+    }
+    if(p==='/api/o/mdmsub'){
+      if(!kp)return J({e:'kp'},403);
+      const have=new Set((await env.DB.prepare('SELECT udise FROM mdm WHERE mon=?').bind(mon).all()).results.map(x=>x.udise)),miss=ss.filter(x=>!have.has(x.udise));
+      if(!ss.length||miss.length)return J({e:'inc',n:miss.length},400);
+      const ts=new Date().toISOString();await env.DB.prepare('INSERT OR REPLACE INTO mdm_sub(mon,code,ts) VALUES(?,?,?)').bind(mon,t.uname,ts).run();
+      return J({ok:1,ts});
+    }
+    const [rw,sb]=await Promise.all([env.DB.prepare('SELECT udise,d FROM mdm WHERE mon=?').bind(mon).all(),env.DB.prepare('SELECT code,ts FROM mdm_sub WHERE mon=?').bind(mon).all()]);
+    const sub={};sb.results.forEach(x=>sub[x.code]=x.ts);const rows={};
+    rw.results.forEach(x=>{if(!ok.has(x.udise))return;const s=ss.find(y=>y.udise===x.udise);if(!kp&&!(s&&sub[s.code]))return;try{rows[x.udise]=JSON.parse(x.d)}catch(e){}});
+    const o={ok:1,mon,sub:kp?(sub[t.uname]||''):sub,sch:ss.map(x=>({u:x.udise,nm:x.name||'',c:x.code})),rows};
+    if(kp){const [y,m]=mon.split('-').map(Number),pm=m===1?(y-1)+'-12':y+'-'+String(m-1).padStart(2,'0'),pv=(await env.DB.prepare('SELECT udise,d FROM mdm WHERE mon=?').bind(pm).all()).results,P={};
+      pv.forEach(x=>{if(!ok.has(x.udise))return;try{const d=JSON.parse(x.d);P[x.udise]={p1:d[0],p2:d[7],ck:d[14],c1:Math.round((d[4]+d[5]-d[6])*100)/100,c2:Math.round((d[11]+d[12]-d[13])*100)/100}}catch(e){}});o.prev=P}
+    return J(o);
+  }
   if(p==='/api/o/sum'){
     const [f,d,ro,pm]=await Promise.all([
       env.DB.prepare('SELECT udise,upd,submitted,(SELECT COUNT(*) FROM json_each(data)) n FROM sch_form').all(),
