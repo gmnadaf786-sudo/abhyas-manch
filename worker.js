@@ -26,6 +26,16 @@ async function adminKey(env,b){
   if(+fails)await env.DB.prepare("UPDATE settings SET v=? WHERE k='admin'").bind([salt,hh,0,0].join('|')).run();
   return null;
 }
+const PAYP=new Set(['/api/admin/payimp','/api/admin/paymons','/api/admin/paydel']);
+async function payKey(env,b){
+  const a=await env.DB.prepare("SELECT * FROM settings WHERE k='payadm'").first().catch(()=>null);
+  if(!a)return J({e:'nopay'},503);
+  const [salt,hh,fails,last]=a.v.split('|');
+  if(+fails>=8&&Date.now()-(+last)<900000)return J({e:'locked'},429);
+  if(await hashPin(String(b.pk||''),salt)!==hh){await env.DB.prepare("UPDATE settings SET v=? WHERE k='payadm'").bind([salt,hh,(+fails)+1,Date.now()].join('|')).run();return J({e:'bad'},401)}
+  if(+fails)await env.DB.prepare("UPDATE settings SET v=? WHERE k='payadm'").bind([salt,hh,0,0].join('|')).run();
+  return null;
+}
 async function pwOk(pw,salt,stored){return stored&&stored.startsWith('p:')?(await hashPin(pw,salt))===stored.slice(2):(await sha(salt+pw))===stored}
 async function teacher(env,b,needOk){
   const t=cl(b.token,64);if(!t)return null;
@@ -99,7 +109,7 @@ const PYL=['मूळ वेतन','महागाई भत्ता','घर
 const PYM=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const monOrd=m=>{const a=String(m||'').split('_'),i=PYM.indexOf(a[0]);return i<0||!/^\d{4}$/.test(a[1]||'')?0:(+a[1])*100+i};
 let PDOK=false;
-async function pdEns(env){if(PDOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS payd(mon TEXT,ord INTEGER,hid TEXT,ds TEXT,nm TEXT,v TEXT,PRIMARY KEY(mon,hid,nm))").run();PDOK=true}
+async function pdEns(env){if(PDOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS payd(mon TEXT,ord INTEGER,hid TEXT,ds TEXT,nm TEXT,v TEXT,PRIMARY KEY(mon,hid,nm))").run();try{await env.DB.prepare("ALTER TABLE payd ADD COLUMN up TEXT").run()}catch(e){}PDOK=true}
 async function pdSalt(env){let q=await env.DB.prepare("SELECT v FROM cfg WHERE k='pay_salt'").first();if(q)return q.v;await env.DB.prepare("INSERT OR IGNORE INTO cfg(k,v) VALUES('pay_salt',?)").bind(rnd(16)).run();q=await env.DB.prepare("SELECT v FROM cfg WHERE k='pay_salt'").first();return q.v}
 async function pdHid(env,id){return (await sha((await pdSalt(env))+'|'+id)).slice(0,32)}
 const nmTok=s=>String(s||'').replace(/[.,()\-_/]/g,' ').split(/\s+/).map(x=>x.trim().toLowerCase()).filter(x=>x.length>1);
@@ -1239,8 +1249,11 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/payimp'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
-    const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
+  if(p==='/api/admin/payimp'||p==='/api/admin/paypw'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
+    const b=await body(r);let bad;
+    if(b.pk!==undefined&&PAYP.has(p))bad=await payKey(env,b);else bad=await adminKey(env,b);
+    if(bad)return bad;
+    if(p==='/api/admin/paypw'){if(b.pk!==undefined)return J({e:'bad'},403);const pw=cl(b.pw,60);if(pw.length<8)return J({e:'short'},400);const salt=rnd(8);await env.DB.prepare("INSERT OR REPLACE INTO settings(k,v) VALUES('payadm',?)").bind([salt,await hashPin(pw,salt),0,0].join('|')).run();return J({ok:1})}
     if(p==='/api/admin/spwreset'){await slEnsure(env);const u=cl(b.udise,11).replace(/\D/g,'');if(u.length!==11)return J({e:'bad'},400);await env.DB.batch([env.DB.prepare('DELETE FROM school_login WHERE udise=?').bind(u),env.DB.prepare('DELETE FROM pw_req WHERE udise=?').bind(u)]);return J({ok:1})}
     if(p==='/api/admin/opwreset'){await slEnsure(env);let u=cl(b.u,12).toUpperCase().replace(/\s/g,'');if(/^\d{7}$/.test(u))u='CLU'+u;if(u!=='BEO'&&!CEN[u])return J({e:'bad'},400);await env.DB.prepare('DELETE FROM off_login WHERE uname=?').bind(u).run();return J({ok:1})}
     if(p==='/api/admin/recimport'){await slEnsure(env);const st=[],dt=v=>/^\d{4}-\d{2}-\d{2}$/.test(cl(v,10))?cl(v,10):'';for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,40)){const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,''),k=x.kind==='S'?'S':'L',fd=dt(x.fd),td=dt(x.td),ty=cl(x.typ,60);if(!/^[A-Z0-9]{6,20}$/.test(sh)||!fd||!td||!ty)continue;const ud=cl(x.udise,11).replace(/\D/g,''),rm=cl(x.rm,200);st.push(env.DB.prepare("INSERT INTO tch_rec(shalarth,kind,fd,td,udise,typ,rm,status,upd) SELECT ?,?,?,?,?,?,?,'Approved',? WHERE NOT EXISTS(SELECT 1 FROM tch_rec WHERE shalarth=? AND kind=? AND fd=? AND td=? AND typ=?)").bind(sh,k,fd,td,ud,ty,rm,istDay(),sh,k,fd,td,ty))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
@@ -1289,16 +1302,16 @@ async function ext(p,r,env){
       const num=y=>{const n=Number(y);return isFinite(n)?Math.round(n*100)/100:0};
       const vv=a=>Array.isArray(a)&&a.length===27?a.map(num):null;
       if(b.wipe)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon));
-      const INS='INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)';
+      const NOW=new Date(Date.now()+19800000).toISOString().slice(0,16).replace('T',' '),INS='INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v,up) VALUES(?,?,?,?,?,?,?)';
       // एका व्यक्तीच्या सर्व हॅशची जुनी नोंद काढून नवी टाकणे; दुबार असल्यास वगळून अलर्ट
-      const put=async(hs,ds,nm,js,label)=>{if(hs.some(h=>seen.has(h))){dup++;if(dn.length<30)dn.push(label||nm);return false}hs.forEach(h=>seen.add(h));if(hs.some(h=>ex.has(h)))rep++;for(const h of hs)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=? AND hid=?').bind(mon,h));for(const h of hs)st.push(env.DB.prepare(INS).bind(mon,ord,h,ds,nm,js));return true};
+      const put=async(hs,ds,nm,js,label)=>{if(hs.some(h=>seen.has(h))){dup++;if(dn.length<30)dn.push(label||nm);return false}hs.forEach(h=>seen.add(h));if(hs.some(h=>ex.has(h)))rep++;for(const h of hs)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=? AND hid=?').bind(mon,h));for(const h of hs)st.push(env.DB.prepare(INS).bind(mon,ord,h,ds,nm,js,NOW));return true};
       for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,400)){const pan=String(x.p||'').trim().toUpperCase(),v=vv(x.v),nm=cl(x.nm,80);if(!PR.test(pan)||!v)continue;if(await put([await pdHid(env,'P'+pan)],cl(x.ds,40),nm,JSON.stringify(v),nm+' ('+pan.slice(-4)+')'))nt++}
       for(const x of (Array.isArray(b.rows2)?b.rows2:[]).slice(0,300)){const sh=String(x.sh||'').trim().toUpperCase(),nm=cl(x.nm,80),h=Array.isArray(x.h)?x.h.slice(0,80).map(y=>cl(y,60)):[],v=Array.isArray(x.v)?x.v.slice(0,80).map(num):[];if(!/^[A-Z0-9]{8,20}$/.test(sh)||!nm||h.length<10||h.length!==v.length)continue;const pn=String(x.pn||'').trim().toUpperCase(),hs=[await pdHid(env,'S'+sh)];if(PR.test(pn))hs.push(await pdHid(env,'P'+pn));if(await put(hs,cl(x.ds,40),nm,JSON.stringify({h,v}),nm+' ('+sh.slice(-4)+')')){nt++;if(/kendra|केंद्र/i.test(String(x.ds||''))&&hs.length>1){const u=String(x.u||'').replace(/\D/g,''),kc=u?await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(u).first().catch(()=>null):null;if(kc&&CEN[kc.code]){bind.push(env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('kpp:'+kc.code,hs[1]));kb++}else if(kbn.length<30)kbn.push(nm)}}}
       for(const x of (Array.isArray(b.kp)?b.kp:[]).slice(0,60)){const c=String(x.c||'').toUpperCase(),v=vv(x.v);if(!CEN[c]||!v)continue;if(await put([await pdHid(env,'K'+c)],'केंद्रप्रमुख',cl(x.nm,80),JSON.stringify(v),cl(x.nm,80)))nk++}
       for(let i=0;i<st.length;i+=40)await env.DB.batch(st.slice(i,i+40));for(const q of bind)await q.run();
       return J({ok:1,t:nt,k:nk,dup,rep,dn,kb,kbn});
     }
-    if(p==='/api/admin/paymons'){await pdEns(env);const q=await env.DB.prepare('SELECT mon,ord,COUNT(DISTINCT nm) n FROM payd GROUP BY mon,ord ORDER BY ord DESC').all();return J({ok:1,rows:q.results||[]})}
+    if(p==='/api/admin/paymons'){await pdEns(env);const q=await env.DB.prepare("SELECT mon,ord,COUNT(DISTINCT nm) n,COUNT(DISTINCT CASE WHEN ds LIKE '%endra%' OR ds LIKE '%केंद्र%' OR ds LIKE '%के.प्र%' THEN nm END) kp,MAX(up) up FROM payd GROUP BY mon,ord ORDER BY ord DESC").all();return J({ok:1,rows:q.results||[]})}
     if(p==='/api/admin/paydel'){await pdEns(env);const mon=cl(b.mon,12);await env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon).run();return J({ok:1})}
     if(p==='/api/admin/tinfoimport'){await slEnsure(env);const st=[];for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,20)){const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,'');if(!/^[A-Z0-9]{6,20}$/.test(sh)||!x.d||typeof x.d!=='object')continue;const d={};let n=0;for(const k of Object.keys(x.d)){if(n++>150)break;d[cl(k,80)]=cl(x.d[k],600)}const js=JSON.stringify(d);if(js.length>60000)continue;st.push(env.DB.prepare('INSERT INTO tch_info(shalarth,data,upd) VALUES(?,?,?) ON CONFLICT(shalarth) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(sh,js,istDay()))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
     if(p==='/api/admin/cenlist'){await slEnsure(env);return J({ok:1,rows:(await env.DB.prepare('SELECT code,COUNT(*) n FROM sch_center GROUP BY code').all()).results,cen:CEN})}

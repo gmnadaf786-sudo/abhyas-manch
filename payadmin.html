@@ -1,0 +1,18 @@
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>पगार अपलोड – अभ्यास मंच</title>
+<style>:root{--bg:#f7f7f4;--c:#fff;--i:#1f2933;--m:#64748b;--l:#e2e8f0;--a:#0f766e}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--c:#1e293b;--i:#e2e8f0;--m:#94a3b8;--l:#334155}}
+body{margin:0;background:var(--bg);color:var(--i);font:15px/1.5 system-ui,sans-serif}main{max-width:900px;margin:0 auto;padding:16px}
+.card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:14px;margin-bottom:14px}h1{font-size:20px;margin:6px 0 12px}h2{font-size:16px;margin:0 0 8px}
+input,select,button{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--i)}button{background:var(--a);color:#fff;border:0;cursor:pointer}
+.kp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kp div{background:var(--c);border:1px solid var(--l);border-radius:12px;padding:10px}.kp b{font-size:24px;display:block}.kp span{color:var(--m);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;border-bottom:1px solid var(--l);text-align:left}th{color:var(--m);font-weight:600}.w{overflow-x:auto}
+.bar{height:8px;background:var(--a);border-radius:4px}</style><script src="inst.js"></script></head><body><main>
+<h1>💰 पगार अपलोड (उप-admin)</h1>
+<div class="card" id="lg"><input id="k" type="password" autocomplete="off" placeholder="उप-admin पासवर्ड" style="width:100%;box-sizing:border-box;margin-bottom:10px"><button onclick="go()" style="width:100%">उघडा</button><p id="e" style="color:#b91c1c"></p></div>
+<div id="d" style="display:none"><div class="card"><h2>📥 पगार Excel आयात</h2><p style="font-size:13px;color:var(--m)">Pay Bill किंवा Shalarth "Abstract Detail Report" Excel निवडा, महिना निवडा, "वाचा व आयात करा" दाबा. फाईल फक्त या ब्राउझरमध्ये वाचली जाते; PAN फक्त हॅश स्वरूपात साठवला जातो. एका व्यक्तीची एका महिन्यात एकच नोंद राहते; दुबार PAN/Shalarth ID आढळल्यास अलर्ट मिळतो.</p><input type="file" id="pbf" accept=".xls,.xlsx"><br><label>महिना</label> <input type="month" id="pbm"> <button onclick="pbRead()">वाचा व आयात करा</button><p id="pbx"></p></div><div class="card"><h2>📊 डॅशबोर्ड</h2><div id="pbl">…</div></div><button onclick="out()" style="background:#64748b">🚪 बाहेर पडा</button></div></main>
+<script src="payimp.js?v=1"></script>
+<script>
+var K='';
+function post(u,b){b.pk=K;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.$s=r.status;return j})})}
+function go(){K=document.getElementById('k').value;e.textContent='…';post('/api/admin/paymons',{}).then(function(j){if(j&&j.ok){e.textContent='';lg.style.display='none';d.style.display='block';pbList()}else e.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. १५ मिनिटांनी पुन्हा करा.':j.e==='nopay'?'उप-admin पासवर्ड अजून ठरवलेला नाही.':'पासवर्ड चुकीचा.'}).catch(function(){e.textContent='इंटरनेट तपासा.'})}
+function out(){K='';location.reload()}
+</script></body></html>
