@@ -1284,14 +1284,19 @@ async function ext(p,r,env){
     if(p==='/api/admin/paycfg'){await slEnsure(env);const u=cl(b.url,300),k=cl(b.key,100);if(!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(u)||k.length<8)return J({e:'bad'},400);await env.DB.batch([env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('pay_url',u),env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('pay_key',k)]);return J({ok:1})}
     if(p==='/api/admin/payimp'){
       await slEnsure(env);await pdEns(env);const mon=cl(b.mon,12);if(!monOrd(mon))return J({e:'month'},400);
-      const PR=/^[A-Z]{5}\d{4}[A-Z]$/,ord=monOrd(mon),st=[],seen=new Set();let nt=0,nk=0,dup=0;
-      const vv=a=>Array.isArray(a)&&a.length===27?a.map(x=>{const n=Number(x);return isFinite(n)?Math.round(n*100)/100:0}):null;
-      if(b.first)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon));
-      for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,400)){const pan=String(x.p||'').trim().toUpperCase(),v=vv(x.v),nm=cl(x.nm,80);if(!PR.test(pan)||!v)continue;const hid=await pdHid(env,'P'+pan),key=hid+'|'+nm;if(seen.has(key)){dup++;continue}seen.add(key);st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,hid,cl(x.ds,40),nm,JSON.stringify(v)));nt++}
-      for(const x of (Array.isArray(b.rows2)?b.rows2:[]).slice(0,300)){const sh=String(x.sh||'').trim().toUpperCase(),nm=cl(x.nm,80),h=Array.isArray(x.h)?x.h.slice(0,80).map(y=>cl(y,60)):[],v=Array.isArray(x.v)?x.v.slice(0,80).map(y=>{const n=Number(y);return isFinite(n)?Math.round(n*100)/100:0}):[];if(!/^[A-Z0-9]{8,20}$/.test(sh)||!nm||h.length<10||h.length!==v.length)continue;const key='S'+sh+'|'+nm;if(seen.has(key)){dup++;continue}seen.add(key);const js=JSON.stringify({h,v});st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,await pdHid(env,'S'+sh),cl(x.ds,40),nm,js));const pn=String(x.pn||'').trim().toUpperCase();if(PR.test(pn))st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,await pdHid(env,'P'+pn),cl(x.ds,40),nm,js));nt++}
-      for(const x of (Array.isArray(b.kp)?b.kp:[]).slice(0,60)){const c=String(x.c||'').toUpperCase(),v=vv(x.v);if(!CEN[c]||!v)continue;st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,await pdHid(env,'K'+c),'केंद्रप्रमुख',cl(x.nm,80),JSON.stringify(v)));nk++}
+      const PR=/^[A-Z]{5}\d{4}[A-Z]$/,ord=monOrd(mon),st=[],seen=new Set(),dn=[];let nt=0,nk=0,dup=0,rep=0;
+      const ex=new Set(((await env.DB.prepare('SELECT DISTINCT hid FROM payd WHERE mon=?').bind(mon).all()).results||[]).map(x=>x.hid));
+      const num=y=>{const n=Number(y);return isFinite(n)?Math.round(n*100)/100:0};
+      const vv=a=>Array.isArray(a)&&a.length===27?a.map(num):null;
+      if(b.wipe)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon));
+      const INS='INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)';
+      // एका व्यक्तीच्या सर्व हॅशची जुनी नोंद काढून नवी टाकणे; दुबार असल्यास वगळून अलर्ट
+      const put=async(hs,ds,nm,js,label)=>{if(hs.some(h=>seen.has(h))){dup++;if(dn.length<30)dn.push(label||nm);return false}hs.forEach(h=>seen.add(h));if(hs.some(h=>ex.has(h)))rep++;for(const h of hs)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=? AND hid=?').bind(mon,h));for(const h of hs)st.push(env.DB.prepare(INS).bind(mon,ord,h,ds,nm,js));return true};
+      for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,400)){const pan=String(x.p||'').trim().toUpperCase(),v=vv(x.v),nm=cl(x.nm,80);if(!PR.test(pan)||!v)continue;if(await put([await pdHid(env,'P'+pan)],cl(x.ds,40),nm,JSON.stringify(v),nm+' ('+pan.slice(-4)+')'))nt++}
+      for(const x of (Array.isArray(b.rows2)?b.rows2:[]).slice(0,300)){const sh=String(x.sh||'').trim().toUpperCase(),nm=cl(x.nm,80),h=Array.isArray(x.h)?x.h.slice(0,80).map(y=>cl(y,60)):[],v=Array.isArray(x.v)?x.v.slice(0,80).map(num):[];if(!/^[A-Z0-9]{8,20}$/.test(sh)||!nm||h.length<10||h.length!==v.length)continue;const pn=String(x.pn||'').trim().toUpperCase(),hs=[await pdHid(env,'S'+sh)];if(PR.test(pn))hs.push(await pdHid(env,'P'+pn));if(await put(hs,cl(x.ds,40),nm,JSON.stringify({h,v}),nm+' ('+sh.slice(-4)+')'))nt++}
+      for(const x of (Array.isArray(b.kp)?b.kp:[]).slice(0,60)){const c=String(x.c||'').toUpperCase(),v=vv(x.v);if(!CEN[c]||!v)continue;if(await put([await pdHid(env,'K'+c)],'केंद्रप्रमुख',cl(x.nm,80),JSON.stringify(v),cl(x.nm,80)))nk++}
       for(let i=0;i<st.length;i+=40)await env.DB.batch(st.slice(i,i+40));
-      return J({ok:1,t:nt,k:nk,dup});
+      return J({ok:1,t:nt,k:nk,dup,rep,dn});
     }
     if(p==='/api/admin/paymons'){await pdEns(env);const q=await env.DB.prepare('SELECT mon,ord,COUNT(DISTINCT nm) n FROM payd GROUP BY mon,ord ORDER BY ord DESC').all();return J({ok:1,rows:q.results||[]})}
     if(p==='/api/admin/paydel'){await pdEns(env);const mon=cl(b.mon,12);await env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon).run();return J({ok:1})}
