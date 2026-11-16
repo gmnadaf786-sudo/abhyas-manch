@@ -1293,7 +1293,7 @@ async function ext(p,r,env){
       for(let i=0;i<st.length;i+=40)await env.DB.batch(st.slice(i,i+40));
       return J({ok:1,t:nt,k:nk,dup});
     }
-    if(p==='/api/admin/paymons'){await pdEns(env);const q=await env.DB.prepare('SELECT mon,ord,COUNT(*) n FROM payd GROUP BY mon,ord ORDER BY ord DESC').all();return J({ok:1,rows:q.results||[]})}
+    if(p==='/api/admin/paymons'){await pdEns(env);const q=await env.DB.prepare('SELECT mon,ord,COUNT(DISTINCT nm) n FROM payd GROUP BY mon,ord ORDER BY ord DESC').all();return J({ok:1,rows:q.results||[]})}
     if(p==='/api/admin/paydel'){await pdEns(env);const mon=cl(b.mon,12);await env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon).run();return J({ok:1})}
     if(p==='/api/admin/tinfoimport'){await slEnsure(env);const st=[];for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,20)){const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,'');if(!/^[A-Z0-9]{6,20}$/.test(sh)||!x.d||typeof x.d!=='object')continue;const d={};let n=0;for(const k of Object.keys(x.d)){if(n++>150)break;d[cl(k,80)]=cl(x.d[k],600)}const js=JSON.stringify(d);if(js.length>60000)continue;st.push(env.DB.prepare('INSERT INTO tch_info(shalarth,data,upd) VALUES(?,?,?) ON CONFLICT(shalarth) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(sh,js,istDay()))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
     if(p==='/api/admin/cenlist'){await slEnsure(env);return J({ok:1,rows:(await env.DB.prepare('SELECT code,COUNT(*) n FROM sch_center GROUP BY code').all()).results,cen:CEN})}

@@ -92,7 +92,7 @@ function pbRead(){var f=document.getElementById('pbf').files[0],x=document.getEl
   if(!rows.length&&!rows2.length){x.textContent='कोणताही कर्मचारी सापडला नाही. फाईल तपासा.';return}
   var all=rows.map(function(r){return{t:0,r:r}}).concat(rows2.map(function(r){return{t:1,r:r}}));
   var T=0,K=0,D=0,i=0;function nx(){if(i>=all.length&&i>0){fin();return}var ch=all.slice(i,i+100),o={mon:mon,rows:ch.filter(function(z){return !z.t}).map(function(z){return z.r}),rows2:ch.filter(function(z){return z.t}).map(function(z){return z.r})};if(i===0){o.first=1;o.kp=kp}post('/api/admin/payimp',o).then(function(j){if(!j||!j.ok){x.textContent='अडचण आली. पुन्हा प्रयत्न करा.';return}T+=j.t;K+=j.k;D+=j.dup;i+=100;x.textContent='⏳ '+Math.min(i,all.length)+' / '+all.length;nx()}).catch(function(){x.textContent='इंटरनेट अडचण.'})}
-  function fin(){x.textContent='✔ '+mon+': शिक्षक '+T+', केंद्रप्रमुख '+K+(D?' (दुबार '+D+' वगळले)':'')+' आयात झाले.';pbList()}
+  function fin(){var kn=rows2.filter(function(z){return /kendra|केंद्र/i.test(z.ds)}).length;x.textContent='✔ '+mon+': शिक्षक '+(T-kn)+', केंद्रप्रमुख '+(K+kn)+(D?' (दुबार '+D+' वगळले)':'')+' आयात झाले.';pbList()}
   nx()}catch(e){x.textContent='फाईल वाचता आली नाही.'}};rd.readAsArrayBuffer(f)}
  if(window.XLSX)go();else{var sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';sc.onload=go;sc.onerror=function(){x.textContent='लायब्ररी लोड झाली नाही.'};document.head.appendChild(sc)}}
 function pycfg(){pym.textContent='…';post('/api/admin/paycfg',{url:pyu.value.trim(),key:pyk.value.trim()}).then(function(j){pym.textContent=j&&j.ok?'✔ जतन झाले':'लिंक किंवा किल्ली चुकीची'}).catch(function(){pym.textContent='अडचण'})}
