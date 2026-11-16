@@ -129,10 +129,12 @@ async function offApi(p,r,env){
   const kp=t.uname!=='BEO';
   if(p==='/api/o/pay'){
     if(!kp)return J({e:'kp'},403);await pdEns(env);
-    const hid=await pdHid(env,'K'+t.uname),dm=await pdMons(env,hid),m=cl(b.month,12).replace(/[^A-Za-z0-9_]/g,'');
-    if(!dm.length)return J({ok:1,none:1,msg:'केंद्रप्रमुखाची वेतन पावती उपलब्ध नाही. (वेतन माहिती अजून भरलेली नाही.)'});
+    const bk='kpp:'+t.uname,pan=cl(b.pan,10).toUpperCase();let bound=(await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bk).first())||null;bound=bound?bound.v:'';
+    if(pan){if(!/^[A-Z]{5}\d{4}[A-Z]$/.test(pan))return J({ok:1,none:1,need:1,msg:'PAN चुकीचा आहे.'});const hp=await pdHid(env,'P'+pan);if(!(await pdMons(env,hp)).length)return J({ok:1,none:1,need:1,msg:'या PAN साठी वेतन माहिती सापडली नाही.'});bound=hp;await env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind(bk,hp).run()}
+    const hid=[await pdHid(env,'K'+t.uname),bound],dm=await pdMons(env,hid),m=cl(b.month,12).replace(/[^A-Za-z0-9_]/g,'');
+    if(!dm.length)return J({ok:1,none:1,need:1,msg:'पावती दिसण्यासाठी तुमचा PAN क्रमांक एकदा टाका.'});
     const mon=dm.some(x=>x.mon===m)?m:dm[0].mon,s2=await pdSlip(env,hid,mon,'');
-    return J({ok:1,months:dm.map(x=>x.mon),month:mon,p:s2?s2.p:null,nm:s2?s2.nm:'',ds:s2?s2.ds:'केंद्रप्रमुख',nw:s2?s2.nw:0,sc:'केंद्र: '+(CEN[t.uname]||''),sh:'',pn:''});
+    return J({ok:1,months:dm.map(x=>x.mon),month:mon,p:s2?s2.p:null,nm:s2?s2.nm:'',ds:s2?s2.ds:'केंद्रप्रमुख',nw:s2?s2.nw:0,sc:'केंद्र: '+(CEN[t.uname]||''),sh:'',pn:'',bound:bound?1:0});
   }
   if(p==='/api/o/chpw'){
     const old=cl(b.old,40),nw=cl(b.nw,40);
@@ -1286,7 +1288,7 @@ async function ext(p,r,env){
       const vv=a=>Array.isArray(a)&&a.length===27?a.map(x=>{const n=Number(x);return isFinite(n)?Math.round(n*100)/100:0}):null;
       if(b.first)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon));
       for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,400)){const pan=String(x.p||'').trim().toUpperCase(),v=vv(x.v),nm=cl(x.nm,80);if(!PR.test(pan)||!v)continue;const hid=await pdHid(env,'P'+pan),key=hid+'|'+nm;if(seen.has(key)){dup++;continue}seen.add(key);st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,hid,cl(x.ds,40),nm,JSON.stringify(v)));nt++}
-      for(const x of (Array.isArray(b.rows2)?b.rows2:[]).slice(0,300)){const sh=String(x.sh||'').trim().toUpperCase(),nm=cl(x.nm,80),h=Array.isArray(x.h)?x.h.slice(0,80).map(y=>cl(y,60)):[],v=Array.isArray(x.v)?x.v.slice(0,80).map(y=>{const n=Number(y);return isFinite(n)?Math.round(n*100)/100:0}):[];if(!/^[A-Z0-9]{8,20}$/.test(sh)||!nm||h.length<10||h.length!==v.length)continue;const key='S'+sh+'|'+nm;if(seen.has(key)){dup++;continue}seen.add(key);st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,await pdHid(env,'S'+sh),cl(x.ds,40),nm,JSON.stringify({h,v})));nt++}
+      for(const x of (Array.isArray(b.rows2)?b.rows2:[]).slice(0,300)){const sh=String(x.sh||'').trim().toUpperCase(),nm=cl(x.nm,80),h=Array.isArray(x.h)?x.h.slice(0,80).map(y=>cl(y,60)):[],v=Array.isArray(x.v)?x.v.slice(0,80).map(y=>{const n=Number(y);return isFinite(n)?Math.round(n*100)/100:0}):[];if(!/^[A-Z0-9]{8,20}$/.test(sh)||!nm||h.length<10||h.length!==v.length)continue;const key='S'+sh+'|'+nm;if(seen.has(key)){dup++;continue}seen.add(key);const js=JSON.stringify({h,v});st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,await pdHid(env,'S'+sh),cl(x.ds,40),nm,js));const pn=String(x.pn||'').trim().toUpperCase();if(PR.test(pn))st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,await pdHid(env,'P'+pn),cl(x.ds,40),nm,js));nt++}
       for(const x of (Array.isArray(b.kp)?b.kp:[]).slice(0,60)){const c=String(x.c||'').toUpperCase(),v=vv(x.v);if(!CEN[c]||!v)continue;st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,await pdHid(env,'K'+c),'केंद्रप्रमुख',cl(x.nm,80),JSON.stringify(v)));nk++}
       for(let i=0;i<st.length;i+=40)await env.DB.batch(st.slice(i,i+40));
       return J({ok:1,t:nt,k:nk,dup});
