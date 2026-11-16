@@ -912,7 +912,7 @@ async function ext(p,r,env){
     if(hasG&&!dHas){try{const rs=await fetch(cf.pay_url+'?key='+encodeURIComponent(cf.pay_key)+'&sh='+encodeURIComponent(t.shalarth)+'&pan='+pan+(m?'&month='+m:''),{redirect:'follow'});gj=await rs.json()}catch(e){gj=null}if(gj&&!gj.ok)gj=null}
     const gm=gj&&gj.months||[],all=[...new Set([...dm.map(x=>x.mon),...gm])].sort((x,y)=>monOrd(y)-monOrd(x));
     if(!all.length)return J({ok:1,none:1,msg:(gj===null&&hasG&&!dm.length)?'वेतन माहिती सध्या मिळाली नाही. नंतर प्रयत्न करा.':'या PAN साठी वेतन पावती उपलब्ध नाही.'});
-    let mon=m||(gj&&gj.month)||'';if(!m&&dm.length&&monOrd(dm[0].mon)>=monOrd(mon))mon=dm[0].mon;if(!mon)mon=all[0];
+    let mon=m||(gj&&gj.month)||'';if(!m&&dm.length&&monOrd(dm[0].mon)>=monOrd(mon))mon=dm[0].mon;if(!m&&dm.length>1){const cn={};for(const x of (await env.DB.prepare('SELECT mon,COUNT(DISTINCT hid) n FROM payd GROUP BY mon').all()).results)cn[x.mon]=x.n;let bs=null;for(const x of dm)if(!bs||(cn[x.mon]||0)>(cn[bs]||0)||((cn[x.mon]||0)===(cn[bs]||0)&&monOrd(x.mon)>monOrd(bs)))bs=x.mon;if(bs)mon=bs}if(!mon)mon=all[0];
     if(dm.some(x=>x.mon===mon)){const s2=await pdSlip(env,hid,mon,t.name);if(s2)return J({ok:1,months:all,month:mon,p:s2.p,nm:t.name,ds:s2.ds,nw:s2.nw,sc:sc?sc.name:'',sh:t.shalarth,pn:pan});return J({ok:1,months:all,month:mon,p:null,nm:t.name,ds:'',nw:0,sc:sc?sc.name:'',sh:t.shalarth,pn:pan})}
     if(gj&&mon===(gj.month||''))return J({ok:1,months:all,month:mon,p:gj.p||null,nm:gj.nm||t.name,ds:gj.ds||'',nw:gj.nw?1:0,sc:sc?sc.name:'',sh:t.shalarth,pn:pan});
     return J({ok:1,months:all,month:mon,p:null,nm:t.name,ds:'',nw:0,sc:sc?sc.name:'',sh:t.shalarth,pn:pan});
