@@ -95,6 +95,18 @@ async function schoolAuth(env,b){
   return await env.DB.prepare('SELECT * FROM school_login WHERE token=?').bind(t).first();
 }
 
+const PYL=['मूळ वेतन','महागाई भत्ता','घर भाडे भत्ता','वाहन भत्ता','दिव्यांग/वाहतूक भत्ता','इतर (फरक)','मानधन','NPS शासन वर्गणी 14%','फरकातून NPS शासन वर्गणी','एकूण वेतन','सण अग्रिम','वजा जाता रक्कम','भविष्य निर्वाह निधी','NPS शासन वर्गणी (कपात)','NPS कर्मचारी वर्गणी','गट विमा','व्यवसाय कर','मुद्रांक शुल्क','आयकर','फरकातून NPS','फरकातून NPS (कर्मचारी)','इतर कपात','जीवन विमा निगम','सा.जि.विकास/सह पत संस्था','प्राथ. शिक्षक बँक','एकूण वजाती','निव्वळ आदा करावयाची रक्कम'];
+const PYM=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const monOrd=m=>{const a=String(m||'').split('_'),i=PYM.indexOf(a[0]);return i<0||!/^\d{4}$/.test(a[1]||'')?0:(+a[1])*100+i};
+let PDOK=false;
+async function pdEns(env){if(PDOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS payd(mon TEXT,ord INTEGER,hid TEXT,ds TEXT,nm TEXT,v TEXT,PRIMARY KEY(mon,hid,nm))").run();PDOK=true}
+async function pdSalt(env){let q=await env.DB.prepare("SELECT v FROM cfg WHERE k='pay_salt'").first();if(q)return q.v;await env.DB.prepare("INSERT OR IGNORE INTO cfg(k,v) VALUES('pay_salt',?)").bind(rnd(16)).run();q=await env.DB.prepare("SELECT v FROM cfg WHERE k='pay_salt'").first();return q.v}
+async function pdHid(env,id){return (await sha((await pdSalt(env))+'|'+id)).slice(0,32)}
+const nmTok=s=>String(s||'').replace(/[.,()\-_/]/g,' ').split(/\s+/).map(x=>x.trim().toLowerCase()).filter(x=>x.length>1);
+function pdPick(rows,nm){if(!rows.length)return null;if(rows.length===1)return rows[0];const t=new Set(nmTok(nm));let best=null,bs=0;for(const r of rows){const sc=nmTok(r.nm).filter(x=>t.has(x)).length;if(sc>bs){bs=sc;best=r}}return best}
+// मासिक वेतन: D1 मधून (PAN/केंद्र-हॅश) – फक्त स्वतःची नोंद
+async function pdMons(env,hid){return (await env.DB.prepare('SELECT DISTINCT mon,ord FROM payd WHERE hid=? ORDER BY ord DESC').bind(hid).all()).results||[]}
+async function pdSlip(env,hid,mon,nm){const rows=(await env.DB.prepare('SELECT ds,nm,v FROM payd WHERE hid=? AND mon=?').bind(hid,mon).all()).results||[];const r=pdPick(rows,nm);if(!r)return null;let v=[];try{v=JSON.parse(r.v)}catch(e){}return {ds:r.ds||'',nm:r.nm||'',p:PYL.map((l,i)=>[l,String(v[i]==null?0:v[i])])}}
 async function offAuth(env,b){const u=cl(b.u,12).toUpperCase(),t=cl(b.token,64);if(!u||t.length<20)return null;const x=await env.DB.prepare('SELECT * FROM off_login WHERE uname=? AND token=?').bind(u,t).first();return x&&x.tt&&Date.now()-x.tt<OTTL?x:null}
 const OTTL=30*864e5,OFAIL=8,OLOCK=15*6e4;
 async function offApi(p,r,env){
@@ -115,6 +127,13 @@ async function offApi(p,r,env){
   }
   const t=await offAuth(env,b);if(!t)return J({e:'auth'},401);
   const kp=t.uname!=='BEO';
+  if(p==='/api/o/pay'){
+    if(!kp)return J({e:'kp'},403);await pdEns(env);
+    const hid=await pdHid(env,'K'+t.uname),dm=await pdMons(env,hid),m=cl(b.month,12).replace(/[^A-Za-z0-9_]/g,'');
+    if(!dm.length)return J({ok:1,none:1,msg:'केंद्रप्रमुखाची वेतन पावती उपलब्ध नाही. (वेतन माहिती अजून भरलेली नाही.)'});
+    const mon=dm.some(x=>x.mon===m)?m:dm[0].mon,s2=await pdSlip(env,hid,mon,'');
+    return J({ok:1,months:dm.map(x=>x.mon),month:mon,p:s2?s2.p:null,nm:s2?s2.nm:'',ds:s2?s2.ds:'केंद्रप्रमुख',nw:0,sc:'केंद्र: '+(CEN[t.uname]||''),sh:'',pn:''});
+  }
   if(p==='/api/o/chpw'){
     const old=cl(b.old,40),nw=cl(b.nw,40);
     if(nw.length<6||nw==='123456')return J({e:'weak'},400);
@@ -868,15 +887,23 @@ async function ext(p,r,env){
     return J({ok:1,parts:j.parts.slice(0,2).map(x=>({part:cl(x.part,2),name:cl(x.name,100),data:String(x.data||'')}))});
   }
   if(p==='/api/t/pay'){
-    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);await pdEns(env);
     const cf={};for(const x of (await env.DB.prepare("SELECT k,v FROM cfg WHERE k IN('pay_url','pay_key')").all()).results)cf[x.k]=x.v;
-    if(!cf.pay_url||!cf.pay_key)return J({ok:1,none:1,msg:'वेतन पावती सुविधा अजून सुरू केलेली नाही.'});
+    const hasG=!!(cf.pay_url&&cf.pay_key);
     const ti=await env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(t.shalarth).first();let pan='';try{pan=String(JSON.parse(ti&&ti.data||'{}')['PAN क्रमांक']||'').trim().toUpperCase()}catch(e){}
     if(!/^[A-Z]{5}\d{4}[A-Z]$/.test(pan))pan='';
     const m=cl(b.month,12).replace(/[^A-Za-z0-9_]/g,'');
-    let j;try{const rs=await fetch(cf.pay_url+'?key='+encodeURIComponent(cf.pay_key)+'&sh='+encodeURIComponent(t.shalarth)+'&pan='+pan+(m?'&month='+m:''),{redirect:'follow'});j=await rs.json()}catch(e){return J({ok:1,none:1,msg:'वेतन माहिती सध्या मिळाली नाही. नंतर प्रयत्न करा.'})}
-    if(!j||!j.ok)return J({ok:1,none:1,msg:(j&&j.msg)||'वेतन माहिती मिळाली नाही.'});
-    const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,months:j.months||[],month:j.month||'',p:j.p||null,nm:j.nm||t.name,ds:j.ds||'',nw:j.nw?1:0,sc:sc?sc.name:'',sh:t.shalarth,pn:pan});
+    const hid=pan?await pdHid(env,'P'+pan):'',dm=hid?await pdMons(env,hid):[];
+    const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first();
+    if(!hasG&&!dm.length)return J({ok:1,none:1,msg:pan?'या PAN साठी वेतन पावती उपलब्ध नाही. (वेतन माहिती अजून भरलेली नाही.)':'वेतन पावतीसाठी तुमची माहितीत "PAN क्रमांक" भरा.'});
+    const dHas=m&&dm.some(x=>x.mon===m);let gj=null;
+    if(hasG&&!dHas){try{const rs=await fetch(cf.pay_url+'?key='+encodeURIComponent(cf.pay_key)+'&sh='+encodeURIComponent(t.shalarth)+'&pan='+pan+(m?'&month='+m:''),{redirect:'follow'});gj=await rs.json()}catch(e){gj=null}if(gj&&!gj.ok)gj=null}
+    const gm=gj&&gj.months||[],all=[...new Set([...dm.map(x=>x.mon),...gm])].sort((x,y)=>monOrd(y)-monOrd(x));
+    if(!all.length)return J({ok:1,none:1,msg:(gj===null&&hasG&&!dm.length)?'वेतन माहिती सध्या मिळाली नाही. नंतर प्रयत्न करा.':'या PAN साठी वेतन पावती उपलब्ध नाही.'});
+    let mon=m||(gj&&gj.month)||'';if(!m&&dm.length&&monOrd(dm[0].mon)>=monOrd(mon))mon=dm[0].mon;if(!mon)mon=all[0];
+    if(dm.some(x=>x.mon===mon)){const s2=await pdSlip(env,hid,mon,t.name);if(s2)return J({ok:1,months:all,month:mon,p:s2.p,nm:t.name,ds:s2.ds,nw:0,sc:sc?sc.name:'',sh:t.shalarth,pn:pan});return J({ok:1,months:all,month:mon,p:null,nm:t.name,ds:'',nw:0,sc:sc?sc.name:'',sh:t.shalarth,pn:pan})}
+    if(gj&&mon===(gj.month||''))return J({ok:1,months:all,month:mon,p:gj.p||null,nm:gj.nm||t.name,ds:gj.ds||'',nw:gj.nw?1:0,sc:sc?sc.name:'',sh:t.shalarth,pn:pan});
+    return J({ok:1,months:all,month:mon,p:null,nm:t.name,ds:'',nw:0,sc:sc?sc.name:'',sh:t.shalarth,pn:pan});
   }
   if(p==='/api/t/panchang'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
@@ -1210,7 +1237,7 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
+  if(p==='/api/admin/payimp'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
     if(p==='/api/admin/spwreset'){await slEnsure(env);const u=cl(b.udise,11).replace(/\D/g,'');if(u.length!==11)return J({e:'bad'},400);await env.DB.batch([env.DB.prepare('DELETE FROM school_login WHERE udise=?').bind(u),env.DB.prepare('DELETE FROM pw_req WHERE udise=?').bind(u)]);return J({ok:1})}
     if(p==='/api/admin/opwreset'){await slEnsure(env);let u=cl(b.u,12).toUpperCase().replace(/\s/g,'');if(/^\d{7}$/.test(u))u='CLU'+u;if(u!=='BEO'&&!CEN[u])return J({e:'bad'},400);await env.DB.prepare('DELETE FROM off_login WHERE uname=?').bind(u).run();return J({ok:1})}
@@ -1253,6 +1280,18 @@ async function ext(p,r,env){
     if(p==='/api/admin/dirsave'){await slEnsure(env);const st=[env.DB.prepare('DELETE FROM dir')];for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,300)){const d=cl(x.desig,80);if(!d)continue;st.push(env.DB.prepare('INSERT INTO dir(desig,name,area,mobile) VALUES(?,?,?,?)').bind(d,cl(x.name,80),cl(x.area,80),cl(x.mobile,20).replace(/\D/g,'').slice(-12)))}await env.DB.batch(st);return J({ok:1,n:st.length-1})}
     if(p==='/api/admin/tachimport'){await slEnsure(env);const st=[];if(b.reset)st.push(env.DB.prepare('DELETE FROM tach'));for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,40)){const m=cl(x.m,40),c=cl(x.c,6),sb=cl(x.s,120);if(!m||!c||!sb)continue;st.push(env.DB.prepare('INSERT INTO tach(medium,cls,subject,lesson,points,exp,assess,material,locode,lodesc,activity,notes) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(m,c,sb,cl(x.l,20),cl(x.p,300),cl(x.e,2500),cl(x.a,500),cl(x.t,500),cl(x.lc,200),cl(x.ld,800),cl(x.ac,800),cl(x.n,500)))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
     if(p==='/api/admin/paycfg'){await slEnsure(env);const u=cl(b.url,300),k=cl(b.key,100);if(!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(u)||k.length<8)return J({e:'bad'},400);await env.DB.batch([env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('pay_url',u),env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('pay_key',k)]);return J({ok:1})}
+    if(p==='/api/admin/payimp'){
+      await slEnsure(env);await pdEns(env);const mon=cl(b.mon,12);if(!monOrd(mon))return J({e:'month'},400);
+      const PR=/^[A-Z]{5}\d{4}[A-Z]$/,ord=monOrd(mon),st=[],seen=new Set();let nt=0,nk=0,dup=0;
+      const vv=a=>Array.isArray(a)&&a.length===27?a.map(x=>{const n=Number(x);return isFinite(n)?Math.round(n*100)/100:0}):null;
+      if(b.first)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon));
+      for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,400)){const pan=String(x.p||'').trim().toUpperCase(),v=vv(x.v),nm=cl(x.nm,80);if(!PR.test(pan)||!v)continue;const hid=await pdHid(env,'P'+pan),key=hid+'|'+nm;if(seen.has(key)){dup++;continue}seen.add(key);st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,hid,cl(x.ds,40),nm,JSON.stringify(v)));nt++}
+      for(const x of (Array.isArray(b.kp)?b.kp:[]).slice(0,60)){const c=String(x.c||'').toUpperCase(),v=vv(x.v);if(!CEN[c]||!v)continue;st.push(env.DB.prepare('INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v) VALUES(?,?,?,?,?,?)').bind(mon,ord,await pdHid(env,'K'+c),'केंद्रप्रमुख',cl(x.nm,80),JSON.stringify(v)));nk++}
+      for(let i=0;i<st.length;i+=40)await env.DB.batch(st.slice(i,i+40));
+      return J({ok:1,t:nt,k:nk,dup});
+    }
+    if(p==='/api/admin/paymons'){await pdEns(env);const q=await env.DB.prepare('SELECT mon,ord,COUNT(*) n FROM payd GROUP BY mon,ord ORDER BY ord DESC').all();return J({ok:1,rows:q.results||[]})}
+    if(p==='/api/admin/paydel'){await pdEns(env);const mon=cl(b.mon,12);await env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon).run();return J({ok:1})}
     if(p==='/api/admin/tinfoimport'){await slEnsure(env);const st=[];for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,20)){const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,'');if(!/^[A-Z0-9]{6,20}$/.test(sh)||!x.d||typeof x.d!=='object')continue;const d={};let n=0;for(const k of Object.keys(x.d)){if(n++>150)break;d[cl(k,80)]=cl(x.d[k],600)}const js=JSON.stringify(d);if(js.length>60000)continue;st.push(env.DB.prepare('INSERT INTO tch_info(shalarth,data,upd) VALUES(?,?,?) ON CONFLICT(shalarth) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(sh,js,istDay()))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
     if(p==='/api/admin/cenlist'){await slEnsure(env);return J({ok:1,rows:(await env.DB.prepare('SELECT code,COUNT(*) n FROM sch_center GROUP BY code').all()).results,cen:CEN})}
     if(p==='/api/admin/formlist'){await slEnsure(env);return J({ok:1,rows:(await env.DB.prepare('SELECT f.udise,s.name sc,f.upd,f.by,f.submitted,LENGTH(f.data) sz FROM sch_form f LEFT JOIN schools s ON s.udise=f.udise ORDER BY f.upd DESC LIMIT 700').all()).results})}
