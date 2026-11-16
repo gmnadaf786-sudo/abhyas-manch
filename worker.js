@@ -1357,7 +1357,7 @@ async function ext(p,r,env){
       return J({ok:1,id});
     }
     if(p==='/api/admin/tlist'){
-      const ts=(await env.DB.prepare('SELECT id,shalarth,name,mobile,udise,status,created FROM teachers ORDER BY id DESC LIMIT 500').all()).results;
+      await slEnsure(env);const ts=(await env.DB.prepare("SELECT id,shalarth,name,mobile,udise,status,created FROM teachers WHERE status<>'ok' OR udise NOT IN (SELECT udise FROM schools) ORDER BY (status<>'ok') DESC,id DESC LIMIT 500").all()).results;
       const cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses').all()).results;
       ts.forEach(x=>x.cl=cs.filter(c=>c.tid===x.id).map(c=>c.cls+c.div).join(', '));
       const n=await env.DB.prepare('SELECT COUNT(*) n FROM roster').first();
