@@ -121,6 +121,10 @@ async function mdmEns(env){await env.DB.batch([env.DB.prepare("CREATE TABLE IF N
 function mdmUp(env,mon,u,a,now){const d=[];for(let i=0;i<18;i++){let v=parseFloat(a[i]);const sg=i===4||i===11;if(!isFinite(v)||(v<0&&!sg))v=0;if([1,2,8,9].includes(i)&&v>31)v=31;v=Math.round(Math.max(Math.min(v,1e6),sg?-1e6:0)*100)/100;d.push(v)}return env.DB.prepare('INSERT INTO mdm(mon,udise,d,up) VALUES(?,?,?,?) ON CONFLICT(mon,udise) DO UPDATE SET d=excluded.d,up=excluded.up').bind(mon,u,JSON.stringify(d),now)}
 async function mdmPrev(env,mon,ok){const [y,m]=mon.split('-').map(Number),pm=m===1?(y-1)+'-12':y+'-'+String(m-1).padStart(2,'0'),P={};
   for(const x of (await env.DB.prepare('SELECT udise,d FROM mdm WHERE mon=?').bind(pm).all()).results){if(ok&&!ok.has(x.udise))continue;try{const d=JSON.parse(x.d);P[x.udise]={p1:d[0],p2:d[7],ck:d[14],c1:Math.round((d[4]+d[5]-d[6])*100)/100,c2:Math.round((d[11]+d[12]-d[13])*100)/100}}catch(e){}}return P}
+async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=6?y:y-1,yr=sy+'-'+String((sy+1)%100).padStart(2,'0'),ix=(m-6+12)%12,A={};
+  try{for(const x of (await env.DB.prepare("SELECT udise,v FROM cce_doc WHERE yr=? AND cls=0 AND kind='days' AND k=''").bind(yr).all()).results){if(!ok.has(x.udise))continue;try{const a=JSON.parse(x.v),w=parseFloat(a&&a[ix]);if(w>0)(A[x.udise]=A[x.udise]||{n:0,c1:0,c2:0,b1:0,b2:0}).wd=w}catch(e){}}}catch(e){}
+  try{for(const x of (await env.DB.prepare("SELECT udise,p15,p68,cooked FROM pm_daily WHERE date LIKE ?").bind(mon+'-%').all()).results){if(!ok.has(x.udise)||x.cooked==='नाही')continue;const o=A[x.udise]=A[x.udise]||{n:0,c1:0,c2:0,b1:0,b2:0};o.n++;if(x.p15>0){o.c1++;o.b1+=x.p15}if(x.p68>0){o.c2++;o.b2+=x.p68}}}catch(e){}
+  return A}
 async function offAuth(env,b){const u=cl(b.u,12).toUpperCase(),t=cl(b.token,64);if(!u||t.length<20)return null;const x=await env.DB.prepare('SELECT * FROM off_login WHERE uname=? AND token=?').bind(u,t).first();return x&&x.tt&&Date.now()-x.tt<OTTL?x:null}
 const OTTL=30*864e5,OFAIL=8,OLOCK=15*6e4;
 async function offApi(p,r,env){
@@ -171,7 +175,7 @@ async function offApi(p,r,env){
     const rw=(await env.DB.prepare('SELECT udise,d,up FROM mdm WHERE mon=?').bind(mon).all()).results,rows={},up={};
     rw.forEach(x=>{if(!ok.has(x.udise))return;try{rows[x.udise]=JSON.parse(x.d);up[x.udise]=x.up}catch(e){}});
     const o={ok:1,mon,sch:ss.map(x=>({u:x.udise,nm:x.name||'',c:x.code})),rows,up};
-    if(kp)o.prev=await mdmPrev(env,mon,ok);
+    if(kp){o.prev=await mdmPrev(env,mon,ok);o.auto=await mdmAuto(env,mon,ok)}
     return J(o);
   }
   if(p==='/api/o/sum'){
@@ -313,7 +317,7 @@ async function schoolApi(p,r,env){
     await mdmEns(env);const mon=cl(b.mon,7);if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(mon))return J({e:'mon'},400);
     if(p==='/api/s/mdmsave'){if(!Array.isArray(b.d))return J({e:'bad'},400);const now=new Date().toISOString();await mdmUp(env,mon,t.udise,b.d,now).run();return J({ok:1,up:now})}
     const x=await env.DB.prepare('SELECT d,up FROM mdm WHERE mon=? AND udise=?').bind(mon,t.udise).first();let d=null;try{d=x?JSON.parse(x.d):null}catch(e){}
-    return J({ok:1,mon,d,up:x?x.up:'',prev:(await mdmPrev(env,mon,new Set([t.udise])))[t.udise]||null});
+    return J({ok:1,mon,d,up:x?x.up:'',prev:(await mdmPrev(env,mon,new Set([t.udise])))[t.udise]||null,auto:(await mdmAuto(env,mon,new Set([t.udise])))[t.udise]||null});
   }
   if(p==='/api/s/dist'){
     const k=cl(b.kind,10);if(!SCH_DIST.includes(k))return J({e:'bad'},400);
