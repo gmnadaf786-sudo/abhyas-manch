@@ -126,6 +126,14 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
   try{for(const x of (await env.DB.prepare("SELECT udise,p15,p68,cooked FROM pm_daily WHERE date LIKE ?").bind(mon+'-%').all()).results){if(!ok.has(x.udise)||x.cooked==='नाही')continue;const o=A[x.udise]=A[x.udise]||{n:0,c1:0,c2:0,b1:0,b2:0};o.n++;if(x.p15>0){o.c1++;o.b1+=x.p15}if(x.p68>0){o.c2++;o.b2+=x.p68}}}catch(e){}
   try{for(const x of (await env.DB.prepare("SELECT udise,items FROM pm_rcpt WHERE date LIKE ?").bind(mon+'-%').all()).results){if(!ok.has(x.udise))continue;let it=[];try{it=JSON.parse(x.items)}catch(e){}for(const i of it){if(String(i.name||'').trim()!=='तांदूळ')continue;const o=A[x.udise]=A[x.udise]||{n:0,c1:0,c2:0,b1:0,b2:0};o.rn=1;if(i.q15==null){o.ru=(o.ru||0)+(Number(i.qty)||0)}else{o.r1=(o.r1||0)+(Number(i.q15)||0);o.r2=(o.r2||0)+(Number(i.q68)||0)}}}}catch(e){}
   return A}
+async function lvEns(env){await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_lv(id INTEGER PRIMARY KEY AUTOINCREMENT, udise TEXT, shalarth TEXT, tname TEXT, typ TEXT, fd TEXT, td TEXT, days INTEGER, rm TEXT, img TEXT, upd TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_diary(id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, dt TEXT, kind TEXT, place TEXT, udise TEXT, pn TEXT, rm TEXT, img TEXT, upd TEXT)")])}
+async function phPut(env,imgs,pre,old){const a=(Array.isArray(imgs)?imgs:[]).slice(0,3);if(!a.length)return{keys:old};if(!env.BOOKS)return{e:'noimg'};const bin=[];
+  for(const d of a){const m=/^data:image\/jpeg;base64,([A-Za-z0-9+\/=]+)$/.exec(String(d||''));if(!m||m[1].length>1000000)return{e:'img'};const raw=atob(m[1]),u8=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)u8[i]=raw.charCodeAt(i);bin.push(u8)}
+  const nk=[];for(const u8 of bin){const k=pre+crypto.randomUUID().replace(/-/g,'').slice(0,16)+'.jpg';await env.BOOKS.put(k,u8,{httpMetadata:{contentType:'image/jpeg'}});nk.push(k)}
+  for(const k of old){try{await env.BOOKS.delete(k)}catch(e){}}return{keys:nk}}
+async function phGet(env,json,pre,n){let ks=[];try{ks=JSON.parse(json||'[]')}catch(e){}const k=ks[Math.max(0,parseInt(n)||0)];if(!k||!k.startsWith(pre)||!env.BOOKS)return J({e:'nf'},404);const o=await env.BOOKS.get(k);if(!o)return J({e:'nf'},404);return new Response(o.body,{headers:{'content-type':'image/jpeg','cache-control':'private, max-age=300'}})}
+async function phDel(env,json,pre){try{for(const k of JSON.parse(json||'[]'))if(k.startsWith(pre))await env.BOOKS.delete(k)}catch(e){}}
+const phN=j=>{try{return JSON.parse(j||'[]').length}catch(e){return 0}};
 async function offAuth(env,b){const u=cl(b.u,12).toUpperCase(),t=cl(b.token,64);if(!u||t.length<20)return null;const x=await env.DB.prepare('SELECT * FROM off_login WHERE uname=? AND token=?').bind(u,t).first();return x&&x.tt&&Date.now()-x.tt<OTTL?x:null}
 const OTTL=30*864e5,OFAIL=8,OLOCK=15*6e4;
 async function offApi(p,r,env){
@@ -178,6 +186,38 @@ async function offApi(p,r,env){
     const o={ok:1,mon,sch:ss.map(x=>({u:x.udise,nm:x.name||'',c:x.code})),rows,up};
     if(kp){o.prev=await mdmPrev(env,mon,ok);o.auto=await mdmAuto(env,mon,ok)}
     return J(o);
+  }
+  if(p==='/api/o/lv'||p==='/api/o/lvimg'){
+    await lvEns(env);
+    if(p==='/api/o/lvimg'){const x=await env.DB.prepare('SELECT udise,img FROM sch_lv WHERE id=?').bind(parseInt(b.id)||0).first();if(!x||!ok.has(x.udise))return J({e:'nf'},404);return phGet(env,x.img,'lv/'+x.udise+'/',b.n)}
+    const mon=/^\d{4}-(0[1-9]|1[0-2])$/.test(cl(b.mon,7))?cl(b.mon,7):'';
+    const rs=(await env.DB.prepare('SELECT l.id,l.udise,l.shalarth sh,l.tname tn,l.typ,l.fd,l.td,l.days,l.rm,l.img,l.upd,s.name sc FROM sch_lv l LEFT JOIN schools s ON s.udise=l.udise'+(mon?' WHERE l.fd<=? AND l.td>=?':'')+' ORDER BY l.fd DESC,l.id DESC LIMIT 3000').bind(...(mon?[mon+'-31',mon+'-01']:[])).all()).results;
+    const cm={};ss.forEach(x=>cm[x.udise]=x.code);
+    return J({ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,u:x.udise,sc:x.sc||'',c:cm[x.udise],sh:x.sh,tn:x.tn,typ:x.typ,fd:x.fd,td:x.td,days:x.days,rm:x.rm,n:phN(x.img),upd:x.upd}))});
+  }
+  if(p==='/api/o/dy'||p==='/api/o/dysave'||p==='/api/o/dydel'||p==='/api/o/dyimg'){
+    await lvEns(env);const codes=new Set(ss.map(x=>x.code));
+    const own=async id=>{const x=await env.DB.prepare('SELECT * FROM kp_diary WHERE id=?').bind(parseInt(id)||0).first();return x&&(kp?x.code===t.uname:codes.has(x.code))?x:null};
+    if(p==='/api/o/dyimg'){const x=await own(b.id);return x?phGet(env,x.img,'dy/'+x.code+'/',b.n):J({e:'nf'},404)}
+    if(p==='/api/o/dydel'){if(!kp)return J({e:'kp'},403);const x=await own(b.id);if(x){await phDel(env,x.img,'dy/'+x.code+'/');await env.DB.prepare('DELETE FROM kp_diary WHERE id=?').bind(x.id).run()}return J({ok:1})}
+    if(p==='/api/o/dysave'){
+      if(!kp)return J({e:'kp'},403);const dt=cl(b.dt,10),kind=cl(b.kind,40),place=cl(b.place,40),rm=cl(b.rm,1500);let pn=cl(b.pn,100),ud=cl(b.udise,11).replace(/\D/g,'');
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(dt)||!kind||!place||rm.length<2)return J({e:'arg'},400);
+      if(ud){if(!ok.has(ud))return J({e:'na'},403);const sc=ss.find(x=>x.udise===ud);pn=(sc&&sc.name)||pn}
+      let id=parseInt(b.id)||0,old=[];if(id){const x=await own(id);if(!x)return J({e:'nf'},404);try{old=JSON.parse(x.img||'[]')}catch(e){}}
+      else if((await env.DB.prepare('SELECT COUNT(*) c FROM kp_diary WHERE code=?').bind(t.uname).first()).c>=3000)return J({e:'max'},400);
+      const ph=await phPut(env,b.imgs,'dy/'+t.uname+'/'+Date.now().toString(36)+'-',old);if(ph.e)return J({e:ph.e},400);const now=new Date().toISOString();
+      if(id)await env.DB.prepare('UPDATE kp_diary SET dt=?,kind=?,place=?,udise=?,pn=?,rm=?,img=?,upd=? WHERE id=? AND code=?').bind(dt,kind,place,ud,pn,rm,JSON.stringify(ph.keys),now,id,t.uname).run();
+      else await env.DB.prepare('INSERT INTO kp_diary(code,dt,kind,place,udise,pn,rm,img,upd) VALUES(?,?,?,?,?,?,?,?,?)').bind(t.uname,dt,kind,place,ud,pn,rm,JSON.stringify(ph.keys),now).run();
+      return J({ok:1});
+    }
+    const mon=/^\d{4}-(0[1-9]|1[0-2])$/.test(cl(b.mon,7))?cl(b.mon,7):'',cf=cl(b.c,20);
+    let q='SELECT id,code,dt,kind,place,udise,pn,rm,img,upd FROM kp_diary WHERE 1=1',pr=[];
+    if(kp){q+=' AND code=?';pr.push(t.uname)}else if(cf&&codes.has(cf)){q+=' AND code=?';pr.push(cf)}
+    if(mon){q+=' AND dt>=? AND dt<=?';pr.push(mon+'-01',mon+'-31')}
+    q+=' ORDER BY dt DESC,id DESC LIMIT 1500';
+    const rs=(await env.DB.prepare(q).bind(...pr).all()).results;
+    return J({ok:1,rows:rs.filter(x=>codes.has(x.code)).map(x=>({id:x.id,c:x.code,dt:x.dt,kind:x.kind,place:x.place,u:x.udise,pn:x.pn,rm:x.rm,n:phN(x.img),upd:x.upd}))});
   }
   if(p==='/api/o/sum'){
     const [f,d,ro,pm]=await Promise.all([
@@ -319,6 +359,24 @@ async function schoolApi(p,r,env){
     if(p==='/api/s/mdmsave'){if(!Array.isArray(b.d))return J({e:'bad'},400);const now=new Date().toISOString();await mdmUp(env,mon,t.udise,b.d,now).run();return J({ok:1,up:now})}
     const x=await env.DB.prepare('SELECT d,up FROM mdm WHERE mon=? AND udise=?').bind(mon,t.udise).first();let d=null;try{d=x?JSON.parse(x.d):null}catch(e){}
     return J({ok:1,mon,d,up:x?x.up:'',prev:(await mdmPrev(env,mon,new Set([t.udise])))[t.udise]||null,auto:(await mdmAuto(env,mon,new Set([t.udise])))[t.udise]||null});
+  }
+  if(p==='/api/s/lv'||p==='/api/s/lvsave'||p==='/api/s/lvdel'||p==='/api/s/lvimg'){
+    await lvEns(env);const pre='lv/'+t.udise+'/';
+    if(p==='/api/s/lvimg'){const x=await env.DB.prepare('SELECT img FROM sch_lv WHERE id=? AND udise=?').bind(parseInt(b.id)||0,t.udise).first();return phGet(env,x&&x.img,pre,b.n)}
+    if(p==='/api/s/lvdel'){const id=parseInt(b.id)||0,x=await env.DB.prepare('SELECT img FROM sch_lv WHERE id=? AND udise=?').bind(id,t.udise).first();if(x){await phDel(env,x.img,pre);await env.DB.prepare('DELETE FROM sch_lv WHERE id=? AND udise=?').bind(id,t.udise).run()}return J({ok:1})}
+    if(p==='/api/s/lvsave'){
+      const dt=v=>/^\d{4}-\d{2}-\d{2}$/.test(cl(v,10))?cl(v,10):'',fd=dt(b.fd),td=dt(b.td),typ=cl(b.typ,40),rm=cl(b.rm,300),sh=cl(b.sh,20).toUpperCase().replace(/\s/g,'');
+      if(!fd||!td||td<fd||!typ)return J({e:'arg'},400);const tc=await env.DB.prepare('SELECT name FROM teachers WHERE shalarth=? AND udise=?').bind(sh,t.udise).first();if(!tc)return J({e:'teacher'},400);
+      const days=Math.min(400,Math.round((Date.parse(td)-Date.parse(fd))/864e5)+1);let id=parseInt(b.id)||0,old=[];
+      if(id){const x=await env.DB.prepare('SELECT img FROM sch_lv WHERE id=? AND udise=?').bind(id,t.udise).first();if(!x)return J({e:'nf'},404);try{old=JSON.parse(x.img||'[]')}catch(e){}}
+      else if((await env.DB.prepare('SELECT COUNT(*) c FROM sch_lv WHERE udise=?').bind(t.udise).first()).c>=1500)return J({e:'max'},400);
+      const ph=await phPut(env,b.imgs,pre+Date.now().toString(36)+'-',old);if(ph.e)return J({e:ph.e},400);const now=new Date().toISOString();
+      if(id)await env.DB.prepare('UPDATE sch_lv SET shalarth=?,tname=?,typ=?,fd=?,td=?,days=?,rm=?,img=?,upd=? WHERE id=? AND udise=?').bind(sh,tc.name,typ,fd,td,days,rm,JSON.stringify(ph.keys),now,id,t.udise).run();
+      else await env.DB.prepare('INSERT INTO sch_lv(udise,shalarth,tname,typ,fd,td,days,rm,img,upd) VALUES(?,?,?,?,?,?,?,?,?,?)').bind(t.udise,sh,tc.name,typ,fd,td,days,rm,JSON.stringify(ph.keys),now).run();
+      return J({ok:1});
+    }
+    const tl=(await env.DB.prepare('SELECT shalarth sh,name n FROM teachers WHERE udise=? ORDER BY name').bind(t.udise).all()).results,rs=(await env.DB.prepare('SELECT id,shalarth sh,tname tn,typ,fd,td,days,rm,img,upd FROM sch_lv WHERE udise=? ORDER BY fd DESC,id DESC LIMIT 400').bind(t.udise).all()).results;
+    return J({ok:1,teachers:tl,rows:rs.map(x=>({id:x.id,sh:x.sh,tn:x.tn,typ:x.typ,fd:x.fd,td:x.td,days:x.days,rm:x.rm,n:phN(x.img),upd:x.upd}))});
   }
   if(p==='/api/s/dist'){
     const k=cl(b.kind,10);if(!SCH_DIST.includes(k))return J({e:'bad'},400);
