@@ -156,7 +156,7 @@ function pay(m){d.innerHTML='<button class="g" onclick="wmenu()">← माग�
  h+='<label>महिना</label><select onchange="pay(this.value)">'+(j.months||[]).map(function(x){return '<option value="'+E(x)+'"'+(x===j.month?' selected':'')+'>'+E(pml2(x))+'</option>'}).join('')+'</select>';
  if(!j.p){h+='<p><small>या महिन्याची पावती उपलब्ध नाही.</small></p></div>';d.innerHTML=h;return}
  h+='</div>'+pyt(j)+'<button onclick="pyp()" style="margin-top:10px">🖨️ Print / PDF</button>';d.innerHTML=h}).catch(function(){d.innerHTML='<button class="g" onclick="wmenu()">← मागे</button><p class="er">लोड झाले नाही.</p>'})}
-function pyp(){pv(pyt(PYJ).replace('grid-template-columns:1fr 1fr;gap:12px','grid-template-columns:1fr 1fr;gap:12px;font-size:11px'))}
+function pyp(){window.PDFT='वेतन पावती - '+pml2(PYJ.month)+' - '+(PYJ.nm||'');pv(pyt(PYJ).replace('grid-template-columns:1fr 1fr;gap:12px','grid-template-columns:1fr 1fr;gap:12px;font-size:11px'));window.PDFT=''}
 var TXJ=null,TXT=0;
 function slab(i,s){var x=0,p=0;for(var k=0;k<s.length;k++){var l=s[k][0],r=s[k][1];if(i>p)x+=(Math.min(i,l)-p)*r;p=l;if(i<=l)break}return x}
 function taxc(t,inp){var n=function(v){v=Number(v);return isFinite(v)&&v>0?v:0},gross=n(t.totalPay),pt=n(t.pt),bd=n(t.basicPay)+n(t.da),en=Math.min(n(t.npsEmprAllow),Math.round(bd*0.14)),c80=Math.min(150000,n(t.gpf)+n(t.gis)+n(t.npsEmployee)+n(t.ngrLic)+n(inp.c80)),c1b=Math.min(50000,n(inp.c1b)),d80=n(inp.d80),hra=n(inp.hra),hl=Math.min(200000,n(inp.hl)),oth=n(inp.oth),tds=n(t.incomeTax);
