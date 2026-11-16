@@ -168,7 +168,7 @@ function studLogin(u,p){
  if(/^[6-9]\d{9}$/.test(u)){if(!/^\d{4,6}$/.test(p)){le.textContent='पासवर्ड ४ ते ६ अंकी असतो.';return false}
   lb.disabled=true;le.textContent='तपासत आहे…';
   fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({mobile:u,pin:p})}).then(function(r){return r.json()}).then(function(j){
-   if(!j.ok){lb.disabled=false;le.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. १५ मिनिटांनी पुन्हा प्रयत्न करा.':'मोबाईल किंवा पासवर्ड चुकीचा.';return}
+   if(!j.ok){lb.disabled=false;le.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. १५ मिनिटांनी पुन्हा प्रयत्न करा.':'मोबाईल किंवा पासवर्ड चुकीचा. (१) पासवर्ड ४ ते ६ अंकी असतो. (२) अजून नोंदणी केली नसेल तर "नोंदणी करा" दाबा. (३) शिक्षक/केंद्रप्रमुख/शाळा असाल तर वरील योग्य बटण निवडा.';return}
    le.textContent='';pickKid(j,function(m){le.textContent=m}).then(function(){lb.disabled=false})}).catch(function(){lb.disabled=false;le.textContent='इंटरनेट तपासा.'});return false}
  lb.disabled=true;le.textContent='तपासत आहे…';
  api({action:'login',username:u,password:p}).then(function(r){
