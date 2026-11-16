@@ -11,7 +11,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;b
 <div id="d" style="display:none"><div class="card"><h2>📥 पगार Excel आयात</h2><p style="font-size:13px;color:var(--m)">Pay Bill किंवा Shalarth "Abstract Detail Report" Excel निवडा, महिना निवडा, "वाचा व आयात करा" दाबा. फाईल फक्त या ब्राउझरमध्ये वाचली जाते; PAN फक्त हॅश स्वरूपात साठवला जातो. एका व्यक्तीची एका महिन्यात एकच नोंद राहते; दुबार PAN/Shalarth ID आढळल्यास अलर्ट मिळतो.</p><input type="file" id="pbf" accept=".xls,.xlsx"><br><label>महिना</label> <input type="month" id="pbm"> <button onclick="pbRead()">वाचा व आयात करा</button><p id="pbx"></p></div><div class="card"><h2>📊 डॅशबोर्ड</h2><div id="pbl">…</div></div><button onclick="out()" style="background:#64748b">🚪 बाहेर पडा</button></div></main>
 <script src="payimp.js?v=1"></script>
 <script>
-var K='';
+var K='';window.PBDEL=false;
 function post(u,b){b.pk=K;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.$s=r.status;return j})})}
 function go(){K=document.getElementById('k').value;e.textContent='…';post('/api/admin/paymons',{}).then(function(j){if(j&&j.ok){e.textContent='';lg.style.display='none';d.style.display='block';pbList()}else e.textContent=j.e==='locked'?'खूप चुकीचे प्रयत्न. १५ मिनिटांनी पुन्हा करा.':j.e==='nopay'?'उप-admin पासवर्ड अजून ठरवलेला नाही.':'पासवर्ड चुकीचा.'}).catch(function(){e.textContent='इंटरनेट तपासा.'})}
 function out(){K='';location.reload()}

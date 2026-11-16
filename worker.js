@@ -26,7 +26,7 @@ async function adminKey(env,b){
   if(+fails)await env.DB.prepare("UPDATE settings SET v=? WHERE k='admin'").bind([salt,hh,0,0].join('|')).run();
   return null;
 }
-const PAYP=new Set(['/api/admin/payimp','/api/admin/paymons','/api/admin/paydel']);
+const PAYP=new Set(['/api/admin/payimp','/api/admin/paymons']);
 async function payKey(env,b){
   const a=await env.DB.prepare("SELECT * FROM settings WHERE k='payadm'").first().catch(()=>null);
   if(!a)return J({e:'nopay'},503);
@@ -1251,6 +1251,7 @@ async function ext(p,r,env){
   }
   if(p==='/api/admin/payimp'||p==='/api/admin/paypw'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
     const b=await body(r);let bad;
+    if(b.pk!==undefined&&!PAYP.has(p))return J({e:'bad'},403);
     if(b.pk!==undefined&&PAYP.has(p))bad=await payKey(env,b);else bad=await adminKey(env,b);
     if(bad)return bad;
     if(p==='/api/admin/paypw'){if(b.pk!==undefined)return J({e:'bad'},403);const pw=cl(b.pw,60);if(pw.length<8)return J({e:'short'},400);const salt=rnd(8);await env.DB.prepare("INSERT OR REPLACE INTO settings(k,v) VALUES('payadm',?)").bind([salt,await hashPin(pw,salt),0,0].join('|')).run();return J({ok:1})}
@@ -1301,7 +1302,7 @@ async function ext(p,r,env){
       const ex=new Set(((await env.DB.prepare('SELECT DISTINCT hid FROM payd WHERE mon=?').bind(mon).all()).results||[]).map(x=>x.hid));
       const num=y=>{const n=Number(y);return isFinite(n)?Math.round(n*100)/100:0};
       const vv=a=>Array.isArray(a)&&a.length===27?a.map(num):null;
-      if(b.wipe)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon));
+      if(b.wipe&&b.pk===undefined)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon));
       const NOW=new Date(Date.now()+19800000).toISOString().slice(0,16).replace('T',' '),INS='INSERT OR REPLACE INTO payd(mon,ord,hid,ds,nm,v,up) VALUES(?,?,?,?,?,?,?)';
       // एका व्यक्तीच्या सर्व हॅशची जुनी नोंद काढून नवी टाकणे; दुबार असल्यास वगळून अलर्ट
       const put=async(hs,ds,nm,js,label)=>{if(hs.some(h=>seen.has(h))){dup++;if(dn.length<30)dn.push(label||nm);return false}hs.forEach(h=>seen.add(h));if(hs.some(h=>ex.has(h)))rep++;for(const h of hs)st.push(env.DB.prepare('DELETE FROM payd WHERE mon=? AND hid=?').bind(mon,h));for(const h of hs)st.push(env.DB.prepare(INS).bind(mon,ord,h,ds,nm,js,NOW));return true};
