@@ -13,7 +13,8 @@ function mV(i,v){return (i===4||i===11)?mS(v):mN(v)}
 function mC(d){return{h1:mR(d[3]*R1),l1:mR(d[4]+d[5]-d[6]),h2:mR(d[10]*R2),l2:mR(d[11]+d[12]-d[13]),w:d[14]*CKR}}
 function mBack(){return '<button class="g" onclick="'+(window.ROLE?'TAB=\'S\';draw()':'home()')+'">← मागे</button>'}
 function mSel(){return '<label>महिना</label><select onchange="MM=this.value;mdmReload()">'+mMons().map(function(m){return '<option value="'+m+'"'+(m===MM?' selected':'')+'>'+esc(mLb(m))+'</option>'}).join('')+'</select>'}
-function mApply(u,a){var d=MD.rows[u];if(!a)return false;var ch=false,h1=d[0]>0||a.c1>0,h2=d[7]>0||a.c2>0;if(a.wd){d[1]=h1?a.wd:0;d[8]=h2?a.wd:0;ch=true}if(a.n>0){d[2]=a.c1;d[3]=a.b1;d[9]=a.c2;d[10]=a.b2;ch=true}if(!MD.man[u+'6'])d[6]=mR(d[3]*0.1);if(!MD.man[u+'13'])d[13]=mR(d[10]*0.15);return ch}
+function mApply(u,a){var d=MD.rows[u];if(!a)return false;var ch=false,h1=d[0]>0||a.c1>0,h2=d[7]>0||a.c2>0;if(a.wd){d[1]=h1?a.wd:0;d[8]=h2?a.wd:0;ch=true}if(a.n>0){d[2]=a.c1;d[3]=a.b1;d[9]=a.c2;d[10]=a.b2;ch=true}if(a.rn){var r1=a.r1||0,r2=a.r2||0,ru=a.ru||0;if(ru){if(d[0]>0&&!(d[7]>0))r1+=ru;else if(d[7]>0&&!(d[0]>0))r2+=ru;else{var t=(d[0]||0)+(d[7]||0),x=t?mR(ru*(d[0]||0)/t):ru;r1+=x;r2+=mR(ru-x)}}d[5]=mR(r1);d[12]=mR(r2);ch=true}
+ if(!MD.man[u+'6'])d[6]=mR(d[3]*0.1);if(!MD.man[u+'13'])d[13]=mR(d[10]*0.15);return ch}
 function mdmReload(){if(window.ROLE)mdmLoad();else mdmSchLoad()}
 function mdmGo(){if(!MM){var d=new Date();d.setMonth(d.getMonth()-1);MM=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)}mdmLoad()}
 function mdmLoad(){X.innerHTML=hdr()+mBack()+'<div class="card"><p class="m">⏳ लोड होत आहे…</p></div>';api('/api/o/mdm',{mon:MM}).then(function(j){if(!j.ok){if(j.$s===401){location.reload();return}X.innerHTML=hdr()+mBack()+'<div class="card"><p class="er">लोड झाले नाही.</p><button onclick="mdmLoad()">पुन्हा प्रयत्न</button></div>';return}MD=j;if(ROLE==='KP')mKPinit();mdmDraw()})}
