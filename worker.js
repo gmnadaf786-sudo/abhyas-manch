@@ -127,6 +127,8 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
   try{for(const x of (await env.DB.prepare("SELECT udise,items FROM pm_rcpt WHERE date LIKE ?").bind(mon+'-%').all()).results){if(!ok.has(x.udise))continue;let it=[];try{it=JSON.parse(x.items)}catch(e){}for(const i of it){if(String(i.name||'').trim()!=='तांदूळ')continue;const o=A[x.udise]=A[x.udise]||{n:0,c1:0,c2:0,b1:0,b2:0};o.rn=1;if(i.q15==null){o.ru=(o.ru||0)+(Number(i.qty)||0)}else{o.r1=(o.r1||0)+(Number(i.q15)||0);o.r2=(o.r2||0)+(Number(i.q68)||0)}}}}catch(e){}
   return A}
 async function lvEns(env){await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_lv(id INTEGER PRIMARY KEY AUTOINCREMENT, udise TEXT, shalarth TEXT, tname TEXT, typ TEXT, fd TEXT, td TEXT, days INTEGER, rm TEXT, img TEXT, upd TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_diary(id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, dt TEXT, kind TEXT, place TEXT, udise TEXT, pn TEXT, rm TEXT, img TEXT, upd TEXT)")])}
+let VSOK=false;
+async function vsEns(env){if(VSOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_visit(id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, udise TEXT, dt TEXT, tin TEXT, tout TEXT, vt TEXT, data TEXT, img TEXT, score INTEGER, grade TEXT, st TEXT, upd TEXT)").run();VSOK=true}
 async function phPut(env,imgs,pre,old){const a=(Array.isArray(imgs)?imgs:[]).slice(0,3);if(!a.length)return{keys:old};if(!env.BOOKS)return{e:'noimg'};const bin=[];
   for(const d of a){const m=/^data:image\/jpeg;base64,([A-Za-z0-9+\/=]+)$/.exec(String(d||''));if(!m||m[1].length>1000000)return{e:'img'};const raw=atob(m[1]),u8=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)u8[i]=raw.charCodeAt(i);bin.push(u8)}
   const nk=[];for(const u8 of bin){const k=pre+crypto.randomUUID().replace(/-/g,'').slice(0,16)+'.jpg';await env.BOOKS.put(k,u8,{httpMetadata:{contentType:'image/jpeg'}});nk.push(k)}
@@ -218,6 +220,48 @@ async function offApi(p,r,env){
     q+=' ORDER BY dt DESC,id DESC LIMIT 1500';
     const rs=(await env.DB.prepare(q).bind(...pr).all()).results;
     return J({ok:1,rows:rs.filter(x=>codes.has(x.code)).map(x=>({id:x.id,c:x.code,dt:x.dt,kind:x.kind,place:x.place,u:x.udise,pn:x.pn,rm:x.rm,n:phN(x.img),upd:x.upd}))});
+  }
+  if(p==='/api/o/vs'||p==='/api/o/vsget'||p==='/api/o/vsctx'||p==='/api/o/vssave'||p==='/api/o/vsdel'||p==='/api/o/vsimg'){
+    // शाळा भेट फॉर्म: KP आपल्या केंद्रातील शाळा, BEO सर्व शाळा. नोंद फक्त भरणारा बदलू/काढू शकतो; अंतिम (Final) नोंदी KP/BEO दोघे पाहतात, मसुदा फक्त भरणारा.
+    await vsEns(env);const SC={};ss.forEach(x=>SC[x.udise]=x);
+    const own=x=>!!x&&x.code===t.uname,vis=x=>!!x&&ok.has(x.udise)&&(x.st==='Final'||own(x)),byId=id=>env.DB.prepare('SELECT * FROM kp_visit WHERE id=?').bind(parseInt(id)||0).first();
+    if(p==='/api/o/vsimg'){const x=await byId(b.id);return vis(x)?phGet(env,x.img,'vs/'+x.code+'/',b.n):J({e:'nf'},404)}
+    if(p==='/api/o/vsdel'){const x=await byId(b.id);if(own(x)){await phDel(env,x.img,'vs/'+x.code+'/');await env.DB.prepare('DELETE FROM kp_visit WHERE id=?').bind(x.id).run()}return J({ok:1})}
+    if(p==='/api/o/vsget'){const x=await byId(b.id);if(!vis(x))return J({e:'nf'},404);let d={};try{d=JSON.parse(x.data||'{}')}catch(e){}
+      return J({ok:1,v:{id:x.id,c:x.code,u:x.udise,sc:(SC[x.udise]||{}).name||'',k:(SC[x.udise]||{}).code||'',dt:x.dt,tin:x.tin,tout:x.tout,vt:x.vt,st:x.st,score:x.score,g:x.grade,n:phN(x.img),mine:own(x)?1:0,d}})}
+    if(p==='/api/o/vsctx'){
+      const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);
+      const dt=/^\d{4}-\d{2}-\d{2}$/.test(cl(b.dt,10))?cl(b.dt,10):istDay();await lvEns(env);await pmEnsure(env);
+      const [tc,ro,lv,pm,pv]=await Promise.all([
+        env.DB.prepare("SELECT shalarth sh,name n FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(u).all(),
+        env.DB.prepare('SELECT pen p,cls c,div v,name n FROM roster WHERE udise=? ORDER BY cls,div,name').bind(u).all(),
+        env.DB.prepare('SELECT shalarth sh,tname n,typ,fd,td FROM sch_lv WHERE udise=? AND fd<=? AND td>=?').bind(u,dt,dt).all().catch(()=>({results:[]})),
+        env.DB.prepare('SELECT menu,p15,p68,cooked FROM pm_daily WHERE udise=? AND date=?').bind(u,dt).first().catch(()=>null),
+        env.DB.prepare("SELECT dt,data FROM kp_visit WHERE udise=? AND dt<? AND st='Final' AND COALESCE(json_extract(data,'$.fu'),'')<>'' ORDER BY dt DESC,id DESC LIMIT 1").bind(u,dt).first()]);
+      let prev=null;if(pv){try{const d=JSON.parse(pv.data||'{}');prev={dt:pv.dt,fu:cl(d.fu,600),fd:cl(d.fd,10)}}catch(e){}}
+      return J({ok:1,dt,tc:tc.results||[],ro:ro.results||[],lv:lv.results||[],pm:pm||null,prev});
+    }
+    if(p==='/api/o/vssave'){
+      const u=cl(b.udise,11).replace(/\D/g,''),dt=cl(b.dt,10),tin=cl(b.tin,5),tout=cl(b.tout,5),vt=cl(b.vt,30);
+      if(!ok.has(u)||!/^\d{4}-\d{2}-\d{2}$/.test(dt)||dt>istDay())return J({e:'arg'},400);
+      const dj=JSON.stringify(b.d&&typeof b.d==='object'&&!Array.isArray(b.d)?b.d:{});if(dj.length>200000)return J({e:'big'},400);
+      let id=parseInt(b.id)||0,old=[];
+      if(id){const x=await byId(id);if(!own(x))return J({e:'nf'},404);try{old=JSON.parse(x.img||'[]')}catch(e){}}
+      else if((await env.DB.prepare('SELECT COUNT(*) c FROM kp_visit WHERE code=?').bind(t.uname).first()).c>=3000)return J({e:'max'},400);
+      const ph=await phPut(env,b.imgs,'vs/'+t.uname+'/'+Date.now().toString(36)+'-',old);if(ph.e)return J({e:ph.e},400);
+      const sc=Math.max(0,Math.min(100,Math.round(Number(b.score))||0)),g=['A','B','C','D'].includes(b.g)?b.g:'',st=b.final?'Final':'Draft',now=new Date().toISOString();
+      if(id)await env.DB.prepare('UPDATE kp_visit SET udise=?,dt=?,tin=?,tout=?,vt=?,data=?,img=?,score=?,grade=?,st=?,upd=? WHERE id=? AND code=?').bind(u,dt,tin,tout,vt,dj,JSON.stringify(ph.keys),sc,g,st,now,id,t.uname).run();
+      else{const r=await env.DB.prepare('INSERT INTO kp_visit(code,udise,dt,tin,tout,vt,data,img,score,grade,st,upd) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(t.uname,u,dt,tin,tout,vt,dj,JSON.stringify(ph.keys),sc,g,st,now).run();id=r.meta.last_row_id}
+      return J({ok:1,id});
+    }
+    const mo=cl(b.mon,7),cf=cl(b.c,20),uf=cl(b.udise,11).replace(/\D/g,'');
+    let q="SELECT id,code,udise,dt,tin,tout,vt,score,grade,st,img FROM kp_visit WHERE (st='Final' OR code=?)",pr=[t.uname];
+    if(mo==='Y'){const n=new Date(Date.now()+19800000),y=n.getUTCMonth()>=5?n.getUTCFullYear():n.getUTCFullYear()-1;q+=' AND dt>=?';pr.push(y+'-06-01')}
+    else if(/^\d{4}-(0[1-9]|1[0-2])$/.test(mo)){q+=' AND dt>=? AND dt<=?';pr.push(mo+'-01',mo+'-31')}
+    if(uf){q+=' AND udise=?';pr.push(uf)}
+    q+=' ORDER BY dt DESC,id DESC LIMIT 3000';
+    const rs=(await env.DB.prepare(q).bind(...pr).all()).results.filter(x=>ok.has(x.udise)&&(!cf||(SC[x.udise]||{}).code===cf));
+    return J({ok:1,rows:rs.map(x=>({id:x.id,c:x.code,u:x.udise,sc:(SC[x.udise]||{}).name||'',k:(SC[x.udise]||{}).code||'',dt:x.dt,tin:x.tin,tout:x.tout,vt:x.vt,score:x.score,g:x.grade,st:x.st,n:phN(x.img),mine:own(x)?1:0}))});
   }
   if(p==='/api/o/sum'){
     const [f,d,ro,pm]=await Promise.all([
