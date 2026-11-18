@@ -137,13 +137,13 @@ async function phGet(env,json,pre,n){let ks=[];try{ks=JSON.parse(json||'[]')}cat
 async function phDel(env,json,pre){try{for(const k of JSON.parse(json||'[]'))if(k.startsWith(pre))await env.BOOKS.delete(k)}catch(e){}}
 const phN=j=>{try{return JSON.parse(j||'[]').length}catch(e){return 0}};
 async function offAuth(env,b){const u=cl(b.u,12).toUpperCase(),t=cl(b.token,64);if(!u||t.length<20)return null;const x=await env.DB.prepare('SELECT * FROM off_login WHERE uname=? AND token=?').bind(u,t).first();return x&&x.tt&&Date.now()-x.tt<OTTL?x:null}
-const OTTL=30*864e5,OFAIL=8,OLOCK=15*6e4;
+const OTTL=30*864e5,OFAIL=8,OLOCK=15*6e4,OAEO=['AEO1','AEO2','AEO3'],isOff=u=>u==='BEO'||OAEO.includes(u);
 async function offApi(p,r,env){
   if(!p.startsWith('/api/o/'))return null;
   await slEnsure(env);const b=await body(r);
   if(p==='/api/o/login'){
     let u=cl(b.u,14).toUpperCase().replace(/\s/g,''),pw=cl(b.pw,40);if(/^\d{7}$/.test(u))u='CLU'+u;
-    if(u!=='BEO'&&!CEN[u])return J({e:'bad'},401);
+    if(!isOff(u)&&!CEN[u])return J({e:'bad'},401);
     let x=await env.DB.prepare('SELECT * FROM off_login WHERE uname=?').bind(u).first();
     if(!x){const salt=rnd(8);await env.DB.prepare('INSERT OR IGNORE INTO off_login(uname,salt,pw,changed,fails) VALUES(?,?,?,0,0)').bind(u,salt,await hashPin('123456',salt)).run();x=await env.DB.prepare('SELECT * FROM off_login WHERE uname=?').bind(u).first()}
     const now=Date.now();
@@ -152,10 +152,10 @@ async function offApi(p,r,env){
     if((await hashPin(pw,x.salt))!==x.pw){const f=x.fails+1;await env.DB.prepare('UPDATE off_login SET fails=?,lk=? WHERE uname=?').bind(f,f>=OFAIL?now+OLOCK:0,u).run();return f>=OFAIL?J({e:'locked',m:OLOCK/6e4},429):J({e:'bad',left:OFAIL-f},401)}
     // reuse a still-valid token so logging in on a second device does not log out the first
     const keep=x.token&&x.tt&&now-x.tt<OTTL,tok=keep?x.token:rnd(24);await env.DB.prepare('UPDATE off_login SET fails=0,lk=0,token=?,tt=? WHERE uname=?').bind(tok,keep?x.tt:now,u).run();
-    return J({ok:1,token:tok,u,role:u==='BEO'?'BEO':'KP',label:u==='BEO'?'गटशिक्षणाधिकारी (BEO) – जत':'केंद्र: '+CEN[u],changed:x.changed?1:0});
+    return J({ok:1,token:tok,u,role:isOff(u)?'BEO':'KP',label:u==='BEO'?'गटशिक्षणाधिकारी (BEO) – जत':isOff(u)?u+' – जत':'केंद्र: '+CEN[u],changed:x.changed?1:0});
   }
   const t=await offAuth(env,b);if(!t)return J({e:'auth'},401);
-  const kp=t.uname!=='BEO';
+  const kp=!isOff(t.uname);
   if(p==='/api/o/pay'){
     if(!kp)return J({e:'kp'},403);await pdEns(env);
     const bk='kpp:'+t.uname,pan=cl(b.pan,10).toUpperCase();let bound=(await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bk).first())||null;bound=bound?bound.v:'';
@@ -1396,7 +1396,7 @@ async function ext(p,r,env){
       return J({ok:1,pin,kids:rs.map(x=>x.name+' (इ.'+x.cls+')')})}
     if(p==='/api/admin/paypw'){if(b.pk!==undefined)return J({e:'bad'},403);const pw=cl(b.pw,60);if(pw.length<8)return J({e:'short'},400);const salt=rnd(8);await env.DB.prepare("INSERT OR REPLACE INTO settings(k,v) VALUES('payadm',?)").bind([salt,await hashPin(pw,salt),0,0].join('|')).run();return J({ok:1})}
     if(p==='/api/admin/spwreset'){await slEnsure(env);const u=cl(b.udise,11).replace(/\D/g,'');if(u.length!==11)return J({e:'bad'},400);await env.DB.batch([env.DB.prepare('DELETE FROM school_login WHERE udise=?').bind(u),env.DB.prepare('DELETE FROM pw_req WHERE udise=?').bind(u)]);return J({ok:1})}
-    if(p==='/api/admin/opwreset'){await slEnsure(env);let u=cl(b.u,12).toUpperCase().replace(/\s/g,'');if(/^\d{7}$/.test(u))u='CLU'+u;if(u!=='BEO'&&!CEN[u])return J({e:'bad'},400);await env.DB.prepare('DELETE FROM off_login WHERE uname=?').bind(u).run();return J({ok:1})}
+    if(p==='/api/admin/opwreset'){await slEnsure(env);let u=cl(b.u,12).toUpperCase().replace(/\s/g,'');if(/^\d{7}$/.test(u))u='CLU'+u;if(!isOff(u)&&!CEN[u])return J({e:'bad'},400);await env.DB.prepare('DELETE FROM off_login WHERE uname=?').bind(u).run();return J({ok:1})}
     if(p==='/api/admin/recimport'){await slEnsure(env);const st=[],dt=v=>/^\d{4}-\d{2}-\d{2}$/.test(cl(v,10))?cl(v,10):'';for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,40)){const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,''),k=x.kind==='S'?'S':'L',fd=dt(x.fd),td=dt(x.td),ty=cl(x.typ,60);if(!/^[A-Z0-9]{6,20}$/.test(sh)||!fd||!td||!ty)continue;const ud=cl(x.udise,11).replace(/\D/g,''),rm=cl(x.rm,200);st.push(env.DB.prepare("INSERT INTO tch_rec(shalarth,kind,fd,td,udise,typ,rm,status,upd) SELECT ?,?,?,?,?,?,?,'Approved',? WHERE NOT EXISTS(SELECT 1 FROM tch_rec WHERE shalarth=? AND kind=? AND fd=? AND td=? AND typ=?)").bind(sh,k,fd,td,ud,ty,rm,istDay(),sh,k,fd,td,ty))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
     if(p==='/api/admin/sylimport'){await slEnsure(env);const st=[];if(b.reset)st.push(env.DB.prepare('DELETE FROM syl'));for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,60)){const m=cl(x.m,40),mo=cl(x.mo,20),cls=cl(x.c,6),sub=cl(x.s,120);if(!m||!mo||!cls||!sub)continue;st.push(env.DB.prepare('INSERT INTO syl(medium,month,week,cls,subject,topic,tname,sank,akar) VALUES(?,?,?,?,?,?,?,?,?)').bind(m,mo,Math.min(4,Math.max(1,parseInt(x.w)||1)),cls,sub,cl(x.t,20),cl(x.tn,200),cl(x.sa,40),cl(x.ak,40)))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
     if(p==='/api/admin/ttimport'){await slEnsure(env);const st=[];if(b.reset)st.push(env.DB.prepare('DELETE FROM tt'));for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,60)){const c=cl(x.c,4),pe=cl(x.p,40);if(!c||!pe||!Array.isArray(x.d)||!Array.isArray(x.t))continue;const d=[0,1,2,3,4,5].map(i=>cl(x.d[i],120)),t=[0,1,2,3,4,5].map(i=>cl(x.t[i],30));st.push(env.DB.prepare('INSERT INTO tt(cls,period,d1,d2,d3,d4,d5,d6,t1,t2,t3,t4,t5,t6,rtype) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(c,pe,...d,...t,cl(x.r,20)))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
