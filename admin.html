@@ -9,7 +9,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;b
 <h1>📊 अभ्यास मंच – प्रशासक</h1>
 <div class="card" id="lg"><input id="k" type="password" placeholder="प्रशासक पासवर्ड" style="width:100%;box-sizing:border-box;margin-bottom:10px"><button onclick="go()" style="width:100%">उघडा</button><p id="e" style="color:#b91c1c"></p></div>
 <div id="d" style="display:none"></div></main>
-<script src="payimp.js?v=5"></script>
+<script>document.write('<script src="payimp.js?t='+Date.now()+'"><\/script>')</script>
 <script>
 var K='',E=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
 function post(u,b){b.key=K;return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()})}
