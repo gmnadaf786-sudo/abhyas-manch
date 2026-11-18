@@ -116,7 +116,7 @@ const nmTok=s=>String(s||'').replace(/[.,()\-_/]/g,' ').split(/\s+/).map(x=>x.tr
 function pdPick(rows,nm){if(!rows.length)return null;if(rows.length===1)return rows[0];const t=new Set(nmTok(nm));let best=null,bs=0;for(const r of rows){const sc=nmTok(r.nm).filter(x=>t.has(x)).length;if(sc>bs){bs=sc;best=r}}return best}
 // मासिक वेतन: D1 मधून (PAN/केंद्र-हॅश) – फक्त स्वतःची नोंद
 async function pdMons(env,hid){const H=[].concat(hid).filter(Boolean);if(!H.length)return [];return (await env.DB.prepare('SELECT DISTINCT mon,ord FROM payd WHERE hid IN ('+H.map(()=>'?').join(',')+') ORDER BY ord DESC').bind(...H).all()).results||[]}
-async function pdSlip(env,hid,mon,nm){for(const h of [].concat(hid).filter(Boolean)){const rows=(await env.DB.prepare('SELECT ds,nm,v FROM payd WHERE hid=? AND mon=?').bind(h,mon).all()).results||[];const r=pdPick(rows,nm);if(!r)continue;let v=[];try{v=JSON.parse(r.v)}catch(e){}if(v&&!Array.isArray(v)&&Array.isArray(v.h))return {ds:r.ds||'',nm:r.nm||'',nw:1,p:v.h.map((l,i)=>[l,String(v.v[i]==null?0:v.v[i])])};return {ds:r.ds||'',nm:r.nm||'',nw:0,p:PYL.map((l,i)=>[l,String(v[i]==null?0:v[i])])}}return null}
+async function pdSlip(env,hid,mon,nm){for(const h of [].concat(hid).filter(Boolean)){const rows=(await env.DB.prepare('SELECT ds,nm,v FROM payd WHERE hid=? AND mon=?').bind(h,mon).all()).results||[];const r=pdPick(rows,nm);if(!r)continue;let v=[];try{v=JSON.parse(r.v)}catch(e){}if(v&&!Array.isArray(v)&&Array.isArray(v.h))return {ds:r.ds||'',nm:r.nm||'',nw:1,p:v.h.map((l,i)=>[l,String(v.v[i]==null?0:v.v[i])])};if(v&&!Array.isArray(v)&&Array.isArray(v.v)){const a=v.v;return {ds:r.ds||'',nm:r.nm||'',nw:0,lb:v.lb||null,p:PYL.map((l,i)=>[l,String(a[i]==null?0:a[i])])}}return {ds:r.ds||'',nm:r.nm||'',nw:0,p:PYL.map((l,i)=>[l,String(v[i]==null?0:v[i])])}}return null}
 async function mdmEns(env){await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS mdm(mon TEXT, udise TEXT, d TEXT, up TEXT, PRIMARY KEY(mon,udise))")])}
 function mdmUp(env,mon,u,a,now){const d=[];for(let i=0;i<18;i++){let v=parseFloat(a[i]);const sg=i===4||i===11;if(!isFinite(v)||(v<0&&!sg))v=0;if([1,2,8,9].includes(i)&&v>31)v=31;v=Math.round(Math.max(Math.min(v,1e6),sg?-1e6:0)*100)/100;d.push(v)}return env.DB.prepare('INSERT INTO mdm(mon,udise,d,up) VALUES(?,?,?,?) ON CONFLICT(mon,udise) DO UPDATE SET d=excluded.d,up=excluded.up').bind(mon,u,JSON.stringify(d),now)}
 async function mdmPrev(env,mon,ok){const [y,m]=mon.split('-').map(Number),pm=m===1?(y-1)+'-12':y+'-'+String(m-1).padStart(2,'0'),P={};
@@ -164,7 +164,7 @@ async function offApi(p,r,env){
     const hid=[await pdHid(env,'K'+t.uname),bound],dm=await pdMons(env,hid),m=cl(b.month,12).replace(/[^A-Za-z0-9_]/g,'');
     if(!dm.length)return kp?J({ok:1,none:1,need:1,msg:'पावती दिसण्यासाठी तुमचा PAN क्रमांक एकदा टाका.'}):J({ok:1,none:1,need:0,msg:'तुमची वेतन पावती अजून उपलब्ध नाही. पगार फाईल आयात झाल्यावर येथे दिसेल.'});
     const mon=dm.some(x=>x.mon===m)?m:dm[0].mon,s2=await pdSlip(env,hid,mon,'');
-    return J({ok:1,months:dm.map(x=>x.mon),month:mon,p:s2?s2.p:null,nm:s2?s2.nm:'',ds:s2?s2.ds:(kp?'केंद्रप्रमुख':'शि.वि.अ.'),nw:s2?s2.nw:0,sc:kp?'केंद्र: '+(CEN[t.uname]||''):'पंचायत समिती जत',sh:'',pn:'',bound:bound?1:0,nopan:kp?0:1});
+    return J({ok:1,months:dm.map(x=>x.mon),month:mon,p:s2?s2.p:null,nm:s2?s2.nm:'',ds:s2?s2.ds:(kp?'केंद्रप्रमुख':'शि.वि.अ.'),nw:s2?s2.nw:0,lb:s2?s2.lb||null:null,sc:kp?'केंद्र: '+(CEN[t.uname]||''):'पंचायत समिती जत',sh:'',pn:'',bound:bound?1:0,nopan:kp?0:1});
   }
   if(p==='/api/o/chpw'){
     const old=cl(b.old,40),nw=cl(b.nw,40);
@@ -1457,10 +1457,11 @@ async function ext(p,r,env){
       if(Array.isArray(b.aeo)&&b.aeo.length){
         const am={};for(const a of OAEO){const q=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('aeonm:'+a).first();if(q)am[a]=q.v}
         const HON=['श्री','श्रीमती','सौ','श्रीम','कु'],tk=n=>nmTok(n).filter(x=>!HON.includes(x)),same=(x,y)=>{const a=tk(x),c=tk(y);if(!a.length||!c.length)return false;const cs=new Set(c);return a.filter(t=>cs.has(t)).length>=Math.min(2,a.length,c.length)};
-        const ar=b.aeo.slice(0,6).map(x=>({nm:cl(x.nm,80),ds:cl(x.ds,40),v:vv(x.v)})).filter(x=>x.nm&&x.v),used=new Set(),pend=[];
+        const lbs=o=>{if(!o||typeof o!=='object')return null;const r={};for(const k of Object.keys(o).slice(0,12)){if(/^I([0-9]|1[0-9]|2[0-6])$/.test(k)){const t=cl(o[k],60);if(t)r[k]=t}}return Object.keys(r).length?r:null};
+        const ar=b.aeo.slice(0,6).map(x=>({nm:cl(x.nm,80),ds:cl(x.ds,40),v:vv(x.v),lb:lbs(x.lb)})).filter(x=>x.nm&&x.v),used=new Set(),pend=[];
         for(const x of ar){const a=OAEO.find(a=>!used.has(a)&&am[a]&&same(am[a],x.nm));if(a){used.add(a);x.a=a}else pend.push(x)}
         for(const x of pend){const a=OAEO.find(a=>!used.has(a)&&!am[a]);if(!a){ax++;continue}used.add(a);am[a]=nmTok(x.nm).join(' ');x.a=a;bind.push(env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('aeonm:'+a,am[a]))}
-        for(const x of ar){if(!x.a)continue;if(await put([await pdHid(env,'K'+x.a)],x.ds||'शि.वि.अ.',x.nm,JSON.stringify(x.v),x.nm))ak.push({a:x.a,nm:x.nm})}
+        for(const x of ar){if(!x.a)continue;if(await put([await pdHid(env,'K'+x.a)],x.ds||'शि.वि.अ.',x.nm,JSON.stringify(x.lb?{v:x.v,lb:x.lb}:x.v),x.nm))ak.push({a:x.a,nm:x.nm})}
       }
       for(let i=0;i<st.length;i+=40)await env.DB.batch(st.slice(i,i+40));for(const q of bind)await q.run();
       return J({ok:1,t:nt,k:nk,dup,rep,dn,kb,kbn,ak,ax});
