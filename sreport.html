@@ -1,0 +1,49 @@
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>अभ्यास मंच – शाळा अहवाल</title>
+<style>:root{--bg:#f7f7f4;--c:#fff;--i:#1f2933;--m:#64748b;--l:#e2e8f0;--a:#0f766e;--y:#15803d;--n:#b91c1c}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--c:#1e293b;--i:#e2e8f0;--m:#94a3b8;--l:#334155}}
+body{margin:0;background:var(--bg);color:var(--i);font:15px/1.5 system-ui,sans-serif}main{max-width:720px;margin:0 auto;padding:16px}
+.card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:14px;margin-bottom:14px}h1{font-size:19px;margin:6px 0 4px}h2{font-size:16px;margin:0 0 8px}
+select,input,button{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--i);width:100%;box-sizing:border-box;margin-bottom:8px}
+button{background:var(--a);color:#fff;border:0;cursor:pointer}button.g{background:var(--c);color:var(--a);border:1px solid var(--a)}
+label{font-size:13px;color:var(--m);display:block}small,.m{color:var(--m)}.r{display:flex;gap:8px}.r>*{flex:1}
+.q{padding:9px 0;border-bottom:1px solid var(--l);cursor:pointer}.q:last-child{border:0}.qt{display:flex;justify-content:space-between;gap:8px;font-size:14px}.qt b{white-space:nowrap}
+.bar{height:8px;border-radius:6px;background:#fecaca;margin-top:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--y)}
+.it{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--l);font-size:14px}.it:last-child{border:0}.it b{width:22px;text-align:center;flex:none}
+.y{color:var(--y)}.no{color:var(--n)}.sc{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--l);cursor:pointer;gap:8px}.sc span{min-width:0;overflow-wrap:anywhere;font-size:14px}.sc b{white-space:nowrap}
+.top{display:flex;justify-content:space-between;align-items:center}.top button{width:auto;margin:0;padding:6px 12px}
+</style></head><body><main>
+<div class="top"><h1>📋 शाळा अहवाल</h1><button class="g" onclick="location.href='./'">⬅ मागे</button></div>
+<p class="m" id="dt" style="margin:0 0 12px"></p>
+<div class="card">
+<label>तालुका</label><select id="b"></select>
+<label>केंद्र</label><select id="c"></select>
+<input id="s" placeholder="शाळेचे नाव किंवा UDISE कोड शोधा" inputmode="search">
+</div>
+<div id="o"><div class="card"><p class="m">⏳ लोड होत आहे…</p></div></div>
+</main>
+<script>
+var D,SEL=null,QI=-1,$=function(i){return document.getElementById(i)};
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function cn(x){return x.replace(/\s*\(CLU\d+\)\s*$/,'')}
+function cc(x){var m=/\((CLU\d+)\)/.exec(x);return m?m[1]:''}
+function load(){fetch('data/sreport.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){D=j;var d=j.d.split('-');$('dt').textContent='UDISE+ अहवाल • '+d[2]+'-'+d[1]+'-'+d[0]+' पर्यंत • एकूण '+j.s.length+' शाळा';init()}).catch(function(){$('o').textContent='';var c=el('div','card');c.appendChild(el('p','no','अहवाल लोड झाला नाही.'));var b=el('button','',"पुन्हा प्रयत्न");b.onclick=load;c.appendChild(b);$('o').appendChild(c)})}
+function init(){var sv={};try{sv=JSON.parse(localStorage.getItem('srp')||'{}')}catch(e){}
+var b=$('b');b.appendChild(new Option('संपूर्ण जिल्हा','-1'));D.b.forEach(function(n,i){b.appendChild(new Option(n,i))});
+var jt=D.b.indexOf('जत');b.value=sv.b!=null?sv.b:(jt>=0?jt:-1);fillC(sv.c);
+b.onchange=function(){fillC('');save();draw()};$('c').onchange=function(){save();draw()};$('s').oninput=function(){SEL=null;QI=-1;draw()};draw()}
+function fillC(v){var c=$('c');c.textContent='';c.appendChild(new Option('सर्व केंद्रे','-1'));var bi=+$('b').value,set={};D.s.forEach(function(r){if(bi<0||r[1]===bi)set[r[2]]=1});Object.keys(set).map(Number).sort(function(a,b){return cn(D.c[a]).localeCompare(cn(D.c[b]))}).forEach(function(i){c.appendChild(new Option(cn(D.c[i]),i))});c.value=v!=null&&v!==''&&set[v]?v:'-1'}
+function save(){try{localStorage.setItem('srp',JSON.stringify({b:$('b').value,c:$('c').value}))}catch(e){}}
+function scope(){var bi=+$('b').value,ci=+$('c').value,q=$('s').value.trim().toLowerCase();return D.s.filter(function(r){if(bi>=0&&r[1]!==bi)return false;if(ci>=0&&r[2]!==ci)return false;if(q&&r[0].indexOf(q)<0&&r[3].toLowerCase().indexOf(q)<0)return false;return true})}
+function draw(){var o=$('o');o.textContent='';var L=scope();
+if(SEL){var r=D.s.filter(function(x){return x[0]===SEL})[0];if(r){one(o,r);return}SEL=null}
+if(!L.length){var c=el('div','card');c.appendChild(el('p','m','या निवडीत शाळा नाहीत.'));o.appendChild(c);return}
+var bi=+$('b').value,ci=+$('c').value,tt=ci>=0?cn(D.c[ci]):bi>=0?D.b[bi]+' तालुका':'संपूर्ण जिल्हा';
+var card=el('div','card');card.appendChild(el('h2','',tt+' • '+L.length+' शाळा'));card.appendChild(el('small','m','मुद्दा दाबल्यास "नाही" असलेल्या शाळा दिसतील.'));
+D.q.forEach(function(t,i){var y=0;L.forEach(function(r){if(r[4][i]==='1')y++});var p=Math.round(y*100/L.length);var d=el('div','q');var h=el('div','qt');h.appendChild(el('span','',t));h.appendChild(el('b','',y+'/'+L.length+' ('+p+'%)'));d.appendChild(h);var br=el('div','bar'),f=el('i');f.style.width=p+'%';br.appendChild(f);d.appendChild(br);d.onclick=function(){QI=QI===i?-1:i;draw()};card.appendChild(d);
+if(QI===i){var no=L.filter(function(r){return r[4][i]==='0'});var bx=el('div','');bx.style.cssText='background:var(--bg);border-radius:10px;padding:4px 10px;margin-top:8px';bx.appendChild(el('small','no','"नाही" असलेल्या शाळा : '+no.length));no.forEach(function(r){bx.appendChild(row(r))});if(!no.length)bx.appendChild(el('p','y','सर्व शाळांत "होय" ✅'));card.appendChild(bx)}});
+o.appendChild(card);
+var c2=el('div','card');c2.appendChild(el('h2','','शाळा यादी'));L.slice(0,300).forEach(function(r){c2.appendChild(row(r))});if(L.length>300)c2.appendChild(el('small','m','पहिल्या 300 शाळा दाखवल्या आहेत. शोध वापरा.'));o.appendChild(c2)}
+function row(r){var d=el('div','sc');d.appendChild(el('span','',r[3]));var y=0;for(var i=0;i<r[4].length;i++)if(r[4][i]==='1')y++;d.appendChild(el('b','',y+'/'+r[4].length+' ✅'));d.onclick=function(){SEL=r[0];window.scrollTo(0,0);draw()};return d}
+function one(o,r){var c=el('div','card');var b=el('button','g','⬅ यादीकडे');b.onclick=function(){SEL=null;draw()};c.appendChild(b);c.appendChild(el('h2','',r[3]));c.appendChild(el('small','m','UDISE '+r[0]+' • '+D.b[r[1]]+' • '+cn(D.c[r[2]])));var y=0;for(var i=0;i<r[4].length;i++)if(r[4][i]==='1')y++;var s=el('p','',y+' पैकी '+r[4].length+' मुद्द्यांना "होय"');s.textContent='"होय" : '+y+' / '+r[4].length;s.style.fontWeight='600';c.appendChild(s);
+D.q.forEach(function(t,i){var v=r[4][i],d=el('div','it');d.appendChild(el('b',v==='1'?'y':'no',v==='1'?'✅':v==='0'?'❌':'–'));d.appendChild(el('span','',t));c.appendChild(d)});o.appendChild(c)}
+load();
+</script></body></html>
