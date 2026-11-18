@@ -158,13 +158,13 @@ async function offApi(p,r,env){
   if(!t.changed&&p!=='/api/o/chpw')return J({e:'pwchg'},403); // सुरुवातीचा पासवर्ड (123456) बदलेपर्यंत दुसरे काही चालत नाही
   const kp=!isOff(t.uname);
   if(p==='/api/o/pay'){
-    if(!kp)return J({e:'kp'},403);await pdEns(env);
+    if(!kp&&!OAEO.includes(t.uname))return J({e:'kp'},403);await pdEns(env);
     const bk='kpp:'+t.uname,pan=cl(b.pan,10).toUpperCase();let bound=(await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bk).first())||null;bound=bound?bound.v:'';
     if(pan){if(!/^[A-Z]{5}\d{4}[A-Z]$/.test(pan))return J({ok:1,none:1,need:1,msg:'PAN चुकीचा आहे.'});const hp=await pdHid(env,'P'+pan);if(!(await pdMons(env,hp)).length)return J({ok:1,none:1,need:1,msg:'या PAN साठी वेतन माहिती सापडली नाही.'});bound=hp;await env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind(bk,hp).run()}
     const hid=[await pdHid(env,'K'+t.uname),bound],dm=await pdMons(env,hid),m=cl(b.month,12).replace(/[^A-Za-z0-9_]/g,'');
     if(!dm.length)return J({ok:1,none:1,need:1,msg:'पावती दिसण्यासाठी तुमचा PAN क्रमांक एकदा टाका.'});
     const mon=dm.some(x=>x.mon===m)?m:dm[0].mon,s2=await pdSlip(env,hid,mon,'');
-    return J({ok:1,months:dm.map(x=>x.mon),month:mon,p:s2?s2.p:null,nm:s2?s2.nm:'',ds:s2?s2.ds:'केंद्रप्रमुख',nw:s2?s2.nw:0,sc:'केंद्र: '+(CEN[t.uname]||''),sh:'',pn:'',bound:bound?1:0});
+    return J({ok:1,months:dm.map(x=>x.mon),month:mon,p:s2?s2.p:null,nm:s2?s2.nm:'',ds:s2?s2.ds:(kp?'केंद्रप्रमुख':'शि.वि.अ.'),nw:s2?s2.nw:0,sc:kp?'केंद्र: '+(CEN[t.uname]||''):'पंचायत समिती जत',sh:'',pn:'',bound:bound?1:0});
   }
   if(p==='/api/o/chpw'){
     const old=cl(b.old,40),nw=cl(b.nw,40);
@@ -1384,7 +1384,7 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/payimp'||p==='/api/admin/parentreset'||p==='/api/admin/paypw'||p==='/api/admin/kpbind'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
+  if(p==='/api/admin/payimp'||p==='/api/admin/aeomap'||p==='/api/admin/parentreset'||p==='/api/admin/paypw'||p==='/api/admin/kpbind'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
     const b=await body(r);let bad;
     if(b.pk!==undefined&&!PAYP.has(p))return J({e:'bad'},403);
     if(b.pk!==undefined&&PAYP.has(p))bad=await payKey(env,b);else bad=await adminKey(env,b);
@@ -1452,9 +1452,22 @@ async function ext(p,r,env){
       for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,400)){const pan=String(x.p||'').trim().toUpperCase(),v=vv(x.v),nm=cl(x.nm,80);if(!PR.test(pan)||!v)continue;if(await put([await pdHid(env,'P'+pan)],cl(x.ds,40),nm,JSON.stringify(v),nm+' ('+pan.slice(-4)+')'))nt++}
       for(const x of (Array.isArray(b.rows2)?b.rows2:[]).slice(0,300)){const sh=String(x.sh||'').trim().toUpperCase(),nm=cl(x.nm,80),h=Array.isArray(x.h)?x.h.slice(0,80).map(y=>cl(y,60)):[],v=Array.isArray(x.v)?x.v.slice(0,80).map(num):[];if(!/^[A-Z0-9]{8,20}$/.test(sh)||!nm||h.length<10||h.length!==v.length)continue;const pn=String(x.pn||'').trim().toUpperCase(),hs=[await pdHid(env,'S'+sh)];if(PR.test(pn))hs.push(await pdHid(env,'P'+pn));if(await put(hs,cl(x.ds,40),nm,JSON.stringify({h,v}),nm+' ('+sh.slice(-4)+')')){nt++;if(/kendra|केंद्र/i.test(String(x.ds||''))&&hs.length>1){const u=String(x.u||'').replace(/\D/g,''),kc=u?await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(u).first().catch(()=>null):null;if(kc&&CEN[kc.code]){bind.push(env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('kpp:'+kc.code,hs[1]));kb++}else if(kbn.length<30)kbn.push(nm)}}}
       for(const x of (Array.isArray(b.kp)?b.kp:[]).slice(0,60)){const c=String(x.c||'').toUpperCase(),v=vv(x.v);if(!CEN[c]||!v)continue;if(await put([await pdHid(env,'K'+c)],'केंद्रप्रमुख',cl(x.nm,80),JSON.stringify(v),cl(x.nm,80)))nk++}
+      // शि.वि.अ. (AEO1-3): 'Office bill' मधील ओळी नावावरून AEO खात्याशी जोडतात. पहिल्यांदा क्रमाने (AEO1, AEO2, AEO3) जोडणी होते, नंतर नावावरून; जोडणी admin पानावर दिसते व काढता येते.
+      const ak=[];let ax=0;
+      if(Array.isArray(b.aeo)&&b.aeo.length){
+        const am={};for(const a of OAEO){const q=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('aeonm:'+a).first();if(q)am[a]=q.v}
+        const HON=['श्री','श्रीमती','सौ','श्रीम','कु'],tk=n=>nmTok(n).filter(x=>!HON.includes(x)),same=(x,y)=>{const a=tk(x),c=tk(y);if(!a.length||!c.length)return false;const cs=new Set(c);return a.filter(t=>cs.has(t)).length>=Math.min(2,a.length,c.length)};
+        const ar=b.aeo.slice(0,6).map(x=>({nm:cl(x.nm,80),ds:cl(x.ds,40),v:vv(x.v)})).filter(x=>x.nm&&x.v),used=new Set(),pend=[];
+        for(const x of ar){const a=OAEO.find(a=>!used.has(a)&&am[a]&&same(am[a],x.nm));if(a){used.add(a);x.a=a}else pend.push(x)}
+        for(const x of pend){const a=OAEO.find(a=>!used.has(a)&&!am[a]);if(!a){ax++;continue}used.add(a);am[a]=nmTok(x.nm).join(' ');x.a=a;bind.push(env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('aeonm:'+a,am[a]))}
+        for(const x of ar){if(!x.a)continue;if(await put([await pdHid(env,'K'+x.a)],x.ds||'शि.वि.अ.',x.nm,JSON.stringify(x.v),x.nm))ak.push({a:x.a,nm:x.nm})}
+      }
       for(let i=0;i<st.length;i+=40)await env.DB.batch(st.slice(i,i+40));for(const q of bind)await q.run();
-      return J({ok:1,t:nt,k:nk,dup,rep,dn,kb,kbn});
+      return J({ok:1,t:nt,k:nk,dup,rep,dn,kb,kbn,ak,ax});
     }
+    if(p==='/api/admin/aeomap'){if(b.pk!==undefined)return J({e:'bad'},403);await slEnsure(env);await pdEns(env);
+      if(b.clear){const a=String(b.clear).toUpperCase();if(!OAEO.includes(a))return J({e:'bad'},400);await env.DB.batch([env.DB.prepare('DELETE FROM cfg WHERE k=?').bind('aeonm:'+a),env.DB.prepare('DELETE FROM payd WHERE hid=?').bind(await pdHid(env,'K'+a))])}
+      const rows=[];for(const a of OAEO){const q=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('aeonm:'+a).first();rows.push({a,nm:q?q.v:''})}return J({ok:1,rows})}
     if(p==='/api/admin/paymons'){await pdEns(env);const q=await env.DB.prepare("SELECT mon,ord,COUNT(DISTINCT nm) n,COUNT(DISTINCT CASE WHEN ds LIKE '%endra%' OR ds LIKE '%केंद्र%' OR ds LIKE '%के.प्र%' THEN nm END) kp,MAX(up) up FROM payd GROUP BY mon,ord ORDER BY ord DESC").all();return J({ok:1,rows:q.results||[]})}
     if(p==='/api/admin/paydel'){await pdEns(env);const mon=cl(b.mon,12);await env.DB.prepare('DELETE FROM payd WHERE mon=?').bind(mon).run();return J({ok:1})}
     if(p==='/api/admin/tinfoimport'){await slEnsure(env);const st=[];for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,20)){const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,'');if(!/^[A-Z0-9]{6,20}$/.test(sh)||!x.d||typeof x.d!=='object')continue;const d={};let n=0;for(const k of Object.keys(x.d)){if(n++>150)break;d[cl(k,80)]=cl(x.d[k],600)}const js=JSON.stringify(d);if(js.length>60000)continue;st.push(env.DB.prepare('INSERT INTO tch_info(shalarth,data,upd) VALUES(?,?,?) ON CONFLICT(shalarth) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(sh,js,istDay()))}if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length})}
