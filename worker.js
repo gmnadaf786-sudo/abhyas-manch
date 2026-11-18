@@ -1384,7 +1384,7 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/payimp'||p==='/api/admin/aeomap'||p==='/api/admin/parentreset'||p==='/api/admin/paypw'||p==='/api/admin/kpbind'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
+  if(p==='/api/admin/payimp'||p==='/api/admin/aeomap'||p==='/api/admin/schmed'||p==='/api/admin/parentreset'||p==='/api/admin/paypw'||p==='/api/admin/kpbind'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
     const b=await body(r);let bad;
     if(b.pk!==undefined&&!PAYP.has(p))return J({e:'bad'},403);
     if(b.pk!==undefined&&PAYP.has(p))bad=await payKey(env,b);else bad=await adminKey(env,b);
@@ -1466,6 +1466,16 @@ async function ext(p,r,env){
       for(let i=0;i<st.length;i+=40)await env.DB.batch(st.slice(i,i+40));for(const q of bind)await q.run();
       return J({ok:1,t:nt,k:nk,dup,rep,dn,kb,kbn,ak,ax});
     }
+    // एका शाळेच्या सर्व विद्यार्थ्यांचे माध्यम (kn / mr) एकदम बदलणे. act:'set' शिवाय फक्त सध्याची संख्या दाखवतो.
+    if(p==='/api/admin/schmed'){if(b.pk!==undefined)return J({e:'bad'},403);await slEnsure(env);
+      const u=cl(b.udise,11).replace(/\D/g,''),md=b.med==='kn'?'kn':b.med==='mr'?'mr':'';if(u.length!==11)return J({e:'bad'},400);
+      const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
+      if(b.act==='set'){if(!md)return J({e:'med'},400);
+        const r=await env.DB.prepare("UPDATE roster SET med=? WHERE udise=? AND COALESCE(med,'')<>?").bind(md,u,md).run();
+        await env.DB.prepare('UPDATE students SET med=? WHERE id IN (SELECT sid FROM roster WHERE udise=? AND sid IS NOT NULL)').bind(md,u).run();
+        return J({ok:1,name:sc?sc.name:'',changed:(r&&r.meta&&r.meta.changes)||0})}
+      const rows=(await env.DB.prepare("SELECT COALESCE(med,'') m,COUNT(*) n FROM roster WHERE udise=? GROUP BY COALESCE(med,'')").bind(u).all()).results||[];
+      return J({ok:1,name:sc?sc.name:'',rows})}
     if(p==='/api/admin/aeomap'){if(b.pk!==undefined)return J({e:'bad'},403);await slEnsure(env);await pdEns(env);
       if(b.clear){const a=String(b.clear).toUpperCase();if(!OAEO.includes(a))return J({e:'bad'},400);await env.DB.batch([env.DB.prepare('DELETE FROM cfg WHERE k=?').bind('aeonm:'+a),env.DB.prepare('DELETE FROM payd WHERE hid=?').bind(await pdHid(env,'K'+a))])}
       const rows=[];for(const a of OAEO){const q=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('aeonm:'+a).first();rows.push({a,nm:q?q.v:''})}return J({ok:1,rows})}
