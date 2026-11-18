@@ -77,14 +77,14 @@ function vpLoad(){
  X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="m">⏳ लोड होत आहे…</p></div>';
  var mk=vpKey();
  return Promise.all([api('/api/o/vpget',{k:'cfg'}),api('/api/o/vpget',{k:'m:'+mk}),api('/api/o/vs',{mon:mk})]).then(function(a){
-  if(!a[0].ok||!a[1].ok){if(a[0].$s===401){location.reload();return}X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="er">लोड झाले नाही.</p><button onclick="vpLoad()">पुन्हा प्रयत्न</button></div>';return}
+  if(!a[0].ok||!a[1].ok){if(a[0].$s===401){location.reload();return}X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="er">लोड झाले नाही'+(a[0].e?' ('+esc(a[0].e)+(a[0].$s?' '+a[0].$s:'')+')':'')+'. सर्व्हर (worker.js) नवीन आवृत्तीवर चढवला आहे का ते तपासा.</p><button onclick="vpLoad()">पुन्हा प्रयत्न</button></div>';return}
   VPL.cfg=vpParse(a[0].data);VPL.md=vpParse(a[1].data);VPL.vs=(a[2].ok?a[2].rows:[]).filter(function(x){return x.mine});
   var gir=vpCode()==='CLU3603591',sv=[];
   if(!VPL.cfg){VPL.cfg=gir?JSON.parse(JSON.stringify(VPSEED)):vpAuto();sv.push(vpSaveCfg())}
   if(!VPL.cfg.ex)VPL.cfg.ex=[];
   if(!VPL.md&&gir&&mk==='2026-12'){VPL.md=JSON.parse(JSON.stringify(VPSEEDM));sv.push(vpSaveMd())}
   var us=[].concat.apply([],VPL.cfg.groups.map(function(g){return g.s})).concat((window.DATA||[]).map(function(r){return r.u}));
-  return Promise.all(sv).then(function(){return vpCls(us)}).then(vpDraw)});
+  return Promise.all(sv).then(function(){return vpCls(us)}).then(vpDraw)}).catch(function(e){X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="er">भेट नियोजन उघडता आले नाही: '+esc(String(e&&e.message||e))+'</p><button onclick="vpLoad()">पुन्हा प्रयत्न</button></div>'});
 }
 
 function vpMonSel(){var d=new Date(),o='',i;for(i=-1;i<=4;i++){var t=new Date(d.getFullYear(),d.getMonth()+i,1),v=t.getFullYear()+'-'+vp2(t.getMonth()+1);o+='<option value="'+v+'"'+(v===vpKey()?' selected':'')+'>'+VPMN[t.getMonth()]+' '+t.getFullYear()+'</option>'}return o}
