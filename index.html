@@ -145,7 +145,7 @@ function api(o){return fetch(API,{method:'POST',headers:{'Content-Type':'text/pl
 function showLogin(m){lg.style.display='flex';le.textContent=m||''}
 function loadCat(st){return fetch('content/'+catKey(st)+'/catalog.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(c){CAT=c;D=c.subjects;BASE='content/'+catKey(st)+'/';return true})}
 function ssSet(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}
-var ROLES=[['stu','🧑‍🎓 विद्यार्थी / पालक','PEN (११ अंकी) / मोबाईल'],['tch','👩‍🏫 शिक्षक','शालार्थ ID (उदा. 02DEDGMNM7901)'],['off','🏢 केंद्रप्रमुख / BEO / AEO','केंद्र कोड (CLU…), BEO किंवा AEO1'],['sch','🏫 शाळा','शाळेचा UDISE कोड (११ अंकी)']],RL='stu';
+var ROLES=[['stu','🧑‍🎓 विद्यार्थी / पालक','PEN (११ अंकी) / मोबाईल'],['tch','👩‍🏫 शिक्षक','शालार्थ ID (उदा. 02DEDGMNM7901)'],['off','🏢 KP / BEO / AEO','केंद्र कोड / BEO / AEO1'],['sch','🏫 शाळा','शाळेचा UDISE कोड (११ अंकी)']],RL='stu';
 try{RL=localStorage.getItem('am_role')||'stu'}catch(e){}
 function setRole(r){RL=r;try{localStorage.setItem('am_role',r)}catch(e){}var c=ROLES.filter(function(x){return x[0]===r})[0]||ROLES[0];rl.innerHTML=ROLES.map(function(x){var on=x[0]===r;return '<button type="button" onclick="setRole(\''+x[0]+'\')" style="border:2px solid #0f766e;border-radius:10px;padding:9px 4px;font:inherit;font-size:13px;font-weight:'+(on?'800':'500')+';background:'+(on?'#0f766e':'transparent')+';color:'+(on?'#fff':'#0f766e')+'">'+x[1]+'</button>'}).join('');lu.placeholder=c[2];lu.inputMode=(r==='stu'||r==='sch')?'numeric':'text';lu.maxLength=r==='tch'?16:(r==='off'?12:11);if(r==='stu')lu.maxLength=11}
 setRole(RL);
