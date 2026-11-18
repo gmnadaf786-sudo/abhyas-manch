@@ -287,9 +287,9 @@ async function offApi(p,r,env){
   if(p==='/api/o/stu'){
     const u=cl(b.udise,11).replace(/\D/g,'');
     if(u){if(!ok.has(u))return J({e:'na'},403);
-      const q=(await env.DB.prepare('SELECT r.pen,r.name,r.cls,r.div,i.gender,i.dob,i.roll FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name').bind(u).all()).results;
+      const q=(await env.DB.prepare('SELECT r.pen,r.name,r.cls,r.div,r.med,i.gender,i.dob,i.roll FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name').bind(u).all()).results;
       return J({ok:1,rows:q});}
-    const q=(await env.DB.prepare('SELECT r.udise u,r.cls,COUNT(*) n,SUM(i.gender=\'M\') m,SUM(i.gender=\'F\') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen GROUP BY r.udise,r.cls').all()).results;
+    const q=(await env.DB.prepare('SELECT r.udise u,r.cls,COALESCE(r.med,\'\') med,COUNT(*) n,SUM(i.gender=\'M\') m,SUM(i.gender=\'F\') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen GROUP BY r.udise,r.cls,COALESCE(r.med,\'\')').all()).results;
     return J({ok:1,rows:q.filter(x=>ok.has(x.u))});
   }
   if(p==='/api/o/teachers'){
