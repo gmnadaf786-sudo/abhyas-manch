@@ -60,7 +60,7 @@ function vzCalc(d){
  var o=al.length?Math.round(al.reduce(function(a,b){return a+b},0)/al.length):null;r.o={p:o,g:vzGr(o),k:al.length};
  return r}
 function vzBadge(g){return g?'<b style="display:inline-block;min-width:22px;text-align:center;padding:1px 8px;border-radius:10px;color:#fff;background:'+VZGC[g]+'">'+g+'</b>':''}
-function vzWho(c){return c==='BEO'?'गटशिक्षणाधिकारी (BEO)':'केंद्रप्रमुख – '+(CEN[c]||c)}
+function vzWho(c){return c==='BEO'?'गटशिक्षणाधिकारी (BEO)':/^AEO[1-3]$/.test(c)?c:'केंद्रप्रमुख – '+(CEN[c]||c)}
 function vzAL(v){return v==='Y'?'✔ होय':v==='P'?'◐ अंशतः':v==='N'?'✘ नाही':v==='X'?'लागू नाही':'—'}
 function vzNum(s){return String(s==null?'':s).replace(/\D/g,'').slice(0,4)}
 
