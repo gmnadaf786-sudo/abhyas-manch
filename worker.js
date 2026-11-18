@@ -155,6 +155,7 @@ async function offApi(p,r,env){
     return J({ok:1,token:tok,u,role:isOff(u)?'BEO':'KP',label:u==='BEO'?'गटशिक्षणाधिकारी (BEO) – जत':isOff(u)?u+' – जत':'केंद्र: '+CEN[u],changed:x.changed?1:0});
   }
   const t=await offAuth(env,b);if(!t)return J({e:'auth'},401);
+  if(!t.changed&&p!=='/api/o/chpw')return J({e:'pwchg'},403); // सुरुवातीचा पासवर्ड (123456) बदलेपर्यंत दुसरे काही चालत नाही
   const kp=!isOff(t.uname);
   if(p==='/api/o/pay'){
     if(!kp)return J({e:'kp'},403);await pdEns(env);
@@ -391,6 +392,7 @@ async function schoolApi(p,r,env){
     return J({ok:1});
   }
   const t=await schoolAuth(env,b);if(!t)return J({e:'auth'},401);
+  if(!t.changed&&p!=='/api/s/chpw')return J({e:'pwchg'},403); // सुरुवातीचा पासवर्ड बदलेपर्यंत दुसरे काही चालत नाही
   if(p==='/api/s/chpw'){
     const old=cl(b.old,40),nw=cl(b.nw,40);
     if(nw.length<6||nw==='123456')return J({e:'weak'},400);
@@ -565,6 +567,7 @@ async function pmApi(p,r,env){
   if(!p.startsWith('/api/pm/'))return null;
   const b=await body(r),t=await schoolAuth(env,b);
   if(!t)return J({e:'auth'},401);
+  if(!t.changed)return J({e:'pwchg'},403);
   await pmEnsure(env);
   const u=t.udise,by=cl(b.by,40)||'शाळा';
   if(p==='/api/pm/students'){
