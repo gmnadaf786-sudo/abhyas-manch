@@ -160,11 +160,11 @@ async function offApi(p,r,env){
   if(p==='/api/o/pay'){
     if(!kp&&!OAEO.includes(t.uname))return J({e:'kp'},403);await pdEns(env);
     const bk='kpp:'+t.uname,pan=cl(b.pan,10).toUpperCase();let bound=(await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bk).first())||null;bound=bound?bound.v:'';
-    if(pan){if(!/^[A-Z]{5}\d{4}[A-Z]$/.test(pan))return J({ok:1,none:1,need:1,msg:'PAN चुकीचा आहे.'});const hp=await pdHid(env,'P'+pan);if(!(await pdMons(env,hp)).length)return J({ok:1,none:1,need:1,msg:'या PAN साठी वेतन माहिती सापडली नाही.'});bound=hp;await env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind(bk,hp).run()}
+    if(pan&&kp){if(!/^[A-Z]{5}\d{4}[A-Z]$/.test(pan))return J({ok:1,none:1,need:1,msg:'PAN चुकीचा आहे.'});const hp=await pdHid(env,'P'+pan);if(!(await pdMons(env,hp)).length)return J({ok:1,none:1,need:1,msg:'या PAN साठी वेतन माहिती सापडली नाही.'});bound=hp;await env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind(bk,hp).run()}
     const hid=[await pdHid(env,'K'+t.uname),bound],dm=await pdMons(env,hid),m=cl(b.month,12).replace(/[^A-Za-z0-9_]/g,'');
-    if(!dm.length)return J({ok:1,none:1,need:1,msg:'पावती दिसण्यासाठी तुमचा PAN क्रमांक एकदा टाका.'});
+    if(!dm.length)return kp?J({ok:1,none:1,need:1,msg:'पावती दिसण्यासाठी तुमचा PAN क्रमांक एकदा टाका.'}):J({ok:1,none:1,need:0,msg:'तुमची वेतन पावती अजून उपलब्ध नाही. पगार फाईल आयात झाल्यावर येथे दिसेल.'});
     const mon=dm.some(x=>x.mon===m)?m:dm[0].mon,s2=await pdSlip(env,hid,mon,'');
-    return J({ok:1,months:dm.map(x=>x.mon),month:mon,p:s2?s2.p:null,nm:s2?s2.nm:'',ds:s2?s2.ds:(kp?'केंद्रप्रमुख':'शि.वि.अ.'),nw:s2?s2.nw:0,sc:kp?'केंद्र: '+(CEN[t.uname]||''):'पंचायत समिती जत',sh:'',pn:'',bound:bound?1:0});
+    return J({ok:1,months:dm.map(x=>x.mon),month:mon,p:s2?s2.p:null,nm:s2?s2.nm:'',ds:s2?s2.ds:(kp?'केंद्रप्रमुख':'शि.वि.अ.'),nw:s2?s2.nw:0,sc:kp?'केंद्र: '+(CEN[t.uname]||''):'पंचायत समिती जत',sh:'',pn:'',bound:bound?1:0,nopan:kp?0:1});
   }
   if(p==='/api/o/chpw'){
     const old=cl(b.old,40),nw=cl(b.nw,40);
