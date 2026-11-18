@@ -198,6 +198,17 @@ async function offApi(p,r,env){
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
     return J({ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,u:x.udise,sc:x.sc||'',c:cm[x.udise],sh:x.sh,tn:x.tn,typ:x.typ,fd:x.fd,td:x.td,days:x.days,rm:x.rm,n:phN(x.img),upd:x.upd}))});
   }
+  if(p==='/api/o/vpget'||p==='/api/o/vpsave'){
+    // भेट नियोजन: KP आपल्या केंद्राचे गट (k='cfg') व महिन्याचे नियोजन (k='m:YYYY-MM') साठवतो
+    if(!kp)return J({e:'kp'},403);
+    await env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_vplan(code TEXT, k TEXT, data TEXT, upd TEXT, PRIMARY KEY(code,k))").run();
+    const k=cl(b.k,12);if(!/^(cfg|m:\d{4}-(0[1-9]|1[0-2]))$/.test(k))return J({e:'arg'},400);
+    if(p==='/api/o/vpget'){const x=await env.DB.prepare('SELECT data FROM kp_vplan WHERE code=? AND k=?').bind(t.uname,k).first();return J({ok:1,data:x?x.data:null})}
+    const d=typeof b.data==='string'?b.data:'';if(!d||d.length>60000)return J({e:'arg'},400);
+    try{JSON.parse(d)}catch(e){return J({e:'arg'},400)}
+    await env.DB.prepare('INSERT INTO kp_vplan(code,k,data,upd) VALUES(?,?,?,?) ON CONFLICT(code,k) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(t.uname,k,d,new Date().toISOString()).run();
+    return J({ok:1});
+  }
   if(p==='/api/o/dy'||p==='/api/o/dysave'||p==='/api/o/dydel'||p==='/api/o/dyimg'){
     await lvEns(env);const codes=new Set(ss.map(x=>x.code));
     const own=async id=>{const x=await env.DB.prepare('SELECT * FROM kp_diary WHERE id=?').bind(parseInt(id)||0).first();return x&&(kp?x.code===t.uname:codes.has(x.code))?x:null};
