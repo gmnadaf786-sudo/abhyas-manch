@@ -10,9 +10,9 @@ var VZGL={A:'A – उत्कृष्ट',B:'B – चांगली',C:'C �
 var VZGC={A:'#15803d',B:'#0f766e',C:'#b45309',D:'#b91c1c'};
 var VZLN={l:'भाषा विषय – वाचन स्तर',m:'गणित विषय – स्तर',e:'इंग्रजी – वाचन स्तर'};
 var VZLV={
- l:['अक्षर ओळख नाही (वाचता येत नाही)','अक्षरे ओळखतो','शब्द वाचतो','वाक्य / छोटा परिच्छेद वाचतो','गोष्ट / पाठ अस्खलित वाचतो'],
- m:['१ ते ९ संख्या ओळखत नाही','१ ते ९ संख्या ओळखतो','१० ते ९९ संख्या ओळखतो','वजाबाकी करतो','भागाकार करतो'],
- e:['काहीही ओळखत नाही','Capital letters ओळखतो','Small letters ओळखतो','Words वाचतो','Sentences वाचतो']};
+ l:['अक्षर ओळख नाही (वाचता येत नाही)','अक्षरे ओळखतो','शब्द वाचतो','वाक्य / छोटा परिच्छेद वाचतो','गोष्ट / पाठ अस्खलित वाचतो','इयत्ता स्तर – इयत्तेच्या पातळीचा उतारा अर्थासह वाचतो'],
+ m:['१ ते ९ संख्या ओळखत नाही','१ ते ९ संख्या ओळखतो','१० ते ९९ संख्या ओळखतो','वजाबाकी करतो','भागाकार करतो','इयत्ता स्तर – इयत्तेनुसार मोठ्या संख्या वाचतो (उदा. ५ वी: ७ अंकी)'],
+ e:['काहीही ओळखत नाही','Capital letters ओळखतो','Small letters ओळखतो','Words वाचतो','Sentences वाचतो','इयत्ता स्तर – इयत्तेच्या पातळीचा उतारा अर्थासह वाचतो']};
 var VZQ={
  a:{t:'🌿 परिसर व स्वच्छता',q:[
   ['a1','शाळेचा परिसर स्वच्छ आहे (कचरा / घाण नाही)'],['a2','कचरापेटी / कचरा टाकण्याची सोय आहे व वापरली जाते'],['a3','वर्गखोल्या स्वच्छ असून रोज झाडलोट होते'],
@@ -182,7 +182,7 @@ function vzLvL(){var e=document.getElementById('vzlvl');if(!e)return;if(!VZSE.lv
 function vzLv(pen,f,v){var x=(VZCX.ro||[]).filter(function(r){return r.p===pen})[0];if(!x)return;var o=VZ.d.lv[pen]=VZ.d.lv[pen]||{n:x.n,c:x.c,v:x.v,l:'',m:'',e:''};o[f]=v;if(o.l===''&&o.m===''&&o.e==='')delete VZ.d.lv[pen];vzLvS();vzLoc()}
 function vzLvTab(d){var P=Object.keys(d.lv||{}),h='';if(!P.length)return '<p class="m">स्तर नोंद नाही.</p>';
  h+='<p style="margin:6px 0 4px">तपासलेले विद्यार्थी: <b>'+P.length+'</b></p>';
- ['l','m','e'].forEach(function(f){var c=[0,0,0,0,0],n=0;P.forEach(function(p){var v=d.lv[p][f];if(v!==''&&v!=null){c[+v]++;n++}});
+ ['l','m','e'].forEach(function(f){var c=VZLV[f].map(function(){return 0}),n=0;P.forEach(function(p){var v=d.lv[p][f];if(v!==''&&v!=null){c[+v]++;n++}});
   h+='<table class="vzt" style="margin-bottom:8px"><tr><th colspan="3" style="text-align:left">'+VZLN[f]+' ('+n+' विद्यार्थी)</th></tr>'+VZLV[f].map(function(t,i){return '<tr><td>'+(i+1)+'. '+esc(t)+'</td><td style="width:42px;text-align:center">'+c[i]+'</td><td style="width:50px;text-align:center">'+(n?Math.round(100*c[i]/n)+'%':'')+'</td></tr>'}).join('')+'</table>'});return h}
 function vzLvS(){var e=document.getElementById('vzlvs');if(e)e.innerHTML=vzLvTab(VZ.d)}
 
