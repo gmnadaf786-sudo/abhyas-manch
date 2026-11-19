@@ -127,7 +127,7 @@ function vzNav(n){return '<div class="row" style="margin-top:8px">'+(n>0?'<butto
 function vzPage(n){return n===0?vzP0():n<=3?vzPc3(['a','b','c'][n-1]):n===4?vzP4():n===5?vzP5():vzP6()}
 function vzP0(){return '<div class="card"><h2>भेट माहिती</h2><p class="m">शाळा: <b>'+esc(vzSn(VZ.u))+'</b></p>'+vzInfoFields(VZ)+'<p class="m">भेट देणारे: '+esc(vzWho(U))+'</p>'
  +(VZCX&&VZCX.prev?'<div class="card" style="background:#fef9c3;border-color:#facc15;color:#713f12"><b>मागील भेटीतील पाठपुरावा ('+mDt(VZCX.prev.dt)+'):</b><br>'+(VZCX.prev.fu?esc(VZCX.prev.fu)+(VZCX.prev.fd?'<br><small>मुदत: '+mDt(VZCX.prev.fd)+'</small>':''):'<small>नोंद नाही.</small>')+'</div>':'')
- +'<button onclick="vzInfoSv()">माहिती जतन करून पुढे →</button></div>'}
+ +'<button onclick="vzInfoSv()">माहिती जतन करून पुढे →</button></div>'+gvzHtml()}
 function vzInfoSv(){var dt=document.getElementById('vzd').value;if(!dt||dt>vzToday()){alert('भेटीचा दिनांक तपासा.');return}var ch=dt!==VZ.dt;VZ.dt=dt;VZ.tin=document.getElementById('vzti').value;VZ.tout=document.getElementById('vzto').value;VZ.vt=document.getElementById('vzv').value;vzLoc();if(ch)vzCtx(function(){vzInit();vzStep(1)});else vzStep(1)}
 function vzRow(k,lb){return '<div class="vzr"><div>'+lb+'</div><div id="vc_'+k+'">'+vzCh(VZ.d.k[k]||'',"vzSet('"+k+"','%v')")+'</div></div>'}
 function vzSet(k,v){VZ.d.k[k]=VZ.d.k[k]===v?'':v;var e=document.getElementById('vc_'+k);if(e)e.innerHTML=vzCh(VZ.d.k[k],"vzSet('"+k+"','%v')");vzProg();vzLoc()}
@@ -207,7 +207,7 @@ function vzSave(fin){var m=document.getElementById('vzm'),c=vzCalc(VZ.d);
 function vzView(id){X.innerHTML=hdr()+'<div class="card"><p class="m">⏳ लोड होत आहे…</p></div>';
  api('/api/o/vsget',{id:id}).then(function(j){if(!j.ok){alert('नोंद उघडता आली नाही.');vzDraw();return}var v=j.v;window.VZVW=v;
   X.innerHTML=hdr()+'<button class="g" onclick="vzDraw()">← मागे</button><div class="card"><div class="row"><button class="g" onclick="vzPrintV()">🖨 प्रिंट</button>'+(v.mine?'<button class="g" onclick="vzEdit('+v.id+')">✏ बदला</button>':'')+'</div>'+phBtns('/api/o/vsimg',v.id,v.n,'फोटो')+'</div><div class="card">'+vzRep(v)+'</div>'})}
-function vzRep(v){var d=v.d||{},c=vzCalc(d),h='<h3 style="margin:0 0 6px">शाळा भेट अहवाल</h3><table class="vzt"><tr><td><b>शाळा</b></td><td>'+esc(v.sc||vzSn(v.u))+'</td><td><b>UDISE</b></td><td>'+esc(v.u)+'</td></tr><tr><td><b>केंद्र</b></td><td>'+esc(CEN[v.k]||v.k||'')+'</td><td><b>दिनांक / वेळ</b></td><td>'+mDt(v.dt)+(v.tin?' · '+esc(v.tin)+(v.tout?' – '+esc(v.tout):''):'')+'</td></tr><tr><td><b>भेट देणारे</b></td><td>'+esc(vzWho(v.c))+'</td><td><b>भेट प्रकार</b></td><td>'+esc(v.vt||'')+'</td></tr></table>';
+function vzRep(v){var d=v.d||{},c=vzCalc(d),h='<h3 style="margin:0 0 6px">शाळा भेट अहवाल</h3><table class="vzt"><tr><td><b>शाळा</b></td><td>'+esc(v.sc||vzSn(v.u))+'</td><td><b>UDISE</b></td><td>'+esc(v.u)+'</td></tr><tr><td><b>केंद्र</b></td><td>'+esc(CEN[v.k]||v.k||'')+'</td><td><b>दिनांक / वेळ</b></td><td>'+mDt(v.dt)+(v.tin?' · '+esc(v.tin)+(v.tout?' – '+esc(v.tout):''):'')+'</td></tr><tr><td><b>भेट देणारे</b></td><td>'+esc(vzWho(v.c))+'</td><td><b>भेट प्रकार</b></td><td>'+esc(v.vt||'')+'</td></tr>'+geoRep(d)+'</table>';
  h+='<h4 style="margin:12px 0 4px">📈 एकूण मूल्यांकन</h4>'+vzScoreTab(c);
  ['a','b','c'].forEach(function(s){h+='<h4 style="margin:12px 0 4px">'+VZQ[s].t+'</h4>';
   if(s==='b'&&d.pm&&(d.pm.menu||d.pm.p||d.pm.e))h+='<p style="margin:0 0 4px">मेनू: '+esc(d.pm.menu||'—')+' · पटावर हजर: '+esc(d.pm.p||'—')+' · आहार घेतलेले: '+esc(d.pm.e||'—')+'</p>';
