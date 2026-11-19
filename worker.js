@@ -129,6 +129,11 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
 async function lvEns(env){await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_lv(id INTEGER PRIMARY KEY AUTOINCREMENT, udise TEXT, shalarth TEXT, tname TEXT, typ TEXT, fd TEXT, td TEXT, days INTEGER, rm TEXT, img TEXT, upd TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_diary(id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, dt TEXT, kind TEXT, place TEXT, udise TEXT, pn TEXT, rm TEXT, img TEXT, upd TEXT)")])}
 let VSOK=false;
 async function vsEns(env){if(VSOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_visit(id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, udise TEXT, dt TEXT, tin TEXT, tout TEXT, vt TEXT, data TEXT, img TEXT, score INTEGER, grade TEXT, st TEXT, upd TEXT)").run();VSOK=true}
+let GEOK=false;
+async function geoEns(env){if(GEOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_geo(udise TEXT PRIMARY KEY, lat REAL, lng REAL, acc INTEGER, by TEXT, upd TEXT)").run();GEOK=true}
+function geoClean(o){if(!o||typeof o!=='object')return null;const la=Number(o.lat),ln=Number(o.lng);if(!isFinite(la)||!isFinite(ln)||la<6||la>38||ln<68||ln>98)return null;const ac=Math.max(0,Math.min(99999,Math.round(Number(o.acc))||0));return{lat:Math.round(la*1e6)/1e6,lng:Math.round(ln*1e6)/1e6,acc:ac}}
+function geoDist(a,b){const R=6371000,r=Math.PI/180,dl=(b.lat-a.lat)*r,dn=(b.lng-a.lng)*r,x=Math.sin(dl/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dn/2)**2;return Math.round(2*R*Math.asin(Math.sqrt(x)))}
+async function geoPut(env,u,g,by){await geoEns(env);await env.DB.prepare('INSERT INTO sch_geo(udise,lat,lng,acc,by,upd) VALUES(?,?,?,?,?,?) ON CONFLICT(udise) DO UPDATE SET lat=excluded.lat,lng=excluded.lng,acc=excluded.acc,by=excluded.by,upd=excluded.upd').bind(u,g.lat,g.lng,g.acc,by,new Date().toISOString()).run()}
 async function phPut(env,imgs,pre,old){const a=(Array.isArray(imgs)?imgs:[]).slice(0,3);if(!a.length)return{keys:old};if(!env.BOOKS)return{e:'noimg'};const bin=[];
   for(const d of a){const m=/^data:image\/jpeg;base64,([A-Za-z0-9+\/=]+)$/.exec(String(d||''));if(!m||m[1].length>1000000)return{e:'img'};const raw=atob(m[1]),u8=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)u8[i]=raw.charCodeAt(i);bin.push(u8)}
   const nk=[];for(const u8 of bin){const k=pre+crypto.randomUUID().replace(/-/g,'').slice(0,16)+'.jpg';await env.BOOKS.put(k,u8,{httpMetadata:{contentType:'image/jpeg'}});nk.push(k)}
@@ -233,6 +238,16 @@ async function offApi(p,r,env){
     const rs=(await env.DB.prepare(q).bind(...pr).all()).results;
     return J({ok:1,rows:rs.filter(x=>codes.has(x.code)).map(x=>({id:x.id,c:x.code,dt:x.dt,kind:x.kind,place:x.place,u:x.udise,pn:x.pn,rm:x.rm,n:phN(x.img),upd:x.upd}))});
   }
+  if(p==='/api/o/geo'||p==='/api/o/geoset'){
+    // शाळांचे स्थान (GPS): KP आपल्या केंद्रातील शाळांचे, BEO/AEO सर्वांचे. नोंद KP, BEO किंवा शाळा (मुख्याध्यापक) करू शकतात; नवी नोंद जुनीची जागा घेते.
+    await geoEns(env);await vsEns(env);
+    if(p==='/api/o/geoset'){const u=cl(b.udise,11).replace(/\D/g,''),g=geoClean(b);if(!ok.has(u)||!g)return J({e:'arg'},400);await geoPut(env,u,g,kp?'KP':'BEO');return J({ok:1})}
+    const gs=(await env.DB.prepare('SELECT udise,lat,lng,acc,by,upd FROM sch_geo').all()).results||[],G={};gs.forEach(x=>G[x.udise]=x);
+    const n=new Date(Date.now()+19800000),y=n.getUTCMonth()>=5?n.getUTCFullYear():n.getUTCFullYear()-1,mo=n.toISOString().slice(0,7);
+    const vr=(await env.DB.prepare("SELECT udise,dt FROM kp_visit WHERE st='Final' AND dt>=?").bind(y+'-06-01').all()).results||[],V={};
+    vr.forEach(x=>{const o=V[x.udise]=V[x.udise]||{l:'',y:0,m:0};if(x.dt>o.l)o.l=x.dt;o.y++;if(x.dt.slice(0,7)===mo)o.m++});
+    return J({ok:1,mo,rows:ss.map(x=>{const g=G[x.udise],v=V[x.udise]||{l:'',y:0,m:0};return{u:x.udise,n:x.name||x.udise,c:x.code,lat:g?g.lat:null,lng:g?g.lng:null,acc:g?g.acc:null,by:g?g.by:'',up:g?g.upd:'',lv:v.l,vy:v.y,vm:v.m}})});
+  }
   if(p==='/api/o/vs'||p==='/api/o/vsget'||p==='/api/o/vsctx'||p==='/api/o/vssave'||p==='/api/o/vsdel'||p==='/api/o/vsimg'){
     // शाळा भेट फॉर्म: KP आपल्या केंद्रातील शाळा, BEO सर्व शाळा. नोंद फक्त भरणारा बदलू/काढू शकतो; अंतिम (Final) नोंदी KP/BEO दोघे पाहतात, मसुदा फक्त भरणारा.
     await vsEns(env);const SC={};ss.forEach(x=>SC[x.udise]=x);
@@ -256,7 +271,7 @@ async function offApi(p,r,env){
     if(p==='/api/o/vssave'){
       const u=cl(b.udise,11).replace(/\D/g,''),dt=cl(b.dt,10),tin=cl(b.tin,5),tout=cl(b.tout,5),vt=cl(b.vt,30);
       if(!ok.has(u)||!/^\d{4}-\d{2}-\d{2}$/.test(dt)||dt>istDay())return J({e:'arg'},400);
-      const dj=JSON.stringify(b.d&&typeof b.d==='object'&&!Array.isArray(b.d)?b.d:{});if(dj.length>200000)return J({e:'big'},400);
+      const dd=b.d&&typeof b.d==='object'&&!Array.isArray(b.d)?b.d:{};await geoEns(env);{const g=geoClean(dd.geo);if(g){const sg=await env.DB.prepare('SELECT lat,lng FROM sch_geo WHERE udise=?').bind(u).first();dd.geo={lat:g.lat,lng:g.lng,acc:g.acc,ts:cl(dd.geo.ts,30)};if(sg)dd.gd=geoDist(sg,g);else delete dd.gd}else{delete dd.geo;delete dd.gd}}const dj=JSON.stringify(dd);if(dj.length>200000)return J({e:'big'},400);
       let id=parseInt(b.id)||0,old=[];
       if(id){const x=await byId(id);if(!own(x))return J({e:'nf'},404);try{old=JSON.parse(x.img||'[]')}catch(e){}}
       else if((await env.DB.prepare('SELECT COUNT(*) c FROM kp_visit WHERE code=?').bind(t.uname).first()).c>=3000)return J({e:'max'},400);
@@ -410,6 +425,12 @@ async function schoolApi(p,r,env){
     if((await hashPin(old,t.salt))!==t.pw)return J({e:'bad'},401);
     const salt=rnd(8);await env.DB.prepare('UPDATE school_login SET salt=?,pw=?,changed=1 WHERE udise=?').bind(salt,await hashPin(nw,salt),t.udise).run();
     return J({ok:1});
+  }
+  if(p==='/api/s/geo'||p==='/api/s/geoset'){
+    await geoEns(env);
+    if(p==='/api/s/geoset'){const g=geoClean(b);if(!g)return J({e:'arg'},400);await geoPut(env,t.udise,g,'S');}
+    const x=await env.DB.prepare('SELECT lat,lng,acc,by,upd FROM sch_geo WHERE udise=?').bind(t.udise).first();
+    return J({ok:1,g:x?{lat:x.lat,lng:x.lng,acc:x.acc,by:x.by,up:x.upd}:null});
   }
   if(p==='/api/s/mdm'||p==='/api/s/mdmsave'){
     await mdmEns(env);const mon=cl(b.mon,7);if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(mon))return J({e:'mon'},400);
