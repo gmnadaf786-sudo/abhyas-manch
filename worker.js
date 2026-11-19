@@ -261,7 +261,7 @@ async function offApi(p,r,env){
       const dt=/^\d{4}-\d{2}-\d{2}$/.test(cl(b.dt,10))?cl(b.dt,10):istDay();await lvEns(env);await pmEnsure(env);
       const [tc,ro,lv,pm,pv]=await Promise.all([
         env.DB.prepare("SELECT shalarth sh,name n FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(u).all(),
-        env.DB.prepare('SELECT pen p,cls c,div v,name n FROM roster WHERE udise=? ORDER BY cls,div,name').bind(u).all(),
+        env.DB.prepare('SELECT pen p,cls c,div v,name n,med FROM roster WHERE udise=? ORDER BY cls,div,name').bind(u).all(),
         env.DB.prepare('SELECT shalarth sh,tname n,typ,fd,td FROM sch_lv WHERE udise=? AND fd<=? AND td>=?').bind(u,dt,dt).all().catch(()=>({results:[]})),
         env.DB.prepare('SELECT menu,p15,p68,cooked FROM pm_daily WHERE udise=? AND date=?').bind(u,dt).first().catch(()=>null),
         env.DB.prepare("SELECT dt,data FROM kp_visit WHERE udise=? AND dt<? AND st='Final' AND COALESCE(json_extract(data,'$.fu'),'')<>'' ORDER BY dt DESC,id DESC LIMIT 1").bind(u,dt).first()]);
