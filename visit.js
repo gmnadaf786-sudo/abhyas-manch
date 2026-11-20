@@ -163,12 +163,12 @@ function vzTcAdd(){var e=document.getElementById('vzan'),n=e.value.trim();if(n.l
 function vzTcDel(i){if(!confirm('हे नाव काढायचे?'))return;VZ.d.tc.splice(i,1);vzStep(4)}
 
 /* विद्यार्थी */
-function vzAt(k,f,el){el.value=vzNum(el.value);var o=VZ.d.at[k]=VZ.d.at[k]||{n:'',p:''};o[f]=el.value;if(f==='p')o.auto=0;if(f==='n')vzAtSync(k);vzAtT();vzLoc()}
-function vzAtSync(k){var o=VZ.d.at[k];if(!o)return;var cnt=VZ.d.ab.filter(function(a){return a.c+'|'+(a.v||'')===k}).length;
- if(cnt>0){if(+o.n>0){o.p=String(Math.max(0,+o.n-cnt));o.auto=1}}else if(o.auto){o.p='';o.auto=0}
+function vzAt(k,f,el){el.value=vzNum(el.value);var o=VZ.d.at[k]=VZ.d.at[k]||{n:'',p:''};o[f]=el.value;if(f==='p')o.man=1;if(f==='n')vzAtSync(k);vzAtT();vzLoc()}
+function vzAtSync(k,f){var o=VZ.d.at[k];if(!o)return;var cnt=VZ.d.ab.filter(function(a){return a.c+'|'+(a.v||'')===k}).length;
+ if(+o.n>0&&(f||!o.man)){o.p=String(Math.max(0,+o.n-cnt));o.man=0}
  [].forEach.call(document.querySelectorAll('input[data-pk]'),function(i){if(i.getAttribute('data-pk')===k)i.value=o.p||''})}
 function vzAtT(){var e=document.getElementById('vzat');if(!e)return;var c=vzCalc(VZ.d).s;e.innerHTML=c.att!==null?'एकूण उपस्थिती: <b>'+c.ap+' / '+c.an+'</b> ('+c.att+'%)':'<span class="m">उपस्थिती भरल्यावर टक्केवारी दिसेल.</span>'}
-function vzAb(pen,on){var d=VZ.d,old=d.ab.filter(function(a){return a.p===pen})[0];if(on){var x=(VZCX.ro||[]).filter(function(r){return r.p===pen})[0];if(x&&!d.ab.some(function(a){return a.p===pen}))d.ab.push({p:pen,n:x.n,c:x.c,v:x.v,r:''})}else d.ab=d.ab.filter(function(a){return a.p!==pen});var ne=d.ab.filter(function(a){return a.p===pen})[0]||old;if(ne){var kk=ne.c+'|'+(ne.v||'');vzAtSync(kk);vzCbRe(kk)}vzAtT();vzLoc()}
+function vzAb(pen,on){var d=VZ.d,old=d.ab.filter(function(a){return a.p===pen})[0];if(on){var x=(VZCX.ro||[]).filter(function(r){return r.p===pen})[0];if(x&&!d.ab.some(function(a){return a.p===pen}))d.ab.push({p:pen,n:x.n,c:x.c,v:x.v,r:''})}else d.ab=d.ab.filter(function(a){return a.p!==pen});var ne=d.ab.filter(function(a){return a.p===pen})[0]||old;if(ne){var kk=ne.c+'|'+(ne.v||'');vzAtSync(kk,1);vzCbRe(kk)}vzAtT();vzLoc()}
 function vzLvSel(f,v,pen){return '<div style="display:flex;gap:6px;margin:0 0 4px"><select style="margin:0;padding:6px;flex:1;min-width:0;font-size:14px" onchange="%FN"><option value="">'+VZLN[f]+' — निवडा</option>'+VZLV[f].map(function(t,i){return '<option value="'+i+'"'+(String(v)===String(i)?' selected':'')+'>'+(i+1)+'. '+esc(t)+'</option>'}).join('')+'</select><button type="button" class="g" style="width:auto;margin:0;padding:6px 10px;white-space:nowrap" onclick="lvtGo(\''+pen+'\',\''+f+'\')">📝 टेस्ट</button></div>'}
 function vzLv(pen,f,v){var x=(VZCX.ro||[]).filter(function(r){return r.p===pen})[0];if(!x)return;var o=VZ.d.lv[pen]=VZ.d.lv[pen]||{n:x.n,c:x.c,v:x.v,l:'',m:'',e:''};o[f]=v;if(o.l===''&&o.m===''&&o.e==='')delete VZ.d.lv[pen];vzLvS();vzLoc()}
 function vzLvTab(d){var P=Object.keys(d.lv||{}),h='';if(!P.length)return '<p class="m">स्तर नोंद नाही.</p>';
@@ -187,19 +187,25 @@ function vzCbInner(k){var d=VZ.d,a=k.split('|'),C=vzCls(),ro=C.length>0,cc=C.fil
  stu=(VZCX.ro||[]).filter(function(x){return String(x.c)===a[0]&&(x.v||'')===(a[1]||'')}),
  ab=d.ab.filter(function(x){return String(x.c)+'|'+(x.v||'')===k}),inp='style="margin:0;padding:6px;width:80px" inputmode="numeric"',
  rs=function(sel,fn){return '<select style="margin:4px 0 0;padding:6px" onchange="'+fn+'"><option value="">कारण (ऐच्छिक)</option>'+VZRE.map(function(r){return '<option'+(sel===r?' selected':'')+'>'+esc(r)+'</option>'}).join('')+'</select>'};
+ if(ro&&cc&&(o.p===''||o.p==null)){o.p=String(Math.max(0,cc.n-ab.length));o.man=0}
  var h='<b>🧑‍🎓 '+vzClN(k)+'</b><div style="margin:6px 0">पट: '+(ro?'<b>'+(cc?cc.n:o.n)+'</b>':'<input '+inp+' value="'+esc(o.n||'')+'" oninput="vzAt(\''+k+'\',\'n\',this)">')+' &nbsp; उपस्थित: <input data-pk="'+k+'" '+inp+' value="'+esc(o.p||'')+'" oninput="vzAt(\''+k+'\',\'p\',this)"></div>';
- h+='<details'+(VZCO[k+'a']?' open':'')+' ontoggle="VZCO[\''+k+'a\']=this.open"><summary><b>🚫 अनुपस्थित विद्यार्थी ('+ab.length+')</b></summary>';
- if(ro)h+='<div style="max-height:300px;overflow:auto;border:1px solid var(--l);border-radius:10px;padding:4px 8px;margin-top:6px">'+stu.map(function(x){var ex=ab.filter(function(y){return y.p===x.p})[0];return '<div style="padding:5px 0;border-bottom:1px solid var(--l)"><label style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" style="width:auto;margin:0" '+(ex?'checked ':'')+'onchange="vzAb(\''+x.p+'\',this.checked)"> '+esc(x.n)+'</label>'+(ex?rs(ex.r,"vzAbR('"+x.p+"',this.value)"):'')+'</div>'}).join('')+'</div>';
- else h+='<div class="row" style="margin-top:6px"><input class="abn" placeholder="विद्यार्थ्याचे नाव" style="flex:2;margin:0"><button class="g" style="min-width:0;flex:0 0 auto;margin:0" onclick="vzAbMan(this)">➕</button></div>'+ab.map(function(x){var i=d.ab.indexOf(x);return '<div class="vzr"><b>'+esc(x.n)+'</b><a href="#" style="float:right" onclick="vzAbXI('+i+');return false">✖</a>'+rs(x.r,"VZ.d.ab["+i+"].r=this.value;vzLoc()")+'</div>'}).join('');
- h+='</details>';
- if(ro&&stu.length)h+='<details'+(VZCO[k+'l']?' open':'')+' ontoggle="VZCO[\''+k+'l\']=this.open" style="margin-top:6px"><summary><b>📊 विद्यार्थी स्तर नोंद ('+stu.filter(function(x){return d.lv[x.p]}).length+'/'+stu.length+')</b></summary><p class="m" style="margin:4px 0">निवडलेल्या विद्यार्थ्यांची भाषा वाचन, गणित व इंग्रजी पातळी निवडा किंवा 📝 टेस्ट घ्या. फक्त तपासलेल्या विद्यार्थ्यांचीच नोंद करा.</p>'+stu.map(function(x){var o2=d.lv[x.p]||{};return '<div class="vzr"><b>'+esc(x.n)+'</b>'+['l','m','e'].map(function(f){return vzLvSel(f,o2[f]==null?'':o2[f],x.p).replace('%FN',"vzLv('"+x.p+"','"+f+"',this.value)")}).join('')+'</div>'}).join('')+'</details>';
+ if(ro){
+  var bt=function(on,col,lb,fn,dis){return '<button type="button" class="vzb"'+(dis?' disabled':'')+' style="'+(dis?'opacity:.4;background:var(--c);color:var(--m);border:1px solid var(--l)':on?'background:'+col+';color:#fff;border:1px solid '+col:'background:var(--c);color:'+col+';border:1px solid '+col)+'" onclick="'+fn+'">'+lb+'</button>'};
+  h+='<p class="m" style="margin:4px 0">सर्व विद्यार्थी डिफॉल्ट <b>उपस्थित</b> आहेत. गैरहजर असेल त्याला "गैरहजर" दाबा; उपस्थित विद्यार्थ्याची "चाचणी" (भाषा, गणित, इंग्रजी स्तर) घेता येते.</p><div style="border:1px solid var(--l);border-radius:10px;padding:2px 8px">'+stu.map(function(x){var ex=ab.filter(function(y){return y.p===x.p})[0],lv=d.lv[x.p],op=!ex&&VZCO['t'+x.p],q="'"+x.p+"'";
+   var done=lv?['l','m','e'].filter(function(f){return lv[f]!==''&&lv[f]!=null}).length:0;
+   return '<div style="padding:6px 0;border-bottom:1px solid var(--l)"><div><b>'+esc(x.n)+'</b>'+(done?' <small style="color:#15803d">✔ स्तर '+done+'/3</small>':'')+'</div><div>'+bt(!ex,'#15803d','✔ उपस्थित','vzAb('+q+',false)')+bt(!!ex,'#b91c1c','✘ गैरहजर','vzAb('+q+',true)')+bt(op,'#0f766e','📝 चाचणी','vzStT('+q+')',!!ex)+'</div>'+(ex?rs(ex.r,"vzAbR("+q+",this.value)"):'')
+    +(op?'<div style="margin-top:6px;padding:6px;border:1px dashed var(--l);border-radius:10px">'+['l','m','e'].map(function(f){var v=lv&&lv[f]!=null?lv[f]:'';return vzLvSel(f,v,x.p).replace('%FN',"vzLv('"+x.p+"','"+f+"',this.value)")}).join('')+'</div>':'')+'</div>'}).join('')+'</div>';
+ }else{
+  h+='<details'+(VZCO[k+'a']?' open':'')+' ontoggle="VZCO[\''+k+'a\']=this.open"><summary><b>🚫 अनुपस्थित विद्यार्थी ('+ab.length+')</b></summary><div class="row" style="margin-top:6px"><input class="abn" placeholder="विद्यार्थ्याचे नाव" style="flex:2;margin:0"><button class="g" style="min-width:0;flex:0 0 auto;margin:0" onclick="vzAbMan(this)">➕</button></div>'+ab.map(function(x){var i=d.ab.indexOf(x);return '<div class="vzr"><b>'+esc(x.n)+'</b><a href="#" style="float:right" onclick="vzAbXI('+i+');return false">✖</a>'+rs(x.r,"VZ.d.ab["+i+"].r=this.value;vzLoc()")+'</div>'}).join('')+'</details>';
+ }
  return h}
+function vzStT(pen){VZCO['t'+pen]=!VZCO['t'+pen];vzLvRe(pen)}
 function vzCbBox(k){return '<div class="vzcb" data-k="'+k+'" style="border:1px solid var(--l);border-radius:12px;padding:8px;margin-top:8px">'+vzCbInner(k)+'</div>'}
 function vzCbRe(k){[].forEach.call(document.querySelectorAll('.vzcb'),function(e){if(e.getAttribute('data-k')===k)e.innerHTML=vzCbInner(k)})}
 function vzLvRe(pen){var x=(VZCX.ro||[]).filter(function(r){return r.p===pen})[0];if(x)vzCbRe(x.c+'|'+(x.v||''))}
 function vzAbR(pen,v){var x=VZ.d.ab.filter(function(a){return a.p===pen})[0];if(x){x.r=v;vzLoc()}}
-function vzAbMan(btn){var bx=btn.closest('.vzcb'),k=bx.getAttribute('data-k'),a=k.split('|'),i=bx.querySelector('input.abn'),n=i.value.trim();if(n.length<2)return;VZ.d.ab.push({p:'m'+Date.now(),n:n,c:a[0],v:a[1]||'',r:''});vzAtSync(k);vzAtT();vzCbRe(k);vzLoc()}
-function vzAbXI(i){var x=VZ.d.ab.splice(i,1)[0];if(x){var k=x.c+'|'+(x.v||'');vzAtSync(k);vzAtT();vzCbRe(k)}vzLoc()}
+function vzAbMan(btn){var bx=btn.closest('.vzcb'),k=bx.getAttribute('data-k'),a=k.split('|'),i=bx.querySelector('input.abn'),n=i.value.trim();if(n.length<2)return;VZ.d.ab.push({p:'m'+Date.now(),n:n,c:a[0],v:a[1]||'',r:''});vzAtSync(k,1);vzAtT();vzCbRe(k);vzLoc()}
+function vzAbXI(i){var x=VZ.d.ab.splice(i,1)[0];if(x){var k=x.c+'|'+(x.v||'');vzAtSync(k,1);vzAtT();vzCbRe(k)}vzLoc()}
 function vzTcRe(i){var e=document.getElementById('vtc_'+i);if(e)e.innerHTML=vzTcHtml(i)}
 function vzClSel(rest,fn){return rest.length?'<select style="margin:4px 0 0" onchange="'+fn+'"><option value="">➕ वर्ग जोडा…</option>'+rest.map(function(c){return '<option value="'+c.k+'">'+vzClN(c.k)+'</option>'}).join('')+'</select>':''}
 function vzTcCl(i){var t=VZ.d.tc[i],all=vzKeys(),sel=t.cl||[],chip='display:inline-block;background:var(--a);color:#fff;border-radius:14px;padding:3px 10px;margin:2px 4px 2px 0';
