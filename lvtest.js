@@ -68,5 +68,5 @@ function lvtNext(){var p=lvtCnt()>=LVT.st.need;LVT.trail.push({s:LVT.s,p:p});
  else{if(p)return lvtEnd(LVT.s);if(LVT.s<=1)return lvtEnd(0);LVT.s--}
  lvtNew();lvtDraw()}
 function lvtEnd(l){LVT.done=l;lvtDraw()}
-function lvtSave(){if(!LVT)return;var pen=LVT.pen,f=LVT.f,l=LVT.done;lvtClose();vzLv(pen,f,String(l));vzLvL()}
+function lvtSave(){if(!LVT)return;var pen=LVT.pen,f=LVT.f,l=LVT.done;lvtClose();vzLv(pen,f,String(l));vzLvRe(pen)}
 function lvtClose(){var e=document.getElementById('lvt');if(e)e.remove();LVT=null}
