@@ -259,19 +259,21 @@ async function offApi(p,r,env){
     if(p==='/api/o/vsctx'){
       const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);
       const dt=/^\d{4}-\d{2}-\d{2}$/.test(cl(b.dt,10))?cl(b.dt,10):istDay();await lvEns(env);await pmEnsure(env);
-      const [tc,ro,lv,pm,pv]=await Promise.all([
+      const [tc,ro,lv,pm,pv,tl]=await Promise.all([
         env.DB.prepare("SELECT shalarth sh,name n FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(u).all(),
         env.DB.prepare('SELECT pen p,cls c,div v,name n,med FROM roster WHERE udise=? ORDER BY cls,div,name').bind(u).all(),
         env.DB.prepare('SELECT shalarth sh,tname n,typ,fd,td FROM sch_lv WHERE udise=? AND fd<=? AND td>=?').bind(u,dt,dt).all().catch(()=>({results:[]})),
         env.DB.prepare('SELECT menu,p15,p68,cooked FROM pm_daily WHERE udise=? AND date=?').bind(u,dt).first().catch(()=>null),
-        env.DB.prepare("SELECT dt,data FROM kp_visit WHERE udise=? AND dt<? AND st='Final' AND COALESCE(json_extract(data,'$.fu'),'')<>'' ORDER BY dt DESC,id DESC LIMIT 1").bind(u,dt).first()]);
+        env.DB.prepare("SELECT dt,data FROM kp_visit WHERE udise=? AND dt<? AND st='Final' AND COALESCE(json_extract(data,'$.fu'),'')<>'' ORDER BY dt DESC,id DESC LIMIT 1").bind(u,dt).first(),
+        env.DB.prepare('SELECT t.shalarth sh,c.cls c,c.div v FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=?').bind(u).all().catch(()=>({results:[]}))]);
       let prev=null;if(pv){try{const d=JSON.parse(pv.data||'{}');prev={dt:pv.dt,fu:cl(d.fu,600),fd:cl(d.fd,10)}}catch(e){}}
-      return J({ok:1,dt,tc:tc.results||[],ro:ro.results||[],lv:lv.results||[],pm:pm||null,prev});
+      const tcl={};(tl.results||[]).forEach(x=>{(tcl[x.sh]=tcl[x.sh]||[]).push(x.c+'|'+(x.v||''))});
+      return J({ok:1,dt,tc:tc.results||[],ro:ro.results||[],lv:lv.results||[],pm:pm||null,prev,tcl});
     }
     if(p==='/api/o/vssave'){
       const u=cl(b.udise,11).replace(/\D/g,''),dt=cl(b.dt,10),tin=cl(b.tin,5),tout=cl(b.tout,5),vt=cl(b.vt,30);
       if(!ok.has(u)||!/^\d{4}-\d{2}-\d{2}$/.test(dt)||dt>istDay())return J({e:'arg'},400);
-      const dd=b.d&&typeof b.d==='object'&&!Array.isArray(b.d)?b.d:{};await geoEns(env);{const g=geoClean(dd.geo);if(g){const sg=await env.DB.prepare('SELECT lat,lng FROM sch_geo WHERE udise=?').bind(u).first();dd.geo={lat:g.lat,lng:g.lng,acc:g.acc,ts:cl(dd.geo.ts,30)};if(sg)dd.gd=geoDist(sg,g);else delete dd.gd}else{delete dd.geo;delete dd.gd}}const dj=JSON.stringify(dd);if(dj.length>200000)return J({e:'big'},400);
+      const dd=b.d&&typeof b.d==='object'&&!Array.isArray(b.d)?b.d:{};await geoEns(env);if(Array.isArray(dd.tc))dd.tc.forEach(t=>{if(t&&t.sig&&!(typeof t.sig==='string'&&t.sig.length<=60000&&/^data:image\/png;base64,[A-Za-z0-9+\/=]+$/.test(t.sig)))delete t.sig});{const g=geoClean(dd.geo);if(g){const sg=await env.DB.prepare('SELECT lat,lng FROM sch_geo WHERE udise=?').bind(u).first();dd.geo={lat:g.lat,lng:g.lng,acc:g.acc,ts:cl(dd.geo.ts,30)};if(sg)dd.gd=geoDist(sg,g);else delete dd.gd}else{delete dd.geo;delete dd.gd}}const dj=JSON.stringify(dd);if(dj.length>200000)return J({e:'big'},400);
       let id=parseInt(b.id)||0,old=[];
       if(id){const x=await byId(id);if(!own(x))return J({e:'nf'},404);try{old=JSON.parse(x.img||'[]')}catch(e){}}
       else if((await env.DB.prepare('SELECT COUNT(*) c FROM kp_visit WHERE code=?').bind(t.uname).first()).c>=3000)return J({e:'max'},400);
