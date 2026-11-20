@@ -48,13 +48,17 @@ function lvtStage(f,s,c,lang){var b=lvtBand(c),C=LVTC[lang]||LVTC.mr,E=LVTC.en,r
 function lvtGS(lang,b,c){var g=(LVTG[lang]||LVTG.mr)[b];return{t:'इयत्ता '+c+' स्तर — उतारा अस्खलित वाचायला सांगा, मग प्रश्न विचारा',it:[{x:g[0],lab:'अस्खलित वाचले'},{x:g[1],a:g[2],lab:'योग्य उत्तर दिले'}],need:2,one:1}}
 var LVTN={l:'भाषा वाचन',m:'गणित',e:'इंग्रजी वाचन'};
 function lvtGo(pen,f){var x=(VZCX.ro||[]).filter(function(r){return r.p===pen})[0];if(!x)return;var lang=x.med==='kn'?'kn':'mr';
- var s0=[1,2,3][lvtBand(x.c)];LVT={pen:pen,f:f,n:x.n,c:x.c,lang:lang,s:s0,mode:'start',best:0,trail:[],mk:{},st:null,done:null};lvtNew();lvtDraw()}
+ var s0=[1,2,3][lvtBand(x.c)],mode='start',cur=(VZ.d.lv[pen]||{})[f],cv=cur===''||cur==null?0:parseInt(cur);
+ if(cv>=1&&cv<=5){s0=cv;mode='sel'}
+ LVT={pen:pen,f:f,n:x.n,c:x.c,lang:lang,s:s0,mode:mode,sel0:mode==='sel'?cv:0,best:0,trail:[],mk:{},st:null,done:null,dec:null};lvtNew();lvtDraw()}
 function lvtNew(){LVT.st=lvtStage(LVT.f,LVT.s,LVT.c,LVT.lang);LVT.mk={}}
 function lvtOv(){var e=document.getElementById('lvt');if(!e){e=document.createElement('div');e.id='lvt';e.style.cssText='position:fixed;inset:0;z-index:200;background:var(--bg);overflow:auto;padding:12px';document.body.appendChild(e)}return e}
 function lvtCnt(){var n=0;for(var k in LVT.mk)if(LVT.mk[k])n++;return n}
 function lvtDraw(){var e=lvtOv(),S=LVT.st,h='<div style="max-width:720px;margin:0 auto"><div class="card"><div style="display:flex;gap:8px;align-items:center"><b style="flex:1">📝 '+esc(LVT.n)+' — '+LVTN[LVT.f]+' टेस्ट</b><button class="g" style="width:auto;margin:0;padding:6px 12px" onclick="lvtClose()">✖ रद्द</button></div>';
  if(LVT.f==='l')h+='<div class="row" style="margin-top:8px"><button class="'+(LVT.lang==='mr'?'':'g')+'" style="min-width:0" onclick="lvtLang(\'mr\')">मराठी</button><button class="'+(LVT.lang==='kn'?'':'g')+'" style="min-width:0" onclick="lvtLang(\'kn\')">ಕನ್ನಡ</button></div>';
  if(LVT.trail.length)h+='<p class="m" style="margin:6px 0 0">झालेले टप्पे: '+LVT.trail.map(function(t){return t.s+(t.p?' ✔':' ✘')}).join(' · ')+'</p>';h+='</div>';
+ if(LVT.mode==='sel'&&LVT.sel0&&LVT.done===null){var L0=VZLV[LVT.f];h+='<div class="card" style="background:#ecfdf5;border-color:#6ee7b7;color:#065f46"><small>निवडलेला स्तर: <b>'+(LVT.sel0+1)+'. '+esc(LVT.sel0===5?lvtGrade(LVT.f,LVT.c):L0[LVT.sel0])+'</b> — त्याच स्तराची चाचणी घेतली जाते.</small></div>'}
+ if(LVT.dec&&LVT.done===null){var pp=LVT.dec.p,L1=VZLV[LVT.f],ls=LVT.s;h+='<div class="card"><h2>'+(pp?'✔ निवडलेला स्तर पास':'✘ निवडलेला स्तर पास नाही')+'</h2><p style="margin:0 0 10px">स्तर <b>'+(ls+1)+'. '+esc(ls===5?lvtGrade(LVT.f,LVT.c):L1[ls])+'</b> — बरोबर '+lvtCnt()+' / '+LVT.st.it.length+'</p><div class="row">'+(pp?'<button onclick="lvtEnd('+ls+')">✔ हा स्तर जतन करा</button>'+(ls<5?'<button class="g" onclick="lvtDecUp()">⬆ पुढचा स्तर तपासा</button>':''):'<button onclick="lvtDecDown()">⬇ मागचा स्तर तपासा</button>')+'<button class="g" onclick="lvtClose()">रद्द</button></div></div></div>';e.innerHTML=h;return}
  if(LVT.done!==null){var L=VZLV[LVT.f],lv=LVT.done;h+='<div class="card"><h2>निकाल</h2><p style="font-size:18px;margin:0 0 10px"><b>'+(lv+1)+'. '+esc(lv===5?lvtGrade(LVT.f,LVT.c):L[lv])+'</b></p><p class="m">असा स्तर नोंदवायचा?</p><div class="row"><button onclick="lvtSave()">✔ हा स्तर जतन करा</button><button class="g" onclick="lvtClose()">रद्द</button></div></div></div>';e.innerHTML=h;return}
  h+='<div class="card"><h2>टप्पा '+LVT.s+' / 5</h2><p class="m" style="margin:0 0 8px">'+S.t+'<br>बरोबर वाचले / सोडवले तर त्यावर <b>टिचकी द्या</b> (हिरवे होईल).</p>';
  h+=S.it.map(function(it,i){var on=LVT.mk[i];return '<button type="button" onclick="lvtTog('+i+')" style="display:block;text-align:'+(S.big?'center':'left')+';margin:0 0 8px;padding:'+(S.big?'16px':'12px')+';font-size:'+(S.big?(S.sm?'28px':'34px'):S.one&&it.x.length>120?'20px':'22px')+';line-height:1.5;background:'+(on?'#15803d':'var(--c)')+';color:'+(on?'#fff':'var(--i)')+';border:2px solid '+(on?'#15803d':'var(--l)')+'">'+esc(it.x)+(it.a?'<div style="font-size:13px;opacity:.7">उत्तर: '+esc(it.a)+'</div>':'')+(S.lab?'<div style="font-size:13px;opacity:.7">'+S.lab+(on?' ✔':' (दाबा)')+'</div>':'')+'</button>'}).join('');
@@ -63,10 +67,13 @@ function lvtCt(){var e=document.getElementById('lvtc');if(e){var n=lvtCnt(),ok=n
 function lvtTog(i){LVT.mk[i]=!LVT.mk[i];lvtDraw()}
 function lvtLang(l){LVT.lang=l;lvtNew();lvtDraw()}
 function lvtNext(){var p=lvtCnt()>=LVT.st.need;LVT.trail.push({s:LVT.s,p:p});
+ if(LVT.mode==='sel'){LVT.dec={p:p};return lvtDraw()}
  if(LVT.mode==='start'){if(p){LVT.best=LVT.s;if(LVT.s>=5)return lvtEnd(5);LVT.mode='up';LVT.s++}else{LVT.mode='down';if(LVT.s<=1)return lvtEnd(0);LVT.s--}}
  else if(LVT.mode==='up'){if(p){LVT.best=LVT.s;if(LVT.s>=5)return lvtEnd(5);LVT.s++}else return lvtEnd(LVT.best)}
  else{if(p)return lvtEnd(LVT.s);if(LVT.s<=1)return lvtEnd(0);LVT.s--}
  lvtNew();lvtDraw()}
-function lvtEnd(l){LVT.done=l;lvtDraw()}
+function lvtEnd(l){LVT.done=l;LVT.dec=null;lvtDraw()}
+function lvtDecUp(){LVT.mode='up';LVT.best=LVT.s;LVT.s++;LVT.dec=null;lvtNew();lvtDraw()}
+function lvtDecDown(){if(LVT.s<=1)return lvtEnd(0);LVT.mode='down';LVT.s--;LVT.dec=null;lvtNew();lvtDraw()}
 function lvtSave(){if(!LVT)return;var pen=LVT.pen,f=LVT.f,l=LVT.done;lvtClose();vzLv(pen,f,String(l));vzLvRe(pen)}
 function lvtClose(){var e=document.getElementById('lvt');if(e)e.remove();LVT=null}
