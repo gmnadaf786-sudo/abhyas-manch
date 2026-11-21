@@ -91,7 +91,21 @@ function smsFor(date){if(date!==today()){alert('SMS फक्त आजच्य
  var p=['MH MDMM sc '+ud];
  if(a&&a!=='0'){var c=SMSC[pulseNorm(e.pulse15)];if(!c){alert('इ. १–५ ची डाळ/कडधान्य निवडा.');return}p.push('p1-5 '+a,'mc1-5 0','pu1-5 '+c)}
  if(b&&b!=='0'){var d=SMSC[pulseNorm(e.pulse68)];if(!d){alert('इ. ६–८ ची डाळ/कडधान्य निवडा.');return}p.push('p6-8 '+b,'mc6-8 0','pu6-8 '+d)}
- location.href='sms:'+SMSR+'?body='+encodeURIComponent(p.join(', '))}
+ smsPick(date,ud,p.join(', '))}
+/* SMS सर्व्हर क्रमांक (NIC MDM SMS मॅन्युअल): तिन्ही वापरता येतात — एकावर पाठवून स्वीकारला गेला (Request Served Successfully) की झाले; नाही गेला तर दुसऱ्यावर पाठवा. */
+var SMSN=[['9223166166','मोबाईल क्रमांक'],['166','शॉर्ट कोड'],['51969','शॉर्ट कोड']];
+function smsSent(ud,date){try{return JSON.parse(localStorage.getItem('pm_sms_'+ud+'_'+date)||'[]')}catch(e){return []}}
+function smsMark(ud,date,n){try{var a=smsSent(ud,date);if(a.indexOf(n)<0)a.push(n);localStorage.setItem('pm_sms_'+ud+'_'+date,JSON.stringify(a))}catch(e){}}
+function smsPick(date,ud,msg){window.SMSM={d:date,u:ud,m:msg};var o=document.getElementById('smsp');if(!o){o=document.createElement('div');o.id='smsp';o.style.cssText='position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center';document.body.appendChild(o)}smsPickDraw()}
+function smsPickDraw(){var o=document.getElementById('smsp'),M=window.SMSM,sent=smsSent(M.u,M.d);
+ o.innerHTML='<div style="background:var(--c,#fff);color:var(--i,#111);width:100%;max-width:560px;border-radius:16px 16px 0 0;padding:14px 14px 18px;max-height:90vh;overflow:auto"><div style="display:flex;align-items:center"><b style="flex:1;font-size:16px">📱 SMS कोणत्या नंबरवर पाठवायचा?</b><button class="g" style="width:auto;padding:4px 12px" onclick="smsClose()">✖</button></div>'
+ +'<p class="m" style="margin:6px 0">पाठवायचा मेसेज (SMS ॲपमध्ये आपोआप भरला जाईल):</p><div id="smsm" style="font:13px/1.5 monospace;word-break:break-word;background:rgba(127,127,127,.12);border-radius:10px;padding:8px">'+esc(M.m)+'</div>'
+ +'<div style="margin-top:10px">'+SMSN.map(function(x){var d=sent.indexOf(x[0])>=0;return '<button onclick="smsGo(\''+x[0]+'\')" style="display:block;width:100%;margin:0 0 8px;padding:12px;font-size:16px;text-align:left"><b>'+x[0]+'</b> <small style="opacity:.85">('+x[1]+')</small>'+(d?' <span style="float:right">✔ पाठवला</span>':'')+'</button>'}).join('')+'</div>'
+ +'<button class="g" onclick="smsCopy()" style="width:100%;margin:0 0 8px">📋 मेसेज कॉपी करा</button>'
+ +'<p class="m" style="font-size:12.5px;margin:0">तिन्ही नंबर शासनाच्या MDM SMS सुविधेचेच आहेत. आधी एका नंबरवर पाठवा; "Request Served Successfully" उत्तर आले की पुरे. नंबर चालला नाही किंवा उत्तर आले नाही तर दुसऱ्या नंबरवर पाठवा. फक्त नोंदणीकृत मुख्याध्यापक / सहाय्यक मुख्याध्यापक इ. मोबाईलवरूनच SMS स्वीकारला जातो.</p></div>'}
+function smsGo(n){var M=window.SMSM;smsMark(M.u,M.d,n);smsPickDraw();location.href='sms:'+n+'?body='+encodeURIComponent(M.m)}
+function smsCopy(){var M=window.SMSM,b=document.getElementById('smsm');try{navigator.clipboard.writeText(M.m).then(function(){b.style.outline='2px solid #15803d'}).catch(function(){})}catch(e){}}
+function smsClose(){var o=document.getElementById('smsp');if(o)o.remove()}
 function calcTab(){document.getElementById('b').innerHTML='<div class="card"><b>धान्य हिशेब (आजच्या मेनूसाठी)</b><div class="r"><div><span class="lab">इ. १–५ विद्यार्थी</span><input class="n" id="ca" type="number" inputmode="numeric" min="0"></div><div><span class="lab">इ. ६–८ विद्यार्थी</span><input class="n" id="cb" type="number" inputmode="numeric" min="0"></div></div><label class="lab">दिनांक (मेनूसाठी)</label><input type="date" id="cd" value="'+today()+'" style="width:100%"><button onclick="calcRun()" style="margin-top:10px;width:100%">🧮 हिशेब करा</button><div id="cr" style="margin-top:10px"></div></div>'}
 function calcRun(){var a=+document.getElementById('ca').value||0,b=+document.getElementById('cb').value||0,d=document.getElementById('cd').value||today(),o=document.getElementById('cr');if(!a&&!b){o.innerHTML='<p class="er">किमान एका गटाची संख्या भरा.</p>';return}
  var rc=recFor(d),pu=pulseNorm(rc[1]),kg=function(v){return v>=1?fmt(v)+' किग्रॅ':fmt(v*1000)+' ग्रॅम'},rows=[['तांदूळ',a*.1,b*.15],[pu,a*.02,b*.03]];SPICES.forEach(function(x){rows.push([x[0],a*x[1],b*x[2]])});
