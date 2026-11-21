@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="kn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಗಳು – ಅನಿಮೇಟೆಡ್ ಪ್ರಯೋಗಗಳು (6ನೇ ತರಗತಿ, ಪಾಠ 13)</title><style>
+:root{--bg:#f5f6f2;--card:#fff;--ink:#202722;--mute:#5d675f;--line:#e0e4da;--green:#2e8b57;--blue:#2f6fed;--orange:#e8801f;--red:#d64545;--sky:#eaf4f1}
+@media(prefers-color-scheme:dark){:root{--bg:#121613;--card:#1b211c;--ink:#edf2ee;--mute:#a6b2a9;--line:#2c352e;--sky:#1c2a26}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI",system-ui,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:22px;margin:8px 0 4px}h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.tag{display:inline-block;font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+svg{width:100%;height:auto;display:block;border-radius:12px;background:var(--sky);touch-action:manipulation}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button.btn{border:1px solid transparent;background:var(--green);color:#fff;border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;cursor:pointer}
+button.btn.o{background:var(--orange)}button.btn.b{background:var(--blue)}
+button.btn.ghost{background:var(--bg);color:var(--ink);border-color:var(--line)}
+button.btn.sel{outline:3px solid var(--orange)}
+button.btn:disabled{opacity:.45}
+input[type=range]{flex:1;min-width:150px;accent-color:var(--green)}
+.say{padding:10px 12px;border-left:4px solid var(--green);background:var(--bg);border-radius:8px;font-size:15px;margin-top:8px}
+.say.bad{border-left-color:var(--red)}
+.lbl{font-size:13px;color:var(--mute);margin:8px 0 0}
+.note{font-size:13px;color:var(--mute);margin-top:6px}
+.big{font-size:26px;font-weight:700;text-align:center;margin:6px 0}
+.q{margin:12px 0}.q p{margin:0 0 6px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:6px}.opts button{text-align:left}
+.fb{font-size:14px;margin-top:4px}.ok{color:#1f9d55}.bad{color:var(--red)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl td,.tbl th{border:1px solid var(--line);padding:6px;text-align:center}
+</style></head><body><div class="wrap">
+<h1>🌍 ನೈಸರ್ಗಿಕ ಸಂಪನ್ಮೂಲಗಳು</h1>
+<p class="sub">6ನೇ ತರಗತಿ · ಸಾಮಾನ್ಯ ವಿಜ್ಞಾನ · ಪಾಠ 13 — ಮಣ್ಣು, ನೀರು, ಸೂರ್ಯ, ಗಾಳಿ ಮತ್ತು ಇಂಧನ — ನವೀಕರಿಸಬಹುದಾದ ಮತ್ತು ನವೀಕರಿಸಲಾಗದ ಸಂಪನ್ಮೂಲಗಳು</p>
+<div class="card">
+<h2>ಪ್ರಯೋಗ 1: ಮಣ್ಣಿನ ವಿಧ — ನೀರು ಹೇಗೆ ಇಂಗುತ್ತದೆ?</h2>
+<div><span class="tag">ಮಣ್ಣು</span><span class="tag">ಇಂಗುವಿಕೆ</span><span class="tag">ಸರಂಧ್ರತೆ</span></div>
+<p class="sub">ಮೂರು ಮಣ್ಣುಗಳ ಮೇಲೆ ಒಂದೇ ಪ್ರಮಾಣದ ನೀರು ಸುರಿಯಿರಿ. ಯಾವ ಮಣ್ಣು ನೀರನ್ನು ಹಿಡಿದಿಡುತ್ತದೆ?</p>
+<svg viewBox="0 0 320 200"><g id="cups"></g></svg>
+<div class="row"><button class="btn o" id="pour">💧 ನೀರು ಸುರಿಯಿರಿ</button><button class="btn ghost" id="pr0">↺ ಮರುಹೊಂದಿಸಿ</button></div>
+<div class="say" id="s1Say">ಬಟ್ಟಲಿನಲ್ಲಿ ಬೀಳುವ ನೀರು ಎಷ್ಟೆಂದು ನೋಡಿ.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 2: ಮಳೆನೀರು ಸಂಗ್ರಹ ಮತ್ತು ಅಂತರ್ಜಲ</h2>
+<div><span class="tag">ಮಳೆನೀರು ಸಂರಕ್ಷಣೆ</span><span class="tag">ಅಂತರ್ಜಲ</span></div>
+<p class="sub">ಮಳೆ ಸುರಿಸಿ. ಮಳೆನೀರು ಸಂಗ್ರಹದ ವ್ಯವಸ್ಥೆ ಇದ್ದರೆ ಬಾವಿಯ ನೀರಿನ ಮಟ್ಟ ಏನಾಗುತ್ತದೆ?</p>
+<svg viewBox="0 0 320 220"><rect width="320" height="220" fill="#e8f4ff"/><rect y="105" width="320" height="115" fill="#a77b4f"/><rect id="gw" x="0" width="320" fill="#4f97ee" opacity=".55"/><rect x="40" y="55" width="80" height="50" fill="#c96a3b"/><polygon points="30,55 80,25 130,55" fill="#8b3a1a"/><rect id="tnk" x="195" y="90" width="50" height="40" fill="none" stroke="#333" stroke-width="2"/><rect id="tw" x="196" width="48" fill="#4f97ee"/><path id="pipe" d="M122 55 L135 55 L135 112 L195 112" fill="none" stroke="#555" stroke-width="3" opacity="0"/><rect id="wel" x="270" y="105" width="22" height="100" fill="#222" opacity=".25"/><g id="rain"></g></svg>
+<div class="row"><button class="btn b" id="rhOn">▶ ಮಳೆನೀರು ಸಂಗ್ರಹ ಇಲ್ಲದೆ</button><button class="btn b" id="rhOff">▶ ಮಳೆನೀರು ಸಂಗ್ರಹದೊಂದಿಗೆ</button><button class="btn ghost" id="rhR">↺</button></div>
+<div class="say" id="s2Say"></div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 3: ಸೌರಶಕ್ತಿ — ಸೂರ್ಯನ ಶಾಖ</h2>
+<div><span class="tag">ಸೌರಶಕ್ತಿ</span><span class="tag">ಸೌರ ಕುಕ್ಕರ್</span></div>
+<p class="sub">ಸೂರ್ಯನ ಬೆಳಕು ಬೀಳುವ ಪ್ರಮಾಣ ಬದಲಿಸಿ. ಸೌರ ಕುಕ್ಕರ್‌ನ ಒಳಗಿನ ತಾಪಮಾನ ಹೇಗೆ ಬದಲಾಗುತ್ತದೆ?</p>
+<svg viewBox="0 0 320 190"><rect width="320" height="190" fill="#e6f4ff"/><circle id="sun" cx="260" cy="40" r="20" fill="#f7b500"/><g id="rays"></g><polygon points="70,150 90,110 230,110 250,150" fill="#555"/><rect x="85" y="120" width="150" height="20" fill="#222"/><rect x="100" y="100" width="120" height="20" fill="#bfe6f5" opacity=".7" stroke="#333"/><text x="160" y="135" font-size="12" fill="#fff" text-anchor="middle" id="tmpT"></text><rect x="40" y="160" width="240" height="10" fill="#8b5e3c"/></svg>
+<div class="row"><span style="min-width:150px">ಸೂರ್ಯನ ಬೆಳಕು: <b id="sV">60</b>%</span><input type="range" id="sS" min="0" max="100" value="60"></div>
+<div class="say" id="s3Say"></div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 4: ನವೀಕರಿಸಬಹುದಾದ ಮತ್ತು ನವೀಕರಿಸಲಾಗದ ಸಂಪನ್ಮೂಲ</h2>
+<div><span class="tag">ಪಳೆಯುಳಿಕೆ ಇಂಧನ</span><span class="tag">ಸೌರ-ಪವನ ಶಕ್ತಿ</span></div>
+<p class="sub">ಕಾಲ ಕಳೆದಂತೆ ಏನಾಗುತ್ತದೆ? ಪೆಟ್ರೋಲ್/ಕಲ್ಲಿದ್ದಲು ಬಳಕೆ ವೇಗ ಬದಲಿಸಿ, ಸೂರ್ಯ-ಗಾಳಿಯೊಂದಿಗೆ ಹೋಲಿಸಿ.</p>
+<svg viewBox="0 0 320 170"><text x="85" y="15" font-size="12" text-anchor="middle" fill="var(--ink)">ಕಲ್ಲಿದ್ದಲು / ಪೆಟ್ರೋಲ್</text><rect x="45" y="25" width="80" height="110" fill="none" stroke="#333" stroke-width="2"/><rect id="fos" x="46" width="78" fill="#333"/><text x="235" y="15" font-size="12" text-anchor="middle" fill="var(--ink)">ಸೂರ್ಯ / ಗಾಳಿ</text><rect x="195" y="25" width="80" height="110" fill="none" stroke="#333" stroke-width="2"/><rect id="ren" x="196" width="78" fill="#f7b500"/><text x="160" y="160" font-size="12" text-anchor="middle" id="yrT" fill="var(--ink)"></text></svg>
+<div class="row"><span style="min-width:150px">ಬಳಕೆ ವೇಗ</span><input type="range" id="uS" min="1" max="5" value="2"></div>
+<div class="row"><button class="btn o" id="yrB">▶ ವರ್ಷಗಳು ಕಳೆಯಲಿ</button><button class="btn ghost" id="yrR">↺</button></div>
+<div class="say" id="s4Say"></div>
+</div>
+
+<div class="card"><h2>ಪರೀಕ್ಷಿಸಿ</h2><div id="quiz"></div><p class="note" id="qScore"></p></div>
+</div><script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],NS="http://www.w3.org/2000/svg";
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),sm=u=>{u=clamp(u,0,1);return u*u*(3-2*u)};
+function loopRun(fn){let last=performance.now(),t=0,id=0,on=true;const f=now=>{if(!on)return;const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;if(fn(t,dt)===true){on=false;return}id=requestAnimationFrame(f)};id=requestAnimationFrame(f);return()=>{on=false;cancelAnimationFrame(id)}}
+function buildQuiz(qs){let sc=0,done=0;qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p>${qi+1}. ${q[0]}</p>`;const o=document.createElement("div");o.className="opts";const fb=document.createElement("div");fb.className="fb";let ans=false;
+ q[1].forEach((t,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=t;
+  b.onclick=()=>{if(ans)return;ans=true;done++;if(i==q[2]){sc++;b.style.outline="3px solid #1f9d55";fb.innerHTML='<span class="ok">✅ ಸರಿ!</span> '+q[3]}else{b.style.outline="3px solid #d64545";fb.innerHTML='<span class="bad">❌ ತಪ್ಪು.</span> '+q[3]}
+   $("#qScore").textContent=`ಅಂಕ: ${sc}/${done} (ಒಟ್ಟು ${qs.length})`};o.appendChild(b)});
+ d.appendChild(o);d.appendChild(fb);$("#quiz").appendChild(d)})}
+
+/* ---- 1: ಮಣ್ಣು ---- */
+const SO=[["ಮರಳು ಮಣ್ಣು","#e2c27a",.85],["ಜೇಡಿ ಮಣ್ಣು","#8a5a3b",.12],["ಕಪ್ಪು ಮಣ್ಣು","#3b2f2a",.4]];
+const cg=$("#cups"),CP=SO.map((s,i)=>{const x=20+i*100;const g=mk("g",{},cg);
+ mk("rect",{x,y:60,width:80,height:60,fill:s[1]},g);mk("rect",{x,y:120,width:80,height:4,fill:"#555"},g);
+ const wt=mk("rect",{x:x+5,y:30,width:70,height:0,fill:"#4f97ee",opacity:.7},g);
+ const bo=mk("rect",{x:x+5,y:178,width:70,height:0,fill:"#4f97ee"},g);mk("rect",{x:x,y:130,width:80,height:60,fill:"none",stroke:"#555","stroke-width":2},g);
+ mk("text",{x:x+40,y:198,"font-size":11,"text-anchor":"middle",fill:"var(--ink)"},g).textContent=s[0];
+ return {s,wt,bo,tp:0,btm:0,x}});
+let s1stop=()=>{};
+function s1draw(){CP.forEach(c=>{const hh=c.tp*30;c.wt.setAttribute("y",60-hh);c.wt.setAttribute("height",hh);const bh=c.btm*50;c.bo.setAttribute("y",188-bh);c.bo.setAttribute("height",bh)})}
+function s1r(){s1stop();CP.forEach(c=>{c.tp=0;c.btm=0});s1draw();$("#s1Say").textContent="ನೀರು ಸುರಿಯಲು ಬಟನ್ ಒತ್ತಿ."}
+$("#pr0").onclick=s1r;s1r();
+$("#pour").onclick=()=>{s1r();let t0=0;CP.forEach(c=>c.tp=1);
+ s1stop=loopRun((t,dt)=>{CP.forEach(c=>{const f=Math.min(c.tp,dt*c.s[2]*.7);c.tp-=f;c.btm=Math.min(1,c.btm+f*.9)});s1draw();
+  if(t>4.5){$("#s1Say").innerHTML="🏖️ <b>ಮರಳು</b>: ನೀರು ಬೇಗ ಇಂಗುತ್ತದೆ, ಹೆಚ್ಚು ಕೆಳಗೆ ಹೋಗುತ್ತದೆ. 🧱 <b>ಜೇಡಿ</b>: ಸಣ್ಣ ಕಣ, ನೀರು ಮೇಲೆಯೇ ನಿಲ್ಲುತ್ತದೆ. ⚫ <b>ಕಪ್ಪು ಮಣ್ಣು</b>: ನೀರನ್ನು ಹಿಡಿದಿಡುತ್ತದೆ — ಹತ್ತಿ/ಕಬ್ಬು ಬೆಳೆಗೆ ಸೂಕ್ತ.";return true}})};
+
+/* ---- 2: ಮಳೆನೀರು ---- */
+const rn=$("#rain"),RD=Array.from({length:40},()=>({x:rnd(0,320),y:rnd(-100,100),e:mk("line",{stroke:"#4f97ee","stroke-width":2},rn)}));
+let gwL=.4,tnk=0,rmode=0,raining=false,rtime=0,rstop=()=>{};
+function r2draw(){const gy=215-gwL*110;$("#gw").setAttribute("y",gy);$("#gw").setAttribute("height",220-gy);$("#tw").setAttribute("y",130-tnk*38);$("#tw").setAttribute("height",tnk*38);$("#pipe").setAttribute("opacity",rmode==2?1:0)}
+function r2r(){rstop();gwL=.4;tnk=0;rmode=0;raining=false;rtime=0;RD.forEach(d=>{d.e.setAttribute("opacity",0)});r2draw();$("#s2Say").textContent="ಒಂದು ಸನ್ನಿವೇಶ ಆರಿಸಿ."}
+function r2go(m){r2r();rmode=m;raining=true;
+ rstop=loopRun((t,dt)=>{rtime=t;RD.forEach(d=>{d.y+=dt*220;if(d.y>105){d.y=rnd(-60,0);d.x=rnd(0,320)}d.e.setAttribute("opacity",t<4?.8:0);d.e.setAttribute("x1",d.x);d.e.setAttribute("x2",d.x-2);d.e.setAttribute("y1",d.y);d.e.setAttribute("y2",d.y+10)});
+  if(t<4){if(m==2)tnk=Math.min(1,tnk+dt*.22);gwL+=dt*(m==2?.02:.012)}
+  else if(t<9){gwL-=dt*.045;if(m==2){tnk=Math.max(0,tnk-dt*.04);gwL+=dt*.032}} // dry season pumping
+  gwL=clamp(gwL,.05,1);r2draw();
+  if(t>9){$("#s2Say").innerHTML=m==2?"✅ ಮಳೆನೀರನ್ನು ಟ್ಯಾಂಕ್‌ನಲ್ಲಿ ಸಂಗ್ರಹಿಸಿ ಬಳಸಿದ್ದರಿಂದ ಅಂತರ್ಜಲ ಮಟ್ಟ ಉಳಿದಿದೆ. ಮಳೆನೀರು ಸಂರಕ್ಷಣೆ ಅಗತ್ಯ.":"⚠️ ಮಳೆನೀರು ಹರಿದುಹೋಯಿತು; ಬೇಸಿಗೆಯಲ್ಲಿ ಬಾವಿಯ ನೀರು ಬೇಗ ಕಡಿಮೆಯಾಯಿತು.";return true}})}
+$("#rhOn").onclick=()=>r2go(1);$("#rhOff").onclick=()=>r2go(2);$("#rhR").onclick=r2r;r2r();
+
+/* ---- 3: ಸೌರಶಕ್ತಿ ---- */
+const ry=$("#rays"),RYS=[0,1,2,3,4].map(i=>mk("line",{stroke:"#f7b500","stroke-width":3},ry));let tmp=30;
+$("#sS").oninput=()=>{$("#sV").textContent=$("#sS").value};
+loopRun((t,dt)=>{const v=+$("#sS").value/100,target=30+v*100;tmp+=(target-tmp)*dt*.5;
+ $("#sun").setAttribute("r",14+v*10);$("#sun").setAttribute("opacity",.3+v*.7);
+ RYS.forEach((r,i)=>{const ph=((t*1.5+i*.2)%1);const x0=250-i*8,y0=58+i*4,x1=170+i*10,y1=108;r.setAttribute("x1",x0+(x1-x0)*ph*.7);r.setAttribute("y1",y0+(y1-y0)*ph*.7);r.setAttribute("x2",x0+(x1-x0)*(ph*.7+.15));r.setAttribute("y2",y0+(y1-y0)*(ph*.7+.15));r.setAttribute("opacity",v)});
+ $("#tmpT").textContent=Math.round(tmp)+"°C";
+ $("#s3Say").innerHTML=v<.2?"ಸೂರ್ಯನ ಬೆಳಕು ಕಡಿಮೆ → ಒಳಗಿನ ಉಷ್ಣತೆ ಕಡಿಮೆ.":tmp>100?"🍚 ತಾಪಮಾನ 100°C ಮೀರಿದೆ — ಅನ್ನ ಬೇಯಿಸಲು ಸಾಕು! ಸೌರಶಕ್ತಿ ಉಚಿತ ಮತ್ತು ಮಾಲಿನ್ಯರಹಿತ.":"ಬೆಳಕು ಹೆಚ್ಚಿದಷ್ಟು ಒಳಗಿನ ಉಷ್ಣತೆ ಹೆಚ್ಚುತ್ತದೆ."});
+
+/* ---- 4: ನವೀಕರಿಸುವ ----*/
+let fos=1,yr=0,y4stop=()=>{};
+function y4d(){$("#fos").setAttribute("y",135-fos*108);$("#fos").setAttribute("height",fos*108);$("#ren").setAttribute("y",25);$("#ren").setAttribute("height",110);$("#yrT").textContent="ವರ್ಷಗಳು ಕಳೆದಿವೆ: "+Math.round(yr)}
+function y4r(){y4stop();fos=1;yr=0;y4d();$("#s4Say").textContent="ಬಳಕೆ ವೇಗ ಆರಿಸಿ ▶ ಒತ್ತಿ."}
+$("#yrR").onclick=y4r;y4r();
+$("#yrB").onclick=()=>{y4r();const sp=+$("#uS").value;
+ y4stop=loopRun((t,dt)=>{yr+=dt*30;fos=Math.max(0,fos-dt*.07*sp*.4);y4d();
+  if(fos<=0||t>8){$("#s4Say").innerHTML=fos<=.02?"⛔ ಕಲ್ಲಿದ್ದಲು/ಪೆಟ್ರೋಲ್ ಮುಗಿದುಹೋಯಿತು. ಇವು ಲಕ್ಷ ವರ್ಷಗಳಲ್ಲಿ ಮಾತ್ರ ಸೃಷ್ಟಿಯಾಗುವ <b>ನವೀಕರಿಸಲಾಗದ</b> ಸಂಪನ್ಮೂಲ. ಸೂರ್ಯ-ಗಾಳಿ ಇನ್ನೂ ಮೊದಲಿನಂತೆಯೇ ಇದೆ — <b>ನವೀಕರಿಸಬಹುದಾದ</b>.":`ಉಳಿದ ಇಂಧನ: ${Math.round(fos*100)}%. ಬಳಕೆ ವೇಗ ಹೆಚ್ಚಿದರೆ ಬೇಗ ಮುಗಿಯುತ್ತದೆ. ಸೂರ್ಯ-ಗಾಳಿ ಕಡಿಮೆಯಾಗುವುದಿಲ್ಲ.`;return true}})};
+
+buildQuiz([
+ ["ನೀರನ್ನು ಬೇಗ ಇಂಗಿಸುವ ಮಣ್ಣು ಯಾವುದು?",["ಜೇಡಿ ಮಣ್ಣು","ಮರಳು ಮಣ್ಣು","ಕಪ್ಪು ಮಣ್ಣು"],1,"ಮರಳಿನ ಕಣಗಳ ನಡುವೆ ದೊಡ್ಡ ಜಾಗವಿರುವುದರಿಂದ ನೀರು ಬೇಗ ಇಂಗುತ್ತದೆ."],
+ ["ಮಳೆನೀರು ಸಂಗ್ರಹದಿಂದ ಯಾವ ಲಾಭ?",["ಅಂತರ್ಜಲ ಮಟ್ಟ ಉಳಿಯುತ್ತದೆ","ಮಣ್ಣು ಕಪ್ಪಾಗುತ್ತದೆ","ಮಳೆ ಹೆಚ್ಚು ಬರುತ್ತದೆ"],0,"ಸಂಗ್ರಹಿಸಿದ ನೀರನ್ನು ಬೇಸಿಗೆಯಲ್ಲಿ ಬಳಸಬಹುದು."],
+ ["ಇವುಗಳಲ್ಲಿ ನವೀಕರಿಸಲಾಗದ ಸಂಪನ್ಮೂಲ ಯಾವುದು?",["ಸೂರ್ಯನ ಬೆಳಕು","ಗಾಳಿ","ಕಲ್ಲಿದ್ದಲು"],2,"ಕಲ್ಲಿದ್ದಲು ಸೃಷ್ಟಿಯಾಗಲು ಲಕ್ಷಾಂತರ ವರ್ಷ ಬೇಕು."],
+ ["ಸೌರಶಕ್ತಿಯ ಒಂದು ಪ್ರಯೋಜನ ಯಾವುದು?",["ಹೊಗೆ ಮತ್ತು ಮಾಲಿನ್ಯ ಇಲ್ಲ","ರಾತ್ರಿಯೂ ಸಿಗುತ್ತದೆ","ಬೆಲೆ ಹೆಚ್ಚು"],0,"ಸೌರಶಕ್ತಿ ಸ್ವಚ್ಛ ಮತ್ತು ಪುನರ್ನವೀಕರಿಸಬಹುದಾದ ಶಕ್ತಿ."],
+ ["ಹತ್ತಿ ಬೆಳೆಯಲು ಸೂಕ್ತ ಮಣ್ಣು ಯಾವುದು?",["ಮರಳು ಮಣ್ಣು","ಕಪ್ಪು ಮಣ್ಣು","ಕೆಂಪು ಮಣ್ಣು"],1,"ಕಪ್ಪು ಮಣ್ಣು ನೀರನ್ನು ಹಿಡಿದಿಡುತ್ತದೆ."]
+]);
+
+</script></body></html>

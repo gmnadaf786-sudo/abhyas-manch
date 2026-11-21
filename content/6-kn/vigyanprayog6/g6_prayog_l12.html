@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="kn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ಚಲನೆ ಮತ್ತು ಚಲನೆಯ ಪ್ರಕಾರಗಳು – ಅನಿಮೇಟೆಡ್ ಪ್ರಯೋಗಗಳು (6ನೇ ತರಗತಿ, ಪಾಠ 12)</title><style>
+:root{--bg:#f5f6f2;--card:#fff;--ink:#202722;--mute:#5d675f;--line:#e0e4da;--green:#2e8b57;--blue:#2f6fed;--orange:#e8801f;--red:#d64545;--sky:#eaf4f1}
+@media(prefers-color-scheme:dark){:root{--bg:#121613;--card:#1b211c;--ink:#edf2ee;--mute:#a6b2a9;--line:#2c352e;--sky:#1c2a26}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI",system-ui,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:22px;margin:8px 0 4px}h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.tag{display:inline-block;font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+svg{width:100%;height:auto;display:block;border-radius:12px;background:var(--sky);touch-action:manipulation}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button.btn{border:1px solid transparent;background:var(--green);color:#fff;border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;cursor:pointer}
+button.btn.o{background:var(--orange)}button.btn.b{background:var(--blue)}
+button.btn.ghost{background:var(--bg);color:var(--ink);border-color:var(--line)}
+button.btn.sel{outline:3px solid var(--orange)}
+button.btn:disabled{opacity:.45}
+input[type=range]{flex:1;min-width:150px;accent-color:var(--green)}
+.say{padding:10px 12px;border-left:4px solid var(--green);background:var(--bg);border-radius:8px;font-size:15px;margin-top:8px}
+.say.bad{border-left-color:var(--red)}
+.lbl{font-size:13px;color:var(--mute);margin:8px 0 0}
+.note{font-size:13px;color:var(--mute);margin-top:6px}
+.big{font-size:26px;font-weight:700;text-align:center;margin:6px 0}
+.q{margin:12px 0}.q p{margin:0 0 6px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:6px}.opts button{text-align:left}
+.fb{font-size:14px;margin-top:4px}.ok{color:#1f9d55}.bad{color:var(--red)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl td,.tbl th{border:1px solid var(--line);padding:6px;text-align:center}
+</style></head><body><div class="wrap">
+<h1>🚌 ಚಲನೆ ಮತ್ತು ಚಲನೆಯ ಪ್ರಕಾರಗಳು</h1>
+<p class="sub">6ನೇ ತರಗತಿ · ಸಾಮಾನ್ಯ ವಿಜ್ಞಾನ · ಪಾಠ 12 — ಸಂದರ್ಭ ಬಿಂದು, ಚಲನೆಯ ಪ್ರಕಾರಗಳು, ಲೋಲಕ ಮತ್ತು ಭೂಮಿಯ ಚಲನೆ — ಮುಟ್ಟಿ ನೋಡಿ ಕಲಿಯಿರಿ</p>
+<div class="card">
+<h2>ಪ್ರಯೋಗ 1: ಚಲನೆ — ವೀಕ್ಷಕನ ಮೇಲೆ ಅವಲಂಬಿತ</h2>
+<div><span class="tag">ಸಂದರ್ಭ ಬಿಂದು</span><span class="tag">ವಿಶ್ರಾಂತಿ</span><span class="tag">ಚಲನೆ</span></div>
+<p class="sub">ಬಸ್ಸು ಚಲಿಸುತ್ತಿದೆ. ನೀವು ಎಲ್ಲಿ ನಿಂತಿದ್ದೀರಿ ಎಂದು ಆರಿಸಿ. ಯಾವ ವಸ್ತು ಚಲಿಸುತ್ತಿದೆ ಎಂದು ಅನಿಸುತ್ತದೆ?</p>
+<svg viewBox="0 0 320 170"><rect width="320" height="170" fill="#dff1ff"/><rect y="120" width="320" height="50" fill="#777"/><g id="trees"></g><g id="bus"><rect x="90" y="70" width="120" height="48" rx="6" fill="#e8b21f"/><rect x="100" y="78" width="22" height="18" fill="#bfe6f5"/><rect x="130" y="78" width="22" height="18" fill="#bfe6f5"/><rect x="160" y="78" width="22" height="18" fill="#bfe6f5"/><text x="140" y="108" font-size="20" text-anchor="middle">🧍</text><text x="172" y="108" font-size="20" text-anchor="middle">🧍</text><circle cx="115" cy="120" r="9" fill="#222"/><circle cx="185" cy="120" r="9" fill="#222"/></g><text id="obsT" x="160" y="20" font-size="13" text-anchor="middle" fill="var(--ink)"></text></svg>
+<div class="row"><button class="btn b" id="ob1">🚌 ನೀವು ಬಸ್ಸಿನೊಳಗೆ</button><button class="btn b" id="ob2">🌳 ನೀವು ರಸ್ತೆ ಬದಿಯಲ್ಲಿ</button></div>
+<div class="say" id="o1Say"></div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 2: ಚಲನೆಯ ಪ್ರಕಾರಗಳು</h2>
+<div><span class="tag">ಸರಳರೇಖಾ</span><span class="tag">ವೃತ್ತಾಕಾರ</span><span class="tag">ಆಂದೋಲನ</span><span class="tag">ಯಾದೃಚ್ಛಿಕ</span></div>
+<p class="sub">ಒಂದು ಚಲನೆ ಆರಿಸಿ. ವಸ್ತು ಚಲಿಸುವ ಮಾರ್ಗದ ಗುರುತು ಹೇಗಿರುತ್ತದೆ?</p>
+<svg viewBox="0 0 320 190"><rect width="320" height="190" fill="var(--soft,#f4f7fb)" rx="8"/><polyline id="trl" fill="none" stroke="#2f6fed" stroke-width="2" opacity=".6"/><text id="mv" font-size="26" text-anchor="middle">⚽</text></svg>
+<div class="row" style="flex-wrap:wrap" id="mB"></div>
+<div class="say" id="m2Say">ಒಂದು ಪ್ರಕಾರ ಆರಿಸಿ.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 3: ಲೋಲಕ — ಆಂದೋಲನ ಚಲನೆ</h2>
+<div><span class="tag">ಲೋಲಕ</span><span class="tag">ಆವರ್ತ ಕಾಲ</span></div>
+<p class="sub">ದಾರದ ಉದ್ದ ಬದಲಿಸಿ. ಒಂದು ಆಂದೋಲನಕ್ಕೆ ತಗಲುವ ಸಮಯ ಬದಲಾಗುತ್ತದೆಯೇ?</p>
+<svg viewBox="0 0 320 210"><line x1="100" y1="12" x2="220" y2="12" stroke="#555" stroke-width="5"/><line id="str" x1="160" y1="12" stroke="#555" stroke-width="2"/><circle id="bob" r="12" fill="#d64545"/></svg>
+<div class="row"><span style="min-width:150px">ದಾರದ ಉದ್ದ: <b id="LV">60</b> ಸೆಂ.ಮೀ</span><input type="range" id="Ls" min="20" max="100" value="60"></div>
+<div class="say" id="p3Say"></div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 4: ಭೂಮಿಯ ಎರಡು ಚಲನೆಗಳು</h2>
+<div><span class="tag">ಪರಿಭ್ರಮಣ</span><span class="tag">ಪರಿಕ್ರಮಣ</span><span class="tag">ಹಗಲು-ರಾತ್ರಿ</span></div>
+<p class="sub">ಭೂಮಿ ತನ್ನ ಅಕ್ಷದ ಸುತ್ತ ತಿರುಗುತ್ತದೆ (ಹಗಲು-ರಾತ್ರಿ) ಮತ್ತು ಸೂರ್ಯನ ಸುತ್ತಲೂ ಸುತ್ತುತ್ತದೆ. (ಪ್ರಮಾಣಕ್ಕೆ ಅನುಗುಣವಾಗಿಲ್ಲ)</p>
+<svg viewBox="0 0 320 230"><circle cx="160" cy="115" r="85" fill="none" stroke="#888" stroke-dasharray="4 5"/><circle cx="160" cy="115" r="18" fill="#f7b500"/><g id="ea"><circle r="16" fill="#2f6fed"/><path id="nt" fill="#000" opacity=".55"/><circle id="pin" r="3.5" fill="#fff" stroke="#d64545" stroke-width="2"/></g><text id="dT" x="160" y="222" font-size="12" text-anchor="middle" fill="var(--ink)"></text></svg>
+<div class="row"><span style="min-width:120px">ವೇಗ</span><input type="range" id="esp" min="1" max="5" value="2"></div>
+<div class="say" id="e4Say"></div>
+</div>
+
+<div class="card"><h2>ಪರೀಕ್ಷಿಸಿ</h2><div id="quiz"></div><p class="note" id="qScore"></p></div>
+</div><script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],NS="http://www.w3.org/2000/svg";
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),sm=u=>{u=clamp(u,0,1);return u*u*(3-2*u)};
+function loopRun(fn){let last=performance.now(),t=0,id=0,on=true;const f=now=>{if(!on)return;const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;if(fn(t,dt)===true){on=false;return}id=requestAnimationFrame(f)};id=requestAnimationFrame(f);return()=>{on=false;cancelAnimationFrame(id)}}
+function buildQuiz(qs){let sc=0,done=0;qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p>${qi+1}. ${q[0]}</p>`;const o=document.createElement("div");o.className="opts";const fb=document.createElement("div");fb.className="fb";let ans=false;
+ q[1].forEach((t,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=t;
+  b.onclick=()=>{if(ans)return;ans=true;done++;if(i==q[2]){sc++;b.style.outline="3px solid #1f9d55";fb.innerHTML='<span class="ok">✅ ಸರಿ!</span> '+q[3]}else{b.style.outline="3px solid #d64545";fb.innerHTML='<span class="bad">❌ ತಪ್ಪು.</span> '+q[3]}
+   $("#qScore").textContent=`ಅಂಕ: ${sc}/${done} (ಒಟ್ಟು ${qs.length})`};o.appendChild(b)});
+ d.appendChild(o);d.appendChild(fb);$("#quiz").appendChild(d)})}
+
+/* ---- 1 ---- */
+const trg=$("#trees"),TR=[0,1,2,3].map(i=>{const g=mk("g",{},trg);mk("rect",{x:-3,y:80,width:6,height:40,fill:"#7a4a21"},g);mk("circle",{cx:0,cy:75,r:16,fill:"#2e8b3e"},g);return{g,x:i*110}});
+let obs=1,off=0;
+function o1(){$("#o1Say").innerHTML=obs==1?"<b>ಬಸ್ಸಿನೊಳಗೆ ಇರುವ ನಿಮಗೆ:</b> ಪಕ್ಕದ ಪ್ರಯಾಣಿಕ ವಿಶ್ರಾಂತಿಯಲ್ಲಿದ್ದಾರೆ; ಮರಗಳು ಹಿಂದಕ್ಕೆ ಚಲಿಸುತ್ತಿರುವಂತೆ ಕಾಣುತ್ತದೆ.":"<b>ರಸ್ತೆ ಬದಿಯಲ್ಲಿ ನಿಂತ ನಿಮಗೆ:</b> ಮರಗಳು ವಿಶ್ರಾಂತಿಯಲ್ಲಿವೆ; ಬಸ್ಸು ಮತ್ತು ಅದರೊಳಗಿನ ಪ್ರಯಾಣಿಕರು ಚಲಿಸುತ್ತಿದ್ದಾರೆ. ಒಂದೇ ವಸ್ತು, ಬೇರೆ ವೀಕ್ಷಕ — ಬೇರೆ ಉತ್ತರ!";$("#obsT").textContent=obs==1?"ಸಂದರ್ಭ ಬಿಂದು: ಬಸ್ಸು":"ಸಂದರ್ಭ ಬಿಂದು: ರಸ್ತೆ ಬದಿಯ ಮರ"}
+$("#ob1").onclick=()=>{obs=1;o1()};$("#ob2").onclick=()=>{obs=2;o1()};o1();
+loopRun((t,dt)=>{off=(off+dt*70)%440;TR.forEach(tr=>{const x=obs==1?((tr.x-off)%440+440)%440-60:tr.x-60+ (obs==2?0:0);tr.g.setAttribute("transform",`translate(${x} 0)`)});
+ $("#bus").setAttribute("transform",obs==1?"translate(0 0)":`translate(${(off%440)-200} 0)`)});
+
+/* ---- 2 ---- */
+const MT=[["ಸರಳರೇಖಾ ಚಲನೆ","ನೇರ ಹಾದಿಯಲ್ಲಿ ಚಲನೆ. ಉದಾ: ನೇರ ರಸ್ತೆಯಲ್ಲಿ ಹೋಗುವ ವಾಹನ, ಬಿದ್ದ ಹಣ್ಣು.","⚽",t=>[30+(t%3)*86,95]],
+ ["ವೃತ್ತಾಕಾರ ಚಲನೆ","ವೃತ್ತದ ಹಾದಿಯಲ್ಲಿ ಚಲನೆ. ಉದಾ: ತಿರುಗುವ ತೊಟ್ಟಿಲು, ಗಡಿಯಾರದ ಮುಳ್ಳು.","🎠",t=>[160+70*Math.cos(t*1.6),95+70*Math.sin(t*1.6)]],
+ ["ಆಂದೋಲನ ಚಲನೆ","ಒಂದೇ ಬಿಂದುವಿನ ಅತ್ತಿತ್ತ ಹಿಂದೆ-ಮುಂದೆ ಚಲನೆ. ಉದಾ: ಲೋಲಕ, ತಂಬೂರಿ ತಂತಿ, ಉಯ್ಯಾಲೆ.","🔔",t=>[160+85*Math.sin(t*2.2),70+25*Math.cos(t*2.2)*Math.cos(t*2.2)]],
+ ["ಯಾದೃಚ್ಛಿಕ ಚಲನೆ","ಯಾವುದೇ ನಿಯಮಿತ ಮಾರ್ಗವಿಲ್ಲದ ಚಲನೆ. ಉದಾ: ಹಾರುವ ಜೇನ್ನೊಣ, ಓಡಾಡುವ ಮಕ್ಕಳು.","🐝",null]];
+let m2Stop=()=>{};
+MT.forEach((m,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=m[0];b.onclick=()=>{m2Stop();$("#m2Say").innerHTML="<b>"+m[0]+":</b> "+m[1];const mv=$("#mv");mv.textContent=m[2];const pts=[];let rx=160,ry=95,vx=60,vy=40;
+ m2Stop=loopRun((t,dt)=>{let p;if(m[3])p=m[3](t);else{vx+=rnd(-300,300)*dt;vy+=rnd(-300,300)*dt;const s=Math.hypot(vx,vy)||1;vx=vx/s*90;vy=vy/s*90;rx+=vx*dt;ry+=vy*dt;if(rx<20||rx>300)vx*=-1;if(ry<20||ry>170)vy*=-1;rx=clamp(rx,20,300);ry=clamp(ry,20,170);p=[rx,ry]}
+  if(i==0&&p[0]<30&&pts.length>0)pts.length=0;pts.push(p.join(","));if(pts.length>240)pts.shift();$("#trl").setAttribute("points",pts.join(" "));mv.setAttribute("x",p[0]);mv.setAttribute("y",p[1]+8)})};$("#mB").appendChild(b)});
+
+/* ---- 3: ಲೋಲಕ ---- */
+let pth=0.5,pw=0,pt0=0;
+function p3t(){const L=+$("#Ls").value;$("#LV").textContent=L;const T=2*Math.PI*Math.sqrt(L/980);$("#p3Say").innerHTML=`ಒಂದು ಆಂದೋಲನದ ಕಾಲ ≈ <b>${T.toFixed(2)} ಸೆಕೆಂಡ್</b>. ದಾರ ಉದ್ದ ಆದಷ್ಟು ಆಂದೋಲನ ನಿಧಾನ; ಚಿಕ್ಕದಾದರೆ ವೇಗ. ಒಂದೇ ಪಥದಲ್ಲಿ ಮತ್ತೆ ಮತ್ತೆ ಅತ್ತಿತ್ತ ಚಲಿಸುವುದೇ <b>ಆಂದೋಲನ ಚಲನೆ</b>.`}
+$("#Ls").oninput=p3t;p3t();
+loopRun((t,dt)=>{dt=Math.min(dt,.03);const L=+$("#Ls").value/100,g=9.8;const a=-(g/L)*Math.sin(pth);pw+=a*dt;pth+=pw*dt;const px=160+L*160*Math.sin(pth),py=12+L*160*Math.cos(pth);$("#str").setAttribute("x2",px);$("#str").setAttribute("y2",py);$("#bob").setAttribute("cx",px);$("#bob").setAttribute("cy",py)});
+
+/* ---- 4: ಭೂಮಿ ---- */
+let ang=0,rot=0;
+loopRun((t,dt)=>{const sp=+$("#esp").value;ang+=dt*sp*.25;rot+=dt*sp*.25*24;const ex=160+85*Math.cos(ang),ey=115+85*Math.sin(ang);$("#ea").setAttribute("transform",`translate(${ex} ${ey})`);
+ const sa=Math.atan2(115-ey,160-ex)*180/Math.PI;// direction to sun
+ // night half faces away from sun
+ const R=16,a0=(sa+90)*Math.PI/180,a1=(sa+270)*Math.PI/180;
+ $("#nt").setAttribute("d",`M${R*Math.cos(a0)} ${R*Math.sin(a0)} A${R} ${R} 0 0 0 ${R*Math.cos(a1)} ${R*Math.sin(a1)} Z`);
+ const pa=rot;$("#pin").setAttribute("cx",R*.65*Math.cos(pa));$("#pin").setAttribute("cy",R*.65*Math.sin(pa));
+ const dAng=((pa-sa*Math.PI/180)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);const day=Math.cos(pa-sa*Math.PI/180)>0;
+ const days=Math.floor(rot/(2*Math.PI)),yrs=Math.floor(ang/(2*Math.PI));
+ $("#dT").textContent=`ಭೂಮಿ ತಿರುಗಿದ ಸಂಖ್ಯೆ (ದಿನಗಳು): ${days} | ಸೂರ್ಯನ ಸುತ್ತ ಸುತ್ತಿದ ವರ್ಷಗಳು: ${yrs}`;
+ $("#e4Say").innerHTML=`ಬಿಳಿ ಚುಕ್ಕೆ (ನಿಮ್ಮ ಊರು): <b>${day?"ಹಗಲು ☀️":"ರಾತ್ರಿ 🌙"}</b>. ಭೂಮಿ ತನ್ನ ಅಕ್ಷದ ಮೇಲೆ ತಿರುಗುವುದರಿಂದ ಹಗಲು-ರಾತ್ರಿ ಆಗುತ್ತದೆ; ಸೂರ್ಯನ ಸುತ್ತ ಒಂದು ಸುತ್ತು ಹಾಕಲು ಒಂದು ವರ್ಷ ಬೇಕು.`});
+
+buildQuiz([
+ ["ಒಂದು ವಸ್ತು ಚಲಿಸುತ್ತಿದೆಯೇ ಅಥವಾ ವಿಶ್ರಾಂತಿಯಲ್ಲಿದೆಯೇ ಎಂದು ನಿರ್ಧರಿಸಲು ಏನು ಬೇಕು?",["ಸಂದರ್ಭ ಬಿಂದು","ತೂಕ","ಬಣ್ಣ"],0,"ಚಲನೆ ಸಂದರ್ಭ ಬಿಂದುವಿಗೆ ಹೋಲಿಸಿ ನಿರ್ಧರಿಸಲ್ಪಡುತ್ತದೆ."],
+ ["ಬಸ್ಸಿನಲ್ಲಿ ಕುಳಿತ ನಿಮಗೆ ಪಕ್ಕದ ಪ್ರಯಾಣಿಕ ಹೇಗೆ ಕಾಣುತ್ತಾನೆ?",["ಚಲಿಸುತ್ತಿದ್ದಾನೆ","ವಿಶ್ರಾಂತಿಯಲ್ಲಿದ್ದಾನೆ","ಹಾರುತ್ತಿದ್ದಾನೆ"],1,"ನಿಮ್ಮ ಮತ್ತು ಅವನ ನಡುವಿನ ಅಂತರ ಬದಲಾಗುವುದಿಲ್ಲ."],
+ ["ಲೋಲಕದ ಚಲನೆ ಯಾವ ಪ್ರಕಾರ?",["ಆಂದೋಲನ ಚಲನೆ","ವೃತ್ತಾಕಾರ ಚಲನೆ","ಸರಳರೇಖಾ ಚಲನೆ"],0,"ಒಂದು ಮಧ್ಯ ಬಿಂದುವಿನ ಅತ್ತಿತ್ತ ಚಲನೆ ಆಂದೋಲನ."],
+ ["ಜೇನ್ನೊಣದ ಹಾರಾಟ ಯಾವ ಚಲನೆ?",["ಸರಳರೇಖಾ","ವೃತ್ತಾಕಾರ","ಯಾದೃಚ್ಛಿಕ"],2,"ಅದರ ಮಾರ್ಗಕ್ಕೆ ನಿಯಮಿತ ಆಕಾರವಿಲ್ಲ."],
+ ["ಹಗಲು-ರಾತ್ರಿ ಏಕೆ ಆಗುತ್ತದೆ?",["ಭೂಮಿ ತನ್ನ ಅಕ್ಷದ ಮೇಲೆ ತಿರುಗುವುದರಿಂದ","ಸೂರ್ಯ ಭೂಮಿಯ ಸುತ್ತ ಸುತ್ತುವುದರಿಂದ","ಚಂದ್ರನಿಂದ"],0,"ಭೂಮಿ ತನ್ನ ಅಕ್ಷದ ಸುತ್ತ ಸುಮಾರು 24 ಗಂಟೆಗೊಮ್ಮೆ ತಿರುಗುತ್ತದೆ."]
+]);
+
+</script></body></html>

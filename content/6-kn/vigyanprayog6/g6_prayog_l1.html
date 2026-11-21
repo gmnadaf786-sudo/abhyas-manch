@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ಸಜೀವಿಗಳ ಲಕ್ಷಣಗಳು – ಅನಿಮೇಟೆಡ್ ಪ್ರಯೋಗಗಳು (6ನೇ ತರಗತಿ)</title>
+<style>
+:root{--bg:#f4f7f2;--card:#fff;--ink:#1c2a22;--mute:#5a6b61;--line:#dbe5dc;--green:#2e8b57;--blue:#2f6fed;--orange:#e8801f;--soil:#8b5e3c;--sky:#e8f4fb;--bad:#d64545;--ok:#1f9d55}
+@media(prefers-color-scheme:dark){:root{--bg:#121a15;--card:#1b261f;--ink:#eaf2ec;--mute:#a4b5aa;--line:#2c3b31;--sky:#1d2f3a;--soil:#6f4a2f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI",system-ui,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:22px;margin:8px 0 4px}
+h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 12px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.chip.on{background:var(--green);color:#fff;border-color:var(--green)}
+.meaning{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--bg);font-size:15px;min-height:48px}
+.tag{display:inline-block;font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+svg{width:100%;height:auto;display:block;border-radius:12px;background:var(--sky)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button.btn{border:0;background:var(--green);color:#fff;border-radius:12px;padding:10px 14px;font:inherit;font-size:15px;cursor:pointer}
+button.btn.alt{background:var(--blue)}
+button.btn.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+button.btn.sel{outline:3px solid var(--orange)}
+input[type=range]{flex:1;min-width:150px;accent-color:var(--green)}
+.say{padding:10px 12px;border-left:4px solid var(--green);background:var(--bg);border-radius:8px;font-size:15px}
+.note{font-size:13px;color:var(--mute);margin-top:6px}
+.eq{text-align:center;font-size:15px;padding:10px;border-radius:12px;background:var(--bg);margin-top:10px}
+.eq b{color:var(--orange)}
+.bolt{display:inline-block;animation:pulse 1s infinite}
+@keyframes pulse{50%{transform:scale(1.35)}}
+.item{text-align:center;font-size:64px;line-height:1.1;margin:6px 0}
+.item small{display:block;font-size:20px;font-weight:700}
+.fb{min-height:52px;margin-top:6px;padding:10px;border-radius:10px;background:var(--bg);font-size:15px}
+.fb.good{border-left:4px solid var(--ok)}.fb.wrong{border-left:4px solid var(--bad)}
+.score{font-weight:700;color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🌱 ಸಜೀವಿಗಳ ಲಕ್ಷಣಗಳು</h1>
+  <p class="sub">6ನೇ ತರಗತಿ · ಸಾಮಾನ್ಯ ವಿಜ್ಞಾನ · ಪಾಠ 1 — ಮುಟ್ಟಿ, ಒತ್ತಿ, ನೋಡಿ ಕಲಿಯಿರಿ</p>
+
+  <div class="card">
+    <h2>ಸಜೀವಿಗಳ 7 ಲಕ್ಷಣಗಳು</h2>
+    <p class="sub">ಒಂದೊಂದನ್ನು ಒತ್ತಿ ಅರ್ಥ ನೋಡಿ</p>
+    <div class="chips" id="chips"></div>
+    <div class="meaning" id="meaning">👆 ಮೇಲಿನ ಒಂದು ಲಕ್ಷಣವನ್ನು ಒತ್ತಿ.</div>
+  </div>
+
+  <!-- ಪ್ರಯೋಗ 1 -->
+  <div class="card">
+    <h2>ಪ್ರಯೋಗ 1: ಬೀಜ ಮೊಳಕೆಯೊಡೆಯುವುದು</h2>
+    <div><span class="tag">ಬೆಳವಣಿಗೆ</span><span class="tag">ಪ್ರಜನನ</span></div>
+    <p class="sub">ಸ್ಲೈಡರ್ ಎಳೆದು ದಿನಗಳು ಕಳೆದಂತೆ ಬೀಜಕ್ಕೆ ಏನಾಗುತ್ತದೆ ನೋಡಿ.</p>
+    <svg viewBox="0 0 320 270" id="seedSvg">
+      <rect x="0" y="150" width="320" height="120" fill="var(--soil)"/>
+      <g id="rootG" stroke="#e8d9b8" stroke-linecap="round" fill="none">
+        <path id="root" stroke-width="3"/><path id="lat1" stroke-width="2"/><path id="lat2" stroke-width="2"/>
+      </g>
+      <path id="shoot" stroke="#3aa35f" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <g id="leaves"><ellipse cx="0" cy="-12" rx="9" ry="16" fill="#46b36a" transform="rotate(-40)"/><ellipse cx="0" cy="-12" rx="9" ry="16" fill="#46b36a" transform="rotate(40)"/></g>
+      <ellipse id="seed" cx="160" cy="180" rx="12" ry="8" fill="#c58a4b" stroke="#7a4f24"/>
+      <text x="12" y="172" font-size="13" fill="#fff">ಮಣ್ಣು + ನೀರು 💧</text>
+      <text id="dayLbl" x="12" y="24" font-size="15" fill="var(--ink)">ದಿನ 0</text>
+      <text id="hLbl" x="12" y="44" font-size="13" fill="var(--mute)"></text>
+    </svg>
+    <div class="row"><button class="btn" id="seedPlay">▶ ಚಲಿಸು</button><input type="range" id="seedDay" min="0" max="10" step="0.05" value="0"></div>
+    <div class="say" id="seedSay"></div>
+    <p class="note">ನಿಜವಾಗಿ ಇದಕ್ಕೆ ಹಲವು ದಿನಗಳು ಬೇಕು; ಇಲ್ಲಿ ವೇಗವಾಗಿ ತೋರಿಸಲಾಗಿದೆ. ಮನೆಯಲ್ಲಿ ಹತ್ತಿಯ ಮೇಲೆ ಕಾಳುಗಳನ್ನು ಇಟ್ಟು ನೀರು ಹಾಕಿ ನೀವೇ ಪರೀಕ್ಷಿಸಿ.</p>
+  </div>
+
+  <!-- ಪ್ರಯೋಗ 2 -->
+  <div class="card">
+    <h2>ಪ್ರಯೋಗ 2: ಸಸ್ಯಗಳು ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತವೆ</h2>
+    <div><span class="tag">ಚೇತನ ಕ್ಷಮತೆ</span><span class="tag">ಚಲನವಲನ</span></div>
+    <p class="sub">(ಅ) ಸೂರ್ಯನ ದಿಕ್ಕು ಬದಲಿಸಿ — ಸಸ್ಯ ಏನು ಮಾಡುತ್ತದೆ?</p>
+    <svg viewBox="0 0 320 250" id="sunSvg">
+      <circle id="sunGlow" r="30" fill="#ffd54a" opacity=".35"/><circle id="sun" r="18" fill="#ffc400"/>
+      <rect x="0" y="228" width="320" height="22" fill="var(--soil)"/>
+      <path id="stem" stroke="#3aa35f" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <g id="topLeaves"><ellipse cx="-14" cy="-6" rx="16" ry="8" fill="#46b36a" transform="rotate(-25 -14 -6)"/><ellipse cx="14" cy="-6" rx="16" ry="8" fill="#46b36a" transform="rotate(25 14 -6)"/></g>
+    </svg>
+    <div class="row">
+      <button class="btn alt" data-sun="-1">☀️ ಎಡ</button>
+      <button class="btn alt" data-sun="0">☀️ ಮೇಲೆ</button>
+      <button class="btn alt" data-sun="1">☀️ ಬಲ</button>
+    </div>
+    <div class="say" id="sunSay">ಸೂರ್ಯನನ್ನು ಬೇರೆ ದಿಕ್ಕಿಗೆ ಸರಿಸಿ.</div>
+    <p class="note">ನಿಜ ಜೀವನದಲ್ಲಿ ಕಾಂಡ ಬಾಗಲು ಕೆಲವು ದಿನಗಳು ಬೇಕು; ಇಲ್ಲಿ ವೇಗಗೊಳಿಸಲಾಗಿದೆ.</p>
+
+    <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+    <p class="sub">(ಆ) “ಮುಟ್ಟಿದರೆ ಮುನಿ” ಗಿಡವನ್ನು ಮುಟ್ಟಿ 👇</p>
+    <svg viewBox="0 0 320 200" id="mimSvg" style="cursor:pointer">
+      <rect x="0" y="180" width="320" height="20" fill="var(--soil)"/>
+      <path d="M160 182 Q165 110 160 40" stroke="#3aa35f" stroke-width="5" fill="none"/>
+      <g id="mimLeaves"></g>
+      <text x="160" y="22" text-anchor="middle" font-size="13" fill="var(--mute)">ಗಿಡದ ಮೇಲೆ ಒತ್ತಿ</text>
+    </svg>
+    <div class="say" id="mimSay">ಎಲೆಗಳು ತೆರೆದಿವೆ. ಗಿಡವನ್ನು ಮುಟ್ಟಿ!</div>
+  </div>
+
+  <!-- ಪ್ರಯೋಗ 3 -->
+  <div class="card">
+    <h2>ಪ್ರಯೋಗ 3: ಉಸಿರಾಟ ಮತ್ತು ಶ್ವಸನ</h2>
+    <div><span class="tag">ಉಸಿರಾಟ</span><span class="tag">ಶ್ವಸನ</span></div>
+    <p class="sub">ಶ್ವಾಸಕೋಶ ಹೇಗೆ ಹಿಗ್ಗಿ-ಕುಗ್ಗುತ್ತದೆ ಎಂದು ನೋಡಿ. ವೇಗ ಬದಲಿಸಿ.</p>
+    <svg viewBox="0 0 320 240" id="lungSvg">
+      <path d="M160 6 V80 M160 80 Q135 95 118 112 M160 80 Q185 95 202 112" stroke="#999" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <g id="lungL"><ellipse rx="46" ry="62" fill="#f08a8a" stroke="#c45a5a" stroke-width="2"/></g>
+      <g id="lungR"><ellipse rx="46" ry="62" fill="#f08a8a" stroke="#c45a5a" stroke-width="2"/></g>
+      <path id="dia" fill="none" stroke="#7a4f24" stroke-width="5" stroke-linecap="round"/>
+      <g id="o2"></g><g id="co2"></g>
+      <text id="phase" x="12" y="24" font-size="15" fill="var(--ink)"></text>
+      <text id="rate" x="12" y="44" font-size="13" fill="var(--mute)"></text>
+    </svg>
+    <div class="row">
+      <button class="btn ghost sel" data-T="4">😌 ವಿಶ್ರಾಂತಿ</button>
+      <button class="btn ghost" data-T="2">🏃 ಓಡಿದ ನಂತರ</button>
+    </div>
+    <div class="say"><b>ಉಸಿರಾಟ</b> = ಶ್ವಾಸ (ಗಾಳಿ ಒಳಗೆ) + ಉಚ್ಛ್ವಾಸ (ಗಾಳಿ ಹೊರಗೆ). ದೇಹಕ್ಕೆ ಹೆಚ್ಚು ಶಕ್ತಿ ಬೇಕಾದಾಗ ಉಸಿರಾಟ ವೇಗವಾಗುತ್ತದೆ.</div>
+    <div class="eq"><span class="bolt">⚡</span> <b>ಶ್ವಸನ</b> (ಪ್ರತಿ ಜೀವಕೋಶದೊಳಗೆ):<br>ಆಹಾರ + ಆಮ್ಲಜನಕ → <b>ಶಕ್ತಿ</b> + ಇಂಗಾಲದ ಡೈಆಕ್ಸೈಡ್ + ನೀರು</div>
+    <p class="note">ನೆನಪಿಡಿ: ಉಸಿರಾಟ (ಗಾಳಿ ಒಳ-ಹೊರಗೆ) ಮತ್ತು ಶ್ವಸನ (ಕೋಶದಲ್ಲಿ ಶಕ್ತಿ ಉತ್ಪತ್ತಿ) ಬೇರೆ ಬೇರೆ ಪ್ರಕ್ರಿಯೆಗಳು.</p>
+  </div>
+
+  <!-- ಆಟ -->
+  <div class="card">
+    <h2>ಪರೀಕ್ಷಿಸಿ: ಸಜೀವಿ ಅಥವಾ ನಿರ್ಜೀವಿ?</h2>
+    <p class="sub">ಚಲಿಸುವ ಎಲ್ಲವೂ ಸಜೀವಿ ಅಲ್ಲ! ಲಕ್ಷಣಗಳನ್ನು ನೆನಪಿಸಿಕೊಂಡು ಉತ್ತರಿಸಿ. <span class="score" id="score"></span></p>
+    <div class="item" id="gItem"></div>
+    <div class="row" style="justify-content:center"><button class="btn" id="gLive">🌿 ಸಜೀವಿ</button><button class="btn alt" id="gNon">🪨 ನಿರ್ಜೀವಿ</button></div>
+    <div class="fb" id="gFb">ಉತ್ತರ ಆಯ್ಕೆ ಮಾಡಿ.</div>
+    <div class="row" style="justify-content:center"><button class="btn ghost" id="gNext" hidden>ಮುಂದಿನದು ➜</button></div>
+  </div>
+
+  <div class="card"><h2>ಸಾರಾಂಶ</h2>
+    <div class="say">ಸಜೀವಿಗಳು ಆಹಾರ ಪಡೆಯುತ್ತವೆ, ಉಸಿರಾಡುತ್ತವೆ, ಬೆಳೆಯುತ್ತವೆ, ಸುತ್ತಲಿನ ಬದಲಾವಣೆಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತವೆ, ಬೇಡವಾದುದನ್ನು ಹೊರಹಾಕುತ್ತವೆ ಮತ್ತು ತಮ್ಮಂತಹ ಹೊಸ ಜೀವಿಗಳನ್ನು ಉತ್ಪತ್ತಿ ಮಾಡುತ್ತವೆ. ಇವುಗಳಲ್ಲಿ <b>ಬೆಳವಣಿಗೆ</b> ಮತ್ತು <b>ಪ್ರಜನನ</b> ಅತ್ಯಂತ ಮುಖ್ಯ ಲಕ್ಷಣಗಳು.</div>
+  </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), NS="http://www.w3.org/2000/svg";
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+/* ---- 7 ಲಕ್ಷಣಗಳು ---- */
+const traits=[
+ ["🍽 ಪೋಷಣೆ","ಜೀವಿಗಳು ಆಹಾರ ಪಡೆದು ಅದರಿಂದ ಶಕ್ತಿ ಮತ್ತು ಬೆಳವಣಿಗೆ ಪಡೆಯುತ್ತವೆ. ಸಸ್ಯಗಳು ತಮ್ಮ ಆಹಾರವನ್ನು ತಾವೇ ತಯಾರಿಸುತ್ತವೆ."],
+ ["📈 ಬೆಳವಣಿಗೆ ಮತ್ತು ವಿಕಾಸ","ದೇಹದ ಗಾತ್ರ ಮತ್ತು ರಚನೆ ಹೆಚ್ಚುತ್ತದೆ. (ಪ್ರಯೋಗ 1 ನೋಡಿ)"],
+ ["👆 ಚೇತನ ಕ್ಷಮತೆ","ಸುತ್ತಲಿನ ಬದಲಾವಣೆಯನ್ನು (ಬೆಳಕು, ಸ್ಪರ್ಶ…) ತಿಳಿದು ಪ್ರತಿಕ್ರಿಯಿಸುವುದು. (ಪ್ರಯೋಗ 2 ನೋಡಿ)"],
+ ["🚽 ಉತ್ಸರ್ಜನೆ / ವಿಸರ್ಜನೆ","ದೇಹದಲ್ಲಿ ಉಪಯೋಗವಿಲ್ಲದ ವಸ್ತುಗಳನ್ನು ಹೊರಹಾಕುವುದು. ಉದಾ: ಪ್ರಾಣಿಗಳ ಮೂತ್ರ, ಸಸ್ಯಗಳ ಉದುರುವ ಎಲೆಗಳು."],
+ ["⚡ ಶ್ವಸನ","ಜೀವಕೋಶಗಳಲ್ಲಿ ಆಹಾರ ಮತ್ತು ಆಮ್ಲಜನಕದಿಂದ ಶಕ್ತಿ ಬಿಡುಗಡೆ ಆಗುವುದು. (ಪ್ರಯೋಗ 3 ನೋಡಿ)"],
+ ["🐣 ಪ್ರಜನನ","ತಮ್ಮಂತೆಯೇ ಹೊಸ ಜೀವಿಗಳನ್ನು ಹುಟ್ಟಿಸುವುದು. ಉದಾ: ಬೀಜದಿಂದ ಹೊಸ ಗಿಡ, ಮೊಟ್ಟೆಯಿಂದ ಮರಿ."],
+ ["🏃 ಚಲನವಲನ","ಸ್ಥಳ ಬದಲಿಸುವುದು ಅಥವಾ ಅಂಗಗಳನ್ನು ಅಲುಗಾಡಿಸುವುದು. ಸಸ್ಯಗಳು ಸ್ಥಳ ಬದಲಿಸುವುದಿಲ್ಲ, ಆದರೆ ಭಾಗಗಳು ಚಲಿಸುತ್ತವೆ."]
+];
+traits.forEach((t,i)=>{const b=document.createElement("button");b.className="chip";b.textContent=t[0];
+ b.onclick=()=>{document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));b.classList.add("on");$("#meaning").textContent=t[1]};
+ $("#chips").appendChild(b)});
+
+/* ---- ಪ್ರಯೋಗ 1: ಬೀಜ ---- */
+const seedSay=d=>d<1?"ಒಣ ಬೀಜ — ಒಳಗೆ ಜೀವ ಸುಪ್ತವಾಗಿದೆ.":d<3?"ಬೀಜ ನೀರು ಹೀರಿ ಉಬ್ಬುತ್ತದೆ.":d<5?"ಮೊದಲು ಬೇರು (ಮೂಲಾಂಕುರ) ಕೆಳಗೆ ಬೆಳೆಯುತ್ತದೆ.":d<7?"ಕಾಂಡ (ಪ್ರಾಂಕುರ) ಮಣ್ಣಿನಿಂದ ಮೇಲೆ ಬರುತ್ತದೆ.":"ಎಲೆಗಳು ಮೂಡುತ್ತವೆ — ಹೊಸ ಸಸ್ಯ ಬೆಳೆಯುತ್ತಿದೆ! ಇದೇ ಬೆಳವಣಿಗೆ (ಬೀಜಾಂಕುರ).";
+function drawSeed(d){
+ const r=clamp((d-2)/8,0,1)*80, s=clamp((d-3.5)/6.5,0,1)*135;
+ $("#root").setAttribute("d",`M160 180 Q158 ${180+r/2} ${160+(r>0?6:0)} ${180+r}`);
+ const l=clamp((d-6)/4,0,1)*28;
+ $("#lat1").setAttribute("d",l>0?`M160 ${180+r*.5} Q${160-l/2} ${180+r*.5+l/3} ${160-l} ${180+r*.5+l/2}`:"");
+ $("#lat2").setAttribute("d",l>0?`M163 ${180+r*.65} Q${163+l/2} ${180+r*.65+l/3} ${163+l} ${180+r*.65+l/2}`:"");
+ $("#shoot").setAttribute("d",s>0?`M160 176 Q150 ${176-s/2} 160 ${176-s}`:"");
+ const k=clamp((d-6)/4,0,1);
+ $("#leaves").setAttribute("transform",`translate(160 ${176-s}) scale(${k})`);
+ $("#leaves").style.display=k>0?"":"none";
+ $("#seed").setAttribute("rx",clamp(d<3?10+d*2.5:17.5-(d-3)*1.2,8,18));
+ $("#dayLbl").textContent="ದಿನ "+Math.round(d);
+ $("#hLbl").textContent=s>0?"ಗಿಡದ ಎತ್ತರ ≈ "+Math.round(s*0.4)+" ಮಿ.ಮೀ.":"";
+ $("#seedSay").textContent=seedSay(d);
+}
+let seedTimer=null;
+$("#seedDay").oninput=e=>{stopSeed();drawSeed(+e.target.value)};
+function stopSeed(){if(seedTimer){cancelAnimationFrame(seedTimer);seedTimer=null;$("#seedPlay").textContent="▶ ಚಲಿಸು"}}
+$("#seedPlay").onclick=()=>{
+ if(seedTimer){stopSeed();return}
+ let v=+$("#seedDay").value; if(v>=10)v=0; $("#seedPlay").textContent="⏸ ನಿಲ್ಲಿಸು";
+ let last=performance.now();
+ const step=t=>{const dt=(t-last)/1000;last=t;v=Math.min(10,v+dt*1.1);$("#seedDay").value=v;drawSeed(v);
+  if(v<10)seedTimer=requestAnimationFrame(step);else stopSeed()};
+ seedTimer=requestAnimationFrame(step);
+};
+drawSeed(0);
+
+/* ---- ಪ್ರಯೋಗ 2ಅ: ಸೂರ್ಯನ ದಿಕ್ಕು ---- */
+let theta=0,target=0,sunPos=[160,40];
+const sunSpots={"-1":[40,50],"0":[160,34],"1":[280,50]}, sunAng={"-1":-50,"0":0,"1":50};
+const sunText={"-1":"ಸೂರ್ಯ ಎಡಭಾಗದಲ್ಲಿ — ಸಸ್ಯ ಎಡಕ್ಕೆ ಬಾಗುತ್ತದೆ.","0":"ಸೂರ್ಯ ನೇರ ಮೇಲೆ — ಸಸ್ಯ ನೇರವಾಗಿ ಬೆಳೆಯುತ್ತದೆ.","1":"ಸೂರ್ಯ ಬಲಭಾಗದಲ್ಲಿ — ಸಸ್ಯ ಬಲಕ್ಕೆ ಬಾಗುತ್ತದೆ."};
+function drawPlant(){
+ const a=theta*Math.PI/180, x=160+Math.sin(a)*100, y=228-Math.cos(a)*100;
+ $("#stem").setAttribute("d",`M160 228 Q${160+Math.sin(a)*15} 168 ${x} ${y}`);
+ $("#topLeaves").setAttribute("transform",`translate(${x} ${y}) rotate(${theta})`);
+ $("#sun").setAttribute("cx",sunPos[0]);$("#sun").setAttribute("cy",sunPos[1]);
+ $("#sunGlow").setAttribute("cx",sunPos[0]);$("#sunGlow").setAttribute("cy",sunPos[1]);
+}
+let plantRun=false;
+function animPlant(){
+ if(plantRun)return;plantRun=true;let last=performance.now();
+ const step=t=>{const dt=(t-last)/1000;last=t;const diff=target-theta;
+  theta+= Math.sign(diff)*Math.min(Math.abs(diff),45*dt);drawPlant();
+  if(Math.abs(target-theta)>0.1)requestAnimationFrame(step);else plantRun=false};
+ requestAnimationFrame(step);
+}
+document.querySelectorAll("[data-sun]").forEach(b=>b.onclick=()=>{
+ const k=b.dataset.sun;sunPos=sunSpots[k];target=sunAng[k];$("#sunSay").textContent=sunText[k]+" ಇದು ಚೇತನ ಕ್ಷಮತೆ (ಬೆಳಕಿಗೆ ಪ್ರತಿಕ್ರಿಯೆ).";animPlant()});
+drawPlant();
+
+/* ---- ಪ್ರಯೋಗ 2ಆ: ಮುಟ್ಟಿದರೆ ಮುನಿ ---- */
+const mim=[], ys=[70,105,140];
+ys.forEach((y,i)=>{[-1,1].forEach(side=>{
+ const g=document.createElementNS(NS,"g");g.style.transformOrigin="0 0";g.style.transition="transform .45s ease "+(i*0.12)+"s";
+ const e=document.createElementNS(NS,"ellipse");e.setAttribute("cx",0);e.setAttribute("cy",-24);e.setAttribute("rx",8);e.setAttribute("ry",24);e.setAttribute("fill","#46b36a");g.appendChild(e);
+ $("#mimLeaves").appendChild(g);mim.push({g,y:y+ (side<0?0:0),side});
+});});
+function setMim(closed){mim.forEach(m=>{const ang=closed?m.side*8:m.side*72;m.g.style.transform=`translate(160px,${m.y}px) rotate(${ang}deg)`})}
+setMim(false);let mimT=null;
+$("#mimSvg").onclick=()=>{setMim(true);$("#mimSay").textContent="ಮುಟ್ಟಿದ ತಕ್ಷಣ ಎಲೆಗಳು ಮುಚ್ಚಿಕೊಂಡವು! ಇದು ಸ್ಪರ್ಶಕ್ಕೆ ಪ್ರತಿಕ್ರಿಯೆ — ಚೇತನ ಕ್ಷಮತೆ.";
+ clearTimeout(mimT);mimT=setTimeout(()=>{setMim(false);$("#mimSay").textContent="ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಎಲೆಗಳು ಮತ್ತೆ ತೆರೆದವು. ಮತ್ತೊಮ್ಮೆ ಮುಟ್ಟಿ!"},3000)};
+
+/* ---- ಪ್ರಯೋಗ 3: ಶ್ವಾಸಕೋಶ ---- */
+const o2g=$("#o2"),co2g=$("#co2");let T=4;
+function mkMol(parent,txt,col){const g=document.createElementNS(NS,"g");const c=document.createElementNS(NS,"circle");c.setAttribute("r",11);c.setAttribute("fill",col);
+ const t=document.createElementNS(NS,"text");t.setAttribute("text-anchor","middle");t.setAttribute("y",4);t.setAttribute("font-size","9");t.setAttribute("fill","#fff");t.textContent=txt;g.appendChild(c);g.appendChild(t);parent.appendChild(g);return g}
+const o2m=[0,1,2].map(()=>mkMol(o2g,"O₂","#2f6fed")), co2m=[0,1,2].map(()=>mkMol(co2g,"CO₂","#e8801f"));
+document.querySelectorAll("[data-T]").forEach(b=>b.onclick=()=>{T=+b.dataset.T;document.querySelectorAll("[data-T]").forEach(x=>x.classList.remove("sel"));b.classList.add("sel")});
+let t0=performance.now(),phaseT=0,lastNow=t0;
+function lung(now){
+ const dt=(now-lastNow)/1000;lastNow=now;phaseT=(phaseT+dt/T)%1;
+ const inhale=phaseT<.5, p=inhale?phaseT/.5:(phaseT-.5)/.5, breath=0.5-0.5*Math.cos(2*Math.PI*phaseT);
+ const s=1+0.2*breath;
+ $("#lungL").setAttribute("transform",`translate(113 150) scale(${s})`);$("#lungR").setAttribute("transform",`translate(207 150) scale(${s})`);
+ $("#dia").setAttribute("d",`M70 ${212+breath*14} Q160 ${196+breath*26} 250 ${212+breath*14}`);
+ o2m.forEach((m,i)=>{const q=(p+i/3)%1;m.setAttribute("transform",`translate(160 ${12+q*70})`);m.style.display=inhale?"":"none"});
+ co2m.forEach((m,i)=>{const q=(p+i/3)%1;m.setAttribute("transform",`translate(160 ${82-q*70})`);m.style.display=inhale?"none":""});
+ $("#phase").textContent=inhale?"ಶ್ವಾಸ ⬇ ಗಾಳಿ ಒಳಗೆ (O₂)":"ಉಚ್ಛ್ವಾಸ ⬆ ಗಾಳಿ ಹೊರಗೆ (CO₂)";
+ $("#rate").textContent="ನಿಮಿಷಕ್ಕೆ ಸುಮಾರು "+Math.round(60/T)+" ಬಾರಿ";
+ requestAnimationFrame(lung);
+}
+requestAnimationFrame(lung);
+
+/* ---- ಆಟ ---- */
+const items=[
+ ["🌳","ಮರ",true,"ಮರ ಬೆಳೆಯುತ್ತದೆ, ಆಹಾರ ತಯಾರಿಸುತ್ತದೆ ಮತ್ತು ಬೀಜಗಳಿಂದ ಹೊಸ ಮರ ಹುಟ್ಟಿಸುತ್ತದೆ."],
+ ["🪨","ಕಲ್ಲು",false,"ಕಲ್ಲಿಗೆ ಆಹಾರ, ಉಸಿರಾಟ, ಬೆಳವಣಿಗೆ, ಪ್ರಜನನ ಯಾವುದೂ ಇಲ್ಲ."],
+ ["🐈","ಬೆಕ್ಕು",true,"ಬೆಕ್ಕು ಆಹಾರ ತಿನ್ನುತ್ತದೆ, ಉಸಿರಾಡುತ್ತದೆ, ಬೆಳೆಯುತ್ತದೆ, ಮರಿಗಳನ್ನು ಹಾಕುತ್ತದೆ."],
+ ["🚗","ಕಾರು",false,"ಕಾರು ಚಲಿಸುತ್ತದೆ, ಆದರೆ ಬೆಳೆಯುವುದಿಲ್ಲ, ಉಸಿರಾಡುವುದಿಲ್ಲ, ಹೊಸ ಕಾರನ್ನು ಹುಟ್ಟಿಸುವುದಿಲ್ಲ. ಚಲನೆ ಒಂದೇ ಸಾಕಾಗದು!"],
+ ["🍄","ಅಣಬೆ",true,"ಅಣಬೆ ಬೆಳೆಯುತ್ತದೆ ಮತ್ತು ಬೀಜಕಗಳ ಮೂಲಕ ಹೊಸ ಅಣಬೆಗಳನ್ನು ಹುಟ್ಟಿಸುತ್ತದೆ."],
+ ["☁️","ಮೋಡ",false,"ಮೋಡ ಚಲಿಸುತ್ತದೆ, ಗಾತ್ರ ಬದಲಾಗುತ್ತದೆ, ಆದರೆ ಆಹಾರ, ಉಸಿರಾಟ, ಪ್ರಜನನ ಇಲ್ಲ — ಅದು ನಿರ್ಜೀವಿ."]
+];
+let gi=0,gs=0,gn=0,answered=false;
+function showItem(){const it=items[gi%items.length];$("#gItem").innerHTML=it[0]+"<small>"+it[1]+"</small>";
+ $("#gFb").className="fb";$("#gFb").textContent="ಉತ್ತರ ಆಯ್ಕೆ ಮಾಡಿ.";$("#gNext").hidden=true;answered=false;
+ $("#score").textContent=gn?`ಅಂಕ: ${gs}/${gn}`:""}
+function answer(live){if(answered)return;answered=true;const it=items[gi%items.length];const ok=(live===it[2]);gn++;if(ok)gs++;
+ $("#gFb").className="fb "+(ok?"good":"wrong");$("#gFb").textContent=(ok?"✅ ಸರಿ! ":"❌ ಇಲ್ಲ. ")+it[1]+(it[2]?" ಸಜೀವಿ. ":" ನಿರ್ಜೀವಿ. ")+it[3];
+ $("#score").textContent=`ಅಂಕ: ${gs}/${gn}`;$("#gNext").hidden=false}
+$("#gLive").onclick=()=>answer(true);$("#gNon").onclick=()=>answer(false);
+$("#gNext").onclick=()=>{gi++;showItem()};
+showItem();
+</script>
+</body>
+</html>

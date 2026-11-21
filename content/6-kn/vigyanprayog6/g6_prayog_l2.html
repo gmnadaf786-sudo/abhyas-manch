@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ಮಾಪನ – ಅನಿಮೇಟೆಡ್ ಪ್ರಯೋಗಗಳು (6ನೇ ತರಗತಿ, ಪಾಠ 2)</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#1c2433;--mute:#5a6678;--line:#dbe2ec;--blue:#2f6fed;--green:#2e8b57;--orange:#e8801f;--red:#d64545;--sky:#eaf2fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--card:#1a212c;--ink:#ecf1f8;--mute:#a3afc0;--line:#2b3646;--sky:#1c2a3a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI",system-ui,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:22px;margin:8px 0 4px}h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.tag{display:inline-block;font-size:12px;background:var(--blue);color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+svg{width:100%;height:auto;display:block;border-radius:12px;background:var(--sky)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button.btn{border:0;background:var(--blue);color:#fff;border-radius:12px;padding:10px 14px;font:inherit;font-size:15px;cursor:pointer}
+button.btn.g{background:var(--green)}button.btn.o{background:var(--orange)}
+button.btn.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+button.btn.sel{outline:3px solid var(--orange)}
+button.btn:disabled{opacity:.45}
+input[type=range]{flex:1;min-width:150px;accent-color:var(--blue)}
+.say{padding:10px 12px;border-left:4px solid var(--blue);background:var(--bg);border-radius:8px;font-size:15px;margin-top:8px}
+.note{font-size:13px;color:var(--mute);margin-top:6px}
+.beakers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.bk{border-radius:12px;padding:12px 4px;font-weight:700;color:#fff}
+.hands{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;text-align:center}
+.hand{border-radius:12px;padding:12px 6px;background:var(--bg);border:2px solid var(--line);transition:background .6s,border-color .6s;min-height:96px}
+.hand .e{font-size:34px}
+.big{font-size:28px;font-weight:700;text-align:center;margin:6px 0}
+.chk{margin:8px 0 0;padding-left:20px;font-size:14px}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}.tbl td,.tbl th{border:1px solid var(--line);padding:6px;text-align:center}
+input[type=number],select{font:inherit;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:120px}
+.q{margin:10px 0}.q p{margin:0 0 6px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opts button{text-align:left}
+.fb{font-size:14px;margin-top:4px}
+.ok{color:#1f9d55}.bad{color:var(--red)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>📏 ಮಾಪನ</h1>
+<p class="sub">6ನೇ ತರಗತಿ · ಸಾಮಾನ್ಯ ವಿಜ್ಞಾನ · ಪಾಠ 2 — ಅಳತೆ ಮತ್ತು ಉಷ್ಣತಾಮಾನ, ಮುಟ್ಟಿ ನೋಡಿ ಕಲಿಯಿರಿ</p>
+
+<!-- ಪ್ರಯೋಗ 1 -->
+<div class="card">
+<h2>ಪ್ರಯೋಗ 1: ಅಳತೆ ಎಲ್ಲರಿಗೂ ಒಂದೇ ಏಕೆ ಇರಬೇಕು?</h2>
+<div><span class="tag">ಅಪ್ರಮಾಣಿತ ಮಾಪನ</span><span class="tag">ಪ್ರಮಾಣಿತ ಮೂಲಮಾನ</span></div>
+<p class="sub">ಒಂದೇ ಮೇಜನ್ನು (120 ಸೆಂ.ಮೀ) ಇಬ್ಬರು ತಮ್ಮ ಗೇಣಿನಿಂದ ಅಳೆಯುತ್ತಾರೆ. ಒತ್ತಿ ನೋಡಿ.</p>
+<svg viewBox="0 0 320 190" id="spSvg">
+<rect x="20" y="100" width="280" height="14" rx="3" fill="#a9703f"/>
+<rect x="30" y="114" width="6" height="40" fill="#8a5a31"/><rect x="284" y="114" width="6" height="40" fill="#8a5a31"/>
+<g id="spans"></g><g id="rulerG"></g>
+<text id="spTxt" x="160" y="30" text-anchor="middle" font-size="15" fill="var(--ink)"></text>
+</svg>
+<div class="row">
+<button class="btn" id="bKid">🧒 ಮಗುವಿನ ಗೇಣು (15 ಸೆಂ.ಮೀ)</button>
+<button class="btn o" id="bAdult">🧑 ದೊಡ್ಡವರ ಗೇಣು (20 ಸೆಂ.ಮೀ)</button>
+<button class="btn g" id="bRule" disabled>📏 ಮೀಟರ್ ಪಟ್ಟಿಯಿಂದ</button>
+</div>
+<div class="say" id="spSay">ಮೊದಲು ಇಬ್ಬರ ಗೇಣುಗಳಿಂದ ಅಳೆಯಿರಿ.</div>
+</div>
+
+<!-- ಪ್ರಯೋಗ 2 -->
+<div class="card">
+<h2>ಪ್ರಯೋಗ 2: ಮೀಟರ್ ಪಟ್ಟಿಯನ್ನು ಸರಿಯಾಗಿ ಬಳಸುವುದು</h2>
+<div><span class="tag">ಉದ್ದದ ಮಾಪನ</span><span class="tag">ಸಂದರ್ಭ ಬಿಂದು</span></div>
+<p class="sub">ಪೆನ್ಸಿಲನ್ನು ಸರಿಸಿ, ಕಣ್ಣಿನ ಸ್ಥಾನ ಬದಲಿಸಿ — ಓದು ಹೇಗೆ ಬದಲಾಗುತ್ತದೆ?</p>
+<svg viewBox="0 0 320 190" id="rlSvg">
+<g id="eye"><text id="eyeT" font-size="26" text-anchor="middle">👁️</text><line id="sight" stroke="#d64545" stroke-width="1.5" stroke-dasharray="4 3"/></g>
+<g id="pencil"><rect id="penB" y="78" height="22" fill="#f2c14e" stroke="#a37a12"/><polygon id="penTip" fill="#e8c9a0" stroke="#a37a12"/></g>
+<rect x="10" y="104" width="300" height="52" fill="#f6e7b0" stroke="#b79b3c" id="ruler"/>
+<g id="ticks"></g>
+<polygon id="mark" fill="#d64545"/>
+</svg>
+<div class="row"><span style="min-width:120px">ಪೆನ್ಸಿಲ್ ಆರಂಭ</span><input type="range" id="pStart" min="0" max="3" step="0.1" value="0"></div>
+<div class="row"><button class="btn ghost" data-eye="-1">👁 ಎಡದಿಂದ</button><button class="btn ghost sel" data-eye="0">👁 ನೇರ ಮೇಲಿನಿಂದ</button><button class="btn ghost" data-eye="1">👁 ಬಲದಿಂದ</button></div>
+<div class="say" id="rlSay"></div>
+<ul class="chk"><li>ವಸ್ತುವಿನ ಒಂದು ತುದಿಯನ್ನು ಪಟ್ಟಿಯ <b>0</b> ಗುರುತಿಗೆ ಇಡಿ.</li><li>ಓದುವಾಗ ಕಣ್ಣು ಅಳೆಯುವ ತುದಿಯ <b>ನೇರ ಮೇಲೆ</b> ಇರಲಿ.</li><li>0 ಗುರುತಿನಿಂದ ಆರಂಭಿಸಲಾಗದಿದ್ದರೆ: <b>ಕೊನೆಯ ಓದು − ಆರಂಭದ ಓದು</b>.</li></ul>
+</div>
+
+<!-- ಪ್ರಯೋಗ 3 -->
+<div class="card">
+<h2>ಪ್ರಯೋಗ 3: ಸ್ಪರ್ಶದಿಂದ ತಾಪಮಾನ ತಿಳಿಯಬಹುದೇ?</h2>
+<div><span class="tag">ಸಾಪೇಕ್ಷ ಸಂವೇದನೆ</span></div>
+<p class="sub">ಬಿಸಿ ನೀರು (A), ತಣ್ಣೀರು (B) ಮತ್ತು ಉಗುರುಬೆಚ್ಚಗಿನ ನೀರು (C). ಹಂತ ಹಂತವಾಗಿ ಮಾಡಿ.</p>
+<div class="beakers"><div class="bk" style="background:#d64545">A<br>ಬಿಸಿ ನೀರು</div><div class="bk" style="background:#2f6fed">B<br>ತಣ್ಣೀರು</div><div class="bk" style="background:#e0a21b">C<br>ಉಗುರುಬೆಚ್ಚಗೆ</div></div>
+<div class="hands"><div class="hand" id="hL"><div class="e">✋</div><div id="hLt">ಎಡಗೈ</div></div><div class="hand" id="hR"><div class="e">🤚</div><div id="hRt">ಬಲಗೈ</div></div></div>
+<div class="row"><button class="btn" id="s1">① ಎಡಗೈ A ಯಲ್ಲಿ, ಬಲಗೈ B ಯಲ್ಲಿ</button><button class="btn o" id="s2" disabled>② ಎರಡೂ ಕೈ C ಯಲ್ಲಿ</button><button class="btn ghost" id="s0">↺</button></div>
+<div class="say" id="tcSay">ಹಂತ ① ರಿಂದ ಆರಂಭಿಸಿ.</div>
+</div>
+
+<!-- ಪ್ರಯೋಗ 4 -->
+<div class="card">
+<h2>ಪ್ರಯೋಗ 4: ಉಷ್ಣತಾಮಾಪಕ (ಥರ್ಮಾಮೀಟರ್)</h2>
+<div><span class="tag">ಉಷ್ಣತಾಮಾನ</span><span class="tag">°C</span></div>
+<p class="sub">ಪ್ರಕಾರ ಆರಿಸಿ ಮತ್ತು ಸ್ಲೈಡರ್ ಎಳೆಯಿರಿ.</p>
+<div class="row"><button class="btn sel" id="mLab">🧪 ಪ್ರಯೋಗಾಲಯ (−10 ರಿಂದ 110 °C)</button><button class="btn ghost" id="mCli">🌡 ವೈದ್ಯಕೀಯ (35 ರಿಂದ 42 °C)</button></div>
+<svg viewBox="0 0 320 290" id="thSvg">
+<rect id="tube" x="104" y="20" width="14" height="210" rx="7" fill="#fff" stroke="#8a97a8" stroke-width="2"/>
+<circle cx="111" cy="248" r="20" fill="#d64545" stroke="#8a97a8" stroke-width="2"/>
+<rect id="liq" x="108" width="6" fill="#d64545"/>
+<g id="thTicks"></g>
+<text id="thEmoji" x="245" y="150" font-size="64" text-anchor="middle">🏠</text>
+<text id="thLbl" x="245" y="185" font-size="13" text-anchor="middle" fill="var(--ink)"></text>
+</svg>
+<div class="big" id="thVal"></div>
+<div class="row"><input type="range" id="thSl"></div>
+<div class="row" id="thPre"></div>
+<div class="say" id="thSay"></div>
+<ul class="chk"><li>ಉಷ್ಣತಾಮಾಪಕದ ಬಲ್ಬ್ ಅಳೆಯುವ ವಸ್ತು/ದ್ರವದಲ್ಲಿ ಮುಳುಗಿರಲಿ.</li><li>ಪಾತ್ರೆಯ ತಳ ಅಥವಾ ಬದಿಯನ್ನು ಮುಟ್ಟಬಾರದು; ನೇರವಾಗಿ ಹಿಡಿಯಿರಿ.</li><li>ಓದು ಸ್ಥಿರವಾದ ಮೇಲೆ ಕಣ್ಣಿನ ಮಟ್ಟದಲ್ಲಿ ಓದಿ.</li></ul>
+<p class="note">ಬಲ್ಬ್‌ನಲ್ಲಿರುವ ದ್ರವ ಬಿಸಿಯಾದಾಗ ಹಿಗ್ಗಿ ಕೊಳವೆಯಲ್ಲಿ ಮೇಲೆ ಏರುತ್ತದೆ.</p>
+</div>
+
+<!-- ಮೂಲಮಾನ -->
+<div class="card">
+<h2>ಮೂಲಮಾನ ಪರಿವರ್ತಕ (ಉದ್ದ)</h2>
+<div class="row"><input type="number" id="cvV" value="1" min="0" step="any"><select id="cvU"><option value="1000">ಕಿ.ಮೀ</option><option value="1" selected>ಮೀ</option><option value="0.01">ಸೆಂ.ಮೀ</option><option value="0.001">ಮಿ.ಮೀ</option></select></div>
+<table class="tbl"><tr><th>ಕಿ.ಮೀ</th><th>ಮೀ</th><th>ಸೆಂ.ಮೀ</th><th>ಮಿ.ಮೀ</th></tr><tr id="cvR"></tr></table>
+<div class="say">1 ಕಿ.ಮೀ = 1000 ಮೀ · 1 ಮೀ = 100 ಸೆಂ.ಮೀ · 1 ಸೆಂ.ಮೀ = 10 ಮಿ.ಮೀ<br>SI ಮೂಲಮಾನಗಳು: ಉದ್ದ – ಮೀಟರ್ (m), ದ್ರವ್ಯರಾಶಿ – ಕಿಲೋಗ್ರಾಂ (kg), ಸಮಯ – ಸೆಕೆಂಡ್ (s), ಉಷ್ಣತಾಮಾನ – ಕೆಲ್ವಿನ್ (K).</div>
+</div>
+
+<!-- ಪರೀಕ್ಷೆ -->
+<div class="card"><h2>ಪರೀಕ್ಷಿಸಿ</h2><div id="quiz"></div><p class="note" id="qScore"></p></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),NS="http://www.w3.org/2000/svg";
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+/* ---- ಪ್ರಯೋಗ 1 ---- */
+const SC=280/120,res={};let busy=false;
+function runSpan(span,key,label,color){
+ if(busy)return;busy=true;$("#spans").innerHTML="";$("#rulerG").innerHTML="";const n=120/span,w=span*SC;let i=0;
+ $("#spTxt").textContent=label+" ಗೇಣಿನಿಂದ ಅಳೆಯುತ್ತಿದೆ…";
+ const t=setInterval(()=>{
+  const g=mk("g",{},$("#spans"));mk("rect",{x:20+i*w+1,y:60,width:w-2,height:32,rx:6,fill:color,opacity:.85},g);
+  mk("text",{x:20+i*w+w/2,y:81,"text-anchor":"middle","font-size":13,fill:"#fff"},g).textContent=i+1;i++;
+  if(i>=n){clearInterval(t);busy=false;res[key]=n;$("#spTxt").textContent=label+": "+n+" ಗೇಣು";
+   if(res.kid&&res.adult){$("#spSay").innerHTML="ಒಂದೇ ಮೇಜು! ಮಗುವಿಗೆ <b>"+res.kid+" ಗೇಣು</b>, ದೊಡ್ಡವರಿಗೆ <b>"+res.adult+" ಗೇಣು</b>. ಗೇಣಿನ ಅಳತೆ ವ್ಯಕ್ತಿಯಿಂದ ವ್ಯಕ್ತಿಗೆ ಬದಲಾಗುತ್ತದೆ. ಈಗ ಮೀಟರ್ ಪಟ್ಟಿ ಬಳಸಿ ನೋಡಿ.";$("#bRule").disabled=false}
+   else $("#spSay").textContent="ಈಗ ಇನ್ನೊಬ್ಬರ ಗೇಣಿನಿಂದ ಅಳೆಯಿರಿ."}
+ },230);
+}
+$("#bKid").onclick=()=>runSpan(15,"kid","ಮಗುವಿನ","#2f6fed");
+$("#bAdult").onclick=()=>runSpan(20,"adult","ದೊಡ್ಡವರ","#e8801f");
+$("#bRule").onclick=()=>{$("#spans").innerHTML="";const g=$("#rulerG");g.innerHTML="";
+ mk("rect",{x:20,y:60,width:280,height:30,fill:"#f6e7b0",stroke:"#b79b3c"},g);
+ for(let c=0;c<=120;c+=10){const x=20+c*SC;mk("line",{x1:x,x2:x,y1:60,y2:c%20?72:78,stroke:"#555"},g);if(c%20==0)mk("text",{x,y:88,"text-anchor":"middle","font-size":9,fill:"#333"},g).textContent=c}
+ $("#spTxt").textContent="ಮೀಟರ್ ಪಟ್ಟಿ: 120 ಸೆಂ.ಮೀ — ಎಲ್ಲರಿಗೂ ಒಂದೇ!";
+ $("#spSay").textContent="ಪ್ರಮಾಣಿತ ಮೂಲಮಾನ (ಸೆಂ.ಮೀ, ಮೀ) ಬಳಸಿದರೆ ಯಾರು ಅಳೆದರೂ ಉತ್ತರ ಒಂದೇ. ಅದಕ್ಕಾಗಿ SI ವ್ಯವಸ್ಥೆ ಇದೆ."};
+
+/* ---- ಪ್ರಯೋಗ 2 ---- */
+const X0=10,PX=20,L=9.6;let eyeShift=0;
+for(let i=0;i<=150;i++){const x=X0+i*2,cm=i%10==0,half=i%5==0;
+ mk("line",{x1:x,x2:x,y1:104,y2:cm?128:half?121:115,stroke:"#444"},$("#ticks"));
+ if(cm)mk("text",{x,y:144,"text-anchor":"middle","font-size":11,fill:"#333"},$("#ticks")).textContent=i/10}
+function drawRule(){
+ const st=+$("#pStart").value,x=X0+st*PX,w=L*PX;
+ $("#penB").setAttribute("x",x);$("#penB").setAttribute("width",w);
+ $("#penTip").setAttribute("points",`${x+w},78 ${x+w+14},89 ${x+w},100`);
+ const end=st+L,tipX=X0+end*PX, apparent=end+eyeShift*0.3;
+ const ax=X0+apparent*PX;
+ $("#mark").setAttribute("points",`${ax},106 ${ax-5},116 ${ax+5},116`);
+ const ex=tipX+eyeShift*50;
+ $("#eyeT").setAttribute("x",ex);$("#eyeT").setAttribute("y",36);
+ $("#sight").setAttribute("x1",ex);$("#sight").setAttribute("y1",44);$("#sight").setAttribute("x2",ax);$("#sight").setAttribute("y2",106);
+ const read=n=>(Math.round(n*10)/10).toFixed(1);
+ let t=`ಕೊನೆಯ ಓದು: <b>${read(apparent)}</b> · ಆರಂಭದ ಓದು: <b>${read(st)}</b> → ಉದ್ದ = ${read(apparent)} − ${read(st)} = <b>${read(apparent-st)} ಸೆಂ.ಮೀ</b>`;
+ if(eyeShift!=0)t+=`<br>⚠️ ಓದು ತಪ್ಪಾಗಿದೆ (ನಿಜವಾದ ಉದ್ದ ${L} ಸೆಂ.ಮೀ). ಕಣ್ಣು ತುದಿಯ ನೇರ ಮೇಲೆ ಇರಬೇಕು.`;
+ else if(st>0)t+=`<br>ಆರಂಭ 0 ಅಲ್ಲದ್ದರಿಂದ ಕಳೆಯಬೇಕು. ಸರಿಯಾದ ಉದ್ದ ${L} ಸೆಂ.ಮೀ ✅`;
+ else t+=`<br>✅ ಆರಂಭ 0 ಮತ್ತು ನೇರ ನೋಟ — ಸರಿಯಾದ ಅಳತೆ!`;
+ $("#rlSay").innerHTML=t;
+}
+$("#pStart").oninput=drawRule;
+document.querySelectorAll("[data-eye]").forEach(b=>b.onclick=()=>{eyeShift=+b.dataset.eye;document.querySelectorAll("[data-eye]").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");drawRule()});
+drawRule();
+
+/* ---- ಪ್ರಯೋಗ 3 ---- */
+function hand(id,tid,bg,bd,txt){$(id).style.background=bg;$(id).style.borderColor=bd;$(tid).innerHTML=txt}
+function reset3(){hand("#hL","#hLt","","","ಎಡಗೈ");hand("#hR","#hRt","","","ಬಲಗೈ");$("#s1").disabled=false;$("#s2").disabled=true;$("#tcSay").textContent="ಹಂತ ① ರಿಂದ ಆರಂಭಿಸಿ."}
+$("#s1").onclick=()=>{hand("#hL","#hLt","#ffd6d6","#d64545","ಎಡಗೈ: A (ಬಿಸಿ) ಯಲ್ಲಿ 🔥");hand("#hR","#hRt","#d6e4ff","#2f6fed","ಬಲಗೈ: B (ತಣ್ಣೀರು) ಯಲ್ಲಿ ❄️");
+ $("#s1").disabled=true;$("#tcSay").textContent="ಸ್ವಲ್ಪ ಹೊತ್ತು ಕೈಗಳನ್ನು ಇಡಿ… ಎಡಗೈಗೆ ಬಿಸಿಗೆ, ಬಲಗೈಗೆ ತಣ್ಣಗೆ ಅಭ್ಯಾಸವಾಗುತ್ತದೆ.";setTimeout(()=>$("#s2").disabled=false,1200)};
+$("#s2").onclick=()=>{hand("#hL","#hLt","#d6e4ff","#2f6fed","ಎಡಗೈ: C ಯಲ್ಲಿ <b>ತಂಪು!</b> 🥶");hand("#hR","#hRt","#ffd6d6","#d64545","ಬಲಗೈ: C ಯಲ್ಲಿ <b>ಬಿಸಿ!</b> 🥵");
+ $("#s2").disabled=true;$("#tcSay").textContent="ಒಂದೇ ನೀರು (C), ಆದರೆ ಎರಡು ಕೈಗಳಿಗೆ ಬೇರೆ ಬೇರೆ ಅನುಭವ! ಸ್ಪರ್ಶದಿಂದ ಸರಿಯಾದ ತಾಪಮಾನ ತಿಳಿಯಲಾಗದು — ಅದಕ್ಕೆ ಉಷ್ಣತಾಮಾಪಕ ಬೇಕು."};
+$("#s0").onclick=reset3;
+
+/* ---- ಪ್ರಯೋಗ 4 ---- */
+const modes={lab:{min:-10,max:110,major:10,minor:1,step:1,v:30,pre:[["❄️ ಮಂಜುಗಡ್ಡೆ",0],["🏠 ಕೋಣೆ",30],["☕ ಬಿಸಿ ನೀರು",70],["💨 ಕುದಿಯುವ ನೀರು",100]]},
+ cli:{min:35,max:42,major:1,minor:0.1,step:0.1,v:37,pre:[["🙂 ಸಾಮಾನ್ಯ",37],["🤒 ಜ್ವರ",39]]}};
+let mode="lab",cur=30,tw=null;const YT=230,YB=20;
+function build(){const m=modes[mode],g=$("#thTicks");g.innerHTML="";const n=Math.round((m.max-m.min)/m.minor);
+ for(let i=0;i<=n;i++){const v=m.min+i*m.minor,y=YT-(v-m.min)/(m.max-m.min)*(YT-YB);const major=Math.abs(v/m.major-Math.round(v/m.major))<1e-6;
+  mk("line",{x1:122,x2:major?142:131,y1:y,y2:y,stroke:"#667",width:1},g);
+  if(major)mk("text",{x:146,y:y+4,"font-size":11,fill:"var(--ink)"},g).textContent=Math.round(v*10)/10}
+ const s=$("#thSl");s.min=m.min;s.max=m.max;s.step=m.step;
+ $("#thPre").innerHTML="";m.pre.forEach(p=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=p[0];b.onclick=()=>tween(p[1]);$("#thPre").appendChild(b)});
+ $("#thEmoji").textContent=mode=="lab"?"🏠":"🙂";cur=m.v;s.value=cur;draw(cur)}
+function draw(v){const m=modes[mode];cur=v;const y=YT-(v-m.min)/(m.max-m.min)*(YT-YB);
+ $("#liq").setAttribute("y",y);$("#liq").setAttribute("height",250-y);
+ const r=mode=="lab"?Math.round(v):Math.round(v*10)/10;$("#thVal").textContent=r.toFixed(mode=="lab"?0:1)+" °C";$("#thSl").value=v;
+ let e,t,s;
+ if(mode=="lab"){e=v<=0?"🧊":v<25?"🥶":v<50?"🏠":v<100?"☕":"♨️";t=v<=0?"ನೀರು ಹೆಪ್ಪುಗಟ್ಟುವ ಉಷ್ಣತಾಮಾನ ≈ 0 °C":v>=100?"ನೀರು ಕುದಿಯುವ ಉಷ್ಣತಾಮಾನ ≈ 100 °C":"";
+  s=v<=0?"0 °C — ನೀರು ಹೆಪ್ಪುಗಟ್ಟಿ ಮಂಜುಗಡ್ಡೆ ಆಗುತ್ತದೆ.":v>=100?"100 °C — ಸಾಮಾನ್ಯ ಒತ್ತಡದಲ್ಲಿ ನೀರು ಕುದಿಯುತ್ತದೆ.":"ಉಷ್ಣತಾಮಾನ ಹೆಚ್ಚಾದಂತೆ ಕೊಳವೆಯಲ್ಲಿ ದ್ರವ ಮೇಲೆ ಏರುತ್ತದೆ. ಎರಡು ದೊಡ್ಡ ಗುರುತುಗಳ ನಡುವೆ 10 °C, ಪ್ರತಿ ಸಣ್ಣ ಗುರುತು 1 °C."}
+ else{e=v>=38?"🤒":"🙂";t=v>=38?"ಜ್ವರ":"ಸಾಮಾನ್ಯ";s=v>=38?"38 °C ಗಿಂತ ಹೆಚ್ಚು — ಜ್ವರ ಇರಬಹುದು. ವೈದ್ಯರನ್ನು ಕಾಣಿ.":"ಮಾನವ ದೇಹದ ಸಾಮಾನ್ಯ ಉಷ್ಣತಾಮಾನ ಸುಮಾರು 37 °C. ಈ ಉಷ್ಣತಾಮಾಪಕ 35 ರಿಂದ 42 °C ವರೆಗೆ ಮಾತ್ರ ಅಳೆಯುತ್ತದೆ."}
+ $("#thEmoji").textContent=e;$("#thLbl").textContent=t;$("#thSay").textContent=s}
+function tween(to){cancelAnimationFrame(tw);const from=cur;let t0=null;const st=t=>{if(!t0)t0=t;const k=Math.min(1,(t-t0)/900);draw(from+(to-from)*(1-Math.pow(1-k,3)));if(k<1)tw=requestAnimationFrame(st)};tw=requestAnimationFrame(st)}
+$("#thSl").oninput=e=>{cancelAnimationFrame(tw);draw(+e.target.value)};
+function setMode(m){mode=m;$("#mLab").className="btn"+(m=="lab"?" sel":" ghost");$("#mCli").className="btn"+(m=="cli"?" sel":" ghost");build()}
+$("#mLab").onclick=()=>setMode("lab");$("#mCli").onclick=()=>setMode("cli");build();
+
+/* ---- ಪರಿವರ್ತಕ ---- */
+function conv(){const v=+$("#cvV").value||0,m=v*(+$("#cvU").value);const f=n=>+n.toPrecision(8);
+ $("#cvR").innerHTML=[m/1000,m,m*100,m*1000].map(n=>"<td>"+f(n)+"</td>").join("")}
+$("#cvV").oninput=conv;$("#cvU").onchange=conv;conv();
+
+/* ---- ಪ್ರಶ್ನೆಗಳು ---- */
+const qs=[
+ ["1 ಮೀಟರ್ = ಎಷ್ಟು ಸೆಂ.ಮೀ?",["10","100","1000"],1,"1 ಮೀ = 100 ಸೆಂ.ಮೀ."],
+ ["ಉದ್ದವನ್ನು ಅಳೆಯಲು ಪೆನ್ಸಿಲ್‌ನ ತುದಿ ಪಟ್ಟಿಯ 0 ಗುರುತಿಗೆ ಇಲ್ಲದಿದ್ದರೆ ಏನು ಮಾಡಬೇಕು?",["ಕೊನೆಯ ಓದನ್ನೇ ಬರೆಯಬೇಕು","ಕೊನೆಯ ಓದು − ಆರಂಭದ ಓದು","ಎರಡನ್ನೂ ಕೂಡಿಸಬೇಕು"],1,"ಎರಡು ಓದುಗಳ ವ್ಯತ್ಯಾಸವೇ ಉದ್ದ."],
+ ["ಸ್ಪರ್ಶದಿಂದ ತಾಪಮಾನ ನಿರ್ಧರಿಸುವುದು ಸರಿಯೇ?",["ಹೌದು, ಯಾವಾಗಲೂ ಸರಿ","ಇಲ್ಲ, ವ್ಯಕ್ತಿ ಮತ್ತು ಸಂದರ್ಭ ಅವಲಂಬಿತ; ಉಷ್ಣತಾಮಾಪಕ ಬೇಕು","ಕೇವಲ ಬಿಸಿಯಾಗಿದ್ದರೆ ಸರಿ"],1,"ಪ್ರಯೋಗ 3 ರಲ್ಲಿ ಒಂದೇ ನೀರು ಎರಡು ಕೈಗಳಿಗೆ ಬೇರೆ ಅನಿಸಿತು."],
+ ["ಮಾನವ ದೇಹದ ಸಾಮಾನ್ಯ ಉಷ್ಣತಾಮಾನ ಸುಮಾರು ಎಷ್ಟು?",["27 °C","37 °C","47 °C"],1,"ಸುಮಾರು 37 °C."],
+ ["ಉಷ್ಣತಾಮಾನದ SI ಮೂಲಮಾನ ಯಾವುದು?",["ಕೆಲ್ವಿನ್ (K)","ಮೀಟರ್ (m)","ಸೆಕೆಂಡ್ (s)"],0,"ಉಷ್ಣತಾಮಾನದ SI ಮೂಲಮಾನ ಕೆಲ್ವಿನ್. ಶಾಲೆಯಲ್ಲಿ ಸಾಮಾನ್ಯವಾಗಿ °C ಬಳಸುತ್ತೇವೆ."]
+];
+let sc=0,done=0;
+qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p>${qi+1}. ${q[0]}</p>`;const o=document.createElement("div");o.className="opts";
+ const fb=document.createElement("div");fb.className="fb";let ans=false;
+ q[1].forEach((t,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=t;
+  b.onclick=()=>{if(ans)return;ans=true;done++;if(i==q[2]){sc++;b.style.outline="3px solid #1f9d55";fb.innerHTML='<span class="ok">✅ ಸರಿ!</span> '+q[3]}else{b.style.outline="3px solid #d64545";fb.innerHTML='<span class="bad">❌ ತಪ್ಪು.</span> '+q[3]}
+   $("#qScore").textContent=`ಅಂಕ: ${sc}/${done} (ಒಟ್ಟು ${qs.length})`};o.appendChild(b)});
+ d.appendChild(o);d.appendChild(fb);$("#quiz").appendChild(d)});
+</script>
+</body>
+</html>

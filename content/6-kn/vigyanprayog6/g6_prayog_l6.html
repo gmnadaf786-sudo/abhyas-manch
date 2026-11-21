@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="kn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ಪದಾರ್ಥಗಳ ಗುಣಧರ್ಮಗಳು – ಅನಿಮೇಟೆಡ್ ಪ್ರಯೋಗಗಳು (6ನೇ ತರಗತಿ, ಪಾಠ 6)</title><style>
+:root{--bg:#f5f6f2;--card:#fff;--ink:#202722;--mute:#5d675f;--line:#e0e4da;--green:#2e8b57;--blue:#2f6fed;--orange:#e8801f;--red:#d64545;--sky:#eaf4f1}
+@media(prefers-color-scheme:dark){:root{--bg:#121613;--card:#1b211c;--ink:#edf2ee;--mute:#a6b2a9;--line:#2c352e;--sky:#1c2a26}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI",system-ui,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:22px;margin:8px 0 4px}h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.tag{display:inline-block;font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+svg{width:100%;height:auto;display:block;border-radius:12px;background:var(--sky);touch-action:manipulation}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button.btn{border:1px solid transparent;background:var(--green);color:#fff;border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;cursor:pointer}
+button.btn.o{background:var(--orange)}button.btn.b{background:var(--blue)}
+button.btn.ghost{background:var(--bg);color:var(--ink);border-color:var(--line)}
+button.btn.sel{outline:3px solid var(--orange)}
+button.btn:disabled{opacity:.45}
+input[type=range]{flex:1;min-width:150px;accent-color:var(--green)}
+.say{padding:10px 12px;border-left:4px solid var(--green);background:var(--bg);border-radius:8px;font-size:15px;margin-top:8px}
+.say.bad{border-left-color:var(--red)}
+.lbl{font-size:13px;color:var(--mute);margin:8px 0 0}
+.note{font-size:13px;color:var(--mute);margin-top:6px}
+.big{font-size:26px;font-weight:700;text-align:center;margin:6px 0}
+.q{margin:12px 0}.q p{margin:0 0 6px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:6px}.opts button{text-align:left}
+.fb{font-size:14px;margin-top:4px}.ok{color:#1f9d55}.bad{color:var(--red)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl td,.tbl th{border:1px solid var(--line);padding:6px;text-align:center}
+</style></head><body><div class="wrap">
+<h1>🧪 ಪದಾರ್ಥಗಳ ಗುಣಧರ್ಮಗಳು</h1>
+<p class="sub">6ನೇ ತರಗತಿ · ಸಾಮಾನ್ಯ ವಿಜ್ಞಾನ · ಪಾಠ 6 — ಘನ, ದ್ರವ, ವಾಯು, ಸಾಂದ್ರತೆ, ಪಾರದರ್ಶಕತೆ ಮತ್ತು ಚುಂಬಕ — ಮುಟ್ಟಿ ನೋಡಿ ಕಲಿಯಿರಿ</p>
+<div class="card">
+<h2>ಪ್ರಯೋಗ 1: ಘನ, ದ್ರವ, ವಾಯು — ಕಣಗಳ ನೃತ್ಯ</h2>
+<div><span class="tag">ಅವಸ್ಥೆ</span><span class="tag">ಕಣಗಳು</span><span class="tag">ಅಂತರ ಮತ್ತು ಬಲ</span></div>
+<p class="sub">ಉಷ್ಣತೆ ಬದಲಿಸಿ. ಕಣಗಳ ಚಲನೆ, ಅವುಗಳ ನಡುವಿನ ಅಂತರ ಹೇಗೆ ಬದಲಾಗುತ್ತದೆ ಎಂದು ನೋಡಿ.</p>
+<svg viewBox="0 0 320 190"><rect x="40" y="10" width="240" height="170" rx="6" fill="var(--soft,#f4f7fb)" stroke="#888" stroke-width="2"/><g id="pt"></g></svg>
+<div class="row"><span style="min-width:110px">ಉಷ್ಣತೆ: <b id="tV">10</b></span><input type="range" id="tmp" min="0" max="100" value="10"></div>
+<div class="say" id="ptSay"></div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 2: ತೇಲುತ್ತದೆಯೇ, ಮುಳುಗುತ್ತದೆಯೇ?</h2>
+<div><span class="tag">ಸಾಂದ್ರತೆ = ದ್ರವ್ಯರಾಶಿ ÷ ಪರಿಮಾಣ</span></div>
+<p class="sub">ಮೊದಲು ಊಹಿಸಿ, ನಂತರ ವಸ್ತುವನ್ನು ನೀರಿಗೆ ಬಿಡಿ. ನೀರಿನ ಸಾಂದ್ರತೆ = 1 ಗ್ರಾಂ/ಸೆಂ.ಮೀ³</p>
+<svg viewBox="0 0 320 220"><rect x="60" y="80" width="200" height="130" fill="#4f97ee" opacity=".55"/><path d="M60 20 V210 H260 V20" fill="none" stroke="#555" stroke-width="3"/><g id="dobj"></g><text id="dnm" x="160" y="14" text-anchor="middle" font-size="13" fill="var(--ink)"></text></svg>
+<div class="row" id="dbtns" style="flex-wrap:wrap"></div>
+<div class="say" id="dSay">ಒಂದು ವಸ್ತು ಆರಿಸಿ.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 3: ಪಾರದರ್ಶಕ, ಅರ್ಧಪಾರದರ್ಶಕ, ಅಪಾರದರ್ಶಕ</h2>
+<div><span class="tag">ಬೆಳಕು</span><span class="tag">ಪಾರದರ್ಶಕ</span></div>
+<p class="sub">ಟಾರ್ಚ್ ಬೆಳಕು ವಸ್ತುವಿನ ಮೂಲಕ ಹಾದುಹೋಗಬಹುದೇ? ವಸ್ತು ಆರಿಸಿ.</p>
+<svg viewBox="0 0 320 170"><defs><filter id="blr"><feGaussianBlur stdDeviation="3"/></filter></defs>
+<rect x="8" y="65" width="34" height="40" rx="6" fill="#e8b21f"/><text x="25" y="130" font-size="10" text-anchor="middle" fill="var(--ink)">ಟಾರ್ಚ್</text>
+<g id="rays"></g>
+<rect id="mat" x="130" y="30" width="14" height="110" fill="#bfe6f5" stroke="#333"/>
+<text x="137" y="155" font-size="10" text-anchor="middle" fill="var(--ink)">ವಸ್ತು</text>
+<text x="255" y="40" font-size="40" text-anchor="middle" id="star" fill="#e8b21f">★</text>
+<text x="270" y="130" font-size="10" text-anchor="middle" fill="var(--ink)">ಹಿಂದಿನ ವಸ್ತು</text>
+<text x="205" y="90" font-size="26" text-anchor="middle">👁️</text></svg>
+<div class="row" style="flex-wrap:wrap"><button class="btn b" data-m="0">ಗಾಜು</button><button class="btn b" data-m="1">ಬೆಣ್ಣೆ ಕಾಗದ</button><button class="btn b" data-m="2">ರಟ್ಟು</button></div>
+<div class="say" id="trSay">ವಸ್ತು ಆರಿಸಿ.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 4: ಚುಂಬಕೀಯ ಮತ್ತು ಚುಂಬಕೀಯವಲ್ಲದ ವಸ್ತುಗಳು</h2>
+<div><span class="tag">ಚುಂಬಕ</span><span class="tag">ಆಕರ್ಷಣೆ</span></div>
+<p class="sub">ಸ್ಲೈಡರ್‌ನಿಂದ ಚುಂಬಕವನ್ನು ಎಡದಿಂದ ಬಲಕ್ಕೆ ಸರಿಸಿ. ಯಾವ ವಸ್ತುಗಳು ಅಂಟಿಕೊಳ್ಳುತ್ತವೆ?</p>
+<svg viewBox="0 0 320 150"><line x1="0" y1="125" x2="320" y2="125" stroke="#888" stroke-width="2"/><g id="mg"></g><g id="mgn"><rect x="-22" y="0" width="22" height="26" fill="#d64545"/><rect x="0" y="0" width="22" height="26" fill="#2f6fed"/><text x="-11" y="18" font-size="13" text-anchor="middle" fill="#fff">N</text><text x="11" y="18" font-size="13" text-anchor="middle" fill="#fff">S</text></g></svg>
+<div class="row"><span style="min-width:60px">ಚುಂಬಕ</span><input type="range" id="mpos" min="0" max="100" value="0"></div>
+<div class="say" id="mgSay">ಚುಂಬಕವನ್ನು ಸರಿಸಿ.</div>
+</div>
+
+<div class="card"><h2>ಪರೀಕ್ಷಿಸಿ</h2><div id="quiz"></div><p class="note" id="qScore"></p></div>
+</div><script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],NS="http://www.w3.org/2000/svg";
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),sm=u=>{u=clamp(u,0,1);return u*u*(3-2*u)};
+function loopRun(fn){let last=performance.now(),t=0,id=0,on=true;const f=now=>{if(!on)return;const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;if(fn(t,dt)===true){on=false;return}id=requestAnimationFrame(f)};id=requestAnimationFrame(f);return()=>{on=false;cancelAnimationFrame(id)}}
+function buildQuiz(qs){let sc=0,done=0;qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p>${qi+1}. ${q[0]}</p>`;const o=document.createElement("div");o.className="opts";const fb=document.createElement("div");fb.className="fb";let ans=false;
+ q[1].forEach((t,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=t;
+  b.onclick=()=>{if(ans)return;ans=true;done++;if(i==q[2]){sc++;b.style.outline="3px solid #1f9d55";fb.innerHTML='<span class="ok">✅ ಸರಿ!</span> '+q[3]}else{b.style.outline="3px solid #d64545";fb.innerHTML='<span class="bad">❌ ತಪ್ಪು.</span> '+q[3]}
+   $("#qScore").textContent=`ಅಂಕ: ${sc}/${done} (ಒಟ್ಟು ${qs.length})`};o.appendChild(b)});
+ d.appendChild(o);d.appendChild(fb);$("#quiz").appendChild(d)})}
+
+/* ---- ಪ್ರಯೋಗ 1: ಕಣಗಳು ---- */
+const PT=$("#pt"),pts=[];const COLS=6,ROWS=5;
+for(let i=0;i<COLS*ROWS;i++){const c=i%COLS,r=Math.floor(i/COLS);const hx=95+c*30,hy=55+r*28;pts.push({el:mk("circle",{r:7,fill:"#2f6fed",stroke:"#fff"},PT),hx,hy,x:hx,y:hy,vx:rnd(-1,1),vy:rnd(-1,1)})}
+function ptMode(T){return T<35?0:T<70?1:2}
+loopRun((t,dt)=>{const T=+$("#tmp").value,m=ptMode(T);
+ pts.forEach(p=>{
+  if(m==0){const a=1+T/12;p.x=p.hx+Math.sin(t*20+p.hx)*a;p.y=p.hy+Math.cos(t*22+p.hy)*a;p.vx=rnd(-1,1);p.vy=rnd(-1,1)}
+  else{const sp=m==1?55:150;const n=Math.hypot(p.vx,p.vy)||1;p.vx+=rnd(-.3,.3);p.vy+=rnd(-.3,.3);const nn=Math.hypot(p.vx,p.vy)||1;p.vx=p.vx/nn;p.vy=p.vy/nn;
+   p.x+=p.vx*sp*dt;p.y+=p.vy*sp*dt;
+   const top=m==1?100:18;
+   if(p.x<48){p.x=48;p.vx=Math.abs(p.vx)}if(p.x>272){p.x=272;p.vx=-Math.abs(p.vx)}
+   if(p.y<top){p.y=top;p.vy=Math.abs(p.vy)}if(p.y>172){p.y=172;p.vy=-Math.abs(p.vy)}}
+  p.el.setAttribute("cx",p.x);p.el.setAttribute("cy",p.y);p.el.setAttribute("fill",m==0?"#2f6fed":m==1?"#1f9d55":"#e8801f")});
+});
+const PTT=["<b>ಘನ:</b> ಕಣಗಳು ಬಹಳ ಹತ್ತಿರ, ಬಲವಾಗಿ ಹಿಡಿದಿವೆ. ತಮ್ಮ ಸ್ಥಾನದಲ್ಲೇ ಕಂಪಿಸುತ್ತವೆ. ಆಕಾರ ಮತ್ತು ಗಾತ್ರ ನಿಶ್ಚಿತ.","<b>ದ್ರವ:</b> ಕಣಗಳ ನಡುವೆ ಸ್ವಲ್ಪ ಅಂತರ, ಬಲ ಕಡಿಮೆ. ಒಂದರ ಮೇಲೊಂದು ಜಾರುತ್ತವೆ. ಪಾತ್ರೆಯ ಆಕಾರ ಪಡೆಯುತ್ತದೆ, ಪರಿಮಾಣ ನಿಶ್ಚಿತ.","<b>ವಾಯು:</b> ಕಣಗಳ ನಡುವೆ ಹೆಚ್ಚು ಅಂತರ, ಬಲ ಅತಿ ಕಡಿಮೆ. ವೇಗವಾಗಿ ಎಲ್ಲೆಡೆ ಹರಡುತ್ತವೆ; ಇಡೀ ಪಾತ್ರೆಯನ್ನು ತುಂಬುತ್ತವೆ."];
+let lastM=-1;$("#tmp").oninput=e=>{$("#tV").textContent=e.target.value};
+setInterval(()=>{const m=ptMode(+$("#tmp").value);if(m!=lastM){lastM=m;$("#ptSay").innerHTML=PTT[m]}},150);
+$("#ptSay").innerHTML=PTT[0];lastM=0;
+
+/* ---- ಪ್ರಯೋಗ 2: ಸಾಂದ್ರತೆ ---- */
+const OBJ=[["ಮರದ ತುಂಡು",.6,"🪵"],["ಕಾರ್ಕ್",.25,"⚪"],["ಮಂಜುಗಡ್ಡೆ",.92,"🧊"],["ಕಲ್ಲು",2.6,"🪨"],["ಕಬ್ಬಿಣದ ಮೊಳೆ",7.8,"🔩"],["ಚಿನ್ನದ ಉಂಗುರ",19.3,"💍"]];
+let dStop=()=>{};
+OBJ.forEach(o=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=o[2]+" "+o[0];b.onclick=()=>{dStop();const g=$("#dobj");g.innerHTML="";const el=mk("text",{x:160,y:40,"font-size":32,"text-anchor":"middle"},g);el.textContent=o[2];$("#dnm").textContent=o[0]+" — ಸಾಂದ್ರತೆ "+o[1]+" ಗ್ರಾಂ/ಸೆಂ.ಮೀ³";
+ $("#dSay").textContent="ಬಿಡುತ್ತಿದ್ದೇವೆ…";const fl=o[1]<1,end=fl?(70+ (o[1])*40):200;
+ dStop=loopRun(t=>{let y;if(t<.6)y=40+t/.6*40;else{const k=sm(clamp((t-.6)/(fl?1.2:1.6),0,1));y=80+(end-80)*k+(fl?Math.sin(t*6)*3*(1-k):0)}
+  el.setAttribute("y",y);
+  if(t>2.4){$("#dSay").innerHTML=fl?`✅ <b>ತೇಲುತ್ತದೆ</b> — ${o[0]}ದ ಸಾಂದ್ರತೆ (${o[1]}) ನೀರಿನ ಸಾಂದ್ರತೆ (1) ಗಿಂತ ಕಡಿಮೆ.`:`⬇️ <b>ಮುಳುಗುತ್ತದೆ</b> — ${o[0]}ದ ಸಾಂದ್ರತೆ (${o[1]}) ನೀರಿನ ಸಾಂದ್ರತೆ (1) ಗಿಂತ ಹೆಚ್ಚು.`;return true}})};$("#dbtns").appendChild(b)});
+
+/* ---- ಪ್ರಯೋಗ 3: ಪಾರದರ್ಶಕತೆ ---- */
+const MAT=[{c:"#bfe6f5",o:.35,pass:1,blur:0,msg:"<b>ಗಾಜು — ಪಾರದರ್ಶಕ:</b> ಬೆಳಕು ಸಂಪೂರ್ಣ ಹಾದುಹೋಗುತ್ತದೆ; ಹಿಂದಿನ ವಸ್ತು ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುತ್ತದೆ."},{c:"#f3ecd2",o:.85,pass:.4,blur:1,msg:"<b>ಬೆಣ್ಣೆ ಕಾಗದ — ಅರ್ಧಪಾರದರ್ಶಕ:</b> ಸ್ವಲ್ಪ ಬೆಳಕು ಮಾತ್ರ ಹಾದುಹೋಗುತ್ತದೆ; ವಸ್ತು ಮಂದವಾಗಿ ಕಾಣುತ್ತದೆ."},{c:"#a77b4f",o:1,pass:0,blur:0,msg:"<b>ರಟ್ಟು — ಅಪಾರದರ್ಶಕ:</b> ಬೆಳಕು ಹಾದುಹೋಗುವುದಿಲ್ಲ; ಹಿಂದಿನ ವಸ್ತು ಕಾಣುವುದಿಲ್ಲ."}];
+const RY=[0,1,2,3,4].map(i=>mk("line",{stroke:"#e8b21f","stroke-width":2.5},$("#rays")));
+let tm=0;function showM(i){tm=i;const m=MAT[i];$("#mat").setAttribute("fill",m.c);$("#mat").setAttribute("opacity",m.o);$("#trSay").innerHTML=m.msg;
+ const st=$("#star");st.setAttribute("opacity",m.pass==0?0:m.pass==1?1:.35);st.setAttribute("filter",m.blur?"url(#blr)":"")}
+$$("[data-m]").forEach(b=>b.onclick=()=>showM(+b.dataset.m));showM(0);
+loopRun(t=>{const m=MAT[tm];RY.forEach((r,i)=>{const y=70+i*7.5,ph=(t*1.2+i*.15)%1;const x2=130;
+ r.setAttribute("x1",42);r.setAttribute("y1",y);r.setAttribute("x2",42+(x2-42)*clamp(ph*1.3,0,1));r.setAttribute("y2",y);r.setAttribute("opacity",.9);
+ });
+ // beams after material
+ if(!RY.after){RY.after=[0,1,2,3,4].map(()=>mk("line",{stroke:"#e8b21f","stroke-width":2.5},$("#rays")))}
+ RY.after.forEach((r,i)=>{const y=70+i*7.5,ph=(t*1.2+i*.15)%1;r.setAttribute("x1",144);r.setAttribute("y1",y);r.setAttribute("x2",144+(230-144)*clamp((ph-.5)*2,0,1));r.setAttribute("y2",y);r.setAttribute("opacity",m.pass*.9)})});
+
+/* ---- ಪ್ರಯೋಗ 4: ಚುಂಬಕ ---- */
+const MI=[["🔩","ಕಬ್ಬಿಣದ ಮೊಳೆ",1],["📎","ಪೇಪರ್ ಕ್ಲಿಪ್",1],["🪵","ಮರದ ತುಂಡು",0],["🖊️","ಪ್ಲಾಸ್ಟಿಕ್ ಪೆನ್",0],["🧽","ರಬ್ಬರ್",0],["🥫","ಉಕ್ಕಿನ ಡಬ್ಬ",1]];
+const mItems=MI.map((m,i)=>{const x=40+i*48;const el=mk("text",{"font-size":26,"text-anchor":"middle",x,y:122},$("#mg"));el.textContent=m[0];return{el,x,m,stuck:false}});
+function mgUpd(){const p=+$("#mpos").value,mx=15+p*2.9,my=88;$("#mgn").setAttribute("transform",`translate(${mx+22} ${my})`);let st=[];
+ mItems.forEach((it,i)=>{const near=Math.abs(it.x-mx)<30;if(it.m[2]&&near)it.stuck=true;else if(!it.m[2]||!near){it.stuck=it.m[2]&&Math.abs(it.x-mx)<32?it.stuck:false}
+  if(it.stuck){it.el.setAttribute("x",mx+11);it.el.setAttribute("y",126-0);it.el.setAttribute("y",118-(st.length*0));st.push(it)}else{it.el.setAttribute("x",it.x);it.el.setAttribute("y",122)}
+  if(it.m[2]&&it.stuck){it.el.setAttribute("y",118-4)}});
+ const near=mItems.find(it=>Math.abs(it.x-mx)<30);
+ if(near)$("#mgSay").innerHTML=near.m[2]?`✅ <b>${near.m[1]}</b> ಚುಂಬಕಕ್ಕೆ ಆಕರ್ಷಿತವಾಗುತ್ತದೆ — ಚುಂಬಕೀಯ ವಸ್ತು.`:`❌ <b>${near.m[1]}</b> ಆಕರ್ಷಿತವಾಗುವುದಿಲ್ಲ — ಚುಂಬಕೀಯವಲ್ಲದ ವಸ್ತು.`}
+$("#mpos").oninput=mgUpd;mgUpd();
+
+buildQuiz([
+ ["ಯಾವ ಅವಸ್ಥೆಯಲ್ಲಿ ಕಣಗಳ ನಡುವಿನ ಅಂತರ ಅತಿ ಹೆಚ್ಚು?",["ಘನ","ದ್ರವ","ವಾಯು"],2,"ವಾಯುವಿನಲ್ಲಿ ಕಣಗಳ ನಡುವೆ ಹೆಚ್ಚು ಅಂತರ ಮತ್ತು ಕಡಿಮೆ ಬಲ ಇರುತ್ತದೆ."],
+ ["ದ್ರವಕ್ಕೆ ಇರುವ ಗುಣ ಯಾವುದು?",["ನಿಶ್ಚಿತ ಆಕಾರ ಮತ್ತು ಪರಿಮಾಣ","ನಿಶ್ಚಿತ ಪರಿಮಾಣ, ಆದರೆ ಪಾತ್ರೆಯ ಆಕಾರ ಪಡೆಯುತ್ತದೆ","ನಿಶ್ಚಿತ ಆಕಾರ ಇಲ್ಲ, ಪರಿಮಾಣವೂ ಇಲ್ಲ"],1,"ದ್ರವದ ಪರಿಮಾಣ ನಿಶ್ಚಿತ; ಅದು ಇರುವ ಪಾತ್ರೆಯ ಆಕಾರ ಪಡೆಯುತ್ತದೆ."],
+ ["ನೀರಿನಲ್ಲಿ ಮುಳುಗುವ ವಸ್ತು ಯಾವುದು?",["ಕಾರ್ಕ್","ಮಂಜುಗಡ್ಡೆ","ಕಬ್ಬಿಣದ ಮೊಳೆ"],2,"ಕಬ್ಬಿಣದ ಸಾಂದ್ರತೆ ನೀರಿಗಿಂತ ಹೆಚ್ಚು, ಆದ್ದರಿಂದ ಮುಳುಗುತ್ತದೆ."],
+ ["ಬೆಳಕು ಸಂಪೂರ್ಣ ಹಾದುಹೋಗುವ ವಸ್ತುವನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?",["ಪಾರದರ್ಶಕ","ಅರ್ಧಪಾರದರ್ಶಕ","ಅಪಾರದರ್ಶಕ"],0,"ಗಾಜಿನಂತಹ ವಸ್ತುಗಳ ಮೂಲಕ ಹಿಂದಿನ ವಸ್ತು ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುತ್ತದೆ."],
+ ["ಚುಂಬಕಕ್ಕೆ ಆಕರ್ಷಿತವಾಗದ ವಸ್ತು ಯಾವುದು?",["ಪೇಪರ್ ಕ್ಲಿಪ್","ಮರದ ತುಂಡು","ಕಬ್ಬಿಣದ ಮೊಳೆ"],1,"ಮರ ಚುಂಬಕೀಯವಲ್ಲದ ವಸ್ತು."]
+]);
+
+</script></body></html>

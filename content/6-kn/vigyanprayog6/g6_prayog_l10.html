@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="kn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ಚುಂಬಕದ ಜಗತ್ತಿನಲ್ಲಿ – ಅನಿಮೇಟೆಡ್ ಪ್ರಯೋಗಗಳು (6ನೇ ತರಗತಿ, ಪಾಠ 10)</title><style>
+:root{--bg:#f5f6f2;--card:#fff;--ink:#202722;--mute:#5d675f;--line:#e0e4da;--green:#2e8b57;--blue:#2f6fed;--orange:#e8801f;--red:#d64545;--sky:#eaf4f1}
+@media(prefers-color-scheme:dark){:root{--bg:#121613;--card:#1b211c;--ink:#edf2ee;--mute:#a6b2a9;--line:#2c352e;--sky:#1c2a26}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI",system-ui,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:22px;margin:8px 0 4px}h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.tag{display:inline-block;font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+svg{width:100%;height:auto;display:block;border-radius:12px;background:var(--sky);touch-action:manipulation}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button.btn{border:1px solid transparent;background:var(--green);color:#fff;border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;cursor:pointer}
+button.btn.o{background:var(--orange)}button.btn.b{background:var(--blue)}
+button.btn.ghost{background:var(--bg);color:var(--ink);border-color:var(--line)}
+button.btn.sel{outline:3px solid var(--orange)}
+button.btn:disabled{opacity:.45}
+input[type=range]{flex:1;min-width:150px;accent-color:var(--green)}
+.say{padding:10px 12px;border-left:4px solid var(--green);background:var(--bg);border-radius:8px;font-size:15px;margin-top:8px}
+.say.bad{border-left-color:var(--red)}
+.lbl{font-size:13px;color:var(--mute);margin:8px 0 0}
+.note{font-size:13px;color:var(--mute);margin-top:6px}
+.big{font-size:26px;font-weight:700;text-align:center;margin:6px 0}
+.q{margin:12px 0}.q p{margin:0 0 6px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:6px}.opts button{text-align:left}
+.fb{font-size:14px;margin-top:4px}.ok{color:#1f9d55}.bad{color:var(--red)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl td,.tbl th{border:1px solid var(--line);padding:6px;text-align:center}
+</style></head><body><div class="wrap">
+<h1>🧲 ಚುಂಬಕದ ಜಗತ್ತಿನಲ್ಲಿ</h1>
+<p class="sub">6ನೇ ತರಗತಿ · ಸಾಮಾನ್ಯ ವಿಜ್ಞಾನ · ಪಾಠ 10 — ಚುಂಬಕೀಯ ವಸ್ತುಗಳು, ಧ್ರುವಗಳು, ಚುಂಬಕ ಕ್ಷೇತ್ರ ಮತ್ತು ದಿಕ್ಸೂಚಿ — ಮುಟ್ಟಿ ನೋಡಿ ಕಲಿಯಿರಿ</p>
+<div class="card">
+<h2>ಪ್ರಯೋಗ 1: ಚುಂಬಕ ಯಾವ ವಸ್ತುವನ್ನು ಎತ್ತುತ್ತದೆ?</h2>
+<div><span class="tag">ಚುಂಬಕೀಯ</span><span class="tag">ಅಚುಂಬಕೀಯ</span></div>
+<p class="sub">ಒಂದು ವಸ್ತುವನ್ನು ಒತ್ತಿ. ಚುಂಬಕ ಅದರ ಮೇಲೆ ಬರುತ್ತದೆ. ವಸ್ತು ಮೇಲೆ ಏರುತ್ತದೆಯೇ?</p>
+<svg viewBox="0 0 320 170"><line x1="10" y1="145" x2="310" y2="145" stroke="#888" stroke-width="2"/><g id="mI"></g><text id="mg1" x="40" y="40" font-size="34" text-anchor="middle">🧲</text></svg>
+<div class="say" id="m1Say">ಒಂದು ವಸ್ತು ಆರಿಸಿ.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 2: ಚುಂಬಕದ ಧ್ರುವಗಳು</h2>
+<div><span class="tag">ಉತ್ತರ ಧ್ರುವ (N)</span><span class="tag">ದಕ್ಷಿಣ ಧ್ರುವ (S)</span></div>
+<p class="sub">ಬಲಭಾಗದ ಚುಂಬಕವನ್ನು ತಿರುಗಿಸಿ (flip) ಹತ್ತಿರ ಬಿಡಿ. ಸಮಾನ ಧ್ರುವಗಳು ಏನು ಮಾಡುತ್ತವೆ? ಭಿನ್ನ ಧ್ರುವಗಳು?</p>
+<svg viewBox="0 0 320 130"><g id="mA"><rect x="30" y="45" width="40" height="40" fill="#d64545"/><rect x="70" y="45" width="40" height="40" fill="#2f6fed"/><text x="50" y="72" font-size="18" text-anchor="middle" fill="#fff">N</text><text x="90" y="72" font-size="18" text-anchor="middle" fill="#fff">S</text></g>
+<g id="mB"><rect id="bL" x="0" y="45" width="40" height="40" fill="#d64545"/><rect id="bR" x="40" y="45" width="40" height="40" fill="#2f6fed"/><text id="tL" x="20" y="72" font-size="18" text-anchor="middle" fill="#fff">N</text><text id="tR" x="60" y="72" font-size="18" text-anchor="middle" fill="#fff">S</text></g></svg>
+<div class="row"><span style="min-width:110px">ಅಂತರ</span><input type="range" id="gap" min="30" max="130" value="90"></div>
+<div class="row"><button class="btn ghost" id="flip">🔄 ಬಲ ಚುಂಬಕ ತಿರುಗಿಸಿ</button><button class="btn o" id="rel">▶ ಬಿಡಿ</button></div>
+<div class="say" id="m2Say"></div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 3: ಚುಂಬಕ ಕ್ಷೇತ್ರ (ಕಬ್ಬಿಣದ ಪುಡಿ ಪ್ರಯೋಗ)</h2>
+<div><span class="tag">ಚುಂಬಕ ಕ್ಷೇತ್ರ</span><span class="tag">ದಿಕ್ಸೂಚಿ</span></div>
+<p class="sub">ಕಬ್ಬಿಣದ ಪುಡಿ ಚುಂಬಕದ ಸುತ್ತ ಹೇಗೆ ಜೋಡಿಸಿಕೊಳ್ಳುತ್ತದೆ ಎಂದು ನೋಡಿ. ಕೆಳಗಿನ ಸ್ಲೈಡರ್‌ಗಳಿಂದ ದಿಕ್ಸೂಚಿಯನ್ನು ಸರಿಸಿ.</p>
+<svg viewBox="0 0 320 220"><g id="fil"></g><rect x="125" y="98" width="35" height="24" fill="#d64545"/><rect x="160" y="98" width="35" height="24" fill="#2f6fed"/><text x="142" y="115" font-size="13" text-anchor="middle" fill="#fff">N</text><text x="178" y="115" font-size="13" text-anchor="middle" fill="#fff">S</text><g id="cmp"><circle r="9" fill="#fff" stroke="#333"/><line id="cn" x1="0" y1="0" x2="12" y2="0" stroke="#d64545" stroke-width="3"/><line id="cs" x1="0" y1="0" x2="-12" y2="0" stroke="#2f6fed" stroke-width="3"/></g></svg>
+<div class="row"><span style="min-width:90px">ದಿಕ್ಸೂಚಿ ಅಡ್ಡ</span><input type="range" id="cx" min="0" max="100" value="85"></div>
+<div class="row"><span style="min-width:90px">ದಿಕ್ಸೂಚಿ ಎತ್ತರ</span><input type="range" id="cy" min="0" max="100" value="20"></div>
+<div class="say" id="m3Say">ಕಬ್ಬಿಣದ ಪುಡಿ ಧ್ರುವಗಳ ಬಳಿ ದಟ್ಟವಾಗಿ ಜೋಡಣೆಯಾಗುತ್ತದೆ — ಅಲ್ಲಿ ಚುಂಬಕ ಶಕ್ತಿ ಹೆಚ್ಚು.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 4: ದಿಕ್ಸೂಚಿ — ಸ್ವತಂತ್ರ ಚುಂಬಕ ಉತ್ತರ-ದಕ್ಷಿಣ ತೋರಿಸುತ್ತದೆ</h2>
+<div><span class="tag">ದಿಕ್ಸೂಚಿ</span><span class="tag">ಭೂಮಿಯೇ ಒಂದು ಚುಂಬಕ</span></div>
+<p class="sub">ಸೂಜಿಯನ್ನು ತಳ್ಳಿ. ಅದು ಯಾವ ದಿಕ್ಕಿನಲ್ಲಿ ನಿಲ್ಲುತ್ತದೆ? ಪಕ್ಕದಲ್ಲಿ ಚುಂಬಕ ತಂದರೆ?</p>
+<svg viewBox="0 0 320 200"><circle cx="160" cy="100" r="75" fill="#fffdf0" stroke="#333" stroke-width="3"/><text x="160" y="40" font-size="14" text-anchor="middle" font-weight="700">ಉ (N)</text><text x="160" y="170" font-size="14" text-anchor="middle" font-weight="700">ದ (S)</text><text x="228" y="105" font-size="14" text-anchor="middle" font-weight="700">ಪೂ (E)</text><text x="92" y="105" font-size="14" text-anchor="middle" font-weight="700">ಪ (W)</text>
+<g id="nd" transform="translate(160 100)"><polygon points="-6,0 0,-55 6,0" fill="#d64545"/><polygon points="-6,0 0,55 6,0" fill="#2f6fed"/><circle r="4" fill="#333"/></g>
+<g id="bm" opacity="0"><rect x="272" y="86" width="22" height="28" fill="#2f6fed"/><rect x="294" y="86" width="22" height="28" fill="#d64545"/></g></svg>
+<div class="row"><button class="btn o" id="push">👉 ಸೂಜಿ ತಳ್ಳಿ</button><button class="btn ghost" id="bmT">🧲 ಹತ್ತಿರ ಚುಂಬಕ: ಇಲ್ಲ</button></div>
+<div class="say" id="m4Say"></div>
+</div>
+
+<div class="card"><h2>ಪರೀಕ್ಷಿಸಿ</h2><div id="quiz"></div><p class="note" id="qScore"></p></div>
+</div><script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],NS="http://www.w3.org/2000/svg";
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),sm=u=>{u=clamp(u,0,1);return u*u*(3-2*u)};
+function loopRun(fn){let last=performance.now(),t=0,id=0,on=true;const f=now=>{if(!on)return;const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;if(fn(t,dt)===true){on=false;return}id=requestAnimationFrame(f)};id=requestAnimationFrame(f);return()=>{on=false;cancelAnimationFrame(id)}}
+function buildQuiz(qs){let sc=0,done=0;qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p>${qi+1}. ${q[0]}</p>`;const o=document.createElement("div");o.className="opts";const fb=document.createElement("div");fb.className="fb";let ans=false;
+ q[1].forEach((t,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=t;
+  b.onclick=()=>{if(ans)return;ans=true;done++;if(i==q[2]){sc++;b.style.outline="3px solid #1f9d55";fb.innerHTML='<span class="ok">✅ ಸರಿ!</span> '+q[3]}else{b.style.outline="3px solid #d64545";fb.innerHTML='<span class="bad">❌ ತಪ್ಪು.</span> '+q[3]}
+   $("#qScore").textContent=`ಅಂಕ: ${sc}/${done} (ಒಟ್ಟು ${qs.length})`};o.appendChild(b)});
+ d.appendChild(o);d.appendChild(fb);$("#quiz").appendChild(d)})}
+
+/* ---- 1 ---- */
+const MI=[["🔩","ಕಬ್ಬಿಣದ ಮೊಳೆ",1],["⚙️","ನಿಕ್ಕಲ್ ತುಂಡು",1],["🔷","ಕೋಬಾಲ್ಟ್ ತುಂಡು",1],["🪢","ತಾಮ್ರದ ತಂತಿ",0],["🥤","ಪ್ಲಾಸ್ಟಿಕ್ ಮುಚ್ಚಳ",0],["📄","ಕಾಗದ",0]];
+const mI=$("#mI"),mEls=MI.map((m,i)=>{const x=36+i*50;const e=mk("text",{x,y:135,"font-size":28,"text-anchor":"middle",style:"cursor:pointer"},mI);e.textContent=m[0];return{e,x,m}});
+let m1Stop=()=>{},busy1=false;
+mEls.forEach((it,i)=>{it.e.onclick=()=>{if(busy1)return;busy1=true;m1Stop();const mg=$("#mg1");it.e.setAttribute("y",135);$("#m1Say").textContent="ಚುಂಬಕ ಬರುತ್ತಿದೆ…";
+ m1Stop=loopRun(t=>{let mx,my,iy=135;
+  if(t<1){const k=sm(t);mx=40+(it.x-40)*k;my=40}
+  else if(t<2){const k=sm(t-1);mx=it.x;my=40+k*62}
+  else if(t<3){const k=sm(t-2);mx=it.x;my=102-k*62;if(it.m[2])iy=135-(135-(my+34))*0-k*62+0;}
+  else{mx=it.x;my=40}
+  if(t>=2&&t<3&&it.m[2])iy=my+36;if(t>=1&&t<2&&it.m[2]&&my>85)iy=Math.min(135,my+36);
+  mg.setAttribute("x",mx);mg.setAttribute("y",my);
+  if(it.m[2]&&t>=1.7)it.e.setAttribute("y",iy);
+  if(t>3.2){busy1=false;it.e.setAttribute("y",135);mg.setAttribute("x",40);$("#m1Say").innerHTML=it.m[2]?`✅ <b>${it.m[1]}</b> ಚುಂಬಕಕ್ಕೆ ಅಂಟಿಕೊಂಡಿತು — ಚುಂಬಕೀಯ ವಸ್ತು (ಕಬ್ಬಿಣ, ನಿಕ್ಕಲ್, ಕೋಬಾಲ್ಟ್).`:`❌ <b>${it.m[1]}</b> ಆಕರ್ಷಿತವಾಗಲಿಲ್ಲ — ಅಚುಂಬಕೀಯ ವಸ್ತು.`;return true}})}});
+
+/* ---- 2 ---- */
+let orient=0,m2Stop=()=>{},bx=200;
+function bDraw(){$("#mB").setAttribute("transform",`translate(${bx} 0)`);const n=orient==0;$("#bL").setAttribute("fill",n?"#d64545":"#2f6fed");$("#bR").setAttribute("fill",n?"#2f6fed":"#d64545");$("#tL").textContent=n?"N":"S";$("#tR").textContent=n?"S":"N"}
+function m2Reset(){m2Stop();bx=110+(+$("#gap").value);bDraw();$("#m2Say").textContent="ಬಲ ಚುಂಬಕದ ಎಡ ಧ್ರುವ: "+(orient==0?"N (ಉತ್ತರ)":"S (ದಕ್ಷಿಣ)")+". ಎಡ ಚುಂಬಕದ ಬಲ ಧ್ರುವ: S."}
+$("#gap").oninput=m2Reset;$("#flip").onclick=()=>{orient=1-orient;m2Reset()};
+$("#rel").onclick=()=>{m2Reset();const att=orient==0;const x0=bx;$("#rel").disabled=true;
+ m2Stop=loopRun((t,dt)=>{const k=clamp(t/1.8,0,1);bx=att?x0-(x0-110)*k*k:x0+(240-x0)*sm(k);bDraw();
+  if(t>2.2){$("#rel").disabled=false;$("#m2Say").innerHTML=att?"🧲 ಎಡದ <b>S</b> ಮತ್ತು ಬಲದ <b>N</b> — ಭಿನ್ನ ಧ್ರುವಗಳು ಪರಸ್ಪರ <b>ಆಕರ್ಷಿಸುತ್ತವೆ</b>.":"↔️ ಎಡದ <b>S</b> ಮತ್ತು ಬಲದ <b>S</b> — ಸಮಾನ ಧ್ರುವಗಳು ಪರಸ್ಪರ <b>ವಿಕರ್ಷಿಸುತ್ತವೆ</b> (ದೂರ ತಳ್ಳುತ್ತವೆ).";return true}})};
+m2Reset();
+
+/* ---- 3 ---- */
+const PN=[-17,0],PS=[17,0];function fld(x,y){const f=(p,q)=>{const dx=x-p[0],dy=y-p[1],r=Math.hypot(dx,dy)||1;return[q*dx/r**3,q*dy/r**3]};const a=f(PN,1),b=f(PS,-1);return[a[0]+b[0],a[1]+b[1]]}
+const fl=$("#fil");
+for(let x=14;x<320;x+=18)for(let y=10;y<220;y+=18){const cx=x-160,cy=y-110;if(Math.abs(cx)<44&&Math.abs(cy)<18)continue;
+ const [bx,by]=fld(cx,cy),m=Math.hypot(bx,by),a=Math.atan2(by,bx)*180/Math.PI;
+ mk("line",{x1:-6,y1:0,x2:6,y2:0,stroke:"#444","stroke-width":1.8,"stroke-linecap":"round",opacity:clamp(Math.sqrt(m)*18,.12,.95),transform:`translate(${x} ${y}) rotate(${a})`},fl)}
+function cmpU(){const px=10+ +$("#cx").value*3,py=10+ +$("#cy").value*2;const [bx,by]=fld(px-160,py-110),a=Math.atan2(by,bx)*180/Math.PI;$("#cmp").setAttribute("transform",`translate(${px} ${py}) rotate(${a})`)}
+$("#cx").oninput=cmpU;$("#cy").oninput=cmpU;cmpU();
+
+/* ---- 4 ---- */
+let th=0,w=0,tgt=0,near=false;
+$("#push").onclick=()=>{w+=(Math.random()<.5?-1:1)*(300+Math.random()*200)};
+$("#bmT").onclick=()=>{near=!near;$("#bmT").textContent="🧲 ಹತ್ತಿರ ಚುಂಬಕ: "+(near?"ಹೌದು":"ಇಲ್ಲ");$("#bm").setAttribute("opacity",near?1:0);tgt=near?90:0};
+loopRun((t,dt)=>{dt=Math.min(dt,.03);const a=-30*(th-tgt)-3.2*w;w+=a*dt;th+=w*dt;$("#nd").setAttribute("transform",`translate(160 100) rotate(${th})`);
+ const settled=Math.abs(w)<8&&Math.abs(th-tgt)<4;
+ $("#m4Say").innerHTML=near?(settled?"ಪಕ್ಕದ ಚುಂಬಕ ಭೂಮಿಯ ಪ್ರಭಾವವನ್ನು ಮೀರಿ ಸೂಜಿಯನ್ನು ತನ್ನ ಕಡೆ ಎಳೆಯಿತು (ಭಿನ್ನ ಧ್ರುವಗಳ ಆಕರ್ಷಣೆ).":"ಸೂಜಿ ತಿರುಗುತ್ತಿದೆ…"):(settled?"ಸೂಜಿಯ ಕೆಂಪು (ಉತ್ತರ) ತುದಿ <b>ಉತ್ತರ</b> ದಿಕ್ಕನ್ನು ತೋರಿಸುತ್ತದೆ. ಭೂಮಿಯೇ ಒಂದು ದೊಡ್ಡ ಚುಂಬಕ!":"ಸೂಜಿ ತಿರುಗುತ್ತಿದೆ…")});
+
+buildQuiz([
+ ["ಇವುಗಳಲ್ಲಿ ಚುಂಬಕಕ್ಕೆ ಆಕರ್ಷಿತವಾಗುವ ಲೋಹ ಯಾವುದು?",["ತಾಮ್ರ","ಕಬ್ಬಿಣ","ಪ್ಲಾಸ್ಟಿಕ್"],1,"ಕಬ್ಬಿಣ, ನಿಕ್ಕಲ್, ಕೋಬಾಲ್ಟ್ ಚುಂಬಕೀಯ ವಸ್ತುಗಳು."],
+ ["ಸಮಾನ ಧ್ರುವಗಳು (N-N ಅಥವಾ S-S) ಹತ್ತಿರ ಬಂದರೆ ಏನಾಗುತ್ತದೆ?",["ಆಕರ್ಷಿಸುತ್ತವೆ","ವಿಕರ್ಷಿಸುತ್ತವೆ","ಏನೂ ಆಗುವುದಿಲ್ಲ"],1,"ಸಮಾನ ಧ್ರುವಗಳು ವಿಕರ್ಷಿಸುತ್ತವೆ, ಭಿನ್ನ ಧ್ರುವಗಳು ಆಕರ್ಷಿಸುತ್ತವೆ."],
+ ["ಚುಂಬಕದ ಆಕರ್ಷಣೆ ಶಕ್ತಿ ಎಲ್ಲಿ ಹೆಚ್ಚು?",["ಮಧ್ಯದಲ್ಲಿ","ಧ್ರುವಗಳ ಬಳಿ","ಎಲ್ಲೆಡೆ ಸಮಾನ"],1,"ಕಬ್ಬಿಣದ ಪುಡಿ ಧ್ರುವಗಳ ಬಳಿ ಹೆಚ್ಚು ಸೇರುತ್ತದೆ."],
+ ["ಸ್ವತಂತ್ರವಾಗಿ ತೂಗುಬಿಟ್ಟ ಚುಂಬಕ ಯಾವ ದಿಕ್ಕಿನಲ್ಲಿ ನಿಲ್ಲುತ್ತದೆ?",["ಪೂರ್ವ-ಪಶ್ಚಿಮ","ಉತ್ತರ-ದಕ್ಷಿಣ","ಯಾವುದೇ ದಿಕ್ಕು"],1,"ದಿಕ್ಸೂಚಿ ಇದೇ ತತ್ವದ ಮೇಲೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ."],
+ ["ಇವುಗಳಲ್ಲಿ ಚುಂಬಕದ ಬಳಕೆ ಯಾವುದರಲ್ಲಿ ಇದೆ?",["ವಿದ್ಯುತ್ ಜನರೇಟರ್","ಸ್ಪೀಕರ್ ಮತ್ತು ATM ಕಾರ್ಡ್","ಮೇಲಿನ ಎಲ್ಲವೂ"],2,"ಜನರೇಟರ್, ಸ್ಪೀಕರ್, ATM, MRI ಯಂತ್ರ ಇವೆಲ್ಲದರಲ್ಲಿ ಚುಂಬಕ ಬಳಕೆಯಾಗುತ್ತದೆ."]
+]);
+
+</script></body></html>

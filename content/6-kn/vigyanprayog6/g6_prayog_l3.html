@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ಪದಾರ್ಥಗಳನ್ನು ಬೇರ್ಪಡಿಸೋಣ – ಅನಿಮೇಟೆಡ್ ಪ್ರಯೋಗಗಳು (6ನೇ ತರಗತಿ, ಪಾಠ 3)</title>
+<style>
+:root{--bg:#f6f5ef;--card:#fff;--ink:#222a24;--mute:#5d675f;--line:#e0e3d8;--green:#2e8b57;--blue:#2f6fed;--orange:#e8801f;--red:#d64545;--sky:#eef6f3}
+@media(prefers-color-scheme:dark){:root{--bg:#121613;--card:#1b211c;--ink:#edf2ee;--mute:#a6b2a9;--line:#2c352e;--sky:#1d2a25}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI",system-ui,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:22px;margin:8px 0 4px}h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.tag{display:inline-block;font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+svg{width:100%;height:auto;display:block;border-radius:12px;background:var(--sky)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button.btn{border:1px solid transparent;background:var(--green);color:#fff;border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;cursor:pointer}
+button.btn.o{background:var(--orange)}
+button.btn.ghost{background:var(--bg);color:var(--ink);border-color:var(--line)}
+button.btn.sel{outline:3px solid var(--orange)}
+button.btn:disabled{opacity:.45}
+.say{padding:10px 12px;border-left:4px solid var(--green);background:var(--bg);border-radius:8px;font-size:15px;margin-top:8px}
+.say.bad{border-left-color:var(--red)}
+.lbl{font-size:13px;color:var(--mute);margin:8px 0 0}
+.note{font-size:13px;color:var(--mute);margin-top:6px}
+.q{margin:12px 0}.q p{margin:0 0 6px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:6px}.opts button{text-align:left}
+.fb{font-size:14px;margin-top:4px}.ok{color:#1f9d55}.bad{color:var(--red)}
+.stat{font-weight:700;color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🧂 ಪದಾರ್ಥಗಳನ್ನು ಬೇರ್ಪಡಿಸೋಣ</h1>
+<p class="sub">6ನೇ ತರಗತಿ · ಸಾಮಾನ್ಯ ವಿಜ್ಞಾನ · ಪಾಠ 3 — ಮಿಶ್ರಣ ಯಾವುದು? ಬೇರ್ಪಡಿಸುವ ಸರಿಯಾದ ವಿಧಾನ ಯಾವುದು?</p>
+
+<!-- ಕರಗುತ್ತದೆಯೇ? -->
+<div class="card">
+<h2>ಆರಂಭ: ನೀರಿನಲ್ಲಿ ಕರಗುತ್ತದೆಯೇ?</h2>
+<div><span class="tag">ಮಿಶ್ರಣ</span><span class="tag">ಕರಗುವ / ಕರಗದ</span></div>
+<p class="sub">ನೀರಿಗೆ ಒಂದೊಂದು ವಸ್ತು ಹಾಕಿ ನೋಡಿ. ಯಾವುದು ಕರಗುತ್ತದೆ?</p>
+<svg viewBox="0 0 320 220" id="dsSvg">
+<rect id="dsW" x="102" y="100" width="116" height="100" fill="#8fc7ff" opacity=".55"/>
+<g id="dsP"></g>
+<path d="M100 60 V200 H220 V60" fill="none" stroke="#7a8a99" stroke-width="3"/>
+</svg>
+<div class="row"><button class="btn" data-sub="salt">🧂 ಉಪ್ಪು</button><button class="btn" data-sub="sugar">🍬 ಸಕ್ಕರೆ</button><button class="btn o" data-sub="sand">🏖 ಮರಳು</button><button class="btn o" data-sub="soil">🟤 ಮಣ್ಣು</button></div>
+<div class="say" id="dsSay">ಒಂದು ವಸ್ತುವನ್ನು ಆರಿಸಿ.</div>
+<p class="note">ಎರಡು ಅಥವಾ ಹೆಚ್ಚು ಪದಾರ್ಥಗಳನ್ನು ಒಟ್ಟಿಗೆ ಬೆರೆಸಿದರೆ ಅದು <b>ಮಿಶ್ರಣ</b>. ಮಿಶ್ರಣದ ಪದಾರ್ಥಗಳು ಗಾತ್ರ, ಭಾರ, ಕರಗುವಿಕೆ ಮುಂತಾದ ಗುಣಗಳಲ್ಲಿ ಬೇರೆ ಬೇರೆ — ಅದರ ಆಧಾರದ ಮೇಲೆ ವಿಧಾನ ಆರಿಸುತ್ತೇವೆ.</p>
+</div>
+
+<!-- ಪ್ರಯೋಗಶಾಲೆ -->
+<div class="card">
+<h2>ಬೇರ್ಪಡಿಸುವ ಪ್ರಯೋಗಶಾಲೆ</h2>
+<div><span class="tag">ಬೇರ್ಪಡಿಸುವ ವಿಧಾನಗಳು</span></div>
+<p class="sub">① ಮಿಶ್ರಣ ಆರಿಸಿ ② ವಿಧಾನ ಆರಿಸಿ ③ ▶ ಒತ್ತಿ. ತಪ್ಪು ವಿಧಾನ ಆರಿಸಿದರೆ ಏನಾಗುತ್ತದೆ ಎಂದೂ ನೋಡಿ!</p>
+<p class="lbl">① ಮಿಶ್ರಣ</p>
+<div class="row" id="mixBtns"></div>
+<div class="say" id="mixHint">ಒಂದು ಮಿಶ್ರಣ ಆರಿಸಿ.</div>
+<svg viewBox="0 0 320 235" id="labSvg" style="margin-top:10px">
+<g id="ex"></g><g id="pts"></g><g id="fx"></g>
+<line x1="0" y1="205" x2="320" y2="205" stroke="#9aa59d" stroke-width="2"/>
+</svg>
+<p class="lbl">② ವಿಧಾನ</p>
+<div class="row" id="metBtns"></div>
+<div class="row"><button class="btn o" id="go">▶ ಪ್ರಾರಂಭ</button><span class="stat" id="tried"></span></div>
+<div class="say" id="labSay">ಮಿಶ್ರಣ ಮತ್ತು ವಿಧಾನ ಆರಿಸಿ.</div>
+</div>
+
+<!-- ಸಾರಾಂಶ -->
+<div class="card">
+<h2>ಸಾರಾಂಶ — ಯಾವ ಗುಣ, ಯಾವ ವಿಧಾನ?</h2>
+<div class="say" style="line-height:1.9">
+ದೊಡ್ಡ ಕಣಗಳು ಬೇರೆ → <b>ಆರಿಸುವಿಕೆ</b><br>
+ಭಾರ ಮತ್ತು ಹಗುರ → <b>ತೂರುವಿಕೆ</b><br>
+ಗಾತ್ರ ಬೇರೆ ಬೇರೆ → <b>ಜರಡಿ ಹಿಡಿಯುವಿಕೆ</b><br>
+ನೀರಿನಲ್ಲಿ ಕರಗದ ಭಾರ ಕಣಗಳು → <b>ತಳ ಸೇರುವಿಕೆ + ಬಸಿಯುವಿಕೆ</b><br>
+ನೀರಿನಲ್ಲಿ ಕರಗದ ಸೂಕ್ಷ್ಮ ಕಣಗಳು → <b>ಸೋಸುವಿಕೆ</b><br>
+ನೀರಿನಲ್ಲಿ ಕರಗಿದ ಘನ ವಸ್ತು → <b>ಆವಿಭವನ</b><br>
+ಕಬ್ಬಿಣ, ಕೋಬಾಲ್ಟ್, ನಿಕ್ಕಲ್ → <b>ಚುಂಬಕೀಯ ಬೇರ್ಪಡಿಸುವಿಕೆ</b><br>
+ಹಾಲು/ಮೊಸರಿನ ಕೊಬ್ಬು → <b>ಕಡೆಯುವಿಕೆ</b>
+</div>
+</div>
+
+<div class="card"><h2>ಪರೀಕ್ಷಿಸಿ</h2><div id="quiz"></div><p class="note" id="qScore"></p></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),NS="http://www.w3.org/2000/svg";
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const rnd=(a,b)=>a+Math.random()*(b-a), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const sm=u=>{u=clamp(u,0,1);return u*u*(3-2*u)};
+
+/* ================= ಕರಗುತ್ತದೆಯೇ? ================= */
+const SUBS={salt:{n:26,r:2.3,c:"#ffffff",s:"#9aa",dis:true,msg:"ಉಪ್ಪು ನೀರಿನಲ್ಲಿ <b>ಕರಗಿತು</b>. ನೀರು ತಿಳಿಯಾಗಿದೆ, ಕಣಗಳು ಕಾಣುವುದಿಲ್ಲ. (ಇದನ್ನು ಸೋಸಿದರೆ ಬೇರ್ಪಡುವುದಿಲ್ಲ!)"},
+ sugar:{n:26,r:2.5,c:"#fff8f0",s:"#c9b79c",dis:true,msg:"ಸಕ್ಕರೆ ನೀರಿನಲ್ಲಿ <b>ಕರಗಿತು</b>. ಕರಗಿದ ವಸ್ತುವನ್ನು ಕಣ್ಣಿನಿಂದ ಗುರುತಿಸಲಾಗದು."},
+ sand:{n:26,r:2.8,c:"#d9b26f",s:"#a9803a",dis:false,msg:"ಮರಳು <b>ಕರಗಲಿಲ್ಲ</b>. ಭಾರವಾದ್ದರಿಂದ ತಳ ಸೇರಿತು."},
+ soil:{n:30,r:2.2,c:"#8b5e3c",s:"#5c3a1d",dis:false,murk:true,msg:"ಮಣ್ಣು <b>ಕರಗಲಿಲ್ಲ</b>. ಮೊದಲು ನೀರು ಕದಡಿತು, ನಂತರ ಮಣ್ಣು ನಿಧಾನವಾಗಿ ತಳ ಸೇರಿತು."}};
+let dsRaf=0,dsBusy=false;
+function runSub(key){
+ if(dsBusy)return;dsBusy=true;cancelAnimationFrame(dsRaf);
+ const c=SUBS[key],g=$("#dsP");g.innerHTML="";$("#dsW").setAttribute("fill","#8fc7ff");$("#dsW").setAttribute("opacity",".55");
+ const ps=[];for(let i=0;i<c.n;i++)ps.push({el:mk("circle",{r:c.r,fill:c.c,stroke:c.s,"stroke-width":.8},g),x:rnd(112,208),y:rnd(8,50),d:rnd(0,1.4),fl:rnd(184,198)-c.r,vs:rnd(30,60)});
+ $("#dsSay").textContent="ಹಾಕುತ್ತಿದ್ದೇವೆ…";let t=0,last=performance.now();
+ const step=now=>{const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;
+  ps.forEach(p=>{if(t>p.d){if(p.y<p.fl)p.y+=(p.y<100?110:p.vs)*dt;else if(c.dis){p.o=Math.max(0,(p.o??1)-dt*.5);p.el.setAttribute("opacity",p.o)}
+   p.el.setAttribute("cx",p.x);p.el.setAttribute("cy",p.y)}});
+  if(c.murk){const k=clamp(1-(t-1.5)/4,0,1);$("#dsW").setAttribute("fill",`rgb(${Math.round(143-40*k)},${Math.round(199-70*k)},${Math.round(255-120*k)})`)}
+  if(t<5)dsRaf=requestAnimationFrame(step);else{$("#dsSay").innerHTML=c.msg;dsBusy=false}};
+ dsRaf=requestAnimationFrame(step);
+}
+document.querySelectorAll("[data-sub]").forEach(b=>b.onclick=()=>runSub(b.dataset.sub));
+
+/* ================= ಪ್ರಯೋಗಶಾಲೆ ================= */
+const MIX={
+ rice:{n:"🍚 ಅಕ್ಕಿ + ಕಲ್ಲು",A:[30,3,"#f7f1df","#cbbf9c"],B:[6,6,"#8a8f98","#555"],ok:["pick"],hint:"ಕಲ್ಲುಗಳು ಅಕ್ಕಿಗಿಂತ ಬಹಳ ದೊಡ್ಡವು.",ct:"pile"},
+ wheat:{n:"🌾 ಗೋಧಿ + ಹೊಟ್ಟು",A:[28,3.5,"#e0b13c","#a37a12"],B:[28,2.6,"#b5936a","#8a6a3f"],ok:["winnow"],hint:"ಗೋಧಿ ಭಾರ, ಹೊಟ್ಟು ಬಹಳ ಹಗುರ.",ct:"pile"},
+ flour:{n:"🥣 ಹಿಟ್ಟು + ಕಲ್ಲಿನ ಹರಳು",A:[70,1.8,"#ffffff","#bbb"],B:[8,6,"#7d838e","#444"],ok:["sieve"],hint:"ಹಿಟ್ಟಿನ ಕಣಗಳು ಬಹಳ ಸಣ್ಣ, ಹರಳುಗಳು ದೊಡ್ಡವು (ಆದರೆ ಕೈಯಿಂದ ಆರಿಸಲು ಕಷ್ಟ).",ct:"pile"},
+ mud:{n:"💧 ಮಣ್ಣು ನೀರು",A:[0],B:[40,2.6,"#8b5e3c","#5c3a1d"],ok:["sed","filter"],hint:"ಮಣ್ಣು ನೀರಿನಲ್ಲಿ ಕರಗದು; ಮಣ್ಣಿನ ಕಣಗಳು ನೀರಿಗಿಂತ ಭಾರ.",ct:"beaker"},
+ salt:{n:"🧂 ಉಪ್ಪು ನೀರು",A:[0],B:[40,3,"#ffffff","#99a"],ok:["evap"],hint:"ಉಪ್ಪು ನೀರಿನಲ್ಲಿ ಕರಗಿದೆ — ಕಣಗಳು ಕಾಣುವುದಿಲ್ಲ.",ct:"beaker"},
+ iron:{n:"🧲 ಕಬ್ಬಿಣದ ಪುಡಿ + ಮರಳು",A:[26,2.5,"#2b2b2b","#000"],B:[40,2.5,"#d9b26f","#a9803a"],ok:["magnet"],hint:"ಕಬ್ಬಿಣ ಮತ್ತು ಮರಳಿನ ಕಣಗಳ ಗಾತ್ರ ಒಂದೇ. ಒಂದು ಚುಂಬಕೀಯ ವಸ್ತು.",ct:"pile"},
+ curd:{n:"🥛 ಮೊಸರು (ಬೆಣ್ಣೆ ಬೇಕು)",A:[0],B:[22,3.4,"#f2d03b","#b8960c"],ok:["churn"],hint:"ಮೊಸರಿನಲ್ಲಿ ಹಗುರವಾದ ಕೊಬ್ಬಿನ ಹನಿಗಳಿವೆ.",ct:"pot"}
+};
+const NAMES={pick:"ಆರಿಸುವಿಕೆ",winnow:"ತೂರುವಿಕೆ",sieve:"ಜರಡಿ ಹಿಡಿಯುವಿಕೆ",sed:"ತಳ ಸೇರುವಿಕೆ + ಬಸಿಯುವಿಕೆ",filter:"ಸೋಸುವಿಕೆ",evap:"ಆವಿಭವನ",magnet:"ಚುಂಬಕೀಯ",churn:"ಕಡೆಯುವಿಕೆ"};
+const REASON={pick:"ಆರಿಸುವಿಕೆ: ಕೈಯಿಂದ ಎತ್ತಿ ತೆಗೆಯುವಷ್ಟು ದೊಡ್ಡ ಕಣಗಳು ಬೇಕು.",winnow:"ತೂರುವಿಕೆ: ಭಾರ ಮತ್ತು ಹಗುರ ಕಣಗಳು ಇರಬೇಕು, ಗಾಳಿ ಬೇಕು.",sieve:"ಜರಡಿ: ಕಣಗಳ ಗಾತ್ರದಲ್ಲಿ ವ್ಯತ್ಯಾಸ ಇರಬೇಕು.",sed:"ತಳ ಸೇರುವಿಕೆ: ನೀರಿನಲ್ಲಿ ಕರಗದ ಭಾರವಾದ ಕಣಗಳು ಇರಬೇಕು.",filter:"ಸೋಸುವಿಕೆ: ದ್ರವದಲ್ಲಿ ಕರಗದ ಘನ ಕಣಗಳು ಇರಬೇಕು.",evap:"ಆವಿಭವನ: ದ್ರವದಲ್ಲಿ ಕರಗಿದ ಘನ ವಸ್ತು ಇರಬೇಕು.",magnet:"ಚುಂಬಕ: ಒಂದು ವಸ್ತು ಕಬ್ಬಿಣದಂತಹ ಚುಂಬಕೀಯವಾಗಿರಬೇಕು.",churn:"ಕಡೆಯುವಿಕೆ: ಹಾಲು/ಮೊಸರಿನಿಂದ ಬೆಣ್ಣೆ ಬೇರ್ಪಡಿಸಲು ಮಾತ್ರ."};
+const GOOD={pick:"ಕೈಯಿಂದ ದೊಡ್ಡ ಕಲ್ಲುಗಳನ್ನು ಒಂದೊಂದಾಗಿ ಆರಿಸಿ ತೆಗೆದೆವು — <b>ಆರಿಸುವಿಕೆ</b>.",winnow:"ಭಾರವಾದ ಗೋಧಿ ಹತ್ತಿರವೇ ಬಿತ್ತು, ಹಗುರ ಹೊಟ್ಟು ಗಾಳಿಯಲ್ಲಿ ದೂರ ಹೋಯಿತು — <b>ತೂರುವಿಕೆ</b>.",sieve:"ಸಣ್ಣ ಹಿಟ್ಟು ಜರಡಿಯ ರಂಧ್ರಗಳಿಂದ ಕೆಳಗೆ ಬಿತ್ತು, ದೊಡ್ಡ ಹರಳುಗಳು ಮೇಲೆ ಉಳಿದವು — <b>ಜರಡಿ ಹಿಡಿಯುವಿಕೆ</b>.",sed:"ಭಾರವಾದ ಮಣ್ಣು ತಳ ಸೇರಿತು (<b>ತಳ ಸೇರುವಿಕೆ</b>), ತಿಳಿ ನೀರನ್ನು ನಿಧಾನವಾಗಿ ಬಸಿದೆವು (<b>ಬಸಿಯುವಿಕೆ</b>).",filter:"ನೀರು ಫಿಲ್ಟರ್ ಪೇಪರ್‌ನ ಸೂಕ್ಷ್ಮ ರಂಧ್ರಗಳಿಂದ ಹಾದು ಹೋಯಿತು, ಮಣ್ಣು ಮೇಲೆ ಉಳಿಯಿತು — <b>ಸೋಸುವಿಕೆ</b>.",evap:"ನೀರು ಆವಿಯಾಗಿ ಹೋಯಿತು, ಕರಗಿದ್ದ ಉಪ್ಪು ಹರಳುಗಳಾಗಿ ಉಳಿಯಿತು — <b>ಆವಿಭವನ</b>. (ಸಮುದ್ರದ ನೀರಿನಿಂದ ಉಪ್ಪು ಇದೇ ರೀತಿ ತಯಾರಾಗುತ್ತದೆ.)",magnet:"ಚುಂಬಕ ಕಬ್ಬಿಣದ ಪುಡಿಯನ್ನು ಸೆಳೆಯಿತು, ಮರಳನ್ನು ಸೆಳೆಯಲಿಲ್ಲ — <b>ಚುಂಬಕೀಯ ಬೇರ್ಪಡಿಸುವಿಕೆ</b>.",churn:"ಕಡೆದಾಗ ಹಗುರವಾದ ಕೊಬ್ಬು ಒಟ್ಟುಗೂಡಿ ಬೆಣ್ಣೆಯಾಗಿ ಮೇಲೆ ತೇಲಿತು — <b>ಕಡೆಯುವಿಕೆ</b>."};
+
+let S=null,raf=0,selMix=null,selMet=null,okSet=new Set();
+function clearScene(){$("#ex").innerHTML="";$("#pts").innerHTML="";$("#fx").innerHTML=""}
+function mkPs(key){const c=MIX[key],ps=[];[[c.A,0],[c.B,1]].forEach(([d,k])=>{if(!d[0])return;for(let i=0;i<d[0];i++)ps.push({el:mk("circle",{r:d[1],fill:d[2],stroke:d[3],"stroke-width":.8},$("#pts")),k,r:d[1],x:0,y:0})});return ps}
+function put(p,x,y){p.x=x;p.y=y;p.el.setAttribute("cx",x.toFixed(1));p.el.setAttribute("cy",y.toFixed(1))}
+function op(p,o){p.el.setAttribute("opacity",o)}
+function containers(key){const ct=MIX[key].ct,ex=$("#ex");
+ if(ct=="beaker"){mk("rect",{id:"water",x:92,y:80,width:136,height:120,fill:"#8fc7ff",opacity:.55},ex);mk("path",{d:"M90 60 V203 H230 V60",fill:"none",stroke:"#7a8a99","stroke-width":3},ex)}
+ if(ct=="pot"){mk("rect",{x:110,y:80,width:100,height:122,rx:8,fill:"#fff8ea",stroke:"#9a8a6a","stroke-width":3},ex)}}
+function pileXY(p,key){const ct=MIX[key].ct;
+ if(ct=="pile")put(p,rnd(75,245),205-p.r-rnd(0,28));
+ else if(ct=="beaker")put(p,rnd(100,220),rnd(88,194));
+ else put(p,rnd(120,200),rnd(95,194))}
+function prepare(key){cancelAnimationFrame(raf);clearScene();const ps=mkPs(key);S={key,ps,run:false,t:0};containers(key);
+ ps.forEach(p=>{pileXY(p,key);if(key=="salt")op(p,0)})}
+
+/* --- ವಿಧಾನಗಳು --- */
+const M={
+ pick:{setup(S){const g=$("#ex");mk("path",{d:"M232 178 Q262 215 292 178 Z",fill:"#d8c9a8",stroke:"#8a7a58","stroke-width":2},g);
+   S.hand=mk("text",{x:200,y:160,"font-size":28,"text-anchor":"middle"},$("#fx"));S.hand.textContent="✋";
+   S.st=S.ps.filter(p=>p.k==1);S.st.forEach((p,j)=>{p.sx=p.x;p.sy=p.y;p.tx=rnd(240,284);p.ty=198-rnd(0,8);p.t0=.6+j*.9})},
+  step(S,t){let hx=200,hy=150;S.st.forEach(p=>{if(t>=p.t0&&t<p.t0+.8){const u=sm((t-p.t0)/.8);put(p,p.sx+(p.tx-p.sx)*u,p.sy+(p.ty-p.sy)*u-Math.sin(u*Math.PI)*18);hx=p.x;hy=p.y-10}else if(t>=p.t0+.8)put(p,p.tx,p.ty)});
+   const nx=S.st.find(p=>t<p.t0);if(nx&&t<nx.t0&&!S.st.some(p=>t>=p.t0&&t<p.t0+.8)){hx=nx.x;hy=nx.y-12}
+   S.hand.setAttribute("x",hx);S.hand.setAttribute("y",hy);return t>.6+S.st.length*.9+.9}},
+ winnow:{setup(S){const g=$("#ex");mk("rect",{x:112,y:8,width:64,height:12,rx:3,fill:"#a98a5c"},g);
+   [50,90,130].forEach(y=>{mk("line",{x1:20,y1:y,x2:92,y2:y,stroke:"#2f6fed","stroke-width":3},g);mk("polygon",{points:`92,${y-6} 104,${y} 92,${y+6}`,fill:"#2f6fed"},g)});
+   mk("text",{x:20,y:40,"font-size":13,fill:"#2f6fed"},g).textContent="ಗಾಳಿ";
+   S.ps.forEach(p=>{p.d=rnd(0,3);p.vx=p.k==0?rnd(-4,4):rnd(22,42);p.vy=p.k==0?rnd(90,110):rnd(30,40);p.x=rnd(122,166);p.y=26;p.done=false;op(p,0)})},
+  step(S,t,dt){S.ps.forEach(p=>{if(t<p.d||p.done)return;op(p,1);p.y+=p.vy*dt;p.x+=p.vx*dt;if(p.y>=205-p.r){p.y=205-p.r;p.done=true}put(p,p.x,p.y)});return t>8.2}},
+ sieve:{setup(S){const g=$("#fx");S.sv=mk("g",{},g);mk("line",{x1:60,y1:125,x2:260,y2:125,stroke:"#555","stroke-width":4,"stroke-dasharray":"3 3"},S.sv);
+   mk("text",{x:262,y:118,"font-size":12,fill:"#555"},g).textContent="ಜರಡಿ";
+   S.ps.forEach(p=>{p.bx=rnd(70,250);p.by=p.k==1?125-p.r-2:125-p.r-rnd(2,22);put(p,p.bx,p.by);p.d=rnd(.6,3.6);p.vy=0;p.fl=205-p.r-rnd(0,18);p.fall=false})},
+  step(S,t,dt){const dx=Math.sin(t*20)*(t<4.8?2:0);S.sv.setAttribute("transform",`translate(${dx} 0)`);
+   S.ps.forEach(p=>{if(p.k==1){put(p,p.bx+dx,p.by);return}
+    if(t>p.d){p.vy+=260*dt;p.by=Math.min(p.fl,p.by+p.vy*dt);if(p.by>=p.fl)p.vy=0;put(p,p.bx+(p.by<p.fl?dx:0),p.by)}else put(p,p.bx+dx,p.by)});return t>5.2}},
+ sed:{setup(S){const ex=$("#ex");S.w=$("#water");mk("path",{d:"M248 120 V203 H298 V120",fill:"none",stroke:"#7a8a99","stroke-width":3},ex);
+   S.w2=mk("rect",{x:250,y:203,width:46,height:0,fill:"#8fc7ff",opacity:.55},ex);S.w.setAttribute("y",80);S.w.setAttribute("height",120);
+   mk("text",{x:272,y:112,"font-size":11,"text-anchor":"middle",fill:"#555"},ex).textContent="ತಿಳಿ ನೀರು";
+   S.ps.forEach(p=>{p.vs=rnd(25,55);p.fl=205-p.r-rnd(0,7)})},
+  step(S,t,dt){S.ps.forEach(p=>{if(t<5.8&&p.y<p.fl){p.y=Math.min(p.fl,p.y+p.vs*dt);put(p,p.x+Math.sin(t*3+p.vs)*.2,p.y)}});
+   if(t>6){const u=sm((t-6)/3),y=80+(188-80)*u;S.w.setAttribute("y",y);S.w.setAttribute("height",203-y);const h=64*u;S.w2.setAttribute("y",203-h);S.w2.setAttribute("height",h)}
+   return t>9.4}},
+ filter:{setup(S){const ex=$("#ex");$("#water")?.remove();mk("polygon",{points:"105,40 215,40 170,112 150,112",fill:"none",stroke:"#7a8a99","stroke-width":3},ex);
+   mk("polygon",{points:"113,46 207,46 168,108 152,108",fill:"#fff",opacity:.55},ex);
+   mk("path",{d:"M115 150 V205 H205 V150",fill:"none",stroke:"#7a8a99","stroke-width":3},ex);
+   S.fw=mk("rect",{x:117,y:205,width:86,height:0,fill:"#8fc7ff",opacity:.6},ex);
+   mk("text",{x:262,y:80,"font-size":11,"text-anchor":"middle",fill:"#555"},ex).textContent="ಫಿಲ್ಟರ್ ಪೇಪರ್";
+   mk("line",{x1:226,y1:76,x2:158,y2:106,stroke:"#555","stroke-width":1},ex);
+   S.dr=[];for(let i=0;i<34;i++){const el=mk("circle",{r:2.6,fill:"#4f97ee"},$("#pts"));S.dr.push({el,r:2.6,x:rnd(125,195),y:rnd(48,70),d:rnd(.3,4),ph:0,vy:0,sx:0,sy:0})}
+   S.ps.forEach(p=>{put(p,rnd(125,195),rnd(48,80));p.tx=rnd(155,165);p.ty=rnd(98,108)});S.lv=0},
+  step(S,t,dt){S.ps.forEach(p=>{p.x+=(p.tx-p.x)*Math.min(1,dt*.7);p.y+=(p.ty-p.y)*Math.min(1,dt*.7);put(p,p.x,p.y)});
+   S.dr.forEach(d=>{if(t<d.d){put(d,d.x,d.y);return}
+    if(d.ph==0){d.sx=d.x;d.sy=d.y;d.ph=1;d.t0=t}
+    if(d.ph==1){const u=sm((t-d.t0)/.9);put(d,d.sx+(160-d.sx)*u,d.sy+(112-d.sy)*u);if(u>=1){d.ph=2;d.vy=20}}
+    else if(d.ph==2){d.vy+=300*dt;d.y+=d.vy*dt;put(d,160+rnd(-.3,.3),d.y);if(d.y>=204-S.lv){d.ph=3;S.lv=Math.min(40,S.lv+1.1);S.fw.setAttribute("y",205-S.lv);S.fw.setAttribute("height",S.lv);d.el.setAttribute("opacity",0)}}});
+   return t>7}},
+ evap:{setup(S){const ex=$("#ex");$("#water")?.remove();mk("path",{d:"M85 130 V160 Q85 203 125 203 H195 Q235 203 235 160 V130",fill:"none",stroke:"#7a8a99","stroke-width":3},ex);
+   S.w=mk("rect",{x:88,y:150,width:144,height:50,rx:6,fill:"#8fc7ff",opacity:.6},ex);
+   const fl=mk("text",{x:160,y:230,"font-size":22,"text-anchor":"middle"},ex);fl.textContent="🔥🔥🔥";
+   S.vp=[];for(let i=0;i<16;i++){const el=mk("circle",{r:2.4,fill:"#9ab",opacity:0},$("#fx"));S.vp.push({el,x0:rnd(105,215),o:Math.random()})}
+   S.ps.forEach(p=>{put(p,rnd(100,220),205-p.r-rnd(0,6));op(p,0)});S.sy=0},
+  step(S,t,dt){const k=clamp(t/5,0,1),top=150+48*k;S.w.setAttribute("y",top);S.w.setAttribute("height",203-top);
+   S.vp.forEach(v=>{const ph=(t*.45+v.o)%1;v.el.setAttribute("cx",v.x0+Math.sin(t*3+v.o*6)*5);v.el.setAttribute("cy",top-ph*70);v.el.setAttribute("opacity",t<5.2?(1-ph)*.8:0)});
+   S.ps.forEach(p=>op(p,clamp((t-3)/2,0,1)));return t>6.2}},
+ magnet:{setup(S){S.mg=mk("text",{x:70,y:130,"font-size":36,"text-anchor":"middle"},$("#fx"));S.mg.textContent="🧲";
+   S.ps.forEach(p=>{p.att=null;if(p.k==0)p.el.setAttribute("opacity",1)})},
+  step(S,t){const mx=70+clamp(t/4.5,0,1)*180,my=t<4.6?165:Math.max(60,165-(t-4.6)*55);S.mg.setAttribute("x",mx);S.mg.setAttribute("y",my);
+   S.ps.forEach(p=>{if(p.k!=0)return;if(!p.att&&t<4.7&&Math.abs(p.x-mx)<20)p.att={ox:rnd(-9,9),oy:rnd(10,22)};if(p.att)put(p,mx+p.att.ox,my+p.att.oy)});return t>7.2}},
+ churn:{setup(S){const fx=$("#fx");S.st=mk("g",{},fx);mk("line",{x1:160,y1:62,x2:160,y2:176,stroke:"#8a6a3f","stroke-width":4},S.st);S.pd=mk("rect",{x:-18,y:-3,width:36,height:6,fill:"#8a6a3f"},S.st);
+   S.bt=mk("ellipse",{cx:160,cy:96,rx:26,ry:10,fill:"#f2d03b",stroke:"#b8960c",opacity:0},$("#ex"));
+   S.bl=mk("text",{x:160,y:76,"text-anchor":"middle","font-size":13,fill:"#8a6a00",opacity:0},fx);S.bl.textContent="ಬೆಣ್ಣೆ";
+   S.ps.forEach(p=>{p.ix=p.x;p.iy=p.y;p.tx=rnd(145,175);p.ty=rnd(92,102);p.ph=rnd(0,6.28)})},
+  step(S,t){S.pd.setAttribute("transform",`translate(160 ${170}) scale(${Math.cos(t*7)} 1)`);
+   const pr=clamp(t/6,0,1),e=pr*pr*(3-2*pr);
+   S.ps.forEach(p=>{put(p,p.ix+(p.tx-p.ix)*e+Math.sin(t*8+p.ph)*(1-pr)*7,p.iy+(p.ty-p.iy)*e+Math.cos(t*8+p.ph)*(1-pr)*7)});
+   const o=clamp((t-5.5)/1,0,1);S.bt.setAttribute("opacity",o);S.bl.setAttribute("opacity",o);return t>7.2}}
+};
+
+/* --- ನಿಯಂತ್ರಣ --- */
+function buildBtns(){
+ Object.keys(MIX).forEach(k=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=MIX[k].n;b.dataset.k=k;
+  b.onclick=()=>{if(S&&S.run)return;selMix=k;document.querySelectorAll("#mixBtns .btn").forEach(x=>x.classList.toggle("sel",x==b));
+   $("#mixHint").innerHTML="💡 ಗಮನಿಸಿ: "+MIX[k].hint;$("#labSay").className="say";$("#labSay").textContent=selMet?"▶ ಒತ್ತಿ.":"ಈಗ ವಿಧಾನ ಆರಿಸಿ.";prepare(k)};$("#mixBtns").appendChild(b)});
+ Object.keys(NAMES).forEach(k=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=NAMES[k];b.dataset.m=k;
+  b.onclick=()=>{if(S&&S.run)return;selMet=k;document.querySelectorAll("#metBtns .btn").forEach(x=>x.classList.toggle("sel",x==b))};$("#metBtns").appendChild(b)})}
+buildBtns();
+function setBusy(v){["#go"].forEach(s=>$(s).disabled=v);document.querySelectorAll("#mixBtns .btn,#metBtns .btn").forEach(b=>b.disabled=v)}
+function loop(now){if(!S||!S.run)return;const dt=Math.min(.05,(now-S.last)/1000);S.last=now;S.t+=dt;
+ const done=S.good?M[S.m].step(S,S.t,dt):S.step(S,S.t,dt);
+ if(done||S.t>14)finish();else raf=requestAnimationFrame(loop)}
+function finish(){S.run=false;setBusy(false);const box=$("#labSay");
+ if(S.good){box.className="say";box.innerHTML="✅ "+GOOD[S.m];okSet.add(S.key+"|"+S.m);$("#tried").textContent="✔ "+okSet.size+" ಸರಿ ಸಂಯೋಜನೆ ಕಂಡುಕೊಂಡಿರಿ"}
+ else{box.className="say bad";box.innerHTML="❌ "+NAMES[S.m]+" ವಿಧಾನದಿಂದ ಈ ಮಿಶ್ರಣ ಬೇರ್ಪಡಲಿಲ್ಲ.<br>"+REASON[S.m]+"<br>ಬೇರೆ ವಿಧಾನ ಪ್ರಯತ್ನಿಸಿ."}}
+$("#go").onclick=()=>{if(!selMix||!selMet){$("#labSay").className="say";$("#labSay").textContent="ಮೊದಲು ಮಿಶ್ರಣ ಮತ್ತು ವಿಧಾನ ಎರಡನ್ನೂ ಆರಿಸಿ.";return}
+ if(S&&S.run)return;prepare(selMix);S.m=selMet;S.good=MIX[selMix].ok.includes(selMet);S.run=true;S.last=performance.now();setBusy(true);
+ if(S.good)M[selMet].setup(S);else{S.ps.forEach(p=>{p.bx=p.x;p.by=p.y});S.step=(S,t)=>{S.ps.forEach(p=>put(p,p.bx+Math.sin(t*14+p.bx)*1.2,p.by+Math.cos(t*13+p.by)*1.2));return t>2.5}}
+ $("#labSay").className="say";$("#labSay").textContent="ನೋಡಿ…";raf=requestAnimationFrame(loop)};
+
+/* ---- ಪ್ರಶ್ನೆಗಳು ---- */
+const qs=[
+ ["ಭಾರವಾದ ಮತ್ತು ಹಗುರವಾದ ಪದಾರ್ಥಗಳನ್ನು ಗಾಳಿಯ ಸಹಾಯದಿಂದ ಬೇರ್ಪಡಿಸುವ ವಿಧಾನ ಯಾವುದು?",["ತೂರುವಿಕೆ","ಆವಿಭವನ","ಸೋಸುವಿಕೆ"],0,"ತೂರುವಿಕೆಯಲ್ಲಿ ಗಾಳಿ ಹಗುರ ಹೊಟ್ಟನ್ನು ದೂರ ಒಯ್ಯುತ್ತದೆ."],
+ ["ಸಮುದ್ರದ ನೀರಿನಿಂದ ಉಪ್ಪು ಪಡೆಯಲು ಯಾವ ವಿಧಾನ ಬಳಸುತ್ತಾರೆ?",["ಜರಡಿ ಹಿಡಿಯುವಿಕೆ","ಚುಂಬಕೀಯ ಬೇರ್ಪಡಿಸುವಿಕೆ","ಆವಿಭವನ"],2,"ಸೂರ್ಯನ ಬಿಸಿಲಿನಿಂದ ನೀರು ಆವಿಯಾಗಿ ಉಪ್ಪು ಉಳಿಯುತ್ತದೆ."],
+ ["ಕಬ್ಬಿಣದ ಪುಡಿ ಮತ್ತು ಮರಳಿನ ಮಿಶ್ರಣವನ್ನು ಹೇಗೆ ಬೇರ್ಪಡಿಸಬಹುದು?",["ಚುಂಬಕ ಬಳಸಿ","ಆವಿಭವನ ಮಾಡಿ","ಕಡೆದು"],0,"ಚುಂಬಕ ಕಬ್ಬಿಣವನ್ನು ಮಾತ್ರ ಸೆಳೆಯುತ್ತದೆ."],
+ ["ನೀರಿನಲ್ಲಿ ಕರಗಿದ ಉಪ್ಪನ್ನು ಫಿಲ್ಟರ್ ಪೇಪರ್‌ನಿಂದ ಸೋಸಿ ಬೇರ್ಪಡಿಸಬಹುದೇ?",["ಹೌದು","ಇಲ್ಲ, ಕರಗಿದ ವಸ್ತು ಕಾಗದದ ರಂಧ್ರಗಳಿಂದ ನೀರಿನೊಂದಿಗೆ ಹಾದುಹೋಗುತ್ತದೆ","ಉಪ್ಪು ಮಾತ್ರ ಹಾದುಹೋಗುತ್ತದೆ"],1,"ಕರಗಿದ ವಸ್ತು ಕಣ್ಣಿಗೆ ಕಾಣದಷ್ಟು ಸೂಕ್ಷ್ಮ — ಆವಿಭವನ ಬೇಕು."],
+ ["ಮೊಸರಿನಿಂದ ಬೆಣ್ಣೆ ಬೇರ್ಪಡಿಸಲು ಬಳಸುವ ವಿಧಾನ?",["ಕಡೆಯುವಿಕೆ","ತೂರುವಿಕೆ","ಆರಿಸುವಿಕೆ"],0,"ಕಡೆದಾಗ ಹಗುರ ಕೊಬ್ಬು ಬೆಣ್ಣೆಯಾಗಿ ಮೇಲೆ ತೇಲುತ್ತದೆ."]
+];
+let sc=0,done=0;
+qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p>${qi+1}. ${q[0]}</p>`;const o=document.createElement("div");o.className="opts";const fb=document.createElement("div");fb.className="fb";let ans=false;
+ q[1].forEach((t,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=t;
+  b.onclick=()=>{if(ans)return;ans=true;done++;if(i==q[2]){sc++;b.style.outline="3px solid #1f9d55";fb.innerHTML='<span class="ok">✅ ಸರಿ!</span> '+q[3]}else{b.style.outline="3px solid #d64545";fb.innerHTML='<span class="bad">❌ ತಪ್ಪು.</span> '+q[3]}
+   $("#qScore").textContent=`ಅಂಕ: ${sc}/${done} (ಒಟ್ಟು ${qs.length})`};o.appendChild(b)});
+ d.appendChild(o);d.appendChild(fb);$("#quiz").appendChild(d)});
+</script>
+</body>
+</html>

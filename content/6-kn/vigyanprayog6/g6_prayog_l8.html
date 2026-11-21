@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="kn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ಆಕಾಶದ ಆಚೆ – ಅನಿಮೇಟೆಡ್ ಪ್ರಯೋಗಗಳು (6ನೇ ತರಗತಿ, ಪಾಠ 8)</title><style>
+:root{--bg:#f5f6f2;--card:#fff;--ink:#202722;--mute:#5d675f;--line:#e0e4da;--green:#2e8b57;--blue:#2f6fed;--orange:#e8801f;--red:#d64545;--sky:#eaf4f1}
+@media(prefers-color-scheme:dark){:root{--bg:#121613;--card:#1b211c;--ink:#edf2ee;--mute:#a6b2a9;--line:#2c352e;--sky:#1c2a26}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI",system-ui,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:22px;margin:8px 0 4px}h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.tag{display:inline-block;font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+svg{width:100%;height:auto;display:block;border-radius:12px;background:var(--sky);touch-action:manipulation}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button.btn{border:1px solid transparent;background:var(--green);color:#fff;border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;cursor:pointer}
+button.btn.o{background:var(--orange)}button.btn.b{background:var(--blue)}
+button.btn.ghost{background:var(--bg);color:var(--ink);border-color:var(--line)}
+button.btn.sel{outline:3px solid var(--orange)}
+button.btn:disabled{opacity:.45}
+input[type=range]{flex:1;min-width:150px;accent-color:var(--green)}
+.say{padding:10px 12px;border-left:4px solid var(--green);background:var(--bg);border-radius:8px;font-size:15px;margin-top:8px}
+.say.bad{border-left-color:var(--red)}
+.lbl{font-size:13px;color:var(--mute);margin:8px 0 0}
+.note{font-size:13px;color:var(--mute);margin-top:6px}
+.big{font-size:26px;font-weight:700;text-align:center;margin:6px 0}
+.q{margin:12px 0}.q p{margin:0 0 6px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:6px}.opts button{text-align:left}
+.fb{font-size:14px;margin-top:4px}.ok{color:#1f9d55}.bad{color:var(--red)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl td,.tbl th{border:1px solid var(--line);padding:6px;text-align:center}
+</style></head><body><div class="wrap">
+<h1>🚀 ಆಕಾಶದ ಆಚೆ</h1>
+<p class="sub">6ನೇ ತರಗತಿ · ಸಾಮಾನ್ಯ ವಿಜ್ಞಾನ · ಪಾಠ 8 — ಆಕಾಶ, ಬಾಹ್ಯಾಕಾಶ, ನಕ್ಷತ್ರಗಳ ಚಲನೆ, ಧೂಮಕೇತು ಮತ್ತು ಇಸ್ರೋ ಯಾನಗಳು — ಮುಟ್ಟಿ ನೋಡಿ ಕಲಿಯಿರಿ</p>
+<div class="card">
+<h2>ಪ್ರಯೋಗ 1: ಆಕಾಶದಿಂದ ಬಾಹ್ಯಾಕಾಶಕ್ಕೆ</h2>
+<div><span class="tag">ವಾತಾವರಣ</span><span class="tag">ಗಾಳಿ ವಿರಳ</span><span class="tag">ಬಾಹ್ಯಾಕಾಶ</span></div>
+<p class="sub">ಸ್ಲೈಡರ್ ಎಳೆದು ಭೂಮಿಯಿಂದ ಮೇಲೆ ಹೋಗಿ. ಗಾಳಿ ಕಡಿಮೆಯಾಗುವುದನ್ನು ಮತ್ತು ಆಕಾಶದ ಬಣ್ಣ ಬದಲಾಗುವುದನ್ನು ನೋಡಿ.</p>
+<svg viewBox="0 0 320 200"><rect id="skyR" width="320" height="200" fill="#6fb6ee"/><g id="air"></g><rect y="180" width="320" height="20" fill="#5a9a4a"/><text id="ico" x="160" y="170" font-size="26" text-anchor="middle">🏔️</text></svg>
+<div class="row"><span style="min-width:120px">ಎತ್ತರ: <b id="hV">0</b> ಕಿ.ಮೀ</span><input type="range" id="alt" min="0" max="100" value="0"></div>
+<div class="say" id="aSay"></div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 2: ರಾತ್ರಿಯ ಆಕಾಶ — ಧ್ರುವತಾರೆ ಮತ್ತು ಸಪ್ತರ್ಷಿ</h2>
+<div><span class="tag">ಭೂಮಿಯ ತಿರುಗುವಿಕೆ</span><span class="tag">ಧ್ರುವತಾರೆ</span></div>
+<p class="sub">ಸಮಯ ಸರಿಸಿ. ನಕ್ಷತ್ರಗಳ ಆಕಾರ ಬದಲಾಗುತ್ತದೆಯೇ? ಅವುಗಳ ಸ್ಥಾನ ಬದಲಾಗುತ್ತದೆಯೇ?</p>
+<svg viewBox="0 0 320 230"><rect width="320" height="230" fill="#0b1536" rx="8"/><circle cx="160" cy="115" r="105" fill="none" stroke="#2a3a6e" stroke-dasharray="3 5"/><circle cx="160" cy="115" r="62" fill="none" stroke="#2a3a6e" stroke-dasharray="3 5"/>
+<polyline id="sap" fill="none" stroke="#9db6ff" stroke-width="1.5"/><g id="sapS"></g><text x="160" y="115" font-size="18" text-anchor="middle" dy="6" fill="#ffd34d">★</text><text x="172" y="106" font-size="10" fill="#ffd34d">ಧ್ರುವತಾರೆ</text><text id="tm" x="160" y="222" font-size="12" text-anchor="middle" fill="#fff"></text></svg>
+<div class="row"><span style="min-width:110px">ಗಂಟೆ: <b id="hrV">0</b></span><input type="range" id="hr" min="0" max="12" step=".25" value="0"></div>
+<div class="row"><button class="btn o" id="spin">▶ ರಾತ್ರಿ ಓಡಿಸಿ</button></div>
+<div class="say" id="sSay">ಧ್ರುವತಾರೆ ಯಾವಾಗಲೂ ಒಂದೇ ಸ್ಥಳದಲ್ಲಿ ಕಾಣುತ್ತದೆ; ಉಳಿದ ನಕ್ಷತ್ರಗಳು ಅದರ ಸುತ್ತ ತಿರುಗಿದಂತೆ ಕಾಣುತ್ತವೆ.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 3: ಧೂಮಕೇತು</h2>
+<div><span class="tag">ಧೂಮಕೇತು</span><span class="tag">ಬಾಲ ಸೂರ್ಯನ ವಿರುದ್ಧ ದಿಕ್ಕು</span></div>
+<p class="sub">ಧೂಮಕೇತು ಸೂರ್ಯನ ಸುತ್ತ ಅಂಡಾಕಾರದ ಪಥದಲ್ಲಿ ಚಲಿಸುತ್ತದೆ. ಸೂರ್ಯನ ಹತ್ತಿರ ಬಂದಾಗ ಬಾಲ ಹೇಗಿರುತ್ತದೆ?</p>
+<svg viewBox="0 0 320 200"><ellipse cx="125" cy="100" rx="120" ry="60" fill="none" stroke="#888" stroke-dasharray="4 4"/><text x="229" y="104" font-size="26" text-anchor="middle">☀️</text><line id="tail" stroke="#9fd8ff" stroke-width="6" stroke-linecap="round"/><circle id="head" r="5" fill="#fff" stroke="#333"/><text id="dT" x="160" y="192" font-size="12" text-anchor="middle" fill="var(--ink)"></text></svg>
+<div class="row"><span style="min-width:60px">ವೇಗ</span><input type="range" id="csp" min="1" max="5" value="2"></div>
+<div class="say" id="cSay"></div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 4: ಇಸ್ರೋ ಯಾನಗಳು</h2>
+<div><span class="tag">ಇಸ್ರೋ</span><span class="tag">ಚಂದ್ರಯಾನ</span><span class="tag">ಆದಿತ್ಯ L1</span></div>
+<p class="sub">ಒಂದು ಯಾನ ಆರಿಸಿ. ಉಪಗ್ರಹ ಎಲ್ಲಿಗೆ ಹೋಗುತ್ತದೆ ಎಂದು ನೋಡಿ. (ಪ್ರಮಾಣಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಚಿತ್ರಿಸಿಲ್ಲ)</p>
+<svg viewBox="0 0 320 180"><rect width="320" height="180" fill="#0b1536" rx="8"/><circle cx="40" cy="95" r="16" fill="#2f6fed"/><text x="40" y="125" font-size="10" text-anchor="middle" fill="#fff">ಭೂಮಿ</text>
+<circle cx="40" cy="95" r="50" fill="none" stroke="#445" stroke-dasharray="3 4"/><text x="90" y="95" font-size="16" text-anchor="middle" dy="5">🌕</text>
+<text x="235" y="95" font-size="12" text-anchor="middle" fill="#ffd34d" dy="4">L1 ●</text><text x="295" y="95" font-size="26" text-anchor="middle" dy="8">☀️</text><text x="290" y="35" font-size="18" text-anchor="middle">🔴</text><text x="290" y="52" font-size="9" text-anchor="middle" fill="#fff">ಮಂಗಳ</text>
+<circle id="fl" r="5" fill="#fff" cx="40" cy="95"/></svg>
+<div class="row" style="flex-wrap:wrap" id="mBtns"></div>
+<div class="say" id="mSay">ಒಂದು ಯಾನ ಆರಿಸಿ.</div>
+</div>
+
+<div class="card"><h2>ಪರೀಕ್ಷಿಸಿ</h2><div id="quiz"></div><p class="note" id="qScore"></p></div>
+</div><script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],NS="http://www.w3.org/2000/svg";
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),sm=u=>{u=clamp(u,0,1);return u*u*(3-2*u)};
+function loopRun(fn){let last=performance.now(),t=0,id=0,on=true;const f=now=>{if(!on)return;const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;if(fn(t,dt)===true){on=false;return}id=requestAnimationFrame(f)};id=requestAnimationFrame(f);return()=>{on=false;cancelAnimationFrame(id)}}
+function buildQuiz(qs){let sc=0,done=0;qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p>${qi+1}. ${q[0]}</p>`;const o=document.createElement("div");o.className="opts";const fb=document.createElement("div");fb.className="fb";let ans=false;
+ q[1].forEach((t,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=t;
+  b.onclick=()=>{if(ans)return;ans=true;done++;if(i==q[2]){sc++;b.style.outline="3px solid #1f9d55";fb.innerHTML='<span class="ok">✅ ಸರಿ!</span> '+q[3]}else{b.style.outline="3px solid #d64545";fb.innerHTML='<span class="bad">❌ ತಪ್ಪು.</span> '+q[3]}
+   $("#qScore").textContent=`ಅಂಕ: ${sc}/${done} (ಒಟ್ಟು ${qs.length})`};o.appendChild(b)});
+ d.appendChild(o);d.appendChild(fb);$("#quiz").appendChild(d)})}
+
+/* ---- 1: ವಾತಾವರಣ ---- */
+const airG=$("#air"),dots=[];for(let i=0;i<70;i++)dots.push(mk("circle",{cx:rnd(8,312),cy:rnd(8,172),r:2,fill:"#fff"},airG));
+const ico=$("#ico");
+function hOf(v){return v==0?0:Math.pow(10,v/100*4.6)-1}
+function a1(){const v=+$("#alt").value,h=hOf(v);$("#hV").textContent=h<100?h.toFixed(1):Math.round(h).toLocaleString("en");
+ const dens=Math.exp(-h/6);dots.forEach((d,i)=>d.setAttribute("opacity",i/70<dens?.85:0));
+ const k=clamp(1-Math.log10(h+1)/2.2,0,1);const r=Math.round(8+(111-8)*k),g=Math.round(14+(182-14)*k),b=Math.round(30+(238-30)*k);$("#skyR").setAttribute("fill",`rgb(${r},${g},${b})`);
+ let t,e;if(h<6){t="ಇಲ್ಲಿ ಗಾಳಿ ದಟ್ಟವಾಗಿದೆ. ಪಕ್ಷಿಗಳು, ಮೋಡಗಳು ಇರುತ್ತವೆ.";e="🐦"}else if(h<8.8){t="ಮೋಡಗಳು ಸುಮಾರು 6 ಕಿ.ಮೀ ವರೆಗೆ ಇರುತ್ತವೆ.";e="☁️"}else if(h<11){t="ಮೌಂಟ್ ಎವರೆಸ್ಟ್ (8.8 ಕಿ.ಮೀ) ಮೇಲೆ ಗಾಳಿ ವಿರಳ. ಪ್ರಯಾಣಿಕ ವಿಮಾನಗಳು ಸುಮಾರು 10 ಕಿ.ಮೀ ಎತ್ತರದಲ್ಲಿ ಹಾರುತ್ತವೆ.";e="✈️"}else if(h<30){t="ಯುದ್ಧ ವಿಮಾನಗಳು ಸುಮಾರು 20 ಕಿ.ಮೀ ಎತ್ತರದಲ್ಲಿ ಹಾರುತ್ತವೆ. ಗಾಳಿ ಇನ್ನೂ ವಿರಳ.";e="🛩️"}else if(h<100){t="ಗಾಳಿ ಬಹಳ ಕಡಿಮೆ. ಆಕಾಶ ಕಪ್ಪಾಗುತ್ತಿದೆ.";e="🎈"}else if(h<450){t="ಸುಮಾರು 100 ಕಿ.ಮೀ ನಂತರ ವಾತಾವರಣ ಮುಗಿಯುತ್ತದೆ; ಅಲ್ಲಿಂದ <b>ಬಾಹ್ಯಾಕಾಶ</b> (ಗಾಳಿ ಇಲ್ಲ).";e="🛰️"}else if(h<20000){t="ಬಾಹ್ಯಾಕಾಶ ನಿಲ್ದಾಣ ಸುಮಾರು 450–550 ಕಿ.ಮೀ ಎತ್ತರದಲ್ಲಿ ಪರಿಭ್ರಮಿಸುತ್ತದೆ.";e="🛰️"}else{t="ಭೂ-ಸ್ಥಿರ ಉಪಗ್ರಹಗಳು ಭೂಮಿಯಿಂದ ಸುಮಾರು 36,000 ಕಿ.ಮೀ ದೂರದಲ್ಲಿವೆ.";e="📡"}
+ ico.textContent=e;$("#aSay").innerHTML=t}
+$("#alt").oninput=a1;a1();
+
+/* ---- 2: ನಕ್ಷತ್ರಗಳು ---- */
+const SAP=[[-40,-55],[-12,-60],[10,-82],[40,-90],[44,-60],[88,-72],[96,-100]].map(p=>[p[0],p[1]+10]);
+const sapS=$("#sapS"),sst=SAP.map(()=>mk("circle",{r:4,fill:"#fff"},sapS));
+function s2(h){h=+h;$("#hrV").textContent=h;const th=-h*15*Math.PI/180,c=Math.cos(th),s=Math.sin(th);
+ const pts=SAP.map(p=>[160+p[0]*c-p[1]*s,115+p[0]*s+p[1]*c]);
+ pts.forEach((p,i)=>{sst[i].setAttribute("cx",p[0]);sst[i].setAttribute("cy",p[1])});
+ $("#sap").setAttribute("points",pts.map(p=>p.join(",")).join(" "));
+ const tt=(20+h)%24;$("#tm").textContent="ಸಮಯ: ರಾತ್ರಿ "+Math.floor(tt)+":"+(Math.round((tt%1)*60)+"").padStart(2,"0")+" (ಸಪ್ತರ್ಷಿ "+Math.round(h*15)+"° ತಿರುಗಿದೆ)"}
+$("#hr").oninput=e=>s2(e.target.value);s2(0);
+let spinStop=()=>{};$("#spin").onclick=()=>{spinStop();$("#hr").value=0;$("#spin").disabled=true;spinStop=loopRun(t=>{const h=Math.min(12,t*1.5);$("#hr").value=h;s2(h);if(h>=12){$("#spin").disabled=false;$("#sSay").innerHTML="12 ಗಂಟೆಗಳಲ್ಲಿ ಸಪ್ತರ್ಷಿಯ <b>ಆಕಾರ ಬದಲಾಗಲಿಲ್ಲ</b>, ಆದರೆ <b>ಸ್ಥಾನ ಬದಲಾಯಿತು</b>. ಏಕೆಂದರೆ ಭೂಮಿ ತನ್ನ ಅಕ್ಷದ ಮೇಲೆ ತಿರುಗುತ್ತದೆ.";return true}})};
+
+/* ---- 3: ಧೂಮಕೇತು ---- */
+const A=120,B=60,EC=Math.sqrt(A*A-B*B)/A,CX=125,CY=100,SX=CX+EC*A;let M=0;
+function kep(M){let E=M;for(let i=0;i<6;i++)E=M+EC*Math.sin(E);return E}
+loopRun((t,dt)=>{const sp=+$("#csp").value;const E0=kep(M),r0=A*(1-EC*Math.cos(E0));M+=dt*sp*.6*Math.pow(A/Math.max(r0,25),0)*1;
+ // speed varies naturally via Kepler's equation; use mean anomaly step
+ const E=kep(M),x=CX+A*Math.cos(E),y=CY+B*Math.sin(E),r=Math.hypot(x-SX,y-CY);
+ const ux=(x-SX)/r,uy=(y-CY)/r,len=clamp(1600/r/ r*8,0,120)*(r<120?1:.2);
+ $("#head").setAttribute("cx",x);$("#head").setAttribute("cy",y);
+ const L=clamp(9000/(r*r)*10,0,110);$("#tail").setAttribute("x1",x);$("#tail").setAttribute("y1",y);$("#tail").setAttribute("x2",x+ux*L);$("#tail").setAttribute("y2",y+uy*L);$("#tail").setAttribute("opacity",clamp(L/40,0,.9));
+ $("#dT").textContent="ಸೂರ್ಯನಿಂದ ದೂರ: "+(r<60?"ಹತ್ತಿರ":r<140?"ಮಧ್ಯಮ":"ತುಂಬಾ ದೂರ");
+ $("#cSay").innerHTML=r<70?"ಸೂರ್ಯನ ಹತ್ತಿರ: ಧೂಮಕೇತು ಬಿಸಿಯಾಗಿ, ಉದ್ದ ಬಾಲ ಬೆಳೆಯುತ್ತದೆ. ಬಾಲ ಯಾವಾಗಲೂ <b>ಸೂರ್ಯನಿಗೆ ವಿರುದ್ಧ ದಿಕ್ಕಿಗೆ</b> ಇರುತ್ತದೆ. ವೇಗವೂ ಹೆಚ್ಚು.":r<140?"ಸೂರ್ಯನಿಂದ ದೂರ ಸಾಗುತ್ತಿದೆ: ಬಾಲ ಕುಗ್ಗುತ್ತಿದೆ.":"ಸೂರ್ಯನಿಂದ ಬಹಳ ದೂರ: ಬಾಲ ಇಲ್ಲ, ವೇಗ ಕಡಿಮೆ. ಹ್ಯಾಲಿ ಧೂಮಕೇತು ~76 ವರ್ಷಗಳಿಗೊಮ್ಮೆ ಮರಳಿ ಬರುತ್ತದೆ."});
+
+/* ---- 4: ಇಸ್ರೋ ಯಾನಗಳು ---- */
+const MS=[["ಚಂದ್ರಯಾನ-1 (2008)",[90,95],"ಚಂದ್ರನ ಮೇಲ್ಮೈ ಅಧ್ಯಯನ ಮತ್ತು ನೀರಿನ ಅಸ್ತಿತ್ವದ ಸಂಶೋಧನೆ — ಇಸ್ರೋದ ಮೊದಲ ಚಂದ್ರ ಯಾನ."],["ಮಂಗಳಯಾನ (2014)",[290,35],"ಇಸ್ರೋದ ಮಂಗಳ ಗ್ರಹದ ಅಧ್ಯಯನ ಯಾನ."],["ಚಂದ್ರಯಾನ-3 (2023)",[90,95],"ಚಂದ್ರನ ಮೇಲೆ ಇಳಿದ ಯಾನ; ಚಂದ್ರನ ಬಗ್ಗೆ ಹೆಚ್ಚಿನ ಮಾಹಿತಿ."],["ಆದಿತ್ಯ L1 (2023)",[235,95],"ಸೂರ್ಯನ ಅಧ್ಯಯನ. ಭೂಮಿಯಿಂದ ಸುಮಾರು 15 ಲಕ್ಷ ಕಿ.ಮೀ ದೂರದ L1 ಬಿಂದುವಿನಲ್ಲಿ ನಿಂತು ಸೂರ್ಯನನ್ನು ನಿರಂತರ ವೀಕ್ಷಿಸುತ್ತದೆ. (2 ಸೆಪ್ಟೆಂಬರ್ 2023ರಂದು ಉಡಾವಣೆ)"],["ನಿಸಾರ್ (2025)",null,"ನಾಸಾ ಮತ್ತು ಇಸ್ರೋ ಜಂಟಿ ಉಪಗ್ರಹ; ಭೂಮಿಯನ್ನು ಸುತ್ತುತ್ತ ಪ್ರತಿ 12 ದಿನಗಳಿಗೊಮ್ಮೆ ಇಡೀ ಭೂಮಿಯನ್ನು ವೀಕ್ಷಿಸುತ್ತದೆ (30 ಜುಲೈ 2025ರಂದು ಉಡಾವಣೆ)."]];
+let mStop=()=>{};
+MS.forEach(m=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=m[0];b.onclick=()=>{mStop();$("#mSay").textContent="ಹಾರುತ್ತಿದೆ…";const fl=$("#fl");
+ mStop=loopRun(t=>{const k=sm(clamp(t/2.5,0,1));
+  if(m[1]){fl.setAttribute("cx",40+(m[1][0]-40)*k);fl.setAttribute("cy",95+(m[1][1]-95)*k)}else{const a=t*3;fl.setAttribute("cx",40+Math.cos(a)*30);fl.setAttribute("cy",95+Math.sin(a)*30)}
+  if(t>(m[1]?2.6:3)){$("#mSay").innerHTML="<b>"+m[0]+":</b> "+m[2];if(m[1])return true}})};$("#mBtns").appendChild(b)});
+
+buildQuiz([
+ ["ಭೂಮಿಯಿಂದ ಎತ್ತರಕ್ಕೆ ಹೋದಂತೆ ಗಾಳಿ ಹೇಗಾಗುತ್ತದೆ?",["ಹೆಚ್ಚು ದಟ್ಟವಾಗುತ್ತದೆ","ವಿರಳವಾಗುತ್ತದೆ","ಬದಲಾಗುವುದಿಲ್ಲ"],1,"ಎತ್ತರ ಹೆಚ್ಚಿದಂತೆ ಗಾಳಿ ವಿರಳ; ವಾತಾವರಣದಾಚೆ ಬಾಹ್ಯಾಕಾಶದಲ್ಲಿ ಗಾಳಿ ಇಲ್ಲ."],
+ ["ವಾತಾವರಣದ ಹೊರಗಿನ ಶೂನ್ಯ ಪ್ರದೇಶಕ್ಕೆ ಏನೆನ್ನುತ್ತಾರೆ?",["ಬಾಹ್ಯಾಕಾಶ","ಮೋಡ","ಸಾಗರ"],0,"ಆಕಾಶದ ಆಚೆಗಿನ ಗಾಳಿಯಿಲ್ಲದ ಪ್ರದೇಶವೇ ಬಾಹ್ಯಾಕಾಶ."],
+ ["ರಾತ್ರಿಯಿಡೀ ಒಂದೇ ಸ್ಥಳದಲ್ಲಿ ಕಾಣುವ ನಕ್ಷತ್ರ ಯಾವುದು?",["ಸಪ್ತರ್ಷಿಯ ಎಲ್ಲ ನಕ್ಷತ್ರಗಳು","ಧ್ರುವತಾರೆ","ಸೂರ್ಯ"],1,"ಧ್ರುವತಾರೆ ಭೂಮಿಯ ಅಕ್ಷದ ನೇರದಲ್ಲಿದ್ದು, ಒಂದೇ ಸ್ಥಳದಲ್ಲಿ ಕಾಣುತ್ತದೆ."],
+ ["ಧೂಮಕೇತುವಿನ ಬಾಲ ಯಾವ ದಿಕ್ಕಿಗೆ ಇರುತ್ತದೆ?",["ಸೂರ್ಯನ ಕಡೆಗೆ","ಸೂರ್ಯನಿಗೆ ವಿರುದ್ಧ ದಿಕ್ಕಿಗೆ","ಯಾವ ದಿಕ್ಕಿಗೂ ಇಲ್ಲ"],1,"ಬಾಲ ಯಾವಾಗಲೂ ಸೂರ್ಯನಿಂದ ದೂರ ಕಡೆಗೆ ಚಾಚಿರುತ್ತದೆ."],
+ ["ಆದಿತ್ಯ L1 ಯಾನದ ಉದ್ದೇಶ ಏನು?",["ಚಂದ್ರನ ಮೇಲೆ ಇಳಿಯುವುದು","ಸೂರ್ಯನ ಅಧ್ಯಯನ","ಮಂಗಳ ಗ್ರಹದ ಅಧ್ಯಯನ"],1,"ಆದಿತ್ಯ L1 ಸೂರ್ಯನನ್ನು ನಿರಂತರ ವೀಕ್ಷಿಸಲು ಇಸ್ರೋ ಕಳುಹಿಸಿದ ಬಾಹ್ಯಾಕಾಶ ನೌಕೆ."]
+]);
+
+</script></body></html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="kn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ಸಜೀವಿಗಳಲ್ಲಿಯ ವೈವಿಧ್ಯತೆ – ಅನಿಮೇಟೆಡ್ ಪ್ರಯೋಗಗಳು (6ನೇ ತರಗತಿ, ಪಾಠ 4)</title><style>
+:root{--bg:#f5f6f2;--card:#fff;--ink:#202722;--mute:#5d675f;--line:#e0e4da;--green:#2e8b57;--blue:#2f6fed;--orange:#e8801f;--red:#d64545;--sky:#eaf4f1}
+@media(prefers-color-scheme:dark){:root{--bg:#121613;--card:#1b211c;--ink:#edf2ee;--mute:#a6b2a9;--line:#2c352e;--sky:#1c2a26}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI",system-ui,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:22px;margin:8px 0 4px}h2{font-size:18px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.tag{display:inline-block;font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+svg{width:100%;height:auto;display:block;border-radius:12px;background:var(--sky);touch-action:manipulation}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button.btn{border:1px solid transparent;background:var(--green);color:#fff;border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;cursor:pointer}
+button.btn.o{background:var(--orange)}button.btn.b{background:var(--blue)}
+button.btn.ghost{background:var(--bg);color:var(--ink);border-color:var(--line)}
+button.btn.sel{outline:3px solid var(--orange)}
+button.btn:disabled{opacity:.45}
+input[type=range]{flex:1;min-width:150px;accent-color:var(--green)}
+.say{padding:10px 12px;border-left:4px solid var(--green);background:var(--bg);border-radius:8px;font-size:15px;margin-top:8px}
+.say.bad{border-left-color:var(--red)}
+.lbl{font-size:13px;color:var(--mute);margin:8px 0 0}
+.note{font-size:13px;color:var(--mute);margin-top:6px}
+.big{font-size:26px;font-weight:700;text-align:center;margin:6px 0}
+.q{margin:12px 0}.q p{margin:0 0 6px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:6px}.opts button{text-align:left}
+.fb{font-size:14px;margin-top:4px}.ok{color:#1f9d55}.bad{color:var(--red)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl td,.tbl th{border:1px solid var(--line);padding:6px;text-align:center}
+</style></head><body><div class="wrap">
+<h1>🌿 ಸಜೀವಿಗಳಲ್ಲಿಯ ವೈವಿಧ್ಯತೆ</h1>
+<p class="sub">6ನೇ ತರಗತಿ · ಸಾಮಾನ್ಯ ವಿಜ್ಞಾನ · ಪಾಠ 4 — ಸಸ್ಯ ಮತ್ತು ಪ್ರಾಣಿಗಳ ವೈವಿಧ್ಯ — ಮುಟ್ಟಿ ನೋಡಿ ಕಲಿಯಿರಿ</p>
+<div class="card">
+<h2>ಪ್ರಯೋಗ 1: ಸಸ್ಯಗಳು ಹೇಗೆ ಬೆಳೆಯುತ್ತವೆ?</h2>
+<div><span class="tag">ಮರ</span><span class="tag">ಪೊದೆ</span><span class="tag">ಬಳ್ಳಿ</span></div>
+<p class="sub">ಒಂದು ಬಗೆಯನ್ನು ಒತ್ತಿ — ಸಸ್ಯ ಬೆಳೆಯುವುದನ್ನು ನೋಡಿ.</p>
+<svg viewBox="0 0 320 220" id="plSvg"><line x1="0" y1="190" x2="320" y2="190" stroke="#8b5e3c" stroke-width="6"/><g id="plG"></g></svg>
+<div class="row" id="plBtns"></div>
+<div class="say" id="plSay">ಒಂದು ಬಗೆ ಆರಿಸಿ.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 2: ಎಲೆಯ ನರ ವಿನ್ಯಾಸ</h2>
+<div><span class="tag">ಜಾಲಾಕಾರ</span><span class="tag">ಸಮಾಂತರ</span></div>
+<p class="sub">ಎಲೆ ಆರಿಸಿ — ನರಗಳು ಹೇಗೆ ಹರಡುತ್ತವೆ ಎಂದು ನೋಡಿ.</p>
+<svg viewBox="0 0 320 240" id="lfSvg"><g id="lfG"></g></svg>
+<div class="row" id="lfBtns"></div>
+<div class="say" id="lfSay">ಒಂದು ಎಲೆ ಆರಿಸಿ.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 3: ಬೇರು ಕಿತ್ತು ನೋಡಿ</h2>
+<div><span class="tag">ತಂತು ಬೇರು</span><span class="tag">ತಾಯಿ ಬೇರು</span></div>
+<p class="sub">ಸ್ಲೈಡರ್‌ನಿಂದ ಎರಡೂ ಗಿಡಗಳನ್ನು ಸಮಾನ ಬಲದಿಂದ ಎಳೆಯಿರಿ.</p>
+<svg viewBox="0 0 320 250" id="rtSvg">
+<rect x="0" y="100" width="320" height="150" fill="#8b5e3c" opacity=".55"/>
+<line x1="0" y1="100" x2="320" y2="100" stroke="#5c3a1d" stroke-width="3"/>
+<line x1="160" y1="100" x2="160" y2="250" stroke="#5c3a1d" stroke-width="1" stroke-dasharray="4 4"/>
+<g id="gGrass"></g><g id="gBrinjal"></g>
+<text x="80" y="244" text-anchor="middle" font-size="13" fill="#fff">ಹುಲ್ಲು</text><text x="240" y="244" text-anchor="middle" font-size="13" fill="#fff">ಬದನೆ ಗಿಡ</text>
+</svg>
+<div class="row"><span style="min-width:90px">ಎಳೆಯುವ ಬಲ</span><input type="range" id="pull" min="0" max="100" value="0"></div>
+<div class="say" id="rtSay">ಬಲ ಹೆಚ್ಚಿಸಿ.</div>
+</div>
+
+<div class="card">
+<h2>ಪ್ರಯೋಗ 4: ಪ್ರಾಣಿಗಳ ಆವಾಸ</h2>
+<div><span class="tag">ಆವಾಸ</span></div>
+<p class="sub">ಮೊದಲು ಒಂದು ಪ್ರಾಣಿಯನ್ನು ಒತ್ತಿ, ನಂತರ ಅದು ವಾಸಿಸುವ ಸ್ಥಳವನ್ನು ಒತ್ತಿ.</p>
+<svg viewBox="0 0 320 256" id="hbSvg"><g id="hbZ"></g><g id="hbA"></g></svg>
+<div class="row" id="hbBtns"></div>
+<div class="say" id="hbSay">ಒಂದು ಪ್ರಾಣಿ ಆರಿಸಿ.</div>
+<p class="note" id="hbScore"></p>
+</div>
+
+<div class="card"><h2>ಪರೀಕ್ಷಿಸಿ</h2><div id="quiz"></div><p class="note" id="qScore"></p></div>
+</div><script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],NS="http://www.w3.org/2000/svg";
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),sm=u=>{u=clamp(u,0,1);return u*u*(3-2*u)};
+function loopRun(fn){let last=performance.now(),t=0,id=0,on=true;const f=now=>{if(!on)return;const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;if(fn(t,dt)===true){on=false;return}id=requestAnimationFrame(f)};id=requestAnimationFrame(f);return()=>{on=false;cancelAnimationFrame(id)}}
+function buildQuiz(qs){let sc=0,done=0;qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p>${qi+1}. ${q[0]}</p>`;const o=document.createElement("div");o.className="opts";const fb=document.createElement("div");fb.className="fb";let ans=false;
+ q[1].forEach((t,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=t;
+  b.onclick=()=>{if(ans)return;ans=true;done++;if(i==q[2]){sc++;b.style.outline="3px solid #1f9d55";fb.innerHTML='<span class="ok">✅ ಸರಿ!</span> '+q[3]}else{b.style.outline="3px solid #d64545";fb.innerHTML='<span class="bad">❌ ತಪ್ಪು.</span> '+q[3]}
+   $("#qScore").textContent=`ಅಂಕ: ${sc}/${done} (ಒಟ್ಟು ${qs.length})`};o.appendChild(b)});
+ d.appendChild(o);d.appendChild(fb);$("#quiz").appendChild(d)})}
+
+/* ---- ಪ್ರಯೋಗ 1: ಸಸ್ಯದ ಬಗೆಗಳು ---- */
+const PL={
+ tree:{n:"🌳 ಮರ",t:"<b>ಮರ</b>: ದಪ್ಪ, ಗಟ್ಟಿ ಕಾಂಡ; ಬಹಳ ಎತ್ತರಕ್ಕೆ ಬೆಳೆಯುತ್ತದೆ; ಮೇಲ್ಭಾಗದಲ್ಲಿ ರೆಂಬೆ-ಎಲೆಗಳು."},
+ shrub:{n:"🌿 ಪೊದೆ",t:"<b>ಪೊದೆ</b>: ಕೆಳಭಾಗದಿಂದಲೇ ಹಲವು ಕಾಂಡಗಳು ಹೊರಡುತ್ತವೆ; ಮರಕ್ಕಿಂತ ಕುಳ್ಳಗೆ."},
+ climber:{n:"🌱 ಆರೋಹಿ ಬಳ್ಳಿ",t:"<b>ಆರೋಹಿ ಬಳ್ಳಿ</b>: ಗಟ್ಟಿ ಕಾಂಡವಿಲ್ಲ; ಆಧಾರವನ್ನು ಸುತ್ತಿಕೊಂಡು ಮೇಲೆ ಏರುತ್ತದೆ."},
+ creeper:{n:"🍃 ತೆವಳುವ ಬಳ್ಳಿ",t:"<b>ತೆವಳುವ ಬಳ್ಳಿ</b>: ಎತ್ತರ ಬೆಳೆಯುವುದಿಲ್ಲ; ನೆಲದ ಮೇಲೆ ಹರಡುತ್ತದೆ."}};
+const plG=$("#plG");let stopPl=null;
+const G="#3aa35f",G2="#2e8b57";
+function drawPl(k,u){plG.innerHTML="";
+ if(k=="tree"){const h=95*u;mk("rect",{x:152,y:190-h,width:16,height:h,fill:"#8a5a31"},plG);const cy=190-h-6*u;[[160,cy,44],[132,cy+16,30],[188,cy+16,30]].forEach(c=>mk("circle",{cx:c[0],cy:c[1],r:c[2]*u,fill:G},plG))}
+ if(k=="shrub"){[-45,-22,0,22,45].forEach(a=>{const r=a*Math.PI/180,L=62*u,x=160+Math.sin(r)*L,y=190-Math.cos(r)*L;mk("line",{x1:160,y1:190,x2:x,y2:y,stroke:"#7a5a35","stroke-width":3},plG);mk("circle",{cx:x,cy:y,r:12*u,fill:G},plG);mk("circle",{cx:160+Math.sin(r)*L*.55,cy:190-Math.cos(r)*L*.55,r:8*u,fill:G2},plG)})}
+ if(k=="climber"){mk("line",{x1:210,y1:190,x2:210,y2:36,stroke:"#9a8a6a","stroke-width":5},plG);let p="";for(let i=0;i<=60;i++){const t=i/60*u;p+=(i?"L":"M")+(210+Math.sin(t*28)*9)+" "+(190-t*150)+" ";if(i%6==3)mk("circle",{cx:210+Math.sin(t*28)*9+(i%12?9:-9),cy:190-t*150,r:6,fill:G},plG)}mk("path",{d:p,fill:"none",stroke:G2,"stroke-width":3},plG)}
+ if(k=="creeper"){let p="";for(let i=0;i<=60;i++){const t=i/60*u,x=30+t*270,y=184+Math.sin(t*18)*3;p+=(i?"L":"M")+x+" "+y+" ";if(i%5==2)mk("circle",{cx:x,cy:y-8,r:6,fill:G},plG)}mk("path",{d:p,fill:"none",stroke:G2,"stroke-width":3},plG)}}
+let plStop=()=>{};
+Object.keys(PL).forEach(k=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=PL[k].n;
+ b.onclick=()=>{plStop();$$("#plBtns .btn").forEach(x=>x.classList.toggle("sel",x==b));$("#plSay").innerHTML=PL[k].t;plStop=loopRun(t=>{const u=sm(t/2.2);drawPl(k,u);return u>=1})};$("#plBtns").appendChild(b)});
+drawPl("tree",0);
+
+/* ---- ಪ್ರಯೋಗ 2: ಎಲೆಗಳು ---- */
+const BASE=215,TOP=40,LL=BASE-TOP;
+const LEAF={
+ mango:{n:"🥭 ಮಾವಿನ ಎಲೆ",ret:true,w:s=>40*Math.pow(Math.sin(Math.PI*Math.pow(s,.7)),.9),c:"#3f9a4f",t:"ಮೃದು ಅಂಚು (ನಯವಾದ ಅಂಚು), ಉದ್ದ ಆಕಾರ."},
+ hib:{n:"🌺 ದಾಸವಾಳ ಎಲೆ",ret:true,w:s=>52*Math.pow(Math.sin(Math.PI*Math.pow(s,.65)),.8)+(Math.sin(s*70)>0?3:-1),c:"#3aa35f",t:"ಅಂಚು ಹಲ್ಲಿನಂತೆ ಕತ್ತರಿಸಿದೆ, ಅಗಲ ಆಕಾರ."},
+ jowar:{n:"🌾 ಜೋಳದ ಎಲೆ",ret:false,w:s=>22*Math.min(1,s*10)*Math.pow(1-s,.35),c:"#6bb04a",t:"ಉದ್ದ, ಕಿರಿದಾದ ಪಟ್ಟಿಯಂತೆ."},
+ banana:{n:"🍌 ಬಾಳೆ ಎಲೆ",ret:false,w:s=>55*Math.min(1,s*12)*Math.pow(1-Math.pow(s,3),.6),c:"#4aa84a",t:"ಬಹಳ ಅಗಲ ಮತ್ತು ಉದ್ದ."}};
+const lfG=$("#lfG");
+function showLeaf(k){const d=LEAF[k];lfG.innerHTML="";let L="",R="";
+ for(let i=0;i<=40;i++){const s=i/40,y=BASE-LL*s,w=d.w(s);L+=`${160-w},${y} `;R=`${160+w},${y} `+R}
+ const leaf=mk("polygon",{points:L+R,fill:d.c,opacity:0,stroke:"#1f5f2f","stroke-width":2},lfG);leaf.style.transition="opacity .6s";
+ const veins=[];
+ if(d.ret){veins.push(`M160 ${BASE} L160 ${TOP+6}`);for(let i=1;i<=7;i++){const s=i/8*.9+.04,y=BASE-LL*s,w=d.w(s)*.86,y2=y-30*(1-s*.4);veins.push(`M160 ${y} Q${160-w*.5} ${y-6} ${160-w} ${y2}`);veins.push(`M160 ${y} Q${160+w*.5} ${y-6} ${160+w} ${y2}`)}}
+ else{for(let i=0;i<9;i++){const f=-.8+1.6*i/8;let p="";for(let j=0;j<=24;j++){const s=.02+j/24*.9;p+=(j?"L":"M")+(160+f*d.w(s)*.88)+" "+(BASE-LL*s)+" "}veins.push(p)}}
+ veins.forEach((p,i)=>{const e=mk("path",{d:p,fill:"none",stroke:"#e9f7d0","stroke-width":i==0&&d.ret?3.5:2,"stroke-linecap":"round"},lfG);e.style.strokeDasharray=500;e.style.strokeDashoffset=500;e.style.transition=`stroke-dashoffset 1s ease ${.5+i*.12}s`;requestAnimationFrame(()=>requestAnimationFrame(()=>{e.style.strokeDashoffset=0}))});
+ requestAnimationFrame(()=>{leaf.setAttribute("opacity",1)});
+ $("#lfSay").innerHTML=`<b>${d.n.slice(3)}</b>: ${d.t}<br>ನರ ವಿನ್ಯಾಸ: <b>${d.ret?"ಜಾಲಾಕಾರ (ಬಲೆಯಂತೆ)":"ಸಮಾಂತರ (ಒಂದಕ್ಕೊಂದು ಸಮಾನ)"}</b><br>${d.ret?"ಇಂತಹ ಎಲೆಗಳಿರುವ ಸಸ್ಯಗಳಲ್ಲಿ ಸಾಮಾನ್ಯವಾಗಿ <b>ತಾಯಿ ಬೇರು</b> ಇರುತ್ತದೆ (ದ್ವಿದಳ ಸಸ್ಯ).":"ಇಂತಹ ಎಲೆಗಳಿರುವ ಸಸ್ಯಗಳಲ್ಲಿ ಸಾಮಾನ್ಯವಾಗಿ <b>ತಂತು ಬೇರು</b> ಇರುತ್ತದೆ (ಏಕದಳ ಸಸ್ಯ)."}`}
+Object.keys(LEAF).forEach(k=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=LEAF[k].n;b.onclick=()=>{$$("#lfBtns .btn").forEach(x=>x.classList.toggle("sel",x==b));showLeaf(k)};$("#lfBtns").appendChild(b)});
+
+/* ---- ಪ್ರಯೋಗ 3: ಬೇರು ---- */
+const gg=$("#gGrass"),gb=$("#gBrinjal");
+function plantG(g,cx,kind){g.innerHTML="";
+ if(kind=="grass"){for(let i=-4;i<=4;i++)mk("path",{d:`M${cx+i*2} 100 Q${cx+i*8} 62 ${cx+i*14} 40`,fill:"none",stroke:"#4aa84a","stroke-width":3},g);
+  for(let i=0;i<14;i++){const a=(i/13-.5)*2.4,L=28+((i*37)%30);mk("path",{d:`M${cx} 100 Q${cx+Math.sin(a)*L*.5} ${100+L*.6} ${cx+Math.sin(a)*L} ${100+Math.cos(a)*L*.9}`,fill:"none",stroke:"#f3e3c1","stroke-width":1.5},g)}}
+ else{mk("line",{x1:cx,y1:100,x2:cx,y2:40,stroke:"#3aa35f","stroke-width":5},g);[[-18,62],[18,52],[-16,44]].forEach(l=>{mk("ellipse",{cx:cx+l[0],cy:l[1],rx:13,ry:7,fill:"#3f9a4f"},g)});mk("circle",{cx:cx+8,cy:70,r:6,fill:"#6b3fa0"},g);
+  mk("path",{d:`M${cx} 100 L${cx} 205`,stroke:"#f3e3c1","stroke-width":5,fill:"none"},g);
+  [[120,-26],[145,26],[170,-20]].forEach(b=>mk("path",{d:`M${cx} ${b[0]} L${cx+b[1]} ${b[0]+22}`,stroke:"#f3e3c1","stroke-width":2,fill:"none"},g))}}
+plantG(gg,80,"grass");plantG(gb,240,"brinjal");
+$("#pull").oninput=e=>{const f=+e.target.value;
+ const lift=clamp((f-40)*2.6,0,150);gg.setAttribute("transform",`translate(0 ${-lift})`);
+ const jit=f>75?Math.sin(f*3)*1.5:0;gb.setAttribute("transform",`translate(${jit} 0)`);
+ let t=`ಎಳೆಯುವ ಬಲ: <b>${f}</b><br>`;
+ if(f<40)t+="ಎರಡೂ ಗಿಡಗಳು ಮಣ್ಣಿನಲ್ಲಿ ಭದ್ರವಾಗಿವೆ.";
+ else if(lift<150)t+="ಹುಲ್ಲು ನಿಧಾನವಾಗಿ ಮೇಲೆ ಬರುತ್ತಿದೆ… ಬದನೆ ಗಿಡ ಕದಲುತ್ತಿಲ್ಲ.";
+ else t+="ಹುಲ್ಲು <b>ಬೇರು ಸಹಿತ ಕಿತ್ತುಬಂತು</b>! ಬದನೆ ಗಿಡ ಇನ್ನೂ ಭದ್ರ — ಆಳವಾದ <b>ತಾಯಿ ಬೇರು</b> ಅದನ್ನು ಹಿಡಿದಿದೆ. ಹುಲ್ಲಿನ <b>ತಂತು ಬೇರುಗಳು</b> ಆಳವಿಲ್ಲದೆ ಹರಡಿವೆ.";
+ $("#rtSay").innerHTML=t};
+
+/* ---- ಪ್ರಯೋಗ 4: ಆವಾಸ ---- */
+const ZN={air:{x:10,y:8,w:300,h:50,c:"#bfe3ff",n:"ಆಕಾಶ",term:"ಆಕಾಶದಲ್ಲಿ ಹಾರುವ ಪಕ್ಷಿಗಳು (ಖೇಚರ)"},
+ tree:{x:10,y:64,w:140,h:92,c:"#cfe9c4",n:"ಮರ",term:"ಮರದ ಮೇಲೆ ವಾಸಿಸುವ ಪ್ರಾಣಿ"},
+ land:{x:156,y:64,w:154,h:60,c:"#e7e4b8",n:"ನೆಲದ ಮೇಲೆ",term:"ನೆಲದ ಮೇಲೆ ವಾಸಿಸುವ ಭೂಚರ ಪ್ರಾಣಿ"},
+ burrow:{x:156,y:128,w:154,h:56,c:"#d3b992",n:"ಬಿಲ (ನೆಲದ ಕೆಳಗೆ)",term:"ಬಿಲದಲ್ಲಿ ವಾಸಿಸುವ ಪ್ರಾಣಿ"},
+ water:{x:10,y:162,w:140,h:86,c:"#9fd0ff",n:"ನೀರು",term:"ನೀರಿನಲ್ಲಿ ವಾಸಿಸುವ ಜಲಚರ"},
+ shore:{x:156,y:190,w:154,h:58,c:"#d6e8c0",n:"ದಂಡೆ (ನೀರು + ನೆಲ)",term:"ನೀರು ಮತ್ತು ನೆಲ ಎರಡರಲ್ಲೂ ವಾಸಿಸುವ ಉಭಯಚರ"}};
+const AN=[["🦅","ಹದ್ದು","air"],["🦜","ಗಿಣಿ","air"],["🐒","ಮಂಗ","tree"],["🐘","ಆನೆ","land"],["🐄","ಹಸು","land"],["🐀","ಇಲಿ","burrow"],["🐟","ಮೀನು","water"],["🐸","ಕಪ್ಪೆ","shore"]];
+let selA=null,placed=0;
+Object.entries(ZN).forEach(([k,z])=>{const r=mk("rect",{x:z.x,y:z.y,width:z.w,height:z.h,rx:8,fill:z.c,stroke:"#7a8a99","stroke-width":1.5},$("#hbZ"));r.style.cursor="pointer";
+ mk("text",{x:z.x+6,y:z.y+14,"font-size":11,fill:"#334"},$("#hbZ")).textContent=z.n;
+ r.onclick=()=>{if(selA==null){$("#hbSay").textContent="ಮೊದಲು ಮೇಲಿನ ಒಂದು ಪ್ರಾಣಿಯನ್ನು ಆರಿಸಿ.";return}
+  const a=AN[selA];
+  if(a[2]==k){const t=mk("text",{x:z.x+20+rnd(0,z.w-60),y:z.y+z.h-8-rnd(0,Math.max(4,z.h-40)),"font-size":26},$("#hbA"));t.textContent=a[0];t.style.opacity=0;t.style.transition="opacity .6s";requestAnimationFrame(()=>t.style.opacity=1);
+   btns[selA].disabled=true;btns[selA].classList.remove("sel");placed++;$("#hbSay").innerHTML=`✅ ${a[1]} — ${z.term}.`;selA=null;$("#hbScore").textContent=`ಸರಿ ಸ್ಥಳಕ್ಕೆ ಇರಿಸಿದ್ದು: ${placed}/${AN.length}`;
+   if(placed==AN.length)$("#hbSay").innerHTML+="<br>🎉 ಎಲ್ಲಾ ಪ್ರಾಣಿಗಳ ಆವಾಸ ಗುರುತಿಸಿದಿರಿ! ಪ್ರಾಣಿ ವಾಸಿಸುವ ಸೂಕ್ತ ಸ್ಥಳವೇ ಅದರ <b>ಆವಾಸ</b>."}
+  else{$("#hbSay").className="say bad";$("#hbSay").innerHTML=`❌ ${a[1]} ಇಲ್ಲಿ ವಾಸಿಸುವುದಿಲ್ಲ. ಬೇರೆ ಸ್ಥಳ ಪ್ರಯತ್ನಿಸಿ.`;setTimeout(()=>$("#hbSay").className="say",1500)}}});
+const btns=AN.map((a,i)=>{const b=document.createElement("button");b.className="btn ghost";b.textContent=a[0]+" "+a[1];b.onclick=()=>{selA=i;btns.forEach(x=>x.classList.remove("sel"));b.classList.add("sel");$("#hbSay").textContent=a[1]+" ಎಲ್ಲಿ ವಾಸಿಸುತ್ತದೆ? ಸ್ಥಳವನ್ನು ಒತ್ತಿ."};$("#hbBtns").appendChild(b);return b});
+
+buildQuiz([
+ ["ನೀರು ಮತ್ತು ನೆಲ ಎರಡರಲ್ಲೂ ವಾಸಿಸುವ ಪ್ರಾಣಿಗಳನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?",["ಜಲಚರ","ಉಭಯಚರ","ಖೇಚರ"],1,"ಉಭಯ = ಎರಡು. ಉದಾ: ಕಪ್ಪೆ."],
+ ["ಸಮಾಂತರ ನರ ವಿನ್ಯಾಸದ ಎಲೆಗಳು ಯಾವ ಸಸ್ಯದಲ್ಲಿ ಇರುತ್ತವೆ?",["ಮಾವು","ದಾಸವಾಳ","ಜೋಳ / ಹುಲ್ಲು"],2,"ಏಕದಳ ಸಸ್ಯಗಳಲ್ಲಿ ಎಲೆಯ ನರಗಳು ಸಮಾಂತರ, ಬೇರು ತಂತುಮಯ."],
+ ["ಕಿತ್ತುಹಾಕಲು ಕಷ್ಟವಾದ, ಆಳವಾದ ಬೇರನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?",["ತಂತು ಬೇರು","ತಾಯಿ ಬೇರು","ಹೊರ ಬೇರು"],1,"ತಾಯಿ ಬೇರು ನೆಲದೊಳಗೆ ಆಳಕ್ಕೆ ಹೋಗಿ ಗಿಡವನ್ನು ಹಿಡಿಯುತ್ತದೆ."],
+ ["ಒಂದು ಜೀವಿ ವಾಸಿಸುವ, ಅದಕ್ಕೆ ಸೂಕ್ತವಾದ ಸ್ಥಳವನ್ನು ಏನೆನ್ನುತ್ತಾರೆ?",["ಆವಾಸ","ಆಹಾರ","ಪ್ರಜನನ"],0,"ಆವಾಸ — ಆ ಪ್ರದೇಶದ ಉಷ್ಣತೆ, ಆಹಾರ ಮುಂತಾದವಕ್ಕೆ ಜೀವಿ ಹೊಂದಿಕೊಂಡಿರುತ್ತದೆ."],
+ ["ಆಧಾರವನ್ನು ಸುತ್ತಿಕೊಂಡು ಮೇಲೆ ಏರುವ ಸಸ್ಯ ಯಾವುದು?",["ಮರ","ಆರೋಹಿ ಬಳ್ಳಿ","ತೆವಳುವ ಬಳ್ಳಿ"],1,"ಆರೋಹಿ = ಏರುವ."]
+]);
+
+</script></body></html>
