@@ -242,8 +242,21 @@ function stockOf(month,g){var k=month+'|'+g;return SD2[k]||stk(month,g)}
 var SD2={};
 function closing(month,g){var d=stockOf(month,g),u=usedFor(month,g),prev=prevClose(month,g),c={};
  ITEMS.forEach(function(it){var e=d[it]||{},o=e.o!=null?e.o:(prev?prev[it]:0);c[it]=(o||0)+(e.r||0)+(e.p||0)-u[it]});return c}
+/* आरंभिक शिल्लक: शैक्षणिक वर्षाच्या ३१ मार्च रोजीची सर्व जिन्नसांची शिल्लक (इ. १–५ व ६–८ स्वतंत्र). एप्रिल महिन्याच्या 'मागील' (o) मध्ये साठवली जाते. */
+function opGroups(){return sg()==='both'?['15','68']:[sg()]}
+function opApril(){return fyMonths(fyOf(MON))[0]}
+function openCard(){var fy=fyOf(MON),ap=opApril(),gs=opGroups(),filled=0,tot=0;
+ var rows=ITEMS.map(function(it,i){return '<tr><td>'+esc(it)+'</td>'+gs.map(function(g){var d=stockOf(ap,g),e=d[it]||{},auto=((Y.carry||{})[g]||{})[it];tot++;if(e.o!=null)filled++;return '<td><input type="number" step="any" data-og="'+g+'" data-oi="'+i+'" placeholder="'+(auto?fmt(auto):'')+'" value="'+(e.o!=null?e.o:'')+'"></td>'}).join('')+'</tr>'}).join('');
+ return '<details class="card" id="opn"'+(window.OPN?' open':'')+' ontoggle="window.OPN=this.open"><summary style="cursor:pointer"><b>📌 आरंभिक शिल्लक — ३१ मार्च '+pn(fy)+' रोजी</b> <span class="m" style="margin-left:6px">'+(filled?'भरलेली: '+filled+'/'+tot:'अजून भरलेली नाही')+'</span></summary>'
+ +'<p class="m" style="font-size:12px;margin:8px 0">शैक्षणिक वर्ष '+pn(fy)+'–'+pn(fy+1)+' च्या सुरुवातीची (३१.०३.'+pn(fy)+' रोजीची) तांदूळ, डाळी/कडधान्य, मसाले, मीठ व तेल यांची शिल्लक नोंदवहीप्रमाणे भरा (किग्रॅ / लि.). ती एप्रिलच्या "मागील" स्तंभात जाते आणि पुढील सर्व महिन्यांचा हिशेब त्यावरून येतो. रकाना रिकामा सोडल्यास मागील वर्षाच्या नोंदींवरून आलेली संख्या (राखाडी) वापरली जाते.</p>'
+ +'<div class="st w"><table><tr><th>जिन्नस</th>'+gs.map(function(g){return '<th>'+(g==='15'?'इ. १–५':'इ. ६–८')+'</th>'}).join('')+'</tr>'+rows+'</table></div>'
+ +'<p id="opm" class="er"></p><button onclick="opsave()">💾 आरंभिक शिल्लक जतन करा</button></details>'}
+function opsave(){var ap=opApril(),gs=opGroups(),m=document.getElementById('opm');m.className='m';m.textContent='जतन होत आहे…';
+ var jobs=gs.map(function(g){var d=JSON.parse(JSON.stringify(stockOf(ap,g)||{}));
+  document.querySelectorAll('#opn input[data-og="'+g+'"]').forEach(function(el){var it=ITEMS[+el.dataset.oi],v=el.value.trim();if(v===''){if(d[it]){delete d[it].o;if(!Object.keys(d[it]).length)delete d[it]}}else{(d[it]=d[it]||{}).o=Number(v)}});return {g:g,d:d}});
+ jobs.reduce(function(pr,j){return pr.then(function(x){return x.ok?post('/api/pm/stocksave',{month:ap,grp:j.g,data:j.d}).then(function(y){if(y.ok)SD2[ap+'|'+j.g]=j.d;return y}):x})},Promise.resolve({ok:1})).then(function(j){if(j.ok){window.OPN=1;load()}else{m.className='er';m.textContent='जतन झाले नाही ('+(j.m||j.e||'')+')'}})}
 function sTab(){var d=stockOf(MON,GRP),u=usedFor(MON,GRP),prev=prevClose(MON,GRP),rc=rcptTotals(MON,GRP);
- var h=seg(GRP,"GRP='@';draw()")+
+ var h=seg(GRP,"GRP='@';draw()")+openCard()+
  '<div class="card"><span class="lab">'+(GRP==='15'?'१–५':'६–८')+' – महिन्याची पटसंख्या</span><input id="pat" type="number" class="n" value="'+(d._pat?d._pat.o:'')+'" style="width:140px">'+
  '<p class="m" style="font-size:12px;margin:6px 0 0">मागील शिल्लक रिकामी सोडल्यास मागील महिन्याची अखेरची शिल्लक आपोआप येते (एप्रिलमध्ये मागील वर्षाची मार्च अखेर शिल्लक). वापर = दैनिक नोंदीतील उपस्थिती × प्रमाण. लोकसहभाग = गावकऱ्यांकडून मिळालेला माल.</p></div>'+
  '<div class="card st w"><table><tr><th>जिन्नस (किग्रॅ/लि.)</th><th>मागील</th><th>प्राप्त</th><th>लोक.</th><th>वापर</th><th>शिल्लक</th></tr>'+
