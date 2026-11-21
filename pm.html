@@ -80,7 +80,7 @@ function rp(k){if(!window.PMREP){alert('अहवाल लोड होत आ�
 function chm(v){if(!v||v===MON)return;if(v>today().slice(0,7))v=today().slice(0,7);var o=fyOf(MON);if(fyOf(v)!==o&&Object.keys(E).length&&!confirm('दैनिक नोंदीतील बदल अजून जतन केलेले नाहीत. दुसऱ्या वर्षात गेल्यास ते जातील. पुढे जायचे?')){document.getElementById('mo').value=MON;return}MON=v;if(fyOf(v)!==o)load();else draw()}
 
 /* ---------- SMS / धान्य हिशेब / BMI ---------- */
-var SMSR='9223166166',SMSC={'मुगडाळ':'MD','तूरडाळ':'TD','आख्खा मूग':'MD','मूग':'MD','मटकी':'MT','मसूरडाळ':'MSD','चवळी':'CH','हरभरा':'HB','वाटाणा':'VT','हिरवा वाटाणा':'VT','सोयाबडी':'SB'};
+var SMSR='9223166166',SMSC={'मुगडाळ':'MD','तूरडाळ':'TD','आख्खा मूग':'MG','मूग':'MG','हिरवा मूग':'MG','मटकी':'MT','मसूरडाळ':'MSD','चवळी':'CH','हरभरा':'HB','वाटाणा':'VT','हिरवा वाटाणा':'VT','सोयाबडी':'SP'};
 function popts(v){return PULSES.map(function(x){return '<option'+(x===v?' selected':'')+'>'+x+'</option>'}).join('')}
 function smsOk(){return new Date(Date.now()+19800000).getUTCHours()>=9}
 function smsFor(date){if(date!==today()){alert('SMS फक्त आजच्या दिवसासाठी पाठवता येतो.');return}if(!smsOk()){alert('SMS सकाळी ९ वाजल्यानंतरच पाठवता येतो.');return}var e=ent(date);
@@ -88,9 +88,11 @@ function smsFor(date){if(date!==today()){alert('SMS फक्त आजच्य
  var a=String(e.p15||'').trim(),b=String(e.p68||'').trim();
  if((!a||a==='0')&&(!b||b==='0')){alert('या दिवसाची उपस्थिती भरलेली नाही. आधी उपस्थिती भरा.');return}
  var ud=(Y&&Y.udise)||'';if(!ud){alert('UDISE कोड मिळाला नाही.');return}
- var p=['MH MDMM sc '+ud];
- if(a&&a!=='0'){var c=SMSC[pulseNorm(e.pulse15)];if(!c){alert('इ. १–५ ची डाळ/कडधान्य निवडा.');return}p.push('p1-5 '+a,'mc1-5 0','pu1-5 '+c)}
- if(b&&b!=='0'){var d=SMSC[pulseNorm(e.pulse68)];if(!d){alert('इ. ६–८ ची डाळ/कडधान्य निवडा.');return}p.push('p6-8 '+b,'mc6-8 0','pu6-8 '+d)}
+ /* NIC MDM SMS मॅन्युअल: फक्त प्राथमिक (१–५) शाळा = 'MH MDMM sc', फक्त उच्च प्राथमिक (६–८) किंवा १–८ शाळा = 'MH MDM sc'. प्रत्येक गटासाठी p (उपस्थित), mc (0 = आहार शिजवला), pu (डाळ कोड), ms (आहार घेतलेले = उपस्थित) */
+ var p=['MH '+(sg()==='15'?'MDMM':'MDM')+' sc '+ud];
+ if(a&&a!=='0'&&sg()!=='68'){var c=SMSC[pulseNorm(e.pulse15)];if(!c){alert('इ. १–५ ची डाळ/कडधान्य निवडा.');return}p.push('p1-5 '+a,'mc1-5 0','pu1-5 '+c,'ms1-5 '+a)}
+ if(b&&b!=='0'&&sg()!=='15'){var d=SMSC[pulseNorm(e.pulse68)];if(!d){alert('इ. ६–८ ची डाळ/कडधान्य निवडा.');return}p.push('p6-8 '+b,'mc6-8 0','pu6-8 '+d,'ms6-8 '+b)}
+ if(p.length<2){alert('या शाळेच्या गटासाठी उपस्थिती भरलेली नाही.');return}
  smsPick(date,ud,p.join(', '))}
 /* SMS सर्व्हर क्रमांक (NIC MDM SMS मॅन्युअल): तिन्ही वापरता येतात — एकावर पाठवून स्वीकारला गेला (Request Served Successfully) की झाले; नाही गेला तर दुसऱ्यावर पाठवा. */
 var SMSN=[['9223166166','मोबाईल क्रमांक'],['166','शॉर्ट कोड'],['51969','शॉर्ट कोड']];
