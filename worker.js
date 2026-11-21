@@ -1423,7 +1423,7 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/payimp'||p==='/api/admin/penchk'||p==='/api/admin/penreset'||p==='/api/admin/aeomap'||p==='/api/admin/schmed'||p==='/api/admin/schlist'||p==='/api/admin/parentreset'||p==='/api/admin/paypw'||p==='/api/admin/kpbind'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
+  if(p==='/api/admin/payimp'||p==='/api/admin/tfind'||p==='/api/admin/tmove'||p==='/api/admin/penchk'||p==='/api/admin/penreset'||p==='/api/admin/aeomap'||p==='/api/admin/schmed'||p==='/api/admin/schlist'||p==='/api/admin/parentreset'||p==='/api/admin/paypw'||p==='/api/admin/kpbind'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
     const b=await body(r);let bad;
     if(b.pk!==undefined&&!PAYP.has(p))return J({e:'bad'},403);
     if(b.pk!==undefined&&PAYP.has(p))bad=await payKey(env,b);else bad=await adminKey(env,b);
@@ -1574,6 +1574,24 @@ async function ext(p,r,env){
       ts.forEach(x=>x.cl=cs.filter(c=>c.tid===x.id).map(c=>c.cls+c.div).join(', '));
       const n=await env.DB.prepare('SELECT COUNT(*) n FROM roster').first();
       return J({ok:1,rows:ts,roster:n.n});
+    }
+    if(p==='/api/admin/tfind'){
+      // शिक्षक शोध (शालार्थ ID / नाव / मोबाईल) — शाळा बदलण्यासाठी
+      const q=cl(b.q,60);if(q.length<3)return J({e:'short'},400);const lk='%'+q.replace(/[%_]/g,'')+'%';
+      const ts=(await env.DB.prepare("SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,s.name school FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.shalarth LIKE ? OR t.name LIKE ? OR t.mobile LIKE ? ORDER BY t.name LIMIT 12").bind(lk,lk,lk).all()).results;
+      const cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses').all()).results;
+      ts.forEach(x=>x.cl=cs.filter(c=>c.tid===x.id).map(c=>c.cls+c.div).join(', '));
+      return J({ok:1,rows:ts});
+    }
+    if(p==='/api/admin/tmove'){
+      // प्रशासकाकडून शिक्षकाची शाळा बदल: जुन्या शाळेचे वर्ग निघतात; approve=1 असल्यास लगेच मंजूर (वापर सुरू)
+      const id=parseInt(b.id)||0,u=cl(b.udise,11).replace(/\D/g,'');if(!id||u.length!==11)return J({e:'arg'},400);
+      const t=await env.DB.prepare('SELECT id,udise,status FROM teachers WHERE id=?').bind(id).first();if(!t)return J({e:'nf'},404);
+      const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();
+      if(!sc&&!b.force)return J({e:'noschool'},404);
+      const st=b.approve?'ok':(u!==t.udise?'pending':t.status);
+      await env.DB.batch([env.DB.prepare('UPDATE teachers SET udise=?,conf=1,status=?,fails=0 WHERE id=?').bind(u,st,id),env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise<>?').bind(id,u)]);
+      return J({ok:1,school:sc?sc.name:'',status:st,moved:u!==t.udise?1:0});
     }
     if(p==='/api/admin/tset'){
       const st=b.status==='ok'?'ok':b.status==='del'?'del':'pending',id=parseInt(b.id)||0;
