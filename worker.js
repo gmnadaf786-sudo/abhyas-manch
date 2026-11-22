@@ -158,12 +158,6 @@ async function cluAdd(env,r,code){
   const L=(await rs.json())[code]||[];
   for(let i=0;i<L.length;i+=40){const st=[];L.slice(i,i+40).forEach(s=>{st.push(env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(s[0],s[1]),env.DB.prepare('INSERT OR IGNORE INTO sch_center(udise,code) VALUES(?,?)').bind(s[0],code))});await env.DB.batch(st)}
   return L.length}
-async function udGeoRes(env,r,u,cache){
-  // UDISE वरून जिल्हा/तालुका/केंद्र (data/udise + geo.json)
-  const k6=u.slice(0,6);if(!(k6 in cache)){const rs=await env.ASSETS.fetch(new Request(new URL('/data/udise/'+k6+'.json',r.url)));cache[k6]=rs.ok?await rs.json():{}}
-  const x=cache[k6][u.slice(6)];if(!x)return null;const g=await geoJson(env,r);
-  for(const d of g)for(const t of d.t)if(t.b.includes(String(x[6]))){const k=t.k.find(q=>q[2]===x[5]);return{d:d.n,t:t.n,k:k?k[0]:'',kc:k?k[2]:''}}
-  return null}
 function geoCluster(g,code,tal){for(const d of g){const ts=d.t.filter(t=>t.k.some(k=>k[2]===code));if(ts.length){const t=ts.find(x=>x.n===tal)||ts[0];return{dn:d.n,dc:d.c||'',name:t.k.find(k=>k[2]===code)[0],tn:t.n}}}return null}
 
 async function offApi(p,r,env){
@@ -1689,7 +1683,7 @@ async function ext(p,r,env){
         const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,''),name=cl(x.name,60),mob=cl(x.mob,10).replace(/\D/g,'').slice(-10),udise=cl(x.udise,11).replace(/\D/g,'');
         if(!/^[A-Z0-9]{6,20}$/.test(sh)||name.length<2||!okMob(mob)||udise.length!==11){sk++;continue}
         st.push(env.DB.prepare("INSERT OR IGNORE INTO teachers(shalarth,name,mobile,udise,salt,pw,status) VALUES(?,?,?,?,?,?,'ok')").bind(sh,name,mob,udise,salt,h));
-        const q=await udGeoRes(env,r,udise,gc).catch(()=>null);if(q)gs.push(env.DB.prepare("UPDATE teachers SET district=?,taluka=?,kendra=?,kcode=? WHERE shalarth=? AND (district IS NULL OR district='')").bind(q.d,q.t,q.k,q.kc,sh));
+        const q=geoIn({district:x.d,taluka:x.t,kendra:x.k,kcode:x.kc});if(q.d&&q.t)gs.push(env.DB.prepare("UPDATE teachers SET district=?,taluka=?,kendra=?,kcode=? WHERE shalarth=? AND (district IS NULL OR district='')").bind(q.d,q.t,q.k,q.kc,sh));
       }
       let n=0;if(st.length){const rs=await env.DB.batch(st);rs.forEach(x=>{n+=x.meta.changes||0});if(gs.length)await env.DB.batch(gs)}
       return J({ok:1,n:n,sk:sk+st.length-n});
