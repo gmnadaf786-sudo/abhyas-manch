@@ -1677,7 +1677,7 @@ async function ext(p,r,env){
       if(st.length)await env.DB.batch(st);
       return J({ok:1,n:st.length});
     }
-    if(p==='/api/admin/timport'){
+    if(p==='/api/admin/timport'){try{
       await tCols(env);const salt=rnd(8),h=await hashPin('123456',salt),st=[],gs=[],gc={};let sk=0;
       for(const x of (Array.isArray(b.rows)?b.rows:[]).slice(0,25)){
         const sh=cl(x.sh,20).toUpperCase().replace(/\s/g,''),name=cl(x.name,60),mob=cl(x.mob,10).replace(/\D/g,'').slice(-10),udise=cl(x.udise,11).replace(/\D/g,'');
@@ -1687,7 +1687,7 @@ async function ext(p,r,env){
       }
       let n=0;if(st.length){const rs=await env.DB.batch(st);rs.forEach(x=>{n+=x.meta.changes||0});if(gs.length)await env.DB.batch(gs)}
       return J({ok:1,n:n,sk:sk+st.length-n});
-    }
+    }catch(e){return J({e:'err',m:String(e&&e.message||e).slice(0,200)},500)}}
     return imp(env,b.rows,null);
   }
   return null;
