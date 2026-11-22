@@ -26,14 +26,15 @@ function gmRow(u){return((GM||{}).rows||[]).filter(function(r){return r.u===u})[
 function gmGo(){X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="m">⏳ लोड होत आहे…</p></div>';GM=null;gmLoad(function(){if(!GM){X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="er">लोड झाले नाही.</p></div>';return}gmDraw()})}
 function gmCol(r){return r.lat==null?(r.xl?'#2563eb':'#64748b'):r.vm>0?'#15803d':r.vy>0?'#d97706':'#b91c1c'}
 function gmRows(){return GM.rows.filter(function(r){return(!GMF||r.c===GMF)&&(!GMQ||r.n.toLowerCase().indexOf(GMQ.toLowerCase())>=0)})}
+var GMRT=0;
 function gmDraw(msg){var kp=ROLE==='KP',R=gmRows(),has=R.filter(function(r){return r.lat!=null}),no=R.filter(function(r){return r.lat==null}),est=no.filter(function(r){return r.xl}),pts=R.filter(function(r){return gmLL(r)});
  var h=hdr()+rOffBack()+'<div class="card"><h2>🗺 शाळांचा नकाशा</h2>'+(msg?'<p class="m">'+msg+'</p>':'');
  if(!kp)h+='<select onchange="GMF=this.value;gmDraw()"><option value="">सर्व केंद्रे</option>'+Object.keys(CEN).filter(function(c){return GM.rows.some(function(r){return r.c===c})}).map(function(c){return '<option value="'+c+'"'+(c===GMF?' selected':'')+'>'+esc(CEN[c])+'</option>'}).join('')+'</select>';
  h+='<input id="gmq" placeholder="शाळेचे नाव शोधा" value="'+esc(GMQ)+'" oninput="GMQ=this.value;gmList()">'
   +'<div class="kp"><div><small>शाळा</small><b>'+R.length+'</b></div><div><small>GPS नोंद</small><b>'+has.length+'</b></div><div><small>GPS बाकी</small><b style="color:'+(no.length?'#b91c1c':'inherit')+'">'+no.length+'</b></div></div>'
-  +'<div class="row"><button class="'+(GMV==='M'?'':'g')+'" onclick="GMV=\'M\';gmDraw()">🗺 नकाशा</button><button class="'+(GMV==='L'?'':'g')+'" onclick="GMV=\'L\';gmDraw()">📋 यादी</button></div>'
+  +'<div class="row"><button class="'+(GMV==='M'?'':'g')+'" onclick="GMV=\'M\';gmDraw()">🗺 नकाशा</button><button class="'+(GMV==='L'?'':'g')+'" onclick="GMV=\'L\';gmDraw()">📋 यादी</button>'+(GMV==='M'&&pts.length>1?'<button class="'+(GMRT?'':'g')+'" onclick="GMRT=GMRT?0:1;gmDraw()">🔗 केंद्र मार्ग</button>':'')+'</div>'
   +'<p class="m" style="margin:4px 0 0"><span style="color:#15803d">●</span> या महिन्यात भेट झाली &nbsp;<span style="color:#d97706">●</span> या वर्षी भेट झाली, या महिन्यात बाकी &nbsp;<span style="color:#b91c1c">●</span> एकदाही भेट नाही &nbsp;<span style="color:#2563eb">●</span> अंदाजे स्थान (सरकारी यादी) &nbsp;<span style="color:#64748b">●</span> स्थान नाही</p>'+(est.length?'<p class="m" style="margin:4px 0 0;font-size:13px">'+est.length+' शाळांचे अंदाजे स्थान सरकारी यादीतून घेतले आहे (निळा ठिपका). अचूक स्थानासाठी शाळेत जाऊन "📍 आत्ता इथे नोंदवा" दाबा; ते नोंदवल्यावर तेच वापरले जाईल.</p>':'')+'</div>';
- h+=(GMV==='M'?'<div class="card" style="padding:6px"><div id="gmm" style="height:min(60vh,460px);border-radius:10px"></div><p class="m" id="gmmm" style="margin:6px 4px 0"></p></div>':'')+'<div id="gml"></div>';
+ h+=(GMV==='M'?'<div class="card" style="padding:6px"><div id="gmm" style="height:min(60vh,460px);border-radius:10px"></div><p class="m" id="gmmm" style="margin:6px 4px 0"></p></div><div id="gmr"></div>':'')+'<div id="gml"></div>';
  X.innerHTML=h;gmList();if(GMV==='M')gmMap(pts)}
 function gmList(){var e=document.getElementById('gml');if(!e)return;var R=gmRows();if(GMV==='M'&&GMQ===''){R=R.filter(function(r){return r.lat==null})}
  var t=GMV==='M'?'📍 स्थान बाकी असलेल्या शाळा':'📋 शाळा यादी';
@@ -42,6 +43,26 @@ function gmList(){var e=document.getElementById('gml');if(!e)return;var R=gmRows
 function gmHere(u){var r=gmRow(u);if(!r)return;if(!confirm('तुम्ही सध्या "'+r.n+'" या शाळेत उभे आहात का? सध्याचे GPS स्थान या शाळेचे स्थान म्हणून जतन होईल.'))return;gmDraw('⏳ स्थान घेत आहे… (काही सेकंद लागतील)');
  geoNow(function(g){if(g.e){gmDraw('<span class="er">'+esc(g.e)+'</span>');return}if(g.acc>150&&!confirm('GPS अचूकता कमी आहे (± '+g.acc+' मी). तरीही जतन करायचे?')){gmDraw();return}
   api('/api/o/geoset',{udise:u,lat:g.lat,lng:g.lng,acc:g.acc}).then(function(j){if(!j.ok){gmDraw('<span class="er">जतन झाले नाही.</span>');return}r.lat=g.lat;r.lng=g.lng;r.acc=g.acc;r.by=ROLE==='KP'?'KP':'B';r.up=new Date().toISOString();gmDraw('<span class="ok">✔ '+esc(r.n)+' चे स्थान जतन झाले (± '+g.acc+' मी).</span>')})})}
+/* ---------- केंद्र मार्ग: सर्व शाळा जोडणारा सर्वात लहान मार्ग (जवळच्या क्रमाने + 2-opt), सरळ रेषेतील अंतर ---------- */
+function gmOrder(P){var n=P.length;if(n<3)return P.map(function(_,i){return i});
+ var D=function(a,b){return geoHav({lat:P[a].q[0],lng:P[a].q[1]},{lat:P[b].q[0],lng:P[b].q[1]})},st=0;
+ for(var i=1;i<n;i++)if(P[i].q[1]<P[st].q[1])st=i;
+ var o=[st],u={};u[st]=1;while(o.length<n){var l=o[o.length-1],bi=-1,bd=1e18;for(var j=0;j<n;j++)if(!u[j]){var d=D(l,j);if(d<bd){bd=d;bi=j}}o.push(bi);u[bi]=1}
+ var imp=1,it=0;while(imp&&it++<40){imp=0;for(var a=0;a<n-2;a++)for(var b=a+1;b<n-1;b++){var d0=D(o[a],o[a+1])+D(o[b],o[b+1]),d1=D(o[a],o[b])+D(o[a+1],o[b+1]);if(d1+1<d0){var seg=o.slice(a+1,b+1).reverse();o=o.slice(0,a+1).concat(seg,o.slice(b+1));imp=1}}
+  /* शेवटचा टोक उलटवणे */
+  for(var c=1;c<n-1;c++){var e0=D(o[c],o[c+1]),e1=D(o[c],o[n-1]);if(e1+1<e0&&c<n-2){var sg=o.slice(c+1).reverse();o=o.slice(0,c+1).concat(sg);imp=1}}}
+ return o}
+function gmRouteDraw(has){var COL=['#0f766e','#7c3aed','#be185d','#b45309','#1d4ed8','#047857','#9d174d','#4338ca'],G={},ks=[],html='';
+ has.forEach(function(r){var q=gmLL(r);if(!q)return;var k=r.c||'-';if(!G[k]){G[k]=[];ks.push(k)}G[k].push({r:r,q:q})});
+ var all=0;
+ ks.forEach(function(k,ci){var P=G[k];if(P.length<2)return;var o=gmOrder(P),col=COL[ci%COL.length],ll=o.map(function(i){return P[i].q}),tot=0,rows='';
+  L.polyline(ll,{color:col,weight:3,opacity:.85,dashArray:'7 6'}).addTo(GMMAP);
+  o.forEach(function(pi,n){var p=P[pi],nx=n<o.length-1?P[o[n+1]]:null,d=nx?geoHav({lat:p.q[0],lng:p.q[1]},{lat:nx.q[0],lng:nx.q[1]}):0;tot+=d;
+   L.marker(p.q,{icon:L.divIcon({className:'',html:'<div style="background:'+col+';color:#fff;border-radius:50%;width:24px;height:24px;line-height:20px;text-align:center;font-size:12px;font-weight:700;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)">'+(n+1)+'</div>',iconSize:[24,24],iconAnchor:[12,12]}),zIndexOffset:500}).addTo(GMMAP).bindPopup('<b>'+(n+1)+'. '+esc(p.r.n)+'</b>'+(nx?'<br>पुढील शाळेपर्यंत: '+geoDm(Math.round(d)):'<br>शेवटची शाळा'));
+   rows+='<tr><td>'+(n+1)+'</td><td>'+esc(p.r.n)+(p.r.lat==null?' <small style="color:#2563eb">(अंदाजे)</small>':'')+'</td><td>'+(nx?geoDm(Math.round(d)):'—')+'</td></tr>'});
+  all+=tot;var nm=(typeof CEN!=='undefined'&&CEN[k])?CEN[k]:'';
+  html+='<div class="card"><h2 style="color:'+col+'">🔗 '+(nm?esc(nm)+' केंद्र – ':'')+'शाळा जोडणी मार्ग</h2><p class="m">'+P.length+' शाळा · एकूण सुमारे <b>'+geoDm(Math.round(tot))+'</b> (सरळ रेषेतील अंतर; प्रत्यक्ष रस्त्याने जास्त असू शकते)</p><div class="w"><table><tr><th>क्र.</th><th>शाळा</th><th>पुढील शाळेपर्यंत</th></tr>'+rows+'</table></div></div>'});
+ var e=document.getElementById('gmr');if(e)e.innerHTML=html||'<div class="card"><p class="m">मार्गासाठी किमान दोन शाळांचे स्थान हवे.</p></div>'}
 function gmLeaf(cb){if(window.L&&L.map){cb();return}var c=document.createElement('link');c.rel='stylesheet';c.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.appendChild(c);var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';s.onload=cb;s.onerror=function(){cb(1)};document.head.appendChild(s)}
 function gmMap(has){var m=document.getElementById('gmmm');if(!has.length){document.getElementById('gmm').innerHTML='<p class="m" style="padding:14px">या शाळांचे कोणतेही स्थान उपलब्ध नाही. खालील यादीतून "📍 आत्ता इथे नोंदवा" किंवा शाळा भेट फॉर्ममधून स्थान घ्या.</p>';return}
  m.textContent='⏳ नकाशा लोड होत आहे… (इंटरनेट आवश्यक)';gmLeaf(function(er){var el=document.getElementById('gmm');if(!el)return;if(er||!window.L){m.innerHTML='<span class="er">नकाशा लोड झाला नाही (इंटरनेट तपासा). यादी वापरा:</span> '+has.map(function(r){var q=gmLL(r);return '<a href="'+geoLink(q[0],q[1])+'" target="_blank" rel="noopener">'+esc(r.n)+'</a>'}).join(' · ');return}
@@ -49,6 +70,7 @@ function gmMap(has){var m=document.getElementById('gmmm');if(!has.length){docume
   GMMAP=L.map(el,{zoomControl:true});L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(GMMAP);var b=[];
   has.forEach(function(r){var q=gmLL(r),ex=r.lat!=null,mk=L.circleMarker(q,{radius:ex?9:7,color:'#fff',weight:2,fillColor:gmCol(r),fillOpacity:ex?.95:.7}).addTo(GMMAP);b.push(q);
    mk.bindPopup('<b>'+esc(r.n)+'</b><br>शेवटची भेट: '+(r.lv?geoDt(r.lv):'—')+'<br>वर्षात '+r.vy+' भेटी'+(ex?'':'<br><span style="color:#2563eb">अंदाजे स्थान (सरकारी यादी)</span>')+'<br><a href="'+geoNav(q[0],q[1])+'" target="_blank" rel="noopener">➡ मार्ग दाखवा (Google Maps)</a>')});
+  if(GMRT)gmRouteDraw(has);else{var rr=document.getElementById('gmr');if(rr)rr.innerHTML=''}
   if(b.length===1)GMMAP.setView(b[0],15);else GMMAP.fitBounds(b,{padding:[24,24]});setTimeout(function(){GMMAP&&GMMAP.invalidateSize()},200)})}
 
 /* ---------- शाळा भेट फॉर्ममधील स्थान (visit.js वापरते) ---------- */
