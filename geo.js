@@ -49,32 +49,41 @@ function gmHere(u){var r=gmRow(u);if(!r)return;if(!confirm('तुम्ही �
    रस्त्याचे अंतर/मार्ग: OSRM (OpenStreetMap) – ब्राउझरमधून; न चालल्यास सरळ रेषेचा मार्ग दाखवतो. */
 var OSRM='https://router.project-osrm.org';
 function gmFj(u){return new Promise(function(ok,no){var c=window.AbortController?new AbortController():null,t=setTimeout(function(){if(c)c.abort();no(0)},20000);fetch(u,c?{signal:c.signal}:{}).then(function(r){return r.json()}).then(function(j){clearTimeout(t);j&&j.code==='Ok'?ok(j):no(0)}).catch(function(){clearTimeout(t);no(0)})})}
-function gmOrder(P,D){var n=P.length;if(n<3)return P.map(function(_,i){return i});
- var st=0;for(var i=1;i<n;i++)if(P[i].q[1]<P[st].q[1])st=i;
+function gmOrder(P,D,st){var n=P.length;if(n<3)return P.map(function(_,i){return i});
+ if(st==null||st<0||st>=n){st=0;for(var i=1;i<n;i++)if(P[i].q[1]<P[st].q[1])st=i}
  var o=[st],u={};u[st]=1;while(o.length<n){var l=o[o.length-1],bi=-1,bd=1e18;for(var j=0;j<n;j++)if(!u[j]){var d=D(l,j);if(d<bd){bd=d;bi=j}}o.push(bi);u[bi]=1}
+ /* 2-opt (सुरुवातीची शाळा स्थिर राहते) */
  var imp=1,it=0;while(imp&&it++<40){imp=0;for(var a=0;a<n-2;a++)for(var b=a+1;b<n-1;b++){var d0=D(o[a],o[a+1])+D(o[b],o[b+1]),d1=D(o[a],o[b])+D(o[a+1],o[b+1]);if(d1+1<d0){var seg=o.slice(a+1,b+1).reverse();o=o.slice(0,a+1).concat(seg,o.slice(b+1));imp=1}}
   for(var c=1;c<n-2;c++){var e0=D(o[c],o[c+1]),e1=D(o[c],o[n-1]);if(e1+1<e0){var sg=o.slice(c+1).reverse();o=o.slice(0,c+1).concat(sg);imp=1}}}
  return o}
-var GMRK=0;
+var GMRK=0,GMRS='',GMRL=0;
+/* सुरुवातीची शाळा: निवडलेली, नाहीतर केंद्राच्या मध्यभागाजवळची शाळा */
+function gmCentre(P){var cy=0,cx=0;P.forEach(function(p){cy+=p.q[0];cx+=p.q[1]});cy/=P.length;cx/=P.length;var b=0,bd=1e18;P.forEach(function(p,i){var d=geoHav({lat:cy,lng:cx},{lat:p.q[0],lng:p.q[1]});if(d<bd){bd=d;b=i}});return b}
 function gmRouteDraw(has){var tk=++GMRK,COL=['#0f766e','#7c3aed','#be185d','#b45309','#1d4ed8','#047857','#9d174d','#4338ca'],G={},ks=[],e=document.getElementById('gmr');
  has.forEach(function(r){var q=gmLL(r);if(!q)return;var k=r.c||'-';if(!G[k]){G[k]=[];ks=ks.concat(k)}G[k].push({r:r,q:q})});
  ks=ks.filter(function(k){return G[k].length>1});if(!e)return;
  if(!ks.length){e.innerHTML='<div class="card"><p class="m">मार्गासाठी किमान दोन शाळांचे स्थान हवे.</p></div>';return}
- e.innerHTML='<div class="card"><p class="m">⏳ रस्त्याने मार्ग काढत आहे… (इंटरनेट आवश्यक)</p></div>';
+ var ctl='';
+ if(ks.length===1){var P0=G[ks[0]].slice(0,90),sel=-1;P0.forEach(function(p,i){if(p.r.u===GMRS)sel=i});if(sel<0)sel=gmCentre(P0);
+  ctl='<div class="card"><label>सुरुवातीची शाळा</label><select onchange="GMRS=this.value;gmDraw()">'+P0.map(function(p,i){return '<option value="'+p.r.u+'"'+(i===sel?' selected':'')+'>'+esc(p.r.n)+'</option>'}).join('')+'</select><label style="display:flex;gap:8px;align-items:center;margin-top:8px;font-weight:400"><input type="checkbox" style="width:20px;height:20px;margin:0" '+(GMRL?'checked ':'')+'onchange="GMRL=this.checked?1:0;gmDraw()"> शेवटी सुरुवातीच्या शाळेत परत या</label></div>'}
+ e.innerHTML=ctl+'<div class="card"><p class="m">⏳ रस्त्याने मार्ग काढत आहे… (इंटरनेट आवश्यक)</p></div>';
  var out={},ci=0;
- function one(){if(tk!==GMRK||!document.getElementById('gmr'))return;if(ci>=ks.length){var h='';ks.forEach(function(k){h+=out[k]||''});document.getElementById('gmr').innerHTML=h;return}
+ function one(){if(tk!==GMRK||!document.getElementById('gmr'))return;if(ci>=ks.length){var h='';ks.forEach(function(k){h+=out[k]||''});document.getElementById('gmr').innerHTML=ctl+h;return}
   var k=ks[ci],ix=ci++,P=G[k].slice(0,90),col=COL[ix%COL.length],hv=function(a,b){return geoHav({lat:P[a].q[0],lng:P[a].q[1]},{lat:P[b].q[0],lng:P[b].q[1]})},cs=function(a){return a.map(function(i){return P[i].q[1]+','+P[i].q[0]}).join(';')};
+  var st=-1;P.forEach(function(p,i){if(p.r.u===GMRS&&ks.length===1)st=i});if(st<0)st=gmCentre(P);
   var idx=P.map(function(_,i){return i}),tbl=P.length>2&&P.length<=60?gmFj(OSRM+'/table/v1/driving/'+cs(idx)+'?annotations=distance'):Promise.reject(0);
   tbl.then(function(j){var M=j.distances;return function(a,b){var v=M[a]&&M[a][b];return v==null?hv(a,b):v}}).catch(function(){return hv}).then(function(Df){
-   var o=gmOrder(P,Df);
-   return gmFj(OSRM+'/route/v1/driving/'+cs(o)+'?overview=full&geometries=geojson&steps=false').then(function(j){return{o:o,rt:j.routes[0]}}).catch(function(){return{o:o,rt:null}})}).then(function(R){
-   if(tk!==GMRK||!window.GMMAP)return;var o=R.o,rt=R.rt,ll=rt?rt.geometry.coordinates.map(function(c){return[c[1],c[0]]}):o.map(function(i){return P[i].q}),tot=0,rows='';
+   var o=gmOrder(P,Df,st),oo=GMRL&&o.length>1?o.concat(o[0]):o;
+   return gmFj(OSRM+'/route/v1/driving/'+cs(oo)+'?overview=full&geometries=geojson&steps=false').then(function(j){return{o:o,oo:oo,rt:j.routes[0],wp:j.waypoints||[]}}).catch(function(){return{o:o,oo:oo,rt:null,wp:[]}})}).then(function(R){
+   if(tk!==GMRK||!window.GMMAP)return;var o=R.o,oo=R.oo,rt=R.rt,ll=rt?rt.geometry.coordinates.map(function(c){return[c[1],c[0]]}):oo.map(function(i){return P[i].q}),tot=0,rows='',bad=0;
    L.polyline(ll,{color:col,weight:4,opacity:.85,dashArray:rt?null:'7 6'}).addTo(GMMAP);
-   o.forEach(function(pi,n){var p=P[pi],nx=n<o.length-1?P[o[n+1]]:null,d=0;if(nx)d=(rt&&rt.legs[n])?rt.legs[n].distance:hv(pi,o[n+1]);tot+=d;
-    L.marker(p.q,{icon:L.divIcon({className:'',html:'<div style="background:'+col+';color:#fff;border-radius:50%;width:24px;height:24px;line-height:20px;text-align:center;font-size:12px;font-weight:700;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)">'+(n+1)+'</div>',iconSize:[24,24],iconAnchor:[12,12]}),zIndexOffset:500}).addTo(GMMAP).bindPopup('<b>'+(n+1)+'. '+esc(p.r.n)+'</b>'+(nx?'<br>पुढील शाळेपर्यंत: '+geoDm(Math.round(d)):'<br>शेवटची शाळा'));
-    rows+='<tr><td>'+(n+1)+'</td><td>'+esc(p.r.n)+(p.r.lat==null?' <small style="color:#2563eb">(अंदाजे)</small>':'')+'</td><td>'+(nx?geoDm(Math.round(d)):'—')+'</td></tr>'});
+   oo.forEach(function(pi,n){var p=P[pi],last=n===oo.length-1,back=GMRL&&last&&o.length>1,nx=!last?P[oo[n+1]]:null,d=0,wr='';
+    if(nx){d=(rt&&rt.legs[n])?rt.legs[n].distance:hv(pi,oo[n+1]);tot+=d;var sd=hv(pi,oo[n+1]);if(rt&&d>3*sd+1500)wr='⚠ रस्ता वळसा घालून (सरळ '+geoDm(Math.round(sd))+')'}
+    var sn=R.wp[n]&&R.wp[n].distance;if(rt&&sn>400)wr+=(wr?' · ':'')+'⚠ स्थान रस्त्यापासून '+geoDm(Math.round(sn))+' दूर';if(wr)bad++;
+    if(!back)L.marker(p.q,{icon:L.divIcon({className:'',html:'<div style="background:'+(n===0?'#111827':col)+';color:#fff;border-radius:50%;width:24px;height:24px;line-height:20px;text-align:center;font-size:12px;font-weight:700;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)">'+(n===0?'S':n+1)+'</div>',iconSize:[24,24],iconAnchor:[12,12]}),zIndexOffset:500}).addTo(GMMAP).bindPopup('<b>'+(n===0?'सुरुवात: ':(n+1)+'. ')+esc(p.r.n)+'</b>'+(nx?'<br>पुढील शाळेपर्यंत: '+geoDm(Math.round(d)):'<br>शेवटची शाळा')+(wr?'<br>'+wr:''));
+    rows+='<tr><td>'+(n===0?'सुरुवात':back?'↩':n+1)+'</td><td>'+esc(p.r.n)+(p.r.lat==null?' <small style="color:#2563eb">(अंदाजे)</small>':'')+(wr?'<br><small class="er">'+wr+'</small>':'')+'</td><td>'+(nx?geoDm(Math.round(d)):'—')+'</td></tr>'});
    var nm=(typeof CEN!=='undefined'&&CEN[k])?CEN[k]:'';
-   out[k]='<div class="card"><h2 style="color:'+col+'">🔗 '+(nm?esc(nm)+' केंद्र – ':'')+'शाळा जोडणी मार्ग</h2><p class="m">'+P.length+' शाळा · एकूण सुमारे <b>'+geoDm(Math.round(tot))+'</b> '+(rt?'(रस्त्याने, OpenStreetMap नुसार; प्रत्यक्षात थोडा फरक असू शकतो)':'<span class="er">(रस्त्याचा मार्ग मिळाला नाही, सरळ रेषेतील अंतर दाखवले आहे)</span>')+'</p><div class="w"><table><tr><th>क्र.</th><th>शाळा</th><th>पुढील शाळेपर्यंत</th></tr>'+rows+'</table></div></div>';
+   out[k]='<div class="card"><h2 style="color:'+col+'">🔗 '+(nm?esc(nm)+' केंद्र – ':'')+'शाळा जोडणी मार्ग</h2><p class="m">सुरुवात: <b>'+esc(P[st].r.n)+'</b> · '+P.length+' शाळा · एकूण सुमारे <b>'+geoDm(Math.round(tot))+'</b> '+(rt?'(रस्त्याने, OpenStreetMap नुसार; प्रत्यक्षात थोडा फरक असू शकतो)':'<span class="er">(रस्त्याचा मार्ग मिळाला नाही, सरळ रेषेतील अंतर दाखवले आहे)</span>')+'</p>'+(bad?'<p class="m er">⚠ '+bad+' ठिकाणी स्थान रस्त्यापासून दूर किंवा रस्ता वळसा घालून आहे – त्या शाळेचे GPS तपासा.</p>':'')+'<div class="w"><table><tr><th>क्र.</th><th>शाळा</th><th>पुढील शाळेपर्यंत</th></tr>'+rows+'</table></div></div>';
    one()}).catch(function(){out[k]='';one()})}
  one()}
 function gmLeaf(cb){if(window.L&&L.map){cb();return}var c=document.createElement('link');c.rel='stylesheet';c.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.appendChild(c);var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';s.onload=cb;s.onerror=function(){cb(1)};document.head.appendChild(s)}
