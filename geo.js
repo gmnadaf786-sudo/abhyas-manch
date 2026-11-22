@@ -18,9 +18,11 @@ function geoDt(s){var m=String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m
 /* ---------- KP / BEO : नकाशा व यादी ---------- */
 function gmLoad(cb){if(GM){cb();return}if(GMLD){GMLD.push(cb);return}GMLD=[cb];api('/api/o/geo',{}).then(function(j){gmXl(j.ok?j.rows:[]).then(function(){var q=GMLD;GMLD=null;if(j.ok)GM=j;q.forEach(function(f){f()})})})}
 /* GPS नोंद नसलेल्या शाळांसाठी सरकारी यादीतील (Excel) अंदाजे स्थान data/udise मधून घेणे: r.xl=[lat,lng]. KP चे GPS असेल तर तेच वापरले जाते. */
-function gmXl(rows){var need=[];rows.forEach(function(r){var p=String(r.u).slice(0,6);if(r.lat==null&&need.indexOf(p)<0)need.push(p)});
+/* ज्या केंद्रांसाठी KP ने नोंदलेल्या GPS ऐवजी नेहमी सरकारी यादीतील स्थान वापरायचे */
+var GOVLOC=['CLU3603591'];
+function gmXl(rows){var need=[];rows.forEach(function(r){var p=String(r.u).slice(0,6);if((r.lat==null||GOVLOC.indexOf(r.c)>=0)&&need.indexOf(p)<0)need.push(p)});
  return Promise.all(need.map(function(p){return fetch('data/udise/'+p+'.json').then(function(x){return x.ok?x.json():{}}).catch(function(){return{}})})).then(function(a){var D={};need.forEach(function(p,i){D[p]=a[i]});
-  rows.forEach(function(r){if(r.lat!=null)return;var d=D[String(r.u).slice(0,6)]||{},s=d[String(r.u).slice(6)];if(s&&s[9]!=null&&s[10]!=null)r.xl=[s[9],s[10]]})})}
+  rows.forEach(function(r){var gv=GOVLOC.indexOf(r.c)>=0;if(r.lat!=null&&!gv)return;var d=D[String(r.u).slice(0,6)]||{},s=d[String(r.u).slice(6)];if(gv&&s&&s[9]!=null&&s[10]!=null){if(r.lat!=null){r.lat0=r.lat;r.lng0=r.lng}r.lat=s[9];r.lng=s[10];r.gov=1;return}if(r.lat!=null)return;if(s&&s[9]!=null&&s[10]!=null)r.xl=[s[9],s[10]]})})}
 function gmLL(r){return r.lat!=null?[r.lat,r.lng]:r.xl||null}
 function gmRow(u){return((GM||{}).rows||[]).filter(function(r){return r.u===u})[0]}
 function gmGo(){X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="m">⏳ लोड होत आहे…</p></div>';GM=null;gmLoad(function(){if(!GM){X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="er">लोड झाले नाही.</p></div>';return}gmDraw()})}
@@ -81,7 +83,7 @@ function gmMap(has){var m=document.getElementById('gmmm');if(!has.length){docume
   m.textContent='पिन दाबल्यावर शाळेची माहिती व मार्ग दिसेल.';if(GMMAP){try{GMMAP.remove()}catch(e){}GMMAP=null}
   GMMAP=L.map(el,{zoomControl:true});L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(GMMAP);var b=[];
   has.forEach(function(r){var q=gmLL(r),ex=r.lat!=null,mk=L.circleMarker(q,{radius:ex?9:7,color:'#fff',weight:2,fillColor:gmCol(r),fillOpacity:ex?.95:.7}).addTo(GMMAP);b.push(q);
-   mk.bindPopup('<b>'+esc(r.n)+'</b><br>शेवटची भेट: '+(r.lv?geoDt(r.lv):'—')+'<br>वर्षात '+r.vy+' भेटी'+(ex?'':'<br><span style="color:#2563eb">अंदाजे स्थान (सरकारी यादी)</span>')+'<br><a href="'+geoNav(q[0],q[1])+'" target="_blank" rel="noopener">➡ मार्ग दाखवा (Google Maps)</a>')});
+   mk.bindPopup('<b>'+esc(r.n)+'</b><br>शेवटची भेट: '+(r.lv?geoDt(r.lv):'—')+'<br>वर्षात '+r.vy+' भेटी'+(r.gov?'<br><span style="color:#2563eb">सरकारी यादीतील स्थान</span>':ex?'':'<br><span style="color:#2563eb">अंदाजे स्थान (सरकारी यादी)</span>')+'<br><a href="'+geoNav(q[0],q[1])+'" target="_blank" rel="noopener">➡ मार्ग दाखवा (Google Maps)</a>')});
   if(GMRT)gmRouteDraw(has);else{var rr=document.getElementById('gmr');if(rr)rr.innerHTML=''}
   if(b.length===1)GMMAP.setView(b[0],15);else GMMAP.fitBounds(b,{padding:[24,24]});setTimeout(function(){GMMAP&&GMMAP.invalidateSize()},200)})}
 
