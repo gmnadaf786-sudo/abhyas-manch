@@ -212,8 +212,10 @@ async function offApi(p,r,env){
   const ok=new Set(ss.map(x=>x.udise));
   if(p==='/api/o/medset'){
     if(!kp)return J({e:'kp'},403);await schCols(env);
-    const u=cl(b.udise,11).replace(/\D/g,''),m=cl(b.med,12);if(!ok.has(u)||!['मराठी','कन्नड','उर्दू','इंग्रजी','हिंदी','इतर'].includes(m))return J({e:'arg'},400);
-    await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,''),env.DB.prepare('UPDATE schools SET med=? WHERE udise=?').bind(m,u)]);return J({ok:1})}
+    const u=cl(b.udise,11).replace(/\D/g,''),AL=['मराठी','कन्नड','उर्दू','इंग्रजी','हिंदी','इतर'],ms=(Array.isArray(b.meds)?b.meds:[b.med]).map(x=>cl(x,12)).filter((x,i,a)=>AL.includes(x)&&a.indexOf(x)===i).slice(0,4);
+    if(!ok.has(u)||!ms.length)return J({e:'arg'},400);
+    const sm=[...new Set((Array.isArray(b.semi)?b.semi:[]).map(x=>parseInt(x)).filter(x=>x>=1&&x<=10))].sort((a,c)=>a-c);
+    await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,''),env.DB.prepare('UPDATE schools SET med=? WHERE udise=?').bind(ms.join(','),u),sm.length?cfgUp(env,'semi:'+u,JSON.stringify(sm)):env.DB.prepare('DELETE FROM cfg WHERE k=?').bind('semi:'+u)]);return J({ok:1})}
   if(p==='/api/o/hmlist'||p==='/api/o/hmt'||p==='/api/o/hmset'){
     if(!kp)return J({e:'kp'},403);
     if(p==='/api/o/hmlist'){
@@ -348,8 +350,9 @@ async function offApi(p,r,env){
       env.DB.prepare('SELECT udise,COUNT(*) n FROM roster GROUP BY udise').all(),
       env.DB.prepare('SELECT udise,MAX(date) d,COUNT(*) c FROM pm_daily GROUP BY udise').all().catch(()=>({results:[]}))]);
     const F={},D={},R={},P={};f.results.forEach(x=>F[x.udise]=x);d.results.forEach(x=>{(D[x.udise]=D[x.udise]||{})[x.kind]=x.g});ro.results.forEach(x=>R[x.udise]=x.n);pm.results.forEach(x=>P[x.udise]=x);
+    const SM={};((await env.DB.prepare("SELECT k,v FROM cfg WHERE k LIKE 'semi:%'").all()).results||[]).forEach(x=>{try{SM[x.k.slice(5)]=JSON.parse(x.v)}catch(e){}});
     await schCols(env);const MD={};((await env.DB.prepare("SELECT udise,med FROM schools WHERE COALESCE(med,'')<>''").all()).results||[]).forEach(x=>{MD[x.udise]=x.med});
-    return J({ok:1,role:kp?'KP':'BEO',cen:await cenAll(env),rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,med:MD[s.udise]||'',fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})});
+    return J({ok:1,role:kp?'KP':'BEO',cen:await cenAll(env),rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,med:MD[s.udise]||'',semi:SM[s.udise]||[],fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})});
   }
   if(p==='/api/o/sna'){
     await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_sna(udise TEXT PRIMARY KEY, mhsn TEXT, bank TEXT, acct TEXT, ifsc TEXT, branch TEXT, hm TEXT, hm_mob TEXT, upd TEXT)").run();
