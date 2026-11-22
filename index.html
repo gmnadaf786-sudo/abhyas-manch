@@ -143,7 +143,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <script src="udgeo.js"></script>
 <script>
 function udLook(u,cb){if(!/^27\d{9}$/.test(u)){cb(null);return}fetch('data/udise/'+u.slice(0,6)+'.json').then(function(r){return r.ok?r.json():{}}).then(function(j){cb(j[u.slice(6)]||null)}).catch(function(){cb(null)})}
-function udFill(){var u=rsu.value.replace(/\D/g,''),h=document.getElementById('rsh');if(u.length!==11){h.textContent='';return}h.style.color='#64748b';h.textContent='शाळा शोधत आहे…';udgFind(u,function(r){if(rsu.value.replace(/\D/g,'')!==u)return;if(!r){h.style.color='#b91c1c';h.textContent='UDISE कोड 27 ने सुरू होणारा ११ अंकी हवा.';return}var m=udgMsg(r);h.style.color=!m.ok?'#b91c1c':m.warn?'#b45309':'#15803d';h.textContent=m.t;if(r.s&&(!rsn.value.trim()||rsn.dataset.auto==='1')){rsn.value=r.s[0];rsn.dataset.auto='1'}if(r.g){if(!GEO)GEO=r.g;if(rd.options.length<2)rgD();udgApply({d:rd,t:rt,k:rk,fd:rgT,ft:rgK},r);rgS(u)}})}
+function udFill(){var u=rsu.value.replace(/\D/g,''),h=document.getElementById('rsh');if(u.length!==11){h.textContent='';rgCr('');return}h.style.color='#64748b';h.textContent='शाळा शोधत आहे…';udgFind(u,function(r){if(rsu.value.replace(/\D/g,'')!==u)return;if(!r){h.style.color='#b91c1c';h.textContent='UDISE कोड 27 ने सुरू होणारा ११ अंकी हवा.';return}var m=udgMsg(r);h.style.color=!m.ok?'#b91c1c':m.warn?'#b45309':'#15803d';h.textContent=m.t;if(r.s&&(!rsn.value.trim()||rsn.dataset.auto==='1')){rsn.value=r.s[0];rsn.dataset.auto='1'}if(r.g){if(!GEO)GEO=r.g;if(rd.options.length<2)rgD();udgApply({d:rd,t:rt,k:rk,fd:rgT,ft:rgK},r);rgS(u)}rgCr(u)})}
 
 
 var API='https://script.google.com/macros/s/AKfycbySme1rFcvWN-9xS_BmE2dMiHqOL8P3gvhs2-BGN6aZxi2d-4xHZJOOuH5kHroLTU4x/exec',WA='https://chat.whatsapp.com/G0r9BnDy4Dr2SRWf5K6EnD',SK='am_sess_v1',QK='am_queue_v1',K='am_prog_v1',S=null,D=[],CAT=null,BASE='',GUEST=null;try{GUEST=JSON.parse(localStorage.getItem('am_guest_v1')||'null')}catch(e){}
@@ -264,14 +264,21 @@ function rgD(){rd.innerHTML=rgo(GEO.map(function(x){return x.n}),'जिल्�
 function rgT(){var d=GEO[rd.value];rt.innerHTML=rgo(d?d.t.map(function(x){return x.n}):[],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र (गाव) निवडा');rgS()}
 function rgK(){var d=GEO[rd.value],t=d&&d.t[rt.value];rk.innerHTML=rgo(t?t.k.map(function(x){return x[0]}):[],'केंद्र (गाव) निवडा');rgS()}
 /* केंद्रानुसार शाळांची यादी (data/clu/<जिल्हा कोड>.json) */
+/* शाळेच्या इयत्ता श्रेणीनुसार (कमी–जास्त वर्ग) इयत्ता यादी मर्यादित करणे – data/udise */
+var CBLK={};
+function rgCr(u){var all=[];GOPT.forEach(function(x){if(all.indexOf(x.cls)<0)all.push(x.cls)});all.sort(function(a,b){return a-b});
+ var set=function(lo,hi){var cs=all.filter(function(c){return c>=lo&&c<=hi});if(!cs.length)cs=all;var cur=rcl.value;rcl.innerHTML='<option value="">इयत्ता निवडा</option>'+cs.map(function(c){return '<option value="'+c+'">इयत्ता '+c+'</option>'}).join('');if(cs.indexOf(+cur)>=0)rcl.value=cur;rgM()};
+ if(!u||u.length!==11){set(0,99);return}
+ var b=u.slice(0,6),go=function(m){if(rsu.value.replace(/\D/g,'')!==u)return;var r=m&&m[u.slice(6)],lo=r&&+r[3],hi=r&&+r[4];if(r&&lo>=0&&hi>=lo)set(lo,hi);else set(0,99)};
+ if(CBLK[b])go(CBLK[b]);else fetch('data/udise/'+b+'.json').then(function(x){return x.ok?x.json():{}}).catch(function(){return{}}).then(function(m){CBLK[b]=m;go(m)})}
 var CLUD={};
-function rgS(sel){var d=GEO&&GEO[rd.value],t=d&&d.t[rt.value],k=t&&rk.value!==''&&t.k[rk.value],c=k&&k[2];
+function rgS(sel){if(!sel)rgCr('');var d=GEO&&GEO[rd.value],t=d&&d.t[rt.value],k=t&&rk.value!==''&&t.k[rk.value],c=k&&k[2];
  if(!c||!d.c){rsd.style.display='none';rsd.innerHTML='';return}
  var go=function(m){var L=(m&&m[c]||[]).slice().sort(function(a,b){return a[1]<b[1]?-1:1});if(rk.value!==String(t.k.indexOf(k))||!L.length){rsd.style.display='none';rsd.innerHTML='';return}
   rsd.innerHTML='<option value="">शाळा निवडा ('+L.length+' शाळा – केंद्रानुसार)</option>'+L.map(function(x){return '<option value="'+x[0]+'">'+x[1].replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</option>'}).join('')+'<option value="X">— यादीत नाही (नाव खाली लिहा) —</option>';rsd.style.display='';if(sel)rsd.value=sel};
  if(CLUD[d.c])go(CLUD[d.c]);else fetch('data/clu/'+d.c+'.json').then(function(r){return r.ok?r.json():{}}).catch(function(){return{}}).then(function(m){CLUD[d.c]=m;go(m)})}
-function rgSp(){var v=rsd.value;if(!v)return;if(v==='X'){rsn.value='';rsn.dataset.auto='';rsu.value='';var h=document.getElementById('rsh');if(h)h.textContent='';rsn.focus();return}
- var o=rsd.options[rsd.selectedIndex];rsn.value=o.text;rsn.dataset.auto='1';rsu.value=v;var h2=document.getElementById('rsh');if(h2){h2.style.color='#15803d';h2.textContent='✓ UDISE '+v}}
+function rgSp(){var v=rsd.value;if(!v)return;if(v==='X'){rsn.value='';rsn.dataset.auto='';rsu.value='';rgCr('');var h=document.getElementById('rsh');if(h)h.textContent='';rsn.focus();return}
+ var o=rsd.options[rsd.selectedIndex];rsn.value=o.text;rsn.dataset.auto='1';rsu.value=v;rgCr(v);var h2=document.getElementById('rsh');if(h2){h2.style.color='#15803d';h2.textContent='✓ UDISE '+v}}
 function rgErr(e){var M={mobile:'मोबाईल क्रमांक बरोबर टाका.',name:'विद्यार्थ्याचे नाव टाका.',pin:'पासवर्ड ४ ते ६ अंकी असावा.',consent:'संमती निवडा.',cls:'इयत्ता आणि माध्यम निवडा.',exists:'हा मोबाईल आधीच नोंदलेला आहे. दुसरा वर्ग जोडायचा असल्यास आधीचाच पासवर्ड टाका; नाहीतर "मोबाईल नंबरने लॉगिन" वापरा.',dup:'हे नाव व वर्ग आधीच जोडलेला आहे.',many:'एका मोबाईलवर जास्तीत जास्त ६ वर्ग जोडता येतात.',bad:'मोबाईल किंवा पासवर्ड चुकीचा.',locked:'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.'};rgm.textContent=M[e]||'काहीतरी अडचण आली. पुन्हा प्रयत्न करा.'}
 function rgGo(){if(!RGM&&RGK==='k'){kpGo();return}if(!RGM&&RGK==='t'){trGo();return}if(!RGM&&RGK==='c'){scGo();return}rgm.textContent='';var o={mobile:rmb.value.trim(),pin:rpn.value.trim()},u='/api/login';
  if(!/^[6-9]\d{9}$/.test(o.mobile)){rgErr('mobile');return}
