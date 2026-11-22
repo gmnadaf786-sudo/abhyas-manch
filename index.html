@@ -168,8 +168,8 @@ function setRole(r){RL=r;try{localStorage.setItem('am_role',r)}catch(e){}var c=R
 var RHINT={stu:'आयडी: शाळेतील PEN (११ अंकी) किंवा नोंदणी केलेला मोबाईल नंबर',tch:'आयडी: शालार्थ ID. पहिल्यांदा असाल तर "नोंदणी करा".',off:'KP: केंद्र कोड · BEO: BEO · AEO: AEO1 / AEO2 / AEO3. सुरुवातीचा पासवर्ड 123456 (पहिल्या वेळी बदलावा लागतो).',sch:'आयडी: शाळेचा UDISE कोड (११ अंकी). सुरुवातीचा पासवर्ड 123456 (पहिल्या वेळी बदलावा लागतो).'},RSUB={stu:'PEN / मोबाईल',tch:'शालार्थ ID',off:'केंद्र कोड / BEO / AEO',sch:'UDISE कोड'},RICO={stu:'🧑‍🎓',tch:'👩‍🏫',off:'🏢',sch:'🏫'};
 var RSAV=false;try{RSAV=!!localStorage.getItem('am_role')}catch(e){}
 function showRoles(){lgf.style.display='none';rls.style.display='block';le.textContent='';rlc.innerHTML=ROLES.map(function(x){var last=RSAV&&x[0]===RL;return '<button type="button" onclick="pickRole(\''+x[0]+'\')" style="background:#fff;color:#0f172a;border:'+(last?'3px solid #0f766e':'3px solid transparent')+';border-radius:20px;padding:14px 6px 12px;box-shadow:0 8px 22px rgba(0,0,0,.2);cursor:pointer;font:inherit;display:flex;flex-direction:column;align-items:center;gap:4px;margin:0;width:100%"><span style="font-size:46px;line-height:1.1">'+RICO[x[0]]+'</span><b style="font-size:15px">'+x[1].replace(/^\S+\s/,'')+'</b><small style="color:#64748b;font-size:11.5px">'+RSUB[x[0]]+'</small></button>'}).join('')}
-function pickRole(r,m){RSAV=true;setRole(r);rls.style.display='none';lgf.style.display='block';lu.value='';lp.value='';le.textContent=m||'';lb.disabled=false;lgrg.style.display=r==='off'?'none':'flex';if(!m)setTimeout(function(){try{lu.focus()}catch(e){}},60)}
-function regFor(){openRg(0);rgKind({stu:'s',tch:'t',sch:'c'}[RL]||'s')}
+function pickRole(r,m){RSAV=true;setRole(r);rls.style.display='none';lgf.style.display='block';lu.value='';lp.value='';le.textContent=m||'';lb.disabled=false;lgrg.style.display='flex';lgrg.textContent=r==='off'?'📝 केंद्रप्रमुख नोंदणी':'📝 नोंदणी करा';if(!m)setTimeout(function(){try{lu.focus()}catch(e){}},60)}
+function regFor(){openRg(0);rgKind({stu:'s',tch:'t',sch:'c',off:'k'}[RL]||'s')}
 function openHelp(){lhp.style.display='flex'}
 setRole(RL);showRoles();
 function ssSet(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}
@@ -526,5 +526,6 @@ function audWin(w){var d;try{d=w.document;if(!d||!d.body||w.__amA)return;w.__amA
 function audScan(d,n){if(n>4||!d)return;audWin(d.defaultView);audKids(d).forEach(function(f){audScan(f.contentDocument,n+1)})}
 function audInit(){clearInterval(AUDT);var k=0,p=cur&&cur.p,l=curL;AUDL='';AUDT=setInterval(function(){if(view.style.display!=='flex'||++k>600){clearInterval(AUDT);return}var d;try{d=fr.contentDocument}catch(e){return}if(!d||!d.body)return;audScan(d,0);var h=audHas(d),b=document.getElementById('audb');if(b){b.style.display=h?'none':'';audBtn()}},1000);}
 fr.addEventListener('load',function(){if(view.style.display==='flex'){injUser();injCards();audInit();if(AUDON)setTimeout(function(){audSpeak(true)},900)}});
+try{if(location.hash==='#regk'){history.replaceState(null,'',location.pathname+location.search);setTimeout(function(){try{openRg(0);rgKind('k')}catch(e){}},300)}}catch(e){}
 try{if(location.hash==='#login'){history.replaceState(null,'',location.pathname+location.search);showLogin('')}}catch(e){}
 </script></body></html>
