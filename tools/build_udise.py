@@ -12,8 +12,11 @@ data/udise/<UDISE चे पहिले ६ अंक>.json  →  { UDISE च�
  12 व्यवस्थापन         13 B=मुले G=मुली C=मिश्र   14 पत्ता
  (०–४ ची रचना जुन्या कोडसाठी आधीसारखीच ठेवली आहे.)
 
-geo.json  →  [ {n: जिल्हा, t: [ {n: तालुका, b: [ब्लॉक कोड…], k: [[केंद्राचे नाव, जुना anchor कोड किंवा '', CLU कोड]…]} ]} ]
+geo.json  →  [ {n: जिल्हा, c: जिल्हा कोड, t: [ {n: तालुका, b: [ब्लॉक कोड…], k: [[केंद्राचे नाव, जुना anchor कोड किंवा '', CLU कोड]…]} ]} ]
  केंद्रे फक्त त्या ब्लॉकच्या सुरू शाळांवरून घेतली आहेत. मराठी नावे tools/mr_names.json मधून.
+
+data/clu/<जिल्हा कोड>.json  →  { केंद्र कोड (CLU…) : [[UDISE, शाळेचे नाव], …] }  (फक्त सुरू शाळा)
+ केंद्रप्रमुख नोंदणी मंजूर झाल्यावर worker.js यावरून त्या केंद्राच्या शाळा आपोआप जोडते.
 """
 import sys, os, re, json, glob, collections
 import openpyxl
@@ -109,9 +112,22 @@ def main(xlsx):
         for nm in sorted(tal):
             ks = sorted(tal[nm]['k'].items(), key=lambda x: x[1].lower())
             ts.append({'n': nm, 'b': tal[nm]['b'], 'k': [[n_, mr['anchor'].get(c, ''), c] for c, n_ in ks]})
-        geo.append({'n': mr['district'].get(dc) or dn[dc], 't': ts})
+        geo.append({'n': mr['district'].get(dc) or dn[dc], 'c': dc, 't': ts})
     with open(os.path.join(ROOT, 'geo.json'), 'w', encoding='utf-8') as f:
         json.dump(geo, f, ensure_ascii=False, separators=(',', ':'))
+    # data/clu : जिल्हा → केंद्र → सुरू शाळा (केंद्रप्रमुख मंजुरीसाठी)
+    cdir = os.path.join(ROOT, 'data', 'clu')
+    os.makedirs(cdir, exist_ok=True)
+    for f in glob.glob(os.path.join(cdir, '*.json')):
+        os.remove(f)
+    byd = collections.defaultdict(lambda: collections.defaultdict(list))
+    for r in R:
+        c = clu(r['Cluster Code'])
+        if r['School Status'] == 'Operational' and c:
+            byd[str(r['District Code'])][c].append([str(r['UDISE Code']).strip(), clean(r['School Name'])])
+    for dc, m in byd.items():
+        with open(os.path.join(cdir, dc + '.json'), 'w', encoding='utf-8') as f:
+            json.dump({k: sorted(v) for k, v in sorted(m.items())}, f, ensure_ascii=False, separators=(',', ':'))
     print('शाळा', len(R), '| फाइल्स', len(files), '| जिल्हे', len(geo),
           '| तालुके', sum(len(d['t']) for d in geo), '| केंद्रे', sum(len(t['k']) for d in geo for t in d['t']))
 
