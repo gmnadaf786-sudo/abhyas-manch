@@ -93,7 +93,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <div id="rgtc" style="display:none"><p style="font-size:12px;color:var(--mut);margin:0 0 10px">नोंदणीनंतर प्रशासकाच्या मंजुरीनंतर लॉगिन करता येईल.</p><input id="tr_sh" placeholder="शालार्थ आयडी (हाच तुमचा युजरनेम)" autocapitalize="characters"><input id="tr_n" placeholder="पूर्ण नाव"><input id="tr_m" inputmode="numeric" maxlength="10" placeholder="मोबाईल क्रमांक"><input id="tr_u" inputmode="numeric" maxlength="11" placeholder="शाळेचा UDISE कोड (११ अंकी)" oninput="trU()"><small id="tr_h" style="display:block;margin:-4px 0 8px"></small><select id="trd" class="rgs"></select><select id="trt" class="rgs"></select><select id="trk" class="rgs"></select><input id="tr_c" placeholder="वर्ग / तुकडी (जसे: 4A, 5B — स्वल्पविरामाने)"><input id="tr_p" type="password" placeholder="स्वतःचा पासवर्ड (किमान ६ अक्षरे)"><label style="display:flex;gap:8px;font-size:13px;color:var(--mut);margin-bottom:10px"><input id="tr_k" type="checkbox" style="width:auto;margin:3px 0 0">मी माझ्या वर्गातील विद्यार्थ्यांचे नाव, PEN व वापर-अहवाल पाहण्यास मान्यता देतो/देते.</label></div>
 <div id="rgr"><p style="font-size:12px;color:var(--mut);margin:6px 0 10px">नोंदणी मोफत आहे. PEN नको. तुमचे नाव PDF वर येईल.</p>
 <input id="rsu" inputmode="numeric" maxlength="11" placeholder="शाळेचा UDISE कोड (११ अंकी) — टाकल्यावर जिल्हा, तालुका, शाळा आपोआप भरतील" oninput="udFill()"><small id="rsh" style="display:block;margin:-4px 0 8px"></small>
-<select id="rd" onchange="rgT()" class="rgs"></select><select id="rt" onchange="rgK()" class="rgs"></select><select id="rk" class="rgs"></select>
+<select id="rd" onchange="rgT()" class="rgs"></select><select id="rt" onchange="rgK()" class="rgs"></select><select id="rk" onchange="rgS()" class="rgs"></select><select id="rsd" onchange="rgSp()" class="rgs" style="display:none"></select>
 <input id="rsn" placeholder="शाळेचे नाव" autocomplete="off" oninput="this.dataset.auto=''">
 <input id="rnm" placeholder="विद्यार्थ्याचे नाव" autocomplete="name"><select id="rcl" onchange="rgM()" class="rgs"></select><select id="rcm" class="rgs"></select></div>
 <input id="rmb" inputmode="numeric" maxlength="10" placeholder="मोबाईल क्रमांक (१० अंकी)" autocomplete="username"><input id="rpn" type="password" inputmode="numeric" maxlength="6" placeholder="पासवर्ड (४ ते ६ अंक)" autocomplete="current-password">
@@ -143,7 +143,7 @@ input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--lin
 <script src="udgeo.js"></script>
 <script>
 function udLook(u,cb){if(!/^27\d{9}$/.test(u)){cb(null);return}fetch('data/udise/'+u.slice(0,6)+'.json').then(function(r){return r.ok?r.json():{}}).then(function(j){cb(j[u.slice(6)]||null)}).catch(function(){cb(null)})}
-function udFill(){var u=rsu.value.replace(/\D/g,''),h=document.getElementById('rsh');if(u.length!==11){h.textContent='';return}h.style.color='#64748b';h.textContent='शाळा शोधत आहे…';udgFind(u,function(r){if(rsu.value.replace(/\D/g,'')!==u)return;if(!r){h.style.color='#b91c1c';h.textContent='UDISE कोड 27 ने सुरू होणारा ११ अंकी हवा.';return}var m=udgMsg(r);h.style.color=!m.ok?'#b91c1c':m.warn?'#b45309':'#15803d';h.textContent=m.t;if(r.s&&(!rsn.value.trim()||rsn.dataset.auto==='1')){rsn.value=r.s[0];rsn.dataset.auto='1'}if(r.g){if(!GEO)GEO=r.g;if(rd.options.length<2)rgD();udgApply({d:rd,t:rt,k:rk,fd:rgT,ft:rgK},r)}})}
+function udFill(){var u=rsu.value.replace(/\D/g,''),h=document.getElementById('rsh');if(u.length!==11){h.textContent='';return}h.style.color='#64748b';h.textContent='शाळा शोधत आहे…';udgFind(u,function(r){if(rsu.value.replace(/\D/g,'')!==u)return;if(!r){h.style.color='#b91c1c';h.textContent='UDISE कोड 27 ने सुरू होणारा ११ अंकी हवा.';return}var m=udgMsg(r);h.style.color=!m.ok?'#b91c1c':m.warn?'#b45309':'#15803d';h.textContent=m.t;if(r.s&&(!rsn.value.trim()||rsn.dataset.auto==='1')){rsn.value=r.s[0];rsn.dataset.auto='1'}if(r.g){if(!GEO)GEO=r.g;if(rd.options.length<2)rgD();udgApply({d:rd,t:rt,k:rk,fd:rgT,ft:rgK},r);rgS(u)}})}
 
 
 var API='https://script.google.com/macros/s/AKfycbySme1rFcvWN-9xS_BmE2dMiHqOL8P3gvhs2-BGN6aZxi2d-4xHZJOOuH5kHroLTU4x/exec',WA='https://chat.whatsapp.com/G0r9BnDy4Dr2SRWf5K6EnD',SK='am_sess_v1',QK='am_queue_v1',K='am_prog_v1',S=null,D=[],CAT=null,BASE='',GUEST=null;try{GUEST=JSON.parse(localStorage.getItem('am_guest_v1')||'null')}catch(e){}
@@ -261,8 +261,17 @@ function openRg(mode){RGM=mode;try{kidLock(0)}catch(e){}rgKind('s');document.get
  fetch('geo.json').then(function(r){return r.json()}).then(function(g){GEO=g;rgD()}).catch(function(){rd.innerHTML='<option value="">इंटरनेट तपासा</option>'})}
 function rgM(){var c=+rcl.value,h='<option value="">माध्यम निवडा</option>';GOPT.filter(function(x){return x.cls===c}).forEach(function(x){h+='<option value="'+x.med+'">'+medName(x.med)+' माध्यम</option>'});rcm.innerHTML=h}
 function rgD(){rd.innerHTML=rgo(GEO.map(function(x){return x.n}),'जिल्हा निवडा');rt.innerHTML=rgo([],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र (गाव) निवडा')}
-function rgT(){var d=GEO[rd.value];rt.innerHTML=rgo(d?d.t.map(function(x){return x.n}):[],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र (गाव) निवडा')}
-function rgK(){var d=GEO[rd.value],t=d&&d.t[rt.value];rk.innerHTML=rgo(t?t.k.map(function(x){return x[0]}):[],'केंद्र (गाव) निवडा')}
+function rgT(){var d=GEO[rd.value];rt.innerHTML=rgo(d?d.t.map(function(x){return x.n}):[],'तालुका निवडा');rk.innerHTML=rgo([],'केंद्र (गाव) निवडा');rgS()}
+function rgK(){var d=GEO[rd.value],t=d&&d.t[rt.value];rk.innerHTML=rgo(t?t.k.map(function(x){return x[0]}):[],'केंद्र (गाव) निवडा');rgS()}
+/* केंद्रानुसार शाळांची यादी (data/clu/<जिल्हा कोड>.json) */
+var CLUD={};
+function rgS(sel){var d=GEO&&GEO[rd.value],t=d&&d.t[rt.value],k=t&&rk.value!==''&&t.k[rk.value],c=k&&k[2];
+ if(!c||!d.c){rsd.style.display='none';rsd.innerHTML='';return}
+ var go=function(m){var L=(m&&m[c]||[]).slice().sort(function(a,b){return a[1]<b[1]?-1:1});if(rk.value!==String(t.k.indexOf(k))||!L.length){rsd.style.display='none';rsd.innerHTML='';return}
+  rsd.innerHTML='<option value="">शाळा निवडा ('+L.length+' शाळा – केंद्रानुसार)</option>'+L.map(function(x){return '<option value="'+x[0]+'">'+x[1].replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</option>'}).join('')+'<option value="X">— यादीत नाही (नाव खाली लिहा) —</option>';rsd.style.display='';if(sel)rsd.value=sel};
+ if(CLUD[d.c])go(CLUD[d.c]);else fetch('data/clu/'+d.c+'.json').then(function(r){return r.ok?r.json():{}}).catch(function(){return{}}).then(function(m){CLUD[d.c]=m;go(m)})}
+function rgSp(){var v=rsd.value;if(!v)return;if(v==='X'){rsn.value='';rsn.dataset.auto='';rsu.value='';var h=document.getElementById('rsh');if(h)h.textContent='';rsn.focus();return}
+ var o=rsd.options[rsd.selectedIndex];rsn.value=o.text;rsn.dataset.auto='1';rsu.value=v;var h2=document.getElementById('rsh');if(h2){h2.style.color='#15803d';h2.textContent='✓ UDISE '+v}}
 function rgErr(e){var M={mobile:'मोबाईल क्रमांक बरोबर टाका.',name:'विद्यार्थ्याचे नाव टाका.',pin:'पासवर्ड ४ ते ६ अंकी असावा.',consent:'संमती निवडा.',cls:'इयत्ता आणि माध्यम निवडा.',exists:'हा मोबाईल आधीच नोंदलेला आहे. दुसरा वर्ग जोडायचा असल्यास आधीचाच पासवर्ड टाका; नाहीतर "मोबाईल नंबरने लॉगिन" वापरा.',dup:'हे नाव व वर्ग आधीच जोडलेला आहे.',many:'एका मोबाईलवर जास्तीत जास्त ६ वर्ग जोडता येतात.',bad:'मोबाईल किंवा पासवर्ड चुकीचा.',locked:'खूप चुकीचे प्रयत्न. शिक्षकांशी संपर्क करा.'};rgm.textContent=M[e]||'काहीतरी अडचण आली. पुन्हा प्रयत्न करा.'}
 function rgGo(){if(!RGM&&RGK==='k'){kpGo();return}if(!RGM&&RGK==='t'){trGo();return}if(!RGM&&RGK==='c'){scGo();return}rgm.textContent='';var o={mobile:rmb.value.trim(),pin:rpn.value.trim()},u='/api/login';
  if(!/^[6-9]\d{9}$/.test(o.mobile)){rgErr('mobile');return}
@@ -282,7 +291,7 @@ function pickKid(j,onErr){var L=j.list;if(!L||L.length<2){return rgDone(j,onErr)
  L.forEach(function(x,i){var p=x.profile;h+='<button type="button" class="les" style="justify-content:flex-start;width:100%;margin:8px 0 0" data-i="'+i+'">👤 '+p.name+' — इयत्ता '+p.cls+' ('+medName(p.med)+')</button>'});
  o.innerHTML=h+'</div>';document.body.appendChild(o);
  Array.prototype.forEach.call(o.querySelectorAll('button'),function(bt){bt.onclick=function(){var x=L[+bt.getAttribute('data-i')];o.remove();rgDone({ok:1,token:x.token,profile:x.profile},onErr)}})}
-function kidLock(on){[rmb,rd,rt,rk,rsn,rsu].forEach(function(e){e.disabled=!!on;e.style.opacity=on?'.7':''})}
+function kidLock(on){[rmb,rd,rt,rk,rsd,rsn,rsu].forEach(function(e){e.disabled=!!on;e.style.opacity=on?'.7':''})}
 function addKid(){var p=PROF&&PROF.p;rg.style.display='none';openRg(0);kidLock(0);if(!p)return;
  rgm.textContent='आधीचा पासवर्ड टाका; विद्यार्थ्याचे नाव, इयत्ता व माध्यम भरा. बाकी माहिती आपोआप भरली आहे.';
  rmb.value=String(p.mobile).split('-')[0];rnm.value='';rpn.value='';rsn.value=p.school||'';rsu.value=p.udise||'';
