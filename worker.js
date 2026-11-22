@@ -151,6 +151,13 @@ let KPOK=false;async function kpEns(env){if(KPOK)return;await env.DB.prepare("CR
 async function cenAll(env){try{await kpEns(env);const rs=(await env.DB.prepare("SELECT code,kname FROM kp_reg WHERE status='ok'").all()).results||[],m={...CEN};rs.forEach(x=>{if(!m[x.code])m[x.code]=x.kname});return m}catch(e){return CEN}}
 let GEOC=null;async function geoJson(env,r){if(GEOC)return GEOC;const x=await env.ASSETS.fetch(new Request(new URL('/geo.json',r.url)));GEOC=await x.json();return GEOC}
 // geo.json मध्ये केंद्र कोड शोधा → {dn,dc,name,tn}; तालुका = क्लायंटने निवडलेला (त्या केंद्राचा असेल तर) नाहीतर पहिला
+async function cluAdd(env,r,code){
+  // केंद्राच्या सुरू शाळा Excel यादीतून जोडा (आधीपासून असलेली शाळा बदलत नाही)
+  const f=geoCluster(await geoJson(env,r),code,'');if(!f||!f.dc)return 0;
+  const rs=await env.ASSETS.fetch(new Request(new URL('/data/clu/'+f.dc+'.json',r.url)));if(!rs.ok)return 0;
+  const L=(await rs.json())[code]||[];
+  for(let i=0;i<L.length;i+=40){const st=[];L.slice(i,i+40).forEach(s=>{st.push(env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(s[0],s[1]),env.DB.prepare('INSERT OR IGNORE INTO sch_center(udise,code) VALUES(?,?)').bind(s[0],code))});await env.DB.batch(st)}
+  return L.length}
 function geoCluster(g,code,tal){for(const d of g){const ts=d.t.filter(t=>t.k.some(k=>k[2]===code));if(ts.length){const t=ts.find(x=>x.n===tal)||ts[0];return{dn:d.n,dc:d.c||'',name:t.k.find(k=>k[2]===code)[0],tn:t.n}}}return null}
 
 async function offApi(p,r,env){
@@ -188,6 +195,19 @@ async function offApi(p,r,env){
     const salt=rnd(8),tok=rnd(24);await env.DB.prepare('UPDATE off_login SET salt=?,pw=?,changed=1,token=?,tt=? WHERE uname=?').bind(salt,await hashPin(nw,salt),tok,Date.now(),t.uname).run();
     return J({ok:1,token:tok});
   }
+  if(p==='/api/o/schadd'){
+    if(!kp)return J({e:'kp'},403);await slEnsure(env);
+    const u=cl(b.udise,11).replace(/\D/g,'');
+    if(!u){const before=(await env.DB.prepare('SELECT COUNT(*) n FROM sch_center WHERE code=?').bind(t.uname).first()).n;await cluAdd(env,r,t.uname);const after=(await env.DB.prepare('SELECT COUNT(*) n FROM sch_center WHERE code=?').bind(t.uname).first()).n;return J({ok:1,added:after-before,total:after})}
+    if(!/^27\d{9}$/.test(u))return J({e:'udise'},400);
+    const rs=await env.ASSETS.fetch(new Request(new URL('/data/udise/'+u.slice(0,6)+'.json',r.url))),d=rs.ok?await rs.json():{},x=d[u.slice(6)];
+    const ex=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(u).first();
+    if(ex&&ex.code!==t.uname)return J({ok:1,other:1,code:ex.code,name:(await cenAll(env))[ex.code]||ex.code});
+    if(!x&&!ex)return J({e:'nf'},404);
+    const nm=x?String(x[0]).slice(0,120):'';
+    if(!b.go)return J({ok:1,name:nm,have:ex?1:0,closed:x&&x[11]?1:0,village:x?x[7]:''});
+    await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,nm),env.DB.prepare('INSERT OR REPLACE INTO sch_center(udise,code) VALUES(?,?)').bind(u,t.uname)]);
+    return J({ok:1,done:1,name:nm})}
   const ss=(kp?await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code=? ORDER BY c.udise').bind(t.uname).all():await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise ORDER BY c.code,c.udise').all()).results;
   const ok=new Set(ss.map(x=>x.udise));
   if(p==='/api/o/mdm'||p==='/api/o/mdmsave'){
@@ -897,6 +917,13 @@ async function ext(p,r,env){
     await env.DB.prepare("INSERT OR REPLACE INTO kp_reg(code,kname,rname,mobile,district,taluka,salt,pw,status,ts) VALUES(?,?,?,?,?,?,?,?,'pending',?)").bind(code,f.name,rn,mo,f.dn,f.tn,salt,await hashPin(pw,salt),istDay()).run();
     return J({ok:1});
   }
+  if(p==='/api/admin/clusync'){
+    const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;await slEnsure(env);
+    const cen=await cenAll(env),codes=Object.keys(cen);
+    if(!b.code)return J({ok:1,codes});
+    const code=cl(b.code,14).toUpperCase();if(!cen[code])return J({e:'nf'},404);
+    const before=(await env.DB.prepare('SELECT COUNT(*) n FROM sch_center WHERE code=?').bind(code).first()).n;await cluAdd(env,r,code);
+    const after=(await env.DB.prepare('SELECT COUNT(*) n FROM sch_center WHERE code=?').bind(code).first()).n;return J({ok:1,added:after-before,total:after})}
   if(p==='/api/admin/kpreglist'||p==='/api/admin/kpregset'){
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;
     await slEnsure(env);await kpEns(env);
