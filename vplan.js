@@ -60,6 +60,20 @@ function vpCls(us){var bs={};us.forEach(function(u){bs[u.slice(0,6)]=1});
  return Promise.all(Object.keys(bs).map(function(b){if(VPL.bl[b])return 0;return fetch('/data/udise/'+b+'.json').then(function(r){return r.json()}).then(function(j){VPL.bl[b]=j}).catch(function(){VPL.bl[b]={}})})).then(function(){
   us.forEach(function(u){var j=VPL.bl[u.slice(0,6)]||{},x=j[u.slice(6)];if(x)VPL.cls[u]=[x[3],x[4],x[0]]})})}
 
+/* ===== नकाशावरील स्थानावरून गट (जवळच्या शाळा एकत्र) ===== */
+function vpGeo(cb){try{gmLoad(function(){VPL.q={};((window.GM&&GM.rows)||[]).forEach(function(r){var q=gmLL(r);if(q)VPL.q[r.u]=q});cb()})}catch(e){VPL.q=VPL.q||{};cb()}}
+function vpHv(a,b){return geoHav({lat:a[0],lng:a[1]},{lat:b[0],lng:b[1]})}
+function vpAutoG(ex){ex=ex||[];var us=(window.DATA||[]).map(function(r){return r.u}).filter(function(u){return ex.indexOf(u)<0}),q=VPL.q||{},loc=us.filter(function(u){return q[u]}),no=us.filter(function(u){return !q[u]});
+ if(loc.length<2)return null;
+ var P=loc.map(function(u){return{u:u,q:q[u]}}),o=gmOrder(P,function(a,b){return vpHv(P[a].q,P[b].q)}),L=o.map(function(i){return P[i].u}),g=[],i=0;
+ while(i<L.length){g.push({n:'',s:L.slice(i,i+2)});i+=2}
+ var last=g[g.length-1];if(g.length>1&&last.s.length===1){var p=g[g.length-2];if(p.s.length<3){p.s=p.s.concat(last.s);g.pop()}}
+ if(no.length){var by={};no.forEach(function(u){var v=u.slice(6,9);(by[v]=by[v]||[]).push(u)});
+  Object.keys(by).sort().forEach(function(v){var N=by[v].sort(),j=0,st=g.length;while(j<N.length){g.push({n:'',s:N.slice(j,j+2)});j+=2}var l2=g[g.length-1];if(g.length-st>1&&l2.s.length===1){var p2=g[g.length-2];if(p2.s.length<3){p2.s=p2.s.concat(l2.s);g.pop()}}})}
+ return{sm:4,bg:3,nm:{},groups:g,geo:1}}
+function vpGKm(g){var q=VPL.q||{},t=0;if(g.s.length<2)return '';for(var i=0;i<g.s.length-1;i++){var a=q[g.s[i]],b=q[g.s[i+1]];if(!a||!b)return '';t+=vpHv(a,b)}return '📍 शाळांमधील अंतर सुमारे '+geoDm(Math.round(t))+' (सरळ रेषेत)'}
+function vpRebuildG(){if(!confirm('आताचे सर्व गट काढून नकाशावरील स्थानानुसार (जवळच्या शाळा एकत्र) नवीन गट बनवायचे?'))return;var nm=VPL.cfg.nm||{},ex=VPL.cfg.ex||[],a=vpAutoG(ex);if(!a){alert('गट बनवण्यासाठी किमान दोन शाळांचे स्थान हवे.');return}a.nm=nm;a.ex=ex;VPL.cfg=a;VPL.msg='✓ नकाशावरील स्थानानुसार गट बनले. गटांचा क्रम जवळच्या मार्गाने आहे, म्हणून लागोपाठचे दिवस जवळ येतात.';vpTouch()}
+
 function vpAuto(){var by={},g=[];
  (window.DATA||[]).forEach(function(r){var v=r.u.slice(6,9);(by[v]=by[v]||[]).push(r.u)});
  Object.keys(by).sort().forEach(function(v){var L=by[v].sort(),i=0,st=g.length;
@@ -76,11 +90,11 @@ function vpMon(v){var p=v.split('-');VPL.y=+p[0];VPL.m=+p[1]-1;VPL.msg='';vpLoad
 function vpLoad(){
  X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="m">⏳ लोड होत आहे…</p></div>';
  var mk=vpKey();
- return Promise.all([api('/api/o/vpget',{k:'cfg'}),api('/api/o/vpget',{k:'m:'+mk}),api('/api/o/vs',{mon:mk})]).then(function(a){
+ return Promise.all([api('/api/o/vpget',{k:'cfg'}),api('/api/o/vpget',{k:'m:'+mk}),api('/api/o/vs',{mon:mk}),new Promise(function(r){vpGeo(r)})]).then(function(a){
   if(!a[0].ok||!a[1].ok){if(a[0].$s===401){location.reload();return}X.innerHTML=hdr()+rOffBack()+'<div class="card"><p class="er">लोड झाले नाही'+(a[0].e?' ('+esc(a[0].e)+(a[0].$s?' '+a[0].$s:'')+')':'')+'. सर्व्हर (worker.js) नवीन आवृत्तीवर चढवला आहे का ते तपासा.</p><button onclick="vpLoad()">पुन्हा प्रयत्न</button></div>';return}
   VPL.cfg=vpParse(a[0].data);VPL.md=vpParse(a[1].data);VPL.vs=(a[2].ok?a[2].rows:[]).filter(function(x){return x.mine});
   var gir=vpCode()==='CLU3603591',sv=[];
-  if(!VPL.cfg){VPL.cfg=gir?JSON.parse(JSON.stringify(VPSEED)):vpAuto();sv.push(vpSaveCfg())}
+  if(!VPL.cfg){VPL.cfg=gir?JSON.parse(JSON.stringify(VPSEED)):(vpAutoG()||vpAuto());sv.push(vpSaveCfg())}
   if(!VPL.cfg.ex)VPL.cfg.ex=[];
   if(!VPL.md&&gir&&mk==='2026-12'){VPL.md=JSON.parse(JSON.stringify(VPSEEDM));sv.push(vpSaveMd())}
   var us=[].concat.apply([],VPL.cfg.groups.map(function(g){return g.s})).concat((window.DATA||[]).map(function(r){return r.u}));
@@ -132,10 +146,10 @@ function vpTg(iso){var md=VPL.md,f=md.f.slice(),i=f.indexOf(iso);if(i>=0)f.splic
 function vpGroups(){
  var c=VPL.cfg,h='<div class="card"><p class="m">प्रत्येक गट म्हणजे एका दिवसाच्या भेटीच्या शाळा (नेहमी एकत्र जोड्या). एका फेरीत गटांच्या क्रमाने दिवस येतात. शाळा दुसऱ्या गटात हलवण्यासाठी शाळेसमोरील यादी वापरा.</p>'
   +'<div class="row" style="flex-wrap:nowrap"><div style="flex:1"><label>फक्त लहान शाळा (इ. १–४) – दिवसाला जास्तीत जास्त</label><input type="number" min="1" max="8" value="'+c.sm+'" onchange="vpRule(\'sm\',this.value)"></div><div style="flex:1"><label>मोठी शाळा असल्यास – जास्तीत जास्त</label><input type="number" min="1" max="8" value="'+c.bg+'" onchange="vpRule(\'bg\',this.value)"></div></div>'
-  +'<div class="row"><button class="g" onclick="vpNew()">+ नवीन गट</button><button class="g" onclick="vpRebuild()">↻ आपोआप गट बनवा (गावानुसार)</button></div></div>';
+  +'<div class="row"><button class="g" onclick="vpNew()">+ नवीन गट</button><button class="g" onclick="vpRebuild()">↻ आपोआप गट बनवा (गावानुसार)</button></div><div class="row"><button onclick="vpRebuildG()">📍 नकाशावरून गट बनवा (जवळच्या शाळा एकत्र)</button></div></div>';
  c.groups.forEach(function(g,gi){
   var w=vpWarn(g);
-  h+='<div class="card"><div style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><b style="flex:1">गट '+(gi+1)+(g.n?' – '+esc(g.n):'')+'</b><button class="g" style="width:auto;margin:0;padding:4px 10px" onclick="vpMvG('+gi+',-1)">↑</button><button class="g" style="width:auto;margin:0;padding:4px 10px" onclick="vpMvG('+gi+',1)">↓</button></div>'+(w?'<p class="er">'+w+'</p>':'');
+  h+='<div class="card"><div style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><b style="flex:1">गट '+(gi+1)+(g.n?' – '+esc(g.n):'')+'</b><button class="g" style="width:auto;margin:0;padding:4px 10px" onclick="vpMvG('+gi+',-1)">↑</button><button class="g" style="width:auto;margin:0;padding:4px 10px" onclick="vpMvG('+gi+',1)">↓</button></div>'+(w?'<p class="er">'+w+'</p>':'')+(vpGKm(g)?'<p class="m" style="margin:0 0 6px">'+vpGKm(g)+'</p>':'');
   g.s.forEach(function(u,si){
    h+='<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px"><div style="flex:1;min-width:0">'+esc(vpNm(u))+'<br><small>'+u+' · '+(vpBig(u)?'मोठी':'लहान')+' '+vpSz(u)+'</small></div><select style="width:auto;max-width:46%;margin:0" onchange="vpMvS('+gi+','+si+',this.value)"><option value="">गट हलवा…</option>'
     +c.groups.map(function(x,xi){return xi===gi?'':'<option value="'+xi+'">→ गट '+(xi+1)+'</option>'}).join('')+'<option value="N">→ नवीन गट</option></select></div>'});
