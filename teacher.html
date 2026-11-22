@@ -42,7 +42,7 @@ function login(){e.textContent='';post('/api/t/login',{shalarth:u.value.trim(),p
  T=j.token;U=j.udise;try{sessionStorage.setItem('am_t',T);sessionStorage.setItem('am_tn',j.name||'')}catch(x){}if(j.status!=='ok'){show('d');d.innerHTML='<div class="card"><h2>मंजुरी बाकी</h2><p>नमस्कार '+E(j.name)+', तुमची नोंदणी प्रशासकाच्या मंजुरीसाठी प्रलंबित आहे. मंजुरी मिळाल्यावर पुन्हा लॉगिन करा.</p></div>';return}
  home()}).catch(function(){e.textContent='इंटरनेट तपासा.'})}
 function reg(){re.textContent='';var cs=rc.value.split(',').map(function(x){var m=x.trim().toUpperCase().match(/^(\d)\s*([A-Z]?)$/);return m?{cls:+m[1],div:m[2]||'A'}:null}).filter(Boolean);
- post('/api/t/register',{shalarth:rs.value.trim(),name:rn.value.trim(),mobile:rm.value.trim(),udise:ru.value.trim(),district:(RZS?RZS.val().district:''),taluka:(RZS?RZS.val().taluka:''),kendra:(RZS?RZS.val().kendra:''),pw:rp.value,consent:rk.checked?1:0,classes:cs}).then(function(j){
+ post('/api/t/register',{shalarth:rs.value.trim(),name:rn.value.trim(),mobile:rm.value.trim(),udise:ru.value.trim(),district:(RZS?RZS.val().district:''),taluka:(RZS?RZS.val().taluka:''),kendra:(RZS?RZS.val().kendra:''),kcode:(RZS?RZS.val().kendraCode:''),pw:rp.value,consent:rk.checked?1:0,classes:cs}).then(function(j){
  if(j.ok){show('lg');u.value=rs.value;e.className='er ok';e.textContent='नोंदणी झाली. प्रशासकाच्या मंजुरीनंतर लॉगिन करा.';return}
  re.textContent={sh:'शालार्थ आयडी चुकीचा.',name:'नाव टाका.',mobile:'मोबाईल चुकीचा.',udise:'UDISE ११ अंकी हवा.',pw:'पासवर्ड किमान ६ अक्षरे.',consent:'मान्यता आवश्यक.',cls:'वर्ग/तुकडी टाका (उदा. 4A).',exists:'हा शालार्थ आयडी आधीच नोंदलेला आहे.'}[j.e]||'अडचण.'})}
 function addc(){post('/api/t/avail',{}).then(function(j){if(!j.ok){alert('अडचण');return}

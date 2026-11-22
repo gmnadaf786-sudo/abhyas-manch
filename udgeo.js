@@ -54,7 +54,7 @@ function udgSel(ids){
   S.d.onchange=S.fd;S.t.onchange=S.ft;
   S.init=function(){udgGeo(function(g){if(!g)return;if(S.d.options.length<2)S.d.innerHTML=udgOpts(g.map(function(x){return x.n}),'जिल्हा निवडा');S.fd()})};
   /* निवडलेली मूल्ये (सबमिटसाठी) */
-  S.val=function(){var g=UDG.g,d=g&&g[S.d.value],t=d&&d.t[S.t.value],k=t&&t.k[S.k.value];return {district:d?d.n:'',taluka:t?t.n:'',kendra:k?k[0]:'',kendraCode:k?k[1]:''}};
+  S.val=function(){var g=UDG.g,d=g&&g[S.d.value],t=d&&d.t[S.t.value],k=t&&t.k[S.k.value];return {district:d?d.n:'',taluka:t?t.n:'',kendra:k?k[0]:'',kendraCode:k?k[2]:''}};
   return S}
 /* इनपुट + हिंट + निवड जोडा. inp=UDISE इनपुट, hint=small घटक, S=udgSel/ student S, onFound(r) ऐच्छिक */
 function udgBind(inp,hint,S,onFound){
