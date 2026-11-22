@@ -210,6 +210,21 @@ async function offApi(p,r,env){
     return J({ok:1,done:1,name:nm})}
   const ss=(kp?await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code=? ORDER BY c.udise').bind(t.uname).all():await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise ORDER BY c.code,c.udise').all()).results;
   const ok=new Set(ss.map(x=>x.udise));
+  if(p==='/api/o/hmlist'||p==='/api/o/hmt'||p==='/api/o/hmset'){
+    if(!kp)return J({e:'kp'},403);
+    if(p==='/api/o/hmlist'){
+      const hs={},tn={},mg=new Set();
+      ((await env.DB.prepare("SELECT k,v FROM cfg WHERE k LIKE 'hm:%'").all()).results||[]).forEach(x=>{hs[x.k.slice(3)]=x.v});
+      ((await env.DB.prepare("SELECT k FROM cfg WHERE k LIKE 'hmm:%'").all()).results||[]).forEach(x=>mg.add(x.k.slice(4)));
+      ((await env.DB.prepare("SELECT udise,COUNT(*) n FROM teachers WHERE status='ok' GROUP BY udise").all()).results||[]).forEach(x=>{tn[x.udise]=x.n});
+      return J({ok:1,rows:ss.map(x=>({u:x.udise,nm:x.name||x.udise,hm:hs[x.udise]||'',n:tn[x.udise]||0,m:mg.has(x.udise)?1:0}))})}
+    const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'auth'},403);
+    if(p==='/api/o/hmt'){
+      const ts=((await env.DB.prepare("SELECT shalarth sh,name n,mobile m FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(u).all()).results||[]),h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hmt:'+u).first();
+      return J({ok:1,rows:ts,hmt:h?h.v:''})}
+    const sh=cl(b.sh,20).toUpperCase(),t2=await env.DB.prepare("SELECT name FROM teachers WHERE shalarth=? AND udise=? AND status='ok'").bind(sh,u).first();if(!t2)return J({e:'nf'},404);
+    await env.DB.batch([cfgUp(env,'hm:'+u,t2.name),cfgUp(env,'hmt:'+u,sh),cfgUp(env,'hmm:'+u,'1')]);
+    return J({ok:1,name:t2.name})}
   if(p==='/api/o/mdm'||p==='/api/o/mdmsave'){
     await mdmEns(env);
     const mon=cl(b.mon,7);if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(mon))return J({e:'mon'},400);
@@ -570,9 +585,24 @@ async function schoolApi(p,r,env){
       st.push(env.DB.prepare('INSERT INTO sch_cmember(udise,cid,id,name,desig,mtype,mobile,joined,active) VALUES(?,?,?,?,?,?,?,?,?)').bind(t.udise,cid,++i,nm,cl(m.desig,30),cl(m.type,40),mo,/^\d{4}-\d\d-\d\d$/.test(m.joined||'')?m.joined:'',m.active==='No'?0:1))}
     await env.DB.batch(st);return J({ok:1,n:i});
   }
+  if(p==='/api/s/tlist'){
+    await tCols(env);await tcEns(env);
+    const ts=(await env.DB.prepare("SELECT id,shalarth sh,name n,mobile m FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(t.udise).all()).results||[],cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE udise=? ORDER BY cls,div').bind(t.udise).all()).results||[],h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hmt:'+t.udise).first();
+    return J({ok:1,hmt:h?h.v:'',rows:ts.map(x=>({id:x.id,sh:x.sh,n:x.n,m:x.m,c:cs.filter(c=>c.tid===x.id).map(c=>({cls:c.cls,div:c.div}))}))})}
+  if(p==='/api/s/tcls'){
+    await tcEns(env);const id=parseInt(b.id)||0;
+    if(!await env.DB.prepare("SELECT id FROM teachers WHERE id=? AND udise=? AND status='ok'").bind(id,t.udise).first())return J({e:'nf'},404);
+    const seen=new Set(),want=[];for(const c of (Array.isArray(b.rows)?b.rows:[]).slice(0,16)){const k=parseInt(c&&c.cls)||0,dv=cl(c&&c.div,2).toUpperCase();if(k<1||k>8||!/^[A-Z]{1,2}$/.test(dv)||seen.has(k+'|'+dv))continue;seen.add(k+'|'+dv);want.push([k,dv])}
+    const cur=(await env.DB.prepare('SELECT cls,div FROM tclasses WHERE tid=? AND udise=?').bind(id,t.udise).all()).results||[],st=[];
+    cur.forEach(c=>{if(!seen.has(c.cls+'|'+c.div))st.push(env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(id,t.udise,c.cls,c.div))});
+    want.forEach(w=>st.push(env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(id,t.udise,w[0],w[1])));
+    st.push(env.DB.prepare('UPDATE teachers SET conf=1 WHERE id=?').bind(id),cfgUp(env,'hmm:'+t.udise,'1'));
+    await env.DB.batch(st);return J({ok:1,n:want.length})}
   if(p==='/api/s/me'){await schCols(env);const sc=await env.DB.prepare('SELECT name,med,cmin,cmax FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,udise:t.udise,school:sc?sc.name:'',med:sc&&sc.med||'',cmin:sc&&sc.cmin||0,cmax:sc&&sc.cmax||0,changed:t.changed?1:0})}
   return J({e:'nf'},404);
 }
+async function hmm(env,u){try{return !!(await env.DB.prepare('SELECT 1 x FROM cfg WHERE k=?').bind('hmm:'+u).first())}catch(e){return false}}
+const cfgUp=(env,k,v)=>env.DB.prepare('INSERT INTO cfg(k,v) VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v').bind(k,v);
 let TCK=false;
 async function tcEns(env){if(TCK)return;try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN ct INTEGER DEFAULT 0').run()}catch(e){}try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN subs TEXT').run()}catch(e){}TCK=true}
 async function ctBlock(env,tid,ud,cls,dv){await tcEns(env);const o=await env.DB.prepare('SELECT c.tid,t.name FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=? AND c.cls=? AND c.div=? AND c.ct=1 LIMIT 1').bind(ud,cls,dv).first();return o&&o.tid!==tid?o.name:''}
@@ -1026,11 +1056,13 @@ async function ext(p,r,env){
   if(p==='/api/t/delcls'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const k=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase();if(k<1||k>8||!/^[A-Z]{1,2}$/.test(dv))return J({e:'args'});
+    if(await hmm(env,t.udise))return J({e:'hm'},403);
     await env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND cls=? AND div=?').bind(t.id,k,dv).run();return J({ok:1});
   }
   if(p==='/api/t/addcls'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);
     const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
+    if(await hmm(env,u))return J({e:'hm'},403);
     const cs=(Array.isArray(b.rows)?b.rows:[]).slice(0,16);let n=0;
     for(const c of cs){const k=parseInt(c.cls)||0,dv=cl(c.div,2).toUpperCase();
       if(k<1||k>8)continue;
@@ -1339,7 +1371,8 @@ async function ext(p,r,env){
       const dvs={};rd.forEach(x=>{(dvs[x.cls]=dvs[x.cls]||new Set()).add(x.div)});th.forEach(x=>{(dvs[x.cls]=dvs[x.cls]||new Set()).add(x.div)});
       for(const k in dvs){const dv=[...dvs[k]].sort()[0],hs=th.filter(x=>x.cls==k&&x.div===dv);cm[k]={div:dv,mine:hs.some(x=>x.tid===t.id)?1:0,ct:hs.some(x=>x.tid===t.id&&x.ct)?1:0,ctn:(hs.find(x=>x.ct)||{}).nm||'',oth:hs.filter(x=>x.tid!==t.id).map(x=>x.nm)}}}catch(e){}
     let hm='';try{const h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hm:'+t.udise).first();hm=h&&h.v||'';if(!hm){const h2=await env.DB.prepare('SELECT hm FROM school_sna WHERE udise=?').bind(t.udise).first();hm=h2&&h2.hm||''}}catch(e){}
-    return J({ok:1,cm,hm,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1,sd,cmin:(sc&&sc.cmin)||0,cmax:(sc&&sc.cmax)||0});
+    const hmg=await hmm(env,t.udise);if(hmg&&!t.conf){await env.DB.prepare('UPDATE teachers SET conf=1 WHERE id=?').bind(t.id).run();t.conf=1}
+    return J({ok:1,cm,hm,hmm:hmg?1:0,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1,sd,cmin:(sc&&sc.cmin)||0,cmax:(sc&&sc.cmax)||0});
   }
   if(p==='/api/t/subset'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await tcEns(env);
@@ -1352,6 +1385,7 @@ async function ext(p,r,env){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);await tcEns(env);
     const k=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase();if(k<1||k>8||!/^[A-Z]{1,2}$/.test(dv))return J({e:'args'});
     if(b.what==='mine'){
+      if(await hmm(env,t.udise))return J({e:'hm'},403);
       if(b.on)await env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,t.udise,k,dv).run();
       else await env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,t.udise,k,dv).run();
       return J({ok:1});
