@@ -152,13 +152,19 @@ function vzP1(){var d=VZ.d,h='<div class="card"><h2>🏫 भेट माहि�
 function vzInfoSv(){var dt=document.getElementById('vzd').value;if(!dt||dt>vzToday()){alert('भेटीचा दिनांक तपासा.');return}var ch=dt!==VZ.dt;VZ.dt=dt;VZ.tin=document.getElementById('vzti').value;VZ.tout=document.getElementById('vzto').value;VZ.vt=document.getElementById('vzv').value;vzLoc();if(ch)vzCtx(function(){vzInit();vzStep(0)});else{var e=document.getElementById('vzis');if(e)e.textContent='✔ जतन झाले'}}
 
 /* शिक्षक */
-function vzTcHtml(i){var t=VZ.d.tc[i],lv=(VZCX.lv||[]).filter(function(x){return x.sh===t.id})[0];
- var h='<b>'+esc(t.n)+'</b>'+(t.m?' <a href="#" style="float:right" onclick="vzTcDel('+i+');return false">✖ काढा</a>':'')+'<br><small style="color:'+(lv?'#15803d':'var(--m)')+'">📝 '+(lv?'रजा अर्ज आहे: '+esc(lv.typ)+' ('+mDt(lv.fd)+' – '+mDt(lv.td)+')':t.m?'':'या दिवशी रजा अर्ज नोंद नाही')+'</small><div style="margin-top:4px">'
+function vzTcBody(i){var t=VZ.d.tc[i],lv=(VZCX.lv||[]).filter(function(x){return x.sh===t.id})[0];
+ var h=(t.m?'<a href="#" style="float:right" onclick="vzTcDel('+i+');return false">✖ काढा</a>':'')+'<small style="color:'+(lv?'#15803d':'var(--m)')+'">📝 '+(lv?'रजा अर्ज आहे: '+esc(lv.typ)+' ('+mDt(lv.fd)+' – '+mDt(lv.td)+')':t.m?'':'या दिवशी रजा अर्ज नोंद नाही')+'</small><div style="margin-top:4px">'
   +VZTS.map(function(o){var on=t.s===o[0];return '<button type="button" class="vzb" style="'+(on?'background:var(--a);color:#fff;border:1px solid var(--a)':'background:var(--c);color:var(--a);border:1px solid var(--a)')+'" onclick="vzTSt('+i+',\''+o[0]+'\')">'+o[1]+'</button>'}).join('')+'</div>';
- if(t.s==='P'||t.s==='L')h+=VZTQ.map(function(q){return '<div class="vzr"><div>'+q[1]+'</div><div id="vt_'+i+'_'+q[0]+'">'+vzCh((t.a||{})[q[0]]||'',"vzTSet("+i+",'"+q[0]+"','%v')")+'</div></div>'}).join('');
- if(t.s)h+=vzTcCl(i)+'<input placeholder="शेरा / सूचना (ऐच्छिक)" value="'+esc(t.r||'')+'" oninput="VZ.d.tc['+i+'].r=this.value;vzLoc()">'+vzSgHtml(i);
+ h+=vzTcCl(i);if(t.s==='P'||t.s==='L')h+=VZTQ.map(function(q){return '<div class="vzr"><div>'+q[1]+'</div><div id="vt_'+i+'_'+q[0]+'">'+vzCh((t.a||{})[q[0]]||'',"vzTSet("+i+",'"+q[0]+"','%v')")+'</div></div>'}).join('');
+ if(t.s)h+='<input placeholder="शेरा / सूचना (ऐच्छिक)" value="'+esc(t.r||'')+'" oninput="VZ.d.tc['+i+'].r=this.value;vzLoc()">'+vzSgHtml(i);
  return h}
-function vzP4(){var h='<div class="card"><h2>👨‍🏫 शिक्षक व विद्यार्थी</h2><p class="m">प्रत्येक शिक्षकाची उपस्थिती निवडा. उपस्थित / उशिरा आलेल्या शिक्षकाचे रेकॉर्ड तपासून नोंदवा, त्याचे अध्यापनाचे वर्ग निवडा (त्या वर्गाची विद्यार्थी उपस्थिती, अनुपस्थित व स्तर नोंद तिथेच उघडते) आणि शेवटी शिक्षकाची स्वाक्षरी घ्या.</p></div>';
+var VZTO=-1;
+function vzTcHtml(i){var t=VZ.d.tc[i],open=VZTO===i,st=VZTS.filter(function(o){return o[0]===t.s})[0],cl=(t.cl||[]);
+ var bdg=st?'<span style="display:inline-block;padding:1px 8px;border-radius:99px;font-size:12px;font-weight:600;background:'+(t.s==='P'||t.s==='L'?'#dcfce7;color:#166534':'#fee2e2;color:#991b1b')+'">'+st[1]+'</span>':'<span style="display:inline-block;padding:1px 8px;border-radius:99px;font-size:12px;background:#f3f4f6;color:#6b7280">भरायचे आहे</span>';
+ var h='<div onclick="vzTcTg('+i+')" style="display:flex;align-items:center;gap:10px;cursor:pointer"><span style="flex:0 0 32px;height:32px;line-height:30px;text-align:center;border-radius:50%;border:2px solid var(--a);color:var(--a);font-size:22px;font-weight:700">'+(open?'−':'+')+'</span><div style="flex:1;min-width:0"><b>'+esc(t.n)+'</b><div>'+bdg+(cl.length?' <small class="m">वर्ग: '+cl.map(function(k){return String(k).split('|').join(' ').trim()}).join(', ')+'</small>':' <small class="m">वर्ग निवडलेले नाहीत</small>')+'</div></div></div>';
+ return h+(open?'<div style="margin-top:10px;border-top:1px solid var(--l);padding-top:8px">'+vzTcBody(i)+'</div>':'')}
+function vzTcTg(i){var p=VZTO;VZTO=p===i?-1:i;if(p>=0&&p!==i)vzTcRe(p);vzTcRe(i);if(VZTO===i){var e=document.getElementById('vtc_'+i);if(e&&e.scrollIntoView)e.scrollIntoView({block:'start',behavior:'smooth'})}}
+function vzP4(){if(VZTO>=VZ.d.tc.length)VZTO=-1;var h='<div class="card"><h2>👨‍🏫 शिक्षक व विद्यार्थी</h2><p class="m">प्रत्येक शिक्षकाची उपस्थिती निवडा. उपस्थित / उशिरा आलेल्या शिक्षकाचे रेकॉर्ड तपासून नोंदवा, त्याचे अध्यापनाचे वर्ग निवडा (त्या वर्गाची विद्यार्थी उपस्थिती, अनुपस्थित व स्तर नोंद तिथेच उघडते) आणि शेवटी शिक्षकाची स्वाक्षरी घ्या.</p></div>';
  if(!VZ.d.tc.length)h+='<div class="card"><p class="m">शाळेतील शिक्षकांची नोंद ॲपमध्ये नाही. खाली नाव जोडा.</p></div>';
  VZ.d.tc.forEach(function(t,i){h+='<div class="card" id="vtc_'+i+'">'+vzTcHtml(i)+'</div>'});
  h+=vzXc()+'<div class="card"><label>शिक्षक जोडा (ॲपमध्ये नोंद नसलेला)</label><input id="vzan" placeholder="शिक्षकाचे नाव"><button class="g" onclick="vzTcAdd()">➕ जोडा</button></div>'+vzAct();return h}
