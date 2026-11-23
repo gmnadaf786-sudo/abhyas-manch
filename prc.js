@@ -77,13 +77,13 @@ function prcShow(){
  h+='<div class="card"><b>🏢 केंद्रप्रमुख (मी)</b><div style="margin:6px 0">'+(kpa?'<span class="ok">✔ उपस्थित · '+prcTm(kpa.ts)+(kpa.s?' · सही केली':'')+'</span>':'<span class="m">अजून नोंद नाही</span>')+'</div>'
  +'<div class="row">'+(kpa?'<button class="g" onclick="prcKpOff()">✖ माझी उपस्थिती काढा</button>':'<button onclick="prcKpSign()">✍ माझी सही करा</button><button class="g" onclick="prcKpMark()">✔ फक्त उपस्थित नोंदवा</button>')+'</div></div>';
  /* शिक्षक यादी */
- h+='<div class="card"><b>👨‍🏫 शिक्षक</b><small style="display:block;margin:2px 0 6px">शिक्षकाने स्वतः GPS + सहीने नोंदवले तर ✔ दिसते. तुम्ही प्रत्यक्ष पाहून "उपस्थित" नोंदवू शकता – ती नोंद पत्रकात "केंद्रप्रमुखाने नोंदवले" अशी दिसेल.</small>';
+ h+='<div class="card"><b>👨‍🏫 शिक्षक</b><small style="display:block;margin:2px 0 6px">शिक्षकाने स्वतः GPS + सेल्फी + सहीने नोंदवले तर ✔ दिसते; 📷 दाबून सेल्फी पाहा. सेल्फी फोटो शैक्षणिक वर्ष संपल्यावर (१ जूनला) आपोआप हटतो; उपस्थिती व सही कायम राहते. तुम्ही प्रत्यक्ष पाहून "उपस्थित" नोंदवू शकता – ती नोंद पत्रकात "केंद्रप्रमुखाने नोंदवले" अशी दिसेल.</small>';
  if(!tch.length)h+='<p class="m">या केंद्रात मंजूर शिक्षक नाहीत.</p>';
  var last='';
  tch.forEach(function(t,i){var a=am[t.sh];
   if(t.u!==last){last=t.u;h+='<div style="margin:10px 0 2px;font-weight:600;color:var(--m)">'+esc(t.sc||t.u)+'</div>'}
   h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--l)"><div style="flex:1;min-width:0">'+esc(t.n)+'<br>'+(a?'<small class="ok">✔ '+(a.m==='kp'?'तुम्ही नोंदवले':'स्वतः सही केली · '+prcTm(a.ts)+(a.d!=null?' · '+a.d+' मी':''))+'</small>':'<small class="no">अनुपस्थित / नोंद नाही</small>')+'</div>'
-  +(a?'<button class="g" style="width:auto;margin:0;padding:6px 10px" onclick="prcMark('+i+',0)">✖</button>':'<button style="width:auto;margin:0;padding:6px 10px" onclick="prcMark('+i+',1)">✔ उपस्थित</button>')+'</div>'});
+  +(a&&a.f?'<button class="g" style="width:auto;margin:0;padding:6px 10px" onclick="prcPhoto('+i+')" title="सेल्फी">📷</button>':'')+(a?'<button class="g" style="width:auto;margin:0;padding:6px 10px" onclick="prcMark('+i+',0)">✖</button>':'<button style="width:auto;margin:0;padding:6px 10px" onclick="prcMark('+i+',1)">✔ उपस्थित</button>')+'</div>'});
  h+='</div>';
  /* इतिवृत्त व बंद करणे */
  h+='<div class="card"><b>📝 इतिवृत्त / निर्णय</b><textarea id="prm" rows="5" maxlength="3000" style="width:100%;box-sizing:border-box;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--i);margin-top:6px" placeholder="परिषदेतील चर्चा व निर्णय">'+esc(p.minutes)+'</textarea><div class="row"><button class="g" onclick="prcMinutes()">💾 इतिवृत्त जतन करा</button></div>'
@@ -97,6 +97,13 @@ function prcMinutes(){var p=PRC.cur.p;prcPut({minutes:document.getElementById('p
 function prcClose(c){var msg=c?'परिषद बंद करायची? यानंतर शिक्षकांना सही करता येणार नाही आणि मासिक डायरीत नोंद होईल.':'परिषद पुन्हा उघडायची?';if(!confirm(msg))return;prcPut({st:c?'closed':'open',minutes:document.getElementById('prm').value},c?'✓ परिषद बंद झाली. मासिक डायरीत नोंद केली.':'✓ परिषद पुन्हा उघडली')}
 function prcPut(o,m){var p=PRC.cur.p;api('/api/o/prsave',{id:p.id,dt:p.dt,tf:p.tf,tt:p.tt,place:p.place,udise:p.udise,lat:p.lat,lng:p.lng,rad:p.rad,agenda:p.agenda,minutes:o.minutes!=null?o.minutes:p.minutes,st:o.st||p.st}).then(function(j){if(!j.ok){alert(prcErr(j));return}PRC.msg=m;prcOpen(p.id)})}
 function prcDel(){if(!confirm('ही परिषद व तिची सर्व उपस्थिती कायमची हटवायची?'))return;api('/api/o/prdel',{id:PRC.cur.p.id}).then(function(j){if(!j.ok){alert(prcErr(j));return}PRC.msg='परिषद हटवली';prcLoad()})}
+
+/* ===== शिक्षकाचा सेल्फी पाहणे (फोटो शैक्षणिक वर्ष संपल्यावर हटतो) ===== */
+function prcPhoto(i){var t=PRC.cur.ros[i],a=t&&PRC.cur.at.filter(function(z){return z.w===t.sh})[0];if(!a)return;
+ var e=document.createElement('div');e.id='prcph';e.style.cssText='position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.85);padding:12px;overflow:auto;text-align:center;color:#fff';
+ e.innerHTML='<div style="max-width:420px;margin:0 auto"><p style="margin:6px 0"><b>'+esc(t.n)+'</b><br><small>'+prcTm(a.ts)+(a.d!=null?' · परिषदेपासून '+a.d+' मी':'')+(a.a!=null?' · GPS ±'+a.a+' मी':'')+'</small></p><p id="prcpi" style="min-height:120px">⏳ फोटो येत आहे…</p>'+(a.la!=null?'<p><a style="color:#93c5fd" href="'+geoLink(a.la,a.ln)+'" target="_blank">📍 सही केलेले स्थान नकाशावर पाहा</a></p>':'')+'<button class="g" style="background:#fff" onclick="document.getElementById(\'prcph\').remove()">बंद करा</button></div>';
+ document.body.appendChild(e);
+ fetch('/api/o/prpho',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:T,u:U,id:PRC.cur.p.id,w:t.sh})}).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){var p=document.getElementById('prcpi');if(p)p.innerHTML='<img alt="" style="max-width:100%;border-radius:10px" src="'+URL.createObjectURL(b)+'">'}).catch(function(){var p=document.getElementById('prcpi');if(p)p.textContent='फोटो उपलब्ध नाही (वर्ष संपल्यावर हटवला जातो).'})}
 
 /* ===== KP ची स्वतःची सही ===== */
 var PRCSG=0;
