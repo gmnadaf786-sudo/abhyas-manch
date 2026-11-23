@@ -175,7 +175,7 @@ async function ixEnsure(env){if(IXOK)return;IXOK=true;
      if(cnt[t]>budget)continue;
      await env.DB.prepare('CREATE INDEX IF NOT EXISTS ix_'+t+'_'+c.replace(/,/g,'_')+' ON '+t+'('+c+')').run();budget-=cnt[t];done.push(nm)}catch(e){}}
    await env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('ixdone',JSON.stringify(done)).run()}catch(e){}}
-/* जत तालुक्याचे माध्यम व सेमी इंग्लिश वर्ग (PAT Excel वरून, data/pat_med.json): एकदाच भरले जाते; KP ने आधी ठरवलेले माध्यम/सेमी बदलत नाही */
+/* जत तालुक्याचे माध्यम व सेमी इंग्लिश वर्ग (PAT Excel वरून, data/pat_med.json): एकदाच भरले जाते; Excel मधील शाळांसाठी Excel प्रमाणेच (आधीचे माध्यम/सेमी बदलते) */
 let PATD=false;
 async function patImport(env,r){if(PATD)return;
   try{const f=await env.DB.prepare("SELECT v FROM cfg WHERE k='patmed'").first();if(f){PATD=true;return}
@@ -183,8 +183,8 @@ async function patImport(env,r){if(PATD)return;
    const E=Object.entries(await rs.json());await schCols(env);
    for(let i=0;i<E.length;i+=25){const st=[];E.slice(i,i+25).forEach(([u,x])=>{
      st.push(env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,x[0]),
-             env.DB.prepare("UPDATE schools SET med=? WHERE udise=? AND COALESCE(med,'')=''").bind(x[1].join(','),u));
-     if(x[2].length)st.push(env.DB.prepare('INSERT OR IGNORE INTO cfg(k,v) VALUES(?,?)').bind('semi:'+u,JSON.stringify(x[2])))});
+             env.DB.prepare('UPDATE schools SET med=? WHERE udise=?').bind(x[1].join(','),u),
+             x[2].length?env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('semi:'+u,JSON.stringify(x[2])):env.DB.prepare('DELETE FROM cfg WHERE k=?').bind('semi:'+u))});
     await env.DB.batch(st)}
    await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('patmed','1')").run();OC.clear();PATD=true}catch(e){}}
 async function tcOf(env,ts){const ids=ts.map(x=>x.id),o=[];for(let i=0;i<ids.length;i+=80){const c=ids.slice(i,i+80);o.push(...((await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE tid IN ('+c.map(()=>'?').join(',')+')').bind(...c).all()).results||[]))}return o}
