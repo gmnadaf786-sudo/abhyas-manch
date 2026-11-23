@@ -147,6 +147,16 @@ const phN=j=>{try{return JSON.parse(j||'[]').length}catch(e){return 0}};
 async function offAuth(env,b){const u=cl(b.u,12).toUpperCase(),t=cl(b.token,64);if(!u||t.length<20)return null;const x=await env.DB.prepare('SELECT * FROM off_login WHERE uname=? AND token=?').bind(u,t).first();return x&&x.tt&&Date.now()-x.tt<OTTL?x:null}
 const OTTL=30*864e5,OFAIL=8,OLOCK=15*6e4,OAEO=['AEO1','AEO2','AEO3'],isOff=u=>u==='BEO'||OAEO.includes(u);
 // ---- केंद्रप्रमुख नोंदणी: admin ने मंजूर केलेली केंद्रे (kp_reg) जतच्या CEN सोबत लॉगिनला चालतात ----
+/* शिक्षण परिषद (मासिक): KP परिषद ठरवतो (तारीख, वेळ, ठिकाण GPS व अंतर); शिक्षक लॉगिन करून त्या ठिकाणाहून GPS + स्वाक्षरीने उपस्थिती नोंदवतात.
+   तक्ते: kp_pr (परिषद), kp_pr_att (उपस्थिती; who = शालार्थ ID किंवा 'KP'; mode = self (स्वतः सही) / kp (KP ने नोंदवले)). */
+let PROK=false;
+async function prEns(env){if(PROK)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_pr(id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, dt TEXT, tf TEXT, tt TEXT, place TEXT, udise TEXT, lat REAL, lng REAL, rad INTEGER, agenda TEXT, minutes TEXT, st TEXT, did INTEGER, upd TEXT)"),env.DB.prepare("CREATE INDEX IF NOT EXISTS kp_pr_c ON kp_pr(code,dt)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_pr_att(pid INTEGER, who TEXT, name TEXT, udise TEXT, mode TEXT, ts TEXT, lat REAL, lng REAL, acc INTEGER, dist INTEGER, sign TEXT, PRIMARY KEY(pid,who))")]);PROK=true}
+const PR_EARLY=30,PR_ACC=200;
+function prIst(){const d=new Date(Date.now()+19800000).toISOString();return{dt:d.slice(0,10),tm:d.slice(11,16)}}
+function prMin(s){const m=/^(\d{2}):(\d{2})$/.exec(String(s||''));return m&&+m[1]<24&&+m[2]<60?+m[1]*60+(+m[2]):-1}
+function prHav(a,b,c,d){const R=6371000,r=Math.PI/180,x=Math.sin((c-a)*r/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin((d-b)*r/2)**2;return Math.round(2*R*Math.asin(Math.sqrt(x)))}
+function prSign(s){s=String(s||'');return /^data:image\/(png|jpeg);base64,[A-Za-z0-9+\/=]+$/.test(s)&&s.length<=90000?s:''}
+function prLL(a,b){const la=Number(a),ln=Number(b);return isFinite(la)&&isFinite(ln)&&la>=6&&la<=38&&ln>=68&&ln<=98?[la,ln]:null}
 let KPOK=false;async function kpEns(env){if(KPOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_reg(code TEXT PRIMARY KEY, kname TEXT, rname TEXT, mobile TEXT, district TEXT, taluka TEXT, salt TEXT, pw TEXT, status TEXT, ts TEXT)").run();KPOK=true}
 async function cenAll(env){try{await kpEns(env);const rs=(await env.DB.prepare("SELECT code,kname FROM kp_reg WHERE status='ok'").all()).results||[],m={...CEN};rs.forEach(x=>{if(!m[x.code])m[x.code]=x.kname});return m}catch(e){return CEN}}
 // BEO/AEO: फक्त जत तालुक्याची केंद्रे (CEN + जतच्या नोंदणी केलेली केंद्रे); इतर जिल्ह्यांची/तालुक्यांची नाहीत
@@ -311,6 +321,63 @@ async function offApi(p,r,env){
     try{JSON.parse(d)}catch(e){return J({e:'arg'},400)}
     await env.DB.prepare('INSERT INTO kp_vplan(code,k,data,upd) VALUES(?,?,?,?) ON CONFLICT(code,k) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(t.uname,k,d,new Date().toISOString()).run();
     return J({ok:1});
+  }
+  if(/^\/api\/o\/pr(list|get|save|del|mark|kp|sig)$/.test(p)){
+    // शिक्षण परिषद: फक्त KP आपल्या केंद्राची परिषद ठरवतो / उपस्थिती पाहतो
+    if(!kp)return J({e:'kp'},403);await prEns(env);
+    const own=async id=>await env.DB.prepare('SELECT * FROM kp_pr WHERE id=? AND code=?').bind(parseInt(id)||0,t.uname).first();
+    const roster=async()=>(await env.DB.prepare("SELECT t.shalarth sh,t.name n,t.udise u,s.name sc FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.status='ok' AND t.udise "+SW+" ORDER BY t.udise,t.name").bind(...SA).all()).results.filter(x=>ok.has(x.u));
+    if(p==='/api/o/prlist'){
+      const rs=(await env.DB.prepare('SELECT p.id,p.dt,p.tf,p.tt,p.place,p.st,(SELECT COUNT(*) FROM kp_pr_att a WHERE a.pid=p.id AND a.who<>\'KP\') n FROM kp_pr p WHERE p.code=? ORDER BY p.dt DESC,p.id DESC LIMIT 36').bind(t.uname).all()).results;
+      return J({ok:1,rows:rs,tot:(await roster()).length,today:prIst().dt});
+    }
+    if(p==='/api/o/prsave'){
+      const dt=cl(b.dt,10),tf=cl(b.tf,5),tt=cl(b.tt,5),place=cl(b.place,80),agenda=cl(b.agenda,1500),minutes=cl(b.minutes,3000),st=b.st==='closed'?'closed':'open',ll=prLL(b.lat,b.lng);
+      let rad=parseInt(b.rad)||300;rad=Math.max(50,Math.min(2000,rad));let ud=cl(b.udise,11).replace(/\D/g,'');
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(dt)||prMin(tf)<0||prMin(tt)<=prMin(tf)||!place)return J({e:'arg'},400);
+      if(!ll)return J({e:'loc'},400);
+      if(ud&&!ok.has(ud))ud='';
+      const id=parseInt(b.id)||0,x=id?await own(id):null;if(id&&!x)return J({e:'nf'},404);
+      const now=new Date().toISOString();let did=x?x.did:null,nid=id;
+      if(st==='closed'&&!did){
+        await lvEns(env);const n=(await env.DB.prepare("SELECT COUNT(*) c FROM kp_pr_att WHERE pid=? AND who<>'KP'").bind(id||0).first()).c,tot=(await roster()).length,sc=ud?ss.find(z=>z.udise===ud):null;
+        const rm='शिक्षण परिषद – उपस्थित शिक्षक '+n+'/'+tot+'. ठिकाण: '+place+(agenda?'. विषय: '+agenda.slice(0,300):'');
+        const di=await env.DB.prepare('INSERT INTO kp_diary(code,dt,kind,place,udise,pn,rm,img,upd) VALUES(?,?,?,?,?,?,?,?,?)').bind(t.uname,dt,'केंद्र परिषद',ud?'शाळा':'इतर',ud,(sc&&sc.name)||'',rm,'[]',now).run();
+        did=di.meta&&di.meta.last_row_id||null}
+      if(id)await env.DB.prepare('UPDATE kp_pr SET dt=?,tf=?,tt=?,place=?,udise=?,lat=?,lng=?,rad=?,agenda=?,minutes=?,st=?,did=?,upd=? WHERE id=? AND code=?').bind(dt,tf,tt,place,ud,ll[0],ll[1],rad,agenda,minutes,st,did,now,id,t.uname).run();
+      else{
+        if((await env.DB.prepare('SELECT COUNT(*) c FROM kp_pr WHERE code=?').bind(t.uname).first()).c>=300)return J({e:'max'},400);
+        const ins=await env.DB.prepare('INSERT INTO kp_pr(code,dt,tf,tt,place,udise,lat,lng,rad,agenda,minutes,st,did,upd) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(t.uname,dt,tf,tt,place,ud,ll[0],ll[1],rad,agenda,minutes,st,did,now).run();nid=ins.meta&&ins.meta.last_row_id}
+      return J({ok:1,id:nid});
+    }
+    const x=await own(b.id);if(!x)return J({e:'nf'},404);
+    if(p==='/api/o/prget'){
+      const at=(await env.DB.prepare('SELECT who w,name n,mode m,ts,dist d,acc a,(sign IS NOT NULL AND sign<>\'\') s FROM kp_pr_att WHERE pid=?').bind(x.id).all()).results;
+      return J({ok:1,p:{id:x.id,dt:x.dt,tf:x.tf,tt:x.tt,place:x.place,udise:x.udise,lat:x.lat,lng:x.lng,rad:x.rad,agenda:x.agenda||'',minutes:x.minutes||'',st:x.st},ros:await roster(),at,today:prIst().dt});
+    }
+    if(p==='/api/o/prsig'){
+      const at=(await env.DB.prepare("SELECT who,sign FROM kp_pr_att WHERE pid=? AND sign IS NOT NULL AND sign<>''").bind(x.id).all()).results,o={};at.forEach(z=>o[z.who]=z.sign);
+      return J({ok:1,sig:o});
+    }
+    if(p==='/api/o/prdel'){
+      await env.DB.batch([env.DB.prepare('DELETE FROM kp_pr_att WHERE pid=?').bind(x.id),env.DB.prepare('DELETE FROM kp_pr WHERE id=? AND code=?').bind(x.id,t.uname)]);
+      return J({ok:1});
+    }
+    if(p==='/api/o/prmark'){
+      // KP स्वतः पाहून शिक्षकाची उपस्थिती नोंदवतो / काढतो (शिक्षकाने स्वतः केलेली सही मोडत नाही)
+      const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),tc=(await roster()).find(z=>String(z.sh).toUpperCase()===sh);if(!tc)return J({e:'na'},403);
+      if(!b.on){await env.DB.prepare('DELETE FROM kp_pr_att WHERE pid=? AND who=?').bind(x.id,tc.sh).run();return J({ok:1})}
+      await env.DB.prepare("INSERT INTO kp_pr_att(pid,who,name,udise,mode,ts) VALUES(?,?,?,?,'kp',?) ON CONFLICT(pid,who) DO NOTHING").bind(x.id,tc.sh,tc.n,tc.u,new Date().toISOString()).run();
+      return J({ok:1});
+    }
+    if(p==='/api/o/prkp'){
+      // केंद्रप्रमुखाची स्वतःची उपस्थिती (सही व GPS ऐच्छिक; अंतर फक्त नोंदीसाठी)
+      if(b.off){await env.DB.prepare("DELETE FROM kp_pr_att WHERE pid=? AND who='KP'").bind(x.id).run();return J({ok:1})}
+      const sg=prSign(b.sign),ll=prLL(b.lat,b.lng),acc=Math.max(0,parseInt(b.acc)||0),dist=ll?prHav(ll[0],ll[1],x.lat,x.lng):null;
+      const kr=await env.DB.prepare('SELECT rname,kname FROM kp_reg WHERE code=?').bind(t.uname).first().catch(()=>null),nm=cl((kr&&(kr.rname||kr.kname))||'केंद्रप्रमुख',100);
+      await env.DB.prepare("INSERT OR REPLACE INTO kp_pr_att(pid,who,name,udise,mode,ts,lat,lng,acc,dist,sign) VALUES(?,'KP',?,'','self',?,?,?,?,?,?)").bind(x.id,nm,new Date().toISOString(),ll?ll[0]:null,ll?ll[1]:null,ll?acc:null,dist,sg||null).run();
+      return J({ok:1});
+    }
   }
   if(p==='/api/o/dy'||p==='/api/o/dysave'||p==='/api/o/dydel'||p==='/api/o/dyimg'){
     await lvEns(env);const codes=new Set(ss.map(x=>x.code));
@@ -1416,6 +1483,27 @@ async function ext(p,r,env){
     if(!x||(await hashPin(o,x.salt))!==x.pw)return J({e:'bad'},401);
     const salt=rnd(8);await env.DB.prepare('UPDATE teachers SET salt=?,pw=? WHERE id=?').bind(salt,await hashPin(pw,salt),t.id).run();
     return J({ok:1});
+  }
+  if(p==='/api/t/pr'||p==='/api/t/prsign'){
+    // शिक्षण परिषद: शिक्षक आपल्या केंद्राची परिषद पाहतो व परिषदेच्या ठिकाणाहून GPS + स्वाक्षरीने उपस्थिती नोंदवतो
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await prEns(env);
+    const cc=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(t.udise).first(),code=cc&&cc.code,now=prIst(),nm=prMin(now.tm);
+    const win=x=>{const a=prMin(x.tf)-PR_EARLY,z=prMin(x.tt);return x.st!=='open'?'closed':x.dt<now.dt||(x.dt===now.dt&&nm>z)?'late':x.dt>now.dt||nm<a?'early':'ok'};
+    if(p==='/api/t/pr'){
+      if(!code)return J({ok:1,rows:[],now:now});
+      const rs=(await env.DB.prepare('SELECT p.id,p.dt,p.tf,p.tt,p.place,p.agenda,p.rad,p.st,(SELECT mode FROM kp_pr_att a WHERE a.pid=p.id AND a.who=?) m,(SELECT ts FROM kp_pr_att a WHERE a.pid=p.id AND a.who=?) ts FROM kp_pr p WHERE p.code=? AND p.dt>=? ORDER BY p.dt,p.tf LIMIT 6').bind(t.shalarth,t.shalarth,code,new Date(Date.now()+19800000-14*864e5).toISOString().slice(0,10)).all()).results;
+      return J({ok:1,now:now,rows:rs.map(x=>({id:x.id,dt:x.dt,tf:x.tf,tt:x.tt,place:x.place,agenda:x.agenda||'',rad:x.rad,st:x.st,m:x.m||'',ts:x.ts||'',w:win(x)}))});
+    }
+    const id=parseInt(b.id)||0,x=code?await env.DB.prepare('SELECT * FROM kp_pr WHERE id=? AND code=?').bind(id,code).first():null;if(!x)return J({e:'nf'},404);
+    const have=await env.DB.prepare('SELECT mode FROM kp_pr_att WHERE pid=? AND who=?').bind(x.id,t.shalarth).first();if(have)return J({e:'done',m:have.mode},409);
+    const w=win(x);if(w!=='ok')return J({e:w==='closed'?'closed':w,tf:x.tf,tt:x.tt,dt:x.dt},400);
+    const ll=prLL(b.lat,b.lng),acc=Math.max(0,parseInt(b.acc)||0);if(!ll)return J({e:'loc'},400);
+    if(acc>PR_ACC)return J({e:'acc',acc,max:PR_ACC},400);
+    const dist=prHav(ll[0],ll[1],x.lat,x.lng);if(dist>x.rad)return J({e:'far',dist,rad:x.rad},400);
+    if(b.chk)return J({ok:1,chk:1,dist,rad:x.rad});
+    const sg=prSign(b.sign);if(!sg)return J({e:'sign'},400);
+    await env.DB.prepare("INSERT OR IGNORE INTO kp_pr_att(pid,who,name,udise,mode,ts,lat,lng,acc,dist,sign) VALUES(?,?,?,?,'self',?,?,?,?,?,?)").bind(x.id,t.shalarth,t.name,t.udise,new Date().toISOString(),ll[0],ll[1],acc,dist,sg).run();
+    return J({ok:1,dist});
   }
   if(p==='/api/t/classes'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
