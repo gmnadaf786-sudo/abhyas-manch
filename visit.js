@@ -156,8 +156,8 @@ function vzTcBody(i){var t=VZ.d.tc[i],lv=(VZCX.lv||[]).filter(function(x){return
  var h=(t.m?'<a href="#" style="float:right" onclick="vzTcDel('+i+');return false">✖ काढा</a>':'')+'<small style="color:'+(lv?'#15803d':'var(--m)')+'">📝 '+(lv?'रजा अर्ज आहे: '+esc(lv.typ)+' ('+mDt(lv.fd)+' – '+mDt(lv.td)+')':t.m?'':'या दिवशी रजा अर्ज नोंद नाही')+'</small><div style="margin-top:4px">'
   +VZTS.map(function(o){var on=t.s===o[0];return '<button type="button" class="vzb" style="'+(on?'background:var(--a);color:#fff;border:1px solid var(--a)':'background:var(--c);color:var(--a);border:1px solid var(--a)')+'" onclick="vzTSt('+i+',\''+o[0]+'\')">'+o[1]+'</button>'}).join('')+'</div>';
  if(t.s==='P'||t.s==='L')h+=VZTQ.map(function(q){return '<div class="vzr"><div>'+q[1]+'</div><div id="vt_'+i+'_'+q[0]+'">'+vzCh((t.a||{})[q[0]]||'',"vzTSet("+i+",'"+q[0]+"','%v')")+'</div></div>'}).join('');
- if(t.s)h+='<input placeholder="शेरा / सूचना (ऐच्छिक)" value="'+esc(t.r||'')+'" oninput="VZ.d.tc['+i+'].r=this.value;vzLoc()">'+vzSgHtml(i);
  h+='<div style="margin-top:12px;padding-top:8px;border-top:2px dashed var(--l)"><b>🧑‍🎓 विद्यार्थी माहिती</b></div>'+vzTcCl(i);
+ if(t.s)h+='<input placeholder="शेरा / सूचना (ऐच्छिक)" value="'+esc(t.r||'')+'" oninput="VZ.d.tc['+i+'].r=this.value;vzLoc()">'+vzSgHtml(i);
  return h}
 var VZTO=-1;
 function vzTcHtml(i){var t=VZ.d.tc[i],open=VZTO===i,st=VZTS.filter(function(o){return o[0]===t.s})[0],cl=(t.cl||[]);
