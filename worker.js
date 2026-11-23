@@ -525,6 +525,12 @@ async function offApi(p,r,env){
     const q=(await env.DB.prepare('SELECT r.udise u,r.cls,COALESCE(r.med,\'\') med,COUNT(*) n,SUM(i.gender=\'M\') m,SUM(i.gender=\'F\') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise '+SW+' GROUP BY r.udise,r.cls,COALESCE(r.med,\'\')').bind(...SA).all()).results;
     return J({ok:1,rows:q.filter(x=>ok.has(x.u))});
   }
+  if(p==='/api/o/vagg'){ // सर्व केंद्रांचा विद्यार्थी सांख्यिकी अहवाल: शाळा × मूल्य संख्या (नावे नाहीत)
+    const CX={cls:'r.cls',div:'r.div',med:'r.med',gender:'i.gender',cat:'i.cat',tongue:'i.tongue',status:'i.status'},c=String(b.col||''),ex=CX[c];if(!ex)return J({e:'col'},400);
+    const ck='vag:'+t.uname+':'+c,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    const rs=(await env.DB.prepare("SELECT r.udise u,COALESCE(TRIM(CAST("+ex+" AS TEXT)),'') k,COUNT(*) n FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise "+SW+" GROUP BY r.udise,k").bind(...SA).all()).results||[];
+    const out={ok:1,rows:rs.filter(x=>ok.has(x.u))};OC.set(ck,{t:Date.now()+300000,v:out});return J(out);
+  }
   if(p==='/api/o/sstat'){ // विद्यार्थी टॅब: प्रवर्ग, मातृभाषा, स्थिती (फक्त आकडे)
     const ck='sst:'+t.uname,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
     const g=c=>env.DB.prepare("SELECT r.udise u,COALESCE(NULLIF(TRIM(i."+c+"),''),'नोंद नाही') k,COUNT(*) n FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise "+SW+" GROUP BY r.udise,k").bind(...SA).all().then(x=>(x.results||[]).filter(y=>ok.has(y.u))).catch(()=>[]);
