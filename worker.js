@@ -149,6 +149,8 @@ const OTTL=30*864e5,OFAIL=8,OLOCK=15*6e4,OAEO=['AEO1','AEO2','AEO3'],isOff=u=>u=
 // ---- केंद्रप्रमुख नोंदणी: admin ने मंजूर केलेली केंद्रे (kp_reg) जतच्या CEN सोबत लॉगिनला चालतात ----
 let KPOK=false;async function kpEns(env){if(KPOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_reg(code TEXT PRIMARY KEY, kname TEXT, rname TEXT, mobile TEXT, district TEXT, taluka TEXT, salt TEXT, pw TEXT, status TEXT, ts TEXT)").run();KPOK=true}
 async function cenAll(env){try{await kpEns(env);const rs=(await env.DB.prepare("SELECT code,kname FROM kp_reg WHERE status='ok'").all()).results||[],m={...CEN};rs.forEach(x=>{if(!m[x.code])m[x.code]=x.kname});return m}catch(e){return CEN}}
+// BEO/AEO: फक्त जत तालुक्याची केंद्रे (CEN + जतच्या नोंदणी केलेली केंद्रे); इतर जिल्ह्यांची/तालुक्यांची नाहीत
+async function jatCen(env){try{await kpEns(env);const rs=(await env.DB.prepare("SELECT code,kname FROM kp_reg WHERE status='ok' AND taluka=? AND district=?").bind('जत','सांगली').all()).results||[],m={...CEN};rs.forEach(x=>{if(!m[x.code])m[x.code]=x.kname});return m}catch(e){return CEN}}
 let GEOC=null;async function geoJson(env,r){if(GEOC)return GEOC;const x=await env.ASSETS.fetch(new Request(new URL('/geo.json',r.url)));GEOC=await x.json();return GEOC}
 // geo.json मध्ये केंद्र कोड शोधा → {dn,dc,name,tn}; तालुका = क्लायंटने निवडलेला (त्या केंद्राचा असेल तर) नाहीतर पहिला
 async function cluAdd(env,r,code){
@@ -222,8 +224,9 @@ async function offApi(p,r,env){
     if(!b.go)return J({ok:1,name:nm,have:ex?1:0,closed:x&&x[11]?1:0,village:x?x[7]:''});
     await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,nm),env.DB.prepare('INSERT OR REPLACE INTO sch_center(udise,code) VALUES(?,?)').bind(u,t.uname)]);
     return J({ok:1,done:1,name:nm})}
-  const ss=(kp?await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code=? ORDER BY c.udise').bind(t.uname).all():await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise ORDER BY c.code,c.udise').all()).results;
-  const ok=new Set(ss.map(x=>x.udise)),SW=kp?'IN (SELECT udise FROM sch_center WHERE code=?)':'IN (SELECT udise FROM sch_center)',SA=kp?[t.uname]:[];
+  const JC=kp?null:await jatCen(env),JK=kp?[t.uname]:Object.keys(JC),JQ=JK.map(()=>'?').join(',');
+  const ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;
+  const ok=new Set(ss.map(x=>x.udise)),SW='IN (SELECT udise FROM sch_center WHERE code IN ('+JQ+'))',SA=JK;
   if(/^\/api\/o\/(medset|schadd|hmset|clusync)$/.test(p))OC.clear();
   if(p==='/api/o/medset'){
     if(!kp)return J({e:'kp'},403);await schCols(env);
@@ -368,7 +371,7 @@ async function offApi(p,r,env){
     const F={},D={},R={},P={};f.results.forEach(x=>F[x.udise]=x);d.results.forEach(x=>{(D[x.udise]=D[x.udise]||{})[x.kind]=x.g});ro.results.forEach(x=>R[x.udise]=x.n);pm.results.forEach(x=>P[x.udise]=x);
     const SM={};((await env.DB.prepare("SELECT k,v FROM cfg WHERE k LIKE 'semi:%'").all()).results||[]).forEach(x=>{try{SM[x.k.slice(5)]=JSON.parse(x.v)}catch(e){}});
     await schCols(env);const MD={};((await env.DB.prepare("SELECT udise,med FROM schools WHERE COALESCE(med,'')<>'' AND udise "+SW).bind(...SA).all()).results||[]).forEach(x=>{MD[x.udise]=x.med});
-    const out={ok:1,role:kp?'KP':'BEO',cen:await cenAll(env),rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,med:MD[s.udise]||'',semi:SM[s.udise]||[],fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})};OC.set(ck,{t:Date.now()+90000,v:out});return J(out);
+    const out={ok:1,role:kp?'KP':'BEO',cen:kp?await cenAll(env):JC,rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,med:MD[s.udise]||'',semi:SM[s.udise]||[],fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})};OC.set(ck,{t:Date.now()+90000,v:out});return J(out);
   }
   if(p==='/api/o/sna'){
     await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_sna(udise TEXT PRIMARY KEY, mhsn TEXT, bank TEXT, acct TEXT, ifsc TEXT, branch TEXT, hm TEXT, hm_mob TEXT, upd TEXT)").run();
