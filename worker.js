@@ -176,6 +176,14 @@ async function ixEnsure(env){if(IXOK)return;IXOK=true;
      await env.DB.prepare('CREATE INDEX IF NOT EXISTS ix_'+t+'_'+c.replace(/,/g,'_')+' ON '+t+'('+c+')').run();budget-=cnt[t];done.push(nm)}catch(e){}}
    await env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('ixdone',JSON.stringify(done)).run()}catch(e){}}
 /* जत तालुक्याचे माध्यम व सेमी इंग्लिश वर्ग (PAT Excel वरून, data/pat_med.json): एकदाच भरले जाते; Excel मधील शाळांसाठी Excel प्रमाणेच (आधीचे माध्यम/सेमी बदलते) */
+/* जतच्या 28 केंद्रांच्या सर्व शाळा (अनुदानित, स्वयंअर्थसहाय्यित इ.) केंद्रात जोडा – KP लॉगिन करेपर्यंत वाट न पाहता, एकदाच */
+let CLUD=false;
+async function patClu(env,r){if(CLUD)return;
+  try{const f=await env.DB.prepare("SELECT v FROM cfg WHERE k='patclu'").first();if(f){CLUD=true;return}
+   const rs=await env.ASSETS.fetch(new Request(new URL('/data/clu/2735.json',r.url)));if(!rs.ok)return;
+   const J=await rs.json(),L=[];Object.keys(CEN).forEach(c=>(J[c]||[]).forEach(s=>L.push([s[0],s[1],c])));
+   for(let i=0;i<L.length;i+=40){const st=[];L.slice(i,i+40).forEach(s=>{st.push(env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(s[0],s[1]),env.DB.prepare('INSERT OR IGNORE INTO sch_center(udise,code) VALUES(?,?)').bind(s[0],s[2]))});await env.DB.batch(st)}
+   await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('patclu','1')").run();OC.clear();CLUD=true}catch(e){}}
 let PATD=false;
 async function patImport(env,r){if(PATD)return;
   try{const f=await env.DB.prepare("SELECT v FROM cfg WHERE k='patmed'").first();if(f){PATD=true;return}
@@ -236,6 +244,7 @@ async function offApi(p,r,env){
     if(!b.go)return J({ok:1,name:nm,have:ex?1:0,closed:x&&x[11]?1:0,village:x?x[7]:''});
     await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,nm),env.DB.prepare('INSERT OR REPLACE INTO sch_center(udise,code) VALUES(?,?)').bind(u,t.uname)]);
     return J({ok:1,done:1,name:nm})}
+  if(p==='/api/o/sum')await patClu(env,r);
   const JC=kp?null:await jatCen(env),JK=kp?[t.uname]:Object.keys(JC),JQ=JK.map(()=>'?').join(',');
   const ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;
   const ok=new Set(ss.map(x=>x.udise)),SW='IN (SELECT udise FROM sch_center WHERE code IN ('+JQ+'))',SA=JK;
