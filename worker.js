@@ -182,7 +182,7 @@ let ENGD=false;
 async function patEng(env,r){if(ENGD)return;
   try{const f=await env.DB.prepare("SELECT v FROM cfg WHERE k='paten'").first();if(f){ENGD=true;return}
    const rs=await env.ASSETS.fetch(new Request(new URL('/data/clu/2735.json',r.url)));if(!rs.ok)return;
-   const J=await rs.json(),RX=/ENG[A-Z]*\.?\s*M[IE]DI?UM/i,L=[];Object.keys(CEN).forEach(c=>(J[c]||[]).forEach(s=>{if(RX.test(s[1]))L.push(s[0])}));await schCols(env);
+   const J=await rs.json(),RX=/ENG[A-Z]*\.?\s*M[IE]DI?UM/i,L=[];Object.keys(CEN).forEach(c=>(J[c]||[]).forEach(s=>{if(RX.test(s[1]))L.push(s[0])}));L.push('27350211916','27350211918','27350211919','27350201502','27350209307');await schCols(env);
    for(let i=0;i<L.length;i+=40)await env.DB.batch(L.slice(i,i+40).map(u=>env.DB.prepare("UPDATE schools SET med='इंग्रजी' WHERE udise=? AND COALESCE(med,'')=''").bind(u)));
    await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('paten','1')").run();OC.clear();ENGD=true}catch(e){}}
 let CLUD=false;
