@@ -175,6 +175,18 @@ async function ixEnsure(env){if(IXOK)return;IXOK=true;
      if(cnt[t]>budget)continue;
      await env.DB.prepare('CREATE INDEX IF NOT EXISTS ix_'+t+'_'+c.replace(/,/g,'_')+' ON '+t+'('+c+')').run();budget-=cnt[t];done.push(nm)}catch(e){}}
    await env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('ixdone',JSON.stringify(done)).run()}catch(e){}}
+/* जत तालुक्याचे माध्यम व सेमी इंग्लिश वर्ग (PAT Excel वरून, data/pat_med.json): एकदाच भरले जाते; KP ने आधी ठरवलेले माध्यम/सेमी बदलत नाही */
+let PATD=false;
+async function patImport(env,r){if(PATD)return;
+  try{const f=await env.DB.prepare("SELECT v FROM cfg WHERE k='patmed'").first();if(f){PATD=true;return}
+   const rs=await env.ASSETS.fetch(new Request(new URL('/data/pat_med.json',r.url)));if(!rs.ok)return;
+   const E=Object.entries(await rs.json());await schCols(env);
+   for(let i=0;i<E.length;i+=25){const st=[];E.slice(i,i+25).forEach(([u,x])=>{
+     st.push(env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,x[0]),
+             env.DB.prepare("UPDATE schools SET med=? WHERE udise=? AND COALESCE(med,'')=''").bind(x[1].join(','),u));
+     if(x[2].length)st.push(env.DB.prepare('INSERT OR IGNORE INTO cfg(k,v) VALUES(?,?)').bind('semi:'+u,JSON.stringify(x[2])))});
+    await env.DB.batch(st)}
+   await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('patmed','1')").run();OC.clear();PATD=true}catch(e){}}
 async function tcOf(env,ts){const ids=ts.map(x=>x.id),o=[];for(let i=0;i<ids.length;i+=80){const c=ids.slice(i,i+80);o.push(...((await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE tid IN ('+c.map(()=>'?').join(',')+')').bind(...c).all()).results||[]))}return o}
 async function offApi(p,r,env){
   if(!p.startsWith('/api/o/'))return null;
@@ -362,7 +374,7 @@ async function offApi(p,r,env){
     return J({ok:1,rows:rs.map(x=>({id:x.id,c:x.code,u:x.udise,sc:(SC[x.udise]||{}).name||'',k:(SC[x.udise]||{}).code||'',dt:x.dt,tin:x.tin,tout:x.tout,vt:x.vt,score:x.score,g:x.grade,st:x.st,n:phN(x.img),mine:own(x)?1:0}))});
   }
   if(p==='/api/o/sum'){
-    const ck='sum:'+t.uname,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    await patImport(env,r);const ck='sum:'+t.uname,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
     const [f,d,ro,pm]=await Promise.all([
       env.DB.prepare('SELECT udise,upd,submitted,(SELECT COUNT(*) FROM json_each(data)) n FROM sch_form WHERE udise '+SW).bind(...SA).all(),
       env.DB.prepare('SELECT udise,kind,SUM(got) g FROM sch_dist WHERE udise '+SW+' GROUP BY udise,kind').bind(...SA).all(),
