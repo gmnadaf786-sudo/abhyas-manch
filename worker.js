@@ -457,6 +457,24 @@ async function offApi(p,r,env){
     const rs=(await env.DB.prepare(q).bind(...pr).all()).results.filter(x=>ok.has(x.udise)&&(!cf||(SC[x.udise]||{}).code===cf));
     return J({ok:1,rows:rs.map(x=>({id:x.id,c:x.code,u:x.udise,sc:(SC[x.udise]||{}).name||'',k:(SC[x.udise]||{}).code||'',dt:x.dt,tin:x.tin,tout:x.tout,vt:x.vt,score:x.score,g:x.grade,st:x.st,n:phN(x.img),mine:own(x)?1:0}))});
   }
+  if(p==='/api/o/ovw'){ // तालुका आढावा: केंद्रनिहाय या महिन्याचे काम
+    const mon=/^\d{4}-\d{2}$/.test(b.mon||'')?b.mon:new Date(Date.now()+19800000).toISOString().slice(0,7),ck='ovw:'+t.uname+':'+mon,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    await Promise.all([slEnsure(env),lvEns(env),vsEns(env),mdmEns(env),schCols(env)]).catch(()=>{});
+    const cm={};ss.forEach(x=>cm[x.udise]=x.code);const q=(sql,a)=>env.DB.prepare(sql).bind(...a).all().then(x=>x.results||[]).catch(()=>[]);
+    const [tc,vs,lv,md,dy,me]=await Promise.all([
+      q("SELECT udise,COUNT(*) n,SUM(CASE WHEN status='ok' THEN 0 ELSE 1 END) pe FROM teachers WHERE udise "+SW+" GROUP BY udise",SA),
+      q("SELECT code,COUNT(*) n,COUNT(DISTINCT udise) s FROM kp_visit WHERE dt LIKE ? AND code IN ("+JQ+") GROUP BY code",[mon+'%',...JK]),
+      q("SELECT udise,COUNT(*) n FROM sch_lv WHERE (fd LIKE ? OR td LIKE ?) AND udise "+SW+" GROUP BY udise",[mon+'%',mon+'%',...SA]),
+      q("SELECT udise FROM mdm WHERE mon=? AND udise "+SW,[mon,...SA]),
+      q("SELECT code,COUNT(*) n FROM kp_diary WHERE dt LIKE ? AND code IN ("+JQ+") GROUP BY code",[mon+'%',...JK]),
+      q("SELECT udise FROM schools WHERE COALESCE(med,'')<>'' AND udise "+SW,SA)]);
+    const C={};JK.forEach(c=>C[c]={c,s:0,t:0,tp:0,v:0,vs:0,lv:0,md:0,dy:0,mm:0});
+    ss.forEach(x=>{if(C[x.code]){C[x.code].s++;C[x.code].mm++}});
+    tc.forEach(x=>{const o=C[cm[x.udise]];if(o){o.t+=x.n;o.tp+=x.pe||0}});
+    vs.forEach(x=>{const o=C[x.code];if(o){o.v=x.n;o.vs=x.s}});dy.forEach(x=>{const o=C[x.code];if(o)o.dy=x.n});
+    lv.forEach(x=>{const o=C[cm[x.udise]];if(o)o.lv+=x.n});md.forEach(x=>{const o=C[cm[x.udise]];if(o)o.md++});me.forEach(x=>{const o=C[cm[x.udise]];if(o)o.mm--});
+    const out={ok:1,mon,rows:Object.values(C).filter(o=>o.s)};OC.set(ck,{t:Date.now()+300000,v:out});return J(out);
+  }
   if(p==='/api/o/sum'){
     await patImport(env,r);const ck='sum:'+t.uname,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
     const [f,d,ro,pm]=await Promise.all([
