@@ -1673,7 +1673,7 @@ async function ext(p,r,env){
     await env.DB.prepare('UPDATE roster SET pw=pw0,salt=salt0,fails=0,changed=0 WHERE pen=?').bind(pen).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/payimp'||p==='/api/admin/tfind'||p==='/api/admin/tmove'||p==='/api/admin/penchk'||p==='/api/admin/penreset'||p==='/api/admin/aeomap'||p==='/api/admin/schmed'||p==='/api/admin/schlist'||p==='/api/admin/parentreset'||p==='/api/admin/paypw'||p==='/api/admin/kpbind'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
+  if(p==='/api/admin/payimp'||p==='/api/admin/panchk'||p==='/api/admin/tfind'||p==='/api/admin/tmove'||p==='/api/admin/penchk'||p==='/api/admin/penreset'||p==='/api/admin/aeomap'||p==='/api/admin/schmed'||p==='/api/admin/schlist'||p==='/api/admin/parentreset'||p==='/api/admin/paypw'||p==='/api/admin/kpbind'||p==='/api/admin/paymons'||p==='/api/admin/paydel'||p==='/api/admin/reqsave'||p==='/api/admin/reqlist'||p==='/api/admin/reqresp'||p==='/api/admin/reqdel'||p==='/api/admin/reqtog'||p==='/api/admin/gkcfg'||p==='/api/admin/mailcfg'||p==='/api/admin/snaimp'||p==='/api/admin/wacfg'||p==='/api/admin/fblist'||p==='/api/admin/newscfg'||p==='/api/admin/newsget'||p==='/api/admin/panchimport'||p==='/api/admin/dirsave'||p==='/api/admin/dirlist'||p==='/api/admin/tlist'||p==='/api/admin/tset'||p==='/api/admin/import'||p==='/api/admin/timport'||p==='/api/admin/simport'||p==='/api/admin/hsave'||p==='/api/admin/hdel'||p==='/api/admin/ratesave'||p==='/api/admin/ratedel'||p==='/api/admin/cookimport'||p==='/api/admin/cookmap'||p==='/api/admin/cooknlist'||p==='/api/admin/spwreset'||p==='/api/admin/preqlist'||p==='/api/admin/formlist'||p==='/api/admin/formget'||p==='/api/admin/opwreset'||p==='/api/admin/cenlist'||p==='/api/admin/tinfoimport'||p==='/api/admin/recimport'||p==='/api/admin/sylimport'||p==='/api/admin/ttimport'||p==='/api/admin/tachimport'||p==='/api/admin/paycfg'){
     const b=await body(r);let bad;
     if(b.pk!==undefined&&!PAYP.has(p))return J({e:'bad'},403);
     if(b.pk!==undefined&&PAYP.has(p))bad=await payKey(env,b);else bad=await adminKey(env,b);
@@ -1832,6 +1832,28 @@ async function ext(p,r,env){
       const cs=await tcOf(env,ts);
       ts.forEach(x=>x.cl=cs.filter(c=>c.tid===x.id).map(c=>c.cls+c.div).join(', '));
       return J({ok:1,rows:ts});
+    }
+    if(p==='/api/admin/panchk'){
+      // पगार बिलातील (PAN, शाळा UDISE) शी आपल्या शिक्षक यादीची तुलना: PAN वरून शिक्षक शोधून त्याची शाळा जुळते का ते सांगतो. काहीही बदलत नाही; बदल /api/admin/tmove ने.
+      await slEnsure(env);const PR=/^[A-Z]{5}\d{4}[A-Z]$/,rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,80).map(x=>({pn:cl(x.pn,12).toUpperCase().replace(/\s/g,''),sh:cl(x.sh,20).toUpperCase().replace(/\s/g,''),u:cl(x.u,20).replace(/\D/g,''),nm:cl(x.nm,80)}));
+      const pans=[...new Set(rows.map(x=>x.pn).filter(x=>PR.test(x)))],pm={};
+      if(pans.length)for(const z of (await env.DB.prepare("SELECT shalarth,upper(trim(json_extract(data,'$.\"PAN क्रमांक\"'))) pan FROM tch_info WHERE upper(trim(json_extract(data,'$.\"PAN क्रमांक\"'))) IN ("+pans.map(()=>'?').join(',')+")").bind(...pans).all()).results)(pm[z.pan]=pm[z.pan]||[]).push(String(z.shalarth).toUpperCase());
+      const need=new Set();rows.forEach(x=>{(pm[x.pn]||[]).forEach(q=>need.add(q));if(x.sh)need.add(x.sh)});
+      const tm={},nl=[...need];
+      for(let i=0;i<nl.length;i+=80){const c=nl.slice(i,i+80);for(const t of (await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.udise,t.status,s.name school FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE upper(t.shalarth) IN ('+c.map(()=>'?').join(',')+')').bind(...c).all()).results)tm[String(t.shalarth).toUpperCase()]=t}
+      const bu=[...new Set(rows.map(x=>x.u).filter(x=>x.length===11))],sn={};
+      if(bu.length)for(const z of (await env.DB.prepare('SELECT udise,name FROM schools WHERE udise IN ('+bu.map(()=>'?').join(',')+')').bind(...bu).all()).results)sn[z.udise]=z.name;
+      const diff=[],nf=[];let same=0,nu=0,multi=0,nfn=0;
+      for(const x of rows){
+        if(x.u.length!==11){nu++;continue}
+        let t=null,by='';const c=pm[x.pn]||[];
+        if(c.length>1){multi++;continue}
+        if(c.length===1&&tm[c[0]]){t=tm[c[0]];by='PAN'}
+        else if(x.sh&&tm[x.sh]){t=tm[x.sh];by='शालार्थ ID'}
+        if(!t){nfn++;if(nf.length<30)nf.push(x.nm+(x.pn?' ('+x.pn.slice(-4)+')':''));continue}
+        if(t.udise===x.u){same++;continue}
+        diff.push({id:t.id,sh:t.shalarth,n:t.name,fu:t.udise,fn:t.school||'',tu:x.u,tn:sn[x.u]||'',by,st:t.status,bn:x.nm})}
+      return J({ok:1,n:rows.length,same,nu,multi,nfc:nfn,nf,diff});
     }
     if(p==='/api/admin/tmove'){
       // प्रशासकाकडून शिक्षकाची शाळा बदल: जुन्या शाळेचे वर्ग निघतात; approve=1 असल्यास लगेच मंजूर (वापर सुरू)
