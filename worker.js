@@ -160,10 +160,19 @@ async function cluAdd(env,r,code){
   return L.length}
 function geoCluster(g,code,tal){for(const d of g){const ts=d.t.filter(t=>t.k.some(k=>k[2]===code));if(ts.length){const t=ts.find(x=>x.n===tal)||ts[0];return{dn:d.n,dc:d.c||'',name:t.k.find(k=>k[2]===code)[0],tn:t.n}}}return null}
 
+const OC=new Map();
 let IXOK=false;
+const IXL=[['teachers','udise,status'],['teachers','token'],['teachers','shalarth'],['teachers','mobile'],['students','token'],['students','mobile'],['school_login','token'],['off_login','token'],['roster','udise'],['roster','sid'],['roster','pen'],['sinfo','pen'],['sch_center','code'],['sch_lv','udise,fd'],['sch_dist','udise,kind'],['pm_daily','udise,date'],['tclasses','udise'],['tclasses','tid'],['kp_visit','udise,dt'],['sch_geo','udise'],['sch_form','udise'],['school_sna','udise'],['school_bank','udise'],['pm_cook','udise'],['tch_edit','shalarth'],['tch_info','shalarth'],['feedback','sid'],['resp','rid,wt'],['usage','sid'],['usage','ts']];
+/* index एकदाच (प्रत्येक दिवशी जास्तीत जास्त ~60,000 rows लिहिण्याइतकेच – मोफत लिहिण्याची मर्यादा सुरक्षित राहावी) */
 async function ixEnsure(env){if(IXOK)return;IXOK=true;
-  const L=[['teachers','udise,status'],['roster','udise'],['sch_center','code'],['sch_lv','udise,fd'],['sch_dist','udise,kind'],['pm_daily','udise,date'],['tclasses','udise'],['tclasses','tid'],['kp_visit','udise,dt'],['sch_geo','udise'],['sch_form','udise'],['school_sna','udise'],['school_bank','udise'],['pm_cook','udise'],['tch_edit','shalarth']];
-  for(const [t,c] of L){try{await env.DB.prepare('CREATE INDEX IF NOT EXISTS ix_'+t+'_'+c.replace(/,/g,'_')+' ON '+t+'('+c+')').run()}catch(e){}}}
+  try{let done=[];try{const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='ixdone'").first();done=q&&q.v?JSON.parse(q.v):[]}catch(e){}
+   const todo=IXL.filter(x=>!done.includes(x[0]+'.'+x[1]));if(!todo.length)return;
+   let budget=60000;const cnt={};
+   for(const [t,c] of todo){const nm=t+'.'+c;
+    try{if(!(t in cnt)){const q=await env.DB.prepare('SELECT COUNT(*) n FROM '+t).first();cnt[t]=q?q.n:0}
+     if(cnt[t]>budget)continue;
+     await env.DB.prepare('CREATE INDEX IF NOT EXISTS ix_'+t+'_'+c.replace(/,/g,'_')+' ON '+t+'('+c+')').run();budget-=cnt[t];done.push(nm)}catch(e){}}
+   await env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('ixdone',JSON.stringify(done)).run()}catch(e){}}
 async function tcOf(env,ts){const ids=ts.map(x=>x.id),o=[];for(let i=0;i<ids.length;i+=80){const c=ids.slice(i,i+80);o.push(...((await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE tid IN ('+c.map(()=>'?').join(',')+')').bind(...c).all()).results||[]))}return o}
 async function offApi(p,r,env){
   if(!p.startsWith('/api/o/'))return null;
@@ -215,6 +224,7 @@ async function offApi(p,r,env){
     return J({ok:1,done:1,name:nm})}
   const ss=(kp?await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code=? ORDER BY c.udise').bind(t.uname).all():await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise ORDER BY c.code,c.udise').all()).results;
   const ok=new Set(ss.map(x=>x.udise)),SW=kp?'IN (SELECT udise FROM sch_center WHERE code=?)':'IN (SELECT udise FROM sch_center)',SA=kp?[t.uname]:[];
+  if(/^\/api\/o\/(medset|schadd|hmset|clusync)$/.test(p))OC.clear();
   if(p==='/api/o/medset'){
     if(!kp)return J({e:'kp'},403);await schCols(env);
     const u=cl(b.udise,11).replace(/\D/g,''),AL=['मराठी','कन्नड','उर्दू','इंग्रजी','हिंदी','इतर'],ms=(Array.isArray(b.meds)?b.meds:[b.med]).map(x=>cl(x,12)).filter((x,i,a)=>AL.includes(x)&&a.indexOf(x)===i).slice(0,4);
@@ -349,6 +359,7 @@ async function offApi(p,r,env){
     return J({ok:1,rows:rs.map(x=>({id:x.id,c:x.code,u:x.udise,sc:(SC[x.udise]||{}).name||'',k:(SC[x.udise]||{}).code||'',dt:x.dt,tin:x.tin,tout:x.tout,vt:x.vt,score:x.score,g:x.grade,st:x.st,n:phN(x.img),mine:own(x)?1:0}))});
   }
   if(p==='/api/o/sum'){
+    const ck='sum:'+t.uname,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
     const [f,d,ro,pm]=await Promise.all([
       env.DB.prepare('SELECT udise,upd,submitted,(SELECT COUNT(*) FROM json_each(data)) n FROM sch_form WHERE udise '+SW).bind(...SA).all(),
       env.DB.prepare('SELECT udise,kind,SUM(got) g FROM sch_dist WHERE udise '+SW+' GROUP BY udise,kind').bind(...SA).all(),
@@ -357,7 +368,7 @@ async function offApi(p,r,env){
     const F={},D={},R={},P={};f.results.forEach(x=>F[x.udise]=x);d.results.forEach(x=>{(D[x.udise]=D[x.udise]||{})[x.kind]=x.g});ro.results.forEach(x=>R[x.udise]=x.n);pm.results.forEach(x=>P[x.udise]=x);
     const SM={};((await env.DB.prepare("SELECT k,v FROM cfg WHERE k LIKE 'semi:%'").all()).results||[]).forEach(x=>{try{SM[x.k.slice(5)]=JSON.parse(x.v)}catch(e){}});
     await schCols(env);const MD={};((await env.DB.prepare("SELECT udise,med FROM schools WHERE COALESCE(med,'')<>'' AND udise "+SW).bind(...SA).all()).results||[]).forEach(x=>{MD[x.udise]=x.med});
-    return J({ok:1,role:kp?'KP':'BEO',cen:await cenAll(env),rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,med:MD[s.udise]||'',semi:SM[s.udise]||[],fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})});
+    const out={ok:1,role:kp?'KP':'BEO',cen:await cenAll(env),rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,med:MD[s.udise]||'',semi:SM[s.udise]||[],fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})};OC.set(ck,{t:Date.now()+90000,v:out});return J(out);
   }
   if(p==='/api/o/sna'){
     await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_sna(udise TEXT PRIMARY KEY, mhsn TEXT, bank TEXT, acct TEXT, ifsc TEXT, branch TEXT, hm TEXT, hm_mob TEXT, upd TEXT)").run();
@@ -1764,7 +1775,8 @@ export default{
           return J({rows:await q('SELECT name,mobile,cls,med,district,taluka,kendra,school,school_udise,created,last_seen FROM students'+(w.length?' WHERE '+w.join(' AND '):'')+' ORDER BY id DESC LIMIT 1000',...a2)});
         }
         const one=async(sql)=>(await env.DB.prepare(sql).first());
-        return J({
+        const sc=OC.get('admstats');if(sc&&sc.t>Date.now()&&!b.fresh)return J(sc.v);
+        const sv=await (async()=>({
           tot:await one("SELECT COUNT(*) n,SUM(date(created)=date('now')) today,SUM(last_seen>=datetime('now','-1 day')) a1,SUM(last_seen>=datetime('now','-7 day')) a7 FROM students"),
           ev:await one("SELECT COUNT(*) n,SUM(ts>=datetime('now','-1 day')) d1 FROM usage"),
           dist:await q("SELECT district d,COUNT(*) n,SUM(last_seen>=datetime('now','-7 day')) a7 FROM students GROUP BY district ORDER BY n DESC"),
@@ -1774,7 +1786,7 @@ export default{
           top:await q("SELECT cls c,med m,subj s,COUNT(*) n FROM usage GROUP BY cls,med,subj ORDER BY n DESC LIMIT 25"),
           fb:await q("SELECT f.type t,f.text x,f.lesson l,f.ts ts,s.name n,s.school sc,s.taluka tk,s.cls c FROM feedback f LEFT JOIN students s ON s.id=f.sid ORDER BY f.id DESC LIMIT 50"),
           day:await q("SELECT date(ts) d,COUNT(*) n,COUNT(DISTINCT sid) u FROM usage WHERE ts>=datetime('now','-14 day') GROUP BY date(ts) ORDER BY d")
-        });
+        }))();OC.set('admstats',{t:Date.now()+300000,v:sv});return J(sv);
       }
       if(p==='/api/register'){
         const b=await body(r);
