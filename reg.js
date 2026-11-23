@@ -3,7 +3,7 @@
 var PH=[],LV=null,LO=null,DY=null,DM='',DYC='';
 var LVT=['अर्जित रजा','वैद्यकीय रजा','अर्धवेतन रजा','परिवर्तित रजा','प्रसूती रजा','आकस्मिक/किरकोळ रजा','असाधारण रजा','इतर'];
 var DYK=['शाळा भेट','मीटिंग','प्रशिक्षण/कार्यशाळा','केंद्र परिषद','कार्यालयीन काम','इतर'],DYP=['शाळा','BRC','ZP','इतर'];
-function rOffBack(){return '<button class="g" onclick="TAB=\'S\';draw()">← मागे</button>'}
+function rOffBack(){return '<button class="g" onclick="TAB=\'H\';draw()">← मागे</button>'}
 function rSchBack(){return '<button class="g" onclick="home()">← मागे</button>'}
 function rOpt(a,v){return a.map(function(x){return '<option'+(x===v?' selected':'')+'>'+esc(x)+'</option>'}).join('')}
 function rToday(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}

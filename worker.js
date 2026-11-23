@@ -457,6 +457,17 @@ async function offApi(p,r,env){
     const rs=(await env.DB.prepare(q).bind(...pr).all()).results.filter(x=>ok.has(x.udise)&&(!cf||(SC[x.udise]||{}).code===cf));
     return J({ok:1,rows:rs.map(x=>({id:x.id,c:x.code,u:x.udise,sc:(SC[x.udise]||{}).name||'',k:(SC[x.udise]||{}).code||'',dt:x.dt,tin:x.tin,tout:x.tout,vt:x.vt,score:x.score,g:x.grade,st:x.st,n:phN(x.img),mine:own(x)?1:0}))});
   }
+  if(p==='/api/o/sprof'){ // शाळा प्रोफाइल: मुख्याध्यापक, शिक्षक, वर्गनिहाय पट, भेटी, पोषण आहार
+    const u=String(b.udise||'').replace(/\D/g,'').slice(0,11);if(!ok.has(u))return J({e:'na'},403);
+    await Promise.all([vsEns(env),mdmEns(env)]).catch(()=>{});const q=(s,...a)=>env.DB.prepare(s).bind(...a).all().then(x=>x.results||[]).catch(()=>[]);
+    const [hm,tc,pt,vs,md]=await Promise.all([q("SELECT k,v FROM cfg WHERE k IN (?,?)",'hm:'+u,'hmt:'+u),
+      q("SELECT shalarth sh,name n,mobile m,status st FROM teachers WHERE udise=? ORDER BY name",u),
+      q("SELECT r.cls c,COUNT(*) n,SUM(CASE WHEN i.gender='M' THEN 1 ELSE 0 END) m,SUM(CASE WHEN i.gender='F' THEN 1 ELSE 0 END) f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? GROUP BY r.cls ORDER BY CAST(r.cls AS INTEGER)",u),
+      q("SELECT dt,vt,grade,code FROM kp_visit WHERE udise=? AND st='Final' ORDER BY dt DESC LIMIT 5",u),
+      q("SELECT mon FROM mdm WHERE udise=? ORDER BY mon DESC LIMIT 6",u)]);
+    const H={};hm.forEach(x=>H[x.k.split(':')[0]]=x.v);const hs=H.hmt||'',ht=tc.find(x=>x.sh===hs);
+    return J({ok:1,hm:H.hm||'',hmm:ht?ht.m:'',tc,pt,vs,md:md.map(x=>x.mon)});
+  }
   if(p==='/api/o/ovw'){ // तालुका आढावा: केंद्रनिहाय या महिन्याचे काम
     const mon=/^\d{4}-\d{2}$/.test(b.mon||'')?b.mon:new Date(Date.now()+19800000).toISOString().slice(0,7),ck='ovw:'+t.uname+':'+mon,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
     await Promise.all([slEnsure(env),lvEns(env),vsEns(env),mdmEns(env),schCols(env)]).catch(()=>{});
