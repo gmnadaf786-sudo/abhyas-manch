@@ -525,6 +525,12 @@ async function offApi(p,r,env){
     const q=(await env.DB.prepare('SELECT r.udise u,r.cls,COALESCE(r.med,\'\') med,COUNT(*) n,SUM(i.gender=\'M\') m,SUM(i.gender=\'F\') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise '+SW+' GROUP BY r.udise,r.cls,COALESCE(r.med,\'\')').bind(...SA).all()).results;
     return J({ok:1,rows:q.filter(x=>ok.has(x.u))});
   }
+  if(p==='/api/o/sstat'){ // विद्यार्थी टॅब: प्रवर्ग, मातृभाषा, स्थिती (फक्त आकडे)
+    const ck='sst:'+t.uname,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    const g=c=>env.DB.prepare("SELECT r.udise u,COALESCE(NULLIF(TRIM(i."+c+"),''),'नोंद नाही') k,COUNT(*) n FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise "+SW+" GROUP BY r.udise,k").bind(...SA).all().then(x=>(x.results||[]).filter(y=>ok.has(y.u))).catch(()=>[]);
+    const [cat,tongue,st]=await Promise.all([g('cat'),g('tongue'),g('status')]);
+    const out={ok:1,cat,tongue,st};OC.set(ck,{t:Date.now()+300000,v:out});return J(out);
+  }
   if(p==='/api/o/teachers'){
     await slEnsure(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.udise '+SW+' ORDER BY t.udise,t.name').bind(...SA).all()).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
