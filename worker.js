@@ -161,6 +161,13 @@ let KPOK=false;async function kpEns(env){if(KPOK)return;await env.DB.prepare("CR
 async function cenAll(env){try{await kpEns(env);const rs=(await env.DB.prepare("SELECT code,kname FROM kp_reg WHERE status='ok'").all()).results||[],m={...CEN};rs.forEach(x=>{if(!m[x.code])m[x.code]=x.kname});return m}catch(e){return CEN}}
 // BEO/AEO: फक्त जत तालुक्याची केंद्रे (CEN + जतच्या नोंदणी केलेली केंद्रे); इतर जिल्ह्यांची/तालुक्यांची नाहीत
 async function jatCen(env){try{await kpEns(env);const rs=(await env.DB.prepare("SELECT code,kname FROM kp_reg WHERE status='ok' AND taluka=? AND district=?").bind('जत','सांगली').all()).results||[],m={...CEN};rs.forEach(x=>{if(!m[x.code])m[x.code]=x.kname});return m}catch(e){return CEN}}
+/* D1 मध्ये साठवलेला अहवाल-कॅश: सर्व वापरकर्ते/सर्व्हर भागांना एकच नोंद (1 row read). fr=1 → 2 मिनिटांपेक्षा जुना असल्यास नव्याने */
+let DCE=false;
+async function dcEns(env){if(DCE)return;try{await env.DB.prepare('CREATE TABLE IF NOT EXISTS dcache(k TEXT PRIMARY KEY,v TEXT)').run()}catch(e){}DCE=true}
+async function dcGet(env,k,fr){const h=OC.get(k),now=Date.now();if(h&&h.c&&h.t>now&&!(fr&&now-h.c>120000))return h.v;
+  try{await dcEns(env);const r=await env.DB.prepare('SELECT v FROM dcache WHERE k=?').bind(k).first();if(r){const o=JSON.parse(r.v);if(o.t>now&&!(fr&&now-o.c>120000)){OC.set(k,o);return o.v}}}catch(e){}return null}
+async function dcPut(env,k,v,ttl){const o={t:Date.now()+ttl,c:Date.now(),v};OC.set(k,o);try{await dcEns(env);const s=JSON.stringify(o);if(s.length<1800000)await env.DB.prepare('INSERT OR REPLACE INTO dcache(k,v) VALUES(?,?)').bind(k,s).run()}catch(e){}}
+async function dcClr(env){OC.clear();try{await dcEns(env);await env.DB.prepare('DELETE FROM dcache').run()}catch(e){}}
 let GEOC=null;async function geoJson(env,r){if(GEOC)return GEOC;const x=await env.ASSETS.fetch(new Request(new URL('/geo.json',r.url)));GEOC=await x.json();return GEOC}
 // geo.json मध्ये केंद्र कोड शोधा → {dn,dc,name,tn}; तालुका = क्लायंटने निवडलेला (त्या केंद्राचा असेल तर) नाहीतर पहिला
 async function cluAdd(env,r,code){
@@ -194,14 +201,14 @@ async function patEng(env,r){if(ENGD)return;
    const rs=await env.ASSETS.fetch(new Request(new URL('/data/clu/2735.json',r.url)));if(!rs.ok)return;
    const J=await rs.json(),RX=/ENG[A-Z]*\.?\s*M[IE]DI?UM/i,L=[];Object.keys(CEN).forEach(c=>(J[c]||[]).forEach(s=>{if(RX.test(s[1]))L.push(s[0])}));L.push('27350211916','27350211918','27350211919','27350201502','27350209307');await schCols(env);
    for(let i=0;i<L.length;i+=40)await env.DB.batch(L.slice(i,i+40).map(u=>env.DB.prepare("UPDATE schools SET med='इंग्रजी' WHERE udise=? AND COALESCE(med,'')=''").bind(u)));
-   await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('paten','1')").run();OC.clear();ENGD=true}catch(e){}}
+   await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('paten','1')").run();await dcClr(env);ENGD=true}catch(e){}}
 let CLUD=false;
 async function patClu(env,r){if(CLUD)return;
   try{const f=await env.DB.prepare("SELECT v FROM cfg WHERE k='patclu'").first();if(f){CLUD=true;return}
    const rs=await env.ASSETS.fetch(new Request(new URL('/data/clu/2735.json',r.url)));if(!rs.ok)return;
    const J=await rs.json(),L=[];Object.keys(CEN).forEach(c=>(J[c]||[]).forEach(s=>L.push([s[0],s[1],c])));
    for(let i=0;i<L.length;i+=40){const st=[];L.slice(i,i+40).forEach(s=>{st.push(env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(s[0],s[1]),env.DB.prepare('INSERT OR IGNORE INTO sch_center(udise,code) VALUES(?,?)').bind(s[0],s[2]))});await env.DB.batch(st)}
-   await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('patclu','1')").run();OC.clear();CLUD=true}catch(e){}}
+   await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('patclu','1')").run();await dcClr(env);CLUD=true}catch(e){}}
 let PATD=false;
 async function patImport(env,r){if(PATD)return;
   try{const f=await env.DB.prepare("SELECT v FROM cfg WHERE k='patmed'").first();if(f){PATD=true;return}
@@ -212,7 +219,7 @@ async function patImport(env,r){if(PATD)return;
              env.DB.prepare('UPDATE schools SET med=? WHERE udise=?').bind(x[1].join(','),u),
              x[2].length?env.DB.prepare('INSERT OR REPLACE INTO cfg(k,v) VALUES(?,?)').bind('semi:'+u,JSON.stringify(x[2])):env.DB.prepare('DELETE FROM cfg WHERE k=?').bind('semi:'+u))});
     await env.DB.batch(st)}
-   await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('patmed','1')").run();OC.clear();PATD=true}catch(e){}}
+   await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('patmed','1')").run();await dcClr(env);PATD=true}catch(e){}}
 async function tcOf(env,ts){const ids=ts.map(x=>x.id),o=[];for(let i=0;i<ids.length;i+=80){const c=ids.slice(i,i+80);o.push(...((await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE tid IN ('+c.map(()=>'?').join(',')+')').bind(...c).all()).results||[]))}return o}
 async function offApi(p,r,env){
   if(!p.startsWith('/api/o/'))return null;
@@ -261,12 +268,12 @@ async function offApi(p,r,env){
     const nm=x?String(x[0]).slice(0,120):'';
     if(!b.go)return J({ok:1,name:nm,have:ex?1:0,closed:x&&x[11]?1:0,village:x?x[7]:''});
     await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,nm),env.DB.prepare('INSERT OR REPLACE INTO sch_center(udise,code) VALUES(?,?)').bind(u,t.uname)]);
-    return J({ok:1,done:1,name:nm})}
+    await dcClr(env);return J({ok:1,done:1,name:nm})}
   if(p==='/api/o/sum'){await patClu(env,r);await patImport(env,r);await patEng(env,r)}
   const JC=kp?null:await jatCen(env),JK=kp?[t.uname]:Object.keys(JC),JQ=JK.map(()=>'?').join(',');
-  const ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;
+  const SK=kp?t.uname:'JAT';if(/^\/api\/o\/(medset|schadd|hmset|clusync|tdecide)$/.test(p))await dcClr(env);
+  let ss=await dcGet(env,'ss:'+SK,b.fr);if(!ss){ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;await dcPut(env,'ss:'+SK,ss,600000)}
   const ok=new Set(ss.map(x=>x.udise)),SW='IN (SELECT udise FROM sch_center WHERE code IN ('+JQ+'))',SA=JK;
-  if(/^\/api\/o\/(medset|schadd|hmset|clusync)$/.test(p))OC.clear();
   if(p==='/api/o/medset'){
     if(!kp)return J({e:'kp'},403);await schCols(env);
     const u=cl(b.udise,11).replace(/\D/g,''),AL=['मराठी','कन्नड','उर्दू','इंग्रजी','हिंदी','इतर'],ms=(Array.isArray(b.meds)?b.meds:[b.med]).map(x=>cl(x,12)).filter((x,i,a)=>AL.includes(x)&&a.indexOf(x)===i).slice(0,4);
@@ -458,12 +465,12 @@ async function offApi(p,r,env){
     return J({ok:1,rows:rs.map(x=>({id:x.id,c:x.code,u:x.udise,sc:(SC[x.udise]||{}).name||'',k:(SC[x.udise]||{}).code||'',dt:x.dt,tin:x.tin,tout:x.tout,vt:x.vt,score:x.score,g:x.grade,st:x.st,n:phN(x.img),mine:own(x)?1:0}))});
   }
   if(p==='/api/o/tstat'){ // शिक्षक टॅब: लिंग, प्रकार, माध्यम, जन्मतारीख, सेवानिवृत्ती + या महिन्यातील रजा
-    const mon=new Date(Date.now()+19800000).toISOString().slice(0,7),ck='tst:'+t.uname+':'+mon,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    const mon=new Date(Date.now()+19800000).toISOString().slice(0,7),ck='tst:'+SK+':'+mon;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
     await Promise.all([slEnsure(env),lvEns(env)]).catch(()=>{});const q=(s,a)=>env.DB.prepare(s).bind(...a).all().then(x=>x.results||[]).catch(()=>[]);
     const jx=k=>"json_extract(i.data,'$.\""+k+"\"')";
     const [rs,lv]=await Promise.all([q("SELECT t.shalarth sh,t.udise u,"+jx('लिंग')+" g,"+jx('शिक्षक प्रकार')+" ty,"+jx('अध्यापनाचे माध्यम')+" md,"+jx('जन्मतारीख')+" dob,"+jx('सेवानिवृत्ती दिनांक')+" rt FROM teachers t LEFT JOIN tch_info i ON i.shalarth=t.shalarth WHERE t.udise "+SW,SA),
       q("SELECT udise u,shalarth sh,tname n,typ,fd,td,days FROM sch_lv WHERE fd<=? AND td>=? AND udise "+SW+" ORDER BY fd",[mon+'-31',mon+'-01',...SA])]);
-    const out={ok:1,mon,rows:rs.filter(x=>ok.has(x.u)),lv:lv.filter(x=>ok.has(x.u))};OC.set(ck,{t:Date.now()+300000,v:out});return J(out);
+    const out={ok:1,mon,rows:rs.filter(x=>ok.has(x.u)),lv:lv.filter(x=>ok.has(x.u))};await dcPut(env,ck,out,1800000);return J(out);
   }
   if(p==='/api/o/sprof'){ // शाळा प्रोफाइल: मुख्याध्यापक, शिक्षक, वर्गनिहाय पट, भेटी, पोषण आहार
     const u=String(b.udise||'').replace(/\D/g,'').slice(0,11);if(!ok.has(u))return J({e:'na'},403);
@@ -477,7 +484,7 @@ async function offApi(p,r,env){
     return J({ok:1,hm:H.hm||'',hmm:ht?ht.m:'',tc,pt,vs,md:md.map(x=>x.mon)});
   }
   if(p==='/api/o/ovw'){ // तालुका आढावा: केंद्रनिहाय या महिन्याचे काम
-    const mon=/^\d{4}-\d{2}$/.test(b.mon||'')?b.mon:new Date(Date.now()+19800000).toISOString().slice(0,7),ck='ovw:'+t.uname+':'+mon,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    const mon=/^\d{4}-\d{2}$/.test(b.mon||'')?b.mon:new Date(Date.now()+19800000).toISOString().slice(0,7),ck='ovw:'+SK+':'+mon;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
     await Promise.all([slEnsure(env),lvEns(env),vsEns(env),mdmEns(env),schCols(env)]).catch(()=>{});
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);const q=(sql,a)=>env.DB.prepare(sql).bind(...a).all().then(x=>x.results||[]).catch(()=>[]);
     const [tc,vs,lv,md,dy,me]=await Promise.all([
@@ -492,10 +499,10 @@ async function offApi(p,r,env){
     tc.forEach(x=>{const o=C[cm[x.udise]];if(o){o.t+=x.n;o.tp+=x.pe||0}});
     vs.forEach(x=>{const o=C[x.code];if(o){o.v=x.n;o.vs=x.s}});dy.forEach(x=>{const o=C[x.code];if(o)o.dy=x.n});
     lv.forEach(x=>{const o=C[cm[x.udise]];if(o)o.lv+=x.n});md.forEach(x=>{const o=C[cm[x.udise]];if(o)o.md++});me.forEach(x=>{const o=C[cm[x.udise]];if(o)o.mm--});
-    const out={ok:1,mon,rows:Object.values(C).filter(o=>o.s)};OC.set(ck,{t:Date.now()+300000,v:out});return J(out);
+    const out={ok:1,mon,rows:Object.values(C).filter(o=>o.s)};await dcPut(env,ck,out,1800000);return J(out);
   }
   if(p==='/api/o/sum'){
-    await patImport(env,r);const ck='sum:'+t.uname,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    await patImport(env,r);const ck='sum:'+SK;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
     const [f,d,ro,pm]=await Promise.all([
       env.DB.prepare('SELECT udise,upd,submitted,(SELECT COUNT(*) FROM json_each(data)) n FROM sch_form WHERE udise '+SW).bind(...SA).all(),
       env.DB.prepare('SELECT udise,kind,SUM(got) g FROM sch_dist WHERE udise '+SW+' GROUP BY udise,kind').bind(...SA).all(),
@@ -504,7 +511,7 @@ async function offApi(p,r,env){
     const F={},D={},R={},P={};f.results.forEach(x=>F[x.udise]=x);d.results.forEach(x=>{(D[x.udise]=D[x.udise]||{})[x.kind]=x.g});ro.results.forEach(x=>R[x.udise]=x.n);pm.results.forEach(x=>P[x.udise]=x);
     const SM={};((await env.DB.prepare("SELECT k,v FROM cfg WHERE k LIKE 'semi:%'").all()).results||[]).forEach(x=>{try{SM[x.k.slice(5)]=JSON.parse(x.v)}catch(e){}});
     await schCols(env);const MD={};((await env.DB.prepare("SELECT udise,med FROM schools WHERE COALESCE(med,'')<>'' AND udise "+SW).bind(...SA).all()).results||[]).forEach(x=>{MD[x.udise]=x.med});
-    const out={ok:1,role:kp?'KP':'BEO',cen:kp?await cenAll(env):JC,rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,med:MD[s.udise]||'',semi:SM[s.udise]||[],fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})};OC.set(ck,{t:Date.now()+90000,v:out});return J(out);
+    const out={ok:1,role:kp?'KP':'BEO',cen:kp?await cenAll(env):JC,rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,med:MD[s.udise]||'',semi:SM[s.udise]||[],fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})};await dcPut(env,ck,out,900000);return J(out);
   }
   if(p==='/api/o/sna'){
     await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_sna(udise TEXT PRIMARY KEY, mhsn TEXT, bank TEXT, acct TEXT, ifsc TEXT, branch TEXT, hm TEXT, hm_mob TEXT, upd TEXT)").run();
@@ -522,25 +529,27 @@ async function offApi(p,r,env){
     if(u){if(!ok.has(u))return J({e:'na'},403);
       const q=(await env.DB.prepare('SELECT r.pen,r.name,r.cls,r.div,r.med,i.gender,i.dob,i.roll FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name').bind(u).all()).results;
       return J({ok:1,rows:q});}
+    const ck='stu:'+SK;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
     const q=(await env.DB.prepare('SELECT r.udise u,r.cls,COALESCE(r.med,\'\') med,COUNT(*) n,SUM(i.gender=\'M\') m,SUM(i.gender=\'F\') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise '+SW+' GROUP BY r.udise,r.cls,COALESCE(r.med,\'\')').bind(...SA).all()).results;
-    return J({ok:1,rows:q.filter(x=>ok.has(x.u))});
+    const out={ok:1,rows:q.filter(x=>ok.has(x.u))};await dcPut(env,ck,out,1800000);return J(out);
   }
   if(p==='/api/o/vagg'){ // सर्व केंद्रांचा विद्यार्थी सांख्यिकी अहवाल: शाळा × मूल्य संख्या (नावे नाहीत)
     const CX={cls:'r.cls',div:'r.div',med:'r.med',gender:'i.gender',cat:'i.cat',tongue:'i.tongue',status:'i.status'},c=String(b.col||''),ex=CX[c];if(!ex)return J({e:'col'},400);
-    const ck='vag:'+t.uname+':'+c,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    const ck='vag:'+SK+':'+c;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
     const rs=(await env.DB.prepare("SELECT r.udise u,COALESCE(TRIM(CAST("+ex+" AS TEXT)),'') k,COUNT(*) n FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise "+SW+" GROUP BY r.udise,k").bind(...SA).all()).results||[];
-    const out={ok:1,rows:rs.filter(x=>ok.has(x.u))};OC.set(ck,{t:Date.now()+300000,v:out});return J(out);
+    const out={ok:1,rows:rs.filter(x=>ok.has(x.u))};await dcPut(env,ck,out,1800000);return J(out);
   }
   if(p==='/api/o/sstat'){ // विद्यार्थी टॅब: प्रवर्ग, मातृभाषा, स्थिती (फक्त आकडे)
-    const ck='sst:'+t.uname,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    const ck='sst:'+SK;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
     const g=c=>env.DB.prepare("SELECT r.udise u,COALESCE(NULLIF(TRIM(i."+c+"),''),'नोंद नाही') k,COUNT(*) n FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise "+SW+" GROUP BY r.udise,k").bind(...SA).all().then(x=>(x.results||[]).filter(y=>ok.has(y.u))).catch(()=>[]);
     const [cat,tongue,st]=await Promise.all([g('cat'),g('tongue'),g('status')]);
-    const out={ok:1,cat,tongue,st};OC.set(ck,{t:Date.now()+300000,v:out});return J(out);
+    const out={ok:1,cat,tongue,st};await dcPut(env,ck,out,1800000);return J(out);
   }
   if(p==='/api/o/teachers'){
+    const ck='tch:'+SK;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
     await slEnsure(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.udise '+SW+' ORDER BY t.udise,t.name').bind(...SA).all()).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
-    return J({ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,sh:x.shalarth,n:x.name,m:x.mobile,u:x.udise,sc:x.sc||'',c:cm[x.udise],st:x.status,cf:x.conf?1:0,es:x.es||''}))});
+    const out={ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,sh:x.shalarth,n:x.name,m:x.mobile,u:x.udise,sc:x.sc||'',c:cm[x.udise],st:x.status,cf:x.conf?1:0,es:x.es||''}))};await dcPut(env,ck,out,600000);return J(out);
   }
   if(p==='/api/o/tinfo'){
     const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),t=await env.DB.prepare('SELECT t.name,t.mobile,t.udise,s.name sc FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.shalarth=?').bind(sh).first();
@@ -1119,7 +1128,7 @@ async function ext(p,r,env){
     await env.DB.prepare("INSERT OR REPLACE INTO kp_reg(code,kname,rname,mobile,district,taluka,salt,pw,status,ts) VALUES(?,?,?,?,?,?,?,?,'pending',?)").bind(code,f.name,rn,mo,f.dn,f.tn,salt,await hashPin(pw,salt),istDay()).run();
     return J({ok:1});
   }
-  if(p==='/api/admin/clusync'){
+  if(p==='/api/admin/clusync'){await dcClr(env);
     const b=await body(r),bad=await adminKey(env,b);if(bad)return bad;await slEnsure(env);
     const cen=await cenAll(env),codes=Object.keys(cen);
     if(!b.code)return J({ok:1,codes});
