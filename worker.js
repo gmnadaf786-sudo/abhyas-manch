@@ -160,9 +160,14 @@ async function cluAdd(env,r,code){
   return L.length}
 function geoCluster(g,code,tal){for(const d of g){const ts=d.t.filter(t=>t.k.some(k=>k[2]===code));if(ts.length){const t=ts.find(x=>x.n===tal)||ts[0];return{dn:d.n,dc:d.c||'',name:t.k.find(k=>k[2]===code)[0],tn:t.n}}}return null}
 
+let IXOK=false;
+async function ixEnsure(env){if(IXOK)return;IXOK=true;
+  const L=[['teachers','udise,status'],['roster','udise'],['sch_center','code'],['sch_lv','udise,fd'],['sch_dist','udise,kind'],['pm_daily','udise,date'],['tclasses','udise'],['tclasses','tid'],['kp_visit','udise,dt'],['sch_geo','udise'],['sch_form','udise'],['school_sna','udise'],['school_bank','udise'],['pm_cook','udise'],['tch_edit','shalarth']];
+  for(const [t,c] of L){try{await env.DB.prepare('CREATE INDEX IF NOT EXISTS ix_'+t+'_'+c.replace(/,/g,'_')+' ON '+t+'('+c+')').run()}catch(e){}}}
+async function tcOf(env,ts){const ids=ts.map(x=>x.id),o=[];for(let i=0;i<ids.length;i+=80){const c=ids.slice(i,i+80);o.push(...((await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE tid IN ('+c.map(()=>'?').join(',')+')').bind(...c).all()).results||[]))}return o}
 async function offApi(p,r,env){
   if(!p.startsWith('/api/o/'))return null;
-  await slEnsure(env);const b=await body(r);
+  await slEnsure(env);await ixEnsure(env);const b=await body(r);
   if(p==='/api/o/login'){
     let u=cl(b.u,14).toUpperCase().replace(/\s/g,''),pw=cl(b.pw,40);if(/^\d{7}$/.test(u))u='CLU'+u;
     const cen=await cenAll(env);if(!isOff(u)&&!cen[u])return J({e:'bad'},401);
@@ -209,7 +214,7 @@ async function offApi(p,r,env){
     await env.DB.batch([env.DB.prepare('INSERT OR IGNORE INTO schools(udise,name) VALUES(?,?)').bind(u,nm),env.DB.prepare('INSERT OR REPLACE INTO sch_center(udise,code) VALUES(?,?)').bind(u,t.uname)]);
     return J({ok:1,done:1,name:nm})}
   const ss=(kp?await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code=? ORDER BY c.udise').bind(t.uname).all():await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise ORDER BY c.code,c.udise').all()).results;
-  const ok=new Set(ss.map(x=>x.udise));
+  const ok=new Set(ss.map(x=>x.udise)),SW=kp?'IN (SELECT udise FROM sch_center WHERE code=?)':'IN (SELECT udise FROM sch_center)',SA=kp?[t.uname]:[];
   if(p==='/api/o/medset'){
     if(!kp)return J({e:'kp'},403);await schCols(env);
     const u=cl(b.udise,11).replace(/\D/g,''),AL=['मराठी','कन्नड','उर्दू','इंग्रजी','हिंदी','इतर'],ms=(Array.isArray(b.meds)?b.meds:[b.med]).map(x=>cl(x,12)).filter((x,i,a)=>AL.includes(x)&&a.indexOf(x)===i).slice(0,4);
@@ -250,7 +255,7 @@ async function offApi(p,r,env){
     await lvEns(env);
     if(p==='/api/o/lvimg'){const x=await env.DB.prepare('SELECT udise,img FROM sch_lv WHERE id=?').bind(parseInt(b.id)||0).first();if(!x||!ok.has(x.udise))return J({e:'nf'},404);return phGet(env,x.img,'lv/'+x.udise+'/',b.n)}
     const mon=/^\d{4}-(0[1-9]|1[0-2])$/.test(cl(b.mon,7))?cl(b.mon,7):'';
-    const rs=(await env.DB.prepare('SELECT l.id,l.udise,l.shalarth sh,l.tname tn,l.typ,l.fd,l.td,l.days,l.rm,l.img,l.upd,s.name sc FROM sch_lv l LEFT JOIN schools s ON s.udise=l.udise'+(mon?' WHERE l.fd<=? AND l.td>=?':'')+' ORDER BY l.fd DESC,l.id DESC LIMIT 3000').bind(...(mon?[mon+'-31',mon+'-01']:[])).all()).results;
+    const rs=(await env.DB.prepare('SELECT l.id,l.udise,l.shalarth sh,l.tname tn,l.typ,l.fd,l.td,l.days,l.rm,l.img,l.upd,s.name sc FROM sch_lv l LEFT JOIN schools s ON s.udise=l.udise WHERE l.udise '+SW+(mon?' AND l.fd<=? AND l.td>=?':'')+' ORDER BY l.fd DESC,l.id DESC LIMIT 3000').bind(...SA,...(mon?[mon+'-31',mon+'-01']:[])).all()).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
     return J({ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,u:x.udise,sc:x.sc||'',c:cm[x.udise],sh:x.sh,tn:x.tn,typ:x.typ,fd:x.fd,td:x.td,days:x.days,rm:x.rm,n:phN(x.img),upd:x.upd}))});
   }
@@ -293,9 +298,9 @@ async function offApi(p,r,env){
     // शाळांचे स्थान (GPS): KP आपल्या केंद्रातील शाळांचे, BEO/AEO सर्वांचे. नोंद KP, BEO किंवा शाळा (मुख्याध्यापक) करू शकतात; नवी नोंद जुनीची जागा घेते.
     await geoEns(env);await vsEns(env);
     if(p==='/api/o/geoset'){const u=cl(b.udise,11).replace(/\D/g,''),g=geoClean(b);if(!ok.has(u)||!g)return J({e:'arg'},400);await geoPut(env,u,g,kp?'KP':'BEO');return J({ok:1})}
-    const gs=(await env.DB.prepare('SELECT udise,lat,lng,acc,by,upd FROM sch_geo').all()).results||[],G={};gs.forEach(x=>G[x.udise]=x);
+    const gs=(await env.DB.prepare('SELECT udise,lat,lng,acc,by,upd FROM sch_geo WHERE udise '+SW).bind(...SA).all()).results||[],G={};gs.forEach(x=>G[x.udise]=x);
     const n=new Date(Date.now()+19800000),y=n.getUTCMonth()>=5?n.getUTCFullYear():n.getUTCFullYear()-1,mo=n.toISOString().slice(0,7);
-    const vr=(await env.DB.prepare("SELECT udise,dt FROM kp_visit WHERE st='Final' AND dt>=?").bind(y+'-06-01').all()).results||[],V={};
+    const vr=(await env.DB.prepare("SELECT udise,dt FROM kp_visit WHERE st='Final' AND dt>=? AND udise "+SW).bind(y+'-06-01',...SA).all()).results||[],V={};
     vr.forEach(x=>{const o=V[x.udise]=V[x.udise]||{l:'',y:0,m:0};if(x.dt>o.l)o.l=x.dt;o.y++;if(x.dt.slice(0,7)===mo)o.m++});
     return J({ok:1,mo,rows:ss.map(x=>{const g=G[x.udise],v=V[x.udise]||{l:'',y:0,m:0};return{u:x.udise,n:x.name||x.udise,c:x.code,lat:g?g.lat:null,lng:g?g.lng:null,acc:g?g.acc:null,by:g?g.by:'',up:g?g.upd:'',lv:v.l,vy:v.y,vm:v.m}})});
   }
@@ -345,18 +350,18 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/sum'){
     const [f,d,ro,pm]=await Promise.all([
-      env.DB.prepare('SELECT udise,upd,submitted,(SELECT COUNT(*) FROM json_each(data)) n FROM sch_form').all(),
-      env.DB.prepare('SELECT udise,kind,SUM(got) g FROM sch_dist GROUP BY udise,kind').all(),
-      env.DB.prepare('SELECT udise,COUNT(*) n FROM roster GROUP BY udise').all(),
-      env.DB.prepare('SELECT udise,MAX(date) d,COUNT(*) c FROM pm_daily GROUP BY udise').all().catch(()=>({results:[]}))]);
+      env.DB.prepare('SELECT udise,upd,submitted,(SELECT COUNT(*) FROM json_each(data)) n FROM sch_form WHERE udise '+SW).bind(...SA).all(),
+      env.DB.prepare('SELECT udise,kind,SUM(got) g FROM sch_dist WHERE udise '+SW+' GROUP BY udise,kind').bind(...SA).all(),
+      env.DB.prepare('SELECT udise,COUNT(*) n FROM roster WHERE udise '+SW+' GROUP BY udise').bind(...SA).all(),
+      env.DB.prepare('SELECT udise,MAX(date) d,COUNT(*) c FROM pm_daily WHERE udise '+SW+' GROUP BY udise').bind(...SA).all().catch(()=>({results:[]}))]);
     const F={},D={},R={},P={};f.results.forEach(x=>F[x.udise]=x);d.results.forEach(x=>{(D[x.udise]=D[x.udise]||{})[x.kind]=x.g});ro.results.forEach(x=>R[x.udise]=x.n);pm.results.forEach(x=>P[x.udise]=x);
     const SM={};((await env.DB.prepare("SELECT k,v FROM cfg WHERE k LIKE 'semi:%'").all()).results||[]).forEach(x=>{try{SM[x.k.slice(5)]=JSON.parse(x.v)}catch(e){}});
-    await schCols(env);const MD={};((await env.DB.prepare("SELECT udise,med FROM schools WHERE COALESCE(med,'')<>''").all()).results||[]).forEach(x=>{MD[x.udise]=x.med});
+    await schCols(env);const MD={};((await env.DB.prepare("SELECT udise,med FROM schools WHERE COALESCE(med,'')<>'' AND udise "+SW).bind(...SA).all()).results||[]).forEach(x=>{MD[x.udise]=x.med});
     return J({ok:1,role:kp?'KP':'BEO',cen:await cenAll(env),rows:ss.map(s=>{const x=F[s.udise]||{},g=D[s.udise]||{};return{u:s.udise,nm:s.name||'',c:s.code,med:MD[s.udise]||'',semi:SM[s.udise]||[],fn:x.n||0,fs:x.submitted||'',fu:x.upd||'',n:R[s.udise]||0,uni:g.uni||0,book:g.book||0,shoe:g.shoe||0,bag:g.bag||0,pm:(P[s.udise]||{}).d||'',pmc:(P[s.udise]||{}).c||0}})});
   }
   if(p==='/api/o/sna'){
     await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_sna(udise TEXT PRIMARY KEY, mhsn TEXT, bank TEXT, acct TEXT, ifsc TEXT, branch TEXT, hm TEXT, hm_mob TEXT, upd TEXT)").run();
-    const q=(await env.DB.prepare('SELECT udise,mhsn,bank,acct,ifsc,branch FROM school_sna').all()).results;
+    const q=(await env.DB.prepare('SELECT udise,mhsn,bank,acct,ifsc,branch FROM school_sna WHERE udise '+SW).bind(...SA).all()).results;
     return J({ok:1,rows:q.filter(x=>ok.has(x.udise))});
   }
   if(p==='/api/o/timg'){
@@ -370,11 +375,11 @@ async function offApi(p,r,env){
     if(u){if(!ok.has(u))return J({e:'na'},403);
       const q=(await env.DB.prepare('SELECT r.pen,r.name,r.cls,r.div,r.med,i.gender,i.dob,i.roll FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name').bind(u).all()).results;
       return J({ok:1,rows:q});}
-    const q=(await env.DB.prepare('SELECT r.udise u,r.cls,COALESCE(r.med,\'\') med,COUNT(*) n,SUM(i.gender=\'M\') m,SUM(i.gender=\'F\') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen GROUP BY r.udise,r.cls,COALESCE(r.med,\'\')').all()).results;
+    const q=(await env.DB.prepare('SELECT r.udise u,r.cls,COALESCE(r.med,\'\') med,COUNT(*) n,SUM(i.gender=\'M\') m,SUM(i.gender=\'F\') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise '+SW+' GROUP BY r.udise,r.cls,COALESCE(r.med,\'\')').bind(...SA).all()).results;
     return J({ok:1,rows:q.filter(x=>ok.has(x.u))});
   }
   if(p==='/api/o/teachers'){
-    await slEnsure(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise ORDER BY t.udise,t.name').all()).results;
+    await slEnsure(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.udise '+SW+' ORDER BY t.udise,t.name').bind(...SA).all()).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
     return J({ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,sh:x.shalarth,n:x.name,m:x.mobile,u:x.udise,sc:x.sc||'',c:cm[x.udise],st:x.status,cf:x.conf?1:0,es:x.es||''}))});
   }
@@ -393,12 +398,12 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/sreport'){
     await slEnsure(env);const ks=(Array.isArray(b.f)?b.f:[]).map(x=>cl(x,80)).filter(Boolean).slice(0,200),uq=(Array.isArray(b.us)?b.us:[]).map(u=>cl(u,11).replace(/\D/g,'')).filter(u=>ok.has(u));
-    const q=(await env.DB.prepare('SELECT udise,data FROM sch_form').all()).results,F={};q.forEach(x=>F[x.udise]=x.data);
+    const q=(await env.DB.prepare('SELECT udise,data FROM sch_form WHERE udise '+SW).bind(...SA).all()).results,F={};q.forEach(x=>F[x.udise]=x.data);
     const ex=ks.some(k=>k[0]==='@'),SN={},SB={},CK={};
     if(ex){
-      (await env.DB.prepare('SELECT udise,mhsn,bank,acct,ifsc,branch FROM school_sna').all().catch(()=>({results:[]}))).results.forEach(x=>SN[x.udise]=x);
-      (await env.DB.prepare('SELECT udise,tan,acct FROM school_bank').all().catch(()=>({results:[]}))).results.forEach(x=>SB[x.udise]=x);
-      (await env.DB.prepare('SELECT udise,name,role,gender,bank,ifsc,acct,aadhaar,addr,pin FROM pm_cook ORDER BY udise,name').all().catch(()=>({results:[]}))).results.forEach(x=>(CK[x.udise]=CK[x.udise]||[]).push(x));
+      (await env.DB.prepare('SELECT udise,mhsn,bank,acct,ifsc,branch FROM school_sna WHERE udise '+SW).bind(...SA).all().catch(()=>({results:[]}))).results.forEach(x=>SN[x.udise]=x);
+      (await env.DB.prepare('SELECT udise,tan,acct FROM school_bank WHERE udise '+SW).bind(...SA).all().catch(()=>({results:[]}))).results.forEach(x=>SB[x.udise]=x);
+      (await env.DB.prepare('SELECT udise,name,role,gender,bank,ifsc,acct,aadhaar,addr,pin FROM pm_cook WHERE udise '+SW+' ORDER BY udise,name').bind(...SA).all().catch(()=>({results:[]}))).results.forEach(x=>(CK[x.udise]=CK[x.udise]||[]).push(x));
     }
     const J2=(a,f)=>a.map(f).join('; '),lg=g=>g==='F'?'महिला':g==='M'?'पुरुष':'';
     return J({ok:1,rows:ss.filter(x=>!uq.length||uq.includes(x.udise)).map(x=>{let o={};try{o=JSON.parse(F[x.udise]||'{}')}catch(e){}const d={};ks.forEach(k=>{if(k[0]!=='@'&&o[k]!=null&&o[k]!=='')d[k]=o[k]});
@@ -1684,7 +1689,7 @@ async function ext(p,r,env){
     }
     if(p==='/api/admin/tlist'){
       await slEnsure(env);await tCols(env);const ts=(await env.DB.prepare("SELECT id,shalarth,name,mobile,udise,status,created,district,taluka,kendra,kcode FROM teachers WHERE status<>'ok' OR udise NOT IN (SELECT udise FROM schools) ORDER BY (status<>'ok') DESC,id DESC LIMIT 500").all()).results;
-      const cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses').all()).results;
+      const cs=await tcOf(env,ts);
       ts.forEach(x=>x.cl=cs.filter(c=>c.tid===x.id).map(c=>c.cls+c.div).join(', '));
       const n=await env.DB.prepare('SELECT COUNT(*) n FROM roster').first();
       return J({ok:1,rows:ts,roster:n.n});
@@ -1693,7 +1698,7 @@ async function ext(p,r,env){
       // शिक्षक शोध (शालार्थ ID / नाव / मोबाईल) — शाळा बदलण्यासाठी
       const q=cl(b.q,60);if(q.length<3)return J({e:'short'},400);const lk='%'+q.replace(/[%_]/g,'')+'%';
       const ts=(await env.DB.prepare("SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,s.name school FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.shalarth LIKE ? OR t.name LIKE ? OR t.mobile LIKE ? ORDER BY t.name LIMIT 12").bind(lk,lk,lk).all()).results;
-      const cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses').all()).results;
+      const cs=await tcOf(env,ts);
       ts.forEach(x=>x.cl=cs.filter(c=>c.tid===x.id).map(c=>c.cls+c.div).join(', '));
       return J({ok:1,rows:ts});
     }
