@@ -457,6 +457,14 @@ async function offApi(p,r,env){
     const rs=(await env.DB.prepare(q).bind(...pr).all()).results.filter(x=>ok.has(x.udise)&&(!cf||(SC[x.udise]||{}).code===cf));
     return J({ok:1,rows:rs.map(x=>({id:x.id,c:x.code,u:x.udise,sc:(SC[x.udise]||{}).name||'',k:(SC[x.udise]||{}).code||'',dt:x.dt,tin:x.tin,tout:x.tout,vt:x.vt,score:x.score,g:x.grade,st:x.st,n:phN(x.img),mine:own(x)?1:0}))});
   }
+  if(p==='/api/o/tstat'){ // शिक्षक टॅब: लिंग, प्रकार, माध्यम, जन्मतारीख, सेवानिवृत्ती + या महिन्यातील रजा
+    const mon=new Date(Date.now()+19800000).toISOString().slice(0,7),ck='tst:'+t.uname+':'+mon,hit=OC.get(ck);if(hit&&hit.t>Date.now())return J(hit.v);
+    await Promise.all([slEnsure(env),lvEns(env)]).catch(()=>{});const q=(s,a)=>env.DB.prepare(s).bind(...a).all().then(x=>x.results||[]).catch(()=>[]);
+    const jx=k=>"json_extract(i.data,'$.\""+k+"\"')";
+    const [rs,lv]=await Promise.all([q("SELECT t.shalarth sh,t.udise u,"+jx('लिंग')+" g,"+jx('शिक्षक प्रकार')+" ty,"+jx('अध्यापनाचे माध्यम')+" md,"+jx('जन्मतारीख')+" dob,"+jx('सेवानिवृत्ती दिनांक')+" rt FROM teachers t LEFT JOIN tch_info i ON i.shalarth=t.shalarth WHERE t.udise "+SW,SA),
+      q("SELECT udise u,shalarth sh,tname n,typ,fd,td,days FROM sch_lv WHERE fd<=? AND td>=? AND udise "+SW+" ORDER BY fd",[mon+'-31',mon+'-01',...SA])]);
+    const out={ok:1,mon,rows:rs.filter(x=>ok.has(x.u)),lv:lv.filter(x=>ok.has(x.u))};OC.set(ck,{t:Date.now()+300000,v:out});return J(out);
+  }
   if(p==='/api/o/sprof'){ // शाळा प्रोफाइल: मुख्याध्यापक, शिक्षक, वर्गनिहाय पट, भेटी, पोषण आहार
     const u=String(b.udise||'').replace(/\D/g,'').slice(0,11);if(!ok.has(u))return J({e:'na'},403);
     await Promise.all([vsEns(env),mdmEns(env)]).catch(()=>{});const q=(s,...a)=>env.DB.prepare(s).bind(...a).all().then(x=>x.results||[]).catch(()=>[]);
