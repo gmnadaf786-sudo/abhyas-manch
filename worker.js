@@ -44,7 +44,7 @@ async function teacher(env,b,needOk){
   if(!x.tt||Date.now()-x.tt>TTTL)return null;return x;
 }
 const TTTL=30*864e5;
-let TCOK=false;async function tCols(env){if(TCOK)return;for(const c of ['lf INTEGER DEFAULT 0','tt INTEGER DEFAULT 0','district TEXT','taluka TEXT','kendra TEXT','kcode TEXT'])try{await env.DB.prepare('ALTER TABLE teachers ADD COLUMN '+c).run()}catch(e){}TCOK=true}
+let TCOK=false;async function tCols(env){if(TCOK)return;for(const c of ['lf INTEGER DEFAULT 0','tt INTEGER DEFAULT 0','district TEXT','taluka TEXT','kendra TEXT','kcode TEXT','lft TEXT','lfd TEXT','lfu TEXT'])try{await env.DB.prepare('ALTER TABLE teachers ADD COLUMN '+c).run()}catch(e){}TCOK=true}
 // नोंदणी फॉर्ममधील जिल्हा/तालुका/केंद्र (स्वतः निवडलेले) – शिक्षक व शाळा नोंदणीत साठवण्यासाठी
 let SRCK=false;async function srCols(env){if(SRCK)return;for(const c of ['district TEXT','taluka TEXT','kendra TEXT','kcode TEXT'])try{await env.DB.prepare('ALTER TABLE sch_reg ADD COLUMN '+c).run()}catch(e){}SRCK=true}
 function geoIn(b){const kc=cl(b.kcode,14).toUpperCase();return{d:cl(b.district,60),t:cl(b.taluka,60),k:cl(b.kendra,60),kc:/^CLU\d{5,10}$/.test(kc)?kc:''}}
@@ -168,6 +168,14 @@ async function dcGet(env,k,fr){const h=OC.get(k),now=Date.now();if(h&&h.c&&h.t>n
   try{await dcEns(env);const r=await env.DB.prepare('SELECT v FROM dcache WHERE k=?').bind(k).first();if(r){const o=JSON.parse(r.v);if(o.t>now&&!(fr&&now-o.c>120000)){OC.set(k,o);return o.v}}}catch(e){}return null}
 async function dcPut(env,k,v,ttl){const o={t:Date.now()+ttl,c:Date.now(),v};OC.set(k,o);try{await dcEns(env);const s=JSON.stringify(o);if(s.length<1800000)await env.DB.prepare('INSERT OR REPLACE INTO dcache(k,v) VALUES(?,?)').bind(k,s).run()}catch(e){}}
 async function dcClr(env){OC.clear();try{await dcEns(env);await env.DB.prepare('DELETE FROM dcache').run()}catch(e){}}
+/* सेवानिवृत्ती दिनांक: भरलेला दिनांक, नसल्यास जन्मतारखेवरून – 58 पूर्ण होणाऱ्या महिन्याचा शेवटचा दिवस (1 तारखेला जन्म → मागील महिन्याचा शेवटचा दिवस) */
+const RTX="(CASE WHEN json_extract(i.data,'$.\"सेवानिवृत्ती दिनांक\"') GLOB '[12][0-9][0-9][0-9]-[01][0-9]-[0-3][0-9]' THEN json_extract(i.data,'$.\"सेवानिवृत्ती दिनांक\"') WHEN json_extract(i.data,'$.\"जन्मतारीख\"') GLOB '[12][0-9][0-9][0-9]-[01][0-9]-[0-3][0-9]' THEN (CASE WHEN substr(json_extract(i.data,'$.\"जन्मतारीख\"'),9,2)='01' THEN date(json_extract(i.data,'$.\"जन्मतारीख\"'),'start of month','+58 years','-1 day') ELSE date(json_extract(i.data,'$.\"जन्मतारीख\"'),'start of month','+58 years','+1 month','-1 day') END) END)";
+/* दिवसातून एकदा: सेवानिवृत्त शिक्षकांचे नाव शाळेतून कमी (डिलीट नाही: lfu मध्ये जुनी शाळा, udise रिकामा) */
+let RTD='';
+async function rtSweep(env){const td=new Date(Date.now()+19800000).toISOString().slice(0,10);if(RTD===td)return;RTD=td;
+  try{const f=await env.DB.prepare("SELECT v FROM cfg WHERE k='rtsw'").first();if(f&&f.v===td)return;await tCols(env);
+   const r=await env.DB.prepare("UPDATE teachers SET lft='सेवानिवृत्ती',lfd=(SELECT "+RTX+" FROM tch_info i WHERE i.shalarth=teachers.shalarth),lfu=udise,udise='',conf=0 WHERE COALESCE(udise,'')<>'' AND COALESCE(lft,'')<>'keep' AND shalarth IN (SELECT i.shalarth FROM tch_info i WHERE "+RTX+" < ?)").bind(td).run();
+   await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('rtsw',?)").bind(td).run();if(r.meta&&r.meta.changes)await dcClr(env)}catch(e){}}
 let GEOC=null;async function geoJson(env,r){if(GEOC)return GEOC;const x=await env.ASSETS.fetch(new Request(new URL('/geo.json',r.url)));GEOC=await x.json();return GEOC}
 // geo.json मध्ये केंद्र कोड शोधा → {dn,dc,name,tn}; तालुका = क्लायंटने निवडलेला (त्या केंद्राचा असेल तर) नाहीतर पहिला
 async function cluAdd(env,r,code){
@@ -271,7 +279,7 @@ async function offApi(p,r,env){
     await dcClr(env);return J({ok:1,done:1,name:nm})}
   if(p==='/api/o/sum'){await patClu(env,r);await patImport(env,r);await patEng(env,r)}
   const JC=kp?null:await jatCen(env),JK=kp?[t.uname]:Object.keys(JC),JQ=JK.map(()=>'?').join(',');
-  const SK=kp?t.uname:'JAT';if(/^\/api\/o\/(medset|schadd|hmset|clusync|tdecide)$/.test(p))await dcClr(env);
+  await rtSweep(env);const SK=kp?t.uname:'JAT';if(/^\/api\/o\/(medset|schadd|hmset|clusync|tdecide)$/.test(p))await dcClr(env);
   let ss=await dcGet(env,'ss:'+SK,b.fr);if(!ss){ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;await dcPut(env,'ss:'+SK,ss,600000)}
   const ok=new Set(ss.map(x=>x.udise)),SW='IN (SELECT udise FROM sch_center WHERE code IN ('+JQ+'))',SA=JK;
   if(p==='/api/o/medset'){
@@ -468,7 +476,7 @@ async function offApi(p,r,env){
     const mon=new Date(Date.now()+19800000).toISOString().slice(0,7),ck='tst:'+SK+':'+mon;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
     await Promise.all([slEnsure(env),lvEns(env)]).catch(()=>{});const q=(s,a)=>env.DB.prepare(s).bind(...a).all().then(x=>x.results||[]).catch(()=>[]);
     const jx=k=>"json_extract(i.data,'$.\""+k+"\"')";
-    const [rs,lv]=await Promise.all([q("SELECT t.shalarth sh,t.udise u,"+jx('लिंग')+" g,"+jx('शिक्षक प्रकार')+" ty,"+jx('अध्यापनाचे माध्यम')+" md,"+jx('जन्मतारीख')+" dob,"+jx('सेवानिवृत्ती दिनांक')+" rt FROM teachers t LEFT JOIN tch_info i ON i.shalarth=t.shalarth WHERE t.udise "+SW,SA),
+    const [rs,lv]=await Promise.all([q("SELECT t.shalarth sh,t.udise u,"+jx('लिंग')+" g,"+jx('शिक्षक प्रकार')+" ty,"+jx('अध्यापनाचे माध्यम')+" md,"+jx('जन्मतारीख')+" dob,"+RTX+" rt FROM teachers t LEFT JOIN tch_info i ON i.shalarth=t.shalarth WHERE t.udise "+SW,SA),
       q("SELECT udise u,shalarth sh,tname n,typ,fd,td,days FROM sch_lv WHERE fd<=? AND td>=? AND udise "+SW+" ORDER BY fd",[mon+'-31',mon+'-01',...SA])]);
     const out={ok:1,mon,rows:rs.filter(x=>ok.has(x.u)),lv:lv.filter(x=>ok.has(x.u))};await dcPut(env,ck,out,1800000);return J(out);
   }
@@ -544,6 +552,19 @@ async function offApi(p,r,env){
     const g=c=>env.DB.prepare("SELECT r.udise u,COALESCE(NULLIF(TRIM(i."+c+"),''),'नोंद नाही') k,COUNT(*) n FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise "+SW+" GROUP BY r.udise,k").bind(...SA).all().then(x=>(x.results||[]).filter(y=>ok.has(y.u))).catch(()=>[]);
     const [cat,tongue,st]=await Promise.all([g('cat'),g('tongue'),g('status')]);
     const out={ok:1,cat,tongue,st};await dcPut(env,ck,out,1800000);return J(out);
+  }
+  if(p==='/api/o/tleft'){ // शिक्षकाचे नाव शाळेतून कमी (बदली/निवृत्ती इ.) – डिलीट नाही
+    if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),WH=['बदली – इतर तालुका','बदली – इतर जिल्हा','बदली – तालुक्यात इतर केंद्र','सेवानिवृत्ती','स्वेच्छानिवृत्ती / राजीनामा','मृत्यू','इतर'],why=WH.includes(b.why)?b.why:'',dt=/^\d{4}-\d{2}-\d{2}$/.test(b.dt||'')?b.dt:new Date(Date.now()+19800000).toISOString().slice(0,10);
+    if(!why)return J({e:'why'},400);const x=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);
+    await env.DB.prepare("UPDATE teachers SET lft=?,lfd=?,lfu=udise,udise='',conf=0 WHERE shalarth=?").bind(why+(b.note?' – '+cl(b.note,60):''),dt,sh).run();await dcClr(env);return J({ok:1});
+  }
+  if(p==='/api/o/trestore'){
+    if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare("SELECT lfu FROM teachers WHERE shalarth=? AND COALESCE(udise,'')=''").bind(sh).first();
+    if(!x||!ok.has(x.lfu))return J({e:'na'},403);await env.DB.prepare("UPDATE teachers SET udise=lfu,lft='keep',lfd=NULL,conf=1 WHERE shalarth=?").bind(sh).run();await dcClr(env);return J({ok:1});
+  }
+  if(p==='/api/o/tleftlist'){
+    await tCols(env);const rs=(await env.DB.prepare("SELECT shalarth sh,name n,mobile m,lfu u,lft why,lfd dt FROM teachers WHERE COALESCE(udise,'')='' AND lfu "+SW+" ORDER BY lfd DESC").bind(...SA).all()).results||[];
+    return J({ok:1,rows:rs.filter(x=>ok.has(x.u)&&x.why!=='keep')});
   }
   if(p==='/api/o/teachers'){
     const ck='tch:'+SK;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
@@ -767,7 +788,7 @@ async function schoolApi(p,r,env){
     await env.DB.batch(st);return J({ok:1,n:i});
   }
   if(p==='/api/s/tlist'){
-    await tCols(env);await tcEns(env);
+    await tCols(env);await rtSweep(env);await tcEns(env);
     const ts=(await env.DB.prepare("SELECT id,shalarth sh,name n,mobile m FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(t.udise).all()).results||[],cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE udise=? ORDER BY cls,div').bind(t.udise).all()).results||[],h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hmt:'+t.udise).first();
     return J({ok:1,hmt:h?h.v:'',rows:ts.map(x=>({id:x.id,sh:x.sh,n:x.n,m:x.m,c:cs.filter(c=>c.tid===x.id).map(c=>({cls:c.cls,div:c.div}))}))})}
   if(p==='/api/s/tcls'){
