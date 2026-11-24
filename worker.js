@@ -794,6 +794,12 @@ async function schoolApi(p,r,env){
     }
     if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length});
   }
+  if(p==='/api/s/bona'){ // बोनाफाईड: विद्यार्थी तपशील + अनुक्रमांक
+    const pen=cl(b.pen,20),r=await env.DB.prepare('SELECT r.pen,r.cls,r.div,r.name,i.gender,i.cat,i.dob,i.father,i.mother,i.gr FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? AND r.pen=?').bind(t.udise,pen).first();if(!r)return J({e:'nf'},404);
+    await tcEns(env);const hm=await env.DB.prepare('SELECT t.name FROM cfg c JOIN teachers t ON t.shalarth=c.v WHERE c.k=?').bind('hmt:'+t.udise).first(),ct=await env.DB.prepare('SELECT t.name FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=? AND c.cls=? AND c.div=? AND c.ct=1 LIMIT 1').bind(t.udise,r.cls,r.div).first();
+    let no=0;if(b.inc){const k='bon:'+t.udise+':'+cl(b.ay,9),o=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(k).first();no=(parseInt(o&&o.v)||0)+1;await cfgUp(env,k,String(no)).run()}
+    return J({ok:1,s:r,hm:hm?hm.name:'',ct:ct?ct.name:'',no});
+  }
   if(p==='/api/s/stu'){ // शाळा: स्वतःचे विद्यार्थी (वर्गनिहाय)
     const rs=(await env.DB.prepare('SELECT r.pen p,r.cls c,r.div d,r.name n,i.gender g,i.cat k FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name').bind(t.udise).all()).results||[];
     return J({ok:1,rows:rs});
