@@ -194,16 +194,16 @@ async function tSetSh(env,old,nw){nw=String(nw||'').toUpperCase().replace(/[^A-Z
   st.push(env.DB.prepare("UPDATE cfg SET v=? WHERE k LIKE 'hmt:%' AND v=?").bind(nw,old));
   for(const s of st){try{await s.run()}catch(e){}}await dcClr(env);return {ok:1,sh:nw}}
 /* UDISE+/सरल विद्यार्थी यादी आयात (शिक्षक / मुख्याध्यापक / KP) – एका शाळेसाठी */
-async function uimpCore(env,U,rowsIn,medDef,tid){
+async function uimpCore(env,U,rowsIn,medDef,tid,mvOk){
     await ensS(env);
     const CT0=0,CT=['GEN','SC','ST','VJA','NTB','NTC','NTD','OBC','SBC'];
     const nn=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9ऀ-ॿಀ-೿ ]/g,' ').split(/\s+/).filter(Boolean).sort().join(' ');
-    const rs=[],si=[],pd=[],tc=new Set();let n=0,sk=0,pn=0;
+    const rs=[],si=[],pd=[],tc=new Set();let n=0,sk=0,pn=0,skb=0,sko=0;const eg=[],os=[];
     const FI=c=>c+"=CASE WHEN COALESCE(sinfo."+c+",'')='' THEN excluded."+c+" ELSE sinfo."+c+" END";
     const cache={};
     for(const x of (Array.isArray(rowsIn)?rowsIn:[]).slice(0,120)){const med=/kann/i.test(String(x.x&&x.x.medium||''))?'kn':/mara/i.test(String(x.x&&x.x.medium||''))?'mr':medDef;
       let pen=cl(x.pen,20).replace(/\D/g,''),cls=parseInt(x.cls)||0,dv=cl(x.div,2).toUpperCase()||'A',name=cl(x.name,60);
-      if((pen&&pen.length!==11)||cls<1||cls>8||name.length<2||!/^[A-Z]{1,2}$/.test(dv)){sk++;continue}
+      if((pen&&pen.length!==11)||cls<1||cls>8||name.length<2||!/^[A-Z]{1,2}$/.test(dv)){sk++;skb++;if(eg.length<3)eg.push(name+' ('+cls+dv+')');continue}
       const g=['M','F','O'].includes(x.gender)?x.gender:'',ct=CT.includes(x.cat)?x.cat:'';
       let core={gender:g,cat:ct,father:cl(x.father,60),mother:cl(x.mother,60),addr:cl(x.addr,200),mobile:/^\d{10}$/.test(String(x.mobile||''))?x.mobile:'',dob:/^\d{4}-\d\d-\d\d$/.test(String(x.dob||''))?x.dob:'',gr:cl(x.gr,20),tongue:cl(x.tongue,40)};
       let ex={};if(x.x&&typeof x.x==='object')for(const k of XK){const v=cl(x.x[k],80);if(v)ex[k]=v}
@@ -220,7 +220,8 @@ async function uimpCore(env,U,rowsIn,medDef,tid){
           tc.add(cls+'|'+dv);pn++;continue}
       }
       const old=await env.DB.prepare('SELECT udise FROM roster WHERE pen=?').bind(pen).first();
-      if(old&&old.udise!==U){sk++;continue}
+      let mv=0;if(old&&old.udise!==U&&mvOk&&mvOk.has(old.udise)){mv=1;rs.push(env.DB.prepare('UPDATE roster SET udise=? WHERE pen=?').bind(U,pen))}
+      if(old&&old.udise!==U&&!mv){sk++;sko++;if(os.indexOf(old.udise)<0&&os.length<5)os.push(old.udise);continue}
       const o=await env.DB.prepare('SELECT j FROM uimp_pend WHERE udise=? AND cls=? AND dv=? AND nn=?').bind(U,cls,dv,key).first();
       if(o){try{const q=JSON.parse(o.j);for(const k in q.core)if(!core[k])core[k]=q.core[k];ex=Object.assign({},q.ex,ex)}catch(e){}
         pd.push(env.DB.prepare('DELETE FROM uimp_pend WHERE udise=? AND cls=? AND dv=? AND nn=?').bind(U,cls,dv,key))}
@@ -233,7 +234,7 @@ async function uimpCore(env,U,rowsIn,medDef,tid){
     if(si.length)await env.DB.batch(si);
     if(pd.length)await env.DB.batch(pd);
     if(tid&&tc.size===1)await env.DB.batch([...tc].map(k=>{const [c,d]=k.split('|');return env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(tid,U,parseInt(c),d)}));
-    return {ok:1,n:n,pn:pn,sk:sk};
+    return {ok:1,n:n,pn:pn,sk:sk,skb:skb,sko:sko,eg:eg,os:os};
 }
 /* शाळेचे डीफॉल्ट माध्यम: फक्त कन्नड → kn, अन्यथा mr */
 async function schMed(env,u){try{await schCols(env);const x=await env.DB.prepare('SELECT med FROM schools WHERE udise=?').bind(u).first();const m=String(x&&x.med||'');return /कन्नड/.test(m)&&!/मराठी/.test(m)?'kn':'mr'}catch(e){return 'mr'}}
@@ -615,7 +616,7 @@ async function offApi(p,r,env){
     const out={ok:1,cat,tongue,st};await dcPut(env,ck,out,1800000);return J(out);
   }
   if(p==='/api/o/tadd'){if(!kp)return J({e:'kp'},403);const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);const x=await tNew(env,u,b);return J(x,x.ok?200:400)}
-  if(p==='/api/o/uimport'){if(!kp)return J({e:'kp'},403);const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na',sk:(b.rows||[]).length},403);const x=await uimpCore(env,u,b.rows,b.med==='kn'?'kn':b.med==='mr'?'mr':await schMed(env,u),null);if(b.last)await dcClr(env);return J(x)}
+  if(p==='/api/o/uimport'){if(!kp)return J({e:'kp'},403);const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na',sk:(b.rows||[]).length},403);const x=await uimpCore(env,u,b.rows,b.med==='kn'?'kn':b.med==='mr'?'mr':await schMed(env,u),null,ok);if(b.last)await dcClr(env);return J(x)}
   if(p==='/api/o/tnw'){if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);await env.DB.prepare('UPDATE teachers SET nw=? WHERE shalarth=?').bind(b.on?1:0,sh).run();await dcClr(env);return J({ok:1})}
   if(p==='/api/o/tpin'||p==='/api/o/tsetsh'){if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise,tmpid FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);
     if(p==='/api/o/tpin')return J({ok:1,id:sh,pin:await tPin(env,sh)});const y=await tSetSh(env,sh,b.nsh);return J(y,y.ok?200:400)}
