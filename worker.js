@@ -794,6 +794,10 @@ async function schoolApi(p,r,env){
     }
     if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length});
   }
+  if(p==='/api/s/stu'){ // शाळा: स्वतःचे विद्यार्थी (वर्गनिहाय)
+    const rs=(await env.DB.prepare('SELECT r.pen p,r.cls c,r.div d,r.name n,i.gender g,i.cat k FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name').bind(t.udise).all()).results||[];
+    return J({ok:1,rows:rs});
+  }
   if(p==='/api/s/dash'){ // शाळा मुख्य पान: आजचा आढावा (फक्त या शाळेचे, कमी वाचन)
     const u=t.udise,td=istD(),mon=td.slice(0,7),pm=(()=>{const d=new Date(td+'T00:00:00Z');d.setUTCMonth(d.getUTCMonth()-1);return d.toISOString().slice(0,7)})(),q1=(s,...a)=>env.DB.prepare(s).bind(...a).first().catch(()=>null);
     await Promise.all([tCols(env),tcEns(env)]).catch(()=>{});
