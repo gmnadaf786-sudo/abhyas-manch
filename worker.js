@@ -617,6 +617,11 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/tadd'){if(!kp)return J({e:'kp'},403);const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);const x=await tNew(env,u,b);return J(x,x.ok?200:400)}
   if(p==='/api/o/uimport'){if(!kp)return J({e:'kp'},403);const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na',sk:(b.rows||[]).length},403);const x=await uimpCore(env,u,b.rows,b.med==='kn'?'kn':b.med==='mr'?'mr':await schMed(env,u),null,ok);if(b.last)await dcClr(env);return J(x)}
+  if(p==='/api/o/tname'||p==='/api/o/sname'){ // KP: शिक्षक / शाळेचे नाव दुरुस्त
+    if(!kp)return J({e:'kp'},403);const nm=cl(b.name,120).replace(/\s+/g,' ').trim();if(nm.length<2)return J({e:'name'},400);
+    if(p==='/api/o/tname'){const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);await env.DB.prepare('UPDATE teachers SET name=? WHERE shalarth=?').bind(nm.slice(0,60),sh).run()}
+    else{const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);await env.DB.prepare('INSERT INTO schools(udise,name) VALUES(?,?) ON CONFLICT(udise) DO UPDATE SET name=excluded.name').bind(u,nm).run()}
+    await dcClr(env);return J({ok:1,name:nm})}
   if(p==='/api/o/tnw'){if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);await env.DB.prepare('UPDATE teachers SET nw=? WHERE shalarth=?').bind(b.on?1:0,sh).run();await dcClr(env);return J({ok:1})}
   if(p==='/api/o/tpin'||p==='/api/o/tsetsh'){if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise,tmpid FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);
     if(p==='/api/o/tpin')return J({ok:1,id:sh,pin:await tPin(env,sh)});const y=await tSetSh(env,sh,b.nsh);return J(y,y.ok?200:400)}
@@ -854,6 +859,7 @@ async function schoolApi(p,r,env){
       st.push(env.DB.prepare('INSERT INTO sch_cmember(udise,cid,id,name,desig,mtype,mobile,joined,active) VALUES(?,?,?,?,?,?,?,?,?)').bind(t.udise,cid,++i,nm,cl(m.desig,30),cl(m.type,40),mo,/^\d{4}-\d\d-\d\d$/.test(m.joined||'')?m.joined:'',m.active==='No'?0:1))}
     await env.DB.batch(st);return J({ok:1,n:i});
   }
+  if(p==='/api/s/sname'){const nm=cl(b.name,120).replace(/\s+/g,' ').trim();if(nm.length<2)return J({e:'name'},400);await env.DB.prepare('INSERT INTO schools(udise,name) VALUES(?,?) ON CONFLICT(udise) DO UPDATE SET name=excluded.name').bind(t.udise,nm).run();await dcClr(env);return J({ok:1,name:nm})}
   if(p==='/api/s/uimport'){const bu=String(b.udise||'').replace(/\D/g,'');if(bu&&bu!==t.udise)return J({ok:1,n:0,pn:0,sk:(Array.isArray(b.rows)?b.rows.length:0)});const x=await uimpCore(env,t.udise,b.rows,b.med==='kn'?'kn':b.med==='mr'?'mr':await schMed(env,t.udise),null);await dcClr(env);return J(x)}
   if(p==='/api/s/tadd'){const x=await tNew(env,t.udise,b);return J(x,x.ok?200:400)}
   if(p==='/api/s/tpin'){await tCols(env);const sh=cl(b.sh,20).toUpperCase();if(!await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=? AND udise=?').bind(sh,t.udise).first())return J({e:'na'},403);return J({ok:1,id:sh,pin:await tPin(env,sh)})}
@@ -1627,6 +1633,7 @@ async function ext(p,r,env){
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first(),sv=await env.DB.prepare('SELECT data FROM tax_in WHERE shalarth=?').bind(t.shalarth).first();let inp={};try{inp=JSON.parse(sv&&sv.data||'{}')}catch(e){}
     return J({ok:1,fy:'2026-27',months:rows,totals:tot,inp,profile:{name:t.name,school:sc?sc.name:'',sh:t.shalarth,pan},have:rows.filter(r=>r.av).length});
   }
+  if(p==='/api/t/name'){const b=await body(r),t=await teacher(env,b,false);if(!t)return J({e:'auth'},401);const nm=cl(b.name,60).replace(/\s+/g,' ').trim();if(nm.length<2)return J({e:'name'},400);await env.DB.prepare('UPDATE teachers SET name=? WHERE id=?').bind(nm,t.id).run();await dcClr(env);return J({ok:1,name:nm})}
   if(p==='/api/t/setsh'){const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await tCols(env);const x=await env.DB.prepare('SELECT tmpid FROM teachers WHERE id=?').bind(t.id).first();if(!x||!x.tmpid)return J({e:'na'},403);const y=await tSetSh(env,t.shalarth,b.nsh);return J(y,y.ok?200:400)}
   if(p==='/api/t/chpw'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
