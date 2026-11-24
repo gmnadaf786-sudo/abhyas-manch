@@ -879,8 +879,16 @@ async function schoolApi(p,r,env){
   if(p==='/api/s/tpin'){await tCols(env);const sh=cl(b.sh,20).toUpperCase();if(!await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=? AND udise=?').bind(sh,t.udise).first())return J({e:'na'},403);return J({ok:1,id:sh,pin:await tPin(env,sh)})}
   if(p==='/api/s/tlist'){
     await tCols(env);await rtSweep(env);await tcEns(env);
-    const ts=(await env.DB.prepare("SELECT id,shalarth sh,name n,mobile m,tmpid tp FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(t.udise).all()).results||[],cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE udise=? ORDER BY cls,div').bind(t.udise).all()).results||[],h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hmt:'+t.udise).first();
-    return J({ok:1,hmt:h?h.v:'',rows:ts.map(x=>({id:x.id,sh:x.sh,n:x.n,m:x.m,tp:x.tp?1:0,c:cs.filter(c=>c.tid===x.id).map(c=>({cls:c.cls,div:c.div}))}))})}
+    const ts=(await env.DB.prepare("SELECT id,shalarth sh,name n,mobile m,tmpid tp FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(t.udise).all()).results||[],cs=(await env.DB.prepare('SELECT tid,cls,div,ct FROM tclasses WHERE udise=? ORDER BY cls,div').bind(t.udise).all()).results||[],h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hmt:'+t.udise).first();
+    await schCols(env);const sc=await env.DB.prepare('SELECT cmin,cmax FROM schools WHERE udise=?').bind(t.udise).first(),rd=(await env.DB.prepare('SELECT DISTINCT cls,div FROM roster WHERE udise=?').bind(t.udise).all()).results||[];
+    return J({ok:1,hmt:h?h.v:'',cmin:sc&&sc.cmin||0,cmax:sc&&sc.cmax||0,rd:rd.map(x=>[x.cls,x.div]),rows:ts.map(x=>({id:x.id,sh:x.sh,n:x.n,m:x.m,tp:x.tp?1:0,c:cs.filter(c=>c.tid===x.id).map(c=>({cls:c.cls,div:c.div,ct:c.ct?1:0}))}))})}
+  if(p==='/api/s/ctset'){ // वर्ग → वर्गशिक्षक (एकाच वेळी जतन)
+    await tcEns(env);const ok=new Set(((await env.DB.prepare("SELECT id FROM teachers WHERE udise=? AND status='ok'").bind(t.udise).all()).results||[]).map(x=>x.id)),st=[],seen=new Set(),tids=new Set();let n=0;
+    for(const r of (Array.isArray(b.rows)?b.rows:[]).slice(0,60)){const k=parseInt(r&&r.cls)||0,dv=cl(r&&r.div,2).toUpperCase(),id=parseInt(r&&r.tid)||0;if(k<1||k>10||!/^[A-Z]{1,2}$/.test(dv)||seen.has(k+'|'+dv))continue;seen.add(k+'|'+dv);
+      st.push(env.DB.prepare('UPDATE tclasses SET ct=0 WHERE udise=? AND cls=? AND div=? AND tid<>?').bind(t.udise,k,dv,id));
+      if(id&&ok.has(id)){st.push(env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(id,t.udise,k,dv),env.DB.prepare('UPDATE tclasses SET ct=1 WHERE tid=? AND udise=? AND cls=? AND div=?').bind(id,t.udise,k,dv));tids.add(id);n++}}
+    tids.forEach(id=>st.push(env.DB.prepare('UPDATE teachers SET conf=1 WHERE id=?').bind(id)));st.push(cfgUp(env,'hmm:'+t.udise,'1'));
+    await env.DB.batch(st);return J({ok:1,n})}
   if(p==='/api/s/tcls'){
     await tcEns(env);const id=parseInt(b.id)||0;
     if(!await env.DB.prepare("SELECT id FROM teachers WHERE id=? AND udise=? AND status='ok'").bind(id,t.udise).first())return J({e:'nf'},404);
