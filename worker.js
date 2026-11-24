@@ -1331,8 +1331,9 @@ async function ext(p,r,env){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
     const rs=(await env.DB.prepare("SELECT r.cls,r.div,COUNT(*) n FROM roster r WHERE r.udise=? AND NOT EXISTS(SELECT 1 FROM tclasses c WHERE c.tid=? AND c.udise=r.udise AND c.cls=r.cls AND c.div=r.div) GROUP BY r.cls,r.div ORDER BY r.cls,r.div").bind(u,t.id).all()).results;
-    const mine=(await env.DB.prepare('SELECT cls,div FROM tclasses WHERE tid=? AND udise=?').bind(t.id,u).all()).results||[];
-    return J({ok:1,udise:u,rows:rs,mine});
+    await tcEns(env);const mine=(await env.DB.prepare('SELECT cls,div,ct FROM tclasses WHERE tid=? AND udise=?').bind(t.id,u).all()).results||[];
+    const cts=(await env.DB.prepare('SELECT c.cls,c.div,t.name n FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=? AND c.ct=1 AND c.tid<>?').bind(u,t.id).all()).results||[];
+    return J({ok:1,udise:u,rows:rs,mine,cts});
   }
   if(p==='/api/t/delcls'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
@@ -1344,13 +1345,14 @@ async function ext(p,r,env){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);
     const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
     if(await hmm(env,u))return J({e:'hm'},403);
-    const cs=(Array.isArray(b.rows)?b.rows:[]).slice(0,16);let n=0;
+    const cs=(Array.isArray(b.rows)?b.rows:[]).slice(0,16);let n=0;const bl=[];
     for(const c of cs){const k=parseInt(c.cls)||0,dv=cl(c.div,2).toUpperCase();
       if(k<1||k>8)continue;
       if(!/^[A-Z]{1,2}$/.test(dv))continue;
       if(!b.fresh&&!await env.DB.prepare('SELECT 1 x FROM roster WHERE udise=? AND cls=? AND div=? LIMIT 1').bind(u,k,dv).first())continue;
-      await env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,u,k,dv).run();n++;}
-    return J({ok:1,n:n});
+      await env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,u,k,dv).run();n++;
+      if(c.ct){await tcEns(env);const nm=await ctBlock(env,t.id,u,k,dv);if(nm)bl.push(k+dv+' ('+nm+')');else await env.DB.prepare('UPDATE tclasses SET ct=1 WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,u,k,dv).run()}}
+    return J({ok:1,n:n,bl});
   }
   if(p==='/api/t/info'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
