@@ -794,6 +794,16 @@ async function schoolApi(p,r,env){
     }
     if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length});
   }
+  if(p==='/api/s/dash'){ // शाळा मुख्य पान: आजचा आढावा (फक्त या शाळेचे, कमी वाचन)
+    const u=t.udise,td=istD(),mon=td.slice(0,7),pm=(()=>{const d=new Date(td+'T00:00:00Z');d.setUTCMonth(d.getUTCMonth()-1);return d.toISOString().slice(0,7)})(),q1=(s,...a)=>env.DB.prepare(s).bind(...a).first().catch(()=>null);
+    await Promise.all([tCols(env),tcEns(env)]).catch(()=>{});
+    const [pmT,md0,md1,fm,tc,st,rq]=await Promise.all([q1('SELECT 1 x FROM pm_daily WHERE udise=? AND date=?',u,td),q1('SELECT up FROM mdm WHERE mon=? AND udise=?',pm,u),q1('SELECT up FROM mdm WHERE mon=? AND udise=?',mon,u),
+      q1('SELECT submitted s,(SELECT COUNT(*) FROM json_each(data)) n FROM sch_form WHERE udise=?',u),
+      q1("SELECT COUNT(*) n,SUM(CASE WHEN conf=1 THEN 1 ELSE 0 END) c FROM teachers WHERE udise=? AND status='ok'",u),
+      q1("SELECT COUNT(*) n,SUM(CASE WHEN i.gender='M' THEN 1 ELSE 0 END) m,SUM(CASE WHEN i.gender='F' THEN 1 ELSE 0 END) f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=?",u),
+      rqList(env,'s','s',u).catch(()=>[])]);
+    return J({ok:1,td,pmT:!!pmT,pmon:pm,md0:md0?md0.up||1:0,md1:md1?md1.up||1:0,fs:fm?fm.s||'':'',fn:fm?fm.n||0:0,tn:tc?tc.n||0:0,tcf:tc?tc.c||0:0,sn:st?st.n||0:0,sm:st?st.m||0:0,sf:st?st.f||0:0,rq:(rq||[]).filter(x=>!x.closed&&!x.mine).length});
+  }
   if(p==='/api/s/reqs'||p==='/api/s/reqsub'){
     const nm=((await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first())||{}).name||t.udise;
     if(p==='/api/s/reqs')return J({ok:1,rows:await rqList(env,'s','s',t.udise)});
