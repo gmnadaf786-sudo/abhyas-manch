@@ -44,7 +44,7 @@ async function teacher(env,b,needOk){
   if(!x.tt||Date.now()-x.tt>TTTL)return null;return x;
 }
 const TTTL=30*864e5;
-let TCOK=false;async function tCols(env){if(TCOK)return;for(const c of ['lf INTEGER DEFAULT 0','tt INTEGER DEFAULT 0','district TEXT','taluka TEXT','kendra TEXT','kcode TEXT','lft TEXT','lfd TEXT','lfu TEXT','chg INTEGER DEFAULT 0','pan TEXT','tmpid INTEGER DEFAULT 0'])try{await env.DB.prepare('ALTER TABLE teachers ADD COLUMN '+c).run()}catch(e){}TCOK=true}
+let TCOK=false;async function tCols(env){if(TCOK)return;for(const c of ['lf INTEGER DEFAULT 0','tt INTEGER DEFAULT 0','district TEXT','taluka TEXT','kendra TEXT','kcode TEXT','lft TEXT','lfd TEXT','lfu TEXT','chg INTEGER DEFAULT 0','pan TEXT','tmpid INTEGER DEFAULT 0','nw INTEGER DEFAULT 0'])try{await env.DB.prepare('ALTER TABLE teachers ADD COLUMN '+c).run()}catch(e){}TCOK=true}
 // नोंदणी फॉर्ममधील जिल्हा/तालुका/केंद्र (स्वतः निवडलेले) – शिक्षक व शाळा नोंदणीत साठवण्यासाठी
 let SRCK=false;async function srCols(env){if(SRCK)return;for(const c of ['district TEXT','taluka TEXT','kendra TEXT','kcode TEXT'])try{await env.DB.prepare('ALTER TABLE sch_reg ADD COLUMN '+c).run()}catch(e){}SRCK=true}
 function geoIn(b){const kc=cl(b.kcode,14).toUpperCase();return{d:cl(b.district,60),t:cl(b.taluka,60),k:cl(b.kendra,60),kc:/^CLU\d{5,10}$/.test(kc)?kc:''}}
@@ -182,7 +182,7 @@ async function tNew(env,u,b){await tCols(env);const name=cl(b.name,60),mob=cl(b.
   const sh=sh0||pan||mob;if(await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=? OR (pan<>\'\' AND pan=?)').bind(sh,pan||'#').first())return {e:'exists'};
   if(await env.DB.prepare("SELECT id FROM teachers WHERE mobile=? AND COALESCE(udise,'')<>''").bind(mob).first())return {e:'mobex'};
   const pin=String(100000+(crypto.getRandomValues(new Uint32Array(1))[0]%900000)),salt=rnd(8);
-  await env.DB.prepare("INSERT INTO teachers(shalarth,name,mobile,udise,salt,pw,status,conf,chg,pan,tmpid) VALUES(?,?,?,?,?,?,'ok',1,1,?,?)").bind(sh,name,mob,u,salt,await hashPin(pin,salt),pan,sh0?0:1).run();
+  await env.DB.prepare("INSERT INTO teachers(shalarth,name,mobile,udise,salt,pw,status,conf,chg,pan,tmpid,nw) VALUES(?,?,?,?,?,?,'ok',1,1,?,?,1)").bind(sh,name,mob,u,salt,await hashPin(pin,salt),pan,sh0?0:1).run();
   if(pan){await slEnsure(env);await env.DB.prepare('INSERT OR IGNORE INTO tch_info(shalarth,data,upd) VALUES(?,?,?)').bind(sh,JSON.stringify({'PAN क्रमांक':pan}),'').run()}
   await dcClr(env);return {ok:1,id:sh,pin,tmp:sh0?0:1}}
 async function tPin(env,sh){await tCols(env);const pin=String(100000+(crypto.getRandomValues(new Uint32Array(1))[0]%900000)),salt=rnd(8);await env.DB.prepare('UPDATE teachers SET salt=?,pw=?,chg=1,fails=0,token=NULL WHERE shalarth=?').bind(salt,await hashPin(pin,salt),sh).run();return pin}
@@ -571,6 +571,7 @@ async function offApi(p,r,env){
     const out={ok:1,cat,tongue,st};await dcPut(env,ck,out,1800000);return J(out);
   }
   if(p==='/api/o/tadd'){if(!kp)return J({e:'kp'},403);const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);const x=await tNew(env,u,b);return J(x,x.ok?200:400)}
+  if(p==='/api/o/tnw'){if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);await env.DB.prepare('UPDATE teachers SET nw=? WHERE shalarth=?').bind(b.on?1:0,sh).run();await dcClr(env);return J({ok:1})}
   if(p==='/api/o/tpin'||p==='/api/o/tsetsh'){if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise,tmpid FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);
     if(p==='/api/o/tpin')return J({ok:1,id:sh,pin:await tPin(env,sh)});const y=await tSetSh(env,sh,b.nsh);return J(y,y.ok?200:400)}
   if(p==='/api/o/tleft'){ // शिक्षकाचे नाव शाळेतून कमी (बदली/निवृत्ती इ.) – डिलीट नाही
@@ -588,9 +589,9 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/teachers'){
     const ck='tch:'+SK;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
-    await slEnsure(env);await tCols(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,t.tmpid,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.udise '+SW+' ORDER BY t.udise,t.name').bind(...SA).all()).results;
+    await slEnsure(env);await tCols(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,t.tmpid,t.nw,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.udise '+SW+' ORDER BY t.udise,t.name').bind(...SA).all()).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
-    const out={ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,sh:x.shalarth,n:x.name,m:x.mobile,u:x.udise,sc:x.sc||'',c:cm[x.udise],st:x.status,cf:x.conf?1:0,es:x.es||'',tp:x.tmpid?1:0}))};await dcPut(env,ck,out,600000);return J(out);
+    const out={ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,sh:x.shalarth,n:x.name,m:x.mobile,u:x.udise,sc:x.sc||'',c:cm[x.udise],st:x.status,cf:x.conf?1:0,es:x.es||'',tp:x.tmpid?1:0,nw:x.nw?1:0}))};await dcPut(env,ck,out,600000);return J(out);
   }
   if(p==='/api/o/tinfo'){
     const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),t=await env.DB.prepare('SELECT t.name,t.mobile,t.udise,s.name sc FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.shalarth=?').bind(sh).first();
@@ -644,7 +645,7 @@ async function offApi(p,r,env){
     if(b.act==='ok'){
       const q=await env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(sh).first();let base={},ch={};try{base=JSON.parse(q&&q.data||'{}');ch=JSON.parse(e.data||'{}')}catch(x){}
       Object.assign(base,ch);
-      await env.DB.batch([env.DB.prepare('INSERT INTO tch_info(shalarth,data,upd) VALUES(?,?,?) ON CONFLICT(shalarth) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(sh,JSON.stringify(base),istDay()),env.DB.prepare("UPDATE tch_edit SET status='Approved',remark='',data='{}',upd=? WHERE shalarth=?").bind(istDay(),sh),env.DB.prepare("UPDATE tch_rec SET status='Approved' WHERE shalarth=? AND status='Forwarded'").bind(sh)]);
+      await env.DB.batch([env.DB.prepare('INSERT INTO tch_info(shalarth,data,upd) VALUES(?,?,?) ON CONFLICT(shalarth) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(sh,JSON.stringify(base),istDay()),env.DB.prepare("UPDATE tch_edit SET status='Approved',remark='',data='{}',upd=? WHERE shalarth=?").bind(istDay(),sh),env.DB.prepare('UPDATE teachers SET nw=0 WHERE shalarth=?').bind(sh),env.DB.prepare("UPDATE tch_rec SET status='Approved' WHERE shalarth=? AND status='Forwarded'").bind(sh)]);
       return J({ok:1,status:'Approved'});
     }
     if(b.act==='ret'){const rm=cl(b.remark,300);if(rm.length<3)return J({e:'remark'},400);await env.DB.batch([env.DB.prepare("UPDATE tch_edit SET status='Returned',remark=?,upd=? WHERE shalarth=?").bind(rm,istDay(),sh),env.DB.prepare("UPDATE tch_rec SET status='Returned' WHERE shalarth=? AND status='Forwarded'").bind(sh)]);
@@ -1300,14 +1301,14 @@ async function ext(p,r,env){
   if(p==='/api/t/info'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
     const [i,e]=await Promise.all([env.DB.prepare('SELECT data FROM tch_info WHERE shalarth=?').bind(t.shalarth).first(),env.DB.prepare('SELECT data,status,remark,upd,sub FROM tch_edit WHERE shalarth=?').bind(t.shalarth).first()]);
-    return J({ok:1,sc:await scn(env,t),base:i?i.data:'{}',ed:e||{data:'{}',status:'',remark:''}});
+    return J({ok:1,sc:await scn(env,t),base:i?i.data:'{}',ed:e||{data:'{}',status:'',remark:''},nw:t.nw?1:0});
   }
   if(p==='/api/t/infosave'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await slEnsure(env);
     const e=await env.DB.prepare('SELECT data,status FROM tch_edit WHERE shalarth=?').bind(t.shalarth).first();
     if(e&&e.status==='Forwarded')return J({e:'locked'},409);
     let d={};try{d=JSON.parse(e&&e.data||'{}')}catch(x){}
-    const NE=new Set(TNE);let n=0;
+    const NE=new Set(t.nw?['Shalarth ID']:TNE);let n=0;
     if(b.d&&typeof b.d==='object')for(const k of Object.keys(b.d)){if(n++>150)break;const kk=cl(k,80);if(!kk||NE.has(kk))continue;const v=cl(b.d[k],600);if(v==='')delete d[kk];else d[kk]=v}
     const js=JSON.stringify(d);if(js.length>60000)return J({e:'big'},400);
     const sub=b.submit?1:0,st=sub?'Forwarded':'Draft';
