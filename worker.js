@@ -799,7 +799,7 @@ async function schoolApi(p,r,env){
     if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length});
   }
   if(p==='/api/s/rbook'){await rbEns(env);const r=await env.DB.prepare('SELECT data,upd FROM sch_rbook WHERE udise=?').bind(t.udise).first();let d={};try{d=JSON.parse(r&&r.data||'{}')}catch(e){}return J({ok:1,d,upd:r?r.upd:''})}
-  if(p==='/api/s/rbsave'){await rbEns(env);const k={},src=(b.d&&b.d.k)||{};for(const id of Object.keys(src).slice(0,80)){if(!/^c\d{1,3}$/.test(id))continue;const s=cl(src[id]&&src[id].s,1),d=cl(src[id]&&src[id].d,10);if(!/^[YPNX]$/.test(s))continue;k[id]=/^\d{4}-\d\d-\d\d$/.test(d)?{s,d}:{s}}
+  if(p==='/api/s/rbsave'){await rbEns(env);const k={},src=(b.d&&b.d.k)||{};for(const id of Object.keys(src).slice(0,150)){if(!/^c\d{1,3}$/.test(id))continue;const s=cl(src[id]&&src[id].s,1),d=cl(src[id]&&src[id].d,10);if(!/^[YPNX]$/.test(s))continue;k[id]=/^\d{4}-\d\d-\d\d$/.test(d)?{s,d}:{s}}
     const upd=istDay();await env.DB.prepare('INSERT INTO sch_rbook(udise,data,upd) VALUES(?,?,?) ON CONFLICT(udise) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(t.udise,JSON.stringify({k}),upd).run();return J({ok:1,upd})}
   if(p==='/api/s/bona'){ // बोनाफाईड: विद्यार्थी तपशील + अनुक्रमांक
     const pen=cl(b.pen,20),r=await env.DB.prepare('SELECT r.pen,r.cls,r.div,r.name,i.gender,i.cat,i.dob,i.father,i.mother,i.gr FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? AND r.pen=?').bind(t.udise,pen).first();if(!r)return J({e:'nf'},404);
