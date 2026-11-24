@@ -1331,7 +1331,8 @@ async function ext(p,r,env){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
     const rs=(await env.DB.prepare("SELECT r.cls,r.div,COUNT(*) n FROM roster r WHERE r.udise=? AND NOT EXISTS(SELECT 1 FROM tclasses c WHERE c.tid=? AND c.udise=r.udise AND c.cls=r.cls AND c.div=r.div) GROUP BY r.cls,r.div ORDER BY r.cls,r.div").bind(u,t.id).all()).results;
-    return J({ok:1,udise:u,rows:rs});
+    const mine=(await env.DB.prepare('SELECT cls,div FROM tclasses WHERE tid=? AND udise=?').bind(t.id,u).all()).results||[];
+    return J({ok:1,udise:u,rows:rs,mine});
   }
   if(p==='/api/t/delcls'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
