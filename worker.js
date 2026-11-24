@@ -129,6 +129,7 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
   try{for(const x of (await env.DB.prepare("SELECT udise,p15,p68,cooked FROM pm_daily WHERE date LIKE ?").bind(mon+'-%').all()).results){if(!ok.has(x.udise)||x.cooked==='नाही')continue;const o=A[x.udise]=A[x.udise]||{n:0,c1:0,c2:0,b1:0,b2:0};o.n++;if(x.p15>0){o.c1++;o.b1+=x.p15}if(x.p68>0){o.c2++;o.b2+=x.p68}}}catch(e){}
   try{for(const x of (await env.DB.prepare("SELECT udise,items FROM pm_rcpt WHERE date LIKE ?").bind(mon+'-%').all()).results){if(!ok.has(x.udise))continue;let it=[];try{it=JSON.parse(x.items)}catch(e){}for(const i of it){if(String(i.name||'').trim()!=='तांदूळ')continue;const o=A[x.udise]=A[x.udise]||{n:0,c1:0,c2:0,b1:0,b2:0};o.rn=1;if(i.q15==null){o.ru=(o.ru||0)+(Number(i.qty)||0)}else{o.r1=(o.r1||0)+(Number(i.q15)||0);o.r2=(o.r2||0)+(Number(i.q68)||0)}}}}catch(e){}
   return A}
+let RBK=false;async function rbEns(env){if(RBK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS sch_rbook(udise TEXT PRIMARY KEY,data TEXT,upd TEXT)').run();RBK=true}
 async function lvEns(env){await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_lv(id INTEGER PRIMARY KEY AUTOINCREMENT, udise TEXT, shalarth TEXT, tname TEXT, typ TEXT, fd TEXT, td TEXT, days INTEGER, rm TEXT, img TEXT, upd TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_diary(id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, dt TEXT, kind TEXT, place TEXT, udise TEXT, pn TEXT, rm TEXT, img TEXT, upd TEXT)")])}
 let VSOK=false;
 async function vsEns(env){if(VSOK)return;await env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_visit(id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, udise TEXT, dt TEXT, tin TEXT, tout TEXT, vt TEXT, data TEXT, img TEXT, score INTEGER, grade TEXT, st TEXT, upd TEXT)").run();VSOK=true}
@@ -510,7 +511,8 @@ async function offApi(p,r,env){
         env.DB.prepare('SELECT t.shalarth sh,c.cls c,c.div v FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=?').bind(u).all().catch(()=>({results:[]}))]);
       let prev=null;if(pv){try{const d=JSON.parse(pv.data||'{}');prev={dt:pv.dt,fu:cl(d.fu,600),fd:cl(d.fd,10)}}catch(e){}}
       const tcl={};(tl.results||[]).forEach(x=>{(tcl[x.sh]=tcl[x.sh]||[]).push(x.c+'|'+(x.v||''))});
-      return J({ok:1,dt,tc:tc.results||[],ro:ro.results||[],lv:lv.results||[],pm:pm||null,prev,tcl});
+      let rb=null;try{await rbEns(env);const r=await env.DB.prepare('SELECT data FROM sch_rbook WHERE udise=?').bind(u).first();if(r)rb=(JSON.parse(r.data||'{}').k)||null}catch(e){}
+      return J({ok:1,dt,tc:tc.results||[],ro:ro.results||[],lv:lv.results||[],pm:pm||null,prev,tcl,rb});
     }
     if(p==='/api/o/vssave'){
       const u=cl(b.udise,11).replace(/\D/g,''),dt=cl(b.dt,10),tin=cl(b.tin,5),tout=cl(b.tout,5),vt=cl(b.vt,30);
@@ -707,6 +709,8 @@ async function offApi(p,r,env){
       return J({ok:1,status:'Returned',mail});}
     return J({e:'bad'},400);
   }
+  if(p==='/api/o/rbsum'){await rbEns(env);const m={};((await env.DB.prepare('SELECT udise,data,upd FROM sch_rbook').all()).results||[]).forEach(x=>{if(ok.has(x.udise)){let d={};try{d=JSON.parse(x.data||'{}')}catch(e){}m[x.udise]={k:d.k||{},upd:x.upd}}});
+    return J({ok:1,rows:ss.map(x=>({u:x.udise,n:x.name,k:(m[x.udise]||{}).k||{},upd:(m[x.udise]||{}).upd||''}))})}
   if(p==='/api/o/form'){
     const us=(Array.isArray(b.udise)?b.udise:[b.udise]).map(u=>cl(u,11).replace(/\D/g,'')).filter(u=>ok.has(u)).slice(0,40);
     if(!us.length)return J({ok:1,rows:[]});
@@ -794,6 +798,9 @@ async function schoolApi(p,r,env){
     }
     if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length});
   }
+  if(p==='/api/s/rbook'){await rbEns(env);const r=await env.DB.prepare('SELECT data,upd FROM sch_rbook WHERE udise=?').bind(t.udise).first();let d={};try{d=JSON.parse(r&&r.data||'{}')}catch(e){}return J({ok:1,d,upd:r?r.upd:''})}
+  if(p==='/api/s/rbsave'){await rbEns(env);const k={},src=(b.d&&b.d.k)||{};for(const id of Object.keys(src).slice(0,150)){if(!/^c\d{1,3}$/.test(id))continue;const s=cl(src[id]&&src[id].s,1),d=cl(src[id]&&src[id].d,10);if(!/^[YPNX]$/.test(s))continue;k[id]=/^\d{4}-\d\d-\d\d$/.test(d)?{s,d}:{s}}
+    const upd=istDay();await env.DB.prepare('INSERT INTO sch_rbook(udise,data,upd) VALUES(?,?,?) ON CONFLICT(udise) DO UPDATE SET data=excluded.data,upd=excluded.upd').bind(t.udise,JSON.stringify({k}),upd).run();return J({ok:1,upd})}
   if(p==='/api/s/bona'){ // बोनाफाईड: विद्यार्थी तपशील + अनुक्रमांक
     const pen=cl(b.pen,20),r=await env.DB.prepare('SELECT r.pen,r.cls,r.div,r.name,i.gender,i.cat,i.dob,i.father,i.mother,i.gr FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? AND r.pen=?').bind(t.udise,pen).first();if(!r)return J({e:'nf'},404);
     await tcEns(env);const hm=await env.DB.prepare('SELECT t.name FROM cfg c JOIN teachers t ON t.shalarth=c.v WHERE c.k=?').bind('hmt:'+t.udise).first(),ct=await env.DB.prepare('SELECT t.name FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=? AND c.cls=? AND c.div=? AND c.ct=1 LIMIT 1').bind(t.udise,r.cls,r.div).first();
