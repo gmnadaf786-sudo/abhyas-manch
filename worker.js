@@ -44,7 +44,7 @@ async function teacher(env,b,needOk){
   if(!x.tt||Date.now()-x.tt>TTTL)return null;return x;
 }
 const TTTL=30*864e5;
-let TCOK=false;async function tCols(env){if(TCOK)return;for(const c of ['lf INTEGER DEFAULT 0','tt INTEGER DEFAULT 0','district TEXT','taluka TEXT','kendra TEXT','kcode TEXT','lft TEXT','lfd TEXT','lfu TEXT'])try{await env.DB.prepare('ALTER TABLE teachers ADD COLUMN '+c).run()}catch(e){}TCOK=true}
+let TCOK=false;async function tCols(env){if(TCOK)return;for(const c of ['lf INTEGER DEFAULT 0','tt INTEGER DEFAULT 0','district TEXT','taluka TEXT','kendra TEXT','kcode TEXT','lft TEXT','lfd TEXT','lfu TEXT','chg INTEGER DEFAULT 0','pan TEXT','tmpid INTEGER DEFAULT 0'])try{await env.DB.prepare('ALTER TABLE teachers ADD COLUMN '+c).run()}catch(e){}TCOK=true}
 // नोंदणी फॉर्ममधील जिल्हा/तालुका/केंद्र (स्वतः निवडलेले) – शिक्षक व शाळा नोंदणीत साठवण्यासाठी
 let SRCK=false;async function srCols(env){if(SRCK)return;for(const c of ['district TEXT','taluka TEXT','kendra TEXT','kcode TEXT'])try{await env.DB.prepare('ALTER TABLE sch_reg ADD COLUMN '+c).run()}catch(e){}SRCK=true}
 function geoIn(b){const kc=cl(b.kcode,14).toUpperCase();return{d:cl(b.district,60),t:cl(b.taluka,60),k:cl(b.kendra,60),kc:/^CLU\d{5,10}$/.test(kc)?kc:''}}
@@ -176,6 +176,23 @@ async function rtSweep(env){const td=new Date(Date.now()+19800000).toISOString()
   try{const f=await env.DB.prepare("SELECT v FROM cfg WHERE k='rtsw'").first();if(f&&f.v===td)return;await tCols(env);
    const r=await env.DB.prepare("UPDATE teachers SET lft='सेवानिवृत्ती',lfd=(SELECT "+RTX+" FROM tch_info i WHERE i.shalarth=teachers.shalarth),lfu=udise,udise='',conf=0 WHERE COALESCE(udise,'')<>'' AND COALESCE(lft,'')<>'keep' AND shalarth IN (SELECT i.shalarth FROM tch_info i WHERE "+RTX+" < ?)").bind(td).run();
    await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('rtsw',?)").bind(td).run();if(r.meta&&r.meta.changes)await dcClr(env)}catch(e){}}
+/* नवीन शिक्षक (KP/HM कडून): शालार्थ नसल्यास PAN किंवा मोबाईल हाच तात्पुरता ID; 6 अंकी PIN, पहिल्या लॉगिनला पासवर्ड बदल */
+async function tNew(env,u,b){await tCols(env);const name=cl(b.name,60),mob=cl(b.mobile,10).replace(/\D/g,''),pan=cl(b.pan,10).toUpperCase().replace(/[^A-Z0-9]/g,''),sh0=cl(b.shalarth,20).toUpperCase().replace(/[^A-Z0-9]/g,'');
+  if(name.length<2)return {e:'name'};if(!okMob(mob))return {e:'mobile'};if(pan&&!/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan))return {e:'pan'};if(sh0&&!/^[A-Z0-9]{6,20}$/.test(sh0))return {e:'sh'};
+  const sh=sh0||pan||mob;if(await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=? OR (pan<>\'\' AND pan=?)').bind(sh,pan||'#').first())return {e:'exists'};
+  if(await env.DB.prepare("SELECT id FROM teachers WHERE mobile=? AND COALESCE(udise,'')<>''").bind(mob).first())return {e:'mobex'};
+  const pin=String(100000+(crypto.getRandomValues(new Uint32Array(1))[0]%900000)),salt=rnd(8);
+  await env.DB.prepare("INSERT INTO teachers(shalarth,name,mobile,udise,salt,pw,status,conf,chg,pan,tmpid) VALUES(?,?,?,?,?,?,'ok',1,1,?,?)").bind(sh,name,mob,u,salt,await hashPin(pin,salt),pan,sh0?0:1).run();
+  if(pan){await slEnsure(env);await env.DB.prepare('INSERT OR IGNORE INTO tch_info(shalarth,data,upd) VALUES(?,?,?)').bind(sh,JSON.stringify({'PAN क्रमांक':pan}),'').run()}
+  await dcClr(env);return {ok:1,id:sh,pin,tmp:sh0?0:1}}
+async function tPin(env,sh){await tCols(env);const pin=String(100000+(crypto.getRandomValues(new Uint32Array(1))[0]%900000)),salt=rnd(8);await env.DB.prepare('UPDATE teachers SET salt=?,pw=?,chg=1,fails=0,token=NULL WHERE shalarth=?').bind(salt,await hashPin(pin,salt),sh).run();return pin}
+/* शालार्थ ID मिळाल्यावर तात्पुरता ID सर्व टेबलमध्ये बदलणे */
+async function tSetSh(env,old,nw){nw=String(nw||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(!/^[A-Z0-9]{6,20}$/.test(nw))return {e:'sh'};if(nw===old)return {ok:1};
+  if(await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=?').bind(nw).first())return {e:'exists'};await slEnsure(env);
+  const st=[env.DB.prepare('UPDATE teachers SET shalarth=?,tmpid=0 WHERE shalarth=?').bind(nw,old)];
+  for(const tb of ['tch_info','tch_edit','tch_img','tax_in','tch_rec','sch_lv','fb'])st.push(env.DB.prepare('UPDATE '+tb+' SET shalarth=? WHERE shalarth=?').bind(nw,old));
+  st.push(env.DB.prepare("UPDATE cfg SET v=? WHERE k LIKE 'hmt:%' AND v=?").bind(nw,old));
+  for(const s of st){try{await s.run()}catch(e){}}await dcClr(env);return {ok:1,sh:nw}}
 let GEOC=null;async function geoJson(env,r){if(GEOC)return GEOC;const x=await env.ASSETS.fetch(new Request(new URL('/geo.json',r.url)));GEOC=await x.json();return GEOC}
 // geo.json मध्ये केंद्र कोड शोधा → {dn,dc,name,tn}; तालुका = क्लायंटने निवडलेला (त्या केंद्राचा असेल तर) नाहीतर पहिला
 async function cluAdd(env,r,code){
@@ -553,6 +570,9 @@ async function offApi(p,r,env){
     const [cat,tongue,st]=await Promise.all([g('cat'),g('tongue'),g('status')]);
     const out={ok:1,cat,tongue,st};await dcPut(env,ck,out,1800000);return J(out);
   }
+  if(p==='/api/o/tadd'){if(!kp)return J({e:'kp'},403);const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);const x=await tNew(env,u,b);return J(x,x.ok?200:400)}
+  if(p==='/api/o/tpin'||p==='/api/o/tsetsh'){if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise,tmpid FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);
+    if(p==='/api/o/tpin')return J({ok:1,id:sh,pin:await tPin(env,sh)});const y=await tSetSh(env,sh,b.nsh);return J(y,y.ok?200:400)}
   if(p==='/api/o/tleft'){ // शिक्षकाचे नाव शाळेतून कमी (बदली/निवृत्ती इ.) – डिलीट नाही
     if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),WH=['बदली – इतर तालुका','बदली – इतर जिल्हा','बदली – तालुक्यात इतर केंद्र','सेवानिवृत्ती','स्वेच्छानिवृत्ती / राजीनामा','मृत्यू','इतर'],why=WH.includes(b.why)?b.why:'',dt=/^\d{4}-\d{2}-\d{2}$/.test(b.dt||'')?b.dt:new Date(Date.now()+19800000).toISOString().slice(0,10);
     if(!why)return J({e:'why'},400);const x=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);
@@ -568,9 +588,9 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/teachers'){
     const ck='tch:'+SK;{const dh=await dcGet(env,ck,b.fr);if(dh)return J(dh)}
-    await slEnsure(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.udise '+SW+' ORDER BY t.udise,t.name').bind(...SA).all()).results;
+    await slEnsure(env);await tCols(env);const rs=(await env.DB.prepare('SELECT t.id,t.shalarth,t.name,t.mobile,t.udise,t.status,t.conf,t.tmpid,s.name sc,(SELECT status FROM tch_edit e WHERE e.shalarth=t.shalarth) es FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.udise '+SW+' ORDER BY t.udise,t.name').bind(...SA).all()).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
-    const out={ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,sh:x.shalarth,n:x.name,m:x.mobile,u:x.udise,sc:x.sc||'',c:cm[x.udise],st:x.status,cf:x.conf?1:0,es:x.es||''}))};await dcPut(env,ck,out,600000);return J(out);
+    const out={ok:1,rows:rs.filter(x=>ok.has(x.udise)).map(x=>({id:x.id,sh:x.shalarth,n:x.name,m:x.mobile,u:x.udise,sc:x.sc||'',c:cm[x.udise],st:x.status,cf:x.conf?1:0,es:x.es||'',tp:x.tmpid?1:0}))};await dcPut(env,ck,out,600000);return J(out);
   }
   if(p==='/api/o/tinfo'){
     const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),t=await env.DB.prepare('SELECT t.name,t.mobile,t.udise,s.name sc FROM teachers t LEFT JOIN schools s ON s.udise=t.udise WHERE t.shalarth=?').bind(sh).first();
@@ -787,10 +807,12 @@ async function schoolApi(p,r,env){
       st.push(env.DB.prepare('INSERT INTO sch_cmember(udise,cid,id,name,desig,mtype,mobile,joined,active) VALUES(?,?,?,?,?,?,?,?,?)').bind(t.udise,cid,++i,nm,cl(m.desig,30),cl(m.type,40),mo,/^\d{4}-\d\d-\d\d$/.test(m.joined||'')?m.joined:'',m.active==='No'?0:1))}
     await env.DB.batch(st);return J({ok:1,n:i});
   }
+  if(p==='/api/s/tadd'){const x=await tNew(env,t.udise,b);return J(x,x.ok?200:400)}
+  if(p==='/api/s/tpin'){await tCols(env);const sh=cl(b.sh,20).toUpperCase();if(!await env.DB.prepare('SELECT id FROM teachers WHERE shalarth=? AND udise=?').bind(sh,t.udise).first())return J({e:'na'},403);return J({ok:1,id:sh,pin:await tPin(env,sh)})}
   if(p==='/api/s/tlist'){
     await tCols(env);await rtSweep(env);await tcEns(env);
-    const ts=(await env.DB.prepare("SELECT id,shalarth sh,name n,mobile m FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(t.udise).all()).results||[],cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE udise=? ORDER BY cls,div').bind(t.udise).all()).results||[],h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hmt:'+t.udise).first();
-    return J({ok:1,hmt:h?h.v:'',rows:ts.map(x=>({id:x.id,sh:x.sh,n:x.n,m:x.m,c:cs.filter(c=>c.tid===x.id).map(c=>({cls:c.cls,div:c.div}))}))})}
+    const ts=(await env.DB.prepare("SELECT id,shalarth sh,name n,mobile m,tmpid tp FROM teachers WHERE udise=? AND status='ok' ORDER BY name").bind(t.udise).all()).results||[],cs=(await env.DB.prepare('SELECT tid,cls,div FROM tclasses WHERE udise=? ORDER BY cls,div').bind(t.udise).all()).results||[],h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hmt:'+t.udise).first();
+    return J({ok:1,hmt:h?h.v:'',rows:ts.map(x=>({id:x.id,sh:x.sh,n:x.n,m:x.m,tp:x.tp?1:0,c:cs.filter(c=>c.tid===x.id).map(c=>({cls:c.cls,div:c.div}))}))})}
   if(p==='/api/s/tcls'){
     await tcEns(env);const id=parseInt(b.id)||0;
     if(!await env.DB.prepare("SELECT id FROM teachers WHERE id=? AND udise=? AND status='ok'").bind(id,t.udise).first())return J({e:'nf'},404);
@@ -1222,15 +1244,17 @@ async function ext(p,r,env){
     return J({ok:1});
   }
   if(p==='/api/t/login'){
-    const b=await body(r),sh=cl(b.shalarth,20).toUpperCase(),pw=cl(b.pw,40);
-    const x=await env.DB.prepare('SELECT * FROM teachers WHERE shalarth=?').bind(sh).first();
+    const b=await body(r),sh=cl(b.shalarth,20).toUpperCase().replace(/\s/g,''),pw=cl(b.pw,40);await tCols(env);
+    let x=await env.DB.prepare('SELECT * FROM teachers WHERE shalarth=?').bind(sh).first();
+    if(!x&&/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(sh))x=await env.DB.prepare('SELECT * FROM teachers WHERE pan=?').bind(sh).first();
+    if(!x&&/^[6-9][0-9]{9}$/.test(sh)){const m=(await env.DB.prepare("SELECT * FROM teachers WHERE mobile=? ORDER BY (COALESCE(udise,'')<>'') DESC LIMIT 2").bind(sh).all()).results||[];if(m.length===1||(m.length===2&&(m[0].udise||'')!==''&&(m[1].udise||'')===''))x=m[0]}
     if(!x)return J({e:'bad'},401);
-    await tCols(env);const now=Date.now();
+    const now=Date.now();
     if(x.fails>=8&&now-(x.lf||0)<900000)return J({e:'locked'},429);
     if((await hashPin(pw,x.salt))!==x.pw){await env.DB.prepare('UPDATE teachers SET fails=CASE WHEN fails>=8 AND ?-lf>=900000 THEN 1 ELSE fails+1 END,lf=? WHERE id=?').bind(now,now,x.id).run();return J({e:'bad'},401);}
     // reuse a still-valid token so a second device does not log out the first
     const keep=x.token&&x.tt&&now-x.tt<TTTL,tok=keep?x.token:rnd(24);await env.DB.prepare('UPDATE teachers SET fails=0,token=?,tt=? WHERE id=?').bind(tok,keep?x.tt:now,x.id).run();
-    return J({ok:1,token:tok,status:x.status,name:x.name,udise:x.udise});
+    return J({ok:1,token:tok,status:x.status,name:x.name,udise:x.udise,chg:x.chg?1:0,tmp:x.tmpid?1:0,sh:x.shalarth});
   }
   if(p==='/api/t/school'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
@@ -1555,12 +1579,13 @@ async function ext(p,r,env){
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise).first(),sv=await env.DB.prepare('SELECT data FROM tax_in WHERE shalarth=?').bind(t.shalarth).first();let inp={};try{inp=JSON.parse(sv&&sv.data||'{}')}catch(e){}
     return J({ok:1,fy:'2026-27',months:rows,totals:tot,inp,profile:{name:t.name,school:sc?sc.name:'',sh:t.shalarth,pan},have:rows.filter(r=>r.av).length});
   }
+  if(p==='/api/t/setsh'){const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);await tCols(env);const x=await env.DB.prepare('SELECT tmpid FROM teachers WHERE id=?').bind(t.id).first();if(!x||!x.tmpid)return J({e:'na'},403);const y=await tSetSh(env,t.shalarth,b.nsh);return J(y,y.ok?200:400)}
   if(p==='/api/t/chpw'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const o=cl(b.old,40),pw=cl(b.pw,40);if(pw.length<6)return J({e:'pw'},400);
     const x=await env.DB.prepare('SELECT salt,pw FROM teachers WHERE id=?').bind(t.id).first();
     if(!x||(await hashPin(o,x.salt))!==x.pw)return J({e:'bad'},401);
-    const salt=rnd(8);await env.DB.prepare('UPDATE teachers SET salt=?,pw=? WHERE id=?').bind(salt,await hashPin(pw,salt),t.id).run();
+    const salt=rnd(8);await tCols(env);await env.DB.prepare('UPDATE teachers SET salt=?,pw=?,chg=0 WHERE id=?').bind(salt,await hashPin(pw,salt),t.id).run();
     return J({ok:1});
   }
   if(p==='/api/t/pr'||p==='/api/t/prsign'){
