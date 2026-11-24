@@ -617,6 +617,11 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/tadd'){if(!kp)return J({e:'kp'},403);const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);const x=await tNew(env,u,b);return J(x,x.ok?200:400)}
   if(p==='/api/o/uimport'){if(!kp)return J({e:'kp'},403);const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na',sk:(b.rows||[]).length},403);const x=await uimpCore(env,u,b.rows,b.med==='kn'?'kn':b.med==='mr'?'mr':await schMed(env,u),null,ok);if(b.last)await dcClr(env);return J(x)}
+  if(p==='/api/o/tname'||p==='/api/o/sname'){ // KP: शिक्षक / शाळेचे नाव दुरुस्त
+    if(!kp)return J({e:'kp'},403);const nm=cl(b.name,120).replace(/\s+/g,' ').trim();if(nm.length<2)return J({e:'name'},400);
+    if(p==='/api/o/tname'){const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);await env.DB.prepare('UPDATE teachers SET name=? WHERE shalarth=?').bind(nm.slice(0,60),sh).run()}
+    else{const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);await env.DB.prepare('INSERT INTO schools(udise,name) VALUES(?,?) ON CONFLICT(udise) DO UPDATE SET name=excluded.name').bind(u,nm).run()}
+    await dcClr(env);return J({ok:1,name:nm})}
   if(p==='/api/o/tnw'){if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);await env.DB.prepare('UPDATE teachers SET nw=? WHERE shalarth=?').bind(b.on?1:0,sh).run();await dcClr(env);return J({ok:1})}
   if(p==='/api/o/tpin'||p==='/api/o/tsetsh'){if(!kp)return J({e:'kp'},403);await tCols(env);const sh=cl(b.sh,20).toUpperCase(),x=await env.DB.prepare('SELECT udise,tmpid FROM teachers WHERE shalarth=?').bind(sh).first();if(!x||!ok.has(x.udise))return J({e:'na'},403);
     if(p==='/api/o/tpin')return J({ok:1,id:sh,pin:await tPin(env,sh)});const y=await tSetSh(env,sh,b.nsh);return J(y,y.ok?200:400)}
