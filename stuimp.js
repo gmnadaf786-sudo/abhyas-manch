@@ -8,7 +8,7 @@ function siUi(el, mode) {
     '<p class="m" style="font-size:13px;margin:0 0 6px">UDISE+ किंवा सरल पोर्टलवरून डाउनलोड केलेली विद्यार्थी यादी (Excel .xlsx / .xls किंवा CSV) निवडा. ' +
     (mode === 'kp' ? 'फाइलमध्ये <b>UDISE Code</b> कॉलम असावा – प्रत्येक विद्यार्थी त्याच्या UDISE नुसार तुमच्या केंद्रातील शाळेला जोडला जाईल; केंद्राबाहेरील UDISE वगळले जातील. एका शाळेची फाइल असेल (UDISE कॉलम नसेल) तर खाली शाळा निवडा.'
       : 'सर्व विद्यार्थी तुमच्या शाळेत जोडले जातील (फाइलमध्ये UDISE कॉलम असल्यास फक्त तुमच्या शाळेचे).') +
-    ' आधी नोंद असलेले विद्यार्थी (PEN) दुबार होत नाहीत; इयत्ता/तुकडी अपडेट होते. दुसऱ्या शाळेत नोंद असलेले विद्यार्थी हलवले जात नाहीत.</p>' +
+    ' आधी नोंद असलेले विद्यार्थी (PEN) दुबार होत नाहीत; इयत्ता/तुकडी अपडेट होते. '+(mode === 'kp' ? 'तुमच्याच केंद्रातील दुसऱ्या शाळेत नोंद असल्यास विद्यार्थी फाइलप्रमाणे नवीन शाळेत हलवला जातो; केंद्राबाहेरील शाळेतील विद्यार्थी हलवले जात नाहीत.' : 'दुसऱ्या शाळेत नोंद असलेले विद्यार्थी हलवले जात नाहीत.')+'</p>' +
     (mode === 'kp' ? '<label style="font-size:13px">शाळा (फाइलमध्ये UDISE कॉलम नसल्यास)<select id="siu"><option value="">– फाइलमधील UDISE वापरा –</option>' + DATA.filter(function (r) { return !FL || r.c === FL }).map(function (r) { return '<option value="' + r.u + '">' + esc(r.nm || r.u) + '</option>' }).join('') + '</select></label>' : '') +
     '<label style="font-size:13px">इयत्ता (फाइलमध्ये इयत्ता कॉलम नसल्यास)<select id="sic"><option value="">– फाइलमधून –</option>' + [1, 2, 3, 4, 5, 6, 7, 8].map(function (c) { return '<option>' + c + '</option>' }).join('') + '</select></label>' +
     '<input type="file" id="sif" accept=".xlsx,.xls,.csv"><button onclick="siRead(\'' + mode + '\')">📄 फाइल वाचा</button><div id="six" class="m" style="margin-top:8px"></div></div>';
@@ -67,13 +67,13 @@ function siRead(mode) {
 function siSend() {
   var X = SIX; if (!X) return; var jobs = [];
   X.list.forEach(function (x) { if (!x.ok) return; var R = X.G[x.u]; for (var i = 0; i < R.length; i += 100) jobs.push({ u: x.u, rows: R.slice(i, i + 100) }) });
-  var p = document.getElementById('sip'), k = 0, n = 0, pn = 0, sk = 0, rt = 0, url = X.mode === 'kp' ? '/api/o/uimport' : '/api/s/uimport';
+  var p = document.getElementById('sip'), k = 0, n = 0, pn = 0, sk = 0, skb = 0, sko = 0, na = 0, eg = [], os = [], rt = 0, url = X.mode === 'kp' ? '/api/o/uimport' : '/api/s/uimport';
   [].forEach.call(document.querySelectorAll('#six button'), function (b) { b.disabled = true });
   (function nx() {
-    if (k >= jobs.length) { p.innerHTML = '<p style="color:#0f766e"><b>✅ पूर्ण: ' + n + ' विद्यार्थी आयात/अपडेट झाले.</b>' + (pn ? '<br>' + pn + ' जणांना PEN नाही – नाव/वर्गावरून जुळवण्यासाठी राखून ठेवले.' : '') + (sk ? '<br>' + sk + ' वगळले (चुकीची माहिती किंवा दुसऱ्या शाळेत आधीच नोंद).' : '') + '</p>'; if (typeof rfr === 'function' && X.mode === 'kp') { VD = null; VST = null } return }
+    if (k >= jobs.length) { p.innerHTML = '<p style="color:#0f766e"><b>✅ पूर्ण: ' + n + ' विद्यार्थी आयात/अपडेट झाले.</b>' + (pn ? '<br>' + pn + ' जणांना PEN नाही – नाव/वर्गावरून जुळवण्यासाठी राखून ठेवले.' : '') + (sko ? '<br><span class="no">' + sko + ' विद्यार्थी दुसऱ्या शाळेत आधीच नोंदलेले (UDISE ' + os.join(', ') + ') – हलवले नाहीत.</span>' : '') + (skb ? '<br><span class="no">' + skb + ' ओळींची माहिती अपूर्ण/चुकीची (नाव, इयत्ता, तुकडी किंवा PEN) – उदा. ' + eg.map(esc).join('; ') + '</span>' : '') + (na ? '<br><span class="no">' + na + ' विद्यार्थ्यांची शाळा तुमच्या केंद्रात नाही.</span>' : '') + (sk && !sko && !skb && !na ? '<br>' + sk + ' वगळले.' : '') + '</p>'; if (typeof rfr === 'function' && X.mode === 'kp') { VD = null; VST = null } return }
     var j = jobs[k], b = { rows: j.rows, last: k === jobs.length - 1 ? 1 : 0, udise: j.u };
     p.textContent = 'पाठवत आहे… ' + (k + 1) + ' / ' + jobs.length;
-    api(url, b).then(function (r) { if (!r || (!r.ok && r.e !== 'na')) throw 0; if (r.ok) { n += r.n || 0; pn += r.pn || 0; sk += r.sk || 0 } else sk += j.rows.length; k++; rt = 0; nx() })
+    api(url, b).then(function (r) { if (!r || (!r.ok && r.e !== 'na')) throw 0; if (r.ok) { n += r.n || 0; pn += r.pn || 0; sk += r.sk || 0; skb += r.skb || 0; sko += r.sko || 0; (r.eg || []).forEach(function (x) { if (eg.length < 3) eg.push(x) }); (r.os || []).forEach(function (x) { if (os.indexOf(x) < 0) os.push(x) }) } else { sk += j.rows.length; na += j.rows.length } k++; rt = 0; nx() })
       .catch(function () { if (++rt <= 5) { p.textContent = 'अडचण, पुन्हा प्रयत्न ' + rt + '…'; setTimeout(nx, 2000 * rt) } else p.innerHTML = '<span class="er">इंटरनेट अडचण. पुन्हा "आयात करा" दाबा (आधी झालेले दुबार होणार नाहीत).</span>' })
   })();
 }

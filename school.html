@@ -159,4 +159,4 @@ function formSave(sub){var ch={},k;Object.keys(FD).forEach(function(k){if(JSON.s
 
 function out(){ss('am_su',null);ss('am_s',null);ss('am_sn',null);ss('am_ss',null);T='';location.href='index.html#login'}
 T=sg('am_s');if(T){api('/api/s/me',{}).then(function(j){if(j.ok){SC=j.school;SM=(j.med?'माध्यम: '+j.med:'')+(j.cmin&&j.cmax?(j.med?' · ':'')+'वर्ग '+j.cmin+' ते '+j.cmax:'');ss('am_ss',SC);ss('am_su',j.udise||'');if(!sg('am_sn')){var n0=(prompt('आपले नाव लिहा (नोंद करणारे):')||'').trim();ss('am_sn',n0.length>=2?n0:'शाळा')}home()}else{T='';loginUi()}})}else loginUi();
-</script><script src="stuimp.js?v=1"></script></body></html>
+</script><script src="stuimp.js?v=2"></script></body></html>
