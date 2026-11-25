@@ -733,6 +733,10 @@ async function offApi(p,r,env){
     return J({e:'bad'},400);
   }
   if(p==='/api/o/smimp'){if(kp)return J({e:'beo'},403);const rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,5000),yr=cl(b.yr,9);if(!/^\d{4}-\d{2}$/.test(yr)||rows.length<10)return J({e:'arg'},400);await smEns(env,r);const n=await smPut(env,yr,rows);await cfgUp(env,'smsrc','upload').run();await dcClr(env);return J({ok:1,n,yr})}
+  if(p==='/api/o/schexp'){ // शिष्यवृत्ती नोंदणी: इ. 4 थी व 7 वी विद्यार्थी (केंद्र/तालुका)
+    const rs=(await env.DB.prepare("SELECT r.udise u,r.cls c,r.div d,r.name n,r.med m,i.gender g,i.dob,i.cat,i.father f,i.mother mo,i.mobile mb,i.extra x FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.cls IN (4,7) AND r.udise "+SW+" ORDER BY r.udise,r.cls,r.name").bind(...SA).all()).results||[];
+    const sm={};(await env.DB.prepare('SELECT udise,name,med FROM schools WHERE udise '+SW).bind(...SA).all()).results.forEach(x=>sm[x.udise]=[x.name||'',x.med||'']);
+    return J({ok:1,sch:sm,rows:rs.map(x=>{let e={};try{e=JSON.parse(x.x||'{}')}catch(_){}return [x.u,x.c,x.n,x.m||'',x.g||'',x.dob||'',x.cat||'',x.f||'',x.mo||'',x.mb||'',e.email||'',e.apaar||'',e.cwsn||'',e.medium||'']})})}
   if(p==='/api/o/bsosum'){const d=await bsLoad(env,r),FL={};((await env.DB.prepare("SELECT k FROM cfg WHERE k LIKE 'bso:%' OR k LIKE 'smo:%'").all()).results||[]).forEach(x=>{const p=x.k.split(':'),ty=p[0]==='bso'?'boot':p[1],u=p[p.length-1];(FL[u]=FL[u]||[]).push(ty)});
     return J({ok:1,yr:d.yr,rate:d.rate,rate2:d.rate2,rows:ss.map(x=>{const v=d.rows[x.udise];return [x.udise,x.code,x.name||'',v?v[0]:'',v?v[1]:null,(FL[x.udise]||[]).includes('boot')?1:0,v?(v[3]||0):null,(FL[x.udise]||[]).join(','),v?(v[5]||0):null]})})}
   if(p==='/api/o/bsoone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);return J(await bsOne(env,r,u,b.ty))}
