@@ -1,0 +1,37 @@
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>बूट व गणवेश अनुदान आदेश 2026-27 – पं.स. जत</title>
+<meta property="og:title" content="बूट व गणवेश अनुदान – शाळानिहाय कार्यालयीन आदेश 2026-27">
+<meta property="og:description" content="पंचायत समिती जत · केंद्र व शाळा निवडा आणि आपल्या शाळेचा आदेश PDF डाउनलोड करा">
+<meta name="theme-color" content="#0f766e">
+<style>
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,"Noto Sans Devanagari",sans-serif;background:#f6f7f4;color:#1f2937}
+.hd{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;padding:18px 16px 22px;text-align:center}.hd h1{margin:0;font-size:21px}.hd p{margin:4px 0 0;font-size:13px;opacity:.95}
+.w{max-width:560px;margin:-12px auto 30px;padding:0 12px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:14px;margin:12px 0;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tb{border:2px solid #0f766e;background:#fff;color:#0f766e;border-radius:14px;padding:14px 6px;font:inherit;font-weight:700;cursor:pointer;text-align:center}.tb small{display:block;font-weight:400;font-size:12px;color:#475569}.tb.on{background:#0f766e;color:#fff}.tb.on small{color:#e6fffa}
+label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;background:#fff}
+.go{width:100%;margin-top:14px;padding:14px;border:0;border-radius:12px;background:#16a34a;color:#fff;font:inherit;font-weight:700;font-size:17px;cursor:pointer}.go:disabled{background:#94a3b8}
+.sm{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}.sm div{background:#f0fdfa;border-radius:10px;padding:8px 4px;text-align:center;font-size:12px}.sm b{display:block;font-size:18px;color:#0f766e}
+.m{color:#64748b;font-size:12px}
+</style></head><body>
+<div class="hd"><h1>👟 बूट व 🎽 गणवेश अनुदान आदेश</h1><p>पंचायत समिती जत · सन 2026-27 · शाळा व्यवस्थापन समिती कार्यालयीन आदेश</p></div>
+<div class="w">
+<div class="card"><b>1) आदेश निवडा</b><div class="tg" style="margin-top:8px"><button class="tb on" id="t_boot" onclick="pick('boot')">👟 बूट व पायमोजे<small>₹150 + ₹20 प्रति लाभार्थी</small></button><button class="tb" id="t_uni2" onclick="pick('uni2')">🎽 गणवेश (2 संच)<small>₹380 + ₹220 प्रति लाभार्थी</small></button></div></div>
+<div class="card"><b>2) केंद्र व शाळा निवडा</b><label for="cl">केंद्र</label><select id="cl" onchange="fillS()"><option value="">लोड होत आहे…</option></select><label for="sc">शाळा</label><select id="sc" onchange="show()"><option value="">आधी केंद्र निवडा</option></select><div id="info"></div>
+<button class="go" id="go" onclick="dl()" disabled>📄 आदेश PDF डाउनलोड / प्रिंट</button><p class="m" style="margin:8px 0 0">बटण दाबल्यावर आदेश उघडेल. प्रिंट विंडोमध्ये <b>"Save as PDF / PDF म्हणून सेव्ह करा"</b> निवडा.</p></div>
+<div class="card m">लाभार्थी संख्या व रक्कम: पंचायत समिती जत अनुदान वाटप तक्ता 2026-27. जावक क्रमांक, दिनांक, SMC सभा/ठराव व पुरवठादारांची माहिती आदेशात रिकामी रेषा ठेवली आहे – ती हाताने भरा, किंवा अभ्यास मंच शाळा लॉगिनमधून भरून पूर्ण आदेश काढा.</div>
+</div>
+<script>
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var D=null,TY='boot';
+function $(i){return document.getElementById(i)}
+function pick(t){TY=t;$('t_boot').className='tb'+(t==='boot'?' on':'');$('t_uni2').className='tb'+(t==='uni2'?' on':'');show()}
+function fillS(){var c=$('cl').value,s=$('sc');var L=Object.keys(D.rows).filter(function(u){return D.rows[u][2]===c}).sort(function(a,b){return D.rows[a][4].localeCompare(D.rows[b][4])});
+ s.innerHTML='<option value="">'+(c?'शाळा निवडा ('+L.length+')':'आधी केंद्र निवडा')+'</option>'+L.map(function(u){return '<option value="'+u+'">'+esc(D.rows[u][4])+'</option>'}).join('');show()}
+function job(u){var x=D.rows[u];return {ty:TY,u:u,yr:D.yr,sn:x[4],d:{mh:x[0],n:x[1],cl:x[2],n2:x[3]},f:{}}}
+function show(){var u=$('sc').value;$('go').disabled=!u;if(!u){$('info').innerHTML='';return}var j=job(u),c=BST[TY],R=bsAmt(j),T=R.reduce(function(s,r){return s+r.a},0);
+ $('info').innerHTML='<div class="sm"><div>लाभार्थी<b>'+(j.d[c.nk]||0)+'</b></div><div>'+esc(c.rows[0][0].split(' (')[0])+'<b>₹'+R[0].a+'</b></div><div>'+esc(c.rows[1][0].split(' (')[0])+'<b>₹'+R[1].a+'</b></div></div><p style="margin:8px 0 0">एकूण अनुदान <b>₹'+T+'</b> <span class="m">('+bsWords(T)+' रुपये मात्र) · UDISE '+u+'</span></p>'}
+function dl(){var u=$('sc').value;if(!u)return;var w=window.open('','_blank');if(!w){alert('पॉप-अप परवानगी द्या.');return}w.document.open();w.document.write(bsDoc(job(u)));w.document.close()}
+fetch('/data/bootsox_2026-27.json').then(function(r){return r.json()}).then(function(d){D=d;var C={};Object.keys(d.rows).forEach(function(u){C[d.rows[u][2]]=(C[d.rows[u][2]]||0)+1});
+ $('cl').innerHTML='<option value="">केंद्र निवडा</option>'+Object.keys(C).sort().map(function(c){return '<option>'+esc(c)+'</option>'}).join('')}).catch(function(){$('cl').innerHTML='<option>माहिती लोड झाली नाही – पुन्हा उघडा</option>'})
+</script><script src="bootsox.js?v=4"></script>
+</body></html>
