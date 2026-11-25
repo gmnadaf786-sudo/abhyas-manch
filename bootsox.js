@@ -6,9 +6,9 @@ function bsWords(n){n=Math.round(+n||0);if(!n)return 'शून्य';var o=[],
 function bsF(v){v=+v||0;return v%1?v.toFixed(2):String(v)}
 function bsDt(x){var m=String(x||'').match(/^(\d{4})-(\d\d)-(\d\d)$/);return m?m[3]+'/'+m[2]+'/'+m[1]:(x||'')}
 var BSK=[['kn','केंद्राचे नाव'],['jk','जावक क्रमांक (जा.क्र.)'],['dt','आदेश दिनांक','date'],
- ['#','वाचा क्र. 6 – शा.व्य.स. सभा (कोटेशन मागणी)'],['s6s','सभा क्रमांक'],['s6d','सभा दिनांक','date'],['s6v','विषय / ठराव क्रमांक'],
- ['#','वाचा क्र. 7 – शा.व्य.स. सभा (कोटेशन मंजूर)'],['s7s','सभा क्रमांक'],['s7d','सभा दिनांक','date'],['s7v','विषय / ठराव क्रमांक'],
- ['#','वाचा क्र. 8 – शा.व्य.स. सभा (SNA SPARSH रक्कम वर्ग करणे)'],['s8s','सभा क्रमांक'],['s8d','सभा दिनांक','date'],['s8v','विषय / ठराव क्रमांक'],
+ ['#','वाचा क्र. 6 – शा.व्य.स. सभा (कोटेशन मागणी)'],['s6s','सभा क्रमांक'],['s6d','सभा दिनांक','date'],['s6v','विषय क्रमांक'],['s6t','ठराव क्रमांक'],
+ ['#','वाचा क्र. 7 – शा.व्य.स. सभा (कोटेशन मंजूर)'],['s7s','सभा क्रमांक'],['s7d','सभा दिनांक','date'],['s7v','विषय क्रमांक'],['s7t','ठराव क्रमांक'],
+ ['#','वाचा क्र. 8 – शा.व्य.स. सभा (SNA SPARSH रक्कम वर्ग करणे)'],['s8s','सभा क्रमांक'],['s8d','सभा दिनांक','date'],['s8v','विषय क्रमांक'],['s8t','ठराव क्रमांक'],
  ['#','पुरवठादार 1 – बूट (₹150 प्रति विद्यार्थी)'],['v1n','पुरवठादाराचे नाव'],['b1n','बिल क्रमांक'],['b1d','बिल दिनांक','date'],['v1b','बँकेचे नाव'],['v1a','खाते क्रमांक'],['v1i','IFSC'],
  ['#','पुरवठादार 2 – पायमोजे (₹20 प्रति विद्यार्थी)'],['v2n','पुरवठादाराचे नाव'],['b2n','बिल क्रमांक'],['b2d','बिल दिनांक','date'],['v2b','बँकेचे नाव'],['v2a','खाते क्रमांक'],['v2i','IFSC']];
 var BSJ=null;
@@ -17,7 +17,7 @@ function bsDoc(j){var d=j.d,f=j.f||{},n=d.n,r=j.rate||[150,20],a1=n*r[0],a2=n*r[
  var sp=function(x){return [x*0.75,x*0.12,x*0.13]},p1=sp(a1),p2=sp(a2),C='2.1.3.2-1set shoes and 2 set socks';
  var row=function(v,bd,bn,cmp,q,a,p){return '<tr><td>'+esc(v||'')+'</td><td>'+esc(bsDt(bd))+'</td><td>'+esc(bn||'')+'</td><td style="font-size:9px">'+cmp+'</td><td class="r">'+q+'</td><td class="r">'+bsF(a)+'</td><td class="r">'+bsF(p[0])+'</td><td class="r">'+bsF(p[1])+'</td><td class="r">'+bsF(p[2])+'</td><td class="r">'+bsF(a)+'</td><td class="r">0</td><td class="r">'+bsF(a)+'</td></tr>'};
  var mh=String(d.mh||'').split(''),ac='<table class="ac"><tr><td style="border:0;padding-right:6px"><b>School Agency Code</b></td>'+(mh.length?mh.map(function(c){return '<td>'+esc(c)+'</td>'}).join(''):'<td style="min-width:120px"></td>')+'</tr></table>';
- var sb=function(k,txt){return 'शाळा व्यवस्थापन समिती सभा क्रमांक '+bl(f[k+'s'],30)+' दिनांक '+bl(bsDt(f[k+'d']),70)+' विषय / ठराव क्रमांक '+bl(f[k+'v'],40)+' '+txt};
+ var sb=function(k,txt){return 'शाळा व्यवस्थापन समिती सभा क्रमांक '+bl(f[k+'s'],30)+' दिनांक '+bl(bsDt(f[k+'d']),70)+' विषय क्रमांक '+bl(f[k+'v'],30)+' ठराव क्रमांक '+bl(f[k+'t'],30)+' '+txt};
  return '<!doctype html><html lang="mr"><head><meta charset="utf-8"><title>बूट व पायमोजे आदेश - '+esc(sn)+'</title><style>@page{size:A4;margin:10mm}body{font:12px/1.55 system-ui,"Noto Sans Devanagari",sans-serif;color:#000;margin:0}h1,h2,h3{margin:0;text-align:center}h1{font-size:16px}h2{font-size:13px;font-weight:600}h3{font-size:14px;margin:6px 0;text-decoration:underline}.rw{display:flex;justify-content:space-between;margin:4px 0}ol{margin:2px 0 4px;padding-left:22px}ol li{margin:1px 0}p{margin:4px 0;text-align:justify}table{border-collapse:collapse;width:100%}.t td,.t th{border:1px solid #000;padding:3px 3px;font-size:10px}.t th{background:#f1f5f9}.r{text-align:right}.ac{width:auto}.ac td{border:1px solid #000;width:16px;text-align:center;font-size:11px;padding:2px}.sg{display:flex;justify-content:space-between;margin-top:34px}</style></head><body>'
  +'<h1>जिल्हा परिषद प्राथमिक शाळा '+esc(sn)+'</h1><h2>केंद्र – '+bl(f.kn||d.cl,80)+', तालुका – जत, जिल्हा – सांगली</h2><h2>UDISE NO – '+esc(j.u)+' &nbsp; एक जोडी बूट आणि दोन जोडी पायमोजे &nbsp; सन '+esc(yr)+'</h2>'
  +'<div class="rw"><span>जा.क्र. समग्र/लेखा/ '+bl(f.jk,40)+' /'+esc(yr)+'</span><span>दिनांक – '+bl(bsDt(f.dt),80)+'</span></div>'
