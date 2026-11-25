@@ -1778,7 +1778,7 @@ async function ext(p,r,env){
   if(p==='/api/t/bday'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const md=istDay().slice(5);
-    const rs=(await env.DB.prepare("SELECT r.name,r.cls,r.div,i.dob,i.gender g,i.mobile m FROM tclasses c JOIN roster r ON r.udise=c.udise AND r.cls=c.cls AND r.div=c.div JOIN sinfo i ON i.pen=r.pen WHERE c.tid=? AND substr(i.dob,6,5)=? ORDER BY r.cls,r.div,r.name").bind(t.id,md).all()).results;
+    const rs=(await env.DB.prepare("SELECT r.name,r.cls,r.div,r.med md,i.dob,i.gender g,i.mobile m FROM tclasses c JOIN roster r ON r.udise=c.udise AND r.cls=c.cls AND r.div=c.div JOIN sinfo i ON i.pen=r.pen WHERE c.tid=? AND substr(i.dob,6,5)=? ORDER BY r.cls,r.div,r.name").bind(t.id,md).all()).results;
     const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise||'').first().catch(()=>null);
     return J({ok:1,rows:rs,today:istDay(),me:{nm:t.name||'',sc:sc?sc.name:''}});
   }
