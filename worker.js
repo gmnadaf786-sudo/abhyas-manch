@@ -134,7 +134,7 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
 let BSD=null;async function bsLoad(env,r){if(BSD)return BSD;const rs=await env.ASSETS.fetch(new Request(new URL('/data/bootsox_2026-27.json',r.url)));BSD=rs.ok?await rs.json():{yr:'',rate:[150,20],rows:{}};return BSD}
 const BSTY=['boot','uni2','usg','pad','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
 async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
-  return {ok:1,ty,yr:d.yr,rate:d.rate,rate2:d.rate2,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2],n2:x[3]||0}:null,f:F}}
+  return {ok:1,ty,yr:d.yr,rate:d.rate,rate2:d.rate2,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2],n2:x[3]||0,sg:x[5]||0}:null,f:F}}
 let SMK=false;
 async function smEns(env,r){if(SMK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS sanch_m(udise TEXT PRIMARY KEY,hm INTEGER,p15 INTEGER,p68 INTEGER,tot INTEGER,pe INTEGER)').run();
   const y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first(),sr=await env.DB.prepare("SELECT v FROM cfg WHERE k='smsrc'").first(),SRC='2025-26v2'; // v2: संपूर्ण सांगली जिल्हा (BEO अपलोड झाल्यावर smsrc='upload', मग पुन्हा भरणे नाही)
@@ -734,7 +734,7 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/smimp'){if(kp)return J({e:'beo'},403);const rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,5000),yr=cl(b.yr,9);if(!/^\d{4}-\d{2}$/.test(yr)||rows.length<10)return J({e:'arg'},400);await smEns(env,r);const n=await smPut(env,yr,rows);await cfgUp(env,'smsrc','upload').run();await dcClr(env);return J({ok:1,n,yr})}
   if(p==='/api/o/bsosum'){const d=await bsLoad(env,r),FL={};((await env.DB.prepare("SELECT k FROM cfg WHERE k LIKE 'bso:%' OR k LIKE 'smo:%'").all()).results||[]).forEach(x=>{const p=x.k.split(':'),ty=p[0]==='bso'?'boot':p[1],u=p[p.length-1];(FL[u]=FL[u]||[]).push(ty)});
-    return J({ok:1,yr:d.yr,rate:d.rate,rate2:d.rate2,rows:ss.map(x=>{const v=d.rows[x.udise];return [x.udise,x.code,x.name||'',v?v[0]:'',v?v[1]:null,(FL[x.udise]||[]).includes('boot')?1:0,v?(v[3]||0):null,(FL[x.udise]||[]).join(',')]})})}
+    return J({ok:1,yr:d.yr,rate:d.rate,rate2:d.rate2,rows:ss.map(x=>{const v=d.rows[x.udise];return [x.udise,x.code,x.name||'',v?v[0]:'',v?v[1]:null,(FL[x.udise]||[]).includes('boot')?1:0,v?(v[3]||0):null,(FL[x.udise]||[]).join(','),v?(v[5]||0):null]})})}
   if(p==='/api/o/bsoone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);return J(await bsOne(env,r,u,b.ty))}
   if(p==='/api/o/smsum'){ // KP: स्वतःचे केंद्र, BEO: सर्व; 30 मिनिटे कॅश
     const ck='sm:'+SK;{const h=await dcGet(env,ck,b.fr);if(h)return J(h)}
