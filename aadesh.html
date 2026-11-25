@@ -35,5 +35,5 @@ function show(){var u=$('sc').value;$('go').disabled=!u;if(!u){$('info').innerHT
 function dl(){var u=$('sc').value;if(!u)return;var w=window.open('','_blank');if(!w){alert('पॉप-अप परवानगी द्या.');return}w.document.open();w.document.write(bsDoc(job(u)));w.document.close()}
 fetch('/data/bootsox_2026-27.json').then(function(r){return r.json()}).then(function(d){D=d;var C={};Object.keys(d.rows).forEach(function(u){C[d.rows[u][2]]=(C[d.rows[u][2]]||0)+1});
  $('cl').innerHTML='<option value="">केंद्र निवडा</option>'+Object.keys(C).sort().map(function(c){return '<option>'+esc(c)+'</option>'}).join('')}).catch(function(){$('cl').innerHTML='<option>माहिती लोड झाली नाही – पुन्हा उघडा</option>'})
-</script><script src="bootsox.js?v=8"></script>
+</script><script src="bootsox.js?v=9"></script>
 </body></html>

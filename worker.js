@@ -133,8 +133,8 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
 /* बूट व पायमोजे अनुदान: data/bootsox_2026-27.json (PDF मधून), शाळेची आदेश माहिती cfg 'bso:'+udise */
 let BSD=null;async function bsLoad(env,r){if(BSD)return BSD;const rs=await env.ASSETS.fetch(new Request(new URL('/data/bootsox_2026-27.json',r.url)));BSD=rs.ok?await rs.json():{yr:'',rate:[150,20],rows:{}};return BSD}
 const BSTY=['boot','uni2','usg','pad','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
-async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
-  return {ok:1,ty,yr:d.yr,rate:d.rate,rate2:d.rate2,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2],n2:x[3]||0,sg:x[5]||0}:null,f:F}}
+async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name,cmax FROM schools WHERE udise=?').bind(u).first().catch(()=>null);let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
+  return {ok:1,ty,yr:d.yr,rate:d.rate,rate2:d.rate2,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2],n2:x[3]||0,sg:x[5]||0,cx:(s&&s.cmax)||0}:null,f:F}}
 let SMK=false;
 async function smEns(env,r){if(SMK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS sanch_m(udise TEXT PRIMARY KEY,hm INTEGER,p15 INTEGER,p68 INTEGER,tot INTEGER,pe INTEGER)').run();
   const y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first(),sr=await env.DB.prepare("SELECT v FROM cfg WHERE k='smsrc'").first(),SRC='2025-26v2'; // v2: संपूर्ण सांगली जिल्हा (BEO अपलोड झाल्यावर smsrc='upload', मग पुन्हा भरणे नाही)
