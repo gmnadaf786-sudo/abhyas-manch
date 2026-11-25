@@ -148,7 +148,7 @@ function medMiss(){return DATA.filter(function(r){return (!FL||r.c===FL)&&!r.med
 function medAlert(){if(ROLE!=='KP')return '';var n=medMiss().length;return n?'<div class="card" style="border:2px solid #f59e0b;background:#fffbeb"><b>⚠ '+n+' शाळांचे माध्यम ठरवलेले नाही</b><p class="m" style="margin:4px 0 8px">शाळा सारांशमध्ये प्रत्येक शाळेचे माध्यम (एक किंवा दोन) व सेमी इंग्लिश वर्ग निवडा.</p><button onclick="ssUi()">माध्यम ठरवा</button></div>':''}
 function ssTyp(m){m=String(m||'');return /Zilla Parishad/i.test(m)?'जिल्हा परिषद':/Social\s*Welfare/i.test(m)?'सोशल वेलफेअर':/VJNT/i.test(m)?'VJNT अनुदानित':/Apang|Handicap|Disab/i.test(m)?'अपंग कल्याण अनुदानित':(/Aided/i.test(m)&&!/Un-?\s?Aided/i.test(m)?'खासगी अनुदानित':'इतर')}
 var SSTY=[['जिल्हा परिषद','जिल्हा परिषद शाळा','#16a34a'],['खासगी अनुदानित','खासगी अनुदानित शाळा (सर्व एकत्र)','#d97706'],['VJNT अनुदानित','VJNT अनुदानित शाळा','#0891b2'],['अपंग कल्याण अनुदानित','अपंग कल्याण अनुदानित शाळा','#7c3aed'],['सोशल वेलफेअर','सोशल वेलफेअर शाळा','#db2777'],['इतर','इतर शाळा','#6b7280']];
-var SSL=['1-4','1-5','1-7','1-8','5-7','8-10'];
+var SSL=['1-4','1-5','1-7','1-8','5-7','5-10','5-12','8-10','8-12'];
 var SSDF=null;
 function ssUi(msg){TAB='S';if(SSD&&SSDF===FL+'|'+DATA.length){ssDraw(msg);return}X.innerHTML=hdr(msg)+tabs()+cenSel('ssUi()')+'<div class="card"><p class="m">⏳ शाळांची माहिती घेत आहे…</p></div>';
  var R=DATA.filter(function(r){return !FL||r.c===FL}),pf={},ps=[];R.forEach(function(r){var k=String(r.u).slice(0,6);if(!pf[k]){pf[k]=1;ps.push(k)}});var M={};
