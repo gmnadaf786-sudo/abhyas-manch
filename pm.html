@@ -352,5 +352,5 @@ function pTab(){var rows=[['तांदूळ','१०० ग्रॅम','१
  var wk='';for(var i=0;i<6;i++){var d=new Date(mon);d.setUTCDate(mon.getUTCDate()+i);var ds=d.toISOString().slice(0,10),r=recFor(ds);wk+='<tr><td>'+WK[d.getUTCDay()]+' '+pn(d.getUTCDate())+'</td><td style="text-align:left">'+esc(r[0])+'</td></tr>'}
  document.getElementById('b').innerHTML='<div class="card"><h2>🍛 या आठवड्याचा मेनू</h2><div class="w"><table>'+wk+'</table></div></div><div class="card"><h2>🌾 धान्य व कडधान्यांचे प्रमाण (प्रति विद्यार्थी)</h2><div class="w"><table><tr><th>पदार्थ</th><th>१–५</th><th>६–८</th></tr>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('')+'</table></div></div><div class="card"><h2>🧂 मसाले व तेल</h2><div class="w"><table><tr><th>पदार्थ</th><th>१–५</th><th>६–८</th></tr>'+SPICES.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('')+'<tr><td>तेल (लि.)</td><td>०.००५४९५</td><td>०.००८२४२</td></tr></table></div><small>जिल्हा परिषद, सांगली – PM पोषण शक्ती निर्माण योजना २०२६-२७ च्या परिपत्रकानुसार.</small></div>'}
 init();
-</script><script src="pmrep.js"></script>
+</script><script src="pmrep.js?v=2"></script>
 </body></html>

@@ -53,18 +53,27 @@ function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt
     return used;
   }
 
+  /* त्या महिन्याच्या धान्य पावत्यांमधून गटनिहाय प्राप्त वस्तू (q15/q68 नसल्यास वापराच्या प्रमाणात विभागणी) */
+  function rcptQty_(Y,m,group){
+    var L=(Y.rcptBy&&Y.rcptBy[m])||[];if(!L.length)return null;
+    var a=consumption(Y.dailyBy[m]||[],'15'),b=consumption(Y.dailyBy[m]||[],'68'),q={};
+    L.forEach(function(r){(r.items||[]).forEach(function(x){if(ITEM_NAMES.indexOf(x.name)<0)return;var v;
+      if(x.q15!=null||x.q68!=null)v=Number(group==='15'?x.q15:x.q68)||0;
+      else{var t=(a[x.name]||0)+(b[x.name]||0),sh=ALLOWED.length===1?1:(t>0?((group==='15'?a[x.name]:b[x.name])||0)/t:0.5);v=(Number(x.qty)||0)*sh}
+      q[x.name]=(q[x.name]||0)+v})});
+    return q}
   /* वर्षारंभापासून (एप्रिल) प्रत्येक महिन्याची शिल्लक साखळी. */
   function compute(fy, group){
     var Y=state.year[fy], out={}, prev=(Y.carry&&Y.carry[group])||null;
     fyMonths(fy).forEach(function(m){
-      var st=((Y.stockBy[m]||{})[group])||{}, used=consumption(Y.dailyBy[m]||[],group);
+      var st=((Y.stockBy[m]||{})[group])||{}, used=consumption(Y.dailyBy[m]||[],group), rq=rcptQty_(Y,m,group);
       var o={},ov={},r={},p={},c={},carry={};
       ITEM_NAMES.forEach(function(it){
         var e=st[it]||{};
         carry[it]=prev?prev[it]:0;
         ov[it]=(e.o!==undefined&&e.o!==null&&e.o!=='')?num(e.o):null;
         o[it]=ov[it]!==null?ov[it]:carry[it];
-        r[it]=num(e.r); p[it]=num(e.p);
+        r[it]=rq?(rq[it]||0):num(e.r); p[it]=num(e.p); /* पावत्या असल्यास प्राप्त = पावत्यांची बेरीज */
         c[it]=o[it]+r[it]+p[it]-(used[it]||0);
       });
       out[m]={o:o,ov:ov,carry:carry,r:r,p:p,used:used,c:c}; prev=c;
@@ -283,7 +292,8 @@ function holidayOf(dt){var a=window.PMHOL||[],iso=dt.getFullYear()+'-'+String(dt
     }catch(e){}
   }
 function build(raw,month){
-  var fy=fyOf(month),Y={school:{name:raw.school||'',udise:raw.udise||'',kendra:raw.kendra||'',taluka:raw.taluka||'',district:raw.district||''},teacher:raw.teacher||'',dailyBy:{},stockBy:{},carry:raw.carry||{}};
+  var fy=fyOf(month),Y={school:{name:raw.school||'',udise:raw.udise||'',kendra:raw.kendra||'',taluka:raw.taluka||'',district:raw.district||''},teacher:raw.teacher||'',dailyBy:{},stockBy:{},rcptBy:{},carry:raw.carry||{}};
+  (raw.rcpt||[]).forEach(function(r){var it=[];try{it=JSON.parse(r.items)}catch(e){}var m=String(r.date||'').slice(0,7);if(m)(Y.rcptBy[m]=Y.rcptBy[m]||[]).push({date:r.date,items:it})});
   (raw.daily||[]).forEach(function(d){var o={date:d.date,menu:d.menu||'',p15:Number(d.p15)||0,p68:Number(d.p68)||0,pulse15:d.pulse15||'',pulse68:d.pulse68||'',cooked:d.cooked||'होय',supplement:d.supp||'',tasteTime:d.taste||'',distTime:d.dist||'',taster:d.taster||'',remark:d.remark||'',sample:d.sample||''};(Y.dailyBy[monthOf(d.date)]=Y.dailyBy[monthOf(d.date)]||[]).push(o)});
   (raw.stock||[]).forEach(function(x){var dd={};try{dd=JSON.parse(x.data)}catch(e){}(Y.stockBy[x.month]=Y.stockBy[x.month]||{})[x.grp]=dd});
   state.year={};state.year[fy]=Y;state.month=month;
