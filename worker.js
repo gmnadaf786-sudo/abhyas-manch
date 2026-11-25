@@ -867,7 +867,7 @@ async function schoolApi(p,r,env){
     return J({ok:1,s:r,hm:hm?hm.name:'',ct:ct?ct.name:'',no});
   }
   if(p==='/api/s/schl'){ // इ. 4 थी व 7 वी: शिष्यवृत्ती नोंदणी माहिती (आधार मुखवटा)
-    await kyEns(env);const rs=(await env.DB.prepare("SELECT r.pen,r.cls,r.div,r.name,r.med rmed,i.gender,i.dob idob,i.cat icat,i.father,i.mother,i.mobile imob,i.extra,k.* FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen LEFT JOIN stu_kyc k ON k.pen=r.pen WHERE r.udise=? AND r.cls IN (4,7) ORDER BY r.cls,r.div,r.name").bind(t.udise).all()).results||[];
+    await kyEns(env);const rs=(await env.DB.prepare("SELECT r.pen,r.cls,r.div,r.name,r.med rmed,i.gender,i.dob idob,i.cat icat,i.father,i.mother,i.mobile imob,i.extra,k.a4,k.photo,k.aenr,k.mob,k.email,k.inc,k.dom,k.land,k.dis,k.wri,k.cat,k.med,k.dob FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen LEFT JOIN stu_kyc k ON k.pen=r.pen WHERE r.udise=? AND r.cls IN (4,7) ORDER BY r.cls,r.div,r.name").bind(t.udise).all()).results||[];
     return J({ok:1,key:env.AADHAAR_KEY?1:0,rows:rs.map(x=>{let e={};try{e=JSON.parse(x.extra||'{}')}catch(_){}return {pen:x.pen,c:x.cls,d:x.div,n:x.name,g:x.gender||'',f:x.father||'',mo:x.mother||'',rmed:x.rmed||'',idob:x.idob||'',icat:x.icat||'',imob:x.imob||'',iemail:e.email||'',icwsn:e.cwsn||'',a4:x.a4||'',ph:x.photo?1:0,k:Object.fromEntries(KYF.map(f=>[f,x[f]||'']))}})})}
   if(p==='/api/s/schph'){await kyEns(env);const k=await env.DB.prepare('SELECT photo FROM stu_kyc WHERE pen=? AND udise=?').bind(cl(b.pen,20),t.udise).first();return J({ok:1,img:await kyImg(env,k&&k.photo)})}
   if(p==='/api/s/schlsave'){
