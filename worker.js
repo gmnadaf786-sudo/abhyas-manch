@@ -135,6 +135,13 @@ let BSD=null;async function bsLoad(env,r){if(BSD)return BSD;const rs=await env.A
 const BSTY=['boot','uni2','usg','pad','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
 async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name,cmax FROM schools WHERE udise=?').bind(u).first().catch(()=>null);let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
   return {ok:1,ty,yr:d.yr,rate:d.rate,rate2:d.rate2,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2],n2:x[3]||0,sg:x[5]||0,cx:(s&&s.cmax)||0}:null,f:F}}
+/* शिष्यवृत्ती / विद्यार्थी KYC: stu_kyc. आधार AES-GCM ने कूटबद्ध (secret AADHAAR_KEY), फोटो+सही R2 'schol/udise/pen.jpg' (≤100KB) */
+let KYK=false;async function kyEns(env){if(KYK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS stu_kyc(pen TEXT PRIMARY KEY,udise TEXT,aenc TEXT,a4 TEXT,aenr TEXT,mob TEXT,email TEXT,inc TEXT,dom TEXT,land TEXT,dis TEXT,wri TEXT,cat TEXT,med TEXT,dob TEXT,photo TEXT,upd TEXT)').run();KYK=true}
+async function aKey(env){if(!env.AADHAAR_KEY)return null;const h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('am-aadhaar:'+env.AADHAAR_KEY));return crypto.subtle.importKey('raw',h,'AES-GCM',false,['encrypt','decrypt'])}
+async function aEnc(env,s){const k=await aKey(env);if(!k)return null;const iv=crypto.getRandomValues(new Uint8Array(12)),ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},k,new TextEncoder().encode(s))),o=new Uint8Array(12+ct.length);o.set(iv);o.set(ct,12);let b='';o.forEach(x=>b+=String.fromCharCode(x));return btoa(b)}
+async function aDec(env,s,k){try{k=k||await aKey(env);if(!k||!s)return '';const r=atob(s),u=new Uint8Array(r.length);for(let i=0;i<r.length;i++)u[i]=r.charCodeAt(i);return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:u.slice(0,12)},k,u.slice(12)))}catch(e){return ''}}
+const KYF=['aenr','mob','email','inc','dom','land','dis','wri','cat','med','dob'];
+async function kyImg(env,key){if(!key||!env.BOOKS)return '';const o=await env.BOOKS.get(key);if(!o)return '';const u=new Uint8Array(await o.arrayBuffer());let b='';for(let i=0;i<u.length;i+=8192)b+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return 'data:image/jpeg;base64,'+btoa(b)}
 let SMK=false;
 async function smEns(env,r){if(SMK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS sanch_m(udise TEXT PRIMARY KEY,hm INTEGER,p15 INTEGER,p68 INTEGER,tot INTEGER,pe INTEGER)').run();
   const y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first(),sr=await env.DB.prepare("SELECT v FROM cfg WHERE k='smsrc'").first(),SRC='2025-26v2'; // v2: संपूर्ण सांगली जिल्हा (BEO अपलोड झाल्यावर smsrc='upload', मग पुन्हा भरणे नाही)
@@ -734,9 +741,14 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/smimp'){if(kp)return J({e:'beo'},403);const rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,5000),yr=cl(b.yr,9);if(!/^\d{4}-\d{2}$/.test(yr)||rows.length<10)return J({e:'arg'},400);await smEns(env,r);const n=await smPut(env,yr,rows);await cfgUp(env,'smsrc','upload').run();await dcClr(env);return J({ok:1,n,yr})}
   if(p==='/api/o/schexp'){ // शिष्यवृत्ती नोंदणी: इ. 4 थी व 7 वी विद्यार्थी (केंद्र/तालुका)
-    const rs=(await env.DB.prepare("SELECT r.udise u,r.cls c,r.div d,r.name n,r.med m,i.gender g,i.dob,i.cat,i.father f,i.mother mo,i.mobile mb,i.extra x FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.cls IN (4,7) AND r.udise "+SW+" ORDER BY r.udise,r.cls,r.name").bind(...SA).all()).results||[];
+    await kyEns(env);const rs=(await env.DB.prepare("SELECT r.pen,r.udise u,r.cls c,r.div d,r.name n,r.med m,i.gender g,i.dob,i.cat,i.father f,i.mother mo,i.mobile mb,i.extra x,k.aenc,k.aenr,k.mob kmob,k.email kemail,k.inc,k.dom,k.land,k.dis,k.wri,k.cat kcat,k.med kmed,k.dob kdob,k.photo FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen LEFT JOIN stu_kyc k ON k.pen=r.pen WHERE r.cls IN (4,7) AND r.udise "+SW+" ORDER BY r.udise,r.cls,r.name").bind(...SA).all()).results||[];
+    const AK=await aKey(env);for(const x of rs)x.aad=x.aenc?await aDec(env,x.aenc,AK):'';
     const sm={};(await env.DB.prepare('SELECT udise,name,med FROM schools WHERE udise '+SW).bind(...SA).all()).results.forEach(x=>sm[x.udise]=[x.name||'',x.med||'']);
-    return J({ok:1,sch:sm,rows:rs.map(x=>{let e={};try{e=JSON.parse(x.x||'{}')}catch(_){}return [x.u,x.c,x.n,x.m||'',x.g||'',x.dob||'',x.cat||'',x.f||'',x.mo||'',x.mb||'',e.email||'',e.apaar||'',e.cwsn||'',e.medium||'']})})}
+    return J({ok:1,sch:sm,rows:rs.map(x=>{let e={};try{e=JSON.parse(x.x||'{}')}catch(_){}return [x.u,x.c,x.n,x.kmed||x.m||'',x.g||'',x.kdob||x.dob||'',x.kcat||x.cat||'',x.f||'',x.mo||'',x.kmob||x.mb||'',x.kemail||e.email||'',e.apaar||'',x.dis||e.cwsn||'',e.medium||'',x.aad||'',x.aenr||'',x.dom||'',x.land||'',x.inc||'',x.wri||'',x.photo?x.pen:'']})})}
+  if(p==='/api/o/schphs'){ // फोटो ZIP साठी: 25 पर्यंत PEN
+    await kyEns(env);const ps=(Array.isArray(b.pens)?b.pens:[]).slice(0,25).map(x=>cl(x,20)),out={};
+    for(const pn of ps){const k=await env.DB.prepare('SELECT udise,photo FROM stu_kyc WHERE pen=?').bind(pn).first();if(k&&k.photo&&ok.has(k.udise))out[pn]=await kyImg(env,k.photo)}
+    return J({ok:1,img:out})}
   if(p==='/api/o/bsosum'){const d=await bsLoad(env,r),FL={};((await env.DB.prepare("SELECT k FROM cfg WHERE k LIKE 'bso:%' OR k LIKE 'smo:%'").all()).results||[]).forEach(x=>{const p=x.k.split(':'),ty=p[0]==='bso'?'boot':p[1],u=p[p.length-1];(FL[u]=FL[u]||[]).push(ty)});
     return J({ok:1,yr:d.yr,rate:d.rate,rate2:d.rate2,rows:ss.map(x=>{const v=d.rows[x.udise];return [x.udise,x.code,x.name||'',v?v[0]:'',v?v[1]:null,(FL[x.udise]||[]).includes('boot')?1:0,v?(v[3]||0):null,(FL[x.udise]||[]).join(','),v?(v[5]||0):null]})})}
   if(p==='/api/o/bsoone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);return J(await bsOne(env,r,u,b.ty))}
@@ -854,6 +866,18 @@ async function schoolApi(p,r,env){
     let no=0;if(b.inc){const k='bon:'+t.udise+':'+cl(b.ay,9),o=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(k).first();no=(parseInt(o&&o.v)||0)+1;await cfgUp(env,k,String(no)).run()}
     return J({ok:1,s:r,hm:hm?hm.name:'',ct:ct?ct.name:'',no});
   }
+  if(p==='/api/s/schl'){ // इ. 4 थी व 7 वी: शिष्यवृत्ती नोंदणी माहिती (आधार मुखवटा)
+    await kyEns(env);const rs=(await env.DB.prepare("SELECT r.pen,r.cls,r.div,r.name,r.med rmed,i.gender,i.dob idob,i.cat icat,i.father,i.mother,i.mobile imob,i.extra,k.* FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen LEFT JOIN stu_kyc k ON k.pen=r.pen WHERE r.udise=? AND r.cls IN (4,7) ORDER BY r.cls,r.div,r.name").bind(t.udise).all()).results||[];
+    return J({ok:1,key:env.AADHAAR_KEY?1:0,rows:rs.map(x=>{let e={};try{e=JSON.parse(x.extra||'{}')}catch(_){}return {pen:x.pen,c:x.cls,d:x.div,n:x.name,g:x.gender||'',f:x.father||'',mo:x.mother||'',rmed:x.rmed||'',idob:x.idob||'',icat:x.icat||'',imob:x.imob||'',iemail:e.email||'',icwsn:e.cwsn||'',a4:x.a4||'',ph:x.photo?1:0,k:Object.fromEntries(KYF.map(f=>[f,x[f]||'']))}})})}
+  if(p==='/api/s/schph'){await kyEns(env);const k=await env.DB.prepare('SELECT photo FROM stu_kyc WHERE pen=? AND udise=?').bind(cl(b.pen,20),t.udise).first();return J({ok:1,img:await kyImg(env,k&&k.photo)})}
+  if(p==='/api/s/schlsave'){
+    await kyEns(env);const pen=cl(b.pen,20),ro=await env.DB.prepare('SELECT pen FROM roster WHERE pen=? AND udise=?').bind(pen,t.udise).first();if(!ro)return J({e:'nf'},404);
+    const cur=await env.DB.prepare('SELECT * FROM stu_kyc WHERE pen=?').bind(pen).first()||{},v={};KYF.forEach(f=>v[f]=cl(b.f&&b.f[f],f==='email'?80:40));
+    let aenc=cur.aenc||null,a4=cur.a4||'';const ad=String(b.aad||'').replace(/\D/g,'');
+    if(b.aad==='-'){aenc=null;a4=''}else if(ad){if(ad.length!==12)return J({e:'aad'},400);if(!env.AADHAAR_KEY)return J({e:'nokey'},400);aenc=await aEnc(env,ad);a4=ad.slice(-4)}
+    let photo=cur.photo||null;if(b.img){const m=/^data:image\/jpeg;base64,([A-Za-z0-9+\/=]+)$/.exec(String(b.img));if(!m||m[1].length>140000||!env.BOOKS)return J({e:'img'},400);const raw=atob(m[1]),u8=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)u8[i]=raw.charCodeAt(i);photo='schol/'+t.udise+'/'+pen+'.jpg';await env.BOOKS.put(photo,u8,{httpMetadata:{contentType:'image/jpeg'}})}
+    await env.DB.prepare('INSERT INTO stu_kyc(pen,udise,aenc,a4,'+KYF.join(',')+',photo,upd) VALUES(?,?,?,?,'+KYF.map(()=>'?').join(',')+',?,?) ON CONFLICT(pen) DO UPDATE SET udise=excluded.udise,aenc=excluded.aenc,a4=excluded.a4,'+KYF.map(f=>f+'=excluded.'+f).join(',')+',photo=excluded.photo,upd=excluded.upd').bind(pen,t.udise,aenc,a4,...KYF.map(f=>v[f]),photo,istDay()).run();
+    return J({ok:1,a4,ph:photo?1:0})}
   if(p==='/api/s/stu'){ // शाळा: स्वतःचे विद्यार्थी (वर्गनिहाय)
     const rs=(await env.DB.prepare('SELECT r.pen p,r.cls c,r.div d,r.name n,i.gender g,i.cat k FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? ORDER BY r.cls,r.div,r.name').bind(t.udise).all()).results||[];
     return J({ok:1,rows:rs});
