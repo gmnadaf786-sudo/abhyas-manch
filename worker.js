@@ -140,13 +140,11 @@ async function smPut(env,yr,rows){const st=[env.DB.prepare('DELETE FROM sanch_m'
     st.push(env.DB.prepare('INSERT INTO sanch_m(udise,hm,p15,p68,tot,pe) VALUES(?,?,?,?,?,?)').bind(u,h,a,c,h+a+c,n(x[4])))}
   for(let i=0;i<st.length;i+=90)await env.DB.batch(st.slice(i,i+90));
   await cfgUp(env,'smyr',String(yr||'').slice(0,9)).run();return seen.size}
+function smK(ty,cl){ty=String(ty||'');if(/मुख्याध्यापक/.test(ty))return ['hm','प्रकार'];if(/पदवीधर|विषय/.test(ty))return ['p68','प्रकार'];if(/प्राथमिक|शिक्षण सेवक/.test(ty))return ['p15','प्रकार'];if(!cl||!cl.length)return ['p15','अंदाज'];return [cl.every(x=>x>=6)?'p68':'p15','वर्ग']}
 async function smWork(env,u){await tcEns(env);
   const ts=(await env.DB.prepare("SELECT t.id,t.shalarth sh,t.name n,json_extract(i.data,'$.\"शिक्षक प्रकार\"') ty FROM teachers t LEFT JOIN tch_info i ON i.shalarth=t.shalarth WHERE t.udise=? AND t.status='ok' ORDER BY t.name").bind(u).all()).results||[],
     cs=(await env.DB.prepare('SELECT tid,cls FROM tclasses WHERE udise=?').bind(u).all()).results||[];
-  const w={hm:0,p15:0,p68:0},L=ts.map(t=>{const ty=String(t.ty||'');let k,src='प्रकार';
-    if(/मुख्याध्यापक/.test(ty))k='hm';else if(/पदवीधर|विषय/.test(ty))k='p68';else if(/प्राथमिक|शिक्षण सेवक/.test(ty))k='p15';
-    else{src='वर्ग';const c=cs.filter(x=>x.tid===t.id).map(x=>x.cls);k=c.length&&c.every(x=>x>=6)?'p68':'p15';if(!c.length)src='अंदाज'}
-    w[k]++;return {n:t.n,ty,k,src}});
+  const w={hm:0,p15:0,p68:0},L=ts.map(t=>{const ty=String(t.ty||''),x=smK(ty,cs.filter(c=>c.tid===t.id).map(c=>c.cls));w[x[0]]++;return {n:t.n,ty,k:x[0],src:x[1]}});
   return {w,L}}
 let RBK=false;async function rbEns(env){if(RBK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS sch_rbook(udise TEXT PRIMARY KEY,data TEXT,upd TEXT)').run();RBK=true}
 async function lvEns(env){await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS sch_lv(id INTEGER PRIMARY KEY AUTOINCREMENT, udise TEXT, shalarth TEXT, tname TEXT, typ TEXT, fd TEXT, td TEXT, days INTEGER, rm TEXT, img TEXT, upd TEXT)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS kp_diary(id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, dt TEXT, kind TEXT, place TEXT, udise TEXT, pn TEXT, rm TEXT, img TEXT, upd TEXT)")])}
@@ -729,6 +727,18 @@ async function offApi(p,r,env){
     return J({e:'bad'},400);
   }
   if(p==='/api/o/smimp'){if(kp)return J({e:'beo'},403);const rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,5000),yr=cl(b.yr,9);if(!/^\d{4}-\d{2}$/.test(yr)||rows.length<10)return J({e:'arg'},400);await smEns(env,r);const n=await smPut(env,yr,rows);await cfgUp(env,'smsrc','upload').run();await dcClr(env);return J({ok:1,n,yr})}
+  if(p==='/api/o/smsum'){ // KP: स्वतःचे केंद्र, BEO: सर्व; 30 मिनिटे कॅश
+    const ck='sm:'+SK;{const h=await dcGet(env,ck,b.fr);if(h)return J(h)}
+    await smEns(env,r);await tcEns(env);
+    const [sa,ta,ca,y]=await Promise.all([env.DB.prepare('SELECT udise,hm,p15,p68,tot FROM sanch_m WHERE udise '+SW).bind(...SA).all(),
+      env.DB.prepare("SELECT t.id,t.udise u,json_extract(i.data,'$.\"शिक्षक प्रकार\"') ty FROM teachers t LEFT JOIN tch_info i ON i.shalarth=t.shalarth WHERE t.status='ok' AND t.udise "+SW).bind(...SA).all(),
+      env.DB.prepare('SELECT tid,cls FROM tclasses WHERE udise '+SW).bind(...SA).all(),
+      env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first()]);
+    const S={},W={},C={};(sa.results||[]).forEach(x=>S[x.udise]=[x.hm,x.p15,x.p68]);(ca.results||[]).forEach(x=>{(C[x.tid]=C[x.tid]||[]).push(x.cls)});
+    (ta.results||[]).forEach(t=>{const k=smK(t.ty,C[t.id]),o=W[t.u]||(W[t.u]=[0,0,0,0]);o[k[0]==='hm'?0:k[0]==='p15'?1:2]++;if(k[1]!=='प्रकार')o[3]++});
+    const out={ok:1,yr:y?y.v:'',rows:ss.map(x=>[x.udise,x.code,x.name||'',S[x.udise]||null,W[x.udise]||[0,0,0,0]])};
+    await dcPut(env,ck,out,1800000);return J(out)}
+  if(p==='/api/o/smone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);await smEns(env,r);const s=await env.DB.prepare('SELECT hm,p15,p68,tot,pe FROM sanch_m WHERE udise=?').bind(u).first(),x=await smWork(env,u);return J({ok:1,s:s||null,w:x.w,L:x.L})}
   if(p==='/api/o/smyr'){await smEns(env,r);const y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first(),c=await env.DB.prepare('SELECT COUNT(*) c FROM sanch_m').first();return J({ok:1,yr:y?y.v:'',n:c?c.c:0})}
   if(p==='/api/o/rbsum'){await rbEns(env);const m={};((await env.DB.prepare('SELECT udise,data,upd FROM sch_rbook').all()).results||[]).forEach(x=>{if(ok.has(x.udise)){let d={};try{d=JSON.parse(x.data||'{}')}catch(e){}m[x.udise]={k:d.k||{},upd:x.upd}}});
     return J({ok:1,rows:ss.map(x=>({u:x.udise,n:x.name,k:(m[x.udise]||{}).k||{},upd:(m[x.udise]||{}).upd||''}))})}
