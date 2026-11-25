@@ -132,8 +132,9 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
 /* संच मान्यता: sanch_m (UDISE + मंजूर पदे), वर्ष cfg 'smyr'. नवीन वर्षाची फाइल अपलोड केल्यावर पूर्ण बदलते. */
 /* बूट व पायमोजे अनुदान: data/bootsox_2026-27.json (PDF मधून), शाळेची आदेश माहिती cfg 'bso:'+udise */
 let BSD=null;async function bsLoad(env,r){if(BSD)return BSD;const rs=await env.ASSETS.fetch(new Request(new URL('/data/bootsox_2026-27.json',r.url)));BSD=rs.ok?await rs.json():{yr:'',rate:[150,20],rows:{}};return BSD}
-async function bsOne(env,r,u){const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('bso:'+u).first(),s=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
-  return {ok:1,yr:d.yr,rate:d.rate,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2]}:null,f:F}}
+const BSTY=['boot','uni2','usg','pad','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
+async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(u).first();let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
+  return {ok:1,ty,yr:d.yr,rate:d.rate,rate2:d.rate2,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2],n2:x[3]||0}:null,f:F}}
 let SMK=false;
 async function smEns(env,r){if(SMK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS sanch_m(udise TEXT PRIMARY KEY,hm INTEGER,p15 INTEGER,p68 INTEGER,tot INTEGER,pe INTEGER)').run();
   const y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first(),sr=await env.DB.prepare("SELECT v FROM cfg WHERE k='smsrc'").first(),SRC='2025-26v2'; // v2: संपूर्ण सांगली जिल्हा (BEO अपलोड झाल्यावर smsrc='upload', मग पुन्हा भरणे नाही)
@@ -732,9 +733,9 @@ async function offApi(p,r,env){
     return J({e:'bad'},400);
   }
   if(p==='/api/o/smimp'){if(kp)return J({e:'beo'},403);const rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,5000),yr=cl(b.yr,9);if(!/^\d{4}-\d{2}$/.test(yr)||rows.length<10)return J({e:'arg'},400);await smEns(env,r);const n=await smPut(env,yr,rows);await cfgUp(env,'smsrc','upload').run();await dcClr(env);return J({ok:1,n,yr})}
-  if(p==='/api/o/bsosum'){const d=await bsLoad(env,r),fl=new Set(((await env.DB.prepare("SELECT k FROM cfg WHERE k LIKE 'bso:%'").all()).results||[]).map(x=>x.k.slice(4)));
-    return J({ok:1,yr:d.yr,rate:d.rate,rows:ss.map(x=>{const v=d.rows[x.udise];return [x.udise,x.code,x.name||'',v?v[0]:'',v?v[1]:null,fl.has(x.udise)?1:0]})})}
-  if(p==='/api/o/bsoone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);return J(await bsOne(env,r,u))}
+  if(p==='/api/o/bsosum'){const d=await bsLoad(env,r),FL={};((await env.DB.prepare("SELECT k FROM cfg WHERE k LIKE 'bso:%' OR k LIKE 'smo:%'").all()).results||[]).forEach(x=>{const p=x.k.split(':'),ty=p[0]==='bso'?'boot':p[1],u=p[p.length-1];(FL[u]=FL[u]||[]).push(ty)});
+    return J({ok:1,yr:d.yr,rate:d.rate,rate2:d.rate2,rows:ss.map(x=>{const v=d.rows[x.udise];return [x.udise,x.code,x.name||'',v?v[0]:'',v?v[1]:null,(FL[x.udise]||[]).includes('boot')?1:0,v?(v[3]||0):null,(FL[x.udise]||[]).join(',')]})})}
+  if(p==='/api/o/bsoone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);return J(await bsOne(env,r,u,b.ty))}
   if(p==='/api/o/smsum'){ // KP: स्वतःचे केंद्र, BEO: सर्व; 30 मिनिटे कॅश
     const ck='sm:'+SK;{const h=await dcGet(env,ck,b.fr);if(h)return J(h)}
     await smEns(env,r);await tcEns(env);
@@ -837,8 +838,8 @@ async function schoolApi(p,r,env){
     }
     if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length});
   }
-  if(p==='/api/s/bso')return J(await bsOne(env,r,t.udise));
-  if(p==='/api/s/bsosave'){const f=b.f&&typeof b.f==='object'?b.f:{},o={};for(const k of Object.keys(f).slice(0,60)){if(/^[a-z0-9_]{1,12}$/.test(k))o[k]=cl(f[k],120)}await cfgUp(env,'bso:'+t.udise,JSON.stringify(o)).run();return J({ok:1})}
+  if(p==='/api/s/bso')return J(await bsOne(env,r,t.udise,b.ty));
+  if(p==='/api/s/bsosave'){const f=b.f&&typeof b.f==='object'?b.f:{},o={};for(const k of Object.keys(f).slice(0,60)){if(/^[a-z0-9_]{1,12}$/.test(k))o[k]=cl(f[k],120)}await cfgUp(env,bsKey(BSTY.includes(b.ty)?b.ty:'boot',t.udise),JSON.stringify(o)).run();return J({ok:1})}
   if(p==='/api/s/sm'){await smEns(env,r);const s=await env.DB.prepare('SELECT hm,p15,p68,tot,pe FROM sanch_m WHERE udise=?').bind(t.udise).first(),y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first(),x=await smWork(env,t.udise);return J({ok:1,yr:y?y.v:'',s:s||null,w:x.w,L:x.L})}
   if(p==='/api/s/rbook'){await rbEns(env);const r=await env.DB.prepare('SELECT data,upd FROM sch_rbook WHERE udise=?').bind(t.udise).first();let d={};try{d=JSON.parse(r&&r.data||'{}')}catch(e){}return J({ok:1,d,upd:r?r.upd:''})}
   if(p==='/api/s/rbsave'){await rbEns(env);const k={},src=(b.d&&b.d.k)||{};for(const id of Object.keys(src).slice(0,150)){if(!/^c\d{1,3}$/.test(id))continue;const s=cl(src[id]&&src[id].s,1),d=cl(src[id]&&src[id].d,10);if(!/^[YPNX]$/.test(s))continue;k[id]=/^\d{4}-\d\d-\d\d$/.test(d)?{s,d}:{s}}

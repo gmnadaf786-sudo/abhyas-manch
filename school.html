@@ -7,7 +7,7 @@ button{background:var(--a);color:#fff;border:0;cursor:pointer}button.g{backgroun
 .er{color:#b91c1c;min-height:18px}small,.m{color:var(--m)}.mod{display:flex;align-items:center;gap:12px;text-align:left;padding:14px;margin-bottom:10px}.mod span{font-size:26px}#pv{display:none}@media print{body.pr>*{display:none!important}body.pr>#pv{display:block!important;color:#000}body.pr table{width:100%;border-collapse:collapse;font-size:11px}}</style><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#115e59"><script src="inst.js"></script></head><body><main>
 <h1>🏫 अभ्यास मंच – शाळा लॉगिन</h1>
 <div id="x"></div></main>
-<script src="geo.js?v=6"></script><script src="mdm.js?v=8"></script><script src="reg.js?v=3"></script><script src="regbook.js?v=2"></script><script src="bootsox.js?v=2"></script>
+<script src="geo.js?v=6"></script><script src="mdm.js?v=8"></script><script src="reg.js?v=3"></script><script src="regbook.js?v=2"></script><script src="bootsox.js?v=3"></script>
 <script>
 var X=document.getElementById('x'),T='',SC='';
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -53,7 +53,7 @@ function shMenu(){return shG('📅 रोजचे काम',[shT('🍲','PM �
  +shG('🏫 माझी शाळा',[shT('📋','शाळा माहिती','formUi()','bfm'),shT('📍','शाळेचे स्थान (GPS)','gsUi()'),shT('🏦','बँक खाते माहिती','bankUi()'),shT('👥','शाळास्तरीय समित्या','commUi()'),shT('📋','संच मान्यता','smUi()')])
  +shG('👥 शिक्षक व विद्यार्थी',[shT('👩‍🏫','वर्ग – शिक्षक जोडा','tcUiT()'),shT('➕','नवीन शिक्षक जोडा','tcUi();setTimeout(function(){if(window.taUi&&document.getElementById(\'tadw\'))taUi()},600)'),shT('⬆','विद्यार्थी यादी अपलोड','siHm()'),shT('📄','बोनाफाईड प्रमाणपत्र','bfUi()')])
  +shG('📚 शालेय रजिस्टर',[shT('📒','रजिस्टर स्थिती','rbUi()'),shT('🗂','सर्व नोंदवह्या','rbHome()')])
- +shG('📦 वाटप',[shT('🎽','गणवेश','distUi(\'uni\')'),shT('📚','पुस्तके','distUi(\'book\')'),shT('👟','बूट व मोजे','distUi(\'shoe\')'),shT('🎒','शालेय दप्तर','distUi(\'bag\')'),shT('🧾','बूट-पायमोजे अनुदान आदेश','bsoUi()')])
+ +shG('📦 वाटप',[shT('🎽','गणवेश','distUi(\'uni\')'),shT('📚','पुस्तके','distUi(\'book\')'),shT('👟','बूट व मोजे','distUi(\'shoe\')'),shT('🎒','शालेय दप्तर','distUi(\'bag\')'),shT('🧾','SMC कार्यालयीन आदेश (अनुदान)','bsoUi()')])
  +shG('📑 मासिक अहवाल',[shT('🍚','मासिक पोषण आहार पत्रक','mdmSchGo()','bmd')])
  +shG('🔗 इतर',[shT('🔗','उपयुक्त पोर्टल','plUi()')])}
 function sdLoad(){var e=document.getElementById('sdash');if(!e)return;e.innerHTML='<div class="card"><p class="m" style="margin:0">⏳ आजचा आढावा…</p></div>';api('/api/s/dash',{}).then(function(j){if(!j||!j.ok){e.innerHTML='';return}
