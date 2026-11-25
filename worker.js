@@ -839,7 +839,7 @@ async function schoolApi(p,r,env){
     if(st.length)await env.DB.batch(st);return J({ok:1,n:st.length});
   }
   if(p==='/api/s/bso')return J(await bsOne(env,r,t.udise,b.ty));
-  if(p==='/api/s/bsosave'){const f=b.f&&typeof b.f==='object'?b.f:{},o={};for(const k of Object.keys(f).slice(0,60)){if(/^[a-z0-9_]{1,12}$/.test(k))o[k]=cl(f[k],120)}await cfgUp(env,bsKey(BSTY.includes(b.ty)?b.ty:'boot',t.udise),JSON.stringify(o)).run();return J({ok:1})}
+  if(p==='/api/s/bsosave'){const f=b.f&&typeof b.f==='object'?b.f:{},o={};for(const k of Object.keys(f).slice(0,400)){if(/^[a-z0-9_]{1,12}$/.test(k))o[k]=cl(f[k],120)}await cfgUp(env,bsKey(BSTY.includes(b.ty)?b.ty:'boot',t.udise),JSON.stringify(o)).run();return J({ok:1})}
   if(p==='/api/s/sm'){await smEns(env,r);const s=await env.DB.prepare('SELECT hm,p15,p68,tot,pe FROM sanch_m WHERE udise=?').bind(t.udise).first(),y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first(),x=await smWork(env,t.udise);return J({ok:1,yr:y?y.v:'',s:s||null,w:x.w,L:x.L})}
   if(p==='/api/s/rbook'){await rbEns(env);const r=await env.DB.prepare('SELECT data,upd FROM sch_rbook WHERE udise=?').bind(t.udise).first();let d={};try{d=JSON.parse(r&&r.data||'{}')}catch(e){}return J({ok:1,d,upd:r?r.upd:''})}
   if(p==='/api/s/rbsave'){await rbEns(env);const k={},src=(b.d&&b.d.k)||{};for(const id of Object.keys(src).slice(0,150)){if(!/^c\d{1,3}$/.test(id))continue;const s=cl(src[id]&&src[id].s,1),d=cl(src[id]&&src[id].d,10);if(!/^[YPNX]$/.test(s))continue;k[id]=/^\d{4}-\d\d-\d\d$/.test(d)?{s,d}:{s}}
