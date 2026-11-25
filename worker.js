@@ -703,9 +703,10 @@ async function offApi(p,r,env){
   }
   if(p==='/api/o/bday'){
     const td=istDay(),mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(td.slice(5,7))-1],dd=parseInt(td.slice(8,10));
-    const rs=(await env.DB.prepare("SELECT t.shalarth sh,t.name n,t.udise u,s.name sc,json_extract(i.data,'$.\"जन्मतारीख\"') dob FROM teachers t JOIN tch_info i ON i.shalarth=t.shalarth LEFT JOIN schools s ON s.udise=t.udise WHERE t.status='ok' AND json_extract(i.data,'$.\"जन्मतारीख\"') LIKE ?").bind(mo+' '+dd+', %').all().catch(()=>({results:[]}))).results;
+    const rs=(await env.DB.prepare("SELECT t.shalarth sh,t.name n,t.udise u,t.mobile m,s.name sc,json_extract(i.data,'$.\"जन्मतारीख\"') dob,json_extract(i.data,'$.\"लिंग\"') g FROM teachers t JOIN tch_info i ON i.shalarth=t.shalarth LEFT JOIN schools s ON s.udise=t.udise WHERE t.status='ok' AND json_extract(i.data,'$.\"जन्मतारीख\"') LIKE ?").bind(mo+' '+dd+', %').all().catch(()=>({results:[]}))).results;
     const cm={};ss.forEach(x=>cm[x.udise]=x.code);
-    return J({ok:1,today:td,rows:rs.filter(x=>ok.has(x.u)).map(x=>({n:x.n,sh:x.sh,u:x.u,sc:x.sc||'',c:cm[x.u],y:parseInt(String(x.dob).slice(-4))||0}))});
+    let me={nm:'',post:''};if(kp){const kr=await env.DB.prepare('SELECT rname,kname FROM kp_reg WHERE code=?').bind(t.uname).first().catch(()=>null);me={nm:(kr&&kr.rname)||'',post:'केंद्रप्रमुख'+(kr&&kr.kname?', केंद्र '+kr.kname:'')}}else me={nm:'',post:/^AEO/i.test(t.uname)?'विस्तार अधिकारी (शिक्षण), पं.स. जत':'गटशिक्षणाधिकारी, पं.स. जत'};
+    return J({ok:1,today:td,me,rows:rs.filter(x=>ok.has(x.u)).map(x=>({n:x.n,sh:x.sh,u:x.u,sc:x.sc||'',c:cm[x.u],m:x.m||'',g:/स्त्री|महिला|female|^f/i.test(String(x.g||''))?'F':'M',y:parseInt(String(x.dob).slice(-4))||0}))});
   }
   if(p==='/api/o/tdecide'){
     const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),t=await env.DB.prepare('SELECT udise FROM teachers WHERE shalarth=?').bind(sh).first();
@@ -1777,8 +1778,9 @@ async function ext(p,r,env){
   if(p==='/api/t/bday'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const md=istDay().slice(5);
-    const rs=(await env.DB.prepare("SELECT r.name,r.cls,r.div,i.dob FROM tclasses c JOIN roster r ON r.udise=c.udise AND r.cls=c.cls AND r.div=c.div JOIN sinfo i ON i.pen=r.pen WHERE c.tid=? AND substr(i.dob,6,5)=? ORDER BY r.cls,r.div,r.name").bind(t.id,md).all()).results;
-    return J({ok:1,rows:rs,today:istDay()});
+    const rs=(await env.DB.prepare("SELECT r.name,r.cls,r.div,i.dob,i.gender g,i.mobile m FROM tclasses c JOIN roster r ON r.udise=c.udise AND r.cls=c.cls AND r.div=c.div JOIN sinfo i ON i.pen=r.pen WHERE c.tid=? AND substr(i.dob,6,5)=? ORDER BY r.cls,r.div,r.name").bind(t.id,md).all()).results;
+    const sc=await env.DB.prepare('SELECT name FROM schools WHERE udise=?').bind(t.udise||'').first().catch(()=>null);
+    return J({ok:1,rows:rs,today:istDay(),me:{nm:t.name||'',sc:sc?sc.name:''}});
   }
   if(p==='/api/t/report'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
