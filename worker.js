@@ -132,8 +132,8 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
 /* संच मान्यता: sanch_m (UDISE + मंजूर पदे), वर्ष cfg 'smyr'. नवीन वर्षाची फाइल अपलोड केल्यावर पूर्ण बदलते. */
 let SMK=false;
 async function smEns(env,r){if(SMK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS sanch_m(udise TEXT PRIMARY KEY,hm INTEGER,p15 INTEGER,p68 INTEGER,tot INTEGER,pe INTEGER)').run();
-  const y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first();
-  if(!y&&r){const rs=await env.ASSETS.fetch(new Request(new URL('/data/sm_2025-26.json',r.url)));if(rs.ok){const d=await rs.json();await smPut(env,d.yr,d.rows.map(x=>[x[0],x[1],x[2],x[3],x[5]]))}}
+  const y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first(),sr=await env.DB.prepare("SELECT v FROM cfg WHERE k='smsrc'").first(),SRC='2025-26v2'; // v2: संपूर्ण सांगली जिल्हा (BEO अपलोड झाल्यावर smsrc='upload', मग पुन्हा भरणे नाही)
+  if(r&&(!y||(y.v==='2025-26'&&(!sr||sr.v!==SRC)&&!(sr&&sr.v==='upload')))){const rs=await env.ASSETS.fetch(new Request(new URL('/data/sm_2025-26.json',r.url)));if(rs.ok){const d=await rs.json();await smPut(env,d.yr,d.rows.map(x=>[x[0],x[1],x[2],x[3],x[5]]));await cfgUp(env,'smsrc',SRC).run()}}
   SMK=true}
 async function smPut(env,yr,rows){const st=[env.DB.prepare('DELETE FROM sanch_m')],seen=new Set();
   for(const x of rows){const u=String(x[0]||'').replace(/\D/g,'');if(u.length!==11||seen.has(u))continue;seen.add(u);const n=v=>Math.max(0,Math.min(99,parseInt(v)||0)),h=n(x[1]),a=n(x[2]),c=n(x[3]);
@@ -728,7 +728,7 @@ async function offApi(p,r,env){
       return J({ok:1,status:'Returned',mail});}
     return J({e:'bad'},400);
   }
-  if(p==='/api/o/smimp'){if(kp)return J({e:'beo'},403);const rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,5000),yr=cl(b.yr,9);if(!/^\d{4}-\d{2}$/.test(yr)||rows.length<10)return J({e:'arg'},400);await smEns(env,r);const n=await smPut(env,yr,rows);await dcClr(env);return J({ok:1,n,yr})}
+  if(p==='/api/o/smimp'){if(kp)return J({e:'beo'},403);const rows=(Array.isArray(b.rows)?b.rows:[]).slice(0,5000),yr=cl(b.yr,9);if(!/^\d{4}-\d{2}$/.test(yr)||rows.length<10)return J({e:'arg'},400);await smEns(env,r);const n=await smPut(env,yr,rows);await cfgUp(env,'smsrc','upload').run();await dcClr(env);return J({ok:1,n,yr})}
   if(p==='/api/o/smyr'){await smEns(env,r);const y=await env.DB.prepare("SELECT v FROM cfg WHERE k='smyr'").first(),c=await env.DB.prepare('SELECT COUNT(*) c FROM sanch_m').first();return J({ok:1,yr:y?y.v:'',n:c?c.c:0})}
   if(p==='/api/o/rbsum'){await rbEns(env);const m={};((await env.DB.prepare('SELECT udise,data,upd FROM sch_rbook').all()).results||[]).forEach(x=>{if(ok.has(x.udise)){let d={};try{d=JSON.parse(x.data||'{}')}catch(e){}m[x.udise]={k:d.k||{},upd:x.upd}}});
     return J({ok:1,rows:ss.map(x=>({u:x.udise,n:x.name,k:(m[x.udise]||{}).k||{},upd:(m[x.udise]||{}).upd||''}))})}
