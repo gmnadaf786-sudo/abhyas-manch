@@ -77,12 +77,13 @@ function prcShow(){
  h+='<div class="card"><b>🏢 केंद्रप्रमुख (मी)</b><div style="margin:6px 0">'+(kpa?'<span class="ok">✔ उपस्थित · '+prcTm(kpa.ts)+(kpa.s?' · सही केली':'')+'</span>':'<span class="m">अजून नोंद नाही</span>')+'</div>'
  +'<div class="row">'+(kpa?'<button class="g" onclick="prcKpOff()">✖ माझी उपस्थिती काढा</button>':'<button onclick="prcKpSign()">✍ माझी सही करा</button><button class="g" onclick="prcKpMark()">✔ फक्त उपस्थित नोंदवा</button>')+'</div></div>';
  /* शिक्षक यादी */
- h+='<div class="card"><b>👨‍🏫 शिक्षक</b><small style="display:block;margin:2px 0 6px">शिक्षकाने स्वतः GPS + सहीने नोंदवले तर ✔ दिसते. तुम्ही प्रत्यक्ष पाहून "उपस्थित" नोंदवू शकता – ती नोंद पत्रकात "केंद्रप्रमुखाने नोंदवले" अशी दिसेल.</small>';
+ h+='<div class="card"><b>👨‍🏫 शिक्षक</b><small style="display:block;margin:2px 0 6px">शिक्षकाने स्वतः GPS + सहीने नोंदवले तर ✔ दिसते. तुम्ही प्रत्यक्ष पाहून "उपस्थित" नोंदवू शकता. "✍ सही" दाबून शिक्षकाची सही तुमच्या फोनवर घेतल्यास ती उपस्थिती पत्रकात (PDF) छापली जाते.</small>';
  if(!tch.length)h+='<p class="m">या केंद्रात मंजूर शिक्षक नाहीत.</p>';
  var last='';
  tch.forEach(function(t,i){var a=am[t.sh];
   if(t.u!==last){last=t.u;h+='<div style="margin:10px 0 2px;font-weight:600;color:var(--m)">'+esc(t.sc||t.u)+'</div>'}
-  h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--l)"><div style="flex:1;min-width:0">'+esc(t.n)+'<br>'+(a?'<small class="ok">✔ '+(a.m==='kp'?'तुम्ही नोंदवले':'स्वतः सही केली · '+prcTm(a.ts)+(a.d!=null?' · '+a.d+' मी':''))+'</small>':'<small class="no">अनुपस्थित / नोंद नाही</small>')+'</div>'
+  h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--l)"><div style="flex:1;min-width:0">'+esc(t.n)+'<br>'+(a?'<small class="ok">✔ '+(a.m==='kp'?'तुम्ही नोंदवले'+(a.s?' · ✍ सही घेतली':''):'स्वतः सही केली · '+prcTm(a.ts)+(a.d!=null?' · '+a.d+' मी':''))+'</small>':'<small class="no">अनुपस्थित / नोंद नाही</small>')+'</div>'
+  +((!a||(a.m==='kp'&&!a.s))&&!closed?'<button class="g" style="width:auto;margin:0;padding:6px 10px" onclick="prcTSign('+i+')">✍ सही</button>':'')
   +(a?'<button class="g" style="width:auto;margin:0;padding:6px 10px" onclick="prcMark('+i+',0)">✖</button>':'<button style="width:auto;margin:0;padding:6px 10px" onclick="prcMark('+i+',1)">✔ उपस्थित</button>')+'</div>'});
  h+='</div>';
  /* इतिवृत्त व बंद करणे */
@@ -90,6 +91,7 @@ function prcShow(){
  +'<hr style="border:0;border-top:1px solid var(--l);margin:10px 0"><div class="row">'+(closed?'<button class="g" onclick="prcClose(0)">🔓 पुन्हा उघडा (शिक्षकांना सही करता येईल)</button>':'<button onclick="prcClose(1)">🔒 परिषद बंद करा</button>')+'<button class="g" style="color:#b91c1c;border-color:#b91c1c" onclick="prcDel()">🗑 परिषद हटवा</button></div>'
  +'<small>परिषद बंद केल्यावर शिक्षकांना सही करता येत नाही आणि मासिक डायरीत "केंद्र परिषद" ची नोंद आपोआप होते.</small></div>';
  X.innerHTML=h;window.scrollTo(0,0)}
+function prcTSign(i){var t=PRC.cur.ros[i];if(!t)return;prcPad(t.n,function(sg,er){api('/api/o/prmark',{id:PRC.cur.p.id,sh:t.sh,on:1,sign:sg}).then(function(j){if(!j||!j.ok){er.textContent=prcErr(j||{e:'net'});return}prcKpX();PRC.msg='';prcOpen(PRC.cur.p.id)})})}
 function prcMark(i,on){var t=PRC.cur.ros[i];if(!t)return;api('/api/o/prmark',{id:PRC.cur.p.id,sh:t.sh,on:on}).then(function(j){if(!j.ok){alert(prcErr(j));return}PRC.msg='';prcOpen(PRC.cur.p.id)})}
 function prcKpMark(){api('/api/o/prkp',{id:PRC.cur.p.id}).then(function(j){if(!j.ok){alert(prcErr(j));return}PRC.msg='';prcOpen(PRC.cur.p.id)})}
 function prcKpOff(){api('/api/o/prkp',{id:PRC.cur.p.id,off:1}).then(function(j){if(!j.ok){alert(prcErr(j));return}PRC.msg='';prcOpen(PRC.cur.p.id)})}
@@ -100,9 +102,12 @@ function prcDel(){if(!confirm('ही परिषद व तिची सर्
 
 /* ===== KP ची स्वतःची सही ===== */
 var PRCSG=0;
-function prcKpSign(){
+var PRCOK=null;
+function prcKpSign(){prcPad('केंद्रप्रमुख',null)}
+/* सहीची चौकट: ti = नाव; ok = function(sg,er) (null असल्यास KP ची सही) */
+function prcPad(ti,ok){PRCOK=ok;
  var e=document.createElement('div');e.id='prcsg';e.style.cssText='position:fixed;inset:0;z-index:300;background:var(--bg);padding:12px;overflow:auto';
- e.innerHTML='<div style="max-width:560px;margin:0 auto"><div class="card"><h2>✍ केंद्रप्रमुख — स्वाक्षरी</h2><p class="m">खालील चौकटीत बोटाने सही करा.</p><canvas id="prcsc" width="400" height="160" style="width:100%;height:auto;aspect-ratio:400/160;background:#fff;border:2px dashed var(--l);border-radius:10px;touch-action:none"></canvas><p id="prcse" class="er"></p><div class="row"><button onclick="prcKpOk()">✔ जतन करा</button><button class="g" onclick="prcKpClr()">🧽 पुसा</button><button class="g" onclick="prcKpX()">रद्द</button></div></div></div>';
+ e.innerHTML='<div style="max-width:560px;margin:0 auto"><div class="card"><h2>✍ '+esc(ti)+' — स्वाक्षरी</h2><p class="m">खालील चौकटीत बोटाने सही करा.</p><canvas id="prcsc" width="400" height="160" style="width:100%;height:auto;aspect-ratio:400/160;background:#fff;border:2px dashed var(--l);border-radius:10px;touch-action:none"></canvas><p id="prcse" class="er"></p><div class="row"><button onclick="prcKpOk()">✔ जतन करा</button><button class="g" onclick="prcKpClr()">🧽 पुसा</button><button class="g" onclick="prcKpX()">रद्द</button></div></div></div>';
  document.body.appendChild(e);var c=document.getElementById('prcsc'),x=c.getContext('2d'),dr=false;PRCSG=0;x.lineWidth=2.6;x.lineCap='round';x.lineJoin='round';x.strokeStyle='#111';
  function pt(ev){var r=c.getBoundingClientRect();return[(ev.clientX-r.left)*c.width/r.width,(ev.clientY-r.top)*c.height/r.height]}
  c.onpointerdown=function(ev){dr=true;try{c.setPointerCapture(ev.pointerId)}catch(z){}var q=pt(ev);x.beginPath();x.moveTo(q[0],q[1]);x.lineTo(q[0]+.1,q[1]+.1);x.stroke();PRCSG++;ev.preventDefault()};
@@ -112,6 +117,7 @@ function prcKpClr(){var c=document.getElementById('prcsc');if(c){c.getContext('2
 function prcKpX(){var e=document.getElementById('prcsg');if(e)e.remove()}
 function prcKpOk(){var c=document.getElementById('prcsc'),er=document.getElementById('prcse');if(!c)return;if(PRCSG<3){er.textContent='आधी सही करा.';return}
  var o=document.createElement('canvas');o.width=300;o.height=120;var x=o.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,300,120);x.drawImage(c,0,0,300,120);var sg=o.toDataURL('image/png');
+ if(PRCOK){er.textContent='⏳ जतन होत आहे…';PRCOK(sg,er);return}
  er.textContent='⏳ स्थान घेत आहे…';
  var go=function(g){er.textContent='⏳ जतन होत आहे…';api('/api/o/prkp',{id:PRC.cur.p.id,sign:sg,lat:g&&g.lat,lng:g&&g.lng,acc:g&&g.acc}).then(function(j){if(!j||!j.ok){er.textContent=prcErr(j||{e:'net'});return}prcKpX();PRC.msg='';prcOpen(PRC.cur.p.id)})};
  try{geoNow(function(g){go(g&&!g.e?g:null)},10000)}catch(e){go(null)}}
@@ -123,7 +129,7 @@ function prcPrint(){
   var sg=s.ok?s.sig:{},am={};j.at.forEach(function(a){am[a.w]=a});
   var td='border:1px solid #444;padding:4px 6px;vertical-align:middle',th='border:1px solid #444;padding:4px 6px;background:#eee',rows='',i=0;
   var row=function(nm,sc,a,key){i++;var sig=a&&sg[key]?'<img src="'+sg[key]+'" style="height:34px;max-width:130px">':'';
-   return '<tr><td style="'+td+';text-align:center">'+i+'</td><td style="'+td+'">'+esc(nm)+'</td><td style="'+td+'">'+esc(sc)+'</td><td style="'+td+';text-align:center">'+(a?prcTm(a.ts):'')+'</td><td style="'+td+';text-align:center;height:40px">'+sig+'</td><td style="'+td+'">'+(a?(a.m==='kp'&&key!=='KP'?'केंद्रप्रमुखाने नोंदवले':''):'अनुपस्थित')+'</td></tr>'};
+   return '<tr><td style="'+td+';text-align:center">'+i+'</td><td style="'+td+'">'+esc(nm)+'</td><td style="'+td+'">'+esc(sc)+'</td><td style="'+td+';text-align:center">'+(a?prcTm(a.ts):'')+'</td><td style="'+td+';text-align:center;height:40px">'+sig+'</td><td style="'+td+'">'+(a?(a.m==='kp'&&key!=='KP'?(sg[key]?'केंद्रप्रमुखासमोर सही':'केंद्रप्रमुखाने नोंदवले'):''):'अनुपस्थित')+'</td></tr>'};
   var kpa=am.KP;rows+=row(kpa?kpa.n:'केंद्रप्रमुख','केंद्रप्रमुख',kpa,'KP');
   j.ros.forEach(function(t){rows+=row(t.n,t.sc||'',am[t.sh],t.sh)});
   var n=j.ros.filter(function(t){return am[t.sh]}).length;

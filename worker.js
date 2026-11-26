@@ -493,7 +493,9 @@ async function offApi(p,r,env){
       // KP स्वतः पाहून शिक्षकाची उपस्थिती नोंदवतो / काढतो (शिक्षकाने स्वतः केलेली सही मोडत नाही)
       const sh=cl(b.sh,20).toUpperCase().replace(/\s/g,''),tc=(await roster()).find(z=>String(z.sh).toUpperCase()===sh);if(!tc)return J({e:'na'},403);
       if(!b.on){await env.DB.prepare('DELETE FROM kp_pr_att WHERE pid=? AND who=?').bind(x.id,tc.sh).run();return J({ok:1})}
-      await env.DB.prepare("INSERT INTO kp_pr_att(pid,who,name,udise,mode,ts) VALUES(?,?,?,?,'kp',?) ON CONFLICT(pid,who) DO NOTHING").bind(x.id,tc.sh,tc.n,tc.u,new Date().toISOString()).run();
+      const tsg=b.sign?prSign(b.sign):null;if(b.sign&&!tsg)return J({e:'sign'},400);
+      if(tsg)await env.DB.prepare("INSERT INTO kp_pr_att(pid,who,name,udise,mode,ts,sign) VALUES(?,?,?,?,'kp',?,?) ON CONFLICT(pid,who) DO UPDATE SET sign=excluded.sign WHERE kp_pr_att.mode='kp'").bind(x.id,tc.sh,tc.n,tc.u,new Date().toISOString(),tsg).run();
+      else await env.DB.prepare("INSERT INTO kp_pr_att(pid,who,name,udise,mode,ts) VALUES(?,?,?,?,'kp',?) ON CONFLICT(pid,who) DO NOTHING").bind(x.id,tc.sh,tc.n,tc.u,new Date().toISOString()).run();
       return J({ok:1});
     }
     if(p==='/api/o/prkp'){
