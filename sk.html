@@ -1,0 +1,51 @@
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>शिष्यवृत्ती परीक्षा 2027 – विद्यार्थी माहिती (इ. 4 थी / 7 वी)</title>
+<meta property="og:title" content="शिष्यवृत्ती परीक्षा 2027 – विद्यार्थी माहिती भरा (इ. 4 थी / 7 वी)">
+<meta property="og:description" content="पंचायत समिती जत · केंद्र → शाळा → इयत्ता → विद्यार्थी निवडा; फोटो+सही, आधार, उत्पन्न भरा">
+<meta name="theme-color" content="#0f766e">
+<style>
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,"Noto Sans Devanagari",sans-serif;background:#f6f7f4;color:#1f2937}
+.hd{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;padding:16px 14px 20px;text-align:center}.hd h1{margin:0;font-size:20px}.hd p{margin:4px 0 0;font-size:13px}
+.w{max-width:560px;margin:-10px auto 30px;padding:0 12px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:14px;margin:12px 0}
+h2{margin:0 0 6px;font-size:18px}label{display:block}select,input{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;background:#fff;margin:2px 0}
+button{width:100%;margin-top:10px;padding:13px;border:0;border-radius:12px;background:#0f766e;color:#fff;font:inherit;font-weight:700;cursor:pointer}button.g{background:#fff;color:#0f766e;border:1px solid #0f766e}
+.m{color:#64748b}.er{color:#b91c1c}.tg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tb{border:2px solid #0f766e;background:#fff;color:#0f766e;border-radius:14px;padding:14px;font-weight:800;font-size:18px;margin:0}.tb.on{background:#0f766e;color:#fff}
+:root{--l:#e5e7eb;--c:#fff}
+</style></head><body>
+<div class="hd"><h1>🏅 शिष्यवृत्ती परीक्षा 2027</h1><p>इ. 4 थी (PSE) / इ. 7 वी (UPS) · विद्यार्थी माहिती · पंचायत समिती जत</p></div>
+<div class="w"><div id="X"><p class="m">लोड होत आहे…</p></div>
+<div style="text-align:center;font-size:13px;color:#475569;margin:18px 0 6px;line-height:1.6">विकसक: <b>जी. एम. नदाफ</b><br>समूह साधन केंद्र समन्वयक, गिरगांव · 📞 <a href="tel:7972568986" style="color:#0f766e;text-decoration:none">7972568986</a></div></div>
+<script>
+var X=document.getElementById('X');function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function pa(u,b){return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b||{})}).then(function(r){return r.json()}).catch(function(){return{e:'net'}})}
+var L=null,ST={c:'',u:'',un:'',k:4},PR=null,PI=-1;
+function sel(id,ph,opts,v,fn){return '<select id="'+id+'" onchange="'+fn+'"><option value="">'+ph+'</option>'+opts.map(function(o){return '<option value="'+esc(o[0])+'"'+(o[0]===v?' selected':'')+'>'+esc(o[1])+'</option>'}).join('')+'</select>'}
+function skTop(){var C=L.c,cs=C.filter(function(x){return x[0]===ST.c})[0];
+ X.innerHTML='<div class="card"><h2>1) केंद्र व शाळा</h2><label class="m" style="font-size:13px">केंद्र</label>'+sel('cl','केंद्र निवडा',C.map(function(x){return [x[0],x[1]]}),ST.c,"ST.c=this.value;ST.u='';skTop()")
+ +'<label class="m" style="font-size:13px;margin-top:8px">शाळा</label>'+sel('sc',cs?'शाळा निवडा ('+cs[2].length+')':'आधी केंद्र निवडा',cs?cs[2]:[],ST.u,"ST.u=this.value;ST.un=this.options[this.selectedIndex].text;skTop()")+'</div>'
+ +(ST.u?'<div class="card"><h2>2) इयत्ता</h2><div class="tg"><button class="tb'+(ST.k===4?' on':'')+'" onclick="ST.k=4;lst()">इ. 4 थी</button><button class="tb'+(ST.k===7?' on':'')+'" onclick="ST.k=7;lst()">इ. 7 वी</button></div></div><div id="ls"></div>':'')
+ +'<div class="card m" style="font-size:12px">प्रत्येक विद्यार्थ्याचा फोटो+सही, आधार, उत्पन्न इ. माहिती भरा. आधी भरलेली माहिती गोपनीयतेसाठी येथे दाखवली जात नाही – फक्त ✅ खूण दिसते. नवीन माहिती भरल्यास ती जुन्या माहितीऐवजी जतन होते; रिकामे ठेवलेले रकाने आधीसारखेच राहतात.</div>';
+ if(ST.u)lst()}
+function lst(){var e=document.getElementById('ls');if(!e)return;document.querySelectorAll('.tb').forEach(function(b,i){b.className='tb'+((i===0&&ST.k===4)||(i===1&&ST.k===7)?' on':'')});e.innerHTML='<div class="card"><p class="m">लोड होत आहे…</p></div>';
+ pa('/api/pub/sk/stu',{udise:ST.u,cls:ST.k}).then(function(j){if(!j||!j.ok){e.innerHTML='<div class="card"><p class="er">लोड झाले नाही.</p></div>';return}PR=j;
+  var ok=function(x){return x.ph&&x.ad&&x.inc};e.innerHTML='<div class="card"><h2>3) विद्यार्थी निवडा</h2><p class="m" style="font-size:13px;margin:0">पूर्ण: <b style="color:#15803d">'+j.rows.filter(ok).length+'</b> / '+j.rows.length+'</p>'
+  +(j.rows.length?j.rows.map(function(x,i){return '<div onclick="frm('+i+')" style="cursor:pointer;display:flex;gap:8px;align-items:center;border-top:1px solid #e5e7eb;padding:10px 2px"><span>'+(ok(x)?'✅':'⚠️')+'</span><span style="flex:1">'+esc(x.n)+' <small class="m">('+esc(x.d)+')</small><br><small class="m">'+(x.ph?'📷✔':'📷✖')+' · '+(x.ad?'आधार✔':'आधार✖')+' · '+(x.inc?'उत्पन्न✔':'उत्पन्न✖')+'</small></span><span style="color:#0f766e">›</span></div>'}).join(''):'<p class="m">या इयत्तेचे विद्यार्थी यादीत नाहीत. शाळेने विद्यार्थी यादी अपलोड करावी.</p>')+'</div>'})}
+function frm(i){PI=i;SKP=null;SKS=null;SKIMG=null;var x=PR.rows[i],YN=[['Yes','होय'],['No','नाही']];window.scrollTo(0,0);
+ X.innerHTML='<button class="g" onclick="skTop()">← यादी</button><div class="card"><h2>'+esc(x.n)+'</h2><p class="m" style="margin:0">'+esc(ST.un)+' · इ. '+ST.k+' '+esc(x.d)+'</p>'+(x.ph||x.ad||x.inc?'<p style="font-size:13px;margin:6px 0 0;color:#15803d">आधी भरलेले: '+[x.ph?'फोटो':'',x.ad?'आधार':'',x.inc?'उत्पन्न':''].filter(Boolean).join(', ')+' – बदलायचे असल्यासच पुन्हा भरा.</p>':'')+'</div>'
+ +'<div class="card"><b>📷 फोटो + सही (एकत्र, 100 KB पेक्षा कमी)</b><div id="skpv" style="margin:8px 0;text-align:center"><small class="m">नवीन प्रतिमा येथे दिसेल</small></div>'
+ +'<label style="font-size:12px">1) विद्यार्थ्याचा फोटो</label><div style="display:flex;gap:6px;margin:4px 0"><label style="flex:1;text-align:center;padding:11px 4px;border-radius:10px;font-size:14px;background:#0f766e;color:#fff">📷 कॅमेरा<input type="file" accept="image/*" capture="environment" onchange="skFile(this,\'p\')" style="display:none"></label><label style="flex:1;text-align:center;padding:11px 4px;border-radius:10px;font-size:14px;border:1px solid #0f766e;color:#0f766e">🤳 पुढचा<input type="file" accept="image/*" capture="user" onchange="skFile(this,\'p\')" style="display:none"></label><label style="flex:1;text-align:center;padding:11px 4px;border-radius:10px;font-size:14px;border:1px solid #0f766e;color:#0f766e">🖼 गॅलरी<input type="file" accept="image/*" onchange="skFile(this,\'p\')" style="display:none"></label></div>'
+ +'<label style="font-size:12px;margin-top:8px">2) सही – बोटाने करा किंवा सहीचा फोटो</label><canvas id="skcv" width="600" height="180" style="width:100%;height:90px;border:1px dashed #94a3b8;border-radius:8px;background:#fff;touch-action:none"></canvas><div style="display:flex;gap:6px;margin-top:4px"><button type="button" class="g" style="margin:0;flex:1;padding:10px" onclick="skClr()">🧽 पुसा</button><label style="flex:1;text-align:center;padding:10px 4px;border-radius:10px;font-size:14px;border:1px solid #0f766e;color:#0f766e">📷 सहीचा फोटो<input type="file" accept="image/*" capture="environment" onchange="skFile(this,\'s\')" style="display:none"></label></div>'
+ +'<button type="button" onclick="skMake()">🧩 फोटो + सही एकत्र करा</button><p id="skim" class="m" style="font-size:12px;margin:4px 0 0"></p></div>'
+ +'<div class="card"><b>📝 माहिती</b>'+skIn('sk_aad','आधार क्रमांक (12 अंक)'+(x.ad?' – आधी भरलेला; बदलायचा असल्यासच':''),'','tel')+skIn('sk_aenr','आधार नोंदणी क्रमांक (आधार नसल्यास)','','tel')
+ +skIn('sk_dob','जन्मतारीख','','date')+skSel('sk_cat','आरक्षण प्रवर्ग',SKC,skCat(x.cat))+skSel('sk_med','परीक्षेचे माध्यम',SKM,skMed(x.med))
+ +skSel('sk_inc','पालकांचे वार्षिक उत्पन्न',[['Up to','₹1,00,000 पर्यंत'],['Greater than','₹1,00,000 पेक्षा जास्त']],'')+skIn('sk_mob','पालक मोबाईल','','tel')+skIn('sk_email','पालक ई-मेल (असल्यास)','','email')
+ +skSel('sk_dom','महाराष्ट्र अधिवास (Domicile)',YN,'')+skSel('sk_land','भूमिहीन शेतमजूर पालक',YN,'')+skSel('sk_dis','दिव्यांग',YN,'')+skSel('sk_wri','लेखनिक आवश्यक',YN,'')
+ +'<button onclick="sv()">💾 जतन करा</button><p id="skm" class="er"></p></div>';skPad()}
+function sv(){var x=PR.rows[PI],m=document.getElementById('skm'),g=function(i){var e=document.getElementById(i);return e?e.value.trim():''},ad=g('sk_aad').replace(/\D/g,''),mob=g('sk_mob').replace(/\D/g,'');
+ if(ad&&!skAadOk(ad)){m.textContent='आधार क्रमांक चुकीचा आहे (12 अंक व तपासणी अंक जुळत नाही).';return}if(mob&&!/^[6-9]\d{9}$/.test(mob)){m.textContent='मोबाईल 10 अंकी असावा.';return}
+ if(!ad&&!SKIMG&&!g('sk_inc')&&!mob&&!g('sk_aenr')&&!g('sk_dob')){m.textContent='काहीतरी माहिती भरा.';return}
+ var f={aenr:g('sk_aenr').replace(/\D/g,''),dob:g('sk_dob'),cat:g('sk_cat'),med:g('sk_med'),inc:g('sk_inc'),mob:mob,email:g('sk_email'),dom:g('sk_dom'),land:g('sk_land'),dis:g('sk_dis'),wri:g('sk_wri')};
+ m.textContent='जतन होत आहे…';pa('/api/pub/sk/save',{udise:ST.u,pen:x.pen,f:f,aad:ad,img:SKIMG}).then(function(j){if(j&&j.ok){skTop();setTimeout(function(){var e=document.getElementById('ls');if(e)e.insertAdjacentHTML('beforebegin','<div class="card" style="color:#15803d"><b>✓ '+esc(x.n)+' – माहिती जतन झाली.</b></div>')},50)}else m.textContent=j&&j.e==='nokey'?'आधार साठवण्याची सर्व्हर सेटिंग बाकी आहे.':j&&j.e==='img'?'प्रतिमा खूप मोठी – पुन्हा "एकत्र करा".':'जतन झाले नाही ('+(j&&j.e||'?')+').'})}
+pa('/api/pub/sk/list',{}).then(function(j){if(!j||!j.ok){X.innerHTML='<div class="card"><p class="er">माहिती लोड झाली नाही – पान पुन्हा उघडा.</p></div>';return}L=j;skTop()});
+</script><script src="schol.js?v=3"></script>
+</body></html>

@@ -142,9 +142,19 @@ async function aEnc(env,s){const k=await aKey(env);if(!k)return null;const iv=cr
 async function aDec(env,s,k){try{k=k||await aKey(env);if(!k||!s)return '';const r=atob(s),u=new Uint8Array(r.length);for(let i=0;i<r.length;i++)u[i]=r.charCodeAt(i);return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:u.slice(0,12)},k,u.slice(12)))}catch(e){return ''}}
 const KYF=['aenr','mob','email','inc','dom','land','dis','wri','cat','med','dob'];
 async function kyImg(env,key){if(!key||!env.BOOKS)return '';const o=await env.BOOKS.get(key);if(!o)return '';const u=new Uint8Array(await o.arrayBuffer());let b='';for(let i=0;i<u.length;i+=8192)b+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return 'data:image/jpeg;base64,'+btoa(b)}
+/* लॉगिनशिवाय शिष्यवृत्ती फॉर्म (sk.html): केंद्र → शाळा → इयत्ता → विद्यार्थी. आधीची संवेदनशील माहिती कधीही परत दाखवत नाही. */
+async function pubSk(p,r,env){if(!p.startsWith('/api/pub/sk/'))return null;const b=await body(r);
+  if(p==='/api/pub/sk/list'){const ck='pubsk:list';{const h=await dcGet(env,ck,0);if(h)return J(h)}const cm=await jatCen(env),rs=(await env.DB.prepare('SELECT c.code,s.udise,s.name FROM sch_center c JOIN schools s ON s.udise=c.udise').all()).results||[],C={};
+    rs.forEach(x=>{if(!cm[x.code])return;(C[x.code]=C[x.code]||{n:cm[x.code],s:[]}).s.push([x.udise,x.name||x.udise])});const out={ok:1,c:Object.keys(C).map(k=>[k,C[k].n,C[k].s.sort((a,b)=>String(a[1]).localeCompare(String(b[1])))]).sort((a,b)=>String(a[1]).localeCompare(String(b[1])))};await dcPut(env,ck,out,6*3600000);return J(out)}
+  const u=cl(b.udise,11).replace(/\D/g,'');if(u.length!==11)return J({e:'bad'},400);
+  const cm=await jatCen(env),sc=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(u).first();if(!sc||!cm[sc.code])return J({e:'na'},403);
+  if(p==='/api/pub/sk/stu'){await kyEns(env);const c=parseInt(b.cls)===7?7:4,rs=(await env.DB.prepare("SELECT r.pen,r.div,r.name,r.med rmed,i.gender,i.cat icat,k.a4,k.photo,k.inc,k.aenr FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen LEFT JOIN stu_kyc k ON k.pen=r.pen WHERE r.udise=? AND r.cls=? ORDER BY r.div,r.name").bind(u,c).all()).results||[];
+    return J({ok:1,key:env.AADHAAR_KEY?1:0,rows:rs.map(x=>({pen:x.pen,d:x.div,n:x.name,g:x.gender||'',cat:x.icat||'',med:x.rmed||'',ph:x.photo?1:0,ad:(x.a4||x.aenr)?1:0,inc:x.inc?1:0}))})}
+  if(p==='/api/pub/sk/save'){b.keep=1;try{const rs=await kySave(env,{udise:u},b),jj=await rs.clone().json();return jj.ok?J({ok:1}):rs}catch(e){return J({e:'srv',m:String(e&&e.message||e).slice(0,120)},500)}}
+  return J({e:'nf'},404)}
 async function kySave(env,t,b){
     await kyEns(env);const pen=cl(b.pen,20),ro=await env.DB.prepare('SELECT pen FROM roster WHERE pen=? AND udise=?').bind(pen,t.udise).first();if(!ro)return J({e:'nf'},404);
-    const cur=await env.DB.prepare('SELECT * FROM stu_kyc WHERE pen=?').bind(pen).first()||{},v={};KYF.forEach(f=>v[f]=cl(b.f&&b.f[f],f==='email'?80:40));
+    const cur=await env.DB.prepare('SELECT * FROM stu_kyc WHERE pen=?').bind(pen).first()||{},v={};KYF.forEach(f=>{v[f]=cl(b.f&&b.f[f],f==='email'?80:40);if(b.keep&&!v[f])v[f]=cur[f]||''});
     let aenc=cur.aenc||null,a4=cur.a4||'';const ad=String(b.aad||'').replace(/\D/g,'');
     if(b.aad==='-'){aenc=null;a4=''}else if(ad){if(ad.length!==12)return J({e:'aad'},400);if(!env.AADHAAR_KEY)return J({e:'nokey'},400);aenc=await aEnc(env,ad);a4=ad.slice(-4)}
     let photo=cur.photo||null;if(b.img){const m=/^data:image\/jpeg;base64,([A-Za-z0-9+\/=]+)$/.exec(String(b.img));if(!m||m[1].length>140000||!env.BOOKS)return J({e:'img'},400);const raw=atob(m[1]),u8=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)u8[i]=raw.charCodeAt(i);photo='schol/'+t.udise+'/'+pen+'.jpg';await env.BOOKS.put(photo,u8,{httpMetadata:{contentType:'image/jpeg'}})}
@@ -1202,6 +1212,7 @@ async function stuCall(p,r){
 async function ext(p,r,env){
   // /api/s/login, /api/s/chpw and /api/s/result are shared by the school portal and PEN students:
   // student calls (PEN in body / Bearer token) must skip schoolApi, which would reject them.
+  {const pk=await pubSk(p,r,env);if(pk)return pk}
   if(!(await stuCall(p,r))){const sr=await schoolApi(p,r,env);if(sr)return sr}
   {const orr=await offApi(p,r,env);if(orr)return orr}
   {const pr=await pmApi(p,r,env);if(pr)return pr}
