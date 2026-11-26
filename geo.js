@@ -4,7 +4,9 @@
    सर्व्हर: /api/o/geo, /api/o/geoset (office), /api/s/geo, /api/s/geoset (शाळा); भेटीचे स्थान visit data मध्ये d.geo, अंतर d.gd (मीटर).
    सर्व नावे geo/gm/gvz/gs ने सुरू होतात. */
 var GM=null,GMMAP=null,GMV='M',GMF='',GMQ='',GMLD=null;
-function geoNow(cb){
+function geoNow(cb0,ms){
+ /* काही फोन / ॲप (WebView) मध्ये स्थान परवानगीचे उत्तर कधीच येत नाही – म्हणून स्वतःचा टायमर; cb फक्त एकदाच */
+ var dn=0,cb=function(r){if(dn)return;dn=1;clearTimeout(tm);cb0(r)},tm=setTimeout(function(){cb({e:'स्थान मिळण्यास वेळ लागला. GPS / Location सुरू आहे का ते तपासा.',to:1})},ms||30000);
  if(!navigator.geolocation){cb({e:'या फोनमध्ये / ब्राउझरमध्ये स्थान सुविधा उपलब्ध नाही.'});return}
  navigator.geolocation.getCurrentPosition(function(p){cb({lat:p.coords.latitude,lng:p.coords.longitude,acc:Math.round(p.coords.accuracy||0),ts:new Date().toISOString()})},function(er){
   cb({e:er&&er.code===1?'स्थानाची परवानगी नाकारली आहे. ब्राउझरच्या सेटिंगमध्ये "स्थान (Location)" ला अनुमती द्या व पुन्हा प्रयत्न करा.':er&&er.code===3?'स्थान मिळण्यास वेळ लागला. GPS / Location चालू करून मोकळ्या जागेत पुन्हा प्रयत्न करा.':'स्थान मिळाले नाही. GPS / Location चालू आहे का तपासा.'})},{enableHighAccuracy:true,timeout:25000,maximumAge:0})}
