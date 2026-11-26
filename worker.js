@@ -2119,6 +2119,7 @@ export default{
   async fetch(r,env){
     const u=new URL(r.url);
     if(/\.workers\.dev$/.test(u.hostname)&&u.pathname.startsWith('/api/'))return J({e:'moved',url:'https://abhyasmanch.in'},410);
+    if(/^\/data\/bootsox_/.test(u.pathname))return new Response('Not found',{status:404});
     if(!u.pathname.startsWith('/api/'))return env.ASSETS.fetch(r);
     try{
       const p=u.pathname;
