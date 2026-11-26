@@ -133,8 +133,9 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
 /* बूट व पायमोजे अनुदान: data/bootsox_2026-27.json (PDF मधून), शाळेची आदेश माहिती cfg 'bso:'+udise */
 let BSD=null;async function bsLoad(env,r){if(BSD)return BSD;const rs=await env.ASSETS.fetch(new Request(new URL('/data/bootsox_2026-27.json',r.url)));BSD=rs.ok?await rs.json():{yr:'',rate:[150,20],rows:{}};return BSD}
 const BSTY=['boot','uni2','usg','pad','tr','cw','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
+async function snaCp(env){try{const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='snacp'").first();return JSON.parse(q&&q.v||'{}')}catch(e){return {}}}
 async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name,cmax FROM schools WHERE udise=?').bind(u).first().catch(()=>null);let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
-  return {ok:1,ty,yr:d.yr,rate:d.rate,rate2:d.rate2,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2],n2:x[3]||0,sg:x[5]||0,tr:x[6]||0,p6:x[7]||0,p9:x[8]||0,ce:x[9]||0,ct:x[10]||0,cs:x[11]||0,cx:(s&&s.cmax)||0}:null,f:F}}
+  return {ok:1,ty,yr:d.yr,rate:d.rate,rate2:d.rate2,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2],n2:x[3]||0,sg:x[5]||0,tr:x[6]||0,p6:x[7]||0,p9:x[8]||0,ce:x[9]||0,ct:x[10]||0,cs:x[11]||0,cx:(s&&s.cmax)||0}:null,f:F,cpm:await snaCp(env)}}
 /* शिष्यवृत्ती / विद्यार्थी KYC: stu_kyc. आधार AES-GCM ने कूटबद्ध (secret AADHAAR_KEY), फोटो+सही R2 'schol/udise/pen.jpg' (≤100KB) */
 let KYK=false;async function kyEns(env){if(KYK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS stu_kyc(pen TEXT PRIMARY KEY,udise TEXT,aenc TEXT,a4 TEXT,aenr TEXT,mob TEXT,email TEXT,inc TEXT,dom TEXT,land TEXT,dis TEXT,wri TEXT,cat TEXT,med TEXT,dob TEXT,photo TEXT,upd TEXT)').run();KYK=true}
 async function aKey(env){if(!env.AADHAAR_KEY)return null;const h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('am-aadhaar:'+env.AADHAAR_KEY));return crypto.subtle.importKey('raw',h,'AES-GCM',false,['encrypt','decrypt'])}
@@ -768,7 +769,9 @@ async function offApi(p,r,env){
     for(const pn of ps){const k=await env.DB.prepare('SELECT udise,photo FROM stu_kyc WHERE pen=?').bind(pn).first();if(k&&k.photo&&ok.has(k.udise))out[pn]=await kyImg(env,k.photo)}
     return J({ok:1,img:out})}
   if(p==='/api/o/bsosum'){const d=await bsLoad(env,r),FL={};((await env.DB.prepare("SELECT k FROM cfg WHERE k LIKE 'bso:%' OR k LIKE 'smo:%'").all()).results||[]).forEach(x=>{const p=x.k.split(':'),ty=p[0]==='bso'?'boot':p[1],u=p[p.length-1];(FL[u]=FL[u]||[]).push(ty)});
-    return J({ok:1,yr:d.yr,rate:d.rate,rate2:d.rate2,rows:ss.map(x=>{const v=d.rows[x.udise];return [x.udise,x.code,x.name||'',v?v[0]:'',v?v[1]:null,(FL[x.udise]||[]).includes('boot')?1:0,v?(v[3]||0):null,(FL[x.udise]||[]).join(','),v?(v[5]||0):null,v?(v[6]||0):null,v?(v[7]||0):null,v?(v[8]||0):null,v?(v[9]||0):null,v?(v[10]||0):null,v?(v[11]||0):null]})})}
+    return J({ok:1,yr:d.yr,rate:d.rate,rate2:d.rate2,cpm:await snaCp(env),rows:ss.map(x=>{const v=d.rows[x.udise];return [x.udise,x.code,x.name||'',v?v[0]:'',v?v[1]:null,(FL[x.udise]||[]).includes('boot')?1:0,v?(v[3]||0):null,(FL[x.udise]||[]).join(','),v?(v[5]||0):null,v?(v[6]||0):null,v?(v[7]||0):null,v?(v[8]||0):null,v?(v[9]||0):null,v?(v[10]||0):null,v?(v[11]||0):null]})})}
+  if(p==='/api/o/snaget')return J({ok:1,cpm:await snaCp(env)});
+  if(p==='/api/o/snaset'){if(kp)return J({e:'beo'},403);const o={},m=b.cpm&&typeof b.cpm==='object'?b.cpm:{};for(const t of BSTY){if(t==='sg')continue;const v=cl(m[t],160).trim();if(v)o[t]=v}await cfgUp(env,'snacp',JSON.stringify(o)).run();return J({ok:1,cpm:o})}
   if(p==='/api/o/bsoone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);return J(await bsOne(env,r,u,b.ty))}
   if(p==='/api/o/smsum'){ // KP: स्वतःचे केंद्र, BEO: सर्व; 30 मिनिटे कॅश
     const ck='sm:'+SK;{const h=await dcGet(env,ck,b.fr);if(h)return J(h)}
