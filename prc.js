@@ -112,9 +112,9 @@ function prcKpClr(){var c=document.getElementById('prcsc');if(c){c.getContext('2
 function prcKpX(){var e=document.getElementById('prcsg');if(e)e.remove()}
 function prcKpOk(){var c=document.getElementById('prcsc'),er=document.getElementById('prcse');if(!c)return;if(PRCSG<3){er.textContent='आधी सही करा.';return}
  var o=document.createElement('canvas');o.width=300;o.height=120;var x=o.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,300,120);x.drawImage(c,0,0,300,120);var sg=o.toDataURL('image/png');
- er.textContent='⏳ जतन होत आहे…';
- var go=function(g){api('/api/o/prkp',{id:PRC.cur.p.id,sign:sg,lat:g&&g.lat,lng:g&&g.lng,acc:g&&g.acc}).then(function(j){if(!j.ok){er.textContent=prcErr(j);return}prcKpX();PRC.msg='';prcOpen(PRC.cur.p.id)})};
- try{geoNow(function(g){go(g&&!g.e?g:null)})}catch(e){go(null)}}
+ er.textContent='⏳ स्थान घेत आहे…';
+ var go=function(g){er.textContent='⏳ जतन होत आहे…';api('/api/o/prkp',{id:PRC.cur.p.id,sign:sg,lat:g&&g.lat,lng:g&&g.lng,acc:g&&g.acc}).then(function(j){if(!j||!j.ok){er.textContent=prcErr(j||{e:'net'});return}prcKpX();PRC.msg='';prcOpen(PRC.cur.p.id)})};
+ try{geoNow(function(g){go(g&&!g.e?g:null)},10000)}catch(e){go(null)}}
 
 /* ===== उपस्थिती पत्रक (प्रिंट / PDF) ===== */
 function prcPrint(){
