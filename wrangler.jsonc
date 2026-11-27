@@ -5,7 +5,7 @@
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
-    "run_worker_first": ["/api/*", "/data/bootsox_*", "/aadesh.html", "/aadesh"]
+    "run_worker_first": ["/api/*", "/data/bootsox_*", "/data/indhan_*", "/aadesh.html", "/aadesh"]
   },
   "r2_buckets": [
     { "binding": "BOOKS", "bucket_name": "books" }
