@@ -141,6 +141,9 @@ async function uvGet(env,c){const q=await env.DB.prepare('SELECT v FROM cfg WHER
   if(!Array.isArray(V.vs)){const vs=[1,2].map(i=>({n:V['n'+i]||'',b:V['b'+i]||'',a:V['a'+i]||'',i:V['i'+i]||''})).filter(v=>v.n||v.a);V={vs,as:vs.length?{uni2:[0,1],unc:[0,1]}:{}}}
   V.as=V.as&&typeof V.as==='object'?V.as:{};return V}
 let SNAFIX=0;async function snaFix(env){if(SNAFIX)return;try{await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_sna(udise TEXT PRIMARY KEY, mhsn TEXT, bank TEXT, acct TEXT, ifsc TEXT, branch TEXT, hm TEXT, hm_mob TEXT, upd TEXT)").run();await env.DB.prepare("INSERT INTO school_sna(udise,mhsn,upd) VALUES('27350206416','MHSN00013643',?) ON CONFLICT(udise) DO UPDATE SET mhsn=excluded.mhsn WHERE COALESCE(school_sna.mhsn,'')=''").bind(new Date().toISOString()).run();SNAFIX=1}catch(e){}}
+let NTE=0;async function ntEns(env){if(NTE)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS nt_notice(id INTEGER PRIMARY KEY AUTOINCREMENT, snd TEXT, ti TEXT, bd TEXT, to_kp INTEGER, to_sc INTEGER, cens TEXT, ts INTEGER)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS nt_read(nid INTEGER, who TEXT, ts INTEGER, PRIMARY KEY(nid,who))")]);NTE=1}
+const ntLab=u=>u==='BEO'?'गटशिक्षणाधिकारी (BEO)':'केंद्रप्रमुख – '+(CEN[u]||u);
+const ntRows=(rs,rd,me)=>rs.map(x=>({id:x.id,l:ntLab(x.snd),ti:x.ti,bd:x.bd,ts:x.ts,m:x.snd===me?1:0,r:rd.has(x.id)?1:0,k:x.to_kp,s:x.to_sc}));
 const KPI={};async function kpImg(env,r,c){if(c in KPI)return KPI[c];let v='';try{const rs=await env.ASSETS.fetch(new Request(new URL('/data/kp/'+c+'.jpg',r.url)));if(rs.ok){const u=new Uint8Array(await rs.arrayBuffer());let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));v='data:image/jpeg;base64,'+btoa(s)}}catch(e){}return KPI[c]=v}
 const BSTY=['boot','uni2','unc','usg','pad','tr','cw','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
 async function snaCp(env){try{const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='snacp'").first();return JSON.parse(q&&q.v||'{}')}catch(e){return {}}}
@@ -406,6 +409,39 @@ async function offApi(p,r,env){
   await rtSweep(env);const SK=kp?t.uname:'JAT';if(/^\/api\/o\/(medset|schadd|hmset|clusync|tdecide)$/.test(p))await dcClr(env);
   let ss=await dcGet(env,'ss:'+SK,b.fr);if(!ss){ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;await dcPut(env,'ss:'+SK,ss,600000)}
   const ok=new Set(ss.map(x=>x.udise)),SW='IN (SELECT udise FROM sch_center WHERE code IN ('+JQ+'))',SA=JK;
+  if(/^\/api\/o\/n(send|list|read|stat)$/.test(p)){
+    await ntEns(env);const me=t.uname,isB=me==='BEO',who='K:'+me,lk='%,'+me+',%';
+    if(p==='/api/o/nsend'){
+      if(!kp&&!isB)return J({e:'na'},403);
+      const ti=cl(b.ti,120),bd=cl(b.bd,3000);if(ti.length<2)return J({e:'ti'},400);
+      let tk=0,ts=1,cs='';
+      if(isB){tk=b.kp?1:0;ts=b.sc?1:0;if(!tk&&!ts)return J({e:'to'},400);const l=(Array.isArray(b.cens)?b.cens:[]).map(x=>cl(x,20)).filter(x=>CEN[x]);cs=l.length&&l.length<Object.keys(CEN).length?','+l.join(',')+',':''}
+      else cs=','+me+',';
+      const r2=await env.DB.prepare('INSERT INTO nt_notice(snd,ti,bd,to_kp,to_sc,cens,ts) VALUES(?,?,?,?,?,?,?)').bind(me,ti,bd,tk,ts,cs,Date.now()).run();
+      return J({ok:1,id:r2.meta&&r2.meta.last_row_id||0});
+    }
+    if(p==='/api/o/nlist'){
+      if(!kp&&!isB)return J({ok:1,rows:[],un:0});
+      const rs=(await (kp?env.DB.prepare("SELECT * FROM nt_notice WHERE snd=? OR (to_kp=1 AND (cens='' OR cens LIKE ?)) ORDER BY id DESC LIMIT 60").bind(me,lk):env.DB.prepare("SELECT * FROM nt_notice WHERE snd=? ORDER BY id DESC LIMIT 60").bind(me)).all()).results||[];
+      const rd=new Set(((await env.DB.prepare('SELECT nid FROM nt_read WHERE who=?').bind(who).all()).results||[]).map(x=>x.nid));
+      const rows=ntRows(rs,rd,me),un=rows.filter(x=>!x.m&&!x.r).length;
+      return J({ok:1,un,rows:b.c?[]:rows});
+    }
+    if(p==='/api/o/nread'){
+      const id=parseInt(b.id)||0;if(!kp)return J({ok:1});
+      const x=await env.DB.prepare("SELECT id FROM nt_notice WHERE id=? AND to_kp=1 AND (cens='' OR cens LIKE ?)").bind(id,lk).first();
+      if(x)await env.DB.prepare('INSERT OR IGNORE INTO nt_read(nid,who,ts) VALUES(?,?,?)').bind(id,who,Date.now()).run();
+      return J({ok:1});
+    }
+    if(p==='/api/o/nstat'){
+      const id=parseInt(b.id)||0,x=await env.DB.prepare('SELECT * FROM nt_notice WHERE id=? AND snd=?').bind(id,me).first();if(!x)return J({e:'na'},403);
+      const rd={};((await env.DB.prepare('SELECT who,ts FROM nt_read WHERE nid=?').bind(id).all()).results||[]).forEach(y=>rd[y.who]=y.ts);
+      const inC=c=>!x.cens||x.cens.includes(','+c+',');
+      const kl=x.to_kp?Object.keys(CEN).filter(inC).sort((a,c)=>String(CEN[a]).localeCompare(String(CEN[c]))).map(c=>[c,CEN[c],rd['K:'+c]||0]):[];
+      const sl=x.to_sc?ss.filter(y=>inC(y.code)).map(y=>[y.udise,y.name||y.udise,y.code,rd['S:'+y.udise]||0]):[];
+      return J({ok:1,ti:x.ti,ts:x.ts,kp:kl,sc:sl});
+    }
+  }
   if(p==='/api/o/fuelsum'){const {D,M}=await fuMap(env,r,SW,SA),used=D.ms.map(()=>new Set());Object.values(M).forEach(o=>Object.keys(o).forEach(mi=>used[mi].add(o[mi])));
     const rows=ss.map(x=>[x.udise,x.name||'',x.code,fuRow(D,M,x.udise).map(y=>[y.m,y.tot,y.ac])]);
     const un=kp?[]:[].concat(...D.ms.map((mo,mi)=>mo.rows.map((y,i)=>used[mi].has(i)?null:[mo.m,y[0],String(y[1]).slice(-4),y[3]]).filter(Boolean)));
@@ -853,6 +889,13 @@ async function schoolApi(p,r,env){
   }
   const t=await schoolAuth(env,b);if(!t)return J({e:'auth'},401);
   if(!t.changed&&p!=='/api/s/chpw')return J({e:'pwchg'},403); // सुरुवातीचा पासवर्ड बदलेपर्यंत दुसरे काही चालत नाही
+  if(p==='/api/s/nlist'||p==='/api/s/nread'){
+    await ntEns(env);const cr=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(t.udise).first(),lk='%,'+(cr?cr.code:'-')+',%',who='S:'+t.udise;
+    if(p==='/api/s/nread'){const id=parseInt(b.id)||0,x=await env.DB.prepare("SELECT id FROM nt_notice WHERE id=? AND to_sc=1 AND (cens='' OR cens LIKE ?)").bind(id,lk).first();if(x)await env.DB.prepare('INSERT OR IGNORE INTO nt_read(nid,who,ts) VALUES(?,?,?)').bind(id,who,Date.now()).run();return J({ok:1})}
+    const rs=(await env.DB.prepare("SELECT * FROM nt_notice WHERE to_sc=1 AND (cens='' OR cens LIKE ?) ORDER BY id DESC LIMIT 60").bind(lk).all()).results||[];
+    const rd=new Set(((await env.DB.prepare('SELECT nid FROM nt_read WHERE who=?').bind(who).all()).results||[]).map(x=>x.nid));
+    const rows=ntRows(rs,rd,'-');return J({ok:1,un:rows.filter(x=>!x.r).length,rows:b.c?[]:rows});
+  }
   if(p==='/api/s/fuel'){const {D,M}=await fuMap(env,r,'=?',[t.udise]);return J({ok:1,ms:fuRow(D,M,t.udise)})}
   if(p==='/api/s/chpw'){
     const old=cl(b.old,40),nw=cl(b.nw,40);
