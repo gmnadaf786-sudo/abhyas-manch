@@ -133,9 +133,10 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
 /* बूट व पायमोजे अनुदान: data/bootsox_2026-27.json (PDF मधून), शाळेची आदेश माहिती cfg 'bso:'+udise */
 let BSD=null;async function bsLoad(env,r){if(BSD)return BSD;const rs=await env.ASSETS.fetch(new Request(new URL('/data/bootsox_2026-27.json',r.url)));BSD=rs.ok?await rs.json():{yr:'',rate:[150,20],rows:{}};return BSD}
 /* इंधन व भाजीपाला अनुदान: data/indhan_2026-27.json (SNA यादी, खाते क्रमांकाने शाळेशी जुळवणी) */
-let FUD=null;async function fuLoad(env,r){if(FUD)return FUD;const rs=await env.ASSETS.fetch(new Request(new URL('/data/indhan_2026-27.json',r.url)));const d=rs.ok?await rs.json():{p:'',rows:[]},ix={};(d.rows||[]).forEach((x,i)=>{ix[String(x[1]).replace(/\D/g,'')]=i});FUD={p:d.p||'',src:d.src||'',rows:d.rows||[],ix};return FUD}
+let FUD=null;async function fuLoad(env,r){if(FUD)return FUD;const rs=await env.ASSETS.fetch(new Request(new URL('/data/indhan_2026-27.json',r.url)));const d=rs.ok?await rs.json():{months:[]},ms=(d.months||[]).map(m=>{const ix={};m.rows.forEach((x,i)=>{ix[String(x[1]).replace(/\D/g,'')]=i});return {m:m.m,p:m.p,rows:m.rows,ix}});FUD={ms};return FUD}
 async function fuMap(env,r,w,a){const D=await fuLoad(env,r),M={},q=async t=>((await env.DB.prepare('SELECT udise,acct FROM '+t+' WHERE udise '+w).bind(...a).all().catch(()=>({results:[]}))).results||[]);
-  for(const t of ['school_sna','school_bank','sch_bank'])(await q(t)).forEach(x=>{const k=String(x.acct||'').replace(/\D/g,'');if(k&&k in D.ix&&!M[x.udise])M[x.udise]=[D.ix[k],t]});return {D,M}}
+  for(const t of ['school_sna','school_bank','sch_bank'])(await q(t)).forEach(x=>{const k=String(x.acct||'').replace(/\D/g,'');if(!k)return;D.ms.forEach((mo,mi)=>{if(k in mo.ix){const o=M[x.udise]=M[x.udise]||{};if(!(mi in o))o[mi]=mo.ix[k]}})});return {D,M}}
+const fuRow=(D,M,u)=>D.ms.map((mo,mi)=>{const o=M[u],y=o&&o[mi]!==undefined?mo.rows[o[mi]]:null;return y?{m:mo.m,p:mo.p,tot:y[3],a:y[4],b:y[5],c:y[6],ac:String(y[1]).slice(-4)}:null}).filter(Boolean);
 const BSTY=['boot','uni2','unc','usg','pad','tr','cw','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
 async function snaCp(env){try{const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='snacp'").first();return JSON.parse(q&&q.v||'{}')}catch(e){return {}}}
 async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name,cmax FROM schools WHERE udise=?').bind(u).first().catch(()=>null);let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
@@ -397,10 +398,10 @@ async function offApi(p,r,env){
   await rtSweep(env);const SK=kp?t.uname:'JAT';if(/^\/api\/o\/(medset|schadd|hmset|clusync|tdecide)$/.test(p))await dcClr(env);
   let ss=await dcGet(env,'ss:'+SK,b.fr);if(!ss){ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;await dcPut(env,'ss:'+SK,ss,600000)}
   const ok=new Set(ss.map(x=>x.udise)),SW='IN (SELECT udise FROM sch_center WHERE code IN ('+JQ+'))',SA=JK;
-  if(p==='/api/o/fuelsum'){const {D,M}=await fuMap(env,r,SW,SA),used=new Set(Object.values(M).map(v=>v[0]));
-    const rows=ss.map(x=>{const m=M[x.udise],y=m?D.rows[m[0]]:null;return [x.udise,x.name||'',x.code,y?y[3]:null,y?String(y[1]).slice(-4):'']});
-    const un=kp?[]:D.rows.map((y,i)=>used.has(i)?null:[y[0],String(y[1]).slice(-4),y[3]]).filter(Boolean);
-    return J({ok:1,p:D.p,rows,un,fn:D.rows.length})}
+  if(p==='/api/o/fuelsum'){const {D,M}=await fuMap(env,r,SW,SA),used=D.ms.map(()=>new Set());Object.values(M).forEach(o=>Object.keys(o).forEach(mi=>used[mi].add(o[mi])));
+    const rows=ss.map(x=>[x.udise,x.name||'',x.code,fuRow(D,M,x.udise).map(y=>[y.m,y.tot,y.ac])]);
+    const un=kp?[]:[].concat(...D.ms.map((mo,mi)=>mo.rows.map((y,i)=>used[mi].has(i)?null:[mo.m,y[0],String(y[1]).slice(-4),y[3]]).filter(Boolean)));
+    return J({ok:1,ms:D.ms.map(mo=>[mo.m,mo.p]),rows,un})}
   if(p==='/api/o/medset'){
     if(!kp)return J({e:'kp'},403);await schCols(env);
     const u=cl(b.udise,11).replace(/\D/g,''),AL=['मराठी','कन्नड','उर्दू','इंग्रजी','हिंदी','इतर'],ms=(Array.isArray(b.meds)?b.meds:[b.med]).map(x=>cl(x,12)).filter((x,i,a)=>AL.includes(x)&&a.indexOf(x)===i).slice(0,4);
@@ -836,7 +837,7 @@ async function schoolApi(p,r,env){
   }
   const t=await schoolAuth(env,b);if(!t)return J({e:'auth'},401);
   if(!t.changed&&p!=='/api/s/chpw')return J({e:'pwchg'},403); // सुरुवातीचा पासवर्ड बदलेपर्यंत दुसरे काही चालत नाही
-  if(p==='/api/s/fuel'){const {D,M}=await fuMap(env,r,'=?',[t.udise]),m=M[t.udise];if(!m)return J({ok:1,have:0,p:D.p});const x=D.rows[m[0]];return J({ok:1,have:1,p:D.p,nm:x[0],ac:String(x[1]).slice(-4),tot:x[3],a:x[4],b:x[5],c:x[6]})}
+  if(p==='/api/s/fuel'){const {D,M}=await fuMap(env,r,'=?',[t.udise]);return J({ok:1,ms:fuRow(D,M,t.udise)})}
   if(p==='/api/s/chpw'){
     const old=cl(b.old,40),nw=cl(b.nw,40);
     if(nw.length<6||nw==='123456')return J({e:'weak'},400);
@@ -1120,7 +1121,7 @@ async function pmApi(p,r,env){
     return J({ok:1,id});
   }
   if(p==='/api/pm/cookdel'){await env.DB.prepare('DELETE FROM pm_cook WHERE udise=? AND id=?').bind(u,cl(b.id,60)).run();return J({ok:1})}
-  if(p==='/api/pm/fuel'){const {D,M}=await fuMap(env,r,'=?',[u]),m=M[u];if(!m)return J({ok:1,have:0,p:D.p});const x=D.rows[m[0]];return J({ok:1,have:1,p:D.p,nm:x[0],ac:String(x[1]).slice(-4),tot:x[3],a:x[4],b:x[5],c:x[6]})}
+  if(p==='/api/pm/fuel'){const {D,M}=await fuMap(env,r,'=?',[u]);return J({ok:1,ms:fuRow(D,M,u)})}
   if(p==='/api/pm/year'){
     const fy=parseInt(b.fy)||0;if(fy<2020||fy>2100)return J({e:'fy'},400);
     const d=(await env.DB.prepare('SELECT * FROM pm_daily WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
