@@ -800,8 +800,8 @@ async function offApi(p,r,env){
     for(const ty of BSTY){const x=f.as&&f.as[ty];if(Array.isArray(x))as[ty]=x.slice(0,6).map(n=>{n=parseInt(n);return n>=0&&n<vs.length?n:-1})}
     await cfgUp(env,'uvend:'+c,JSON.stringify({vs,as})).run();return J({ok:1})}
   if(p==='/api/o/bsoall'){const us=(Array.isArray(b.us)?b.us:[]).slice(0,80).map(x=>cl(x,11).replace(/\D/g,'')).filter(u=>ok.has(u)),l=[];for(const u of us)l.push(await bsOne(env,r,u,b.ty));return J({ok:1,l})}
-  if(p==='/api/o/kpphoto'){const c=kp?t.uname:cl(b.c,20);if(!CEN[c])return J({e:'na'},403);return J({ok:1,c,img:await kpImg(env,r,c)})}
-  if(p==='/api/o/kpphotos'){if(kp)return J({e:'na'},403);const l=[];for(const c of Object.keys(CEN).sort((a,b)=>String(CEN[a]).localeCompare(String(CEN[b])))){const i=await kpImg(env,r,c);l.push([c,CEN[c],i])}return J({ok:1,l})}
+  if(p==='/api/o/kpphoto'){const c=kp?t.uname:cl(b.c,20)||'BEO';if(c!=='BEO'&&!CEN[c])return J({e:'na'},403);return J({ok:1,c,img:await kpImg(env,r,c)})}
+  if(p==='/api/o/kpphotos'){if(kp)return J({e:'na'},403);const l=[['BEO','गट शिक्षणाधिकारी',await kpImg(env,r,'BEO')]];for(const c of Object.keys(CEN).sort((a,b)=>String(CEN[a]).localeCompare(String(CEN[b])))){const i=await kpImg(env,r,c);l.push([c,CEN[c],i])}return J({ok:1,l})}
   if(p==='/api/o/bsoone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);return J(await bsOne(env,r,u,b.ty))}
   if(p==='/api/o/smsum'){ // KP: स्वतःचे केंद्र, BEO: सर्व; 30 मिनिटे कॅश
     const ck='sm:'+SK;{const h=await dcGet(env,ck,b.fr);if(h)return J(h)}
