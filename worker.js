@@ -137,11 +137,14 @@ let FUD=null;async function fuLoad(env,r){if(FUD)return FUD;const rs=await env.A
 async function fuMap(env,r,w,a){const D=await fuLoad(env,r),M={},q=async t=>((await env.DB.prepare('SELECT udise,acct FROM '+t+' WHERE udise '+w).bind(...a).all().catch(()=>({results:[]}))).results||[]);
   for(const t of ['school_sna','school_bank','sch_bank'])(await q(t)).forEach(x=>{const k=String(x.acct||'').replace(/\D/g,'');if(!k)return;D.ms.forEach((mo,mi)=>{if(k in mo.ix){const o=M[x.udise]=M[x.udise]||{};if(!(mi in o))o[mi]=mo.ix[k]}})});return {D,M}}
 const fuRow=(D,M,u)=>D.ms.map((mo,mi)=>{const o=M[u],y=o&&o[mi]!==undefined?mo.rows[o[mi]]:null;return y?{m:mo.m,p:mo.p,tot:y[3],a:y[4],b:y[5],c:y[6],ac:String(y[1]).slice(-4)}:null}).filter(Boolean);
+async function uvGet(env,c){const q=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('uvend:'+c).first().catch(()=>null);let V={};try{V=JSON.parse(q&&q.v||'{}')}catch(e){}
+  if(!Array.isArray(V.vs)){const vs=[1,2].map(i=>({n:V['n'+i]||'',b:V['b'+i]||'',a:V['a'+i]||'',i:V['i'+i]||''})).filter(v=>v.n||v.a);V={vs,as:vs.length?{uni2:[0,1],unc:[0,1]}:{}}}
+  V.as=V.as&&typeof V.as==='object'?V.as:{};return V}
 const BSTY=['boot','uni2','unc','usg','pad','tr','cw','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
 async function snaCp(env){try{const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='snacp'").first();return JSON.parse(q&&q.v||'{}')}catch(e){return {}}}
 async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name,cmax FROM schools WHERE udise=?').bind(u).first().catch(()=>null);let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
-  if(ty==='uni2'||ty==='unc'){const sc=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(u).first().catch(()=>null),q=sc?await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('uvend:'+sc.code).first().catch(()=>null):null;let V={};try{V=JSON.parse(q&&q.v||'{}')}catch(e){}
-    for(const i of [1,2])for(const k of ['n','b','a','i'])if(V[k+i]&&!F['v'+i+k])F['v'+i+k]=V[k+i]}
+  {const sc=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(u).first().catch(()=>null),V=sc?await uvGet(env,sc.code):null,A=V&&V.as[ty]||[];
+    A.forEach((ix,k)=>{const v=ix>=0&&V.vs[ix];if(v)for(const q of ['n','b','a','i'])if(v[q]&&!F['v'+(k+1)+q])F['v'+(k+1)+q]=v[q]})}
   return {ok:1,ty,yr:d.yr,rate:d.rate,rate2:d.rate2,u,sn:s?s.name:'',d:x?{mh:x[0],n:x[1],cl:x[2],n2:x[3]||0,sg:x[5]||0,tr:x[6]||0,p6:x[7]||0,p9:x[8]||0,ce:x[9]||0,ct:x[10]||0,cs:x[11]||0,cr:x[12]||0,uc:x[13]||0,cx:(s&&s.cmax)||0}:null,f:F,cpm:await snaCp(env)}}
 /* शिष्यवृत्ती / विद्यार्थी KYC: stu_kyc. आधार AES-GCM ने कूटबद्ध (secret AADHAAR_KEY), फोटो+सही R2 'schol/udise/pen.jpg' (≤100KB) */
 let KYK=false;async function kyEns(env){if(KYK)return;await env.DB.prepare('CREATE TABLE IF NOT EXISTS stu_kyc(pen TEXT PRIMARY KEY,udise TEXT,aenc TEXT,a4 TEXT,aenr TEXT,mob TEXT,email TEXT,inc TEXT,dom TEXT,land TEXT,dis TEXT,wri TEXT,cat TEXT,med TEXT,dob TEXT,photo TEXT,upd TEXT)').run();KYK=true}
@@ -791,9 +794,10 @@ async function offApi(p,r,env){
   if(p==='/api/o/snaget')return J({ok:1,cpm:await snaCp(env)});
   if(p==='/api/o/snaset'){if(kp)return J({e:'beo'},403);const o={},m=b.cpm&&typeof b.cpm==='object'?b.cpm:{};for(const t of BSTY){if(t==='sg')continue;const v=cl(m[t],160).trim();if(v)o[t]=v}await cfgUp(env,'snacp',JSON.stringify(o)).run();return J({ok:1,cpm:o})}
   if(p==='/api/o/uvget'||p==='/api/o/uvsave'){const c=kp?t.uname:cl(b.c,20);if(!CEN[c])return J({e:'na'},403);
-    if(p==='/api/o/uvget'){const q=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('uvend:'+c).first();let f={};try{f=JSON.parse(q&&q.v||'{}')}catch(e){}return J({ok:1,c,cn:CEN[c],f})}
-    const f=b.f||{},o={};for(const i of [1,2]){o['n'+i]=cl(f['n'+i],80);o['b'+i]=cl(f['b'+i],60);o['a'+i]=cl(f['a'+i],30).replace(/[^\d]/g,'');o['i'+i]=cl(f['i'+i],15).toUpperCase().replace(/[^A-Z0-9]/g,'')}
-    await cfgUp(env,'uvend:'+c,JSON.stringify(o)).run();return J({ok:1})}
+    if(p==='/api/o/uvget')return J({ok:1,c,cn:CEN[c],f:await uvGet(env,c)});
+    const f=b.f||{},vs=(Array.isArray(f.vs)?f.vs:[]).slice(0,12).map(v=>({n:cl(v&&v.n,80),b:cl(v&&v.b,60),a:cl(v&&v.a,30).replace(/[^\d]/g,''),i:cl(v&&v.i,15).toUpperCase().replace(/[^A-Z0-9]/g,'')})),as={};
+    for(const ty of BSTY){const x=f.as&&f.as[ty];if(Array.isArray(x))as[ty]=x.slice(0,6).map(n=>{n=parseInt(n);return n>=0&&n<vs.length?n:-1})}
+    await cfgUp(env,'uvend:'+c,JSON.stringify({vs,as})).run();return J({ok:1})}
   if(p==='/api/o/bsoall'){const us=(Array.isArray(b.us)?b.us:[]).slice(0,80).map(x=>cl(x,11).replace(/\D/g,'')).filter(u=>ok.has(u)),l=[];for(const u of us)l.push(await bsOne(env,r,u,b.ty));return J({ok:1,l})}
   if(p==='/api/o/bsoone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);return J(await bsOne(env,r,u,b.ty))}
   if(p==='/api/o/smsum'){ // KP: स्वतःचे केंद्र, BEO: सर्व; 30 मिनिटे कॅश
