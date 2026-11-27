@@ -144,6 +144,18 @@ let SNAFIX=0;async function snaFix(env){if(SNAFIX)return;try{await env.DB.prepar
 let NTE=0;async function ntEns(env){if(NTE)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS nt_notice(id INTEGER PRIMARY KEY AUTOINCREMENT, snd TEXT, ti TEXT, bd TEXT, to_kp INTEGER, to_sc INTEGER, cens TEXT, ts INTEGER)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS nt_read(nid INTEGER, who TEXT, ts INTEGER, PRIMARY KEY(nid,who))")]);NTE=1}
 const ntLab=u=>u==='BEO'?'गटशिक्षणाधिकारी (BEO)':'केंद्रप्रमुख – '+(CEN[u]||u);
 const ntRows=(rs,rd,me)=>rs.map(x=>({id:x.id,l:ntLab(x.snd),ti:x.ti,bd:x.bd,ts:x.ts,m:x.snd===me?1:0,r:rd.has(x.id)?1:0,k:x.to_kp,s:x.to_sc}));
+let FME=0;async function fmEns(env){if(FME)return;await env.DB.batch([env.DB.prepare("CREATE TABLE IF NOT EXISTS fm_form(id INTEGER PRIMARY KEY AUTOINCREMENT, snd TEXT, ti TEXT, ds TEXT, qs TEXT, to_t INTEGER, to_s INTEGER, cens TEXT, dl INTEGER, ts INTEGER)"),env.DB.prepare("CREATE TABLE IF NOT EXISTS fm_resp(fid INTEGER, who TEXT, ans TEXT, ts INTEGER, PRIMARY KEY(fid,who))")]);FME=1}
+const FMT=['text','long','num','date','yn','sel'];
+function fmQs(a){return (Array.isArray(a)?a:[]).slice(0,25).map(q=>{const t=FMT.includes(q&&q.t)?q.t:'text';return {l:cl(q&&q.l,200),t,r:q&&q.r?1:0,o:t==='sel'?(Array.isArray(q.o)?q.o:[]).map(x=>cl(x,60)).filter(Boolean).slice(0,12):[]}}).filter(q=>q.l)}
+function fmAns(qs,a){a=a&&typeof a==='object'?a:{};const o={};for(let i=0;i<qs.length;i++){const q=qs[i];let v=cl(a['q'+i],q.t==='long'?1500:300);if(q.t==='num')v=v.replace(/[^\d.]/g,'');if(q.t==='yn'&&!['होय','नाही'].includes(v))v='';if(q.t==='sel'&&!q.o.includes(v))v='';if(q.t==='date'&&!/^\d{4}-\d{2}-\d{2}$/.test(v))v='';if(q.r&&!v)return {e:'req',i};o['q'+i]=v}return {o}}
+const fmView=(x,r)=>({id:x.id,ti:x.ti,ds:x.ds,qs:JSON.parse(x.qs||'[]'),dl:x.dl,ts:x.ts,l:ntLab(x.snd),a:r?JSON.parse(r.ans||'{}'):null,at:r?r.ts:0});
+async function fmRespond(env,p,b,who,code,pre){
+  await fmEns(env);const lk='%,'+(code||'-')+',%',col=pre==='T'?'to_t':'to_s';
+  if(p.endsWith('fmlist')){const rs=(await env.DB.prepare("SELECT * FROM fm_form WHERE "+col+"=1 AND (cens='' OR cens LIKE ?) ORDER BY id DESC LIMIT 40").bind(lk).all()).results||[];const rp={};((await env.DB.prepare('SELECT * FROM fm_resp WHERE who=?').bind(who).all()).results||[]).forEach(x=>rp[x.fid]=x);const now=Date.now(),rows=rs.map(x=>fmView(x,rp[x.id]));return J({ok:1,un:rows.filter(x=>!x.a&&(!x.dl||x.dl>now)).length,rows:b.c?[]:rows})}
+  const id=parseInt(b.id)||0,x=await env.DB.prepare("SELECT * FROM fm_form WHERE id=? AND "+col+"=1 AND (cens='' OR cens LIKE ?)").bind(id,lk).first();if(!x)return J({e:'na'},403);
+  if(x.dl&&Date.now()>x.dl)return J({e:'late'},400);
+  const v=fmAns(JSON.parse(x.qs||'[]'),b.ans);if(v.e)return J({e:'req',i:v.i},400);
+  await env.DB.prepare('INSERT OR REPLACE INTO fm_resp(fid,who,ans,ts) VALUES(?,?,?,?)').bind(id,who,JSON.stringify(v.o),Date.now()).run();return J({ok:1})}
 const KPI={};async function kpImg(env,r,c){if(c in KPI)return KPI[c];let v='';try{const rs=await env.ASSETS.fetch(new Request(new URL('/data/kp/'+c+'.jpg',r.url)));if(rs.ok){const u=new Uint8Array(await rs.arrayBuffer());let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));v='data:image/jpeg;base64,'+btoa(s)}}catch(e){}return KPI[c]=v}
 const BSTY=['boot','uni2','unc','usg','pad','tr','cw','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
 async function snaCp(env){try{const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='snacp'").first();return JSON.parse(q&&q.v||'{}')}catch(e){return {}}}
@@ -409,6 +421,30 @@ async function offApi(p,r,env){
   await rtSweep(env);const SK=kp?t.uname:'JAT';if(/^\/api\/o\/(medset|schadd|hmset|clusync|tdecide)$/.test(p))await dcClr(env);
   let ss=await dcGet(env,'ss:'+SK,b.fr);if(!ss){ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;await dcPut(env,'ss:'+SK,ss,600000)}
   const ok=new Set(ss.map(x=>x.udise)),SW='IN (SELECT udise FROM sch_center WHERE code IN ('+JQ+'))',SA=JK;
+  if(/^\/api\/o\/fm(save|list|res|del)$/.test(p)){
+    await fmEns(env);const me=t.uname,isB=me==='BEO',lk='%,'+me+',%';
+    if(!kp&&!isB)return J({e:'na'},403);
+    if(p==='/api/o/fmsave'){
+      const ti=cl(b.ti,120),qs=fmQs(b.qs);if(ti.length<2||!qs.length)return J({e:'ti'},400);
+      const tt=b.t?1:0,ts2=b.s?1:0;if(!tt&&!ts2)return J({e:'to'},400);
+      let cs=','+me+',';if(isB){const l=(Array.isArray(b.cens)?b.cens:[]).map(x=>cl(x,20)).filter(x=>CEN[x]);cs=l.length&&l.length<Object.keys(CEN).length?','+l.join(',')+',':''}
+      let dl=0;if(/^\d{4}-\d{2}-\d{2}$/.test(b.dl||'')){dl=Date.parse(b.dl+'T23:59:59+05:30')||0}
+      const r2=await env.DB.prepare('INSERT INTO fm_form(snd,ti,ds,qs,to_t,to_s,cens,dl,ts) VALUES(?,?,?,?,?,?,?,?,?)').bind(me,ti,cl(b.ds,1000),JSON.stringify(qs),tt,ts2,cs,dl,Date.now()).run();
+      return J({ok:1,id:r2.meta&&r2.meta.last_row_id||0});
+    }
+    if(p==='/api/o/fmlist'){
+      const rs=(await (kp?env.DB.prepare("SELECT * FROM fm_form WHERE snd=? OR (snd='BEO' AND (cens='' OR cens LIKE ?)) ORDER BY id DESC LIMIT 60").bind(me,lk):env.DB.prepare("SELECT * FROM fm_form WHERE snd=? ORDER BY id DESC LIMIT 60").bind(me)).all()).results||[];
+      return J({ok:1,rows:rs.map(x=>({id:x.id,ti:x.ti,ts:x.ts,dl:x.dl,l:ntLab(x.snd),m:x.snd===me?1:0,t:x.to_t,s:x.to_s}))});
+    }
+    const id=parseInt(b.id)||0,x=await env.DB.prepare('SELECT * FROM fm_form WHERE id=?').bind(id).first();
+    if(!x||!(x.snd===me||(kp&&x.snd==='BEO'&&(!x.cens||x.cens.includes(','+me+',')))))return J({e:'na'},403);
+    if(p==='/api/o/fmdel'){if(x.snd!==me)return J({e:'na'},403);await env.DB.batch([env.DB.prepare('DELETE FROM fm_resp WHERE fid=?').bind(id),env.DB.prepare('DELETE FROM fm_form WHERE id=?').bind(id)]);return J({ok:1})}
+    const rp={};((await env.DB.prepare('SELECT * FROM fm_resp WHERE fid=?').bind(id).all()).results||[]).forEach(y=>rp[y.who]=y);
+    const inC=c=>!x.cens||x.cens.includes(','+c+',');const nm={},cd={};ss.forEach(y=>{nm[y.udise]=y.name||y.udise;cd[y.udise]=y.code});
+    const sl=x.to_s?ss.filter(y=>inC(y.code)).map(y=>{const q=rp['S:'+y.udise];return [y.udise,y.name||y.udise,y.code,q?q.ts:0,q?JSON.parse(q.ans||'{}'):null]}):[];
+    let tl=[];if(x.to_t){const ts=(await env.DB.prepare("SELECT shalarth,name,udise FROM teachers WHERE status='ok' ORDER BY name").all()).results||[];tl=ts.filter(y=>ok.has(y.udise)&&inC(cd[y.udise])).map(y=>{const q=rp['T:'+y.shalarth];return [y.shalarth,y.name,y.udise,nm[y.udise]||y.udise,cd[y.udise]||'',q?q.ts:0,q?JSON.parse(q.ans||'{}'):null]})}
+    return J({ok:1,f:{id:x.id,ti:x.ti,ds:x.ds,qs:JSON.parse(x.qs||'[]'),dl:x.dl,ts:x.ts,m:x.snd===me?1:0,t:x.to_t,s:x.to_s},T:tl,S:sl});
+  }
   if(/^\/api\/o\/n(send|list|read|stat)$/.test(p)){
     await ntEns(env);const me=t.uname,isB=me==='BEO',who='K:'+me,lk='%,'+me+',%';
     if(p==='/api/o/nsend'){
@@ -889,6 +925,7 @@ async function schoolApi(p,r,env){
   }
   const t=await schoolAuth(env,b);if(!t)return J({e:'auth'},401);
   if(!t.changed&&p!=='/api/s/chpw')return J({e:'pwchg'},403); // सुरुवातीचा पासवर्ड बदलेपर्यंत दुसरे काही चालत नाही
+  if(p==='/api/s/fmlist'||p==='/api/s/fmsub'){const cr=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(t.udise).first();return fmRespond(env,p,b,'S:'+t.udise,cr&&cr.code,'S')}
   if(p==='/api/s/nlist'||p==='/api/s/nread'){
     await ntEns(env);const cr=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(t.udise).first(),lk='%,'+(cr?cr.code:'-')+',%',who='S:'+t.udise;
     if(p==='/api/s/nread'){const id=parseInt(b.id)||0,x=await env.DB.prepare("SELECT id FROM nt_notice WHERE id=? AND to_sc=1 AND (cens='' OR cens LIKE ?)").bind(id,lk).first();if(x)await env.DB.prepare('INSERT OR IGNORE INTO nt_read(nid,who,ts) VALUES(?,?,?)').bind(id,who,Date.now()).run();return J({ok:1})}
@@ -1866,6 +1903,10 @@ async function ext(p,r,env){
     const sg=prSign(b.sign);if(!sg)return J({e:'sign'},400);
     await env.DB.prepare("INSERT OR IGNORE INTO kp_pr_att(pid,who,name,udise,mode,ts,lat,lng,acc,dist,sign) VALUES(?,?,?,?,'self',?,?,?,?,?,?)").bind(x.id,t.shalarth,t.name,t.udise,new Date().toISOString(),ll[0],ll[1],acc,dist,sg).run();
     return J({ok:1,dist});
+  }
+  if(p==='/api/t/fmlist'||p==='/api/t/fmsub'){
+    const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
+    const cr=await env.DB.prepare('SELECT code FROM sch_center WHERE udise=?').bind(t.udise).first();return fmRespond(env,p,b,'T:'+t.shalarth,cr&&cr.code,'T');
   }
   if(p==='/api/t/classes'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
