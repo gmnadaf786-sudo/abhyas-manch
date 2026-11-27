@@ -836,6 +836,7 @@ async function schoolApi(p,r,env){
   }
   const t=await schoolAuth(env,b);if(!t)return J({e:'auth'},401);
   if(!t.changed&&p!=='/api/s/chpw')return J({e:'pwchg'},403); // सुरुवातीचा पासवर्ड बदलेपर्यंत दुसरे काही चालत नाही
+  if(p==='/api/s/fuel'){const {D,M}=await fuMap(env,r,'=?',[t.udise]),m=M[t.udise];if(!m)return J({ok:1,have:0,p:D.p});const x=D.rows[m[0]];return J({ok:1,have:1,p:D.p,nm:x[0],ac:String(x[1]).slice(-4),tot:x[3],a:x[4],b:x[5],c:x[6]})}
   if(p==='/api/s/chpw'){
     const old=cl(b.old,40),nw=cl(b.nw,40);
     if(nw.length<6||nw==='123456')return J({e:'weak'},400);
