@@ -132,6 +132,10 @@ async function mdmAuto(env,mon,ok){const [y,m]=mon.split('-').map(Number),sy=m>=
 /* संच मान्यता: sanch_m (UDISE + मंजूर पदे), वर्ष cfg 'smyr'. नवीन वर्षाची फाइल अपलोड केल्यावर पूर्ण बदलते. */
 /* बूट व पायमोजे अनुदान: data/bootsox_2026-27.json (PDF मधून), शाळेची आदेश माहिती cfg 'bso:'+udise */
 let BSD=null;async function bsLoad(env,r){if(BSD)return BSD;const rs=await env.ASSETS.fetch(new Request(new URL('/data/bootsox_2026-27.json',r.url)));BSD=rs.ok?await rs.json():{yr:'',rate:[150,20],rows:{}};return BSD}
+/* इंधन व भाजीपाला अनुदान: data/indhan_2026-27.json (SNA यादी, खाते क्रमांकाने शाळेशी जुळवणी) */
+let FUD=null;async function fuLoad(env,r){if(FUD)return FUD;const rs=await env.ASSETS.fetch(new Request(new URL('/data/indhan_2026-27.json',r.url)));const d=rs.ok?await rs.json():{p:'',rows:[]},ix={};(d.rows||[]).forEach((x,i)=>{ix[String(x[1]).replace(/\D/g,'')]=i});FUD={p:d.p||'',src:d.src||'',rows:d.rows||[],ix};return FUD}
+async function fuMap(env,r,w,a){const D=await fuLoad(env,r),M={},q=async t=>((await env.DB.prepare('SELECT udise,acct FROM '+t+' WHERE udise '+w).bind(...a).all().catch(()=>({results:[]}))).results||[]);
+  for(const t of ['school_sna','school_bank','sch_bank'])(await q(t)).forEach(x=>{const k=String(x.acct||'').replace(/\D/g,'');if(k&&k in D.ix&&!M[x.udise])M[x.udise]=[D.ix[k],t]});return {D,M}}
 const BSTY=['boot','uni2','usg','pad','tr','cw','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
 async function snaCp(env){try{const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='snacp'").first();return JSON.parse(q&&q.v||'{}')}catch(e){return {}}}
 async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name,cmax FROM schools WHERE udise=?').bind(u).first().catch(()=>null);let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
@@ -393,6 +397,10 @@ async function offApi(p,r,env){
   await rtSweep(env);const SK=kp?t.uname:'JAT';if(/^\/api\/o\/(medset|schadd|hmset|clusync|tdecide)$/.test(p))await dcClr(env);
   let ss=await dcGet(env,'ss:'+SK,b.fr);if(!ss){ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;await dcPut(env,'ss:'+SK,ss,600000)}
   const ok=new Set(ss.map(x=>x.udise)),SW='IN (SELECT udise FROM sch_center WHERE code IN ('+JQ+'))',SA=JK;
+  if(p==='/api/o/fuelsum'){const {D,M}=await fuMap(env,r,SW,SA),used=new Set(Object.values(M).map(v=>v[0]));
+    const rows=ss.map(x=>{const m=M[x.udise],y=m?D.rows[m[0]]:null;return [x.udise,x.name||'',x.code,y?y[3]:null,y?String(y[1]).slice(-4):'']});
+    const un=kp?[]:D.rows.map((y,i)=>used.has(i)?null:[y[0],String(y[1]).slice(-4),y[3]]).filter(Boolean);
+    return J({ok:1,p:D.p,rows,un,fn:D.rows.length})}
   if(p==='/api/o/medset'){
     if(!kp)return J({e:'kp'},403);await schCols(env);
     const u=cl(b.udise,11).replace(/\D/g,''),AL=['मराठी','कन्नड','उर्दू','इंग्रजी','हिंदी','इतर'],ms=(Array.isArray(b.meds)?b.meds:[b.med]).map(x=>cl(x,12)).filter((x,i,a)=>AL.includes(x)&&a.indexOf(x)===i).slice(0,4);
@@ -1111,6 +1119,7 @@ async function pmApi(p,r,env){
     return J({ok:1,id});
   }
   if(p==='/api/pm/cookdel'){await env.DB.prepare('DELETE FROM pm_cook WHERE udise=? AND id=?').bind(u,cl(b.id,60)).run();return J({ok:1})}
+  if(p==='/api/pm/fuel'){const {D,M}=await fuMap(env,r,'=?',[u]),m=M[u];if(!m)return J({ok:1,have:0,p:D.p});const x=D.rows[m[0]];return J({ok:1,have:1,p:D.p,nm:x[0],ac:String(x[1]).slice(-4),tot:x[3],a:x[4],b:x[5],c:x[6]})}
   if(p==='/api/pm/year'){
     const fy=parseInt(b.fy)||0;if(fy<2020||fy>2100)return J({e:'fy'},400);
     const d=(await env.DB.prepare('SELECT * FROM pm_daily WHERE udise=? AND date>=? AND date<=? ORDER BY date').bind(u,fy+'-04-01',(fy+1)+'-03-31').all()).results;
@@ -2129,7 +2138,7 @@ export default{
   async fetch(r,env){
     const u=new URL(r.url);
     if(/\.workers\.dev$/.test(u.hostname)&&u.pathname.startsWith('/api/'))return J({e:'moved',url:'https://abhyasmanch.in'},410);
-    if(/^\/data\/bootsox_/.test(u.pathname))return new Response('Not found',{status:404});
+    if(/^\/data\/(bootsox|indhan)_/.test(u.pathname))return new Response('Not found',{status:404});
     if(!u.pathname.startsWith('/api/'))return env.ASSETS.fetch(r);
     try{
       const p=u.pathname;

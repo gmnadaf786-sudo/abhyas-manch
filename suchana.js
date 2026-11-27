@@ -70,3 +70,12 @@ function crcDoc(cn,f){var t=crcTot(f),T=t.s+t.m,L=function(n){return Number(n).t
  +'<div style="margin-top:30px;text-align:right">('+e(f.nm||'____________________')+')<br>केंद्रप्रमुख<br>समूह साधन केंद्र, '+e(cn)+'<br>ता. जत, जि. सांगली</div>'
  +'<p style="margin-top:20px"><b>प्रत:</b></p><ol><li>मा. गटशिक्षणाधिकारी, पंचायत समिती जत – माहितीस्तव सविनय सादर</li><li>मुख्याध्यापक, केंद्र शाळा '+e(f.ks||'')+' – पुढील कार्यवाहीस्तव</li><li>स्थळप्रत</li></ol>'
  +'<p class="np" style="text-align:center"><button onclick="print()" style="padding:10px 24px;font-size:15px">🖨️ प्रिंट / PDF</button></p></div></body></html>'}
+
+/* इंधन व भाजीपाला अनुदान (खाते क्रमांकाने जुळवणी) — KP/BEO */
+function fuUi(){X.innerHTML=suBack()+'<div class="card"><p class="m">⏳ लोड होत आहे…</p></div>';
+ api('/api/o/fuelsum',{}).then(function(j){if(!j||!j.ok){X.innerHTML=suBack()+'<div class="card"><p class="er">लोड झाले नाही.</p></div>';return}
+ var R=j.rows,m=R.filter(function(r){return r[3]!==null}),tot=0;m.forEach(function(r){tot+=r[3]});
+ var h=suBack()+'<div class="card"><h2>⛽🥬 इंधन व भाजीपाला अनुदान</h2><p class="m" style="font-size:12px">'+suEsc(j.p)+' · खाते क्रमांकाने जुळलेल्या शाळा <b>'+m.length+'</b>/'+R.length+' · एकूण <b>₹'+tot.toLocaleString('en-IN')+'</b></p>'
+ +'<table data-na="1" style="width:100%;border-collapse:collapse;font-size:13px">'+R.map(function(r){return '<tr style="border-top:1px solid var(--l)"><td style="padding:5px 2px">'+suEsc(r[1]||r[0])+'<div style="font-size:11px;color:var(--m)">'+suEsc(r[2])+'</div></td><td style="text-align:right;white-space:nowrap">'+(r[3]===null?'<span style="color:#b91c1c">जुळले नाही</span>':'₹'+r[3].toLocaleString('en-IN')+'<div style="font-size:11px;color:var(--m)">...'+suEsc(r[4])+'</div>')+'</td></tr>'}).join('')+'</table></div>';
+ if(j.un&&j.un.length)h+='<div class="card"><b>यादीतील पण ॲपमध्ये खाते न जुळलेल्या ('+j.un.length+')</b><p class="m" style="font-size:12px">या शाळांचे SNA खाते क्रमांक ॲपमध्ये भरलेले नाहीत किंवा वेगळे आहेत.</p><table data-na="1" style="width:100%;border-collapse:collapse;font-size:12px">'+j.un.map(function(r){return '<tr style="border-top:1px solid var(--l)"><td style="padding:4px 2px">'+suEsc(r[0])+'</td><td>...'+suEsc(r[1])+'</td><td style="text-align:right">₹'+r[2].toLocaleString('en-IN')+'</td></tr>'}).join('')+'</table></div>';
+ X.innerHTML=h})}
