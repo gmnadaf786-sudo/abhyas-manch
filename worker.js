@@ -140,6 +140,7 @@ const fuRow=(D,M,u)=>D.ms.map((mo,mi)=>{const o=M[u],y=o&&o[mi]!==undefined?mo.r
 async function uvGet(env,c){const q=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('uvend:'+c).first().catch(()=>null);let V={};try{V=JSON.parse(q&&q.v||'{}')}catch(e){}
   if(!Array.isArray(V.vs)){const vs=[1,2].map(i=>({n:V['n'+i]||'',b:V['b'+i]||'',a:V['a'+i]||'',i:V['i'+i]||''})).filter(v=>v.n||v.a);V={vs,as:vs.length?{uni2:[0,1],unc:[0,1]}:{}}}
   V.as=V.as&&typeof V.as==='object'?V.as:{};return V}
+let SNAFIX=0;async function snaFix(env){if(SNAFIX)return;try{await env.DB.prepare("CREATE TABLE IF NOT EXISTS school_sna(udise TEXT PRIMARY KEY, mhsn TEXT, bank TEXT, acct TEXT, ifsc TEXT, branch TEXT, hm TEXT, hm_mob TEXT, upd TEXT)").run();await env.DB.prepare("INSERT INTO school_sna(udise,mhsn,upd) VALUES('27350206416','MHSN00013643',?) ON CONFLICT(udise) DO UPDATE SET mhsn=excluded.mhsn WHERE COALESCE(school_sna.mhsn,'')=''").bind(new Date().toISOString()).run();SNAFIX=1}catch(e){}}
 const KPI={};async function kpImg(env,r,c){if(c in KPI)return KPI[c];let v='';try{const rs=await env.ASSETS.fetch(new Request(new URL('/data/kp/'+c+'.jpg',r.url)));if(rs.ok){const u=new Uint8Array(await rs.arrayBuffer());let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));v='data:image/jpeg;base64,'+btoa(s)}}catch(e){}return KPI[c]=v}
 const BSTY=['boot','uni2','unc','usg','pad','tr','cw','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
 async function snaCp(env){try{const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='snacp'").first();return JSON.parse(q&&q.v||'{}')}catch(e){return {}}}
@@ -370,6 +371,7 @@ async function offApi(p,r,env){
   const t=await offAuth(env,b);if(!t)return J({e:'auth'},401);
   if(!t.changed&&p!=='/api/o/chpw')return J({e:'pwchg'},403); // सुरुवातीचा पासवर्ड (123456) बदलेपर्यंत दुसरे काही चालत नाही
   const kp=!isOff(t.uname);
+  await snaFix(env);
   if(p==='/api/o/pay'){
     if(!kp&&!OAEO.includes(t.uname))return J({e:'kp'},403);await pdEns(env);
     const bk='kpp:'+t.uname,pan=cl(b.pan,10).toUpperCase();let bound=(await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bk).first())||null;bound=bound?bound.v:'';
@@ -978,6 +980,7 @@ async function schoolApi(p,r,env){
     const g=async(q,...a)=>{try{return await env.DB.prepare(q).bind(...a).first()}catch(e){return null}};
     const ga=async(q,...a)=>{try{return (await env.DB.prepare(q).bind(...a).all()).results}catch(e){return []}};
     const pm=await g('SELECT tan,acct FROM school_bank WHERE udise=?',t.udise);
+    await snaFix(env);
     const sna=await g('SELECT mhsn,bank,branch,acct,ifsc,hm,hm_mob FROM school_sna WHERE udise=?',t.udise);
     const cooks=await ga('SELECT name,role,bank,ifsc,acct FROM pm_cook WHERE udise=? ORDER BY name',t.udise);
     const own=await ga('SELECT kind,holder,bank,branch,acct,ifsc,upd FROM sch_bank WHERE udise=?',t.udise);
