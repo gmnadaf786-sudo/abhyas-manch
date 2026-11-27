@@ -140,6 +140,7 @@ const fuRow=(D,M,u)=>D.ms.map((mo,mi)=>{const o=M[u],y=o&&o[mi]!==undefined?mo.r
 async function uvGet(env,c){const q=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('uvend:'+c).first().catch(()=>null);let V={};try{V=JSON.parse(q&&q.v||'{}')}catch(e){}
   if(!Array.isArray(V.vs)){const vs=[1,2].map(i=>({n:V['n'+i]||'',b:V['b'+i]||'',a:V['a'+i]||'',i:V['i'+i]||''})).filter(v=>v.n||v.a);V={vs,as:vs.length?{uni2:[0,1],unc:[0,1]}:{}}}
   V.as=V.as&&typeof V.as==='object'?V.as:{};return V}
+const KPI={};async function kpImg(env,r,c){if(c in KPI)return KPI[c];let v='';try{const rs=await env.ASSETS.fetch(new Request(new URL('/data/kp/'+c+'.jpg',r.url)));if(rs.ok){const u=new Uint8Array(await rs.arrayBuffer());let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));v='data:image/jpeg;base64,'+btoa(s)}}catch(e){}return KPI[c]=v}
 const BSTY=['boot','uni2','unc','usg','pad','tr','cw','sg'],bsKey=(ty,u)=>ty==='boot'?'bso:'+u:'smo:'+ty+':'+u;
 async function snaCp(env){try{const q=await env.DB.prepare("SELECT v FROM cfg WHERE k='snacp'").first();return JSON.parse(q&&q.v||'{}')}catch(e){return {}}}
 async function bsOne(env,r,u,ty){ty=BSTY.includes(ty)?ty:'boot';const d=await bsLoad(env,r),x=d.rows[u]||null,f=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind(bsKey(ty,u)).first(),s=await env.DB.prepare('SELECT name,cmax FROM schools WHERE udise=?').bind(u).first().catch(()=>null);let F={};try{F=JSON.parse(f&&f.v||'{}')}catch(e){}
@@ -799,6 +800,8 @@ async function offApi(p,r,env){
     for(const ty of BSTY){const x=f.as&&f.as[ty];if(Array.isArray(x))as[ty]=x.slice(0,6).map(n=>{n=parseInt(n);return n>=0&&n<vs.length?n:-1})}
     await cfgUp(env,'uvend:'+c,JSON.stringify({vs,as})).run();return J({ok:1})}
   if(p==='/api/o/bsoall'){const us=(Array.isArray(b.us)?b.us:[]).slice(0,80).map(x=>cl(x,11).replace(/\D/g,'')).filter(u=>ok.has(u)),l=[];for(const u of us)l.push(await bsOne(env,r,u,b.ty));return J({ok:1,l})}
+  if(p==='/api/o/kpphoto'){const c=kp?t.uname:cl(b.c,20);if(!CEN[c])return J({e:'na'},403);return J({ok:1,c,img:await kpImg(env,r,c)})}
+  if(p==='/api/o/kpphotos'){if(kp)return J({e:'na'},403);const l=[];for(const c of Object.keys(CEN).sort((a,b)=>String(CEN[a]).localeCompare(String(CEN[b])))){const i=await kpImg(env,r,c);l.push([c,CEN[c],i])}return J({ok:1,l})}
   if(p==='/api/o/bsoone'){const u=cl(b.udise,11).replace(/\D/g,'');if(!ok.has(u))return J({e:'na'},403);return J(await bsOne(env,r,u,b.ty))}
   if(p==='/api/o/smsum'){ // KP: स्वतःचे केंद्र, BEO: सर्व; 30 मिनिटे कॅश
     const ck='sm:'+SK;{const h=await dcGet(env,ck,b.fr);if(h)return J(h)}
@@ -2151,7 +2154,7 @@ export default{
   async fetch(r,env){
     const u=new URL(r.url);
     if(/\.workers\.dev$/.test(u.hostname)&&u.pathname.startsWith('/api/'))return J({e:'moved',url:'https://abhyasmanch.in'},410);
-    if(/^\/data\/(bootsox|indhan)_/.test(u.pathname))return new Response('Not found',{status:404});
+    if(/^\/data\/(bootsox_|indhan_|kp\/)/.test(u.pathname))return new Response('Not found',{status:404});
     if(!u.pathname.startsWith('/api/'))return env.ASSETS.fetch(r);
     try{
       const p=u.pathname;
