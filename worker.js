@@ -425,20 +425,20 @@ async function offApi(p,r,env){
   let ss=await dcGet(env,'ss:'+SK,b.fr);if(!ss){ss=(await env.DB.prepare('SELECT c.udise,c.code,s.name FROM sch_center c LEFT JOIN schools s ON s.udise=c.udise WHERE c.code IN ('+JQ+') ORDER BY c.code,c.udise').bind(...JK).all()).results;await dcPut(env,'ss:'+SK,ss,600000)}
   const ok=new Set(ss.map(x=>x.udise)),SW='IN (SELECT udise FROM sch_center WHERE code IN ('+JQ+'))',SA=JK;
   if(/^\/api\/o\/pq(list|do)$/.test(p)){
-    await pqEns(env);const me=t.uname,isB=me==='BEO';
-    if(!kp&&!isB)return J({ok:1,rows:[],n:0});
+    await pqEns(env);const me=t.uname,isB=me==='BEO',isA=OAEO.includes(me);
+    if(!kp&&!isB&&!isA)return J({ok:1,rows:[],n:0});
     const nm={};ss.forEach(y=>nm[y.udise]=y.name||y.udise);
     if(p==='/api/o/pqlist'){
-      const rs=(await (kp?env.DB.prepare("SELECT * FROM pwq WHERE role IN ('T','S') AND code=? ORDER BY ts DESC LIMIT 100").bind(me):env.DB.prepare("SELECT * FROM pwq WHERE NOT (role='K' AND who='BEO') ORDER BY ts DESC LIMIT 200")).all()).results||[];
+      const rs=(await (kp?env.DB.prepare("SELECT * FROM pwq WHERE role IN ('T','S') AND code=? ORDER BY ts DESC LIMIT 100").bind(me):isA?env.DB.prepare("SELECT * FROM pwq WHERE role IN ('T','S') OR (role='K' AND who NOT IN ('BEO','AEO1','AEO2','AEO3')) ORDER BY ts DESC LIMIT 200"):env.DB.prepare("SELECT * FROM pwq WHERE NOT (role='K' AND who='BEO') ORDER BY ts DESC LIMIT 200")).all()).results||[];
       return J({ok:1,n:rs.length,rows:b.c?[]:rs.map(x=>pqRow(x,nm))});
     }
     const role=cl(b.role,1),who=cl(b.who,20),x=await env.DB.prepare('SELECT * FROM pwq WHERE role=? AND who=?').bind(role,who).first();
-    if(!x||(kp&&!(x.code===me&&(role==='T'||role==='S')))||(isB&&role==='K'&&who==='BEO'))return J({e:'na'},403);
+    if(!x||(kp&&!(x.code===me&&(role==='T'||role==='S')))||(isB&&role==='K'&&who==='BEO')||(isA&&role==='K'&&isOff(who)))return J({e:'na'},403);
     if(b.rej){await env.DB.prepare('DELETE FROM pwq WHERE role=? AND who=?').bind(role,who).run();return J({ok:1})}
     let pin='';
     if(role==='T'){if(!ok.has(x.udise))return J({e:'na'},403);pin=await tPin(env,who)}
     else if(role==='S'){if(!ok.has(who))return J({e:'na'},403);await slEnsure(env);await env.DB.batch([env.DB.prepare('DELETE FROM school_login WHERE udise=?').bind(who),env.DB.prepare('DELETE FROM pw_req WHERE udise=?').bind(who)])}
-    else if(role==='K'){if(!isB)return J({e:'na'},403);await env.DB.prepare('DELETE FROM off_login WHERE uname=?').bind(who).run()}
+    else if(role==='K'){if(!isB&&!isA)return J({e:'na'},403);await env.DB.prepare('DELETE FROM off_login WHERE uname=?').bind(who).run()}
     await env.DB.prepare('DELETE FROM pwq WHERE role=? AND who=?').bind(role,who).run();
     return J({ok:1,pin,mobile:x.mobile,name:x.name,role});
   }
