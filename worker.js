@@ -1136,7 +1136,7 @@ async function schoolApi(p,r,env){
     await tcEns(env);const ok=new Set(((await env.DB.prepare("SELECT id FROM teachers WHERE udise=? AND status='ok'").bind(t.udise).all()).results||[]).map(x=>x.id)),st=[],seen=new Set(),tids=new Set();let n=0;
     for(const r of (Array.isArray(b.rows)?b.rows:[]).slice(0,60)){const k=parseInt(r&&r.cls)||0,dv=cl(r&&r.div,2).toUpperCase(),id=parseInt(r&&r.tid)||0;if(k<1||k>10||!/^[A-Z]{1,2}$/.test(dv)||seen.has(k+'|'+dv))continue;seen.add(k+'|'+dv);
       st.push(env.DB.prepare('UPDATE tclasses SET ct=0 WHERE udise=? AND cls=? AND div=? AND tid<>?').bind(t.udise,k,dv,id));
-      if(id&&ok.has(id)){st.push(env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(id,t.udise,k,dv),env.DB.prepare('UPDATE tclasses SET ct=1 WHERE tid=? AND udise=? AND cls=? AND div=?').bind(id,t.udise,k,dv));tids.add(id);n++}}
+      if(id&&ok.has(id)){st.push(env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(id,t.udise,k,dv),env.DB.prepare('UPDATE tclasses SET ct=1,hm=1 WHERE tid=? AND udise=? AND cls=? AND div=?').bind(id,t.udise,k,dv));tids.add(id);n++}}
     tids.forEach(id=>st.push(env.DB.prepare('UPDATE teachers SET conf=1 WHERE id=?').bind(id)));st.push(cfgUp(env,'hmm:'+t.udise,'1'));
     await env.DB.batch(st);return J({ok:1,n})}
   if(p==='/api/s/tcls'){
@@ -1145,7 +1145,7 @@ async function schoolApi(p,r,env){
     const seen=new Set(),want=[];for(const c of (Array.isArray(b.rows)?b.rows:[]).slice(0,16)){const k=parseInt(c&&c.cls)||0,dv=cl(c&&c.div,2).toUpperCase();if(k<1||k>8||!/^[A-Z]{1,2}$/.test(dv)||seen.has(k+'|'+dv))continue;seen.add(k+'|'+dv);want.push([k,dv])}
     const cur=(await env.DB.prepare('SELECT cls,div FROM tclasses WHERE tid=? AND udise=?').bind(id,t.udise).all()).results||[],st=[];
     cur.forEach(c=>{if(!seen.has(c.cls+'|'+c.div))st.push(env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(id,t.udise,c.cls,c.div))});
-    want.forEach(w=>st.push(env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(id,t.udise,w[0],w[1])));
+    want.forEach(w=>st.push(env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(id,t.udise,w[0],w[1]),env.DB.prepare('UPDATE tclasses SET hm=1 WHERE tid=? AND udise=? AND cls=? AND div=?').bind(id,t.udise,w[0],w[1])));
     st.push(env.DB.prepare('UPDATE teachers SET conf=1 WHERE id=?').bind(id),cfgUp(env,'hmm:'+t.udise,'1'));
     await env.DB.batch(st);return J({ok:1,n:want.length})}
   if(p==='/api/s/me'){await schCols(env);const sc=await env.DB.prepare('SELECT name,med,cmin,cmax FROM schools WHERE udise=?').bind(t.udise).first();return J({ok:1,udise:t.udise,school:sc?sc.name:'',med:sc&&sc.med||'',cmin:sc&&sc.cmin||0,cmax:sc&&sc.cmax||0,changed:t.changed?1:0})}
@@ -1154,7 +1154,7 @@ async function schoolApi(p,r,env){
 async function hmm(env,u){try{return !!(await env.DB.prepare('SELECT 1 x FROM cfg WHERE k=?').bind('hmm:'+u).first())}catch(e){return false}}
 const cfgUp=(env,k,v)=>env.DB.prepare('INSERT INTO cfg(k,v) VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v').bind(k,v);
 let TCK=false;
-async function tcEns(env){if(TCK)return;try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN ct INTEGER DEFAULT 0').run()}catch(e){}try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN subs TEXT').run()}catch(e){}TCK=true}
+async function tcEns(env){if(TCK)return;try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN ct INTEGER DEFAULT 0').run()}catch(e){}try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN subs TEXT').run()}catch(e){}try{await env.DB.prepare('ALTER TABLE tclasses ADD COLUMN hm INTEGER DEFAULT 0').run()}catch(e){}try{if(!(await env.DB.prepare("SELECT 1 x FROM cfg WHERE k='tchm1'").first())){await env.DB.prepare("UPDATE tclasses SET hm=1 WHERE udise IN (SELECT substr(k,5) FROM cfg WHERE k LIKE 'hmm:%')").run();await env.DB.prepare("INSERT OR REPLACE INTO cfg(k,v) VALUES('tchm1','1')").run()}}catch(e){}TCK=true}
 async function ctBlock(env,tid,ud,cls,dv){await tcEns(env);const o=await env.DB.prepare('SELECT c.tid,t.name FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=? AND c.cls=? AND c.div=? AND c.ct=1 LIMIT 1').bind(ud,cls,dv).first();return o&&o.tid!==tid?o.name:''}
 const okDob=s=>/^(19|20)\d\d-\d\d-\d\d$/.test(s)&&!isNaN(Date.parse(s))?s:'';
 async function imp(env,rw,tid){
@@ -1612,13 +1612,12 @@ async function ext(p,r,env){
   if(p==='/api/t/delcls'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
     const k=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase();if(k<1||k>8||!/^[A-Z]{1,2}$/.test(dv))return J({e:'args'});
-    if(await hmm(env,t.udise))return J({e:'hm'},403);
+    await tcEns(env);const hr=await env.DB.prepare('SELECT hm FROM tclasses WHERE tid=? AND cls=? AND div=?').bind(t.id,k,dv).first();if(hr&&hr.hm)return J({e:'hm'},403);
     await env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND cls=? AND div=?').bind(t.id,k,dv).run();return J({ok:1});
   }
   if(p==='/api/t/addcls'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);
     const u=(await env.DB.prepare('SELECT udise FROM teachers WHERE id=?').bind(t.id).first()).udise;
-    if(await hmm(env,u))return J({e:'hm'},403);
     const cs=(Array.isArray(b.rows)?b.rows:[]).slice(0,16);let n=0;const bl=[];
     for(const c of cs){const k=parseInt(c.cls)||0,dv=cl(c.div,2).toUpperCase();
       if(k<1||k>8)continue;
@@ -1947,13 +1946,13 @@ async function ext(p,r,env){
   }
   if(p==='/api/t/classes'){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);
-    const rs=(await env.DB.prepare("SELECT c.udise,c.cls,c.div,(SELECT COUNT(*) FROM roster r WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div) n,(SELECT COUNT(*) FROM roster r JOIN students s ON s.id=r.sid WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div AND s.last_seen>=datetime('now','-7 day')) a7 FROM tclasses c WHERE c.tid=? ORDER BY c.cls,c.div").bind(t.id).all()).results;
+    const rs=(await env.DB.prepare("SELECT c.udise,c.cls,c.div,c.hm,(SELECT COUNT(*) FROM roster r WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div) n,(SELECT COUNT(*) FROM roster r JOIN students s ON s.id=r.sid WHERE r.udise=c.udise AND r.cls=c.cls AND r.div=c.div AND s.last_seen>=datetime('now','-7 day')) a7 FROM tclasses c WHERE c.tid=? ORDER BY c.cls,c.div").bind(t.id).all()).results;
     await schCols(env);
     const sc=await env.DB.prepare('SELECT name,cmin,cmax FROM schools WHERE udise=?').bind(t.udise).first();
     const sd=(await env.DB.prepare("SELECT r.cls,COUNT(*) n,SUM(i.gender='M') m,SUM(i.gender='F') f FROM roster r LEFT JOIN sinfo i ON i.pen=r.pen WHERE r.udise=? GROUP BY r.cls ORDER BY r.cls").bind(t.udise).all()).results.map(x=>({cls:x.cls,n:x.n,m:x.m||0,f:x.f||0}));
-    let cm={};try{await tcEns(env);const th=(await env.DB.prepare('SELECT c.cls,c.div,c.tid,c.ct,t.name nm FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=?').bind(t.udise).all()).results,rd=(await env.DB.prepare('SELECT cls,div FROM roster WHERE udise=? GROUP BY cls,div').bind(t.udise).all()).results;
+    let cm={};try{await tcEns(env);const th=(await env.DB.prepare('SELECT c.cls,c.div,c.tid,c.ct,c.hm,t.name nm FROM tclasses c JOIN teachers t ON t.id=c.tid WHERE c.udise=?').bind(t.udise).all()).results,rd=(await env.DB.prepare('SELECT cls,div FROM roster WHERE udise=? GROUP BY cls,div').bind(t.udise).all()).results;
       const dvs={};rd.forEach(x=>{(dvs[x.cls]=dvs[x.cls]||new Set()).add(x.div)});th.forEach(x=>{(dvs[x.cls]=dvs[x.cls]||new Set()).add(x.div)});
-      for(const k in dvs){const dv=[...dvs[k]].sort()[0],hs=th.filter(x=>x.cls==k&&x.div===dv);cm[k]={div:dv,mine:hs.some(x=>x.tid===t.id)?1:0,ct:hs.some(x=>x.tid===t.id&&x.ct)?1:0,ctn:(hs.find(x=>x.ct)||{}).nm||'',oth:hs.filter(x=>x.tid!==t.id).map(x=>x.nm)}}}catch(e){}
+      for(const k in dvs){const dv=[...dvs[k]].sort()[0],hs=th.filter(x=>x.cls==k&&x.div===dv);cm[k]={div:dv,mine:hs.some(x=>x.tid===t.id)?1:0,mh:hs.some(x=>x.tid===t.id&&x.hm)?1:0,ct:hs.some(x=>x.tid===t.id&&x.ct)?1:0,ctn:(hs.find(x=>x.ct)||{}).nm||'',oth:hs.filter(x=>x.tid!==t.id).map(x=>x.nm)}}}catch(e){}
     let hm='';try{const h=await env.DB.prepare('SELECT v FROM cfg WHERE k=?').bind('hm:'+t.udise).first();hm=h&&h.v||'';if(!hm){const h2=await env.DB.prepare('SELECT hm FROM school_sna WHERE udise=?').bind(t.udise).first();hm=h2&&h2.hm||''}}catch(e){}
     const hmg=await hmm(env,t.udise);if(hmg&&!t.conf){await env.DB.prepare('UPDATE teachers SET conf=1 WHERE id=?').bind(t.id).run();t.conf=1}
     return J({ok:1,cm,hm,hmm:hmg?1:0,name:t.name,rows:rs,udise:t.udise,school:sc?sc.name:'',conf:t.conf?1:0,lim:sc?0:1,sd,cmin:(sc&&sc.cmin)||0,cmax:(sc&&sc.cmax)||0});
@@ -1969,9 +1968,8 @@ async function ext(p,r,env){
     const b=await body(r),t=await teacher(env,b,true);if(!t)return J({e:'auth'},401);if(!t.conf)return J({e:'conf'},403);await tcEns(env);
     const k=parseInt(b.cls)||0,dv=cl(b.div,2).toUpperCase();if(k<1||k>8||!/^[A-Z]{1,2}$/.test(dv))return J({e:'args'});
     if(b.what==='mine'){
-      if(await hmm(env,t.udise))return J({e:'hm'},403);
       if(b.on)await env.DB.prepare('INSERT OR IGNORE INTO tclasses(tid,udise,cls,div) VALUES(?,?,?,?)').bind(t.id,t.udise,k,dv).run();
-      else await env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,t.udise,k,dv).run();
+      else{const hr=await env.DB.prepare('SELECT hm FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,t.udise,k,dv).first();if(hr&&hr.hm)return J({e:'hm'},403);await env.DB.prepare('DELETE FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,t.udise,k,dv).run()}
       return J({ok:1});
     }
     if(!await env.DB.prepare('SELECT 1 x FROM tclasses WHERE tid=? AND udise=? AND cls=? AND div=?').bind(t.id,t.udise,k,dv).first())return J({e:'auth'},403);
